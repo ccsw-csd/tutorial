@@ -1,0 +1,1707 @@
+
+
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.2.2">
+    
+    
+      
+        <title>Code: Desarrollo con Springboot - Tutorial Springboot - Angular</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.a2408e81.min.css">
+      
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../assets/style.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#desarrollo-con-springboot" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Cabecera">
+    <a href="../.." title="Tutorial Springboot - Angular" class="md-header-nav__button md-logo" aria-label="Tutorial Springboot - Angular">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            Tutorial Springboot - Angular
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Code: Desarrollo con Springboot
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Limpiar" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Tutorial Springboot - Angular" class="md-nav__button md-logo" aria-label="Tutorial Springboot - Angular">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Tutorial Springboot - Angular
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Bienvenido!" class="md-nav__link">
+      Bienvenido!
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../usecases/" title="Contexto de la aplicación" class="md-nav__link">
+      Contexto de la aplicación
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../install/" title="Entorno de desarrollo" class="md-nav__link">
+      Entorno de desarrollo
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../create/" title="Creación de proyecto" class="md-nav__link">
+      Creación de proyecto
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../cleancode/" title="Estructura y Clean Code" class="md-nav__link">
+      Estructura y Clean Code
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../step1/" title="Code: Desarrollo con Angular" class="md-nav__link">
+      Code: Desarrollo con Angular
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Code: Desarrollo con Springboot
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
+        </span>
+      </label>
+    
+    <a href="./" title="Code: Desarrollo con Springboot" class="md-nav__link md-nav__link--active">
+      Code: Desarrollo con Springboot
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#primeros-pasos" class="md-nav__link">
+    Primeros pasos
+  </a>
+  
+    <nav class="md-nav" aria-label="Primeros pasos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#anadir-utilidades-devonfw" class="md-nav__link">
+    Añadir utilidades Devonfw
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configurar-utilidades-devonfw" class="md-nav__link">
+    Configurar utilidades Devonfw
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estructurar-el-codigo" class="md-nav__link">
+    Estructurar el código
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#capa-de-operaciones-controller" class="md-nav__link">
+    Capa de operaciones: Controller
+  </a>
+  
+    <nav class="md-nav" aria-label="Capa de operaciones: Controller">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#controller-de-ejemplo" class="md-nav__link">
+    Controller de ejemplo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementar-operaciones" class="md-nav__link">
+    Implementar operaciones
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aspectos-importantes" class="md-nav__link">
+    Aspectos importantes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#capa-de-servicio-service" class="md-nav__link">
+    Capa de Servicio: Service
+  </a>
+  
+    <nav class="md-nav" aria-label="Capa de Servicio: Service">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#implementar-servicios" class="md-nav__link">
+    Implementar servicios
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aspectos-importantes_1" class="md-nav__link">
+    Aspectos importantes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#capa-de-datos-repository" class="md-nav__link">
+    Capa de Datos: Repository
+  </a>
+  
+    <nav class="md-nav" aria-label="Capa de Datos: Repository">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creacion-de-bbdd" class="md-nav__link">
+    Creación de BBDD
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementar-entity" class="md-nav__link">
+    Implementar Entity
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementar-repository" class="md-nav__link">
+    Implementar Repository
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aspectos-importantes_2" class="md-nav__link">
+    Aspectos importantes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-hemos-aprendido" class="md-nav__link">
+    ¿Que hemos aprendido?
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../step3/" title="Code: Conectar front con back" class="md-nav__link">
+      Code: Conectar front con back
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../step4/" title="Code: Listado paginado" class="md-nav__link">
+      Code: Listado paginado
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../step5/" title="Code: Listado filtrado" class="md-nav__link">
+      Code: Listado filtrado
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../step6/" title="Code: Validaciones" class="md-nav__link">
+      Code: Validaciones
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../step7/" title="Code: Crear Login" class="md-nav__link">
+      Code: Crear Login
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../step8/" title="Code: Testing" class="md-nav__link">
+      Code: Testing
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../exercise/" title="Ahora hazlo tu!" class="md-nav__link">
+      Ahora hazlo tu!
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../appendix/styles/" title="Anexo. Estilos" class="md-nav__link">
+      Anexo. Estilos
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../appendix/dates/" title="Anexo. Fechas" class="md-nav__link">
+      Anexo. Fechas
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#primeros-pasos" class="md-nav__link">
+    Primeros pasos
+  </a>
+  
+    <nav class="md-nav" aria-label="Primeros pasos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#anadir-utilidades-devonfw" class="md-nav__link">
+    Añadir utilidades Devonfw
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configurar-utilidades-devonfw" class="md-nav__link">
+    Configurar utilidades Devonfw
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estructurar-el-codigo" class="md-nav__link">
+    Estructurar el código
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#capa-de-operaciones-controller" class="md-nav__link">
+    Capa de operaciones: Controller
+  </a>
+  
+    <nav class="md-nav" aria-label="Capa de operaciones: Controller">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#controller-de-ejemplo" class="md-nav__link">
+    Controller de ejemplo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementar-operaciones" class="md-nav__link">
+    Implementar operaciones
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aspectos-importantes" class="md-nav__link">
+    Aspectos importantes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#capa-de-servicio-service" class="md-nav__link">
+    Capa de Servicio: Service
+  </a>
+  
+    <nav class="md-nav" aria-label="Capa de Servicio: Service">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#implementar-servicios" class="md-nav__link">
+    Implementar servicios
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aspectos-importantes_1" class="md-nav__link">
+    Aspectos importantes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#capa-de-datos-repository" class="md-nav__link">
+    Capa de Datos: Repository
+  </a>
+  
+    <nav class="md-nav" aria-label="Capa de Datos: Repository">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creacion-de-bbdd" class="md-nav__link">
+    Creación de BBDD
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementar-entity" class="md-nav__link">
+    Implementar Entity
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementar-repository" class="md-nav__link">
+    Implementar Repository
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aspectos-importantes_2" class="md-nav__link">
+    Aspectos importantes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-hemos-aprendido" class="md-nav__link">
+    ¿Que hemos aprendido?
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  
+                
+                
+                <h1 id="desarrollo-con-springboot">Desarrollo con Springboot</h1>
+<p>Ahora que ya tenemos listo tanto el proyecto back de SpringBoot (en el puerto 8080) como el proyecto front de Angular (en el puerto 4200), ya podemos empezar a codificar la solución.</p>
+<p>Durante todo el tutorial vamos a intentar separar completamente la implementación de front de la implementación de back, para que quede claro como se debe realizar en cada una de las tecnologías.</p>
+<h2 id="primeros-pasos">Primeros pasos</h2>
+<div class="admonition success">
+<p class="admonition-title">Antes de empezar</p>
+<p>Quiero hacer hincapié en Springboot tiene una documentación muy extensa y completa, así que te recomiendo que hagas uso de ella cuando tengas cualquier duda. Tanto la propia web de <a href="https://spring.io/projects/spring-boot">Spring</a> como en el portal de tutoriales de <a href="https://www.baeldung.com/spring-tutorial">Baeldung</a> puedes buscar casi cualquier ejemplo que necesites.</p>
+</div>
+<p>Si has seguido el tutorial, en la creación del proyecto tenías la posibilidad de crear un proyecto Devonfw o crear un proyecto Springboot simple. Hay ciertas herramientas y configuraciones que provee Devonfw que son muy útiles a la hora de desarrollar aplicaciones y por tanto si hemos creado una aplicación Springboot deberíamos añadirlas.</p>
+<h3 id="anadir-utilidades-devonfw">Añadir utilidades Devonfw</h3>
+<p>Lo primero que vamos a hacer es añadir las dependencias a librerías de devonfw. Abriremos el fichero <code>pom.xml</code> que nos ha generado el Spring Initilizr y añadiremos las siguientes líneas:</p>
+<div class="tabbed-set" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">pom.xml</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0&quot;</span> <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+  <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;modelVersion&gt;</span>4.0.0<span class="nt">&lt;/modelVersion&gt;</span>
+  <span class="nt">&lt;parent&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-parent<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>2.3.0.RELEASE<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;relativePath/&gt;</span> <span class="c">&lt;!-- lookup parent from repository --&gt;</span>
+  <span class="nt">&lt;/parent&gt;</span>
+  <span class="nt">&lt;groupId&gt;</span>com.capgemini.coedevon<span class="nt">&lt;/groupId&gt;</span>
+  <span class="nt">&lt;artifactId&gt;</span>tutorial<span class="nt">&lt;/artifactId&gt;</span>
+  <span class="nt">&lt;version&gt;</span>0.0.1-SNAPSHOT<span class="nt">&lt;/version&gt;</span>
+  <span class="nt">&lt;name&gt;</span>tutorial<span class="nt">&lt;/name&gt;</span>
+  <span class="nt">&lt;description&gt;</span>Demo project for Spring Boot<span class="nt">&lt;/description&gt;</span>
+
+  <span class="nt">&lt;properties&gt;</span>
+    <span class="nt">&lt;java.version&gt;</span>1.8<span class="nt">&lt;/java.version&gt;</span>
+<span class="hll">    <span class="nt">&lt;devon4j.version&gt;</span>2020.04.001<span class="nt">&lt;/devon4j.version&gt;</span>
+</span>  <span class="nt">&lt;/properties&gt;</span>
+
+<span class="hll">  <span class="nt">&lt;dependencyManagement&gt;</span>
+</span><span class="hll">    <span class="nt">&lt;dependencies&gt;</span>
+</span><span class="hll">      <span class="c">&lt;!-- BOM of devon4j --&gt;</span>
+</span><span class="hll">      <span class="nt">&lt;dependency&gt;</span>
+</span><span class="hll">        <span class="nt">&lt;groupId&gt;</span>com.devonfw.java.boms<span class="nt">&lt;/groupId&gt;</span>
+</span><span class="hll">        <span class="nt">&lt;artifactId&gt;</span>devon4j-bom<span class="nt">&lt;/artifactId&gt;</span>
+</span><span class="hll">        <span class="nt">&lt;version&gt;</span>${devon4j.version}<span class="nt">&lt;/version&gt;</span>
+</span><span class="hll">        <span class="nt">&lt;type&gt;</span>pom<span class="nt">&lt;/type&gt;</span>
+</span><span class="hll">        <span class="nt">&lt;scope&gt;</span>import<span class="nt">&lt;/scope&gt;</span>
+</span><span class="hll">      <span class="nt">&lt;/dependency&gt;</span>
+</span><span class="hll">    <span class="nt">&lt;/dependencies&gt;</span>
+</span><span class="hll">  <span class="nt">&lt;/dependencyManagement&gt;</span>
+</span>
+  <span class="nt">&lt;dependencies&gt;</span>
+<span class="hll">    <span class="c">&lt;!-- Bean-Mapping for conversion from TO to Entity and vice versa --&gt;</span>
+</span><span class="hll">    <span class="nt">&lt;dependency&gt;</span>
+</span><span class="hll">      <span class="nt">&lt;groupId&gt;</span>com.devonfw.java.modules<span class="nt">&lt;/groupId&gt;</span>
+</span><span class="hll">      <span class="nt">&lt;artifactId&gt;</span>devon4j-beanmapping-orika<span class="nt">&lt;/artifactId&gt;</span>
+</span><span class="hll">    <span class="nt">&lt;/dependency&gt;</span>
+</span>
+<span class="hll">    <span class="c">&lt;!-- Rest Mappers --&gt;</span>
+</span><span class="hll">    <span class="nt">&lt;dependency&gt;</span>
+</span><span class="hll">      <span class="nt">&lt;groupId&gt;</span>com.devonfw.java.modules<span class="nt">&lt;/groupId&gt;</span>
+</span><span class="hll">      <span class="nt">&lt;artifactId&gt;</span>devon4j-rest<span class="nt">&lt;/artifactId&gt;</span>
+</span><span class="hll">    <span class="nt">&lt;/dependency&gt;</span>
+</span>
+<span class="hll">    <span class="c">&lt;!-- JPA --&gt;</span>
+</span><span class="hll">    <span class="nt">&lt;dependency&gt;</span>
+</span><span class="hll">      <span class="nt">&lt;groupId&gt;</span>com.devonfw.java.starters<span class="nt">&lt;/groupId&gt;</span>
+</span><span class="hll">      <span class="nt">&lt;artifactId&gt;</span>devon4j-starter-spring-data-jpa<span class="nt">&lt;/artifactId&gt;</span>
+</span><span class="hll">    <span class="nt">&lt;/dependency&gt;</span>
+</span>
+<span class="hll">    <span class="c">&lt;!--</span>
+</span><span class="hll"><span class="c">    &lt;dependency&gt;</span>
+</span><span class="hll"><span class="c">      &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span>
+</span><span class="hll"><span class="c">      &lt;artifactId&gt;spring-boot-starter-data-jpa&lt;/artifactId&gt;</span>
+</span><span class="hll"><span class="c">    &lt;/dependency&gt;</span>
+</span><span class="hll"><span class="c">    --&gt;</span>
+</span>
+    <span class="nt">&lt;dependency&gt;</span>
+      <span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+      <span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-web<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+
+    <span class="nt">&lt;dependency&gt;</span>
+      <span class="nt">&lt;groupId&gt;</span>org.flywaydb<span class="nt">&lt;/groupId&gt;</span>
+      <span class="nt">&lt;artifactId&gt;</span>flyway-core<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+
+    <span class="nt">&lt;dependency&gt;</span>
+      <span class="nt">&lt;groupId&gt;</span>com.h2database<span class="nt">&lt;/groupId&gt;</span>
+      <span class="nt">&lt;artifactId&gt;</span>h2<span class="nt">&lt;/artifactId&gt;</span>
+      <span class="nt">&lt;scope&gt;</span>runtime<span class="nt">&lt;/scope&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+
+    <span class="nt">&lt;dependency&gt;</span>
+      <span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+      <span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-test<span class="nt">&lt;/artifactId&gt;</span>
+      <span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
+      <span class="nt">&lt;exclusions&gt;</span>
+        <span class="nt">&lt;exclusion&gt;</span>
+          <span class="nt">&lt;groupId&gt;</span>org.junit.vintage<span class="nt">&lt;/groupId&gt;</span>
+          <span class="nt">&lt;artifactId&gt;</span>junit-vintage-engine<span class="nt">&lt;/artifactId&gt;</span>
+        <span class="nt">&lt;/exclusion&gt;</span>
+      <span class="nt">&lt;/exclusions&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+  <span class="nt">&lt;/dependencies&gt;</span>
+
+  <span class="nt">&lt;build&gt;</span>
+    <span class="nt">&lt;plugins&gt;</span>
+      <span class="nt">&lt;plugin&gt;</span>
+        <span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+        <span class="nt">&lt;artifactId&gt;</span>spring-boot-maven-plugin<span class="nt">&lt;/artifactId&gt;</span>
+      <span class="nt">&lt;/plugin&gt;</span>
+    <span class="nt">&lt;/plugins&gt;</span>
+  <span class="nt">&lt;/build&gt;</span>
+
+<span class="nt">&lt;/project&gt;</span>
+</code></pre></div>
+
+</div>
+</div>
+<p>Ojo, que hemos sustituido la dependencia de Spring-JPA por la dependencia de Devonfw-JPA ya que nos permite utilizar más funcionalidades extendidas sobre repositorios JPA. Además de esa dependencia, hemos añadido una utilidad para hacer mapeos entre objetos y para configurar los servicios Rest.</p>
+<h3 id="configurar-utilidades-devonfw">Configurar utilidades Devonfw</h3>
+<p>El siguiente punto es crear las clases de configuración para las librerías que hemos añadido. Para ello vamos a crear un package de configuración general de la aplicación <code>com.capgemini.coedevon.tutorial.config</code> donde crearemos tres clases (dos de ellas dentro del subpaquete <code>mapper</code>).</p>
+<div class="tabbed-set" data-tabs="2:3"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">BeansOrikaConfig.java</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.config</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Bean</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Configuration</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.config.mapper.BeanMapper</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.config.mapper.BeanMapperImpl</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.devonfw.module.beanmapping.common.base.BaseOrikaConfig</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.devonfw.module.json.common.base.ObjectMapperFactory</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.fasterxml.jackson.databind.Module</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">ma.glasnost.orika.MapperFactory</span><span class="p">;</span>
+
+<span class="cm">/**</span>
+<span class="cm">* Java bean configuration for Orika. The method {@link #configureCustomMapping(MapperFactory)} from</span>
+<span class="cm">* {@link BaseOrikaConfig} can be overridden as per requirements.</span>
+<span class="cm">*/</span>
+<span class="nd">@Configuration</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">BeansOrikaConfig</span> <span class="kd">extends</span> <span class="n">BaseOrikaConfig</span> <span class="p">{</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * @return the {@link BeanMapper} implementation.</span>
+<span class="cm">  */</span>
+  <span class="nd">@Override</span>
+  <span class="nd">@Bean</span>
+  <span class="kd">public</span> <span class="n">BeanMapper</span> <span class="nf">getBeanMapper</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="k">return</span> <span class="k">new</span> <span class="n">BeanMapperImpl</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="nd">@Bean</span>
+  <span class="kd">public</span> <span class="n">Module</span> <span class="nf">configureObjectMapper</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="n">ObjectMapperFactory</span> <span class="n">objectMapper</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ObjectMapperFactory</span><span class="p">();</span>
+    <span class="k">return</span> <span class="n">objectMapper</span><span class="p">.</span><span class="na">getExtensionModule</span><span class="p">();</span>
+
+  <span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div>
+
+</div>
+<input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><label for="__tabbed_2_2">mapper/BeanMapper.java</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.config.mapper</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">org.springframework.data.domain.Page</span><span class="p">;</span>
+
+<span class="cm">/**</span>
+<span class="cm">* @author coedevon</span>
+<span class="cm">*/</span>
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">BeanMapper</span> <span class="kd">extends</span> <span class="n">com</span><span class="p">.</span><span class="na">devonfw</span><span class="p">.</span><span class="na">module</span><span class="p">.</span><span class="na">beanmapping</span><span class="p">.</span><span class="na">common</span><span class="p">.</span><span class="na">api</span><span class="p">.</span><span class="na">BeanMapper</span> <span class="p">{</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * Mapea el genérico de un Page en otro tipo de genérico</span>
+<span class="cm">  * @param &lt;T&gt;</span>
+<span class="cm">  * @param source</span>
+<span class="cm">  * @param targetClass</span>
+<span class="cm">  * @return</span>
+<span class="cm">  */</span>
+  <span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">Page</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">mapPage</span><span class="p">(</span><span class="n">Page</span> <span class="n">source</span><span class="p">,</span> <span class="n">Class</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">targetClass</span><span class="p">);</span>
+
+<span class="p">}</span>
+</code></pre></div>
+
+</div>
+<input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><label for="__tabbed_2_3">mapper/BeanMapperImpl.java</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.config.mapper</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">org.springframework.data.domain.Page</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.data.domain.PageImpl</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">com.devonfw.module.beanmapping.common.impl.orika.BeanMapperImplOrika</span><span class="p">;</span>
+
+<span class="cm">/**</span>
+<span class="cm">* @author coedevon</span>
+<span class="cm">*/</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">BeanMapperImpl</span> <span class="kd">extends</span> <span class="n">BeanMapperImplOrika</span> <span class="kd">implements</span> <span class="n">BeanMapper</span> <span class="p">{</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * {@inheritDoc}</span>
+<span class="cm">  */</span>
+  <span class="kd">public</span> <span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">Page</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">mapPage</span><span class="p">(</span><span class="n">Page</span> <span class="n">source</span><span class="p">,</span> <span class="n">Class</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">targetClass</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">source</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">List</span> <span class="n">list</span> <span class="o">=</span> <span class="n">mapList</span><span class="p">(</span><span class="n">source</span><span class="p">.</span><span class="na">getContent</span><span class="p">(),</span> <span class="n">targetClass</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="k">new</span> <span class="n">PageImpl</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="n">source</span><span class="p">.</span><span class="na">getPageable</span><span class="p">(),</span> <span class="n">source</span><span class="p">.</span><span class="na">getTotalElements</span><span class="p">());</span>
+  <span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div>
+
+</div>
+</div>
+<p>Listo, ya podemos empezar a desarrollar nuestros servicios.</p>
+<h2 id="estructurar-el-codigo">Estructurar el código</h2>
+<p>Vamos a hacer un breve refresco de la estructura del código que ya se ha visto en puntos anteriores.</p>
+<p>Las clases deben estar agrupadas por ámbito funcional, en nuestro caso como vamos a hacer la funcionalidad de <code>Categorías</code> pues debería estar todo dentro de un package del tipo <code>com.capgemini.coedevon.tutorial.category</code>.</p>
+<p>Además, deberíamos aplicar la separación por capas como ya se vió en el esquema:</p>
+<p><img alt="estructura-capas" src="../../assets/images/estructura-capas.png" /></p>
+<p>La primera capa, la de <code>Controlador</code>, se encargará de procesar las peticiones y transformar datos. Esta capa llamará a la capa de <code>Lógica</code> de negocio que ejecutará las operaciones, ayudándose de otros objetos de esa misma capa de <code>Lógica</code> o bien de llamadas a datos a través de la capa de <code>Acceso a Datos</code></p>
+<p>Ahora sí, vamos a programar!.</p>
+<h2 id="capa-de-operaciones-controller">Capa de operaciones: Controller</h2>
+<p>En esta capa es donde se definen las operaciones que pueden ser consumidas por los clientes. Se caracterizan por estar anotadas con las anotaciones @Controller o @RestController y por las anotaciones @RequestMapping que nos permiten definir las rutas de acceso.</p>
+<h3 id="controller-de-ejemplo">Controller de ejemplo</h3>
+<p>Vamos a crear una clase <code>CategoryController.java</code> dentro del package <code>com.capgemini.coedevon.tutorial.category</code> para definir las rutas de las operaciones.</p>
+<div class="tabbed-set" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><label for="__tabbed_3_1">CategoryController.java</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.category</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RequestMapping</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RequestMethod</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="p">;</span>
+
+<span class="cm">/**</span>
+<span class="cm">* @author coedevon</span>
+<span class="cm">*/</span>
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">&quot;/category/v1&quot;</span><span class="p">)</span>
+<span class="nd">@RestController</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CategoryController</span> <span class="p">{</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * Método para recuperar todas las Category</span>
+<span class="cm">  * @return</span>
+<span class="cm">  */</span>
+  <span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">path</span> <span class="o">=</span> <span class="s">&quot;/&quot;</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="n">RequestMethod</span><span class="p">.</span><span class="na">GET</span><span class="p">)</span>
+  <span class="kd">public</span> <span class="n">String</span> <span class="nf">prueba</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="k">return</span> <span class="s">&quot;Probando el Controller&quot;</span><span class="p">;</span>
+  <span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div>
+
+</div>
+</div>
+<p>Si abrimos el <a href="https://www.postman.com/">Postman</a> y creamos una petición GET a la url http://localhost:8080/category/v1/ nos responderá con el mensaje que hemos puesto.</p>
+<h3 id="implementar-operaciones">Implementar operaciones</h3>
+<p>Ahora que ya tenemos un controlador y una operacion de negocio ficticia, vamos a borrarla y añadir las operaciones reales que consumirá nuestra pantalla. Deberemos añadir una operación para listar, una para actualizar, una para guardar y una para borrar. Aunque para hacerlo más cómodo, utilizaremos la misma operación para guardar y para actualizar. Además, no estar trabajando con tipos simples, vamos a utilizar un objeto para recibir información y para enviar información.</p>
+<p>Estos objetos típicamente se denominan DTO (Data Transfer Object) y nos sirven justamente para encapsular información que queremos transportar. En realidad no son más que clases pojo sencilla con propiedades y getters y setters. </p>
+<p>Para nuestro ejemplo crearemos una clase <code>CategoryDto</code> dentro del package <code>com.capgemini.coedevon.tutorial.category.model</code> con el siguiente contenido:</p>
+<div class="tabbed-set" data-tabs="4:1"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><label for="__tabbed_4_1">CategoryDto.java</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.category.model</span><span class="p">;</span>
+
+<span class="cm">/**</span>
+<span class="cm">* @author coedevon</span>
+<span class="cm">*/</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CategoryDto</span> <span class="p">{</span>
+  <span class="kd">private</span> <span class="n">Long</span> <span class="n">id</span><span class="p">;</span>
+
+  <span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="p">;</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * @return id</span>
+<span class="cm">  */</span>
+  <span class="kd">public</span> <span class="n">Long</span> <span class="nf">getId</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="na">id</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * @param id new value of {@link #getId}.</span>
+<span class="cm">  */</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setId</span><span class="p">(</span><span class="n">Long</span> <span class="n">id</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="na">id</span> <span class="o">=</span> <span class="n">id</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * @return name</span>
+<span class="cm">  */</span>
+  <span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="na">name</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * @param name new value of {@link #getName}.</span>
+<span class="cm">  */</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="p">(</span><span class="n">String</span> <span class="n">name</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="p">;</span>
+  <span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div>
+
+</div>
+</div>
+<p>A continuación utilizaremos esta clase en nuestro Controller para implementar las tres operaciones de negocio.</p>
+<div class="tabbed-set" data-tabs="5:1"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><label for="__tabbed_5_1">CategoryController.java</label><div class="tabbed-content"></div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.category</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.util.HashMap</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Map</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.PathVariable</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RequestBody</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RequestMapping</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RequestMethod</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.category.model.CategoryDto</span><span class="p">;</span>
+
+<span class="cm">/**</span>
+<span class="cm">* @author coedevon</span>
+<span class="cm">*/</span>
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">&quot;/category/v1&quot;</span><span class="p">)</span>
+<span class="nd">@RestController</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CategoryController</span> <span class="p">{</span>
+
+  <span class="kd">private</span> <span class="kt">long</span> <span class="n">SEQUENCE</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="kd">private</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">Long</span><span class="p">,</span> <span class="n">CategoryDto</span><span class="o">&gt;</span> <span class="n">categories</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Long</span><span class="p">,</span> <span class="n">CategoryDto</span><span class="o">&gt;</span><span class="p">();</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * Método para recuperar todas las Category</span>
+<span class="cm">  * @return</span>
+<span class="cm">  */</span>
+  <span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">path</span> <span class="o">=</span> <span class="s">&quot;/&quot;</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="n">RequestMethod</span><span class="p">.</span><span class="na">GET</span><span class="p">)</span>
+  <span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">CategoryDto</span><span class="o">&gt;</span> <span class="nf">findAll</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="k">return</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">categories</span><span class="p">.</span><span class="na">values</span><span class="p">());</span>
+  <span class="p">}</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * Método para crear o actualizar una Category</span>
+<span class="cm">  * @param dto</span>
+<span class="cm">  * @return</span>
+<span class="cm">  */</span>
+  <span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">path</span> <span class="o">=</span> <span class="s">&quot;/&quot;</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="n">RequestMethod</span><span class="p">.</span><span class="na">PUT</span><span class="p">)</span>
+  <span class="kd">public</span> <span class="n">CategoryDto</span> <span class="nf">save</span><span class="p">(</span><span class="nd">@RequestBody</span> <span class="n">CategoryDto</span> <span class="n">dto</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="n">CategoryDto</span> <span class="n">category</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="na">categories</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">dto</span><span class="p">.</span><span class="na">getId</span><span class="p">());</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">category</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">category</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CategoryDto</span><span class="p">();</span>
+      <span class="n">category</span><span class="p">.</span><span class="na">setId</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">SEQUENCE</span><span class="o">++</span><span class="p">);</span>
+      <span class="k">this</span><span class="p">.</span><span class="na">categories</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">category</span><span class="p">.</span><span class="na">getId</span><span class="p">(),</span> <span class="n">category</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">category</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="n">dto</span><span class="p">.</span><span class="na">getName</span><span class="p">());</span>
+
+    <span class="k">return</span> <span class="n">category</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * Método para borrar una Category</span>
+<span class="cm">  * @param id</span>
+<span class="cm">  */</span>
+  <span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">path</span> <span class="o">=</span> <span class="s">&quot;/{id}&quot;</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="n">RequestMethod</span><span class="p">.</span><span class="na">DELETE</span><span class="p">)</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">delete</span><span class="p">(</span><span class="nd">@PathVariable</span><span class="p">(</span><span class="s">&quot;id&quot;</span><span class="p">)</span> <span class="n">Long</span> <span class="n">id</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="na">categories</span><span class="p">.</span><span class="na">remove</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>Como todavía no tenemos acceso a BD, hemos creado una variable tipo HashMap y una variable Long, que simularán una BD y una secuencia. También hemos implementado tres operaciones GET, PUT y DELETE que realizan las acciones necesarias por nuestra pantalla. Ahora podríamos probarlo desde el Postman con cuatro ejemplo sencillos.</p>
+<div class="admonition tip">
+<p class="admonition-title">Atención</p>
+<p>Los datos que se reciben pueden venir informados como un parámetro en la URL Get, como una variable en el propio path o dentro del body de la petición. Cada uno de ellos se recupera con una anotación especial: <code>@RequestParam</code>, <code>@PathVariable</code> y <code>@RequestBody</code> respectivamente.</p>
+</div>
+<p><strong>GET</strong> nos devuelve un listado de <code>Categorías</code></p>
+<p><img alt="step2-java1" src="../../assets/images/step2-java1.png" /></p>
+<p><strong>PUT</strong> nos sirve para insertar <code>Categorías</code> nuevas (si no tienen el id informado) o para actualizar <code>Categorías</code> (si tienen el id informado). Fíjate que los datos que se reciben están en el body.</p>
+<p><img alt="step2-java2" src="../../assets/images/step2-java2.png" />
+<img alt="step2-java3" src="../../assets/images/step2-java3.png" /></p>
+<p><strong>DELETE</strong> nos sirve eliminar <code>Categorías</code>. Fíjate que el dato del ID está en el path.</p>
+<p><img alt="step2-java4" src="../../assets/images/step2-java4.png" /></p>
+<h3 id="aspectos-importantes">Aspectos importantes</h3>
+<p>Los aspectos importantes de la capa <code>Controller</code> son:</p>
+<ul>
+<li>La clase debe estar anotada con <code>@Controller</code> o <code>@RestController</code>. Mejor usar la última anotación ya que estás diciendo que las operaciones son de tipo Rest y no hará falta configurar nada</li>
+<li>La ruta general al controlador se define con el <code>@RequestMapping</code> global de la clase, aunque también se puede obviar esta anotación y añadir a cada una de las operaciones la ruta raíz.</li>
+<li>Importante, a modo de consejo, anadir en la ruta la versión de la API (en nuestro ejemplo v1). Esto nos ayudará a ampliarla y cambiar la funcionalidad a futuro:<ul>
+<li>Cualquier modificación del algoritmo que no afecte al contrato o cualquier operación nueva, puede ir en la misma versión</li>
+<li>Eliminaciones y modificaciones de contrato, deberían ir en un <code>Controller</code> nuevo anotado con otra versión (<code>category/v2/</code> por ejemplo)</li>
+</ul>
+</li>
+<li>Los métodos que queramos exponer como operaciones deben ir anotados también con <code>@RequestMapping</code> con la info:<ul>
+<li><code>path</code> → Que nos permite definir un path para la operación, siempre sumándole el path de la clase (si es que tuviera)</li>
+<li><code>method</code> → Que nos permite definir el verbo de http que vamos a atender. Podemos tener el mismo path con diferente method, sin problema. Por lo general utilizaremos:<ul>
+<li><em>GET</em> → Generalmente se usa para recuperar información</li>
+<li><em>POST</em> → Se utiliza para hacer update y filtrados complejos de información</li>
+<li><em>PUT</em> → Se utiliza para hacer save de información</li>
+<li><em>DELETE</em> → Se utiliza para hacer borrados de información</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="capa-de-servicio-service">Capa de Servicio: Service</h2>
+<p>Pero en realidad la cosa no funciona así. Hemos implementado parte de la lógica de negocio (las operaciones/acciones de guardado, borrado y listado) dentro de lo que sería la capa de operaciones o servicios al cliente. Esta capa no debe ejecutar lógica de negocio, tan solo debe hacer transformaciones de datos y enrutar peticiones, toda la lógica debería ir en la capa de servicio.</p>
+<h3 id="implementar-servicios">Implementar servicios</h3>
+<p>Pues vamos a arreglarlo. Vamos a crear un servicio y vamos a mover la lógica de negocio al servicio.</p>
+<div class="tabbed-set" data-tabs="6:3"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><label for="__tabbed_6_1">CategoryService.java</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.category</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.category.model.CategoryDto</span><span class="p">;</span>
+
+<span class="cm">/**</span>
+<span class="cm">* @author coedevon</span>
+<span class="cm">*</span>
+<span class="cm">*/</span>
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">CategoryService</span> <span class="p">{</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * Método para recuperar todas las Category</span>
+<span class="cm">  * @return</span>
+<span class="cm">  */</span>
+  <span class="n">List</span><span class="o">&lt;</span><span class="n">CategoryDto</span><span class="o">&gt;</span> <span class="nf">findAll</span><span class="p">();</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * Método para crear o actualizar una Category</span>
+<span class="cm">  * @param dto</span>
+<span class="cm">  * @return</span>
+<span class="cm">  */</span>
+  <span class="n">CategoryDto</span> <span class="nf">save</span><span class="p">(</span><span class="n">CategoryDto</span> <span class="n">dto</span><span class="p">);</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * Método para borrar una Category</span>
+<span class="cm">  * @param id</span>
+<span class="cm">  */</span>
+  <span class="kt">void</span> <span class="nf">delete</span><span class="p">(</span><span class="n">Long</span> <span class="n">id</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+
+</div>
+<input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><label for="__tabbed_6_2">CategoryServiceImpl.java</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.category</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.util.HashMap</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Map</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">org.springframework.stereotype.Service</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.category.model.CategoryDto</span><span class="p">;</span>
+
+<span class="cm">/**</span>
+<span class="cm">* @author coedevon</span>
+<span class="cm">*</span>
+<span class="cm">*/</span>
+<span class="nd">@Service</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CategoryServiceImpl</span> <span class="kd">implements</span> <span class="n">CategoryService</span> <span class="p">{</span>
+  <span class="kd">private</span> <span class="kt">long</span> <span class="n">ID</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+  <span class="kd">private</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">Long</span><span class="p">,</span> <span class="n">CategoryDto</span><span class="o">&gt;</span> <span class="n">categories</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Long</span><span class="p">,</span> <span class="n">CategoryDto</span><span class="o">&gt;</span><span class="p">();</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * Método para recuperar todas las Category</span>
+<span class="cm">  * @return</span>
+<span class="cm">  */</span>
+  <span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">CategoryDto</span><span class="o">&gt;</span> <span class="nf">findAll</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="k">return</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">categories</span><span class="p">.</span><span class="na">values</span><span class="p">());</span>
+  <span class="p">}</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * Método para crear o actualizar una Category</span>
+<span class="cm">  * @param dto</span>
+<span class="cm">  * @return</span>
+<span class="cm">  */</span>
+  <span class="kd">public</span> <span class="n">CategoryDto</span> <span class="nf">save</span><span class="p">(</span><span class="n">CategoryDto</span> <span class="n">dto</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="n">CategoryDto</span> <span class="n">category</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="na">categories</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">dto</span><span class="p">.</span><span class="na">getId</span><span class="p">());</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">category</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">category</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CategoryDto</span><span class="p">();</span>
+      <span class="n">category</span><span class="p">.</span><span class="na">setId</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">ID</span><span class="o">++</span><span class="p">);</span>
+      <span class="k">this</span><span class="p">.</span><span class="na">categories</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">category</span><span class="p">.</span><span class="na">getId</span><span class="p">(),</span> <span class="n">category</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">category</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="n">dto</span><span class="p">.</span><span class="na">getName</span><span class="p">());</span>
+
+    <span class="k">return</span> <span class="n">category</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * Método para borrar una Category</span>
+<span class="cm">  * @param id</span>
+<span class="cm">  */</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">delete</span><span class="p">(</span><span class="n">Long</span> <span class="n">id</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="na">categories</span><span class="p">.</span><span class="na">remove</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+</div>
+<input id="__tabbed_6_3" name="__tabbed_6" type="radio" /><label for="__tabbed_6_3">CategoryController.java</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.category</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.PathVariable</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RequestBody</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RequestMapping</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RequestMethod</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.category.model.CategoryDto</span><span class="p">;</span>
+
+<span class="cm">/**</span>
+<span class="cm">* @author coedevon</span>
+<span class="cm">*/</span>
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">&quot;/category/v1&quot;</span><span class="p">)</span>
+<span class="nd">@RestController</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CategoryController</span> <span class="p">{</span>
+
+  <span class="nd">@Autowired</span>
+  <span class="kd">private</span> <span class="n">CategoryService</span> <span class="n">categoryService</span><span class="p">;</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * Método para recuperar todas las Category</span>
+<span class="cm">  * @return</span>
+<span class="cm">  */</span>
+  <span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">path</span> <span class="o">=</span> <span class="s">&quot;/&quot;</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="n">RequestMethod</span><span class="p">.</span><span class="na">GET</span><span class="p">)</span>
+  <span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">CategoryDto</span><span class="o">&gt;</span> <span class="nf">findAll</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="na">categoryService</span><span class="p">.</span><span class="na">findAll</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * Método para crear o actualizar una Category</span>
+<span class="cm">  * @param dto</span>
+<span class="cm">  * @return</span>
+<span class="cm">  */</span>
+  <span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">path</span> <span class="o">=</span> <span class="s">&quot;/&quot;</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="n">RequestMethod</span><span class="p">.</span><span class="na">PUT</span><span class="p">)</span>
+  <span class="kd">public</span> <span class="n">CategoryDto</span> <span class="nf">save</span><span class="p">(</span><span class="nd">@RequestBody</span> <span class="n">CategoryDto</span> <span class="n">dto</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="na">categoryService</span><span class="p">.</span><span class="na">save</span><span class="p">(</span><span class="n">dto</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * Método para borrar una Category</span>
+<span class="cm">  * @param id</span>
+<span class="cm">  */</span>
+  <span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">path</span> <span class="o">=</span> <span class="s">&quot;/{id}&quot;</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="n">RequestMethod</span><span class="p">.</span><span class="na">DELETE</span><span class="p">)</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">delete</span><span class="p">(</span><span class="nd">@PathVariable</span><span class="p">(</span><span class="s">&quot;id&quot;</span><span class="p">)</span> <span class="n">Long</span> <span class="n">id</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="na">categoryService</span><span class="p">.</span><span class="na">delete</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+</div>
+</div>
+<p>Ahora ya tenemos bien estructurado nuestro proyecto. Ya tenemos las dos capas necesarias Controladores y Servicios y cada uno se encarga de llevar a cabo su cometido de forma correcta.</p>
+<h3 id="aspectos-importantes_1">Aspectos importantes</h3>
+<p>Los aspectos importantes de la capa <code>Service</code> son:</p>
+<ul>
+<li>Toda la lógica de negocio, operaciones y demás debe estar implementada en los servicios. Los controladores simplemente invocan servicios y transforman ciertos datos.</li>
+<li>Es buena práctica que la capa de servicios se implemente usando el patrón fachada, esto quiere decir que necesitamos tener una Interface y al menos una implementación de esa Interface. Y siempre siempre debemos interactuar con la Interface. Esto nos permitirá a futuro poder sustituir la implementación por otra diferente sin que el resto del código se vea afectado. Especialmente útil cuando queremos mockear comportamientos en tests.</li>
+<li>La capa de servicio puede invocar a otros servicios en sus operaciones, pero <strong>nunca</strong> debe invocar a un controlador.</li>
+<li>Para crear un servicio se debe anotar mediante <code>@Service</code> y además debe implementar la Interface del servicio. Un error muy común al arrancar un proyecto y ver que no funcionan las llamadas, es porqué no existe la anotación <code>@Service</code> o porqué no se ha implementado la Interface.</li>
+<li>La forma de <code>inyectar</code> y utilizar componentes manejados por Springboot es mediante la anotación <code>@Autowired</code>. <strong>NO</strong> intentes crear un objeto de CategoryServiceImpl, ni hacer un <code>new</code>, ya que no estará manejado por Springboot y dará fallos de NullPointer. Lo mejor es dejar que Springboot lo gestione y utilizar las inyecciones de dependencias.</li>
+</ul>
+<h2 id="capa-de-datos-repository">Capa de Datos: Repository</h2>
+<p>Pero no siempre vamos a acceder a los datos mediante un HasMap en memoria. En algunas ocasiones queremos que nuestro proyecto acceda a un servicio de datos como puede ser una BBDD, un servicio externo, un acceso a disco, etc.
+Estos accesos se deben hacer desde la capa de acceso a datos, y en concreto para nuestro ejemplo, lo haremos a través de un Repository para que acceda a una BBDD.</p>
+<h3 id="creacion-de-bbdd">Creación de BBDD</h3>
+<p>Para el tutorial no necesitamos configurar una BBDD externa ni complicarnos demasiado. Vamos a utilizar una librería muy útil llamada <code>H2</code> que nos permite levantar una BBDD en memoria persistiendo los datos en memoria o en disco y vamos a utilizar las librerías de <code>flyway</code> para crear nuestro esquema de BBDD en el arranque de la aplicación.</p>
+<p>Para esto, si te acuerdas de cuando creamos la aplicación, existen unos ficheros que se encuentran dentro de la carpeta <code>src/main/resources/db/migration/</code> y que nos permiten ir depositando scripts versionados para que se ejecuten en orden una vez se levante la aplicación. Vamos a crear los nuestros:</p>
+<div class="tabbed-set" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><label for="__tabbed_7_1">V0001__Create_Schema.sql</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span> <span class="n">SEQUENCE</span> <span class="n">HIBERNATE_SEQUENCE</span> <span class="k">START</span> <span class="k">WITH</span> <span class="mi">1000000</span><span class="p">;</span>
+
+<span class="k">DROP</span> <span class="k">TABLE</span> <span class="k">IF</span> <span class="k">EXISTS</span> <span class="n">CATEGORY</span><span class="p">;</span>
+
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">CATEGORY</span> <span class="p">(</span>
+  <span class="n">id</span> <span class="nb">BIGINT</span> <span class="n">AUTO_INCREMENT</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
+  <span class="n">name</span> <span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">250</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span>
+<span class="p">);</span>
+</code></pre></div>
+
+</div>
+<input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><label for="__tabbed_7_2">V0002__Create_Data.sql</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">CATEGORY</span><span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Eurogames&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">CATEGORY</span><span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;Ameritrash&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">CATEGORY</span><span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;Familiar&#39;</span><span class="p">);</span>
+</code></pre></div>
+
+</div>
+</div>
+<p>La creación de la secuencia de hibernate es necesaria para que H2 pueda trabajar con ID auto incrementales. De lo contrario al arrancar la aplicación se quejará.</p>
+<h3 id="implementar-entity">Implementar Entity</h3>
+<p>Una vez creada la BBDD el siguiente paso es crear la entidad con la que vamos a persistir y recuperar información. Las entidades igual que los DTOs deberían estar agrupados dentro del package <code>model</code> de cada funcionalidad, así que vamos a crear una nueva clase java.</p>
+<div class="tabbed-set" data-tabs="8:1"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><label for="__tabbed_8_1">Category.java</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.category.model</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">javax.persistence.Column</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.Entity</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.GeneratedValue</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.GenerationType</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.Id</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.Table</span><span class="p">;</span>
+
+<span class="cm">/**</span>
+<span class="cm">* @author coedevon</span>
+<span class="cm">*/</span>
+<span class="nd">@Entity</span>
+<span class="nd">@Table</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;Category&quot;</span><span class="p">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Category</span> <span class="p">{</span>
+
+  <span class="nd">@Id</span>
+  <span class="nd">@GeneratedValue</span><span class="p">(</span><span class="n">strategy</span> <span class="o">=</span> <span class="n">GenerationType</span><span class="p">.</span><span class="na">AUTO</span><span class="p">)</span>
+  <span class="nd">@Column</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;id&quot;</span><span class="p">,</span> <span class="n">nullable</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span>
+  <span class="kd">private</span> <span class="n">Long</span> <span class="n">id</span><span class="p">;</span>
+
+  <span class="nd">@Column</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;name&quot;</span><span class="p">,</span> <span class="n">nullable</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span>
+  <span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="p">;</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * @return id</span>
+<span class="cm">  */</span>
+  <span class="kd">public</span> <span class="n">Long</span> <span class="nf">getId</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="na">id</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * @param id new value of {@link #getId}.</span>
+<span class="cm">  */</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setId</span><span class="p">(</span><span class="n">Long</span> <span class="n">id</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="na">id</span> <span class="o">=</span> <span class="n">id</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * @return name</span>
+<span class="cm">  */</span>
+  <span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="na">name</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * @param name new value of {@link #getName}.</span>
+<span class="cm">  */</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="p">(</span><span class="n">String</span> <span class="n">name</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="p">;</span>
+  <span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div>
+
+</div>
+</div>
+<p>Si te fijas, la Entity suele ser muy similar a un DTO, tiene unas propiedades y sus getters y setters. Pero a diferencia de los DTOs, esta clase tiene una serie de anotaciones que permiten a JPA hacer su magia y generar consultas SQL a la BBDD. En este ejemplo vemos 4 anotaciones importantes:</p>
+<ul>
+<li><code>@Entity</code> → Le indica a Springboot que se trata de una clase que implementa una Entidad de BBDD. Sin esta anotación no es posible hacer queries.</li>
+<li><code>@Table</code> → Le indica a JPA el nombre y el schema de la tabla que representa esta clase. Por claridad se debería poner siempre, aunque si el nombre de la tabla es igual al nombre de la clase no es necesaria la anotación.</li>
+<li><code>@Id</code> y <code>@GeneratedValue</code> → Le indica a JPA que esta propiedad es la que mapea una Primary Key y además que esta PK se genera con la estrategia que se le indique en la anotación <code>@GeneratedValue</code>, que puede ser:<ul>
+<li>Generación de PK por <code>Secuence</code>, la que utiliza Oracle, en este caso habrá que indicarle un nombre de secuencia.</li>
+<li>Generación de PK por <code>Indentity</code>, la que utiliza MySql o SQLServer, el auto-incremental. </li>
+<li>Generación de PK por <code>Table</code>, en algunas BBDD se permite tener una tabla donde se almacenan como registros todas las secuencias.</li>
+<li>Generación de PK <code>Auto</code>, elige la mejor estrategia en función de la BBDD que hemos seleccionado.</li>
+</ul>
+</li>
+<li><code>@Column</code> → Le indica a JPA que esta propiedad mapea una columna de la tabla y le especifica el nombre de la columna. Al igual que la anotaciónd de <code>Table</code>, esta anotación no es necesaria aunque si es muy recomendable. Por claridad se debería poner siempre, aunque si el nombre de la columna es igual al nombre de la propiedad no es necesaria la anotación.</li>
+</ul>
+<p>Hay muchas otras anotaciones, pero estas son las básicas, ya irás aprendiendo otras.</p>
+<div class="admonition tip">
+<p class="admonition-title">Consejo</p>
+<p>Para definir las PK de las tablas, intenta evitar una PK compuesta de más de una columna. La programación se hace muy compleja y las magias que hace JPA en la oscuridad se complican mucho. Mi recomendación es que siempre utilices una PK númerica, en la medida de lo posible, y si es necesario, crees índices compuestos de búsqueda o checks compuestos para evitar duplicidades.</p>
+</div>
+<h3 id="implementar-repository">Implementar Repository</h3>
+<p>Ahora que ya tenemos la entidad implementada, vamos a utilizarla para acceder a BBDD, y esto lo haremos con un <code>Repository</code>. Existen varias formas de utilizar los repositories, desde el todo automático y magia de JPA hasta el repositorio manual en el que hay que codificar todo. En el tutorial voy a explicar varias formas de implementarlo para este CRUD y los siguientes CRUDs.</p>
+<p>Como ya se dijo en puntos anteriores, el acceso a datos se debe hacer siempre a través de un <code>Repository</code>, así que vamos a implementar uno. En esta capa, al igual que pasaba con los services, es recomendable utilizar el patrón fachada, para poder sustituir implementaciones sin afectar al código.</p>
+<div class="tabbed-set" data-tabs="9:1"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><label for="__tabbed_9_1">CategoryRepository.java</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.category</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">org.springframework.data.repository.CrudRepository</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.category.model.Category</span><span class="p">;</span>
+
+<span class="cm">/**</span>
+<span class="cm">* @author coedevon</span>
+<span class="cm">*/</span>
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">CategoryRepository</span> <span class="kd">extends</span> <span class="n">CrudRepository</span><span class="o">&lt;</span><span class="n">Category</span><span class="p">,</span> <span class="n">Long</span><span class="o">&gt;</span> <span class="p">{</span>
+
+<span class="p">}</span>
+</code></pre></div>
+
+</div>
+</div>
+<p>¿Que te parece?, sencillo, ¿no?. Spring ya tiene una implementación por defecto de un CrudRepository, tan solo tenemos que crear una interface que extienda de la interface <code>CrudRepository</code> pasandole como tipos la <code>Entity</code> y el tipo de la Primary Key. Con eso Spring construye el resto y nos provee de los métodos típicos y necesarios para un CRUD.</p>
+<p>Ahora vamos a utilizarla en el <code>Service</code>, pero hay un problema. El <code>Repository</code> devuelve un objeto tipo <code>Category</code> y el <code>Service</code> y <code>Controller</code> devuelven un objeto tipo <code>CategoryDto</code>. Esto es porque en cada capa se debe con un ámbito de modelos diferente. Podríamos hacer que todo el back trabajara con <code>Category</code> que son entidades de persistencia, pero no es lo correcto y nos podría llevar a cometer errores, o modificar el objeto y que sin que nosotros lo ordenásemos se persistiera ese cambio en BBDD.</p>
+<p>El ámbito de trabajo  de las capas con el que solemos trabajar y está más extendido es el siguiente:</p>
+<p><img alt="step2-java5" src="../../assets/images/step2-java5.png" /></p>
+<ul>
+<li>Los datos que vienen y van al cliente, deberían ser en la mayoría de los casos datos en formato json</li>
+<li>Al entrar en un <code>Controller</code> esos datos json se transforman en un DTO. Al salir del <code>Controller</code> hacia el cliente, esos DTOs se transforman en formato json. Estas conversiones son automáticas, las hace Springboot (en realidad las hace la librería de jackson codehaus).</li>
+<li>Cuando un <code>Controller</code> ejecuta una llamada a un <code>Service</code>, generalmente le pasa sus datos en DTO, y el <code>Service</code> se encarga de transformar esto a una <code>Entity</code>. A la inversa, cuando un <code>Service</code> responde a un <code>Controller</code>, él responde con una <code>Entity</code> y el <code>Controller</code> ya se encargará de transformarlo a DTO.</li>
+<li>Por último, para los <code>Repository</code>, siempre se trabaja de entrada y salida con objetos tipo <code>Entity</code></li>
+</ul>
+<p>Parece un lio, pero ya verás como es muy sencillo ahora que veremos el ejemplo. Una última cosa, para hacer esas transformaciones, las podemos hacer a mano usando getters y setters o bien utilizar el objeto <code>BeanMapper</code> que hemos configurado al principio como utilidad de Devonfw.</p>
+<p>El código debería quedar así:</p>
+<div class="tabbed-set" data-tabs="10:3"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><label for="__tabbed_10_1">CategoryServiceImpl.java</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.category</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">org.springframework.beans.BeanUtils</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.stereotype.Service</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.category.model.Category</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.category.model.CategoryDto</span><span class="p">;</span>
+
+<span class="cm">/**</span>
+<span class="cm">* @author coedevon</span>
+<span class="cm">*</span>
+<span class="cm">*/</span>
+<span class="nd">@Service</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CategoryServiceImpl</span> <span class="kd">implements</span> <span class="n">CategoryService</span> <span class="p">{</span>
+
+  <span class="nd">@Autowired</span>
+  <span class="n">CategoryRepository</span> <span class="n">categoryRepository</span><span class="p">;</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * {@inheritDoc}</span>
+<span class="cm">  */</span>
+  <span class="nd">@Override</span>
+  <span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Category</span><span class="o">&gt;</span> <span class="nf">findAll</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Category</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">this</span><span class="p">.</span><span class="na">categoryRepository</span><span class="p">.</span><span class="na">findAll</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * {@inheritDoc}</span>
+<span class="cm">  */</span>
+  <span class="nd">@Override</span>
+  <span class="kd">public</span> <span class="n">Category</span> <span class="nf">save</span><span class="p">(</span><span class="n">CategoryDto</span> <span class="n">dto</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="n">Category</span> <span class="n">categoria</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">dto</span><span class="p">.</span><span class="na">getId</span><span class="p">()</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span>
+      <span class="n">categoria</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="na">categoryRepository</span><span class="p">.</span><span class="na">findById</span><span class="p">(</span><span class="n">dto</span><span class="p">.</span><span class="na">getId</span><span class="p">()).</span><span class="na">orElse</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+    <span class="k">else</span>
+      <span class="n">categoria</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Category</span><span class="p">();</span>
+
+    <span class="n">BeanUtils</span><span class="p">.</span><span class="na">copyProperties</span><span class="p">(</span><span class="n">dto</span><span class="p">,</span> <span class="n">categoria</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="na">categoryRepository</span><span class="p">.</span><span class="na">save</span><span class="p">(</span><span class="n">categoria</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * {@inheritDoc}</span>
+<span class="cm">  */</span>
+  <span class="nd">@Override</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">delete</span><span class="p">(</span><span class="n">Long</span> <span class="n">id</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="na">categoryRepository</span><span class="p">.</span><span class="na">deleteById</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
+
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+</div>
+<input id="__tabbed_10_2" name="__tabbed_10" type="radio" /><label for="__tabbed_10_2">CategoryService.java</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.category</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.category.model.Category</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.category.model.CategoryDto</span><span class="p">;</span>
+
+<span class="cm">/**</span>
+<span class="cm">* @author coedevon</span>
+<span class="cm">*</span>
+<span class="cm">*/</span>
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">CategoryService</span> <span class="p">{</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * Método para recuperar todas las {@link com.capgemini.coedevon.tutorial.category.model.Category}</span>
+<span class="cm">  * @return</span>
+<span class="cm">  */</span>
+  <span class="n">List</span><span class="o">&lt;</span><span class="n">Category</span><span class="o">&gt;</span> <span class="nf">findAll</span><span class="p">();</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * Método para crear o actualizar una {@link com.capgemini.coedevon.tutorial.category.model.Category}</span>
+<span class="cm">  * @param dto</span>
+<span class="cm">  * @return</span>
+<span class="cm">  */</span>
+  <span class="n">Category</span> <span class="nf">save</span><span class="p">(</span><span class="n">CategoryDto</span> <span class="n">dto</span><span class="p">);</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * Método para borrar una {@link com.capgemini.coedevon.tutorial.category.model.Category}</span>
+<span class="cm">  * @param id</span>
+<span class="cm">  */</span>
+  <span class="kt">void</span> <span class="nf">delete</span><span class="p">(</span><span class="n">Long</span> <span class="n">id</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+
+</div>
+<input id="__tabbed_10_3" name="__tabbed_10" type="radio" /><label for="__tabbed_10_3">CategoryController.java</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.category</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.PathVariable</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RequestBody</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RequestMapping</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RequestMethod</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.category.model.CategoryDto</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.devonfw.module.beanmapping.common.api.BeanMapper</span><span class="p">;</span>
+
+<span class="cm">/**</span>
+<span class="cm">* @author coedevon</span>
+<span class="cm">*/</span>
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">&quot;/category/v1&quot;</span><span class="p">)</span>
+<span class="nd">@RestController</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CategoryController</span> <span class="p">{</span>
+
+  <span class="nd">@Autowired</span>
+  <span class="n">CategoryService</span> <span class="n">categoryService</span><span class="p">;</span>
+
+  <span class="nd">@Autowired</span>
+<span class="hll">  <span class="n">BeanMapper</span> <span class="n">beanMapper</span><span class="p">;</span>
+</span>
+  <span class="cm">/**</span>
+<span class="cm">  * Método para recuperar todas las {@link com.capgemini.coedevon.tutorial.category.model.Category}</span>
+<span class="cm">  * @return</span>
+<span class="cm">  */</span>
+  <span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">path</span> <span class="o">=</span> <span class="s">&quot;/&quot;</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="n">RequestMethod</span><span class="p">.</span><span class="na">GET</span><span class="p">)</span>
+  <span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">CategoryDto</span><span class="o">&gt;</span> <span class="nf">findAll</span><span class="p">()</span> <span class="p">{</span>
+
+<span class="hll">    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="na">beanMapper</span><span class="p">.</span><span class="na">mapList</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">categoryService</span><span class="p">.</span><span class="na">findAll</span><span class="p">(),</span> <span class="n">CategoryDto</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+</span>  <span class="p">}</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * Método para crear o actualizar una {@link com.capgemini.coedevon.tutorial.category.model.Category}</span>
+<span class="cm">  * @param dto</span>
+<span class="cm">  * @return</span>
+<span class="cm">  */</span>
+  <span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">path</span> <span class="o">=</span> <span class="s">&quot;/&quot;</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="n">RequestMethod</span><span class="p">.</span><span class="na">PUT</span><span class="p">)</span>
+  <span class="kd">public</span> <span class="n">CategoryDto</span> <span class="nf">save</span><span class="p">(</span><span class="nd">@RequestBody</span> <span class="n">CategoryDto</span> <span class="n">dto</span><span class="p">)</span> <span class="p">{</span>
+
+<span class="hll">    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="na">beanMapper</span><span class="p">.</span><span class="na">map</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">categoryService</span><span class="p">.</span><span class="na">save</span><span class="p">(</span><span class="n">dto</span><span class="p">),</span> <span class="n">CategoryDto</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+</span>  <span class="p">}</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * Método para borrar una {@link com.capgemini.coedevon.tutorial.category.model.Category}</span>
+<span class="cm">  * @param id</span>
+<span class="cm">  */</span>
+  <span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">path</span> <span class="o">=</span> <span class="s">&quot;/{id}&quot;</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="n">RequestMethod</span><span class="p">.</span><span class="na">DELETE</span><span class="p">)</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">delete</span><span class="p">(</span><span class="nd">@PathVariable</span><span class="p">(</span><span class="s">&quot;id&quot;</span><span class="p">)</span> <span class="n">Long</span> <span class="n">id</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="na">categoryService</span><span class="p">.</span><span class="na">delete</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
+
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+</div>
+</div>
+<p>El <code>Service</code> no tiene nada raro, simplemente accede al <code>Repository</code> (siempre anotado como <code>@Autowired</code>) y recupera datos o los guarda. Fíjate en el caso especial del save que la única diferencia es que en un caso tendrá id != null y por tanto internamente hará un update, y en otro caso tendrá id == null y por tanto internamente hará un save.</p>
+<p>En cuanto a la interface, lo único que cambiamos fue los objetos de respuesta, que ahora pasan a ser de tipo <code>Category</code>. Los de entrada se mantienen como <code>CategoryDto</code>.</p>
+<p>Por último, en el <code>Controller</code> se puede ver como se utiliza el conversor de <code>BeanMapper</code> (siempre anotado como <code>@Autowired</code>), que permite traducir una lista a un tipo concreto, o un objeto único a un tipo concreto. La forma de hacer estas conversiones siempre es por nombre de propiedad. Las propiedades del objeto destino se deben llamar igual que las propiedades del objeto origen. En caso contrario se quedarán a null.</p>
+<h3 id="aspectos-importantes_2">Aspectos importantes</h3>
+<p>Los aspectos importantes de la capa <code>Repository</code> son:</p>
+<ul>
+<li>Al igual que los <code>Service</code>, se debe utilizar el patrón fachada, por lo que tendremos una Interface y posiblemente una implementación.</li>
+<li>A menudo la implementación la hace internamente Springboot, pero hay veces que podemos hacer una implementación manual. Lo veremos en siguientes puntos.</li>
+<li>Los <code>Repository</code> trabajan siempre con <code>Entity</code> que no son más que mapeos de una tabla o de una vista que existe en BBDD.</li>
+<li>Los <code>Repository</code> no contienen lógica de negocio, ni transformaciones, simplemente acceder a datos, persisten o devuelven información.</li>
+<li>Los <code>Repository</code> <strong>JAMÁS</strong> deben llamar a otros <code>Repository</code> ni <code>Service</code>.</li>
+<li>Intenta que tus clases <code>Entity</code> sean lo más sencillas posible, sobre todo en cuanto a Primary Keys, se simplificará mucho el desarrollo.</li>
+</ul>
+<h2 id="que-hemos-aprendido">¿Que hemos aprendido?</h2>
+<p>Resumiendo un poco los pasos que hemos seguido:</p>
+<ul>
+<li>Hay que definir y agrupar por ámbito funcional, hemos creado el package <code>com.capgemini.coedevon.tutorial.category</code> para aglutinar todas las clases</li>
+<li>La implementación se debería separar por capas:<ul>
+<li><code>Controller</code> → Maneja las peticiones de entrada del cliente y realiza transformaciones. No ejecuta directamente lógica de negocio, para eso utiliza llamadas a la siguiente capa.</li>
+<li><code>Service</code> → Ejecuta la lógica de negocio en sus métodos o llamando a otros objetos de la misma capa. No ejecuta directamente accesos a datos, para eso utiliza la siguiente capa.</li>
+<li><code>Repository</code> → Realiza los accesos a datos de lectura y escritura. <strong>NUNCA</strong> debe llamar a otros objetos de la misma capa ni de capas anteriores.</li>
+</ul>
+</li>
+<li>Hay que tener en cuenta los objetos modelo que se mueven en cada capa. Generalmente son:<ul>
+<li><code>Json</code> → Los datos que vienen y van del cliente al <code>Controller</code>.</li>
+<li><code>DTO</code> → Los datos se mueven dentro del <code>Controller</code> y sirven para invocar llamadas. También son los datos que devuelve un <code>Controller</code>.</li>
+<li><code>Entity</code> → Los datos que sirven para persistir y leer datos de una BBDD y que <strong>NUNCA</strong> deberían ir más allá del <code>Controller</code>.</li>
+</ul>
+</li>
+</ul>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Pie">
+        
+          <a href="../step1/" title="Code: Desarrollo con Angular" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Anterior
+                </span>
+                Code: Desarrollo con Angular
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../step3/" title="Code: Conectar front con back" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Siguiente
+                </span>
+                Code: Conectar front con back
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/vendor.d710d30a.min.js"></script>
+      <script src="../../assets/javascripts/bundle.5f27aba8.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copiar al portapapeles", "clipboard.copied": "Copiado al portapapeles", "search.config.lang": "es", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../..",
+          features: [],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.27c6a5e6.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>

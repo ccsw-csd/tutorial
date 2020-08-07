@@ -1,0 +1,835 @@
+
+
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.2.2">
+    
+    
+      
+        <title>Creación de proyecto - Tutorial Springboot - Angular</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.a2408e81.min.css">
+      
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../assets/style.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#creacion-de-proyecto" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Cabecera">
+    <a href=".." title="Tutorial Springboot - Angular" class="md-header-nav__button md-logo" aria-label="Tutorial Springboot - Angular">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            Tutorial Springboot - Angular
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Creación de proyecto
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Limpiar" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Tutorial Springboot - Angular" class="md-nav__button md-logo" aria-label="Tutorial Springboot - Angular">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Tutorial Springboot - Angular
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." title="Bienvenido!" class="md-nav__link">
+      Bienvenido!
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../usecases/" title="Contexto de la aplicación" class="md-nav__link">
+      Contexto de la aplicación
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../install/" title="Entorno de desarrollo" class="md-nav__link">
+      Entorno de desarrollo
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Creación de proyecto
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
+        </span>
+      </label>
+    
+    <a href="./" title="Creación de proyecto" class="md-nav__link md-nav__link--active">
+      Creación de proyecto
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#creacion-de-proyecto-angular" class="md-nav__link">
+    Creación de proyecto Angular
+  </a>
+  
+    <nav class="md-nav" aria-label="Creación de proyecto Angular">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nuevo-proyecto" class="md-nav__link">
+    Nuevo proyecto
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arrancar-el-proyecto" class="md-nav__link">
+    Arrancar el proyecto
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creacion-de-proyecto-springboot" class="md-nav__link">
+    Creación de proyecto Springboot
+  </a>
+  
+    <nav class="md-nav" aria-label="Creación de proyecto Springboot">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creacion-con-devonfw" class="md-nav__link">
+    Creación con Devonfw
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creacion-con-spring-initilizr" class="md-nav__link">
+    Creación con Spring Initilizr
+  </a>
+  
+    <nav class="md-nav" aria-label="Creación con Spring Initilizr">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#spring-initializr" class="md-nav__link">
+    Spring Initializr
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#importar-en-eclipse" class="md-nav__link">
+    Importar en eclipse
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configurar-el-proyecto" class="md-nav__link">
+    Configurar el proyecto
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plantilla-de-proyecto" class="md-nav__link">
+    Plantilla de proyecto
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arrancar-el-proyecto_1" class="md-nav__link">
+    Arrancar el proyecto
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#anexo-creacion-con-devonfw" class="md-nav__link">
+    Anexo. Creación con Devonfw
+  </a>
+  
+    <nav class="md-nav" aria-label="Anexo. Creación con Devonfw">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ejecucion-de-arquetipo" class="md-nav__link">
+    Ejecución de arquetipo
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../cleancode/" title="Estructura y Clean Code" class="md-nav__link">
+      Estructura y Clean Code
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../develop/step1/" title="Code: Desarrollo con Angular" class="md-nav__link">
+      Code: Desarrollo con Angular
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../develop/step2/" title="Code: Desarrollo con Springboot" class="md-nav__link">
+      Code: Desarrollo con Springboot
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../develop/step3/" title="Code: Conectar front con back" class="md-nav__link">
+      Code: Conectar front con back
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../develop/step4/" title="Code: Listado paginado" class="md-nav__link">
+      Code: Listado paginado
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../develop/step5/" title="Code: Listado filtrado" class="md-nav__link">
+      Code: Listado filtrado
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../develop/step6/" title="Code: Validaciones" class="md-nav__link">
+      Code: Validaciones
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../develop/step7/" title="Code: Crear Login" class="md-nav__link">
+      Code: Crear Login
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../develop/step8/" title="Code: Testing" class="md-nav__link">
+      Code: Testing
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../exercise/" title="Ahora hazlo tu!" class="md-nav__link">
+      Ahora hazlo tu!
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../appendix/styles/" title="Anexo. Estilos" class="md-nav__link">
+      Anexo. Estilos
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../appendix/dates/" title="Anexo. Fechas" class="md-nav__link">
+      Anexo. Fechas
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#creacion-de-proyecto-angular" class="md-nav__link">
+    Creación de proyecto Angular
+  </a>
+  
+    <nav class="md-nav" aria-label="Creación de proyecto Angular">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nuevo-proyecto" class="md-nav__link">
+    Nuevo proyecto
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arrancar-el-proyecto" class="md-nav__link">
+    Arrancar el proyecto
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creacion-de-proyecto-springboot" class="md-nav__link">
+    Creación de proyecto Springboot
+  </a>
+  
+    <nav class="md-nav" aria-label="Creación de proyecto Springboot">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creacion-con-devonfw" class="md-nav__link">
+    Creación con Devonfw
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creacion-con-spring-initilizr" class="md-nav__link">
+    Creación con Spring Initilizr
+  </a>
+  
+    <nav class="md-nav" aria-label="Creación con Spring Initilizr">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#spring-initializr" class="md-nav__link">
+    Spring Initializr
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#importar-en-eclipse" class="md-nav__link">
+    Importar en eclipse
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configurar-el-proyecto" class="md-nav__link">
+    Configurar el proyecto
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plantilla-de-proyecto" class="md-nav__link">
+    Plantilla de proyecto
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arrancar-el-proyecto_1" class="md-nav__link">
+    Arrancar el proyecto
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#anexo-creacion-con-devonfw" class="md-nav__link">
+    Anexo. Creación con Devonfw
+  </a>
+  
+    <nav class="md-nav" aria-label="Anexo. Creación con Devonfw">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ejecucion-de-arquetipo" class="md-nav__link">
+    Ejecución de arquetipo
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  
+                
+                
+                <h1 id="creacion-de-proyecto">Creación de proyecto</h1>
+<p>Por lo general necesitaremos un mínimo de dos proyectos para desarrollar una aplicación:</p>
+<ul>
+<li>Por un lado tendremos un proyecto Springboot que se ejecutará en un servidor de aplicaciones, tipo Tomcat. Este proyecto tendrá la lógica de negocio de las operaciones, el acceso a los datos de la BBDD y cualquier integración con servicios de terceros. La forma de exponer estas operaciones de negocio será mediante endpoints de acceso, en concreto llamadas tipo REST.</li>
+<li>Por otro lado tendremos un proyecto Angular que se ejecutará en un servidor web de ficheros estáticos, tipo Apache. Este proyecto será código javascript, css y html, que se ejecutará en el navegador Web y que realizará ciertas operaciones sencillas y validaciones en local y llamadas a nuestro servidor Springboot para ejecutar las operaciones de negocio.</li>
+</ul>
+<p>Puede haber otro tipo de proyectos dentro de la aplicación, sobretodo si están basados en microservicios o tienen componentes batch, pero estos tipos los veremos en el tutorial.</p>
+<div class="admonition tip">
+<p class="admonition-title">Consejo</p>
+<p>Como norma cada uno de los proyectos que componen la aplicación, debería estar conectado a un repositorio de código diferente para poder evolucionar y trabajar con cada uno de ellos de forma aislada sin afectar a los demás. Así además podemos tener equipos aislados que trabajen con cada uno de los proyectos por separado.</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Durante todo el tutorial, voy a intentar separar la construcción del proyecto Angular de la construcción del proyecto Springboot, para terminar haciendo una integración entre los dos. De esta forma podrás comprobar como se puede desarrollar por separado cada uno de los dos proyectos sin ningún problema.</p>
+</div>
+<h2 id="creacion-de-proyecto-angular"><strong> Creación de proyecto Angular </strong></h2>
+<p>La mayoría de los proyectos con Angular en los que trabajamos normalmente, suelen ser proyectos web usando las librerías mas comunes de angular, como angular material.</p>
+<p>Para crear un proyecto de Angular, es necesario tener instalado el CLI de Angular. Si no lo tienes instalado, por favor, acude a la sección <code>Entorno de desarrollo</code> y verifica que tienes instalado todo lo necesario.</p>
+<h3 id="nuevo-proyecto">Nuevo proyecto</h3>
+<p>Lo primero es crear un proyecto desde la consola mediante la herramienta Angular CLI.
+Para ello abrimos una consola, nos situamos en el directorio donde vamos a crear el proyecto y ejecutamos:</p>
+<div class="codehilite"><pre><span></span><code><span class="err">ng new tutorial</span>
+</code></pre></div>
+
+
+<p>Nos realizará varias preguntas.</p>
+<blockquote>
+<p>Would you like to add Angular routing? (y/N)</p>
+<p><code>Preferiblemente: y</code></p>
+<p>Which stylesheet format would you like to use?</p>
+<p><code>Preferiblemente: SCSS</code></p>
+</blockquote>
+<p>En el caso del tutorial como vamos a tener dos proyectos para nuestra aplicación (front y back), para poder seguir correctamente las explicaciones, voy a renombrar la carpeta para poder diferenciarla del otro proyecto. A partir de ahora se llamará <code>front</code>.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Si durante el desarrollo del proyecto necesitas añadir nuevos módulos al proyecto Angular, será necesario resolver las dependencias antes de arrancar el servidor. Esto se puede realizar mediante el gestor yarn (que es más eficiente que el propio gestio de npm), directamente en consola ejecuta el comando <code>yarn</code> y descargará e instalará las nuevas dependencias.</p>
+</div>
+<h3 id="arrancar-el-proyecto">Arrancar el proyecto</h3>
+<p>Para arrancar el proyecto, tan solo necesitamos ejecutar en consola el siguiente comando:</p>
+<div class="codehilite"><pre><span></span><code><span class="err">ng serve</span>
+</code></pre></div>
+
+
+<p>Angular compilará el código fuente, levantará un servidor local al que podremos acceder por defecto mediante la URL: <a href="http://localhost:4200/">http://localhost:4200/</a></p>
+<p>Y ya podemos empezar a trabajar con Angular.</p>
+<div class="admonition tip">
+<p class="admonition-title">Comandos de Angular CLI</p>
+<p>Si necesitas más información sobre los comandos que ofrece Angular CLI para poder crear aplicaciones, componentes, servicios, etc. los tienes disponibles en:
+<a href="https://angular.io/cli#command-overview">https://angular.io/cli#command-overview</a></p>
+</div>
+<h2 id="creacion-de-proyecto-springboot"><strong> Creación de proyecto Springboot </strong></h2>
+<p>La mayoría de los proyectos Springboot en los que trabajamos normalmente, suelen ser proyectos web sencillos con pocas dependencias de terceros o incluso proyectos basados en microservicios que ejecutan pocas acciones.</p>
+<h3 id="creacion-con-devonfw">Creación con Devonfw</h3>
+<p>Podemos crear una estructura de proyecto con todas las dependencias activadas y configuradas a través de <a href="https://devonfw.com/">devonfw</a>. En el tutorial vamos a utilizar un proyecto simple de Springboot, pero queremos que conozcas que con devonfw también se puede crear. Si quieres saber más, visita el punto de <code>Anexo</code> en esta misma sección.</p>
+<div class="admonition tip">
+<p class="admonition-title">Nota</p>
+<p>Está bien tener una plantilla de generación de proyecto con <a href="https://devonfw.com/">Devonfw</a> a modo de ejemplo donde podamos consultar, pero es mucho más sencillo crear una aplicación vacía e ir añadiendole las necesidades de nuestro proyecto a medida que nos vayan haciendo falta. Por eso te recomendamos que pases al punto de Spring Initializr</p>
+</div>
+<h3 id="creacion-con-spring-initilizr">Creación con Spring Initilizr</h3>
+<p>Este método es mucho más recomendable si lo que quieres es tener un proyecto mínimo y sencillo, sin muchas dependencias. </p>
+<h4 id="spring-initializr">Spring Initializr</h4>
+<p>Spring ha creado una página interactiva que permite crear y configurar proyectos en diferentes lenguajes, con diferentes versiones de Spring Boot y añadiendole los módulos que nosotros queramos.</p>
+<p>Esta página está disponible desde <a href="https://start.spring.io/">Spring Initializr</a>. Para seguir el ejemplo del tutorial, entraremos en la web y seleccionaremos los siguientes datos:</p>
+<ul>
+<li>Tipo de proyecto: Maven</li>
+<li>Lenguage: Java</li>
+<li>Versión Spring boot: 2.3.0 (o la que exista por defecto)</li>
+<li>Group: com.capgemini.coedevon</li>
+<li>ArtifactId: tutorial</li>
+<li>Versión Java: 8</li>
+<li>Dependencias: Spring Web, Spring Data JPA, H2 Database y Flyway</li>
+</ul>
+<p><img alt="initializr" src="../assets/images/initializr.png" /></p>
+<p>Esto nos generará un proyecto que ya vendrá configurado con Spring Web, Spring Data para acceder a BBDD, y H2 junto con Flyway para crear una BBDD en memoria de ejemplo con la que trabajaremos durante el tutorial.</p>
+<h4 id="importar-en-eclipse">Importar en eclipse</h4>
+<p>El siguiente paso, ovbiamente es descomprimir el proyecto generado e importarlo como proyecto Maven. Abrimos el eclipse, pulsamos en File → Import y seleccionamos <code>Existing Maven Projects</code>. Buscamos el proyecto y le damos a importar.</p>
+<h4 id="configurar-el-proyecto">Configurar el proyecto</h4>
+<p>En realidad el proyecto está configurado completamente con las propiedades por defecto que vienen en Spring boot. Tan solo para poder arrancar el proyecto nos hará falta un fichero de creación de BBDD que utiliza flyway al arrancar y será necesario tenerlo disponible.</p>
+<p>Crearemos dos ficheros, de momento en blanco, dentro de <code>src/main/resources/db/migration</code>:</p>
+<ul>
+<li>V0001__Create_Schema.sql → Será el fichero que utilizaremos para crear el esquema de BBDD</li>
+<li>V0002__Create_Data.sql → Será el fichero que utilizaremos para rellenar con datos iniciales el esquema de BBDD</li>
+</ul>
+<h3 id="plantilla-de-proyecto"><strong>Plantilla de proyecto</strong></h3>
+<p>Puedes descargarte una <a href="../assets/project-template.7z">plantilla ya construida</a>, con Sprint Initializr y configurada con los pasos que hemos visto en esta sección.</p>
+<h3 id="arrancar-el-proyecto_1">Arrancar el proyecto</h3>
+<p>Por último ya solo nos queda arrancar el proyecto creado. Para ello buscaremos la clase <code>TutorialApplication.java</code> y con el botón derecho seleccionaremos Run As → Java Application. La aplicación al estar basada en Springboot arrancará internamente un Tomcat embebido donde se despliegará el proyecto. Si habéis seguido el tutorial la aplicación estará disponible en <a href="http://localhost:8080">http://localhost:8080</a>, aunque de momento aun no tenemos nada accesible.</p>
+<h3 id="anexo-creacion-con-devonfw">Anexo. Creación con Devonfw</h3>
+<p>Podemos utilizar la plantilla de creación que nos ofrece <a href="https://devonfw.com/">Devonfw</a> a través de su guía de desarrollo. Concretamente podemos seguir estos pasos: <a href="https://devonfw.com/website/pages/docs/devon4j.asciidoc_tutorials.html">Creating a new application</a>.</p>
+<p>El problema que tiene esta plantilla es que genera un proyecto totalmente configurado y que tiene activadas un conjunto muy grande de librerías. La mayoría de estas librerías no las utilizaremos jamás en ningún proyecto e incluso hay configuración de seguridad que tampoco vamos a utilizar por norma general o la tendremos que modificar para adaptarla a nuestra situación (proyecto, entorno, cliente, etc.).</p>
+<h4 id="ejecucion-de-arquetipo">Ejecución de arquetipo</h4>
+<p>Aun así, si quieres crear un proyecto con devonfw es muy sencillo, puedes seguir estos pasos:</p>
+<ul>
+<li>
+<p>Nos situamos en la carpeta que queramos que contenga nuestro proyecto y ejecutamos una consola de comandos. Para ello hacemos clic derecho y seleccionamos la opción <em>Open devonfw CMD shell here</em> y se nos abrirá la consola.</p>
+</li>
+<li>
+<p>En la consola de devon, tecleamos el siguiente comando: <code>devon java create com.capgemini.coedevon.tutorial</code>.
+Veremos como el propio framework se descarga todo lo necesario y en breves momentos tendremos todo listo. Esto nos creará un proyecto de devon4j, con el nombre de paquete <em>com.capgemini.coedevon.tutorial</em>, el id de grupo <em>com.capgemini.coedevon</em>, el id de artefacto <em>tutorial</em>, la versión <em>1.0.0-SNAPSHOT</em> y una base de datos <strong>h2</strong> ya preconfigurada.</p>
+</li>
+</ul>
+<p><img alt="Consola_devon" src="../assets/images/devon4j-template.png" /></p>
+<ul>
+<li>Una vez haya terminado, teclearemos lo siguiente:
+<code>cd tutorial</code> y nos posicionará sobre la carpeta raíz del proyecto. Estando en la carpeta raíz del proyecto, tecleamos lo siguiente: <code>devon eclipse</code> y nos arrancará Eclipse.</li>
+</ul>
+<p>O tambien puedes descargarte una <a href="../assets/devon4j-template.7z">plantilla ya construida de devonfw.</a></p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Pie">
+        
+          <a href="../install/" title="Entorno de desarrollo" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Anterior
+                </span>
+                Entorno de desarrollo
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../cleancode/" title="Estructura y Clean Code" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Siguiente
+                </span>
+                Estructura y Clean Code
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/vendor.d710d30a.min.js"></script>
+      <script src="../assets/javascripts/bundle.5f27aba8.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copiar al portapapeles", "clipboard.copied": "Copiado al portapapeles", "search.config.lang": "es", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados"}</script>
+      
+      <script>
+        app = initialize({
+          base: "..",
+          features: [],
+          search: Object.assign({
+            worker: "../assets/javascripts/worker/search.27c6a5e6.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>
