@@ -3,12 +3,12 @@
 Si estás leyendo esto es porque tienes mucha fuerza de voluntad y unas enormes ganas de aprender a desarrollar con el stack tecnológico de devonfw (Java Spring Boot + Angular) o porque te han mandando hacer este tutorial en tu etapa de formación.
 En cualquier caso, te agradecemos el esfuerzo que estás haciendo y te deseamos suerte :smile:.
 
-Por favor, si detectas que hay algo incorrecto en el tutorial, que no funciona o que está mal escrito, contacta con nosotros para que podamos solventarlo para futuras lecturas. Envíanos un correo [aquí](mailto:eb2a2bc0.capgemini.onmicrosoft.com@emea.teams.ms)
+Por favor, si detectas que hay algo incorrecto en el tutorial, que no funciona o que está mal escrito, contacta con nosotros para que podamos solventarlo para futuras lecturas. Envíanos un issue [aquí](https://github.com/CoEValencia/tutorial/issues).
 
 
 ## ¿Que vamos a hacer?
 
-Durante este tutorial, vamos a crear una aplicación web paso a paso con Spring Boot para la parte servidora y con Angular para la parte frontal. Intentaré comentar todo lo más detallado posible, pero si echas en falta alguna explicación por favor, escríbenos [aquí](mailto:eb2a2bc0.capgemini.onmicrosoft.com@emea.teams.ms) para que podamos añadirla.
+Durante este tutorial, vamos a crear una aplicación web paso a paso con Spring Boot para la parte servidora y con Angular para la parte frontal. Intentaré comentar todo lo más detallado posible, pero si echas en falta alguna explicación por favor, escríbenos un issue [aquí](https://github.com/CoEValencia/tutorial/issues) para que podamos añadirla.
 
 
 ## ¿Como lo vamos a hacer?
