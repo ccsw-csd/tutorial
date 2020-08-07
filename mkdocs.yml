@@ -1,0 +1,39 @@
+site_name: Tutorial Springboot - Angular
+
+nav:
+  - Bienvenido!: index.md
+  - Contexto de la aplicación: usecases.md
+  - Entorno de desarrollo: install.md
+  - Creación de proyecto: create.md
+  - Estructura y Clean Code: cleancode.md
+  - "Code: Desarrollo con Angular": develop/step1.md
+  - "Code: Desarrollo con Springboot": develop/step2.md
+  - "Code: Conectar front con back": develop/step3.md
+  - "Code: Listado paginado": develop/step4.md
+  - "Code: Listado filtrado": develop/step5.md  
+  - "Code: Validaciones": develop/step6.md
+  - "Code: Crear Login": develop/step7.md
+  - "Code: Testing": develop/step8.md
+  - Ahora hazlo tu!: exercise.md
+  - Anexo. Estilos: appendix/styles.md
+  - Anexo. Fechas: appendix/dates.md
+
+theme:
+    name: material
+    language: es
+    
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.critic
+  - codehilite
+  - pymdownx.tabbed
+  - pymdownx.superfences
+  - markdown.extensions.toc:
+      permalink: false
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:pymdownx.emoji.to_svg
+extra_css:
+  - assets/style.css  
+
+
