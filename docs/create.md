@@ -22,7 +22,7 @@ Para crear un proyecto de Angular, es necesario tener instalado el CLI de Angula
 ### Nuevo proyecto
 
 Lo primero es crear un proyecto desde la consola mediante la herramienta Angular CLI.
-Para ello abrimos una consola, nos situamos en el directorio donde vamos a crear el proyecto y ejecutamos:
+Para ello abrimos una consola donde tengamos instalado y enlazado Angular CLI (la consola de Devonfw sirve perfectamente), nos situamos en el directorio donde vamos a crear el proyecto y ejecutamos:
 
     ng new tutorial
 
@@ -44,7 +44,7 @@ En el caso del tutorial como vamos a tener dos proyectos para nuestra aplicació
 
 ### Arrancar el proyecto
 
-Para arrancar el proyecto, tan solo necesitamos ejecutar en consola el siguiente comando:
+Para arrancar el proyecto, tan solo necesitamos ejecutar en consola el siguiente comando siempre dentro del directorio creado por Angular CLI:
 
     ng serve
 
