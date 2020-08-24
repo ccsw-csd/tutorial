@@ -164,6 +164,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../../thanks/" title="Agradecimientos!" class="md-nav__link">
+      Agradecimientos!
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
     <a href="../../usecases/" title="Contexto de la aplicación" class="md-nav__link">
       Contexto de la aplicación
     </a>
@@ -200,8 +212,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../cleancode/" title="Estructura y Clean Code" class="md-nav__link">
-      Estructura y Clean Code
+    <a href="../../cleancode/" title="Estructura y Clean Code (TBD)" class="md-nav__link">
+      Estructura y Clean Code (TBD)
     </a>
   </li>
 
@@ -328,8 +340,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../step6/" title="Code: Validaciones" class="md-nav__link">
-      Code: Validaciones
+    <a href="../step6/" title="Code: Validaciones (TBD)" class="md-nav__link">
+      Code: Validaciones (TBD)
     </a>
   </li>
 
@@ -340,8 +352,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../step7/" title="Code: Crear Login" class="md-nav__link">
-      Code: Crear Login
+    <a href="../step7/" title="Code: Crear Login (TBD)" class="md-nav__link">
+      Code: Crear Login (TBD)
     </a>
   </li>
 
@@ -352,8 +364,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../step8/" title="Code: Testing" class="md-nav__link">
-      Code: Testing
+    <a href="../step8/" title="Code: Testing (TBD)" class="md-nav__link">
+      Code: Testing (TBD)
     </a>
   </li>
 
@@ -364,8 +376,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../exercise/" title="Ahora hazlo tu!" class="md-nav__link">
-      Ahora hazlo tu!
+    <a href="../../exercise/" title="Ahora hazlo tu! (TBD)" class="md-nav__link">
+      Ahora hazlo tu! (TBD)
     </a>
   </li>
 
@@ -376,8 +388,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../appendix/styles/" title="Anexo. Estilos" class="md-nav__link">
-      Anexo. Estilos
+    <a href="../../appendix/styles/" title="Anexo. Estilos (TBD)" class="md-nav__link">
+      Anexo. Estilos (TBD)
     </a>
   </li>
 
@@ -388,8 +400,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../appendix/dates/" title="Anexo. Fechas" class="md-nav__link">
-      Anexo. Fechas
+    <a href="../../appendix/dates/" title="Anexo. Fechas (TBD)" class="md-nav__link">
+      Anexo. Fechas (TBD)
     </a>
   </li>
 
@@ -467,7 +479,7 @@ El siguiente paso, como es obvio será hacer que Angular llame directamente al s
 <div class="highlight"><pre><span></span><code><span class="kr">import</span> <span class="p">{</span> <span class="nx">Injectable</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
 <span class="hll">
 </span><span class="kr">import</span> <span class="p">{</span> <span class="nx">Category</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;src/app/models/categories/Category&#39;</span><span class="p">;</span>
-<span class="hll"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Observable</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;rxjs&#39;</span><span class="p">;</span>
+<span class="hll"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Observable</span><span class="p">,</span> <span class="k">of</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;rxjs&#39;</span><span class="p">;</span>
 </span><span class="hll"><span class="kr">import</span> <span class="p">{</span> <span class="nx">HttpClient</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/common/http&#39;</span><span class="p">;</span>
 </span>
 <span class="kd">@Injectable</span><span class="p">({</span>

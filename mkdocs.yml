@@ -2,21 +2,22 @@ site_name: Tutorial Springboot - Angular
 
 nav:
   - Bienvenido!: index.md
+  - Agradecimientos!: thanks.md
   - Contexto de la aplicación: usecases.md
   - Entorno de desarrollo: install.md
   - Creación de proyecto: create.md
-  - Estructura y Clean Code: cleancode.md
+  - Estructura y Clean Code (TBD): cleancode.md
   - "Code: Desarrollo con Angular": develop/step1.md
   - "Code: Desarrollo con Springboot": develop/step2.md
   - "Code: Conectar front con back": develop/step3.md
   - "Code: Listado paginado": develop/step4.md
   - "Code: Listado filtrado": develop/step5.md  
-  - "Code: Validaciones": develop/step6.md
-  - "Code: Crear Login": develop/step7.md
-  - "Code: Testing": develop/step8.md
-  - Ahora hazlo tu!: exercise.md
-  - Anexo. Estilos: appendix/styles.md
-  - Anexo. Fechas: appendix/dates.md
+  - "Code: Validaciones (TBD)": develop/step6.md
+  - "Code: Crear Login (TBD)": develop/step7.md
+  - "Code: Testing (TBD)": develop/step8.md
+  - Ahora hazlo tu! (TBD): exercise.md
+  - Anexo. Estilos (TBD): appendix/styles.md
+  - Anexo. Fechas (TBD): appendix/dates.md
 
 theme:
     name: material

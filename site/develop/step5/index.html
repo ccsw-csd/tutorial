@@ -164,6 +164,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../../thanks/" title="Agradecimientos!" class="md-nav__link">
+      Agradecimientos!
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
     <a href="../../usecases/" title="Contexto de la aplicación" class="md-nav__link">
       Contexto de la aplicación
     </a>
@@ -200,8 +212,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../cleancode/" title="Estructura y Clean Code" class="md-nav__link">
-      Estructura y Clean Code
+    <a href="../../cleancode/" title="Estructura y Clean Code (TBD)" class="md-nav__link">
+      Estructura y Clean Code (TBD)
     </a>
   </li>
 
@@ -431,8 +443,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../step6/" title="Code: Validaciones" class="md-nav__link">
-      Code: Validaciones
+    <a href="../step6/" title="Code: Validaciones (TBD)" class="md-nav__link">
+      Code: Validaciones (TBD)
     </a>
   </li>
 
@@ -443,8 +455,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../step7/" title="Code: Crear Login" class="md-nav__link">
-      Code: Crear Login
+    <a href="../step7/" title="Code: Crear Login (TBD)" class="md-nav__link">
+      Code: Crear Login (TBD)
     </a>
   </li>
 
@@ -455,8 +467,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../step8/" title="Code: Testing" class="md-nav__link">
-      Code: Testing
+    <a href="../step8/" title="Code: Testing (TBD)" class="md-nav__link">
+      Code: Testing (TBD)
     </a>
   </li>
 
@@ -467,8 +479,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../exercise/" title="Ahora hazlo tu!" class="md-nav__link">
-      Ahora hazlo tu!
+    <a href="../../exercise/" title="Ahora hazlo tu! (TBD)" class="md-nav__link">
+      Ahora hazlo tu! (TBD)
     </a>
   </li>
 
@@ -479,8 +491,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../appendix/styles/" title="Anexo. Estilos" class="md-nav__link">
-      Anexo. Estilos
+    <a href="../../appendix/styles/" title="Anexo. Estilos (TBD)" class="md-nav__link">
+      Anexo. Estilos (TBD)
     </a>
   </li>
 
@@ -491,8 +503,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../appendix/dates/" title="Anexo. Fechas" class="md-nav__link">
-      Anexo. Fechas
+    <a href="../../appendix/dates/" title="Anexo. Fechas (TBD)" class="md-nav__link">
+      Anexo. Fechas (TBD)
     </a>
   </li>
 
@@ -798,7 +810,7 @@ ng generate service services/games/game
     <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 
     <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;buttons&quot;</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">button</span> <span class="na">mat-flat-button</span> <span class="na">color</span><span class="o">=</span><span class="s">&quot;primary&quot;</span> <span class="err">(</span><span class="na">click</span><span class="err">)=&quot;</span><span class="na">createGame</span><span class="err">()</span><span class="p">&gt;</span>Nuevo juego<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>            
+        <span class="p">&lt;</span><span class="nt">button</span> <span class="na">mat-flat-button</span> <span class="na">color</span><span class="o">=</span><span class="s">&quot;primary&quot;</span> <span class="err">(</span><span class="na">click</span><span class="err">)=&quot;</span><span class="na">createGame</span><span class="err">()&quot;</span><span class="p">&gt;</span>Nuevo juego<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>            
     <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>   
 <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 </code></pre></div>
@@ -926,12 +938,62 @@ ng generate service services/games/game
 
 </div>
 </div>
+<p>Recuerda que cada vez que utilizamos un componente nuevo (en este caso el mat-select y mat-option) debemos incluirlo en el módulo padre.</p>
+<div class="tabbed-set" data-tabs="5:1"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><label for="__tabbed_5_1">views.module.ts</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="kr">import</span> <span class="p">{</span> <span class="nx">NgModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">CommonModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/common&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">MatTableModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/table&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">MatIconModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/icon&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">MatButtonModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/button&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">CategoriesComponent</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./categories/categories.component&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">CategoryDialogComponent</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./categories/category-dialog/category-dialog.component&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">MAT_DIALOG_DATA</span><span class="p">,</span> <span class="nx">MatDialogModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/dialog&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">MatFormFieldModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/form-field&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">MatInputModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/input&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">FormsModule</span><span class="p">,</span> <span class="nx">ReactiveFormsModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/forms&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">AuthorsComponent</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./authors/authors.component&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">AuthorDialogComponent</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./authors/author-dialog/author-dialog.component&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">MatPaginatorModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/paginator&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">GamesComponent</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./games/games.component&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">GameDetailComponent</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./games/game-detail/game-detail.component&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">GameDialogComponent</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./games/game-dialog/game-dialog.component&#39;</span><span class="p">;</span>
+<span class="hll"><span class="kr">import</span> <span class="p">{</span> <span class="nx">MatOptionModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/core&#39;</span><span class="p">;</span>
+</span><span class="hll"><span class="kr">import</span> <span class="p">{</span> <span class="nx">MatSelectModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/select&#39;</span><span class="p">;</span>
+</span>
+<span class="kd">@NgModule</span><span class="p">({</span>
+    <span class="nx">declarations</span><span class="o">:</span> <span class="p">[</span><span class="nx">CategoriesComponent</span><span class="p">,</span> <span class="nx">CategoryDialogComponent</span><span class="p">,</span> <span class="nx">AuthorsComponent</span><span class="p">,</span> <span class="nx">AuthorDialogComponent</span><span class="p">,</span> <span class="nx">GamesComponent</span><span class="p">,</span> <span class="nx">GameDetailComponent</span><span class="p">,</span> <span class="nx">GameDialogComponent</span><span class="p">],</span>
+    <span class="nx">imports</span><span class="o">:</span> <span class="p">[</span>
+        <span class="nx">CommonModule</span><span class="p">,</span>
+        <span class="nx">MatTableModule</span><span class="p">,</span>
+        <span class="nx">MatIconModule</span><span class="p">,</span> 
+        <span class="nx">MatButtonModule</span><span class="p">,</span>
+        <span class="nx">MatDialogModule</span><span class="p">,</span>
+        <span class="nx">MatFormFieldModule</span><span class="p">,</span>
+        <span class="nx">MatInputModule</span><span class="p">,</span>
+        <span class="nx">FormsModule</span><span class="p">,</span>
+        <span class="nx">ReactiveFormsModule</span><span class="p">,</span>
+        <span class="nx">MatPaginatorModule</span><span class="p">,</span>
+<span class="hll">        <span class="nx">MatOptionModule</span><span class="p">,</span>
+</span><span class="hll">        <span class="nx">MatSelectModule</span><span class="p">,</span>
+</span>    <span class="p">],</span>
+    <span class="nx">providers</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="nx">provide</span>: <span class="kt">MAT_DIALOG_DATA</span><span class="p">,</span>
+            <span class="nx">useValue</span><span class="o">:</span> <span class="p">{},</span>
+        <span class="p">},</span>
+    <span class="p">]</span>
+<span class="p">})</span>
+<span class="kr">export</span> <span class="kr">class</span> <span class="nx">ViewsModule</span> <span class="p">{</span> <span class="p">}</span>
+</code></pre></div>
+
+</div>
+</div>
 <p>Debe quedar algo similar a esto:</p>
 <p><img alt="step5-angular1" src="../../assets/images/step5-angular1.png" /></p>
 <p>Tenemos una pantalla con una sección de filtros en la parte superior, donde podemos introducir un texto o seleccionar una categoría de un dropdown, un listado que de momento tiene todos los componentes básicos en una fila uno detrás del otro, y un botón para crear juegos nuevos.</p>
 <h3 id="implementar-detalle-del-item">Implementar detalle del item</h3>
 <p>Ahora vamos a implementar el detalle de cada uno de los items que forman el listado. Para ello lo primero que haremos será pasarle la información del juego a cada componente como un dato de entrada <code>Input</code>.</p>
-<div class="tabbed-set" data-tabs="5:1"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><label for="__tabbed_5_1">games.component.html</label><div class="tabbed-content">
+<div class="tabbed-set" data-tabs="6:1"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><label for="__tabbed_6_1">games.component.html</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;container&quot;</span><span class="p">&gt;</span>
     <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Catálogo de juegos<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
 
@@ -969,10 +1031,10 @@ ng generate service services/games/game
 
 </div>
 </div>
-<p>También vamos a necesitar una foto de ejemplo para poder en el detalle de los juegos. Vamos a utilizar esta imagen:</p>
-<p><img src="../../../assets/images/foto.png" width="100"></p>
+<p>También vamos a necesitar una foto de ejemplo para poner dentro de la tarjeta detalle de los juegos. Vamos a utilizar esta imagen:</p>
+<p><img src="../../assets/images/foto.png" width="100"></p>
 <p>Y ya para terminar, implementamos el componente de detalle:</p>
-<div class="tabbed-set" data-tabs="6:3"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><label for="__tabbed_6_1">game-detail.component.html</label><div class="tabbed-content">
+<div class="tabbed-set" data-tabs="7:3"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><label for="__tabbed_7_1">game-detail.component.html</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;container&quot;</span><span class="p">&gt;</span>
     <span class="p">&lt;</span><span class="nt">mat-card</span><span class="p">&gt;</span>
         <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;photo&quot;</span><span class="p">&gt;</span>
@@ -992,7 +1054,7 @@ ng generate service services/games/game
 </code></pre></div>
 
 </div>
-<input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><label for="__tabbed_6_2">game-detail.component.scss</label><div class="tabbed-content">
+<input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><label for="__tabbed_7_2">game-detail.component.scss</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="p">.</span><span class="nc">container</span> <span class="p">{</span>
     <span class="k">display</span><span class="p">:</span> <span class="kc">flex</span><span class="p">;</span>
     <span class="k">width</span><span class="p">:</span> <span class="mi">325</span><span class="kt">px</span><span class="p">;</span>
@@ -1030,7 +1092,7 @@ ng generate service services/games/game
 </code></pre></div>
 
 </div>
-<input id="__tabbed_6_3" name="__tabbed_6" type="radio" /><label for="__tabbed_6_3">game-detail.component.ts</label><div class="tabbed-content">
+<input id="__tabbed_7_3" name="__tabbed_7" type="radio" /><label for="__tabbed_7_3">game-detail.component.ts</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="kr">import</span> <span class="p">{</span> <span class="nx">Component</span><span class="p">,</span> <span class="nx">OnInit</span><span class="p">,</span> <span class="nx">Input</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
 <span class="kr">import</span> <span class="p">{</span> <span class="nx">Game</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;src/app/models/games/Game&#39;</span><span class="p">;</span>
 
@@ -1053,13 +1115,65 @@ ng generate service services/games/game
 
 </div>
 </div>
+<p>Y de nuevo, al utilizar un componente nuevo (en este caso el mat-card) debemos incluirlo en el módulo padre.</p>
+<div class="tabbed-set" data-tabs="8:1"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><label for="__tabbed_8_1">views.module.ts</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="kr">import</span> <span class="p">{</span> <span class="nx">NgModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">CommonModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/common&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">MatTableModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/table&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">MatIconModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/icon&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">MatButtonModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/button&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">CategoriesComponent</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./categories/categories.component&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">CategoryDialogComponent</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./categories/category-dialog/category-dialog.component&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">MAT_DIALOG_DATA</span><span class="p">,</span> <span class="nx">MatDialogModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/dialog&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">MatFormFieldModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/form-field&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">MatInputModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/input&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">FormsModule</span><span class="p">,</span> <span class="nx">ReactiveFormsModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/forms&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">AuthorsComponent</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./authors/authors.component&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">AuthorDialogComponent</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./authors/author-dialog/author-dialog.component&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">MatPaginatorModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/paginator&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">GamesComponent</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./games/games.component&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">GameDetailComponent</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./games/game-detail/game-detail.component&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">GameDialogComponent</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./games/game-dialog/game-dialog.component&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">MatOptionModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/core&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">MatSelectModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/select&#39;</span><span class="p">;</span>
+<span class="hll"><span class="kr">import</span> <span class="p">{</span> <span class="nx">MatCardModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/card&#39;</span><span class="p">;</span>
+</span>
+<span class="kd">@NgModule</span><span class="p">({</span>
+    <span class="nx">declarations</span><span class="o">:</span> <span class="p">[</span><span class="nx">CategoriesComponent</span><span class="p">,</span> <span class="nx">CategoryDialogComponent</span><span class="p">,</span> <span class="nx">AuthorsComponent</span><span class="p">,</span> <span class="nx">AuthorDialogComponent</span><span class="p">,</span> <span class="nx">GamesComponent</span><span class="p">,</span> <span class="nx">GameDetailComponent</span><span class="p">,</span> <span class="nx">GameDialogComponent</span><span class="p">],</span>
+    <span class="nx">imports</span><span class="o">:</span> <span class="p">[</span>
+        <span class="nx">CommonModule</span><span class="p">,</span>
+        <span class="nx">MatTableModule</span><span class="p">,</span>
+        <span class="nx">MatIconModule</span><span class="p">,</span> 
+        <span class="nx">MatButtonModule</span><span class="p">,</span>
+        <span class="nx">MatDialogModule</span><span class="p">,</span>
+        <span class="nx">MatFormFieldModule</span><span class="p">,</span>
+        <span class="nx">MatInputModule</span><span class="p">,</span>
+        <span class="nx">FormsModule</span><span class="p">,</span>
+        <span class="nx">ReactiveFormsModule</span><span class="p">,</span>
+        <span class="nx">MatPaginatorModule</span><span class="p">,</span>
+        <span class="nx">MatOptionModule</span><span class="p">,</span>
+        <span class="nx">MatSelectModule</span><span class="p">,</span>
+<span class="hll">        <span class="nx">MatCardModule</span>    
+</span>    <span class="p">],</span>
+    <span class="nx">providers</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="nx">provide</span>: <span class="kt">MAT_DIALOG_DATA</span><span class="p">,</span>
+            <span class="nx">useValue</span><span class="o">:</span> <span class="p">{},</span>
+        <span class="p">},</span>
+    <span class="p">]</span>
+<span class="p">})</span>
+<span class="kr">export</span> <span class="kr">class</span> <span class="nx">ViewsModule</span> <span class="p">{</span> <span class="p">}</span>
+</code></pre></div>
+
+</div>
+</div>
 <p>Ahora si que debería quedar algo similar a esta pantalla:</p>
 <p><img alt="step5-angular2" src="../../assets/images/step5-angular2.png" /></p>
 <h3 id="implementar-dialogo-de-edicion">Implementar dialogo de edición</h3>
 <p>Ya solo nos falta el último paso, implementar el cuadro de edición / alta de un nuevo juego. Pero tenemos un pequeño problema, y es que al crear o editar un juego debemos seleccionar una <code>Categoría</code> y un <code>Autor</code>. </p>
 <p>Para la <code>Categoría</code> no tenemos ningún problema, pero para el <code>Autor</code> no tenemos un servicio que nos devuelva todos los autores, solo tenemos un servicio que nos devuelve una <code>Page</code> de autores.</p>
 <p>Así que lo primero que haremos será implementar una operación <code>getAllAuthors</code> para poder recuperar una lista.</p>
-<div class="tabbed-set" data-tabs="7:3"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><label for="__tabbed_7_1">mock-authors-list.ts</label><div class="tabbed-content">
+<div class="tabbed-set" data-tabs="9:3"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><label for="__tabbed_9_1">mock-authors-list.ts</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="kr">import</span> <span class="p">{</span> <span class="nx">Author</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;src/app/models/authors/Author&#39;</span><span class="p">;</span>
 
 <span class="kr">export</span> <span class="kr">const</span> <span class="nx">AUTHOR_DATA_LIST</span> : <span class="kt">Author</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[</span>
@@ -1072,7 +1186,7 @@ ng generate service services/games/game
 </code></pre></div>
 
 </div>
-<input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><label for="__tabbed_7_2">mock-authors.ts</label><div class="tabbed-content">
+<input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><label for="__tabbed_9_2">mock-authors.ts</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="kr">import</span> <span class="p">{</span> <span class="nx">AuthorPage</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;src/app/models/authors/AuthorPage&#39;</span><span class="p">;</span>
 <span class="hll"><span class="kr">import</span> <span class="p">{</span> <span class="nx">AUTHOR_DATA_LIST</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./mock-authors-list&#39;</span><span class="p">;</span>
 </span>
@@ -1090,7 +1204,7 @@ ng generate service services/games/game
 </code></pre></div>
 
 </div>
-<input id="__tabbed_7_3" name="__tabbed_7" type="radio" /><label for="__tabbed_7_3">author.service.ts</label><div class="tabbed-content">
+<input id="__tabbed_9_3" name="__tabbed_9" type="radio" /><label for="__tabbed_9_3">author.service.ts</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="kr">import</span> <span class="p">{</span> <span class="nx">Injectable</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
 <span class="kr">import</span> <span class="p">{</span> <span class="nx">Pageable</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;src/app/models/page/Pageable&#39;</span><span class="p">;</span>
 <span class="kr">import</span> <span class="p">{</span> <span class="nx">AuthorPage</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;src/app/models/authors/AuthorPage&#39;</span><span class="p">;</span>
@@ -1134,7 +1248,7 @@ ng generate service services/games/game
 <p>Acuerdate de lo que hemos comentado antes, siempre debes tener presente el <code>Clean Code</code>. ¡No dupliques código!, es muy importante de cara al futuro mantenimiento. En este caso, en tanto en mock-authors como en mock-authors-list teníamos un listado de autores. Lo mejor es que no dupliquemos el código y uno de ellos haga uso del otro.</p>
 </div>
 <p>Ahora sí que tenemos todo listo para implementar el cuadro de dialogo para dar de alta o editar juegos.</p>
-<div class="tabbed-set" data-tabs="8:3"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><label for="__tabbed_8_1">game-dialog.component.html</label><div class="tabbed-content">
+<div class="tabbed-set" data-tabs="10:3"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><label for="__tabbed_10_1">game-dialog.component.html</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;container&quot;</span><span class="p">&gt;</span>
     <span class="p">&lt;</span><span class="nt">h1</span> <span class="err">*</span><span class="na">ngIf</span><span class="o">=</span><span class="s">&quot;game.id == null&quot;</span><span class="p">&gt;</span>Crear juego<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
     <span class="p">&lt;</span><span class="nt">h1</span> <span class="err">*</span><span class="na">ngIf</span><span class="o">=</span><span class="s">&quot;game.id != null&quot;</span><span class="p">&gt;</span>Modificar juego<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
@@ -1182,7 +1296,7 @@ ng generate service services/games/game
 </code></pre></div>
 
 </div>
-<input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><label for="__tabbed_8_2">game-dialog.component.scss</label><div class="tabbed-content">
+<input id="__tabbed_10_2" name="__tabbed_10" type="radio" /><label for="__tabbed_10_2">game-dialog.component.scss</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="p">.</span><span class="nc">container</span> <span class="p">{</span>
     <span class="k">min-width</span><span class="p">:</span> <span class="mi">350</span><span class="kt">px</span><span class="p">;</span>
     <span class="k">max-width</span><span class="p">:</span> <span class="mi">500</span><span class="kt">px</span><span class="p">;</span>
@@ -1205,7 +1319,7 @@ ng generate service services/games/game
 </code></pre></div>
 
 </div>
-<input id="__tabbed_8_3" name="__tabbed_8" type="radio" /><label for="__tabbed_8_3">game-dialog.component.ts</label><div class="tabbed-content">
+<input id="__tabbed_10_3" name="__tabbed_10" type="radio" /><label for="__tabbed_10_3">game-dialog.component.ts</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="kr">import</span> <span class="p">{</span> <span class="nx">Component</span><span class="p">,</span> <span class="nx">OnInit</span><span class="p">,</span> <span class="nx">Inject</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
 <span class="kr">import</span> <span class="p">{</span> <span class="nx">MatDialogRef</span><span class="p">,</span> <span class="nx">MAT_DIALOG_DATA</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/dialog&#39;</span><span class="p">;</span>
 <span class="kr">import</span> <span class="p">{</span> <span class="nx">Game</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;src/app/models/games/Game&#39;</span><span class="p">;</span>
@@ -1289,7 +1403,7 @@ ng generate service services/games/game
 <h2 id="desarrollo-springboot">Desarrollo Springboot</h2>
 <h3 id="modelos">Modelos</h3>
 <p>Lo primero que vamos a hacer es crear los modelos para trabajar con BBDD y con peticiones hacia el front. Además, también tenemos que añadir datos al script de inicialización de BBDD.</p>
-<div class="tabbed-set" data-tabs="9:4"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><label for="__tabbed_9_1">V0001__Create_Schema.sql</label><div class="tabbed-content">
+<div class="tabbed-set" data-tabs="11:4"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><label for="__tabbed_11_1">V0001__Create_Schema.sql</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="k">CREATE</span> <span class="n">SEQUENCE</span> <span class="n">HIBERNATE_SEQUENCE</span> <span class="k">START</span> <span class="k">WITH</span> <span class="mi">1000000</span><span class="p">;</span>
 
 <span class="k">DROP</span> <span class="k">TABLE</span> <span class="k">IF</span> <span class="k">EXISTS</span> <span class="n">CATEGORY</span><span class="p">;</span>
@@ -1324,7 +1438,7 @@ ng generate service services/games/game
 </span></code></pre></div>
 
 </div>
-<input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><label for="__tabbed_9_2">V0002__Create_Data.sql</label><div class="tabbed-content">
+<input id="__tabbed_11_2" name="__tabbed_11" type="radio" /><label for="__tabbed_11_2">V0002__Create_Data.sql</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">CATEGORY</span><span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Eurogames&#39;</span><span class="p">);</span>
 <span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">CATEGORY</span><span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;Ameritrash&#39;</span><span class="p">);</span>
 <span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">CATEGORY</span><span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;Familiar&#39;</span><span class="p">);</span>
@@ -1346,7 +1460,7 @@ ng generate service services/games/game
 </span></code></pre></div>
 
 </div>
-<input id="__tabbed_9_3" name="__tabbed_9" type="radio" /><label for="__tabbed_9_3">Game.java</label><div class="tabbed-content">
+<input id="__tabbed_11_3" name="__tabbed_11" type="radio" /><label for="__tabbed_11_3">Game.java</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.game.model</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">javax.persistence.Column</span><span class="p">;</span>
@@ -1471,7 +1585,7 @@ ng generate service services/games/game
 </code></pre></div>
 
 </div>
-<input id="__tabbed_9_4" name="__tabbed_9" type="radio" /><label for="__tabbed_9_4">GameDto.java</label><div class="tabbed-content">
+<input id="__tabbed_11_4" name="__tabbed_11" type="radio" /><label for="__tabbed_11_4">GameDto.java</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.game.model</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.author.model.AuthorDto</span><span class="p">;</span>
@@ -1585,7 +1699,7 @@ ng generate service services/games/game
 </div>
 <p>Podríamos utilizar los <a href="https://www.baeldung.com/spring-data-derived-queries">QueryMethods</a> para que Spring JPA haga su magia, pero en esta ocasión vamos a hacer una implementación concreta de este método de filtrado.
 Esta implementación la haremos en un Repository normal, y el resto de métodos nos vendrán dados por un CrudRepository como hemos hecho hasta ahora.</p>
-<div class="tabbed-set" data-tabs="10:3"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><label for="__tabbed_10_1">GameRepository.java</label><div class="tabbed-content">
+<div class="tabbed-set" data-tabs="12:3"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><label for="__tabbed_12_1">GameRepository.java</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.game</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">org.springframework.data.repository.CrudRepository</span><span class="p">;</span>
@@ -1601,7 +1715,7 @@ Esta implementación la haremos en un Repository normal, y el resto de métodos 
 </code></pre></div>
 
 </div>
-<input id="__tabbed_10_2" name="__tabbed_10" type="radio" /><label for="__tabbed_10_2">GameCustomRepository.java</label><div class="tabbed-content">
+<input id="__tabbed_12_2" name="__tabbed_12" type="radio" /><label for="__tabbed_12_2">GameCustomRepository.java</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.game</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
@@ -1625,7 +1739,7 @@ Esta implementación la haremos en un Repository normal, y el resto de métodos 
 </code></pre></div>
 
 </div>
-<input id="__tabbed_10_3" name="__tabbed_10" type="radio" /><label for="__tabbed_10_3">GameCustomRepositoryImpl.java</label><div class="tabbed-content">
+<input id="__tabbed_12_3" name="__tabbed_12" type="radio" /><label for="__tabbed_12_3">GameCustomRepositoryImpl.java</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.game</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
@@ -1679,7 +1793,7 @@ Esta implementación la haremos en un Repository normal, y el resto de métodos 
 <p>La implementación de las queries que hagamos dentro del custom repository ya es cosa nuestra y podemos utilizar lo que necesitemos. En este caso hemos optado por utilizar Criteria para hacer la Query ayudándonos de unas clases de utilidad que provee Devonfw, muy recomendables para hacer queries paginadas. </p>
 <h3 id="service">Service</h3>
 <p>Siguiente paso, la capa de lógica, es decir el <code>Service</code>.</p>
-<div class="tabbed-set" data-tabs="11:2"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><label for="__tabbed_11_1">GameService.java</label><div class="tabbed-content">
+<div class="tabbed-set" data-tabs="13:2"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><label for="__tabbed_13_1">GameService.java</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.game</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
@@ -1711,7 +1825,7 @@ Esta implementación la haremos en un Repository normal, y el resto de métodos 
 </code></pre></div>
 
 </div>
-<input id="__tabbed_11_2" name="__tabbed_11" type="radio" /><label for="__tabbed_11_2">AuthorServiceImpl.java</label><div class="tabbed-content">
+<input id="__tabbed_13_2" name="__tabbed_13" type="radio" /><label for="__tabbed_13_2">AuthorServiceImpl.java</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.game</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
@@ -1771,7 +1885,7 @@ Esta implementación la haremos en un Repository normal, y el resto de métodos 
 <p>En este <code>Service</code> volvemos a utilizar el List en lugar del Page, y hemos eliminado el método <code>delete</code> ya que no se pueden borrar juegos. Pero, la novedad está en el <code>save</code>. Si recuerdas, un <code>Game</code> tiene una relación con <code>Author</code> y otra relación con <code>Category</code>. Estas relaciones se hacen a nivel de <code>Entity</code>, sin embargo en nuestro dto de entrada al método <code>GameDto</code> estamos tratando con <code>CategoryDto</code> y <code>AuthorDto</code>.</p>
 <p>Una solución podría ser convertir esos DTOs a <code>Entity</code>, pero esto podría llevar a duplicidades en la cache interna de JPA, así que mejor no utilizar esta solución.</p>
 <p>Lo correcto es realizar consultas a la BBDD y traernos esas entities. Pero si recuerdas las reglas básicas, un <code>Repository</code> debe pertenecer a un solo <code>Service</code>, por lo que en lugar de llamar a métodos de los <code>AuthorRepository</code> y <code>CategoryRepository</code> desde nuestro <code>GameService</code>, debemos llamar a métodos expuestos en <code>AuthorService</code> y <code>CategoryService</code>. Para ello necesitaremos crear esos métodos get en los otros <code>Services</code>. Quedaría algo así:</p>
-<div class="tabbed-set" data-tabs="12:4"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><label for="__tabbed_12_1">AuthorService.java</label><div class="tabbed-content">
+<div class="tabbed-set" data-tabs="14:4"><input checked="checked" id="__tabbed_14_1" name="__tabbed_14" type="radio" /><label for="__tabbed_14_1">AuthorService.java</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.author</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">org.springframework.data.domain.Page</span><span class="p">;</span>
@@ -1817,7 +1931,7 @@ Esta implementación la haremos en un Repository normal, y el resto de métodos 
 </code></pre></div>
 
 </div>
-<input id="__tabbed_12_2" name="__tabbed_12" type="radio" /><label for="__tabbed_12_2">AuthorServiceImpl.java</label><div class="tabbed-content">
+<input id="__tabbed_14_2" name="__tabbed_14" type="radio" /><label for="__tabbed_14_2">AuthorServiceImpl.java</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.author</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">javax.transaction.Transactional</span><span class="p">;</span>
@@ -1890,7 +2004,7 @@ Esta implementación la haremos en un Repository normal, y el resto de métodos 
 </code></pre></div>
 
 </div>
-<input id="__tabbed_12_3" name="__tabbed_12" type="radio" /><label for="__tabbed_12_3">CategoryService.java</label><div class="tabbed-content">
+<input id="__tabbed_14_3" name="__tabbed_14" type="radio" /><label for="__tabbed_14_3">CategoryService.java</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.category</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
@@ -1933,7 +2047,7 @@ Esta implementación la haremos en un Repository normal, y el resto de métodos 
 </code></pre></div>
 
 </div>
-<input id="__tabbed_12_4" name="__tabbed_12" type="radio" /><label for="__tabbed_12_4">CategoryServiceImpl.java</label><div class="tabbed-content">
+<input id="__tabbed_14_4" name="__tabbed_14" type="radio" /><label for="__tabbed_14_4">CategoryServiceImpl.java</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.category</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
@@ -2009,7 +2123,7 @@ Esta implementación la haremos en un Repository normal, y el resto de métodos 
 <p>A la hora de implementar métodos nuevos, ten siempre presente el <code>Clean Code</code>. ¡No dupliques código!, es muy importante de cara al futuro mantenimiento. Si en nuestro método <code>save</code> hacíamos uso de una operación <code>findById</code> y ahora hemos creado una nueva operación <code>get</code>, hagamos uso de esta nueva operación y no repitamos el código.</p>
 </div>
 <p>Y ahora ya podemos implementar correctamente nuestro <code>Service</code>.</p>
-<div class="tabbed-set" data-tabs="13:1"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><label for="__tabbed_13_1">GameServiceImpl.java</label><div class="tabbed-content">
+<div class="tabbed-set" data-tabs="15:1"><input checked="checked" id="__tabbed_15_1" name="__tabbed_15" type="radio" /><label for="__tabbed_15_1">GameServiceImpl.java</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.game</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
@@ -2082,7 +2196,7 @@ Esta implementación la haremos en un Repository normal, y el resto de métodos 
 </div>
 <h3 id="controller">Controller</h3>
 <p>Después de todo este mareo, ya podemos terminar ocn la última capa. Vamos a implementar el <code>Controller</code> para que ataque a la capa de <code>Service</code>, con los endpoints de las operaciones que vamos a publicar. Además, para realizar la búsqueda necesitaremos un nuevo <code>DTO</code> como ya vimos en el ejemplo del listado paginado.</p>
-<div class="tabbed-set" data-tabs="14:2"><input checked="checked" id="__tabbed_14_1" name="__tabbed_14" type="radio" /><label for="__tabbed_14_1">GameController.java</label><div class="tabbed-content">
+<div class="tabbed-set" data-tabs="16:2"><input checked="checked" id="__tabbed_16_1" name="__tabbed_16" type="radio" /><label for="__tabbed_16_1">GameController.java</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.game</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
@@ -2137,7 +2251,7 @@ Esta implementación la haremos en un Repository normal, y el resto de métodos 
 </code></pre></div>
 
 </div>
-<input id="__tabbed_14_2" name="__tabbed_14" type="radio" /><label for="__tabbed_14_2">GameSearchDto.java</label><div class="tabbed-content">
+<input id="__tabbed_16_2" name="__tabbed_16" type="radio" /><label for="__tabbed_16_2">GameSearchDto.java</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.game.model</span><span class="p">;</span>
 
 <span class="cm">/**</span>
@@ -2197,7 +2311,7 @@ Esta implementación la haremos en un Repository normal, y el resto de métodos 
 <h3 id="implementar-listado-autores">Implementar listado Autores</h3>
 <p>Como hemos visto anteriormente en la parte de frontend, para la edición de un <code>Juego</code> nos hace falta un método que devuelva un listado de <code>Autores</code>, ya que ahora mismo la operación que tenemos implementada devuelve un objeto <code>Page</code>.</p>
 <p>Así que antes de finalizar la implementación de backend, vamos a desarrollar esta nueva operación. Por supuesto, respetaremos las operaciones previas que ya existían.</p>
-<div class="tabbed-set" data-tabs="15:3"><input checked="checked" id="__tabbed_15_1" name="__tabbed_15" type="radio" /><label for="__tabbed_15_1">AuthorController.java</label><div class="tabbed-content">
+<div class="tabbed-set" data-tabs="17:3"><input checked="checked" id="__tabbed_17_1" name="__tabbed_17" type="radio" /><label for="__tabbed_17_1">AuthorController.java</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.author</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
@@ -2276,7 +2390,7 @@ Esta implementación la haremos en un Repository normal, y el resto de métodos 
 </code></pre></div>
 
 </div>
-<input id="__tabbed_15_2" name="__tabbed_15" type="radio" /><label for="__tabbed_15_2">AuthorService.java</label><div class="tabbed-content">
+<input id="__tabbed_17_2" name="__tabbed_17" type="radio" /><label for="__tabbed_17_2">AuthorService.java</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.author</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
@@ -2330,7 +2444,7 @@ Esta implementación la haremos en un Repository normal, y el resto de métodos 
 </code></pre></div>
 
 </div>
-<input id="__tabbed_15_3" name="__tabbed_15" type="radio" /><label for="__tabbed_15_3">AuthorServiceImpl.java</label><div class="tabbed-content">
+<input id="__tabbed_17_3" name="__tabbed_17" type="radio" /><label for="__tabbed_17_3">AuthorServiceImpl.java</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.author</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
@@ -2417,7 +2531,7 @@ Esta implementación la haremos en un Repository normal, y el resto de métodos 
 <p>Ahora sí, todo listo para seguir al siguiente punto.</p>
 <h2 id="conectar-front-con-back">Conectar front con back</h2>
 <p>Una vez implementado front y back, lo que nos queda es modificar el servicio del front para que conecte directamente con las operaciones ofrecidas por el back.</p>
-<div class="tabbed-set" data-tabs="16:2"><input checked="checked" id="__tabbed_16_1" name="__tabbed_16" type="radio" /><label for="__tabbed_16_1">author-service.ts</label><div class="tabbed-content">
+<div class="tabbed-set" data-tabs="18:2"><input checked="checked" id="__tabbed_18_1" name="__tabbed_18" type="radio" /><label for="__tabbed_18_1">author-service.ts</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="kr">import</span> <span class="p">{</span> <span class="nx">Injectable</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
 <span class="kr">import</span> <span class="p">{</span> <span class="nx">Pageable</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;src/app/models/page/Pageable&#39;</span><span class="p">;</span>
 <span class="kr">import</span> <span class="p">{</span> <span class="nx">AuthorPage</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;src/app/models/authors/AuthorPage&#39;</span><span class="p">;</span>
@@ -2454,7 +2568,7 @@ Esta implementación la haremos en un Repository normal, y el resto de métodos 
 </code></pre></div>
 
 </div>
-<input id="__tabbed_16_2" name="__tabbed_16" type="radio" /><label for="__tabbed_16_2">game-service.ts</label><div class="tabbed-content">
+<input id="__tabbed_18_2" name="__tabbed_18" type="radio" /><label for="__tabbed_18_2">game-service.ts</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="kr">import</span> <span class="p">{</span> <span class="nx">Injectable</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
 <span class="kr">import</span> <span class="p">{</span> <span class="nx">Game</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;src/app/models/games/Game&#39;</span><span class="p">;</span>
 <span class="kr">import</span> <span class="p">{</span> <span class="nx">Observable</span><span class="p">,</span> <span class="k">of</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;rxjs&#39;</span><span class="p">;</span>
@@ -2521,13 +2635,13 @@ Esta implementación la haremos en un Repository normal, y el resto de métodos 
           </a>
         
         
-          <a href="../step6/" title="Code: Validaciones" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../step6/" title="Code: Validaciones (TBD)" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-footer-nav__title">
               <div class="md-ellipsis">
                 <span class="md-footer-nav__direction">
                   Siguiente
                 </span>
-                Code: Validaciones
+                Code: Validaciones (TBD)
               </div>
             </div>
             <div class="md-footer-nav__button md-icon">

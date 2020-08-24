@@ -164,6 +164,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../../thanks/" title="Agradecimientos!" class="md-nav__link">
+      Agradecimientos!
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
     <a href="../../usecases/" title="Contexto de la aplicación" class="md-nav__link">
       Contexto de la aplicación
     </a>
@@ -200,8 +212,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../cleancode/" title="Estructura y Clean Code" class="md-nav__link">
-      Estructura y Clean Code
+    <a href="../../cleancode/" title="Estructura y Clean Code (TBD)" class="md-nav__link">
+      Estructura y Clean Code (TBD)
     </a>
   </li>
 
@@ -417,8 +429,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../step6/" title="Code: Validaciones" class="md-nav__link">
-      Code: Validaciones
+    <a href="../step6/" title="Code: Validaciones (TBD)" class="md-nav__link">
+      Code: Validaciones (TBD)
     </a>
   </li>
 
@@ -429,8 +441,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../step7/" title="Code: Crear Login" class="md-nav__link">
-      Code: Crear Login
+    <a href="../step7/" title="Code: Crear Login (TBD)" class="md-nav__link">
+      Code: Crear Login (TBD)
     </a>
   </li>
 
@@ -441,8 +453,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../step8/" title="Code: Testing" class="md-nav__link">
-      Code: Testing
+    <a href="../step8/" title="Code: Testing (TBD)" class="md-nav__link">
+      Code: Testing (TBD)
     </a>
   </li>
 
@@ -453,8 +465,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../exercise/" title="Ahora hazlo tu!" class="md-nav__link">
-      Ahora hazlo tu!
+    <a href="../../exercise/" title="Ahora hazlo tu! (TBD)" class="md-nav__link">
+      Ahora hazlo tu! (TBD)
     </a>
   </li>
 
@@ -465,8 +477,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../appendix/styles/" title="Anexo. Estilos" class="md-nav__link">
-      Anexo. Estilos
+    <a href="../../appendix/styles/" title="Anexo. Estilos (TBD)" class="md-nav__link">
+      Anexo. Estilos (TBD)
     </a>
   </li>
 
@@ -477,8 +489,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../appendix/dates/" title="Anexo. Fechas" class="md-nav__link">
-      Anexo. Fechas
+    <a href="../../appendix/dates/" title="Anexo. Fechas (TBD)" class="md-nav__link">
+      Anexo. Fechas (TBD)
     </a>
   </li>
 
@@ -732,6 +744,7 @@ ng generate service services/authors/author
 <span class="kr">export</span> <span class="kr">class</span> <span class="nx">AuthorPage</span> <span class="p">{</span>
     <span class="nx">content</span>: <span class="kt">Author</span><span class="p">[];</span>
     <span class="nx">pageable</span>: <span class="kt">Pageable</span><span class="p">;</span>
+    <span class="nx">totalElements</span>: <span class="kt">number</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
 
@@ -757,7 +770,8 @@ ng generate service services/authors/author
         <span class="nx">sort</span><span class="o">:</span> <span class="p">[</span>
             <span class="p">{</span><span class="nx">property</span><span class="o">:</span> <span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="nx">direction</span><span class="o">:</span> <span class="s2">&quot;ASC&quot;</span><span class="p">}</span>
         <span class="p">]</span>
-    <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="nx">totalElements</span>: <span class="kt">7</span>
 <span class="p">}</span>
 </code></pre></div>
 
@@ -771,7 +785,7 @@ ng generate service services/authors/author
 <span class="kr">import</span> <span class="p">{</span> <span class="nx">AUTHOR_DATA</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./mock-authors&#39;</span><span class="p">;</span>
 
 <span class="kd">@Injectable</span><span class="p">({</span>
-    <span class="nx">povidedIn</span><span class="o">:</span> <span class="s1">&#39;root&#39;</span>
+    <span class="nx">providedIn</span><span class="o">:</span> <span class="s1">&#39;root&#39;</span>
 <span class="p">})</span>
 <span class="kr">export</span> <span class="kr">class</span> <span class="nx">AuthorService</span> <span class="p">{</span>
 
@@ -1426,15 +1440,15 @@ ng generate service services/authors/author
     <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="n">Author</span> <span class="nf">save</span><span class="p">(</span><span class="n">AuthorDto</span> <span class="n">data</span><span class="p">)</span> <span class="p">{</span>
 
-        <span class="n">Author</span> <span class="n">categoria</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+        <span class="n">Author</span> <span class="n">author</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="na">getId</span><span class="p">()</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span>
-            <span class="n">categoria</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="na">authorRepository</span><span class="p">.</span><span class="na">findById</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="na">getId</span><span class="p">()).</span><span class="na">orElse</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+            <span class="n">author</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="na">authorRepository</span><span class="p">.</span><span class="na">findById</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="na">getId</span><span class="p">()).</span><span class="na">orElse</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
         <span class="k">else</span>
-            <span class="n">categoria</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Author</span><span class="p">();</span>
+            <span class="n">author</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Author</span><span class="p">();</span>
 
-        <span class="n">BeanUtils</span><span class="p">.</span><span class="na">copyProperties</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">categoria</span><span class="p">);</span>
+        <span class="n">BeanUtils</span><span class="p">.</span><span class="na">copyProperties</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">author</span><span class="p">);</span>
 
-        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="na">authorRepository</span><span class="p">.</span><span class="na">save</span><span class="p">(</span><span class="n">categoria</span><span class="p">);</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="na">authorRepository</span><span class="p">.</span><span class="na">save</span><span class="p">(</span><span class="n">author</span><span class="p">);</span>
     <span class="p">}</span>
 
     <span class="cm">/**</span>

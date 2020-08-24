@@ -206,7 +206,7 @@ Esto nos creará una carpeta con los ficheros del componente, donde tendremos qu
 Al utilizar etiquetas de material como `mat-toolbar` o `mat-icon` y `routerLink` necesitaremos importar las dependencias. Esto lo podemos hacer directamente en el módulo del que depende, es decir en el fichero `core.module.ts`
 
 === "core.module.ts"
-    ``` Typescript hl_lines="3 4 5 13 14 15 17 18 19"
+    ``` Typescript hl_lines="3 4 6 13 14 15 17 18 19"
     import { NgModule } from '@angular/core';
     import { CommonModule } from '@angular/common';
     import { MatIconModule } from '@angular/material/icon';
@@ -661,7 +661,7 @@ Ahora vamos a darle forma al formulario de editar y crear. Para ello vamos al ht
 
         <div class="buttons">
             <button mat-stroked-button (click)="onClose()">Cerrar</button>
-            <button mat-flat-button color="primary" (click)="onSave()>Guardar</button>
+            <button mat-flat-button color="primary" (click)="onSave()">Guardar</button>
         </div>
     </div>
     ```
@@ -1036,7 +1036,7 @@ Ya por último, una vez tenemos el componente genérico de dialogo, vamos a util
         ...
     ```
 === "categories.component.ts"
-    ``` Typescript hl_lines="2 3 4 5 6 7 8 9 10 11 12 13 14 15"
+    ``` Typescript hl_lines="2 3 4 5 6 7 8 9 10 11 12 13 14"
       ...
       deleteCategory(category: Category) {    
         const dialogRef = this.dialog.open(DialogConfirmationComponent, {

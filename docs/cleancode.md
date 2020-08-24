@@ -208,8 +208,7 @@ En base a esta división por capas que hemos comentado y el resto de entidades i
     * En teoría cada operación debería tener su propio Dto, aunque los podemos reutilizar entre operaciones similares.
     * Debemos seguir una coherencia entre todas las URL de las operaciones. Por ejemplo si elegimos `save` para guardar, usemos esa palabra en todas las operaciones que sean de ese tipo. Evitad utilizar diferentes palabras `save`, `guardar`, `persistir`, `actualizar` para la misma acción.
 * Un `Servicio`
-    * NO puede llamar a objetos de la la capa `Controlador`.
-    * Puede
+    * NO puede llamar a objetos de la la capa `Controlador`.    
 
 
 

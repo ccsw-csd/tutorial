@@ -108,6 +108,7 @@ Así que necesitamos poder enviar y recuperar esa información desde Angular, no
     export class AuthorPage {
         content: Author[];
         pageable: Pageable;
+        totalElements: number;
     }
     ```
 
@@ -133,7 +134,8 @@ Con estos objetos creados ya podemos implementar el servicio y sus datos mockead
             sort: [
                 {property: "id", direction: "ASC"}
             ]
-        }
+        },
+        totalElements: 7
     }
     ```
 === "author.service.ts"
@@ -146,7 +148,7 @@ Con estos objetos creados ya podemos implementar el servicio y sus datos mockead
     import { AUTHOR_DATA } from './mock-authors';
 
     @Injectable({
-        povidedIn: 'root'
+        providedIn: 'root'
     })
     export class AuthorService {
 
@@ -805,15 +807,15 @@ La siguiente capa que vamos a implementar es justamente la capa que hace uso del
         @Override
         public Author save(AuthorDto data) {
 
-            Author categoria = null;
+            Author author = null;
             if (data.getId() != null)
-                categoria = this.authorRepository.findById(data.getId()).orElse(null);
+                author = this.authorRepository.findById(data.getId()).orElse(null);
             else
-                categoria = new Author();
+                author = new Author();
 
-            BeanUtils.copyProperties(data, categoria);
+            BeanUtils.copyProperties(data, author);
 
-            return this.authorRepository.save(categoria);
+            return this.authorRepository.save(author);
         }
 
         /**

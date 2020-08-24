@@ -153,7 +153,7 @@ Ya tenemos las operaciones del servicio con datoos, así que ahora vamos a por e
         </div>
         
         <div class="buttons">
-            <button mat-flat-button color="primary" (click)="createGame()>Nuevo juego</button>            
+            <button mat-flat-button color="primary" (click)="createGame()">Nuevo juego</button>            
         </div>   
     </div>
     ```
@@ -277,6 +277,58 @@ Ya tenemos las operaciones del servicio con datoos, así que ahora vamos a por e
     }
     ```
 
+Recuerda que cada vez que utilizamos un componente nuevo (en este caso el mat-select y mat-option) debemos incluirlo en el módulo padre.
+
+=== "views.module.ts"
+    ``` TypeScript hl_lines="18 19 34 35"
+    import { NgModule } from '@angular/core';
+    import { CommonModule } from '@angular/common';
+    import { MatTableModule } from '@angular/material/table';
+    import { MatIconModule } from '@angular/material/icon';
+    import { MatButtonModule } from '@angular/material/button';
+    import { CategoriesComponent } from './categories/categories.component';
+    import { CategoryDialogComponent } from './categories/category-dialog/category-dialog.component';
+    import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+    import { MatFormFieldModule } from '@angular/material/form-field';
+    import { MatInputModule } from '@angular/material/input';
+    import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+    import { AuthorsComponent } from './authors/authors.component';
+    import { AuthorDialogComponent } from './authors/author-dialog/author-dialog.component';
+    import { MatPaginatorModule } from '@angular/material/paginator';
+    import { GamesComponent } from './games/games.component';
+    import { GameDetailComponent } from './games/game-detail/game-detail.component';
+    import { GameDialogComponent } from './games/game-dialog/game-dialog.component';
+    import { MatOptionModule } from '@angular/material/core';
+    import { MatSelectModule } from '@angular/material/select';
+
+    @NgModule({
+        declarations: [CategoriesComponent, CategoryDialogComponent, AuthorsComponent, AuthorDialogComponent, GamesComponent, GameDetailComponent, GameDialogComponent],
+        imports: [
+            CommonModule,
+            MatTableModule,
+            MatIconModule, 
+            MatButtonModule,
+            MatDialogModule,
+            MatFormFieldModule,
+            MatInputModule,
+            FormsModule,
+            ReactiveFormsModule,
+            MatPaginatorModule,
+            MatOptionModule,
+            MatSelectModule,
+        ],
+        providers: [
+            {
+                provide: MAT_DIALOG_DATA,
+                useValue: {},
+            },
+        ]
+    })
+    export class ViewsModule { }
+    ```
+
+
+
 Debe quedar algo similar a esto:
 
 ![step5-angular1](../assets/images/step5-angular1.png)
@@ -324,9 +376,9 @@ Ahora vamos a implementar el detalle de cada uno de los items que forman el list
     </div>
     ```
 
-También vamos a necesitar una foto de ejemplo para poder en el detalle de los juegos. Vamos a utilizar esta imagen:
+También vamos a necesitar una foto de ejemplo para poner dentro de la tarjeta detalle de los juegos. Vamos a utilizar esta imagen:
 
-<img src="../../../assets/images/foto.png" width="100">
+<img src="../../assets/images/foto.png" width="100">
 
 Y ya para terminar, implementamos el componente de detalle:
 
@@ -406,6 +458,58 @@ Y ya para terminar, implementamos el componente de detalle:
         }
 
     }
+    ```
+
+Y de nuevo, al utilizar un componente nuevo (en este caso el mat-card) debemos incluirlo en el módulo padre.
+
+=== "views.module.ts"
+    ``` TypeScript hl_lines="20 37"
+    import { NgModule } from '@angular/core';
+    import { CommonModule } from '@angular/common';
+    import { MatTableModule } from '@angular/material/table';
+    import { MatIconModule } from '@angular/material/icon';
+    import { MatButtonModule } from '@angular/material/button';
+    import { CategoriesComponent } from './categories/categories.component';
+    import { CategoryDialogComponent } from './categories/category-dialog/category-dialog.component';
+    import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+    import { MatFormFieldModule } from '@angular/material/form-field';
+    import { MatInputModule } from '@angular/material/input';
+    import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+    import { AuthorsComponent } from './authors/authors.component';
+    import { AuthorDialogComponent } from './authors/author-dialog/author-dialog.component';
+    import { MatPaginatorModule } from '@angular/material/paginator';
+    import { GamesComponent } from './games/games.component';
+    import { GameDetailComponent } from './games/game-detail/game-detail.component';
+    import { GameDialogComponent } from './games/game-dialog/game-dialog.component';
+    import { MatOptionModule } from '@angular/material/core';
+    import { MatSelectModule } from '@angular/material/select';
+    import { MatCardModule } from '@angular/material/card';
+
+    @NgModule({
+        declarations: [CategoriesComponent, CategoryDialogComponent, AuthorsComponent, AuthorDialogComponent, GamesComponent, GameDetailComponent, GameDialogComponent],
+        imports: [
+            CommonModule,
+            MatTableModule,
+            MatIconModule, 
+            MatButtonModule,
+            MatDialogModule,
+            MatFormFieldModule,
+            MatInputModule,
+            FormsModule,
+            ReactiveFormsModule,
+            MatPaginatorModule,
+            MatOptionModule,
+            MatSelectModule,
+            MatCardModule    
+        ],
+        providers: [
+            {
+                provide: MAT_DIALOG_DATA,
+                useValue: {},
+            },
+        ]
+    })
+    export class ViewsModule { }
     ```
 
 Ahora si que debería quedar algo similar a esta pantalla:

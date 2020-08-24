@@ -164,6 +164,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../../thanks/" title="Agradecimientos!" class="md-nav__link">
+      Agradecimientos!
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
     <a href="../../usecases/" title="Contexto de la aplicación" class="md-nav__link">
       Contexto de la aplicación
     </a>
@@ -200,8 +212,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../cleancode/" title="Estructura y Clean Code" class="md-nav__link">
-      Estructura y Clean Code
+    <a href="../../cleancode/" title="Estructura y Clean Code (TBD)" class="md-nav__link">
+      Estructura y Clean Code (TBD)
     </a>
   </li>
 
@@ -450,8 +462,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../step6/" title="Code: Validaciones" class="md-nav__link">
-      Code: Validaciones
+    <a href="../step6/" title="Code: Validaciones (TBD)" class="md-nav__link">
+      Code: Validaciones (TBD)
     </a>
   </li>
 
@@ -462,8 +474,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../step7/" title="Code: Crear Login" class="md-nav__link">
-      Code: Crear Login
+    <a href="../step7/" title="Code: Crear Login (TBD)" class="md-nav__link">
+      Code: Crear Login (TBD)
     </a>
   </li>
 
@@ -474,8 +486,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../step8/" title="Code: Testing" class="md-nav__link">
-      Code: Testing
+    <a href="../step8/" title="Code: Testing (TBD)" class="md-nav__link">
+      Code: Testing (TBD)
     </a>
   </li>
 
@@ -486,8 +498,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../exercise/" title="Ahora hazlo tu!" class="md-nav__link">
-      Ahora hazlo tu!
+    <a href="../../exercise/" title="Ahora hazlo tu! (TBD)" class="md-nav__link">
+      Ahora hazlo tu! (TBD)
     </a>
   </li>
 
@@ -498,8 +510,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../appendix/styles/" title="Anexo. Estilos" class="md-nav__link">
-      Anexo. Estilos
+    <a href="../../appendix/styles/" title="Anexo. Estilos (TBD)" class="md-nav__link">
+      Anexo. Estilos (TBD)
     </a>
   </li>
 
@@ -510,8 +522,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../appendix/dates/" title="Anexo. Fechas" class="md-nav__link">
-      Anexo. Fechas
+    <a href="../../appendix/dates/" title="Anexo. Fechas (TBD)" class="md-nav__link">
+      Anexo. Fechas (TBD)
     </a>
   </li>
 
@@ -896,9 +908,9 @@ ng generate module views
 <span class="kr">import</span> <span class="p">{</span> <span class="nx">CommonModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/common&#39;</span><span class="p">;</span>
 <span class="hll"><span class="kr">import</span> <span class="p">{</span> <span class="nx">MatIconModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/icon&#39;</span><span class="p">;</span>
 </span><span class="hll"><span class="kr">import</span> <span class="p">{</span> <span class="nx">MatToolbarModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/material/toolbar&#39;</span><span class="p">;</span>
-</span><span class="hll"><span class="kr">import</span> <span class="p">{</span> <span class="nx">HeaderComponent</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./header/header.component&#39;</span><span class="p">;</span>
-</span><span class="kr">import</span> <span class="p">{</span> <span class="nx">RouterModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/router&#39;</span><span class="p">;</span>
-
+</span><span class="kr">import</span> <span class="p">{</span> <span class="nx">HeaderComponent</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./header/header.component&#39;</span><span class="p">;</span>
+<span class="hll"><span class="kr">import</span> <span class="p">{</span> <span class="nx">RouterModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/router&#39;</span><span class="p">;</span>
+</span>
 
 <span class="kd">@NgModule</span><span class="p">({</span>
   <span class="nx">declarations</span><span class="o">:</span> <span class="p">[</span><span class="nx">HeaderComponent</span><span class="p">],</span>
@@ -1322,7 +1334,7 @@ Como siempre, para crear un componente usamos el asistente de Angular, esta vez 
 
     <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;buttons&quot;</span><span class="p">&gt;</span>
         <span class="p">&lt;</span><span class="nt">button</span> <span class="na">mat-stroked-button</span> <span class="err">(</span><span class="na">click</span><span class="err">)=&quot;</span><span class="na">onClose</span><span class="err">()&quot;</span><span class="p">&gt;</span>Cerrar<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">button</span> <span class="na">mat-flat-button</span> <span class="na">color</span><span class="o">=</span><span class="s">&quot;primary&quot;</span> <span class="err">(</span><span class="na">click</span><span class="err">)=&quot;</span><span class="na">onSave</span><span class="err">()</span><span class="p">&gt;</span>Guardar<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">button</span> <span class="na">mat-flat-button</span> <span class="na">color</span><span class="o">=</span><span class="s">&quot;primary&quot;</span> <span class="err">(</span><span class="na">click</span><span class="err">)=&quot;</span><span class="na">onSave</span><span class="err">()&quot;</span><span class="p">&gt;</span>Guardar<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
     <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 </code></pre></div>
@@ -1709,8 +1721,8 @@ providers: [
 </span><span class="hll">      <span class="p">}</span>
 </span><span class="hll">    <span class="p">});</span>
 </span><span class="hll">  <span class="p">}</span>  
-</span><span class="hll"><span class="p">}</span>
-</span></code></pre></div>
+</span><span class="p">}</span>
+</code></pre></div>
 
 </div>
 </div>
@@ -1734,7 +1746,7 @@ providers: [
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Pie">
         
-          <a href="../../cleancode/" title="Estructura y Clean Code" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../../cleancode/" title="Estructura y Clean Code (TBD)" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-footer-nav__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
@@ -1743,7 +1755,7 @@ providers: [
                 <span class="md-footer-nav__direction">
                   Anterior
                 </span>
-                Estructura y Clean Code
+                Estructura y Clean Code (TBD)
               </div>
             </div>
           </a>

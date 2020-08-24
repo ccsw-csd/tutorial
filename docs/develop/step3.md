@@ -16,7 +16,7 @@ Abrimos el fichero y susituimos la línea que antes devolvía los datos estátic
     import { Injectable } from '@angular/core';
 
     import { Category } from 'src/app/models/categories/Category';
-    import { Observable } from 'rxjs';
+    import { Observable, of } from 'rxjs';
     import { HttpClient } from '@angular/common/http';
 
     @Injectable({
