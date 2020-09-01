@@ -13,7 +13,7 @@ Las herramientas básicas que vamos a utilizar para el desarrollo del tutorial s
     * Yarn
     * Angular CLI
 
-Puedes instalarte estas herramientas por tu cuenta y configurarlas una a una, o puedes instalarte el entorno de desarrollo de devonfw con todo configurado y listo para usarse.
+Puedes instalarte estas herramientas por tu cuenta y configurarlas una a una, o puedes instalarte el entorno de desarrollo de devonfw con todo configurado y listo para usarse para el desarrollo Back.
 
 
 ## Instalación del entorno devonfw
@@ -30,8 +30,9 @@ A continuación se explican los pasos a seguir para la instalación de Devon en 
 *  Renombramos dicha carpeta (por ejemplo: devon) y la copiamos en C:\, quedándonos una ruta del estilo C:\devon.
 
 *  Accedemos a la carpeta recién creada y ejecutamos el fichero *setup.bat*.
+
 !!! attention "Atención"
-    Si no tenemos definida la variable de entorno GIT_HOME, el proceso fallará y nos dará un error que no ecuentra "bin/bash.exe". Aseguraos de que la variable exista.
+    Generalmente al instalar el cliente Git ya nos define él la variable GIT_HOME. En caso de ejecutar el comando anterior y que aparezca un error de que no ecuentra "bin/bash.exe", tendremos que crear nosotros la variable de entorno GIT_HOME apuntando al directorio donde hemos instalado la aplicación.
 
 *  Aparecerá un mensaje para introducir la URL para descargar los settings, como el siguiente:
 ![Devon-setup](./assets/images/devon-setup.png)
@@ -40,3 +41,26 @@ Simplemente pulsado la tecla Enter y el proceso continuará.
 *  A continuación, el instalador se va a descargar todo el software necesario para tener todo el paquete de herramientas listo. Se trata de una descarga de software larga y posiblemente lenta, por lo que deberemos armarnos de paciencia.
 
 *  Una vez haya terminado el proceso, nos dirigimos a nuestra carpeta de instalación y ya podremos arrancar nuestro entorno de desarrollo Eclipse. Para ello ejecutaremos el fichero *eclipse-main.bat*. Una vez comprobemos que arranca, ya lo podemos cerrar.
+
+
+## Instalación de herramientas para desarrollo Front
+
+Ahora necesitamos instalar las herramientas para el desarrollo front.
+
+* Instalaremos un IDE de desarrollo, a nosotros nos gusta mucho [Visual Studio Code](https://code.visualstudio.com/). Puedes entrar en su página y descargarte la versión estable.
+
+* Instalaremos [Nodejs](https://nodejs.org/es/). Entrando en la página de descargas e instalando la última versión estable.
+
+* También podemos instalar Yarn, aunque esto no es necesario ya que con npm también podemos gestionar las dependencias del proyecto. Si queremos instalar yarn tan solo hay que abrir una consola de msdos y ejecutar el comando:
+
+```
+npm install -g yarn
+```
+
+* Por último tendremos que tener el CLI de Angular instalado para poder arrancar el servidor y ejecutar los comandos necesarios para el tutorial. Al igual que con yarn, tan solo hay que abrir una consola de msdos y ejecutar el comando:
+
+```
+npm install -g @angular/cli
+```
+
+Con esto ya tendremos todo instalado, listo para empezar a crear los proyectos.

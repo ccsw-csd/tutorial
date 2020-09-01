@@ -22,7 +22,7 @@ Para crear un proyecto de Angular, es necesario tener instalado el CLI de Angula
 ### Nuevo proyecto
 
 Lo primero es crear un proyecto desde la consola mediante la herramienta Angular CLI.
-Para ello abrimos una consola donde tengamos instalado y enlazado Angular CLI (la consola de Devonfw sirve perfectamente), nos situamos en el directorio donde vamos a crear el proyecto y ejecutamos:
+Para ello abrimos una consola de msdos donde tengamos instalado y enlazado Angular CLI, nos situamos en el directorio donde vamos a crear el proyecto y ejecutamos:
 
     ng new tutorial
 

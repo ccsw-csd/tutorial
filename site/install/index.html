@@ -236,6 +236,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#instalacion-de-herramientas-para-desarrollo-front" class="md-nav__link">
+    Instalación de herramientas para desarrollo Front
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -438,6 +445,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#instalacion-de-herramientas-para-desarrollo-front" class="md-nav__link">
+    Instalación de herramientas para desarrollo Front
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -472,7 +486,7 @@
 </ul>
 </li>
 </ul>
-<p>Puedes instalarte estas herramientas por tu cuenta y configurarlas una a una, o puedes instalarte el entorno de desarrollo de devonfw con todo configurado y listo para usarse.</p>
+<p>Puedes instalarte estas herramientas por tu cuenta y configurarlas una a una, o puedes instalarte el entorno de desarrollo de devonfw con todo configurado y listo para usarse para el desarrollo Back.</p>
 <h2 id="instalacion-del-entorno-devonfw">Instalación del entorno devonfw</h2>
 <p>A continuación se explican los pasos a seguir para la instalación de Devon en nuestro equipo.</p>
 <ul>
@@ -490,10 +504,13 @@
 <li>
 <p>Renombramos dicha carpeta (por ejemplo: devon) y la copiamos en C:\, quedándonos una ruta del estilo C:\devon.</p>
 </li>
+<li>
+<p>Accedemos a la carpeta recién creada y ejecutamos el fichero <em>setup.bat</em>.</p>
+</li>
 </ul>
 <div class="admonition attention">
 <p class="admonition-title">Atención</p>
-<p>Si no tenemos definida la variable de entorno GIT_HOME, el proceso fallará y nos dará un error que no ecuentra "bin/bash.exe". Aseguraos de que la variable exista.</p>
+<p>Generalmente al instalar el cliente Git ya nos define él la variable GIT_HOME. En caso de ejecutar el comando anterior y que aparezca un error de que no ecuentra "bin/bash.exe", tendremos que crear nosotros la variable de entorno GIT_HOME apuntando al directorio donde hemos instalado la aplicación.</p>
 </div>
 <ul>
 <li>
@@ -508,6 +525,29 @@ Simplemente pulsado la tecla Enter y el proceso continuará.</p>
 <p>Una vez haya terminado el proceso, nos dirigimos a nuestra carpeta de instalación y ya podremos arrancar nuestro entorno de desarrollo Eclipse. Para ello ejecutaremos el fichero <em>eclipse-main.bat</em>. Una vez comprobemos que arranca, ya lo podemos cerrar.</p>
 </li>
 </ul>
+<h2 id="instalacion-de-herramientas-para-desarrollo-front">Instalación de herramientas para desarrollo Front</h2>
+<p>Ahora necesitamos instalar las herramientas para el desarrollo front.</p>
+<ul>
+<li>
+<p>Instalaremos un IDE de desarrollo, a nosotros nos gusta mucho <a href="https://code.visualstudio.com/">Visual Studio Code</a>. Puedes entrar en su página y descargarte la versión estable.</p>
+</li>
+<li>
+<p>Instalaremos <a href="https://nodejs.org/es/">Nodejs</a>. Entrando en la página de descargas e instalando la última versión estable.</p>
+</li>
+<li>
+<p>También podemos instalar Yarn, aunque esto no es necesario ya que con npm también podemos gestionar las dependencias del proyecto. Si queremos instalar yarn tan solo hay que abrir una consola de msdos y ejecutar el comando:</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code>npm install -g yarn
+</code></pre></div>
+
+<ul>
+<li>Por último tendremos que tener el CLI de Angular instalado para poder arrancar el servidor y ejecutar los comandos necesarios para el tutorial. Al igual que con yarn, tan solo hay que abrir una consola de msdos y ejecutar el comando:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>npm install -g @angular/cli
+</code></pre></div>
+
+<p>Con esto ya tendremos todo instalado, listo para empezar a crear los proyectos.</p>
                 
               
               
