@@ -1,0 +1,745 @@
+
+
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.2.2">
+    
+    
+      
+        <title>Anexo. Tutorial básico de Git (TBD) - Tutorial Springboot - Angular</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.a2408e81.min.css">
+      
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../assets/style.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#tutorial-basico-de-git" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Cabecera">
+    <a href="../.." title="Tutorial Springboot - Angular" class="md-header-nav__button md-logo" aria-label="Tutorial Springboot - Angular">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            Tutorial Springboot - Angular
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Anexo. Tutorial básico de Git (TBD)
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Limpiar" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Tutorial Springboot - Angular" class="md-nav__button md-logo" aria-label="Tutorial Springboot - Angular">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Tutorial Springboot - Angular
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Bienvenido!" class="md-nav__link">
+      Bienvenido!
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../thanks/" title="Agradecimientos!" class="md-nav__link">
+      Agradecimientos!
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../usecases/" title="Contexto de la aplicación" class="md-nav__link">
+      Contexto de la aplicación
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../install/" title="Entorno de desarrollo" class="md-nav__link">
+      Entorno de desarrollo
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../create/" title="Creación de proyecto" class="md-nav__link">
+      Creación de proyecto
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../cleancode/" title="Estructura y Clean Code (TBD)" class="md-nav__link">
+      Estructura y Clean Code (TBD)
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../develop/step1/" title="Code: Desarrollo con Angular" class="md-nav__link">
+      Code: Desarrollo con Angular
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../develop/step2/" title="Code: Desarrollo con Springboot" class="md-nav__link">
+      Code: Desarrollo con Springboot
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../develop/step3/" title="Code: Conectar front con back" class="md-nav__link">
+      Code: Conectar front con back
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../develop/step4/" title="Code: Listado paginado" class="md-nav__link">
+      Code: Listado paginado
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../develop/step5/" title="Code: Listado filtrado" class="md-nav__link">
+      Code: Listado filtrado
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../develop/step6/" title="Code: Validaciones (TBD)" class="md-nav__link">
+      Code: Validaciones (TBD)
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../develop/step7/" title="Code: Crear Login (TBD)" class="md-nav__link">
+      Code: Crear Login (TBD)
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../develop/step8/" title="Code: Testing (TBD)" class="md-nav__link">
+      Code: Testing (TBD)
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../exercise/" title="Ahora hazlo tu!" class="md-nav__link">
+      Ahora hazlo tu!
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../styles/" title="Anexo. Estilos (TBD)" class="md-nav__link">
+      Anexo. Estilos (TBD)
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../dates/" title="Anexo. Fechas (TBD)" class="md-nav__link">
+      Anexo. Fechas (TBD)
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Anexo. Tutorial básico de Git (TBD)
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
+        </span>
+      </label>
+    
+    <a href="./" title="Anexo. Tutorial básico de Git (TBD)" class="md-nav__link md-nav__link--active">
+      Anexo. Tutorial básico de Git (TBD)
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#estructuras-y-flujo-de-trabajo" class="md-nav__link">
+    Estructuras y flujo de trabajo
+  </a>
+  
+    <nav class="md-nav" aria-label="Estructuras y flujo de trabajo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-y-commmit" class="md-nav__link">
+    add y commmit
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reset" class="md-nav__link">
+    reset
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#trabajo-con-ramas" class="md-nav__link">
+    Trabajo con ramas
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#remote-repository" class="md-nav__link">
+    Remote repository
+  </a>
+  
+    <nav class="md-nav" aria-label="Remote repository">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#clone" class="md-nav__link">
+    clone
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#envio-de-cambios" class="md-nav__link">
+    envío de cambios
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#actualizar-y-fusionar" class="md-nav__link">
+    actualizar y fusionar
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#guia-rapida" class="md-nav__link">
+    Guía rápida
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#estructuras-y-flujo-de-trabajo" class="md-nav__link">
+    Estructuras y flujo de trabajo
+  </a>
+  
+    <nav class="md-nav" aria-label="Estructuras y flujo de trabajo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-y-commmit" class="md-nav__link">
+    add y commmit
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reset" class="md-nav__link">
+    reset
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#trabajo-con-ramas" class="md-nav__link">
+    Trabajo con ramas
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#remote-repository" class="md-nav__link">
+    Remote repository
+  </a>
+  
+    <nav class="md-nav" aria-label="Remote repository">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#clone" class="md-nav__link">
+    clone
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#envio-de-cambios" class="md-nav__link">
+    envío de cambios
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#actualizar-y-fusionar" class="md-nav__link">
+    actualizar y fusionar
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#guia-rapida" class="md-nav__link">
+    Guía rápida
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  
+                
+                
+                <h1 id="tutorial-basico-de-git">Tutorial básico de Git</h1>
+<div class="admonition warning">
+<p class="admonition-title">Atención</p>
+<p>Esta sección está incompleta y todavía en desarrollo. Puedes leerla pero seguramente cambiará o ampliará su información.</p>
+</div>
+<p>Cada vez se tiende más a utilizar repositorios de código Git y, aunque no sea objeto de este tutorial Springboot-Angular, queremos hacer un resumen muy básico y sencillo de como utilizar Git.</p>
+<p>En el mercado existen multitud de herramientas para gestionar repositorios Git, podemos utilizar cualquiera de ellas, aunque desde devonfw se recomienda utilizar <a href="https://git-scm.com/download/win">Git SCM</a>.
+Además, existen también multitud de servidores de código que implementan repositorios Git, como podrían ser GitHub, GitLab, Bitbucket, etc. Todos ellos trabajan de la misma forma, así que este resumen servirá para todos ellos.</p>
+<p>!!tip "Info"
+    Este anexo muestra un resumen muy sencillo y básico de los comandos más comunes que se utilizan en Git. Para ver detalles más avanzados o un tutorial completo te recomiendo que leas la guia de <a href="https://www.atlassian.com/es/git">Atlassian</a>.</p>
+<p>Ahora si, vamos al resumen básico de Git. </p>
+<h2 id="estructuras-y-flujo-de-trabajo">Estructuras y flujo de trabajo</h2>
+<p>Lo primero que debes conocer de Git es su funcionamiento básico de flujo de trabajo. Tu repositorio local está compuesto por tres "estructuras" que contienen los archivos y los cambios de los ficheros del repositorio. </p>
+<p><img alt="apendix_git-workflow_1" src="../../assets/images/apendix_git-workflow_1.png" /></p>
+<ul>
+<li><strong>Working directory</strong> - Contiene los archivos con los que estás trabajando localmente.</li>
+<li><strong>Staging Area</strong> - Es un área intermedia donde vamos añadiendo ficheros para ir agrupando modificaciones.</li>
+<li><strong>Local Repository</strong> - Es el repositorio local donde tendrémos el registro de todos los commits que hemos realizado. Por defecto apunta a HEAD que es el último commit registrado.</li>
+</ul>
+<p>Existen operaciones que nos permiten añadir o borrar ficheros dentro de cada una de las estructuras desde otra estructura.</p>
+<p><img alt="apendix_git-workflow_2" src="../../assets/images/apendix_git-workflow_2.png" /></p>
+<p>Así pues, los comandos básicos dentro de nuestro repositorio local son los siguientes.</p>
+<h3 id="add-y-commmit"><strong>add y commmit</strong></h3>
+<p>Puedes registrar los cambios realizados en tu <code>working directory</code> y añadirlos al <code>staging area</code> usando el comando</p>
+<p><div class="highlight"><pre><span></span><code>git add &lt;filename&gt;
+</code></pre></div>
+    o si quieres añadir todos los ficheros modificados
+<div class="highlight"><pre><span></span><code>git add .
+</code></pre></div></p>
+<p>Este es el primer paso en el flujo de trabajo básico. Una vez tenemos los cambios registrados en el <code>staging area</code> podemos hacer un commit y persistirlos dentro del <code>local repository</code> mediante el comando</p>
+<div class="highlight"><pre><span></span><code>git commit -m &quot;&lt;Commit message&gt;&quot;
+</code></pre></div>
+
+<p>A partir de ese momento, los ficheros modificados y añadidos al <code>local repository</code> se han persistido y se han añadido a tu <code>HEAD</code>, aunque todavía siguen estando el local, no lo has enviado a ningún repositorio remoto.</p>
+<h3 id="reset"><strong>reset</strong></h3>
+<p>De la misma manera que se han añadido ficheros a <code>staging area</code> o a <code>local repository</code>, podemos retirarlos de estas estructuras y volver a recuperar los ficheros que teníamos anteriormente en el <code>working directory</code>. Por ejemplo, si nos hemos equivocado al incluir ficheros en un commit o simplemente queremos deshacer los cambios que hemos realizado bastaría con lanzar el comando</p>
+<p><div class="highlight"><pre><span></span><code>git reset --hard
+</code></pre></div>
+    o si queremos volver a un commit concreto
+<div class="highlight"><pre><span></span><code>git reset &lt;COMMIT&gt;
+</code></pre></div></p>
+<h2 id="trabajo-con-ramas">Trabajo con ramas</h2>
+<p>Para complicarlo todo un poco más, el trabajo con git siempre se realiza mediante ramas. Estas ramas nos sirven para desarrollar funcionalidades aisladas unas de otras y poder hacer mezclas de código de unas ramas a otras. Las ramas más comunes dentro de git suelen ser:</p>
+<ul>
+<li><strong>master</strong> Esta será la rama que contenga el código fuente que tenemos en <strong><code>producción</code></strong>.</li>
+<li><strong>release</strong> Esta será la rama que contenga el código fuente de cada una de las entregas parciales, no tiene porqué coincidir con la rama <code>master</code>.</li>
+<li><strong>develop</strong> Esta será la rama que contenga el código fuente estable que está actualmente en desarrollo.</li>
+<li><strong>feature/xxxx</strong> Estas seránn la rama que contengan el código fuente de desarrollo de cada una de las funcionalidades. Generalmente estas ramas las crea cada desarrollador, las mantiene en local, hasta que las sube a remoto para realizar un <code>merge</code> a la rama <code>develop</code>.</li>
+</ul>
+<p>Siempre que trabajes con ramas debes tener en cuenta que al empezar tu desarrollo debes partir de una versión actualizada de la rama <code>develop</code>, y al terminar tu desarrollo debes solicitar un <code>merge</code> contra <code>develop</code>, para que tu funcionalidad esté incorporada en la rama de desarrollo.</p>
+<p><img alt="apendix_git-workflow_3" src="../../assets/images/apendix_git-workflow_3.png" /></p>
+<h2 id="remote-repository">Remote repository</h2>
+<h3 id="clone">clone</h3>
+<h3 id="envio-de-cambios">envío de cambios</h3>
+<h3 id="actualizar-y-fusionar">actualizar y fusionar</h3>
+<h2 id="guia-rapida">Guía rápida</h2>
+<p>Los pasos básicos de utilización de git son sencillos.</p>
+<ul>
+<li>Primero nos bajamos el repositorio o lo creamos en local mediante los comandos
+<div class="highlight"><pre><span></span><code>git clone
+    o 
+git init
+</code></pre></div></li>
+<li>Una vez estamos trabajando con nuestro repositorio remoto, cada vez que vayamos a comenzar una funcionalidad nueva, debemos crear una rama nueva siempre partiendo desde <code>develop</code> mediante el comando 
+<div class="highlight"><pre><span></span><code>git checkout -b &lt;rama&gt;
+</code></pre></div></li>
+<li>Cuando tengamos implementados los cambios que queremos realizar, hay que subirlos al staging y luego persistirlos en nuestro repositorio local. Esto lo hacemos con el comando
+<div class="highlight"><pre><span></span><code>git add .
+git commit -m &quot;&lt;Commit message&gt;&quot;
+</code></pre></div></li>
+<li>Siempre antes de subir los cambios al repositorio remoto, hay que comprobar que tenemos actualizada nuestra rama comparandola con la rama remota que queremos mergear, en nuestro ejemplo será <code>develop</code>. Por tanto tenemos que cambiar a la rama <code>develop</code>, descargarnos los cambios del repositorio remoto, volver a cambiar a nuestra rama y ejecutar un merge desde <code>develop</code> hacia nuestra rama, ejecutando estos comandos
+<div class="highlight"><pre><span></span><code>git checkout develop
+git pull
+git checkout &lt;rama&gt;
+git merge develop
+</code></pre></div></li>
+<li>Ahora que ya tenemos actualizadas las ramas, tan solo nos basta subir nuestra rama a remoto, con el comando
+<div class="highlight"><pre><span></span><code>git push --set-upstream origin &lt;rama&gt;
+</code></pre></div></li>
+<li>Por último accedemos al cliente web del repositorio y solicitamos un <code>merge request</code> contra <code>develop</code>. Para que sea validado y aprobado por otro compañero del equipo.</li>
+<li>Si en algún momento necesitamos modificar nuestro código del <code>merge request</code> antes de que haya sido aprobado, nos basta con repetir los pasos anteriores
+<div class="highlight"><pre><span></span><code>git add .
+git commit -m &quot;&lt;Commit message&gt;&quot;
+git push origin
+</code></pre></div></li>
+<li>Una vez hayamos terminado el desarrollo y vayamos a empezar una nueva funcionalidad, volveremos al punto 2 de este listado y comenzaremos de nuevo los comando. Debemos recordad que tenemos que partir siempre de la rama <code>develop</code> y además debe estar actualizada <code>git pull</code>.</li>
+</ul>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Pie">
+        
+          <a href="../dates/" title="Anexo. Fechas (TBD)" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Anterior
+                </span>
+                Anexo. Fechas (TBD)
+              </div>
+            </div>
+          </a>
+        
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/vendor.d710d30a.min.js"></script>
+      <script src="../../assets/javascripts/bundle.5f27aba8.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copiar al portapapeles", "clipboard.copied": "Copiado al portapapeles", "search.config.lang": "es", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../..",
+          features: [],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.27c6a5e6.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>

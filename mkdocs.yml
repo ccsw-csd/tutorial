@@ -15,9 +15,10 @@ nav:
   - "Code: Validaciones (TBD)": develop/step6.md
   - "Code: Crear Login (TBD)": develop/step7.md
   - "Code: Testing (TBD)": develop/step8.md
-  - Ahora hazlo tu! (TBD): exercise.md
+  - Ahora hazlo tu!: exercise.md
   - Anexo. Estilos (TBD): appendix/styles.md
   - Anexo. Fechas (TBD): appendix/dates.md
+  - Anexo. Tutorial básico de Git (TBD): appendix/git.md
 
 theme:
     name: material
