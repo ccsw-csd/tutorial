@@ -534,8 +534,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../appendix/git/" title="Anexo. Tutorial básico de Git (TBD)" class="md-nav__link">
-      Anexo. Tutorial básico de Git (TBD)
+    <a href="../../appendix/git/" title="Anexo. Tutorial básico de Git" class="md-nav__link">
+      Anexo. Tutorial básico de Git
     </a>
   </li>
 
@@ -1117,10 +1117,10 @@
 </div>
 <p><strong>GET</strong> nos devuelve un listado de <code>Categorías</code></p>
 <p><img alt="step2-java1" src="../../assets/images/step2-java1.png" /></p>
-<p><strong>PUT</strong> nos sirve para insertar <code>Categorías</code> nuevas (si no tienen el id informado) o para actualizar <code>Categorías</code> (si tienen el id informado). Fíjate que los datos que se reciben están en el body.</p>
+<p><strong>PUT</strong> nos sirve para insertar <code>Categorías</code> nuevas (si no tienen el id informado) o para actualizar <code>Categorías</code> (si tienen el id informado). Fíjate que los datos que se envían están en el body como formato JSON (parte izquierda de la imagen). Si no envías datos, te dará un error.</p>
 <p><img alt="step2-java2" src="../../assets/images/step2-java2.png" />
 <img alt="step2-java3" src="../../assets/images/step2-java3.png" /></p>
-<p><strong>DELETE</strong> nos sirve eliminar <code>Categorías</code>. Fíjate que el dato del ID está en el path.</p>
+<p><strong>DELETE</strong> nos sirve eliminar <code>Categorías</code>. Fíjate que el dato del ID que se envía está en el path.</p>
 <p><img alt="step2-java4" src="../../assets/images/step2-java4.png" /></p>
 <h3 id="aspectos-importantes">Aspectos importantes</h3>
 <p>Los aspectos importantes de la capa <code>Controller</code> son:</p>

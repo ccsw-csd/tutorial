@@ -515,8 +515,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../appendix/git/" title="Anexo. Tutorial básico de Git (TBD)" class="md-nav__link">
-      Anexo. Tutorial básico de Git (TBD)
+    <a href="../../appendix/git/" title="Anexo. Tutorial básico de Git" class="md-nav__link">
+      Anexo. Tutorial básico de Git
     </a>
   </li>
 
@@ -1800,7 +1800,7 @@ Esta implementación la haremos en un Repository normal, y el resto de métodos 
 
 </div>
 </div>
-<p>No se puede implementar un <code>CrudRepository</code> ya que es una interface que tiene su propia implementación en Spring JPA. El truco que podemos hacer es crear una interface y una implementación custom con los métodos que necesitemos y en nuestro <code>CrudRepository</code> extender la interface custom.</p>
+<p>No se puede implementar un <code>CrudRepository</code> ya que es una interface que tiene su propia implementación en Spring JPA. El truco que podemos hacer es crear una interface y una implementación custom con los métodos que necesitemos y en nuestro <code>GameRepository</code> extender la interface custom.</p>
 <p>De esta forma únicamente utilizamos un objeto <code>Repository</code>, pero realmente Spring JPA provee los métodos de Crud y nosotros proveemos los métodos custom.</p>
 <p>La implementación de las queries que hagamos dentro del custom repository ya es cosa nuestra y podemos utilizar lo que necesitemos. En este caso hemos optado por utilizar Criteria para hacer la Query ayudándonos de unas clases de utilidad que provee Devonfw, muy recomendables para hacer queries paginadas. </p>
 <h3 id="service">Service</h3>
@@ -1837,7 +1837,7 @@ Esta implementación la haremos en un Repository normal, y el resto de métodos 
 </code></pre></div>
 
 </div>
-<input id="__tabbed_13_2" name="__tabbed_13" type="radio" /><label for="__tabbed_13_2">AuthorServiceImpl.java</label><div class="tabbed-content">
+<input id="__tabbed_13_2" name="__tabbed_13" type="radio" /><label for="__tabbed_13_2">GameServiceImpl.java</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.game</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>

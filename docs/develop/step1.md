@@ -576,9 +576,10 @@ ng generate component views/categories/category-dialog
 Ahora vamos a hacer que se abra al pulsar el botón `Nueva categoría`. Para eso, vamos al fichero `views\categories\categories.component.ts` y añadimos un nuevo método:
 
 === "categories.component.ts"
-    ``` TypeScript hl_lines="2 6 9 10 11 12 13 14 15 16 17"
+    ``` TypeScript hl_lines="2 3 7 10 11 12 13 14 15 16 17 18"
     ...
     import { MatDialog } from '@angular/material/dialog';
+    import { CategoryDialogComponent } from './category-dialog/category-dialog.component';
     ...
       constructor(
         private categoryService: CategoryService,

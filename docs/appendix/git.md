@@ -1,9 +1,5 @@
 # Tutorial básico de Git
 
-!!! warning "Atención"
-	Esta sección está incompleta y todavía en desarrollo. Puedes leerla pero seguramente cambiará o ampliará su información.
-
-
 Cada vez se tiende más a utilizar repositorios de código Git y, aunque no sea objeto de este tutorial Springboot-Angular, queremos hacer un resumen muy básico y sencillo de como utilizar Git.
 
 En el mercado existen multitud de herramientas para gestionar repositorios Git, podemos utilizar cualquiera de ellas, aunque desde devonfw se recomienda utilizar [Git SCM](https://git-scm.com/download/win).
@@ -78,18 +74,106 @@ Siempre que trabajes con ramas debes tener en cuenta que al empezar tu desarroll
 
 ![apendix_git-workflow_3](../assets/images/apendix_git-workflow_3.png)
 
+### Crear ramas
+
+Crear ramas en local es tan sencillo como ejecutar este comando:
+    
+```
+git checkout -b <NOMBRE_RAMA>
+```
+
+Eso nos creará una rama con el nombre que le hayamos dicho y moverá el `Working Directory` a dicha rama.
+
+
+### Cambiar de rama
+
+Para cambiar de una rama a otra en local tan solo debemos ejecutar el comando:
+    
+```
+git checkout <NOMBRE_RAMA>
+```
+
+La rama debe existir, sino se quejará de que no encuentra la rama. Este comando nos moverá el `Working Directory` a la rama que le hayamos indicado. Si tenemos cambios en el `Staging Area` que no hayan sido movidos al `Local Repository` **NO** nos permitirá movernos a la rama ya que perderíamos los cambios. Antes de poder movernos debemos `resetear` los cambios o bien `commitearlos`.
+
 
 ## Remote repository
 
+Hasta aquí es todo más o menos sencillo, trabajamos con nuestro repositorio local, creamos ramas, commiteamos o reseteamos cambios de código, pero todo esto lo hacemos en local. Ahora necesitamos que esos cambios se distribuyan y puedan leerlos el resto de integrantes de nuestro equipo.
+
+Aquí es donde entra en juego los repositorios remotos.
+
+![apendix_git-workflow_4](../assets/images/apendix_git-workflow_4.png)
+
+Aquí debemos tener MUY en cuenta que el código que vamos a publicar en remoto **SOLO** es posible publicarlo desde el `Local Repository`. Es decir que para poder subir código a remote antes debemos añadirlo a `Staging Area` y hacer un commit para persistirlo en el `Local Repository`.
+
+
 ### clone
+
+Antes de empezar a tocar código del proyecto podemos crear un `Local Repository` vacío o bien bajarnos un proyecto que ya exista en un `Remote Repository`. Esta última opción es la más normal.
+
+Para bajarnos un proyecto desde remoto tan solo hay que ejecutar el comando:
+
+```
+git clone <REMOTE_URL>
+```
+
+Esto te creará una carpeta con el nombre del proyecto y dentro se descargará la estructura completa del repositorio y te moverá al `Working Directory` todo el código de la rama por defecto para ese repositorio.
 
 ### envío de cambios
 
+El envío de datos a un `Remote Repository` tan solo es posible realizarlo desde `Local Repository` (por lo que antes deberás commitear cambios allí), y se debe ejecutar el comando:
+
+```
+git push origin
+```
+
 ### actualizar y fusionar
+
+En ocasiones (bastante habitual) será necesario descargarse los cambios de un `Remote Repository` para poder trabajar con la última versión. Para ello debemos ejecutar el comando:
+
+```
+git pull
+```
+
+El propio `git` realizará la fusión local del código remoto con el código de tu `Working Directory`. Pero en ocasiones, si se ha modificado el mismo fichero en remoto y en local, se puede producir un **Conflicto**. No pasa nada, tan solo tendrás que abrir dicho fichero en conflicto y resolverlo manualmente dejando el código mezclado correcto.
+
+También es posible que el código que queramos actualizar esté en otra rama, si lo que necesitamos es fusionar el código de otra rama con la rama actual, nos situaremos en la rama destino y ejecutaremos el comando:
+
+```
+git merge <RAMA_ORIGEN>
+```
+
+Esto hará lo mismo que un pull en local y fusionará el código de una rama en otra. También es posible que se produzcan conflictos que deberás resolver de forma manual.
+
+
+### Merge Request
+
+Ya por último, como estamos trabajando con ramas, lo único que hacemos es subir y bajar ramas, pero en algún momento alguien debe fusionar el contenido de una rama en la rama `develop`, `release` o `master`, que son las ramas principales.
+
+Se podría directamente usar el comando merge para eso, pero en la mayoría de los repositorios no esta permitido subir el código de una rama principal, por lo que no podrás hacer un merge y subirlo. Para eso existe otra opción que es la de `Merge Request`.
+
+Esta opción permite a un usuario solicitar que otro usuario verifique y valide que el código de su rama es correcto y lo puede fusionar en `Remote Repository` con una rama principal. Al ser una operación delicada, tan solo es posible ejecutarla a través de la web del repositorio git. 
+
+![apendix_git-merge_request](../assets/images/apendix_git-merge_request.png)
+
+Por lo general existirá una opción / botón que permitirá hacer un `Merge Request` con una rama origen y una rama destino (generalmente una de las principales). A esa petición se le asignará un validador y se enviará. El usuario validador verificará si es correcto o no y validará o rechazará la petición. En caso de validarla se fusionará automáticamente en remoto y todos los usuarios podrán descargar los nuevos cambios desde la rama.
+
+
+!!! tip "¡Cuidado!"
+    Siempre antes de solicitar un `Merge Request` debes comprobar que tienes actualizada la rama comparandola con la rama remota que queremos mergear, en nuestro ejemplo será `develop`. 
+    
+Para actualizarla tu rama hay que seguir tres pasos muy sencillos:
+
+- Cambias a la rama `develop` y descargarnos los cambios del repositorio remoto (git pull)
+- Cambias a tu rama y ejecutar un merge desde `develop` hacia nuestra rama (git merge develop)
+- Subes tus cambios a remoto (git add, git commit y git push) y ya puedes solcitar el `Merge Request`
+
 
 ## Guía rápida
 
 Los pasos básicos de utilización de git son sencillos.
+
+![apendix_git-workflow_5](../assets/images/apendix_git-workflow_5.png)
 
 - Primero nos bajamos el repositorio o lo creamos en local mediante los comandos
 ```

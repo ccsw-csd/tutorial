@@ -18,7 +18,7 @@ nav:
   - Ahora hazlo tu!: exercise.md
   - Anexo. Estilos (TBD): appendix/styles.md
   - Anexo. Fechas (TBD): appendix/dates.md
-  - Anexo. Tutorial básico de Git (TBD): appendix/git.md
+  - Anexo. Tutorial básico de Git: appendix/git.md
 
 theme:
     name: material

@@ -288,7 +288,7 @@ Ya tenemos el servicio con los datos, ahora vamos a por el listado paginado.
         loadPage(event?: PageEvent) {
 
             let pageable : Pageable =  {
-                pageNumber: this.pageSize,
+                pageNumber: this.pageNumber,
                 pageSize: this.pageSize,
                 sort: [{
                 property: 'id',
@@ -950,16 +950,16 @@ Además, el método de carga `findPage` ya no es un método de tipo `GET`, ahora
 
 Si ahora levantamos la aplicación y probamos con el postman, podemos ver los resultados que nos ofrece el back.
 
-** POST ** nos devuelve un listado paginado de `Autores`, fíjate bien en la petición `Pageable` y la respuesta tipo `Page`.
+** POST ** nos devuelve un listado paginado de `Autores`. Fíjate que los datos que se envían están en el body como formato JSON (parte izquierda de la imagen). Si no envías datos con formato `Pageable`, te dará un error. También fíjate que la respuesta es de tipo `Page`.
 
 ![step4-java1](../assets/images/step4-java1.png)
 
-** PUT ** nos sirve para insertar `Autores` nuevas (si no tienen el id informado) o para actualizar `Autores` (si tienen el id informado). Fíjate que los datos que se reciben están en el body.
+** PUT ** nos sirve para insertar `Autores` nuevas (si no tienen el id informado) o para actualizar `Autores` (si tienen el id informado).  Fíjate que los datos que se envían están en el body como formato JSON (parte izquierda de la imagen). Si no te dará un error.
 
 ![step4-java2](../assets/images/step4-java2.png)
 ![step4-java3](../assets/images/step4-java3.png)
 
-** DELETE ** nos sirve eliminar `Autores`. Fíjate que el dato del ID está en el path.
+** DELETE ** nos sirve eliminar `Autores`. Fíjate que el dato del ID que se envía está en el path.
 
 ![step4-java4](../assets/images/step4-java4.png)
 

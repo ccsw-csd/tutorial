@@ -1135,7 +1135,7 @@ Esta implementación la haremos en un Repository normal, y el resto de métodos 
     }
     ```
 
-No se puede implementar un `CrudRepository` ya que es una interface que tiene su propia implementación en Spring JPA. El truco que podemos hacer es crear una interface y una implementación custom con los métodos que necesitemos y en nuestro `CrudRepository` extender la interface custom.
+No se puede implementar un `CrudRepository` ya que es una interface que tiene su propia implementación en Spring JPA. El truco que podemos hacer es crear una interface y una implementación custom con los métodos que necesitemos y en nuestro `GameRepository` extender la interface custom.
 
 De esta forma únicamente utilizamos un objeto `Repository`, pero realmente Spring JPA provee los métodos de Crud y nosotros proveemos los métodos custom.
 
@@ -1176,7 +1176,7 @@ Siguiente paso, la capa de lógica, es decir el `Service`.
 
     }
     ```
-=== "AuthorServiceImpl.java"
+=== "GameServiceImpl.java"
     ``` Java
     package com.capgemini.coedevon.tutorial.game;
 

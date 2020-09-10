@@ -17,3 +17,4 @@ Mención especial a las personas que han participado en el tutorial ya sea como 
 - Marina Valls ([@mvalemany](https://github.com/mvalemany))
 - Jaume Segarra ([@jaumesegarra](https://github.com/jaumesegarra))
 - Laura Medina ([@larulirea](https://github.com/larulirea))
+- Yolanda Ubeda

@@ -501,8 +501,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../appendix/git/" title="Anexo. Tutorial básico de Git (TBD)" class="md-nav__link">
-      Anexo. Tutorial básico de Git (TBD)
+    <a href="../../appendix/git/" title="Anexo. Tutorial básico de Git" class="md-nav__link">
+      Anexo. Tutorial básico de Git
     </a>
   </li>
 
@@ -938,7 +938,7 @@ ng generate service services/authors/author
 <span class="hll">    <span class="nx">loadPage</span><span class="p">(</span><span class="nx">event?</span>: <span class="kt">PageEvent</span><span class="p">)</span> <span class="p">{</span>
 </span><span class="hll">
 </span><span class="hll">        <span class="kd">let</span> <span class="nx">pageable</span> : <span class="kt">Pageable</span> <span class="o">=</span>  <span class="p">{</span>
-</span><span class="hll">            <span class="nx">pageNumber</span>: <span class="kt">this.pageSize</span><span class="p">,</span>
+</span><span class="hll">            <span class="nx">pageNumber</span>: <span class="kt">this.pageNumber</span><span class="p">,</span>
 </span><span class="hll">            <span class="nx">pageSize</span>: <span class="kt">this.pageSize</span><span class="p">,</span>
 </span><span class="hll">            <span class="nx">sort</span><span class="o">:</span> <span class="p">[{</span>
 </span><span class="hll">            <span class="nx">property</span><span class="o">:</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span>
@@ -1590,12 +1590,12 @@ ng generate service services/authors/author
 <p>Además, el método de carga <code>findPage</code> ya no es un método de tipo <code>GET</code>, ahora es de tipo <code>POST</code> porque le tenemos que enviar los datos de la paginación para que Spring JPA pueda hacer su magia.</p>
 <h3 id="prueba-de-las-operaciones">Prueba de las operaciones</h3>
 <p>Si ahora levantamos la aplicación y probamos con el postman, podemos ver los resultados que nos ofrece el back.</p>
-<p><strong> POST </strong> nos devuelve un listado paginado de <code>Autores</code>, fíjate bien en la petición <code>Pageable</code> y la respuesta tipo <code>Page</code>.</p>
+<p><strong> POST </strong> nos devuelve un listado paginado de <code>Autores</code>. Fíjate que los datos que se envían están en el body como formato JSON (parte izquierda de la imagen). Si no envías datos con formato <code>Pageable</code>, te dará un error. También fíjate que la respuesta es de tipo <code>Page</code>.</p>
 <p><img alt="step4-java1" src="../../assets/images/step4-java1.png" /></p>
-<p><strong> PUT </strong> nos sirve para insertar <code>Autores</code> nuevas (si no tienen el id informado) o para actualizar <code>Autores</code> (si tienen el id informado). Fíjate que los datos que se reciben están en el body.</p>
+<p><strong> PUT </strong> nos sirve para insertar <code>Autores</code> nuevas (si no tienen el id informado) o para actualizar <code>Autores</code> (si tienen el id informado).  Fíjate que los datos que se envían están en el body como formato JSON (parte izquierda de la imagen). Si no te dará un error.</p>
 <p><img alt="step4-java2" src="../../assets/images/step4-java2.png" />
 <img alt="step4-java3" src="../../assets/images/step4-java3.png" /></p>
-<p><strong> DELETE </strong> nos sirve eliminar <code>Autores</code>. Fíjate que el dato del ID está en el path.</p>
+<p><strong> DELETE </strong> nos sirve eliminar <code>Autores</code>. Fíjate que el dato del ID que se envía está en el path.</p>
 <p><img alt="step4-java4" src="../../assets/images/step4-java4.png" /></p>
 <h2 id="conectar-front-con-back">Conectar front con back</h2>
 <p>Una vez implementado front y back, lo que nos queda es modificar el servicio del front para que conecte directamente con las operaciones ofrecidas por el back.</p>

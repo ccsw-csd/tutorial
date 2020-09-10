@@ -15,7 +15,7 @@
     
     
       
-        <title>Anexo. Tutorial básico de Git (TBD) - Tutorial Springboot - Angular</title>
+        <title>Anexo. Tutorial básico de Git - Tutorial Springboot - Angular</title>
       
     
     
@@ -78,7 +78,7 @@
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              Anexo. Tutorial básico de Git (TBD)
+              Anexo. Tutorial básico de Git
             
           </span>
         </div>
@@ -365,14 +365,14 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
-        Anexo. Tutorial básico de Git (TBD)
+        Anexo. Tutorial básico de Git
         <span class="md-nav__icon md-icon">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
         </span>
       </label>
     
-    <a href="./" title="Anexo. Tutorial básico de Git (TBD)" class="md-nav__link md-nav__link--active">
-      Anexo. Tutorial básico de Git (TBD)
+    <a href="./" title="Anexo. Tutorial básico de Git" class="md-nav__link md-nav__link--active">
+      Anexo. Tutorial básico de Git
     </a>
     
       
@@ -422,6 +422,26 @@
     Trabajo con ramas
   </a>
   
+    <nav class="md-nav" aria-label="Trabajo con ramas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#crear-ramas" class="md-nav__link">
+    Crear ramas
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cambiar-de-rama" class="md-nav__link">
+    Cambiar de rama
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -449,6 +469,13 @@
           <li class="md-nav__item">
   <a href="#actualizar-y-fusionar" class="md-nav__link">
     actualizar y fusionar
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#merge-request" class="md-nav__link">
+    Merge Request
   </a>
   
 </li>
@@ -529,6 +556,26 @@
     Trabajo con ramas
   </a>
   
+    <nav class="md-nav" aria-label="Trabajo con ramas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#crear-ramas" class="md-nav__link">
+    Crear ramas
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cambiar-de-rama" class="md-nav__link">
+    Cambiar de rama
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -556,6 +603,13 @@
           <li class="md-nav__item">
   <a href="#actualizar-y-fusionar" class="md-nav__link">
     actualizar y fusionar
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#merge-request" class="md-nav__link">
+    Merge Request
   </a>
   
 </li>
@@ -589,10 +643,6 @@
                 
                 
                 <h1 id="tutorial-basico-de-git">Tutorial básico de Git</h1>
-<div class="admonition warning">
-<p class="admonition-title">Atención</p>
-<p>Esta sección está incompleta y todavía en desarrollo. Puedes leerla pero seguramente cambiará o ampliará su información.</p>
-</div>
 <p>Cada vez se tiende más a utilizar repositorios de código Git y, aunque no sea objeto de este tutorial Springboot-Angular, queremos hacer un resumen muy básico y sencillo de como utilizar Git.</p>
 <p>En el mercado existen multitud de herramientas para gestionar repositorios Git, podemos utilizar cualquiera de ellas, aunque desde devonfw se recomienda utilizar <a href="https://git-scm.com/download/win">Git SCM</a>.
 Además, existen también multitud de servidores de código que implementan repositorios Git, como podrían ser GitHub, GitLab, Bitbucket, etc. Todos ellos trabajan de la misma forma, así que este resumen servirá para todos ellos.</p>
@@ -639,12 +689,65 @@ Además, existen también multitud de servidores de código que implementan repo
 </ul>
 <p>Siempre que trabajes con ramas debes tener en cuenta que al empezar tu desarrollo debes partir de una versión actualizada de la rama <code>develop</code>, y al terminar tu desarrollo debes solicitar un <code>merge</code> contra <code>develop</code>, para que tu funcionalidad esté incorporada en la rama de desarrollo.</p>
 <p><img alt="apendix_git-workflow_3" src="../../assets/images/apendix_git-workflow_3.png" /></p>
+<h3 id="crear-ramas">Crear ramas</h3>
+<p>Crear ramas en local es tan sencillo como ejecutar este comando:</p>
+<div class="highlight"><pre><span></span><code>git checkout -b &lt;NOMBRE_RAMA&gt;
+</code></pre></div>
+
+<p>Eso nos creará una rama con el nombre que le hayamos dicho y moverá el <code>Working Directory</code> a dicha rama.</p>
+<h3 id="cambiar-de-rama">Cambiar de rama</h3>
+<p>Para cambiar de una rama a otra en local tan solo debemos ejecutar el comando:</p>
+<div class="highlight"><pre><span></span><code>git checkout &lt;NOMBRE_RAMA&gt;
+</code></pre></div>
+
+<p>La rama debe existir, sino se quejará de que no encuentra la rama. Este comando nos moverá el <code>Working Directory</code> a la rama que le hayamos indicado. Si tenemos cambios en el <code>Staging Area</code> que no hayan sido movidos al <code>Local Repository</code> <strong>NO</strong> nos permitirá movernos a la rama ya que perderíamos los cambios. Antes de poder movernos debemos <code>resetear</code> los cambios o bien <code>commitearlos</code>.</p>
 <h2 id="remote-repository">Remote repository</h2>
+<p>Hasta aquí es todo más o menos sencillo, trabajamos con nuestro repositorio local, creamos ramas, commiteamos o reseteamos cambios de código, pero todo esto lo hacemos en local. Ahora necesitamos que esos cambios se distribuyan y puedan leerlos el resto de integrantes de nuestro equipo.</p>
+<p>Aquí es donde entra en juego los repositorios remotos.</p>
+<p><img alt="apendix_git-workflow_4" src="../../assets/images/apendix_git-workflow_4.png" /></p>
+<p>Aquí debemos tener MUY en cuenta que el código que vamos a publicar en remoto <strong>SOLO</strong> es posible publicarlo desde el <code>Local Repository</code>. Es decir que para poder subir código a remote antes debemos añadirlo a <code>Staging Area</code> y hacer un commit para persistirlo en el <code>Local Repository</code>.</p>
 <h3 id="clone">clone</h3>
+<p>Antes de empezar a tocar código del proyecto podemos crear un <code>Local Repository</code> vacío o bien bajarnos un proyecto que ya exista en un <code>Remote Repository</code>. Esta última opción es la más normal.</p>
+<p>Para bajarnos un proyecto desde remoto tan solo hay que ejecutar el comando:</p>
+<div class="highlight"><pre><span></span><code>git clone &lt;REMOTE_URL&gt;
+</code></pre></div>
+
+<p>Esto te creará una carpeta con el nombre del proyecto y dentro se descargará la estructura completa del repositorio y te moverá al <code>Working Directory</code> todo el código de la rama por defecto para ese repositorio.</p>
 <h3 id="envio-de-cambios">envío de cambios</h3>
+<p>El envío de datos a un <code>Remote Repository</code> tan solo es posible realizarlo desde <code>Local Repository</code> (por lo que antes deberás commitear cambios allí), y se debe ejecutar el comando:</p>
+<div class="highlight"><pre><span></span><code>git push origin
+</code></pre></div>
+
 <h3 id="actualizar-y-fusionar">actualizar y fusionar</h3>
+<p>En ocasiones (bastante habitual) será necesario descargarse los cambios de un <code>Remote Repository</code> para poder trabajar con la última versión. Para ello debemos ejecutar el comando:</p>
+<div class="highlight"><pre><span></span><code>git pull
+</code></pre></div>
+
+<p>El propio <code>git</code> realizará la fusión local del código remoto con el código de tu <code>Working Directory</code>. Pero en ocasiones, si se ha modificado el mismo fichero en remoto y en local, se puede producir un <strong>Conflicto</strong>. No pasa nada, tan solo tendrás que abrir dicho fichero en conflicto y resolverlo manualmente dejando el código mezclado correcto.</p>
+<p>También es posible que el código que queramos actualizar esté en otra rama, si lo que necesitamos es fusionar el código de otra rama con la rama actual, nos situaremos en la rama destino y ejecutaremos el comando:</p>
+<div class="highlight"><pre><span></span><code>git merge &lt;RAMA_ORIGEN&gt;
+</code></pre></div>
+
+<p>Esto hará lo mismo que un pull en local y fusionará el código de una rama en otra. También es posible que se produzcan conflictos que deberás resolver de forma manual.</p>
+<h3 id="merge-request">Merge Request</h3>
+<p>Ya por último, como estamos trabajando con ramas, lo único que hacemos es subir y bajar ramas, pero en algún momento alguien debe fusionar el contenido de una rama en la rama <code>develop</code>, <code>release</code> o <code>master</code>, que son las ramas principales.</p>
+<p>Se podría directamente usar el comando merge para eso, pero en la mayoría de los repositorios no esta permitido subir el código de una rama principal, por lo que no podrás hacer un merge y subirlo. Para eso existe otra opción que es la de <code>Merge Request</code>.</p>
+<p>Esta opción permite a un usuario solicitar que otro usuario verifique y valide que el código de su rama es correcto y lo puede fusionar en <code>Remote Repository</code> con una rama principal. Al ser una operación delicada, tan solo es posible ejecutarla a través de la web del repositorio git. </p>
+<p><img alt="apendix_git-merge_request" src="../../assets/images/apendix_git-merge_request.png" /></p>
+<p>Por lo general existirá una opción / botón que permitirá hacer un <code>Merge Request</code> con una rama origen y una rama destino (generalmente una de las principales). A esa petición se le asignará un validador y se enviará. El usuario validador verificará si es correcto o no y validará o rechazará la petición. En caso de validarla se fusionará automáticamente en remoto y todos los usuarios podrán descargar los nuevos cambios desde la rama.</p>
+<div class="admonition tip">
+<p class="admonition-title">¡Cuidado!</p>
+<p>Siempre antes de solicitar un <code>Merge Request</code> debes comprobar que tienes actualizada la rama comparandola con la rama remota que queremos mergear, en nuestro ejemplo será <code>develop</code>. </p>
+</div>
+<p>Para actualizarla tu rama hay que seguir tres pasos muy sencillos:</p>
+<ul>
+<li>Cambias a la rama <code>develop</code> y descargarnos los cambios del repositorio remoto (git pull)</li>
+<li>Cambias a tu rama y ejecutar un merge desde <code>develop</code> hacia nuestra rama (git merge develop)</li>
+<li>Subes tus cambios a remoto (git add, git commit y git push) y ya puedes solcitar el <code>Merge Request</code></li>
+</ul>
 <h2 id="guia-rapida">Guía rápida</h2>
 <p>Los pasos básicos de utilización de git son sencillos.</p>
+<p><img alt="apendix_git-workflow_5" src="../../assets/images/apendix_git-workflow_5.png" /></p>
 <ul>
 <li>Primero nos bajamos el repositorio o lo creamos en local mediante los comandos
 <div class="highlight"><pre><span></span><code>git clone

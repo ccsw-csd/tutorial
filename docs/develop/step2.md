@@ -414,12 +414,12 @@ Como todavía no tenemos acceso a BD, hemos creado una variable tipo HashMap y u
 
 ![step2-java1](../assets/images/step2-java1.png)
 
-**PUT** nos sirve para insertar `Categorías` nuevas (si no tienen el id informado) o para actualizar `Categorías` (si tienen el id informado). Fíjate que los datos que se reciben están en el body.
+**PUT** nos sirve para insertar `Categorías` nuevas (si no tienen el id informado) o para actualizar `Categorías` (si tienen el id informado). Fíjate que los datos que se envían están en el body como formato JSON (parte izquierda de la imagen). Si no envías datos, te dará un error.
 
 ![step2-java2](../assets/images/step2-java2.png)
 ![step2-java3](../assets/images/step2-java3.png)
 
-**DELETE** nos sirve eliminar `Categorías`. Fíjate que el dato del ID está en el path.
+**DELETE** nos sirve eliminar `Categorías`. Fíjate que el dato del ID que se envía está en el path.
 
 ![step2-java4](../assets/images/step2-java4.png)
 
