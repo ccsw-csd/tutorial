@@ -57,6 +57,14 @@ Y ya podemos empezar a trabajar con Angular.
     [https://angular.io/cli#command-overview](https://angular.io/cli#command-overview)
 
 
+### Configurar el proyecto
+
+!!! tip "Strict mode off"
+    Este tutorial está creado y probado con una versión anterior al Angular actual, donde por defecto no estaba activado el modo estricto de TypeScript. Si sigues tal cual las instrucciones de las siguientes secciones te dará fallo por no estar codificado en modo estricto. Lo recomendable para poder hacer el tutorial sin problemas es desactivar este modo, siguiendo las instrucciones que se indican en [este enlace](https://stackoverflow.com/a/64344186/7475335).
+
+
+
+
 
 ## ** Creación de proyecto Springboot **
 
