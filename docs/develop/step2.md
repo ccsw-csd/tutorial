@@ -32,54 +32,8 @@ Ahora sí, vamos a programar!.
 
 En esta capa es donde se definen las operaciones que pueden ser consumidas por los clientes. Se caracterizan por estar anotadas con las anotaciones @Controller o @RestController y por las anotaciones @RequestMapping que nos permiten definir las rutas de acceso.
 
-### Breve detalle sobre REST
-
-Antes de empezar vamos a hablar de operaciones REST. Estas operaciones son el punto de entrada a nuestra aplicación y se pueden diferenciar dos claros elementos:
-
-* Ruta hacia el recurso, lo que viene siendo la URL.
-* Acción a realizar sobre el recurso, lo que viene siendo la operación HTTP o el verbo.
-
-
-#### Ruta del recurso
-
-La ruta del recurso nos indica entre otras cosas, el endpoint y su posible jerarquía sobre la que se va a realizar la operación. Debe tener una raíz de recurso y si se requiere navegar por el recursos, la jerarquía irá separada por barras. La URL nunca debería tener verbos o acciones solamente recursos, identificadores o atributos. 
-Por ejemplo en nuestro caso de `Categorías`, serían correctas las siguientes rutas:
-
-* :heavy_check_mark: /category
-* :heavy_check_mark: /category/3
-* :heavy_check_mark: /category/?name=Dados
-
-Sin embargo, no serían del todo correctas las rutas:
-
-* :x: /getCategory
-* :x: /findCategories
-* :x: /saveCategory
-* :x: /category/save
-
-A menudo, se integran datos identificadores o atributos de búsqueda dentro de la propia ruta. Podríamos definir la operación `category/3` para referirse a la Categoría con ID = 3, o `category/?name=Dados` para referirse a las categorías con nombre = Dados. A veces, estos datos también pueden ir como atributos en la URL o en el cuerpo de la petición, aunque se recomienda que siempre que sean identificadores vayan determinados en la propia URL.
-
-Si el dominio categoría tuviera hijos o relaciones con algún otro dominio se podría añadir esas jerarquía a la URL. Por ejemplo podríamos tener `category/3/child/2` para referirnos al hijo de ID = 2 que tiene la Categoría de ID = 3, y así sucesivamente.
-
-
-#### Acción sobre el recurso
-
-La acción sobre el recurso se determina mediante la operación o verbo HTTP que se utiliza en el endpoint. Los verbos más usados serían:
-
-- **GET**. Cuando se quiere recuperar un recursos.
-- **POST**. Cuando se quiere crear un recurso. Aunque a menudo se utiliza para realizar otras acciones de búsqueda o validación.
-- **PUT**. Cuando se quiere actualizar o modificar un recurso. Aunque a menudo se utiliza una sola operación para crear o actualizar. En ese caso se utilizaría solamente `POST`.
-- **DELETE**. Cuando se quiere eliminar un recurso.
-
-De esta forma tendríamos:
-
-* `GET /category/3`. Realizaría un acceso para recuperar la categoría 3.
-* `POST o PUT /category/3`. Realizaría un acceso para crear o modificar la categoría 3. Los datos a modificar deberían ir en el body.
-* `DELETE /category/3`. Realizaría un acceso para borrar la categoría 3.
-* `GET /category/?name=Dados`. Realizaría un acceso para recuperar las categorías que tengan nombre = Dados.
-
-
-!!! tip "Excepciones a la regla"
-    A veces hay que ejecutar una operación que no es 'estandar' en cuanto a verbos HTTP. Para ese caso, deberemos clarificar en la URL la acción que se debe realizar y si vamos a enviar datos debería ser de tipo `POST` mientras que si simplemente se requiere una contestación sin enviar datos será de tipo `GET`. Por ejemplo `POST /category/3/validate` realizaría un acceso para ejecutar una validación sobre los datos enviados en el body de la categoría 3.
+!!! tip "Recomendación: Breve detalle REST"
+    Antes de continuar te recomiendo encarecidamente que leas el [Anexo: Detalle REST](../appendix/rest.md) donde se explica brevemente como estructurar los servicios REST que veremos a continuación.
 
 
 
@@ -278,15 +232,10 @@ Prueba a jugar borrando categorías que no existen o modificando categorías que
 
 ### Aspectos importantes
 
-AQUIIIIIIIIIIIII
-
 Los aspectos importantes de la capa `Controller` son:
 
 * La clase debe estar anotada con `@Controller` o `@RestController`. Mejor usar la última anotación ya que estás diciendo que las operaciones son de tipo Rest y no hará falta configurar nada
 * La ruta general al controlador se define con el `@RequestMapping` global de la clase, aunque también se puede obviar esta anotación y añadir a cada una de las operaciones la ruta raíz.
-* Importante, a modo de consejo, anadir en la ruta la versión de la API (en nuestro ejemplo v1). Esto nos ayudará a ampliarla y cambiar la funcionalidad a futuro:
-    * Cualquier modificación del algoritmo que no afecte al contrato o cualquier operación nueva, puede ir en la misma versión
-    * Eliminaciones y modificaciones de contrato, deberían ir en un `Controller` nuevo anotado con otra versión (`category/v2/` por ejemplo)
 * Los métodos que queramos exponer como operaciones deben ir anotados también con `@RequestMapping` con la info:
     * `path` → Que nos permite definir un path para la operación, siempre sumándole el path de la clase (si es que tuviera)
     * `method` → Que nos permite definir el verbo de http que vamos a atender. Podemos tener el mismo path con diferente method, sin problema. Por lo general utilizaremos:
@@ -328,7 +277,7 @@ Pues vamos a arreglarlo. Vamos a crear un servicio y vamos a mover la lógica de
       * @param dto
       * @return
       */
-      CategoryDto save(CategoryDto dto);
+      void save(Long id, CategoryDto dto);
 
       /**
       * Método para borrar una Category
@@ -356,7 +305,7 @@ Pues vamos a arreglarlo. Vamos a crear un servicio y vamos a mover la lógica de
     */
     @Service
     public class CategoryServiceImpl implements CategoryService {
-      private long ID = 1;
+      private long SEQUENCE = 1;
 
       private Map<Long, CategoryDto> categories = new HashMap<Long, CategoryDto>();
 
@@ -374,19 +323,19 @@ Pues vamos a arreglarlo. Vamos a crear un servicio y vamos a mover la lógica de
       * @param dto
       * @return
       */
-      public CategoryDto save(CategoryDto dto) {
+      public void save(Long id, CategoryDto dto) {
 
-        CategoryDto category = this.categories.get(dto.getId());
+        CategoryDto category;
 
-        if (category == null) {
+        if (id == null) {
           category = new CategoryDto();
-          category.setId(this.ID++);
+          category.setId(this.SEQUENCE++);
           this.categories.put(category.getId(), category);
+        } else {
+          category = this.categories.get(id);
         }
 
         category.setName(dto.getName());
-
-        return category;
       }
 
       /**
@@ -417,7 +366,7 @@ Pues vamos a arreglarlo. Vamos a crear un servicio y vamos a mover la lógica de
     /**
     * @author ccsw
     */
-    @RequestMapping(value = "/category/v1")
+    @RequestMapping(value = "/category")
     @RestController
     public class CategoryController {
 
@@ -428,7 +377,7 @@ Pues vamos a arreglarlo. Vamos a crear un servicio y vamos a mover la lógica de
       * Método para recuperar todas las Category
       * @return
       */
-      @RequestMapping(path = "/", method = RequestMethod.GET)
+      @RequestMapping(path = "", method = RequestMethod.GET)
       public List<CategoryDto> findAll() {
 
         return this.categoryService.findAll();
@@ -439,10 +388,10 @@ Pues vamos a arreglarlo. Vamos a crear un servicio y vamos a mover la lógica de
       * @param dto
       * @return
       */
-      @RequestMapping(path = "/", method = RequestMethod.PUT)
-      public CategoryDto save(@RequestBody CategoryDto dto) {
+      @RequestMapping(path = { "", "/{id}" }, method = RequestMethod.PUT)
+      public void save(@PathVariable(name = "id", required = false) Long id, @RequestBody CategoryDto dto) {
 
-        return this.categoryService.save(dto);
+        this.categoryService.save(id, dto);
       }
 
       /**
@@ -478,14 +427,12 @@ Estos accesos se deben hacer desde la capa de acceso a datos, y en concreto para
 
 ### Creación de BBDD
 
-Para el tutorial no necesitamos configurar una BBDD externa ni complicarnos demasiado. Vamos a utilizar una librería muy útil llamada `H2` que nos permite levantar una BBDD en memoria persistiendo los datos en memoria o en disco y vamos a utilizar las librerías de `flyway` para crear nuestro esquema de BBDD en el arranque de la aplicación.
+Para el tutorial no necesitamos configurar una BBDD externa ni complicarnos demasiado. Vamos a utilizar una librería muy útil llamada `H2` que nos permite levantar una BBDD en memoria persistiendo los datos en memoria o en disco.
 
-Para esto, si te acuerdas de cuando creamos la aplicación, existen unos ficheros que se encuentran dentro de la carpeta `src/main/resources/db/migration/` y que nos permiten ir depositando scripts versionados para que se ejecuten en orden una vez se levante la aplicación. Vamos a crear los nuestros:
+Para esto, si te acuerdas de cuando creamos la aplicación, existen unos ficheros que se encuentran dentro de la carpeta `src/main/resources/` y que nos permiten ir depositando scripts versionados para que se ejecuten en orden una vez se levante la aplicación. Vamos a crear los nuestros:
 
-=== "V0001__Create_Schema.sql"
+=== "schema.sql"
     ``` SQL
-    CREATE SEQUENCE HIBERNATE_SEQUENCE START WITH 1000000;
-
     DROP TABLE IF EXISTS CATEGORY;
 
     CREATE TABLE CATEGORY (
@@ -493,14 +440,13 @@ Para esto, si te acuerdas de cuando creamos la aplicación, existen unos fichero
       name VARCHAR(250) NOT NULL
     );
     ```
-=== "V0002__Create_Data.sql"
+=== "data.sql"
     ``` SQL
     INSERT INTO CATEGORY(id, name) VALUES (1, 'Eurogames');
     INSERT INTO CATEGORY(id, name) VALUES (2, 'Ameritrash');
     INSERT INTO CATEGORY(id, name) VALUES (3, 'Familiar');
     ```
 
-La creación de la secuencia de hibernate es necesaria para que H2 pueda trabajar con ID auto incrementales. De lo contrario al arrancar la aplicación se quejará.
 
 ### Implementar Entity
 
@@ -658,17 +604,18 @@ El código debería quedar así:
       * {@inheritDoc}
       */
       @Override
-      public Category save(CategoryDto dto) {
+      public void save(Long id, CategoryDto dto) {
 
         Category categoria = null;
-        if (dto.getId() != null)
-          categoria = this.categoryRepository.findById(dto.getId()).orElse(null);
-        else
+
+        if (id == null)
           categoria = new Category();
+        else
+          categoria = this.categoryRepository.findById(id).orElse(null);
 
-        BeanUtils.copyProperties(dto, categoria);
+        categoria.setName(dto.getName());
 
-        return this.categoryRepository.save(categoria);
+        this.categoryRepository.save(categoria);
       }
 
       /**
@@ -708,7 +655,7 @@ El código debería quedar así:
       * @param dto
       * @return
       */
-      Category save(CategoryDto dto);
+      void save(Long id, CategoryDto dto);
 
       /**
       * Método para borrar una {@link com.capgemini.ccsw.tutorial.category.model.Category}
@@ -718,7 +665,7 @@ El código debería quedar así:
     }
     ```
 === "CategoryController.java"
-    ``` Java hl_lines="26 35 46"
+    ``` Java hl_lines="26 35"
     package com.capgemini.ccsw.tutorial.category;
 
     import java.util.List;
@@ -736,7 +683,7 @@ El código debería quedar así:
     /**
     * @author ccsw
     */
-    @RequestMapping(value = "/category/v1")
+    @RequestMapping(value = "/category")
     @RestController
     public class CategoryController {
 
@@ -750,7 +697,7 @@ El código debería quedar así:
       * Método para recuperar todas las {@link com.capgemini.ccsw.tutorial.category.model.Category}
       * @return
       */
-      @RequestMapping(path = "/", method = RequestMethod.GET)
+      @RequestMapping(path = "", method = RequestMethod.GET)
       public List<CategoryDto> findAll() {
 
         return this.beanMapper.mapList(this.categoryService.findAll(), CategoryDto.class);
@@ -761,10 +708,10 @@ El código debería quedar así:
       * @param dto
       * @return
       */
-      @RequestMapping(path = "/", method = RequestMethod.PUT)
-      public CategoryDto save(@RequestBody CategoryDto dto) {
+      @RequestMapping(path = { "", "/{id}" }, method = RequestMethod.PUT)
+      public void save(@PathVariable(name = "id", required = false) Long id, @RequestBody CategoryDto dto) {
 
-        return this.beanMapper.map(this.categoryService.save(dto), CategoryDto.class);
+        this.categoryService.save(id, dto);
       }
 
       /**
@@ -797,12 +744,269 @@ Los aspectos importantes de la capa `Repository` son:
 * Los `Repository` **JAMÁS** deben llamar a otros `Repository` ni `Service`.
 * Intenta que tus clases `Entity` sean lo más sencillas posible, sobre todo en cuanto a Primary Keys, se simplificará mucho el desarrollo.
 
+## Capa de Testing: TDD
+
+Por último y aunque no es lo último que se desarrolla sino todo lo contrario, debería ser lo primero en desarrollar, tenemos la batería de pruebas.
+Hemos hecho desarrollado este primer caso de uso con una ordenación peculiar con fines didácticos, pero en realidad deberíamos ir aplicando [TDD (Test Driven Development)](../appendix/tdd.md) para el desarrollo. Si quieres aprender las reglas básicas de como aplicar TDD al desarrollo diario, te recomiendo que leas el [Anexo. TDD](../appendix/tdd.md).
+
+En este caso, y sin que sirva de precedente, ya tenemos implementados los métodos de la aplicación, y ahora vamos a testearlos. Existen muchas formas de testing en función del componente o la capa que yo quiera testear. En realidad, a medida que vayas programando irás aprendiendo todas ellas, de momento me sirve con que hagas un test simple que pruebe las casuísticas de los métodos.
+
+Lo primero será conocer que queremos probar y para ello nos vamos a hacer una lista:
+
+* Pruebas de listado, debe recuperar los elementos de la tabla `Categoría`
+* Prueba de creación, debe crear una nueva `Categoría`
+* Prueba de modificación correcta, debe modificar una `Categoría` existente
+* Prueba de modificación incorrecta, debe dar error al modificar una `Categoría` que no existe
+* Prueba de borrado correcta, debe borrar una `Categoría` existente
+* Prueba de borrado incorrecta, debe dar error al borrar una `Categoría` que no existe
+
+Se podrían hacer muchos más tests, pero creo que con esos son suficientes para que entiendas como se comporta esta capa. Si te fijas, hay que probar tanto los resultados correctos como los resultados incorrectos. El usuario no siempre se va a comportar como nosotros pensamos.
+
+Pues vamos a ello.
+
+### Pruebas de listado
+
+Vamos a empezar haciendo una clase de test dentro de la carpeta `src/test/java`. No queremos que los test formen parte del código productivo de la aplicación, por eso utilizamos esa ruta que queda fuera del package general de la aplicación.
+
+Crearemos la clase `com.capgemini.ccsw.tutorial.category.CategoryTest`.
+
+=== "CategoryTest.java"
+    ``` Java
+    package com.capgemini.ccsw.tutorial.category;
+
+    import org.springframework.boot.test.context.SpringBootTest;
+    import org.springframework.transaction.annotation.Transactional;
+
+    /**
+    * @author ccsw
+    */
+    @SpringBootTest
+    @Transactional
+    public class CategoryTest {
+
+    }
+    ```
+
+Esta clase es sencilla y tan solo tiene dos anotaciones de Springboot:
+
+* `@SpringBootTest`. Esta anotación lo que hace es inicializar el contexto de Spring cada vez que se inician los test de jUnit. Aunque el contexto tarda unos segundos en arrancar, lo bueno que tiene es que solo se inicializa una vez y se lanzan todos los jUnits en batería con el mismo contexto.
+* `@Transactional`. Esta anotación le indica a Spring que los test van a ser transaccionales, y por tanto cuando termine la ejecución de cada uno de los test, automáticamente por la anotación de arriba, Spring hará un rollback y dejará el estado de la BBDD como estaba inicialmente.
+
+También nos faltará configurar la aplicación de test al igual que hicimos con la aplicación 'productiva'. Deberemos abrir el fichero `src/test/resources/application.properties` y añadir la configuración de la BBDD. Para este tutorial vamos a utilizar la misma BBDD que la aplicación productiva, pero de normal la aplicación se conectará a una BBDD, generalmente física, mientras que los test jUnit se conectarán a otra BBDD, generalmente en memoria.
+
+=== "application.properties"
+    ``` properties
+    #Database
+    spring.jpa.hibernate.ddl-auto=none
+    spring.datasource.driver-class-name=org.h2.Driver
+    spring.datasource.url=jdbc:h2:mem:test;mode=mysql
+    spring.datasource.username=sa
+    spring.datasource.password=sa
+    spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
+    ```
+
+Con todo esto ya podemos crear nuestro primer test. Iremos a la clase `CategoryTest` y añadiremos un método público. Los test siempre tienen que ser métodos públicos que devuelvan el tipo `void`.
+
+
+=== "CategoryTest.java"
+    ``` Java hl_lines="3 4 6 8 9 13 19 20 22-34"
+    package com.capgemini.ccsw.tutorial.category;
+
+    import static org.junit.jupiter.api.Assertions.assertEquals;
+    import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+    import java.util.List;
+
+    import org.junit.jupiter.api.Test;
+    import org.springframework.beans.factory.annotation.Autowired;
+    import org.springframework.boot.test.context.SpringBootTest;
+    import org.springframework.transaction.annotation.Transactional;
+
+    import com.capgemini.ccsw.tutorial.category.model.CategoryDto;
+
+    @SpringBootTest
+    @Transactional
+    public class CategoryTest {
+
+      @Autowired
+      private CategoryController categoryController;
+
+      @Test
+      public void findAllShouldReturnAllCategoriesInDB() {
+
+          assertNotNull(categoryController);
+
+          long categoriesSize = 3;
+
+          List<CategoryDto> categories = categoryController.findAll();
+
+          assertNotNull(categories);
+          assertEquals(categoriesSize, categories.size());
+
+      }
+
+    }
+    ```
+
+Es muy importante marcar cada método de prueba con la anotación `@Test`, en caso contrario no se ejecutará. Lo que se debe hacer en cada método que implementemos es probar **una y solo una** acción. En el ejemplo anterior, hemos probado que llamando al método findAll() comprobamos que realmente nos devuelve 3 resultados, que son los que hay en BBDD inicialmente.
+
+!!! tip "Muy importante: Nomenclatura de los tests"
+    La nomenclatura de los métodos de test debe sigue una estructura determinada. Hay muchas formas de nombrar a los métodos, pero nosotros solemos utilizar la estructura 'should', para indicar lo que va a hacer. En el ejemplo anterior el método 'findAll' debe devolver 'AllCategoriesInDB'. De esta forma sabemos cual es la intención del test, y si por cualquier motivo diera un fallo, sabemos que es lo que NO está funcionando de nuestra aplicación.
+
+Para comprobar que el test funciona, podemos darle botón derecho sobre la clase de `CategoryTest` y pulsar en `Run as` -> `JUnit Test`. Si todo funciona correctamente, deberá aparecer una pantalla de ejecución y todos nuestros tests (en este caso solo uno) corriendo correctamente (en verde).
+
+![step2-java6](../assets/images/step2-java6.png)
+
+
+### Pruebas de creación
+
+Vamos con los siguientes test, los que probarán una creación de una nueva `Categoría`. Añadimos el siguiente método a la clase de test:
+
+
+=== "CategoryTest.java"
+    ``` Java
+
+    @Test
+    public void saveWithoutIdShouldCreateNewCategory() {
+
+        assertNotNull(categoryController);
+
+        String newCategoryName = "Nueva Categoria";
+        long newCategoryId = 4;
+        long newCategoriesSize = newCategoryId;
+
+        CategoryDto dto = new CategoryDto();
+        dto.setName(newCategoryName);
+
+        categoryController.save(null, dto);
+
+        List<CategoryDto> categories = categoryController.findAll();
+        assertNotNull(categories);
+        assertEquals(newCategoriesSize, categories.size());
+
+        CategoryDto categorySearch = categories.stream().filter(item -> item.getId().equals(newCategoryId)).findFirst().orElse(null);
+        assertNotNull(categorySearch);
+        assertEquals(newCategoryName, categorySearch.getName());
+
+    }
+    ```
+
+En este caso, estamos construyendo un objeto `CategoryDto` para darle un nombre a la `Categoría` e invocamos al método `save` pasandole un ID a nulo.
+Seguidamente, recuperamos de nuevo la lista de categorías y en este caso debería tener 4 resultados. Hacemos un filtrado buscando la nueva `Categoría` que debería tener un ID = 4 y debería ser la que acabamos de crear. 
+
+Si ejecutamos, veremos que ambos test ahora aparecen en verde.
+
+
+### Pruebas de modificación
+
+Para este caso de prueba, vamos a realizar dos test, como hemos comentado anteriormente. Tenemos que probar que es lo que pasa cuando intentamos modificar un elemento que existe pero también debemos probar que es lo que pasa cuando intentamos modificar un elemento que **no** existe.
+
+Empezamos con el sencillo, un test que pruebe una modificación existente.
+
+
+=== "CategoryTest.java"
+    ``` Java
+
+    @Test
+    public void modifyWithExistsIdShouldModifyCategory() {
+
+        assertNotNull(categoryController);
+
+        String newCategoryName = "Nueva Categoria";
+        long categoryId = 3;
+        long categoriesSize = 3;
+
+        CategoryDto dto = new CategoryDto();
+        dto.setName(newCategoryName);
+
+        categoryController.save(categoryId, dto);
+
+        List<CategoryDto> categories = categoryController.findAll();
+        assertNotNull(categories);
+        assertEquals(categoriesSize, categories.size());
+
+        CategoryDto categorySearch = categories.stream().filter(item -> item.getId().equals(categoryId)).findFirst().orElse(null);
+        assertNotNull(categorySearch);
+        assertEquals(newCategoryName, categorySearch.getName());
+
+    }
+    ```
+
+La misma filosofía que en el test anterior pero esta vez modificamos la `Categoría` de ID = 3. Luego la filtramos y vemos que realmente se ha modificado. Además comprobamos que el listado de todas los registros sigue siengo 3 y no se ha creado un nuevo registro.
+
+En el siguiente test, probaremos un resultado erróneo. Es un pelín más compleja, pero no mucho.
+
+
+=== "CategoryTest.java"
+    ``` Java
+
+    @Test
+    public void modifyWithNotExistsIdShouldThrowException() {
+
+        assertNotNull(categoryController);
+
+        String newCategoryName = "Nueva Categoria";
+        long categoryId = 4;
+
+        CategoryDto dto = new CategoryDto();
+        dto.setName(newCategoryName);
+
+        assertThrows(NullPointerException.class, () -> categoryController.save(categoryId, dto));
+    }
+    ```
+
+Intentamos modificar el ID = 4, que no debería existir en BBDD y por tanto lo que se espera en el test es que lance un `NullPointerException` al llamar al método `save`.
+
+
+### Pruebas de borrado
+
+Ya por último implementamos las pruebas de borrado.
+
+=== "CategoryTest.java"
+    ``` Java
+
+    @Test
+    public void deleteWithExistsIdShouldDeleteCategory() {
+
+        assertNotNull(categoryController);
+
+        long newCategoriesSize = 2;
+        long deleteCategoryId = 3;
+
+        categoryController.delete(deleteCategoryId);
+
+        List<CategoryDto> categories = categoryController.findAll();
+
+        assertNotNull(categories);
+        assertEquals(newCategoriesSize, categories.size());
+
+    }
+
+    @Test
+    public void deleteWithNotExistsIdShouldThrowException() {
+
+        assertNotNull(categoryController);
+
+        long deleteCategoryId = 4;
+
+        assertThrows(Exception.class, () -> categoryController.delete(deleteCategoryId));
+
+    }
+    ```
+
+En el primer test, se comprueba que el listado tiene un tamaño de 2 (uno menos que el original) y en el segundo test se comprueba que con ID no válido, devuelve una `Exception`.
+
+
+Con esto tendríamos más o menos probados los casos básicos de nuestra aplicación y tendríamos una pequeña red de seguridad que nos ayudaría por si a futuro necesitamos hacer algún cambio o evolutivo.
+
+
 ## ¿Que hemos aprendido?
 
 Resumiendo un poco los pasos que hemos seguido:
 
-* Hay que definir y agrupar por ámbito funcional, hemos creado el package `com.capgemini.ccsw.tutorial.category` para aglutinar todas las clases
-* La implementación se debería separar por capas:
+* Hay que definir y agrupar por ámbito funcional, hemos creado el package `com.capgemini.ccsw.tutorial.category` para aglutinar todas las clases.
+* Lo primero que debemos empezar a construir **siempre** son los test, aunque en este tutorial lo hemos hecho al revés solo con fines didácticos. En los siguientes puntos lo haremos de forma correcta, y esto nos ayudará a pensar y diseñar que es lo que queremos implementar realmente.
+* La implementación de la aplicación se debería separar por capas:
     * `Controller` → Maneja las peticiones de entrada del cliente y realiza transformaciones. No ejecuta directamente lógica de negocio, para eso utiliza llamadas a la siguiente capa.
     * `Service` → Ejecuta la lógica de negocio en sus métodos o llamando a otros objetos de la misma capa. No ejecuta directamente accesos a datos, para eso utiliza la siguiente capa.
     * `Repository` → Realiza los accesos a datos de lectura y escritura. **NUNCA** debe llamar a otros objetos de la misma capa ni de capas anteriores.

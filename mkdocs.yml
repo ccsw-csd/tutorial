@@ -16,6 +16,8 @@ nav:
   - "Code: Crear Login (TBD)": develop/step7.md
   - "Code: Testing (TBD)": develop/step8.md
   - Ahora hazlo tu!: exercise.md
+  - Anexo. Detalle REST: appendix/rest.md
+  - Anexo. TDD: appendix/tdd.md
   - Anexo. Estilos (TBD): appendix/styles.md
   - Anexo. Fechas (TBD): appendix/dates.md
   - Anexo. Tutorial básico de Git: appendix/git.md

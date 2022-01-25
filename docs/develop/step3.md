@@ -1,23 +1,22 @@
 # Conectar Angular con las operaciones de Springboot
 
-Ya casi lo tenemos listo! Por un lado tenemos la aplicación Angular funcionando con datos mockeados en local, y por otro lado tenemos el servidor Springboot con las operaciones funcionando.
+Ya casi lo tenemos listo! Por un lado tenemos la aplicación Angular funcionando con datos mockeados en local, y por otro lado tenemos el servidor Springboot con las operaciones funcionando y además correctamente testeado.
 El siguiente paso, como es obvio será hacer que Angular llame directamente al servidor Springboot para leer y escribir datos y eliminar los datos mockeados en Angular.
 
 Manos a la obra!
 
 ## Llamada del listado
 
-La idea es que el método `getCategories()` de `category.service.ts` en lugar de devolver datos estáticos, realice una llamada al servidor a la ruta `http://localhost:8080/category/v1/`.
+La idea es que el método `getCategories()` de `category.service.ts` en lugar de devolver datos estáticos, realice una llamada al servidor a la ruta `http://localhost:8080/category`.
 
 Abrimos el fichero y susituimos la línea que antes devolvía los datos estáticos por esto:
 
 === "category.service.ts"
-    ``` Typescript hl_lines="2 4 5 13 17"
-    import { Injectable } from '@angular/core';
-
-    import { Category } from 'src/app/models/categories/Category';
-    import { Observable, of } from 'rxjs';
+    ``` Typescript hl_lines="1 12 16"
     import { HttpClient } from '@angular/common/http';
+    import { Injectable } from '@angular/core';
+    import { Observable, of } from 'rxjs';
+    import { Category } from './model/Category';
 
     @Injectable({
     providedIn: 'root'
@@ -29,7 +28,7 @@ Abrimos el fichero y susituimos la línea que antes devolvía los datos estátic
         ) { }
 
         getCategories(): Observable<Category[]> {
-            return this.http.get<Category[]>('http://localhost:8080/category/v1/');
+            return this.http.get<Category[]>('http://localhost:8080/category');
         }
 
         saveCategory(category: Category): Observable<Category> {
@@ -45,25 +44,48 @@ Abrimos el fichero y susituimos la línea que antes devolvía los datos estátic
 Como hemos añadido un componente nuevo `HttpClient` tenemos que añadir la dependencial al módulo padre.
 
 === "services.module.ts"
-``` Typescript hl_lines="3 9"
+``` Typescript hl_lines="12 26"
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatTableModule } from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { CategoryListComponent } from './category-list/category-list.component';
+import { CategoryEditComponent } from './category-edit/category-edit.component';
+import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-  declarations: [],
+  declarations: [CategoryListComponent, CategoryEditComponent],
   imports: [
     CommonModule,
-    HttpClientModule
+    MatTableModule,
+    MatIconModule, 
+    MatButtonModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
   ],
+  providers: [
+    {
+      provide: MAT_DIALOG_DATA,
+      useValue: {},
+    },
+  ]
 })
-export class ServicesModule { }
+export class CategoryModule { }
 ```
 
 Si ahora refrescas el navegador (recuerda tener arrancado también el servidor) y accedes a la pantalla de `Categorías` no saldrá ningún resultado, pero si miras la consola verás un mensaje similar a este:
 
 ```
-Access to XMLHttpRequest at 'http://localhost:8080/category/v1/' from origin 'http://localhost:4200' has been blocked by CORS policy: 
+Access to XMLHttpRequest at 'http://localhost:8080/category' from origin 'http://localhost:4200' has been blocked by CORS policy: 
     No 'Access-Control-Allow-Origin' header is present on the requested resource.
 ```
 
@@ -94,7 +116,7 @@ import com.devonfw.module.beanmapping.common.api.BeanMapper;
 /**
  * @author ccsw
  */
-@RequestMapping(value = "/category/v1")
+@RequestMapping(value = "/category")
 @RestController
 @CrossOrigin(origins = "*")
 public class CategoryController {
@@ -116,11 +138,11 @@ Ahora sí, si refrescamos ya debería aparecer el listado con los datos que vien
 Para la llamada de guardado haríamos lo mismo, pero invocando la operación de negocio `put`.
 
 === "category.service.ts"
-    ``` Typescript hl_lines="20"
-    import { Injectable } from '@angular/core';
-    import { Category } from 'src/app/models/categories/Category';
-    import { Observable, of } from 'rxjs';
+    ``` Typescript hl_lines="21-24"
     import { HttpClient } from '@angular/common/http';
+    import { Injectable } from '@angular/core';
+    import { Observable, of } from 'rxjs';
+    import { Category } from './model/Category';
 
     @Injectable({
     providedIn: 'root'
@@ -132,11 +154,15 @@ Para la llamada de guardado haríamos lo mismo, pero invocando la operación de 
         ) { }
 
         getCategories(): Observable<Category[]> {
-            return this.http.get<Category[]>('http://localhost:8080/category/v1/');
+            return this.http.get<Category[]>('http://localhost:8080/category');
         }
 
         saveCategory(category: Category): Observable<Category> {
-            return this.http.put<Category>('http://localhost:8080/category/v1/', category);
+
+            let url = 'http://localhost:8080/category';
+            if (category.id != null) url += '/'+category.id;
+
+            return this.http.put<Category>(url, category);
         }
 
         deleteCategory(idCategory : number): Observable<any> {
@@ -154,11 +180,11 @@ Ahora podemos probar a modificar o añadir una nueva categoría desde la pantall
 Y ya por último, la llamada de borrado, deberíamos cambiarla e invocar a la operación de negocio `delete`.
 
 === "category.service.ts"
-    ``` Typescript hl_lines="24"
-    import { Injectable } from '@angular/core';
-    import { Category } from 'src/app/models/categories/Category';
-    import { Observable } from 'rxjs';
+    ``` Typescript hl_lines="28"
     import { HttpClient } from '@angular/common/http';
+    import { Injectable } from '@angular/core';
+    import { Observable, of } from 'rxjs';
+    import { Category } from './model/Category';
 
     @Injectable({
     providedIn: 'root'
@@ -170,18 +196,24 @@ Y ya por último, la llamada de borrado, deberíamos cambiarla e invocar a la op
         ) { }
 
         getCategories(): Observable<Category[]> {
-            return this.http.get<Category[]>('http://localhost:8080/category/v1/');
+            return this.http.get<Category[]>('http://localhost:8080/category');
         }
 
         saveCategory(category: Category): Observable<Category> {
-            return this.http.put<Category>('http://localhost:8080/category/v1/', category);
+
+            let url = 'http://localhost:8080/category';
+            if (category.id != null) url += '/'+category.id;
+
+            return this.http.put<Category>(url, category);
         }
 
         deleteCategory(idCategory : number): Observable<any> {
-            return this.http.delete('http://localhost:8080/category/v1/'+idCategory);
+            return this.http.delete('http://localhost:8080/category/'+idCategory);
         }  
 
     } 
     ```
 
 Ahora podemos probar a modificar o añadir una nueva categoría desde la pantalla y debería aparecer los nuevos datos en el listado.
+
+Como ves, es bastante sencillo conectar server y client.
