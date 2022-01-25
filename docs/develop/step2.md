@@ -9,225 +9,16 @@ Durante todo el tutorial vamos a intentar separar completamente la implementaci�
 !!! success "Antes de empezar"
     Quiero hacer hincapié en Springboot tiene una documentación muy extensa y completa, así que te recomiendo que hagas uso de ella cuando tengas cualquier duda. Tanto la propia web de [Spring](https://spring.io/projects/spring-boot) como en el portal de tutoriales de [Baeldung](https://www.baeldung.com/spring-tutorial) puedes buscar casi cualquier ejemplo que necesites.
 
-Si has seguido el tutorial, en la creación del proyecto tenías la posibilidad de crear un proyecto Devonfw o crear un proyecto Springboot simple. Hay ciertas herramientas y configuraciones que provee Devonfw que son muy útiles a la hora de desarrollar aplicaciones y por tanto si hemos creado una aplicación Springboot deberíamos añadirlas.
+Si has seguido el tutorial, en la creación del proyecto tenías la posibilidad de crear un proyecto Springboot simple o descargarte una plantilla ya creada. 
 
-### Añadir utilidades Devonfw
+@TODO RELLENAR ESTO
 
-Lo primero que vamos a hacer es añadir las dependencias a librerías de devonfw. Abriremos el fichero `pom.xml` que nos ha generado el Spring Initilizr y añadiremos las siguientes líneas:
-
-=== "pom.xml"
-    ``` xml hl_lines="19 22 23 24 25 26 27 28 29 30 31 32 33 36 37 38 39 40 42 43 44 45 46 48 49 50 51 52 54 55 56 57 58 59"
-    <?xml version="1.0" encoding="UTF-8"?>
-    <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-      <modelVersion>4.0.0</modelVersion>
-      <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.3.0.RELEASE</version>
-        <relativePath/> <!-- lookup parent from repository -->
-      </parent>
-      <groupId>com.capgemini.coedevon</groupId>
-      <artifactId>tutorial</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
-      <name>tutorial</name>
-      <description>Demo project for Spring Boot</description>
-
-      <properties>
-        <java.version>1.8</java.version>
-        <devon4j.version>2020.04.001</devon4j.version>
-      </properties>
-
-      <dependencyManagement>
-        <dependencies>
-          <!-- BOM of devon4j -->
-          <dependency>
-            <groupId>com.devonfw.java.boms</groupId>
-            <artifactId>devon4j-bom</artifactId>
-            <version>${devon4j.version}</version>
-            <type>pom</type>
-            <scope>import</scope>
-          </dependency>
-        </dependencies>
-      </dependencyManagement>
-
-      <dependencies>
-        <!-- Bean-Mapping for conversion from TO to Entity and vice versa -->
-        <dependency>
-          <groupId>com.devonfw.java.modules</groupId>
-          <artifactId>devon4j-beanmapping-orika</artifactId>
-        </dependency>
-      
-        <!-- Rest Mappers -->
-        <dependency>
-          <groupId>com.devonfw.java.modules</groupId>
-          <artifactId>devon4j-rest</artifactId>
-        </dependency>
-        
-        <!-- JPA -->
-        <dependency>
-          <groupId>com.devonfw.java.starters</groupId>
-          <artifactId>devon4j-starter-spring-data-jpa</artifactId>
-        </dependency>
-
-        <!--
-        <dependency>
-          <groupId>org.springframework.boot</groupId>
-          <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
-        -->
-
-        <dependency>
-          <groupId>org.springframework.boot</groupId>
-          <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-
-        <dependency>
-          <groupId>org.flywaydb</groupId>
-          <artifactId>flyway-core</artifactId>
-        </dependency>
-
-        <dependency>
-          <groupId>com.h2database</groupId>
-          <artifactId>h2</artifactId>
-          <scope>runtime</scope>
-        </dependency>
-
-        <dependency>
-          <groupId>org.springframework.boot</groupId>
-          <artifactId>spring-boot-starter-test</artifactId>
-          <scope>test</scope>
-          <exclusions>
-            <exclusion>
-              <groupId>org.junit.vintage</groupId>
-              <artifactId>junit-vintage-engine</artifactId>
-            </exclusion>
-          </exclusions>
-        </dependency>
-      </dependencies>
-
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-maven-plugin</artifactId>
-          </plugin>
-        </plugins>
-      </build>
-
-    </project>
-    ```
-
-Ojo, que hemos sustituido la dependencia de Spring-JPA por la dependencia de Devonfw-JPA ya que nos permite utilizar más funcionalidades extendidas sobre repositorios JPA. Además de esa dependencia, hemos añadido una utilidad para hacer mapeos entre objetos y para configurar los servicios Rest.
-
-### Configurar utilidades Devonfw
-
-El siguiente punto es crear las clases de configuración para las librerías que hemos añadido. Para ello vamos a crear un package de configuración general de la aplicación `com.capgemini.coedevon.tutorial.config` donde crearemos tres clases (dos de ellas dentro del subpaquete `mapper`).
-
-=== "BeansOrikaConfig.java"
-    ``` Java
-    package com.capgemini.coedevon.tutorial.config;
-
-    import org.springframework.context.annotation.Bean;
-    import org.springframework.context.annotation.Configuration;
-
-    import com.capgemini.coedevon.tutorial.config.mapper.BeanMapper;
-    import com.capgemini.coedevon.tutorial.config.mapper.BeanMapperImpl;
-    import com.devonfw.module.beanmapping.common.base.BaseOrikaConfig;
-    import com.devonfw.module.json.common.base.ObjectMapperFactory;
-    import com.fasterxml.jackson.databind.Module;
-
-    import ma.glasnost.orika.MapperFactory;
-
-    /**
-    * Java bean configuration for Orika. The method {@link #configureCustomMapping(MapperFactory)} from
-    * {@link BaseOrikaConfig} can be overridden as per requirements.
-    */
-    @Configuration
-    public class BeansOrikaConfig extends BaseOrikaConfig {
-
-      /**
-      * @return the {@link BeanMapper} implementation.
-      */
-      @Override
-      @Bean
-      public BeanMapper getBeanMapper() {
-
-        return new BeanMapperImpl();
-      }
-
-      @Bean
-      public Module configureObjectMapper() {
-
-        ObjectMapperFactory objectMapper = new ObjectMapperFactory();
-        return objectMapper.getExtensionModule();
-
-      }
-
-    }
-    ```
-=== "mapper/BeanMapper.java"
-    ``` Java
-    package com.capgemini.coedevon.tutorial.config.mapper;
-
-    import org.springframework.data.domain.Page;
-
-    /**
-    * @author coedevon
-    */
-    public interface BeanMapper extends com.devonfw.module.beanmapping.common.api.BeanMapper {
-
-      /**
-      * Mapea el genérico de un Page en otro tipo de genérico
-      * @param <T>
-      * @param source
-      * @param targetClass
-      * @return
-      */
-      <T> Page<T> mapPage(Page source, Class<T> targetClass);
-
-    }
-    ```
-=== "mapper/BeanMapperImpl.java"
-    ``` Java
-    package com.capgemini.coedevon.tutorial.config.mapper;
-
-    import java.util.List;
-
-    import org.springframework.data.domain.Page;
-    import org.springframework.data.domain.PageImpl;
-
-    import com.devonfw.module.beanmapping.common.impl.orika.BeanMapperImplOrika;
-
-    /**
-    * @author coedevon
-    */
-    public class BeanMapperImpl extends BeanMapperImplOrika implements BeanMapper {
-
-      /**
-      * {@inheritDoc}
-      */
-      public <T> Page<T> mapPage(Page source, Class<T> targetClass) {
-
-        if (source == null) {
-          return null;
-        }
-
-        List list = mapList(source.getContent(), targetClass);
-
-        return new PageImpl<>(list, source.getPageable(), source.getTotalElements());
-      }
-
-    }
-    ```
-
-Listo, ya podemos empezar a desarrollar nuestros servicios.
 
 ## Estructurar el código
 
 Vamos a hacer un breve refresco de la estructura del código que ya se ha visto en puntos anteriores.
 
-Las clases deben estar agrupadas por ámbito funcional, en nuestro caso como vamos a hacer la funcionalidad de `Categorías` pues debería estar todo dentro de un package del tipo `com.capgemini.coedevon.tutorial.category`.
+Las clases deben estar agrupadas por ámbito funcional, en nuestro caso como vamos a hacer la funcionalidad de `Categorías` pues debería estar todo dentro de un package del tipo `com.capgemini.ccsw.tutorial.category`.
 
 Además, deberíamos aplicar la separación por capas como ya se vió en el esquema:
 
@@ -241,13 +32,64 @@ Ahora sí, vamos a programar!.
 
 En esta capa es donde se definen las operaciones que pueden ser consumidas por los clientes. Se caracterizan por estar anotadas con las anotaciones @Controller o @RestController y por las anotaciones @RequestMapping que nos permiten definir las rutas de acceso.
 
+### Breve detalle sobre REST
+
+Antes de empezar vamos a hablar de operaciones REST. Estas operaciones son el punto de entrada a nuestra aplicación y se pueden diferenciar dos claros elementos:
+
+* Ruta hacia el recurso, lo que viene siendo la URL.
+* Acción a realizar sobre el recurso, lo que viene siendo la operación HTTP o el verbo.
+
+
+#### Ruta del recurso
+
+La ruta del recurso nos indica entre otras cosas, el endpoint y su posible jerarquía sobre la que se va a realizar la operación. Debe tener una raíz de recurso y si se requiere navegar por el recursos, la jerarquía irá separada por barras. La URL nunca debería tener verbos o acciones solamente recursos, identificadores o atributos. 
+Por ejemplo en nuestro caso de `Categorías`, serían correctas las siguientes rutas:
+
+* :heavy_check_mark: /category
+* :heavy_check_mark: /category/3
+* :heavy_check_mark: /category/?name=Dados
+
+Sin embargo, no serían del todo correctas las rutas:
+
+* :x: /getCategory
+* :x: /findCategories
+* :x: /saveCategory
+* :x: /category/save
+
+A menudo, se integran datos identificadores o atributos de búsqueda dentro de la propia ruta. Podríamos definir la operación `category/3` para referirse a la Categoría con ID = 3, o `category/?name=Dados` para referirse a las categorías con nombre = Dados. A veces, estos datos también pueden ir como atributos en la URL o en el cuerpo de la petición, aunque se recomienda que siempre que sean identificadores vayan determinados en la propia URL.
+
+Si el dominio categoría tuviera hijos o relaciones con algún otro dominio se podría añadir esas jerarquía a la URL. Por ejemplo podríamos tener `category/3/child/2` para referirnos al hijo de ID = 2 que tiene la Categoría de ID = 3, y así sucesivamente.
+
+
+#### Acción sobre el recurso
+
+La acción sobre el recurso se determina mediante la operación o verbo HTTP que se utiliza en el endpoint. Los verbos más usados serían:
+
+- **GET**. Cuando se quiere recuperar un recursos.
+- **POST**. Cuando se quiere crear un recurso. Aunque a menudo se utiliza para realizar otras acciones de búsqueda o validación.
+- **PUT**. Cuando se quiere actualizar o modificar un recurso. Aunque a menudo se utiliza una sola operación para crear o actualizar. En ese caso se utilizaría solamente `POST`.
+- **DELETE**. Cuando se quiere eliminar un recurso.
+
+De esta forma tendríamos:
+
+* `GET /category/3`. Realizaría un acceso para recuperar la categoría 3.
+* `POST o PUT /category/3`. Realizaría un acceso para crear o modificar la categoría 3. Los datos a modificar deberían ir en el body.
+* `DELETE /category/3`. Realizaría un acceso para borrar la categoría 3.
+* `GET /category/?name=Dados`. Realizaría un acceso para recuperar las categorías que tengan nombre = Dados.
+
+
+!!! tip "Excepciones a la regla"
+    A veces hay que ejecutar una operación que no es 'estandar' en cuanto a verbos HTTP. Para ese caso, deberemos clarificar en la URL la acción que se debe realizar y si vamos a enviar datos debería ser de tipo `POST` mientras que si simplemente se requiere una contestación sin enviar datos será de tipo `GET`. Por ejemplo `POST /category/3/validate` realizaría un acceso para ejecutar una validación sobre los datos enviados en el body de la categoría 3.
+
+
+
 ### Controller de ejemplo
 
-Vamos a crear una clase `CategoryController.java` dentro del package `com.capgemini.coedevon.tutorial.category` para definir las rutas de las operaciones.
+Vamos a crear una clase `CategoryController.java` dentro del package `com.capgemini.ccsw.tutorial.category` para definir las rutas de las operaciones.
 
 === "CategoryController.java"
     ``` Java
-    package com.capgemini.coedevon.tutorial.category;
+    package com.capgemini.ccsw.tutorial.category;
 
     import java.util.List;
 
@@ -257,9 +99,9 @@ Vamos a crear una clase `CategoryController.java` dentro del package `com.capgem
     import org.springframework.web.bind.annotation.RestController;
 
     /**
-    * @author coedevon
+    * @author ccsw
     */
-    @RequestMapping(value = "/category/v1")
+    @RequestMapping(value = "/category")
     @RestController
     public class CategoryController {
 
@@ -267,7 +109,7 @@ Vamos a crear una clase `CategoryController.java` dentro del package `com.capgem
       * Método para recuperar todas las Category
       * @return
       */
-      @RequestMapping(path = "/", method = RequestMethod.GET)
+      @RequestMapping(path = "", method = RequestMethod.GET)
       public String prueba() {
 
         return "Probando el Controller";
@@ -276,22 +118,24 @@ Vamos a crear una clase `CategoryController.java` dentro del package `com.capgem
     }
     ```
 
-Si abrimos el [Postman](https://www.postman.com/) y creamos una petición GET a la url http://localhost:8080/category/v1/ nos responderá con el mensaje que hemos puesto.
+Ahora si arrancamos la aplicación server, abrimos el [Postman](https://www.postman.com/) y creamos una petición GET a la url http://localhost:8080/category nos responderá con el mensaje que hemos programado.
+
+
 
 ### Implementar operaciones
 
-Ahora que ya tenemos un controlador y una operacion de negocio ficticia, vamos a borrarla y añadir las operaciones reales que consumirá nuestra pantalla. Deberemos añadir una operación para listar, una para actualizar, una para guardar y una para borrar. Aunque para hacerlo más cómodo, utilizaremos la misma operación para guardar y para actualizar. Además, no estar trabajando con tipos simples, vamos a utilizar un objeto para recibir información y para enviar información.
+Ahora que ya tenemos un controlador y una operacion de negocio ficticia, vamos a borrarla y añadir las operaciones reales que consumirá nuestra pantalla. Deberemos añadir una operación para listar, una para actualizar, una para guardar y una para borrar. Aunque para hacerlo más cómodo, utilizaremos la misma operación para guardar y para actualizar. Además, no vamos a trabajar directamente con datos simples, sino que usaremos objetos para recibir información y para enviar información.
 
-Estos objetos típicamente se denominan DTO (Data Transfer Object) y nos sirven justamente para encapsular información que queremos transportar. En realidad no son más que clases pojo sencilla con propiedades y getters y setters. 
+Estos objetos típicamente se denominan DTO (Data Transfer Object) y nos sirven justamente para encapsular información que queremos transportar. En realidad no son más que clases *pojo* sencillas con propiedades, getters y setters. 
 
-Para nuestro ejemplo crearemos una clase `CategoryDto` dentro del package `com.capgemini.coedevon.tutorial.category.model` con el siguiente contenido:
+Para nuestro ejemplo crearemos una clase `CategoryDto` dentro del package `com.capgemini.ccsw.tutorial.category.model` con el siguiente contenido:
 
 === "CategoryDto.java"
     ``` Java
-    package com.capgemini.coedevon.tutorial.category.model;
+    package com.capgemini.ccsw.tutorial.category.model;
 
     /**
-    * @author coedevon
+    * @author ccsw
     */
     public class CategoryDto {
       private Long id;
@@ -337,7 +181,7 @@ A continuación utilizaremos esta clase en nuestro Controller para implementar l
 
 === "CategoryController.java"
   ``` Java
-  package com.capgemini.coedevon.tutorial.category;
+  package com.capgemini.ccsw.tutorial.category;
 
   import java.util.ArrayList;
   import java.util.HashMap;
@@ -350,12 +194,12 @@ A continuación utilizaremos esta clase en nuestro Controller para implementar l
   import org.springframework.web.bind.annotation.RequestMethod;
   import org.springframework.web.bind.annotation.RestController;
 
-  import com.capgemini.coedevon.tutorial.category.model.CategoryDto;
+  import com.capgemini.ccsw.tutorial.category.model.CategoryDto;
 
   /**
-  * @author coedevon
+  * @author ccsw
   */
-  @RequestMapping(value = "/category/v1")
+  @RequestMapping(value = "/category")
   @RestController
   public class CategoryController {
 
@@ -366,31 +210,33 @@ A continuación utilizaremos esta clase en nuestro Controller para implementar l
     * Método para recuperar todas las Category
     * @return
     */
-    @RequestMapping(path = "/", method = RequestMethod.GET)
+    @RequestMapping(path = "", method = RequestMethod.GET)
     public List<CategoryDto> findAll() {
 
-      return new ArrayList(this.categories.values());
+        return new ArrayList(this.categories.values());
     }
 
     /**
     * Método para crear o actualizar una Category
+    * @param id
     * @param dto
     * @return
     */
-    @RequestMapping(path = "/", method = RequestMethod.PUT)
-    public CategoryDto save(@RequestBody CategoryDto dto) {
+    @RequestMapping(path = { "", "/{id}" }, method = RequestMethod.PUT)
+    public void save(@PathVariable(name = "id", required = false) Long id, @RequestBody CategoryDto dto) {
 
-      CategoryDto category = this.categories.get(dto.getId());
+        CategoryDto category;
 
-      if (category == null) {
-        category = new CategoryDto();
-        category.setId(this.SEQUENCE++);
-        this.categories.put(category.getId(), category);
-      }
+        if (id == null) {
+          category = new CategoryDto();
+          category.setId(this.SEQUENCE++);
+          this.categories.put(category.getId(), category);
+        } 
+        else {
+          category = this.categories.get(id);
+        }
 
-      category.setName(dto.getName());
-
-      return category;
+        category.setName(dto.getName());
     }
 
     /**
@@ -400,30 +246,39 @@ A continuación utilizaremos esta clase en nuestro Controller para implementar l
     @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
     public void delete(@PathVariable("id") Long id) {
 
-      this.categories.remove(id);
+        this.categories.remove(id);
     }
   }
   ```
 
 Como todavía no tenemos acceso a BD, hemos creado una variable tipo HashMap y una variable Long, que simularán una BD y una secuencia. También hemos implementado tres operaciones GET, PUT y DELETE que realizan las acciones necesarias por nuestra pantalla. Ahora podríamos probarlo desde el Postman con cuatro ejemplo sencillos.
 
+Fíjate que el método `save` tiene dos rutas. La ruta normal `category/` y la ruta informada `category/3`. Esto es porque hemos juntado la acción create y update en un mismo método para facilitar el desarrollo. Es totalmente válido y funcional.
+
+
 !!! tip "Atención"
     Los datos que se reciben pueden venir informados como un parámetro en la URL Get, como una variable en el propio path o dentro del body de la petición. Cada uno de ellos se recupera con una anotación especial: `@RequestParam`, `@PathVariable` y `@RequestBody` respectivamente.
 
-**GET** nos devuelve un listado de `Categorías`
+**GET /category** nos devuelve un listado de `Categorías`
 
 ![step2-java1](../assets/images/step2-java1.png)
 
-**PUT** nos sirve para insertar `Categorías` nuevas (si no tienen el id informado) o para actualizar `Categorías` (si tienen el id informado). Fíjate que los datos que se envían están en el body como formato JSON (parte izquierda de la imagen). Si no envías datos, te dará un error.
+**PUT /category** nos sirve para insertar `Categorías` nuevas (si no tienen el id informado) o para actualizar `Categorías` (si tienen el id informado). Fíjate que los datos que se envían están en el body como formato JSON (parte izquierda de la imagen). Si no envías datos, te dará un error.
 
 ![step2-java2](../assets/images/step2-java2.png)
 ![step2-java3](../assets/images/step2-java3.png)
 
-**DELETE** nos sirve eliminar `Categorías`. Fíjate que el dato del ID que se envía está en el path.
+**DELETE /category** nos sirve eliminar `Categorías`. Fíjate que el dato del ID que se envía está en el path.
 
 ![step2-java4](../assets/images/step2-java4.png)
 
+
+Prueba a jugar borrando categorías que no existen o modificando categorías que no existen. Tal y como está programado, el borrado no dará error, pero la modificación debería dar un NullPointerException al no existir el dato a modificar.
+
+
 ### Aspectos importantes
+
+AQUIIIIIIIIIIIII
 
 Los aspectos importantes de la capa `Controller` son:
 
@@ -450,14 +305,14 @@ Pues vamos a arreglarlo. Vamos a crear un servicio y vamos a mover la lógica de
 
 === "CategoryService.java"
     ``` Java
-    package com.capgemini.coedevon.tutorial.category;
+    package com.capgemini.ccsw.tutorial.category;
 
     import java.util.List;
 
-    import com.capgemini.coedevon.tutorial.category.model.CategoryDto;
+    import com.capgemini.ccsw.tutorial.category.model.CategoryDto;
 
     /**
-    * @author coedevon
+    * @author ccsw
     *
     */
     public interface CategoryService {
@@ -484,7 +339,7 @@ Pues vamos a arreglarlo. Vamos a crear un servicio y vamos a mover la lógica de
     ```
 === "CategoryServiceImpl.java"
     ``` Java
-    package com.capgemini.coedevon.tutorial.category;
+    package com.capgemini.ccsw.tutorial.category;
 
     import java.util.ArrayList;
     import java.util.HashMap;
@@ -493,10 +348,10 @@ Pues vamos a arreglarlo. Vamos a crear un servicio y vamos a mover la lógica de
 
     import org.springframework.stereotype.Service;
 
-    import com.capgemini.coedevon.tutorial.category.model.CategoryDto;
+    import com.capgemini.ccsw.tutorial.category.model.CategoryDto;
 
     /**
-    * @author coedevon
+    * @author ccsw
     *
     */
     @Service
@@ -546,7 +401,7 @@ Pues vamos a arreglarlo. Vamos a crear un servicio y vamos a mover la lógica de
     ```
 === "CategoryController.java"
     ``` Java
-    package com.capgemini.coedevon.tutorial.category;
+    package com.capgemini.ccsw.tutorial.category;
 
     import java.util.List;
 
@@ -557,10 +412,10 @@ Pues vamos a arreglarlo. Vamos a crear un servicio y vamos a mover la lógica de
     import org.springframework.web.bind.annotation.RequestMethod;
     import org.springframework.web.bind.annotation.RestController;
 
-    import com.capgemini.coedevon.tutorial.category.model.CategoryDto;
+    import com.capgemini.ccsw.tutorial.category.model.CategoryDto;
 
     /**
-    * @author coedevon
+    * @author ccsw
     */
     @RequestMapping(value = "/category/v1")
     @RestController
@@ -653,7 +508,7 @@ Una vez creada la BBDD el siguiente paso es crear la entidad con la que vamos a 
 
 === "Category.java"
     ``` Java
-    package com.capgemini.coedevon.tutorial.category.model;
+    package com.capgemini.ccsw.tutorial.category.model;
 
     import javax.persistence.Column;
     import javax.persistence.Entity;
@@ -663,7 +518,7 @@ Una vez creada la BBDD el siguiente paso es crear la entidad con la que vamos a 
     import javax.persistence.Table;
 
     /**
-    * @author coedevon
+    * @author ccsw
     */
     @Entity
     @Table(name = "Category")
@@ -736,14 +591,14 @@ Como ya se dijo en puntos anteriores, el acceso a datos se debe hacer siempre a 
 
 === "CategoryRepository.java"
     ``` Java
-    package com.capgemini.coedevon.tutorial.category;
+    package com.capgemini.ccsw.tutorial.category;
 
     import org.springframework.data.repository.CrudRepository;
 
-    import com.capgemini.coedevon.tutorial.category.model.Category;
+    import com.capgemini.ccsw.tutorial.category.model.Category;
 
     /**
-    * @author coedevon
+    * @author ccsw
     */
     public interface CategoryRepository extends CrudRepository<Category, Long> {
 
@@ -769,7 +624,7 @@ El código debería quedar así:
 
 === "CategoryServiceImpl.java"
     ``` Java
-    package com.capgemini.coedevon.tutorial.category;
+    package com.capgemini.ccsw.tutorial.category;
 
     import java.util.List;
 
@@ -777,11 +632,11 @@ El código debería quedar así:
     import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.stereotype.Service;
 
-    import com.capgemini.coedevon.tutorial.category.model.Category;
-    import com.capgemini.coedevon.tutorial.category.model.CategoryDto;
+    import com.capgemini.ccsw.tutorial.category.model.Category;
+    import com.capgemini.ccsw.tutorial.category.model.CategoryDto;
 
     /**
-    * @author coedevon
+    * @author ccsw
     *
     */
     @Service
@@ -829,34 +684,34 @@ El código debería quedar así:
     ```
 === "CategoryService.java"
     ``` Java
-    package com.capgemini.coedevon.tutorial.category;
+    package com.capgemini.ccsw.tutorial.category;
 
     import java.util.List;
 
-    import com.capgemini.coedevon.tutorial.category.model.Category;
-    import com.capgemini.coedevon.tutorial.category.model.CategoryDto;
+    import com.capgemini.ccsw.tutorial.category.model.Category;
+    import com.capgemini.ccsw.tutorial.category.model.CategoryDto;
 
     /**
-    * @author coedevon
+    * @author ccsw
     *
     */
     public interface CategoryService {
 
       /**
-      * Método para recuperar todas las {@link com.capgemini.coedevon.tutorial.category.model.Category}
+      * Método para recuperar todas las {@link com.capgemini.ccsw.tutorial.category.model.Category}
       * @return
       */
       List<Category> findAll();
 
       /**
-      * Método para crear o actualizar una {@link com.capgemini.coedevon.tutorial.category.model.Category}
+      * Método para crear o actualizar una {@link com.capgemini.ccsw.tutorial.category.model.Category}
       * @param dto
       * @return
       */
       Category save(CategoryDto dto);
 
       /**
-      * Método para borrar una {@link com.capgemini.coedevon.tutorial.category.model.Category}
+      * Método para borrar una {@link com.capgemini.ccsw.tutorial.category.model.Category}
       * @param id
       */
       void delete(Long id);
@@ -864,7 +719,7 @@ El código debería quedar así:
     ```
 === "CategoryController.java"
     ``` Java hl_lines="26 35 46"
-    package com.capgemini.coedevon.tutorial.category;
+    package com.capgemini.ccsw.tutorial.category;
 
     import java.util.List;
 
@@ -875,11 +730,11 @@ El código debería quedar así:
     import org.springframework.web.bind.annotation.RequestMethod;
     import org.springframework.web.bind.annotation.RestController;
 
-    import com.capgemini.coedevon.tutorial.category.model.CategoryDto;
+    import com.capgemini.ccsw.tutorial.category.model.CategoryDto;
     import com.devonfw.module.beanmapping.common.api.BeanMapper;
 
     /**
-    * @author coedevon
+    * @author ccsw
     */
     @RequestMapping(value = "/category/v1")
     @RestController
@@ -892,7 +747,7 @@ El código debería quedar así:
       BeanMapper beanMapper;
 
       /**
-      * Método para recuperar todas las {@link com.capgemini.coedevon.tutorial.category.model.Category}
+      * Método para recuperar todas las {@link com.capgemini.ccsw.tutorial.category.model.Category}
       * @return
       */
       @RequestMapping(path = "/", method = RequestMethod.GET)
@@ -902,7 +757,7 @@ El código debería quedar así:
       }
 
       /**
-      * Método para crear o actualizar una {@link com.capgemini.coedevon.tutorial.category.model.Category}
+      * Método para crear o actualizar una {@link com.capgemini.ccsw.tutorial.category.model.Category}
       * @param dto
       * @return
       */
@@ -913,7 +768,7 @@ El código debería quedar así:
       }
 
       /**
-      * Método para borrar una {@link com.capgemini.coedevon.tutorial.category.model.Category}
+      * Método para borrar una {@link com.capgemini.ccsw.tutorial.category.model.Category}
       * @param id
       */
       @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
@@ -946,7 +801,7 @@ Los aspectos importantes de la capa `Repository` son:
 
 Resumiendo un poco los pasos que hemos seguido:
 
-* Hay que definir y agrupar por ámbito funcional, hemos creado el package `com.capgemini.coedevon.tutorial.category` para aglutinar todas las clases
+* Hay que definir y agrupar por ámbito funcional, hemos creado el package `com.capgemini.ccsw.tutorial.category` para aglutinar todas las clases
 * La implementación se debería separar por capas:
     * `Controller` → Maneja las peticiones de entrada del cliente y realiza transformaciones. No ejecuta directamente lógica de negocio, para eso utiliza llamadas a la siguiente capa.
     * `Service` → Ejecuta la lógica de negocio en sus métodos o llamando a otros objetos de la misma capa. No ejecuta directamente accesos a datos, para eso utiliza la siguiente capa.

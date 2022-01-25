@@ -45,18 +45,21 @@ Una sugerencia de como hacerlo es la siguiente:
 
 ```
 - src\app
-	- shared          	/* Componentes y utilidades comunes */ 
-	- core            	/* Componentes core como autenticación y layout */ 
+	- core            	/* Componentes y utilidades comunes */ 
 		- header	  	/* Estructura del header */ 
 		- footer	  	/* Estructura del footer */ 
-	- services		  	/* Servicios de acceso a operaciones Rest */ 
-	- models		  	/* Modelos de datos para componentes y servicios */ 
+  - domain1       /* Módulo con los componentes del dominio1 */
+	  - services       	/* Servicios con operaciones del dominio1 */ 
+	  - models        	/* Modelos de datos del dominio1 */ 
+	  - component1     	/* Componente1 del dominio1 */ 
+	  - componentX     	/* ComponenteX del dominio1 */ 
+  - domainX       /* Así para el resto de dominios de la aplicación */
 ```
 
 Recordar, que esto es una sugerencia para una estructura de carpetas y componentes. No existe un estandar.
 
 !!! tip "ATENCIÓN: Componentes genéricos"
-    Debemos tener en cuenta que a la hora de programar un componente `shared`, lo ideal es pensar que sea un componente plug & play, es decir que si lo copias y lo llevas a otro proyecto funcione sin la necesidad de adaptarlo.
+    Debemos tener en cuenta que a la hora de programar un componente `core`, lo ideal es pensar que sea un componente plug & play, es decir que si lo copias y lo llevas a otro proyecto funcione sin la necesidad de adaptarlo.
 
 ### Buenas prácticas y Clean Code
 

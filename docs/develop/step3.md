@@ -76,7 +76,7 @@ Para solucionarlo hay varias formas, pero la más cómoda en desarrollo es habil
 
 === "CategoryController.java"
 ``` Java hl_lines="6 21"
-package com.capgemini.coedevon.tutorial.category;
+package com.capgemini.ccsw.tutorial.category;
 
 import java.util.List;
 
@@ -88,11 +88,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.capgemini.coedevon.tutorial.category.model.CategoryDto;
+import com.capgemini.ccsw.tutorial.category.model.CategoryDto;
 import com.devonfw.module.beanmapping.common.api.BeanMapper;
 
 /**
- * @author coedevon
+ * @author ccsw
  */
 @RequestMapping(value = "/category/v1")
 @RestController

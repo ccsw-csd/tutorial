@@ -58,28 +58,20 @@ Pues vamos a ello, crearemos esa estructura común para toda la aplicación. Est
 Pero antes de todo, vamos a crear los módulos generales de la aplicación, así que ejecutamos en consola el comando que nos permite crear un módulo nuevo:
 
 ```
-ng generate module shared
 ng generate module core
-ng generate module models
-ng generate module services
-ng generate module views
 ```
 
 Y añadimos esos módulos al módulo padre de la aplicación:
 
 === "app.module.ts"
-``` Typescript hl_lines="7 8 9 10 11 20 21 22 23 24"
+``` Typescript hl_lines="7 16"
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
-import { ModelsModule } from './models/models.module';
-import { ServicesModule } from './services/services.module';
-import { ViewsModule } from './views/views.module';
 
 @NgModule({
   declarations: [
@@ -88,11 +80,7 @@ import { ViewsModule } from './views/views.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    SharedModule,
     CoreModule,
-    ModelsModule,
-    ServicesModule,
-    ViewsModule,
     BrowserAnimationsModule,
   ],
   providers: [],
@@ -258,22 +246,62 @@ Vamos al navegador y refrescamos la página, debería aparecer una barra superio
 
 Ya tenemos la estructura principal, ahora vamos a crear nuestra primera pantalla. Vamos a empezar por la de `Categorías` que es la más sencilla, ya que se trata de un listado, que muestra datos sin filtrar ni paginar.
 
-Las pantallas deberían ir todas dentro del módulo `views` así que vamos a ejecutar el siguiente comando para crear la pantalla dentro de dicho módulo:
+Como categorías es un dominio funcional de la aplicación, vamos a crear un módulo que contenga toda la funcionalidad de ese dominio. Ejecutamos en consola:
 
 ```
-ng generate component views/categories
+ng generate module category
 ```
 
-Por último vamos a añadir la nueva ruta del componente dentro del routing, para ello modificamos el fichero `app-routing.module.ts`
+Y por tanto, al igual que hicimos anteriormente, hay que añadir el módulo al fichero `app.module.ts`
+
+=== "app.module.ts"
+``` Typescript hl_lines="8 19"
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CoreModule } from './core/core.module';
+import { CategoryModule } from './category/category.module';
+
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    CoreModule,
+    CategoryModule,
+    BrowserAnimationsModule,
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
+
+
+Ahora todas las pantallas, componentes y servicios que creemos, referidos a este dominio funcional, deberán ir dentro del modulo `cagegory`.
+
+Vamos a crear un primer componente que será un listado de categorías. Para ello vamos a ejecutar el siguiente comando:
+
+```
+ng generate component category/category-list
+```
+
+Para terminar de configurar la aplicación, vamos a añadir la ruta del componente dentro del componente routing de Angular, para poder acceder a él, para ello modificamos el fichero `app-routing.module.ts`
 
 === "app-routing.module.ts"
     ``` Typescript hl_lines="3 6"
     import { NgModule } from '@angular/core';
     import { Routes, RouterModule } from '@angular/router';
-    import { CategoriesComponent } from './views/categories/categories.component';
+    import { CategoryListComponent } from './category/category-list/category-list.component';
 
     const routes: Routes = [
-      { path: 'categories', component: CategoriesComponent },
+      { path: 'categories', component: CategoryListComponent },
     ];
 
     @NgModule({
@@ -287,9 +315,20 @@ Si abrimos el navegador y accedemos a `http://localhost:4200/` podremos navegar 
 
 ### Código de la pantalla
 
-Ahora vamos a construir la pantalla. Para manejar la información del listado, necesitamos almacenar los datos en un objeto de tipo `model`. Para ello crearemos un fichero en `models\categories\Category.ts` donde implementaremos la clase necesaria. Esta clase será la que utilizaremos en el código html y ts de nuestro componente.
+Ahora vamos a construir la pantalla. Para manejar la información del listado, necesitamos almacenar los datos en un objeto de tipo `model`. Para ello crearemos un fichero en `category\model\Category.ts` donde implementaremos la clase necesaria. Esta clase será la que utilizaremos en el código html y ts de nuestro componente.
 
-=== "categories.component.html"
+=== "Category.ts"
+    ``` Typescript
+    export class Category {
+        id: number;
+        name: string;
+    }
+    ```
+
+
+También, escribiremos el código de la pantalla de listado.
+
+=== "category-list.component.html"
     ``` HTML hl_lines="4 5 10 15 23 24"
     <div class="container">
         <h1>Listado de Categorías</h1>
@@ -322,7 +361,7 @@ Ahora vamos a construir la pantalla. Para manejar la información del listado, n
         </div>   
     </div>
     ```
-=== "categories.component.scss"
+=== "category-list.component.scss"
     ``` CSS
     .container {
       margin: 20px;
@@ -357,25 +396,18 @@ Ahora vamos a construir la pantalla. Para manejar la información del listado, n
       }
     }
     ```    
-=== "Category.ts"
-    ``` Typescript
-    export class Category {
-        id: number;
-        name: string;
-    }
-    ```
-=== "categories.component.ts"
+=== "category-list.component.ts"
     ``` Typescript hl_lines="2 3 12 13"
     import { Component, OnInit } from '@angular/core';
-    import { Category } from 'src/app/models/categories/Category';
     import { MatTableDataSource } from '@angular/material/table';
+    import { Category } from '../model/Category';
     
     @Component({
-      selector: 'app-categories',
-      templateUrl: './categories.component.html',
-      styleUrls: ['./categories.component.scss']
+      selector: 'app-category-list',
+      templateUrl: './category-list.component.html',
+      styleUrls: ['./category-list.component.scss']
     })
-    export class CategoriesComponent implements OnInit {
+    export class CategoryListComponent implements OnInit {
 
       dataSource = new MatTableDataSource<Category>();
       displayedColumns: string[] = ['id', 'name', 'action'];
@@ -396,19 +428,19 @@ El código HTML es fácil de seguir pero por si acaso:
 * Línea 15: Definición de la tercera columna, su cabecera vacía y los dos botones de acción
 * Línea 23 y 24: Construcción de la cabecera y las filas
 
-Y ya por último, añadimos los componentes que se han utilizado de Angular Material a las dependencias del módulo donde está definido el componente en este caso `views\views.module.ts`:
+Y ya por último, añadimos los componentes que se han utilizado de Angular Material a las dependencias del módulo donde está definido el componente en este caso `category\category.module.ts`:
 
-=== "views.module.ts"
+=== "category.module.ts"
     ``` TypeScript hl_lines="3 4 5 12 13 14"
     import { NgModule } from '@angular/core';
     import { CommonModule } from '@angular/common';
     import { MatTableModule } from '@angular/material/table';
     import { MatIconModule } from '@angular/material/icon';
     import { MatButtonModule } from '@angular/material/button';
-    import { CategoriesComponent } from './categories/categories.component';
+    import { CategoryListComponent } from './category-list/category-list.component';
 
     @NgModule({
-      declarations: [CategoriesComponent],
+      declarations: [CategoryListComponent],
       imports: [
         CommonModule,
         MatTableModule,
@@ -416,10 +448,10 @@ Y ya por último, añadimos los componentes que se han utilizado de Angular Mate
         MatButtonModule
       ],
     })
-    export class ViewsModule { }
+    export class CategoryModule { }
     ```
 
-Si abrimos el navegador y accedemos a `http://localhost:4200/` y pulsamos en el menú de `Categorías` obtendremos una pantalla con un listado vacío (solo con cabeceras) y un botón de crear Nueva Categoría.
+Si abrimos el navegador y accedemos a `http://localhost:4200/` y pulsamos en el menú de `Categorías` obtendremos una pantalla con un listado vacío (solo con cabeceras) y un botón de crear Nueva Categoría que aun no hace nada.
 
 ## Añadiendo datos
 
@@ -427,13 +459,13 @@ En este punto y para ver como responde el listado, vamos a añadir datos. Si tuv
 
 ### Creando un servicio
 
-En angular, cualquier acceso a datos debe pasar por un `service`, así que vamos a crearnos uno para categorías. Vamos a la consola y ejecutamos:
+En angular, cualquier acceso a datos debe pasar por un `service`, así que vamos a crearnos uno para todas las operaciones de categorías. Vamos a la consola y ejecutamos:
 
 ```
-ng generate service services/categories/category
+ng generate service category/category
 ```
 
-Esto nos creará un servicio y lo añadirá al módulo de `services.module.ts`. Además, este servicio es inyectable por defecto así que podemos utilizarlo inyectándolo en cualquier componente que lo necesite. 
+Esto nos creará un servicio, que además podemos utilizarlo inyectándolo en cualquier componente que lo necesite. 
 
 ### Implementando un servicio
 
@@ -442,8 +474,8 @@ Vamos a implementar una operación de negocio que recupere el listado de categor
 === "category.service.ts"
     ``` TypeScript hl_lines="2 3 12 13 14"
     import { Injectable } from '@angular/core';
-    import { Category } from 'src/app/models/categories/Category';
     import { Observable } from 'rxjs';
+    import { Category } from './model/Category';
 
     @Injectable({
       providedIn: 'root'
@@ -457,12 +489,12 @@ Vamos a implementar una operación de negocio que recupere el listado de categor
       }
     }
     ```
-=== "categories.component.ts"
+=== "category-list.component.ts"
     ``` TypeScript hl_lines="4 17 21 22 23"
     import { Component, OnInit } from '@angular/core';
-    import { Category } from 'src/app/models/categories/Category';
     import { MatTableDataSource } from '@angular/material/table';
-    import { CategoryService } from 'src/app/services/categories/category.service';
+    import { Category } from '../model/Category';
+    import { CategoryService } from '../category.service';
     
     @Component({
       selector: 'app-categories',
@@ -488,11 +520,11 @@ Vamos a implementar una operación de negocio que recupere el listado de categor
 
 ### Mockeando datos
 
-Como hemos comentado anteriormente, el backend todavía no está implementado así que vamos a mockear datos. Nos crearemos un fichero `mock-categories.ts` con datos ficticios y modificaremos el servicio para que devuelva esos datos. De esta forma, cuando tengamos implementada la operación de negocio en backend, tan solo tenemos que sustuir el código que devuelve datos estáticos por una llamada http.
+Como hemos comentado anteriormente, el backend todavía no está implementado así que vamos a mockear datos. Nos crearemos un fichero `mock-categories.ts` dentro de model, con datos ficticios y modificaremos el servicio para que devuelva esos datos. De esta forma, cuando tengamos implementada la operación de negocio en backend, tan solo tenemos que sustuir el código que devuelve datos estáticos por una llamada http.
 
 === "mock-categories.ts"
     ``` TypeScript
-    import { Category } from 'src/app/models/categories/Category';
+    import { Category } from "./Category";
 
     export const CATEGORY_DATA: Category[] = [
         { id: 1, name: 'Dados' },
@@ -509,9 +541,9 @@ Como hemos comentado anteriormente, el backend todavía no está implementado as
 === "category.service.ts"
     ``` TypeScript hl_lines="2 4 14"
     import { Injectable } from '@angular/core';
-    import { CATEGORY_DATA } from './mock-categories';
-    import { Category } from 'src/app/models/categories/Category';
     import { Observable, of } from 'rxjs';
+    import { Category } from './model/Category';
+    import { CATEGORY_DATA } from './model/mock-categories';
 
     @Injectable({
       providedIn: 'root'
@@ -537,9 +569,9 @@ Para terminar, vamos a simular las otras dos peticiones, la de editar y la de bo
 === "category.service.ts"
     ``` TypeScript hl_lines="17 18 19 21 22 23"
     import { Injectable } from '@angular/core';
-    import { CATEGORY_DATA } from './mock-categories';
-    import { Category } from 'src/app/models/categories/Category';
     import { Observable, of } from 'rxjs';
+    import { Category } from './model/Category';
+    import { CATEGORY_DATA } from './model/mock-categories';
 
     @Injectable({
       providedIn: 'root'
@@ -567,19 +599,19 @@ Para terminar, vamos a simular las otras dos peticiones, la de editar y la de bo
 ### Crear componente
 
 Ahora nos queda añadir las acciones al listado: crear, editar y eliminar. Empezaremos primero por las acciones de crear y editar, que ambas deberían abrir una ventana modal con un formulario para poder modificar datos de la entidad `Categoría`.
-Como siempre, para crear un componente usamos el asistente de Angular, esta vez al tratarse de una pantalla que solo vamos a utilizar dentro del listado de categorías, tiene sentido que lo creemos dentro de ese directorio:
+Como siempre, para crear un componente usamos el asistente de Angular, esta vez al tratarse de una pantalla que solo vamos a utilizar dentro del dominio de categorías, tiene sentido que lo creemos dentro de ese módulo:
 
 ```
-ng generate component views/categories/category-dialog
+ng generate component category/category-edit
 ```
 
-Ahora vamos a hacer que se abra al pulsar el botón `Nueva categoría`. Para eso, vamos al fichero `views\categories\categories.component.ts` y añadimos un nuevo método:
+Ahora vamos a hacer que se abra al pulsar el botón `Nueva categoría`. Para eso, vamos al fichero `category-list.component.ts` y añadimos un nuevo método:
 
-=== "categories.component.ts"
+=== "category-list.component.ts"
     ``` TypeScript hl_lines="2 3 7 10 11 12 13 14 15 16 17 18"
     ...
     import { MatDialog } from '@angular/material/dialog';
-    import { CategoryDialogComponent } from './category-dialog/category-dialog.component';
+    import { CategoryEditComponent } from '../category-edit/category-edit.component';
     ...
       constructor(
         private categoryService: CategoryService,
@@ -587,7 +619,7 @@ Ahora vamos a hacer que se abra al pulsar el botón `Nueva categoría`. Para eso
       ) { }
     ...
       createCategory() {    
-        const dialogRef = this.dialog.open(CategoryDialogComponent, {
+        const dialogRef = this.dialog.open(CategoryEditComponent, {
           data: {}
         });
 
@@ -600,17 +632,17 @@ Ahora vamos a hacer que se abra al pulsar el botón `Nueva categoría`. Para eso
 
 Para poder abrir un componente dentro de un dialogo necesitamos obtener en el constructor un MatDialog. De ahí que hayamos tenido que añadirlo como import y en el constructor.
 
-Dentro del método `createCategory` lo que hacemos es crear un dialogo con el componente `CategoryDialogComponent` en su interior, pasarle unos datos de creación, donde podemos poner estilos del dialog y un objeto `data` donde pondremos los datos que queremos pasar entre los componentes. Por último, nos suscribimos al evento `afterClosed` para ejecutar las acciones que creamos oportunas, en nuestro caso volveremos a cargar el listado inicial.
+Dentro del método `createCategory` lo que hacemos es crear un dialogo con el componente `CategoryEditComponent` en su interior, pasarle unos datos de creación, donde podemos poner estilos del dialog y un objeto `data` donde pondremos los datos que queremos pasar entre los componentes. Por último, nos suscribimos al evento `afterClosed` para ejecutar las acciones que creamos oportunas, en nuestro caso volveremos a cargar el listado inicial.
 
-Como hemos utilizado un `MatDialog` en el componente, necesitamos añadirlo también al módulo, así que abrimos el fichero `views.module.ts` y añadimos:
+Como hemos utilizado un `MatDialog` en el componente, necesitamos añadirlo también al módulo, así que abrimos el fichero `category.module.ts` y añadimos:
 
-=== "views.module.ts"
+=== "category.module.ts"
     ``` TypeScript hl_lines="2 8 10 11 12 13 14 15"
     ...
     import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 
     @NgModule({
-      declarations: [CategoriesComponent, CategoryDialogComponent],
+      declarations: [CategoryListComponent, CategoryEditComponent],
       imports: [
         ...
         MatDialogModule
@@ -622,12 +654,12 @@ Como hemos utilizado un `MatDialog` en el componente, necesitamos añadirlo tamb
         },
       ]
     })
-    export class ViewsModule { }
+    export class CategoryModule { }
     ```
 
-Y ya por último enlazamos el click en el botón con el método que acabamos de crear para abrir el dialogo. Modificamos el fichero `views\categories\categories.component.html` y añadimos el evento click:
+Y ya por último enlazamos el click en el botón con el método que acabamos de crear para abrir el dialogo. Modificamos el fichero `category-list.component.html` y añadimos el evento click:
 
-=== "categories.component.html"
+=== "category-list.component.html"
     ``` TypeScript hl_lines="3"
     ...
         <div class="buttons">
@@ -636,13 +668,13 @@ Y ya por último enlazamos el click en el botón con el método que acabamos de 
     </div>
     ```
 
-Si refrescamos el navegador y pulsamos el botón `Nueva categoría` veremos como se abre una ventana modal de tipo Dialog con el componente nuevo que hemos creado. 
+Si refrescamos el navegador y pulsamos el botón `Nueva categoría` veremos como se abre una ventana modal de tipo Dialog con el componente nuevo que hemos creado, aunque solo se leerá `category-edit works!` que es el contenido por defecto del componente.
 
 ### Código del dialogo
 
 Ahora vamos a darle forma al formulario de editar y crear. Para ello vamos al html, ts y css del componente y pegamos el siguiente contenido:
 
-=== "category-dialog.component.html"
+=== "category-edit.component.html"
     ``` HTML
     <div class="container">
         <h1>Crear categoría</h1>
@@ -666,7 +698,7 @@ Ahora vamos a darle forma al formulario de editar y crear. Para ello vamos al ht
         </div>
     </div>
     ```
-=== "category-dialog.component.scss"
+=== "category-edit.component.scss"
     ``` CSS
     .container {
         min-width: 350px;
@@ -688,24 +720,24 @@ Ahora vamos a darle forma al formulario de editar y crear. Para ello vamos al ht
         }
     }
     ```
-=== "category-dialog.component.ts"
+=== "category-edit.component.ts"
     ``` TypeScript
-    import { Component, OnInit, Inject } from '@angular/core';
-    import { Category } from 'src/app/models/categories/Category';
+    import { Component, OnInit } from '@angular/core';
     import { MatDialogRef } from '@angular/material/dialog';
-    import { CategoryService } from 'src/app/services/categories/category.service';
+    import { CategoryService } from '../category.service';
+    import { Category } from '../model/Category';
 
     @Component({
-      selector: 'app-category-dialog',
-      templateUrl: './category-dialog.component.html',
-      styleUrls: ['./category-dialog.component.scss']
+      selector: 'app-category-edit',
+      templateUrl: './category-edit.component.html',
+      styleUrls: ['./category-edit.component.scss']
     })
-    export class CategoryDialogComponent implements OnInit {
+    export class CategoryEditComponent implements OnInit {
 
       category : Category;
 
       constructor(
-        public dialogRef: MatDialogRef<CategoryDialogComponent>,
+        public dialogRef: MatDialogRef<CategoryEditComponent>,
         private categoryService: CategoryService
       ) { }
 
@@ -726,11 +758,11 @@ Ahora vamos a darle forma al formulario de editar y crear. Para ello vamos al ht
     }
     ```
 
-Si te fijas en el código TypeScript, hemos añadido en el método `onSave` una llamada al servicio de `Category` que aunque no realice ninguna operación, por lo menos lo dejamos preparado para conectar con el servidor.
+Si te fijas en el código TypeScript, hemos añadido en el método `onSave` una llamada al servicio de `CategoryService` que aunque no realice ninguna operación de momento, por lo menos lo dejamos preparado para conectar con el servidor.
 
-Además, como siempre, al utilizar componentes `matInput`, `matForm`, `matError` hay que añadirlos como dependencias en el módulo `views.module.ts`:
+Además, como siempre, al utilizar componentes `matInput`, `matForm`, `matError` hay que añadirlos como dependencias en el módulo `category.module.ts`:
 
-=== "views.module.ts"
+=== "category.module.ts"
     ``` TypeScript hl_lines="3 4 5 12 13 14 15"
     ...
     import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
@@ -739,7 +771,7 @@ Además, como siempre, al utilizar componentes `matInput`, `matForm`, `matError`
     import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
     @NgModule({
-      declarations: [CategoriesComponent, CategoryDialogComponent],
+      declarations: [CategoryListComponent, CategoryEditComponent],
       imports: [
         ...
         MatDialogModule,
@@ -755,7 +787,7 @@ Además, como siempre, al utilizar componentes `matInput`, `matForm`, `matError`
         },
       ]
     })
-    export class ViewsModule { }
+    export class CategoryModule { }
     ```
 
 Ahora podemos navegar y abrir el cuadro de dialogo mediante el botón `Nueva categoría` para ver como queda nuestro formulario.
@@ -765,7 +797,7 @@ Ahora podemos navegar y abrir el cuadro de dialogo mediante el botón `Nueva cat
 El mismo componente que hemos utilizado para crear una nueva categoría, nos sirve también para editar una categoría existente. Tan solo tenemos que utilizar la funcionalidad que Angular nos proporciona y pasarle los datos a editar en la llamada de apertura del Dialog.
 Vamos a implementar funcionalidad sobre el icono `editar`, tendremos que modificar unos cuantos ficheros:
 
-=== "categories.component.html"
+=== "category-list.component.html"
     ``` HTML hl_lines="18 19 20"
     <div class="container">
         <h1>Listado de Categorías</h1>
@@ -800,7 +832,7 @@ Vamos a implementar funcionalidad sobre el icono `editar`, tendremos que modific
         </div>   
     </div>
     ```
-=== "categories.component.ts"
+=== "category-list.component.ts"
     ``` TypeScript hl_lines="27 28 29 30 31 32 33 34 35"
     export class CategoriesComponent implements OnInit {
 
@@ -819,7 +851,7 @@ Vamos a implementar funcionalidad sobre el icono `editar`, tendremos que modific
       }
     
       createCategory() {    
-        const dialogRef = this.dialog.open(CategoryDialogComponent, {
+        const dialogRef = this.dialog.open(CategoryEditComponent, {
           data: {}
         });
 
@@ -829,7 +861,7 @@ Vamos a implementar funcionalidad sobre el icono `editar`, tendremos que modific
       }  
 
       editCategory(category: Category) {
-        const dialogRef = this.dialog.open(CategoryDialogComponent, {
+        const dialogRef = this.dialog.open(CategoryEditComponent, {
           data: { category: category }
         });
 
@@ -842,7 +874,7 @@ Vamos a implementar funcionalidad sobre el icono `editar`, tendremos que modific
 
 Y los Dialog:
 
-=== "category-dialog.component.html"
+=== "category-edit.component.html"
     ``` TypeScript hl_lines="2 3"
     <div class="container">
         <h1 *ngIf="category.id == null">Crear categoría</h1>
@@ -852,24 +884,24 @@ Y los Dialog:
             <mat-form-field>
     ...
     ```
-=== "category-dialog.component.ts"
-    ``` TypeScript hl_lines="3 17 22 23 24 25 26 27"
+=== "category-edit.component.ts"
+    ``` TypeScript hl_lines="1 2 17 22 23 24 25 26 27"
     import { Component, OnInit, Inject } from '@angular/core';
-    import { Category } from 'src/app/models/categories/Category';
     import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-    import { CategoryService } from 'src/app/services/categories/category.service';
+    import { CategoryService } from '../category.service';
+    import { Category } from '../model/Category';
 
     @Component({
-      selector: 'app-category-dialog',
-      templateUrl: './category-dialog.component.html',
-      styleUrls: ['./category-dialog.component.scss']
+      selector: 'app-category-edit',
+      templateUrl: './category-edit.component.html',
+      styleUrls: ['./category-edit.component.scss']
     })
-    export class CategoryDialogComponent implements OnInit {
+    export class CategoryEditComponent implements OnInit {
 
       category : Category;
 
       constructor(
-        public dialogRef: MatDialogRef<CategoryDialogComponent>,
+        public dialogRef: MatDialogRef<CategoryEditComponent>,
         @Inject(MAT_DIALOG_DATA) public data: any,
         private categoryService: CategoryService
       ) { }
@@ -902,9 +934,9 @@ Navegando ahora por la página y pulsando en el icono de editar, se debería abr
 
 Si te fijas, al modificar los datos dentro de la ventana de diálogo se modifica también en el listado. Esto es porque estamos pasando el mismo objeto desde el listado a la ventana dialogo y al ser el listado y el formulario reactivos los dos, cualquier cambio sobre los datos se refresca directamente en la pantalla. 
 
-Hay veces en la que este comportamiento nos interesa, pero en este caso no queremos que se modifique el listado. Para solucionarlo debemos hacer una copia del objeto, para que ambos modelos (formulario y listado) utilicen objetos diferentes. Es tan sencillo como modificar `category-dialog.component.ts` y añadirle una copia del dato
+Hay veces en la que este comportamiento nos interesa, pero en este caso no queremos que se modifique el listado. Para solucionarlo debemos hacer una copia del objeto, para que ambos modelos (formulario y listado) utilicen objetos diferentes. Es tan sencillo como modificar `category-edit.component.ts` y añadirle una copia del dato
 
-=== "category-dialog.component.ts"
+=== "category-edit.component.ts"
     ``` TypeScript hl_lines="4"
         ...
         ngOnInit(): void {
@@ -926,10 +958,10 @@ Hay veces en la que este comportamiento nos interesa, pero en este caso no quere
 
 Por norma general, toda acción de borrado de un dato de pantalla requiere una confirmación previa por parte del usuario. Es decir, para evitar que el dato se borre accidentalmente el usuario tendrá que confirmar su acción. Por tanto vamos a crear un componente que nos permita pedir una confirmación al usuario.
 
-Como esta pantalla de confirmación va a ser algo común a muchas acciones de borrado de nuestra aplicación, vamos a crearla dentro del módulo `shared`. Como siempre, ejecutamos el comando en consola:
+Como esta pantalla de confirmación va a ser algo común a muchas acciones de borrado de nuestra aplicación, vamos a crearla dentro del módulo `core`. Como siempre, ejecutamos el comando en consola:
 
 ```
-ng generate component shared/dialog-confirmation/dialog-confirmation
+ng generate component core/dialog-confirmation
 ```
 
 E implementamos el código que queremos que tenga el componente. Al ser un componente genérico vamos a aprovechar y leeremos las variables que le pasemos en `data`.
@@ -1002,12 +1034,14 @@ E implementamos el código que queremos que tenga el componente. Al ser un compo
     ```
 
 !!! info "Recuerda"
-    Recuerda que los componentes utilizados en el diálogo de confirmación se deben añadir al módulo padre al que pertenecen, en este caso a `shared.module.ts`
+    Recuerda que los componentes utilizados en el diálogo de confirmación se deben añadir al módulo padre al que pertenecen, en este caso a `core.module.ts`
     ```
     imports: [
       CommonModule,
-      MatDialogModule,
+      RouterModule,
       MatIconModule, 
+      MatToolbarModule,
+      MatDialogModule,
       MatButtonModule,
     ],
     providers: [
@@ -1015,12 +1049,12 @@ E implementamos el código que queremos que tenga el componente. Al ser un compo
         provide: MAT_DIALOG_DATA,
         useValue: {},
       },
-    ]
+    ],
     ```
 
 Ya por último, una vez tenemos el componente genérico de dialogo, vamos a utilizarlo en nuestro listado al pulsar el botón eliminar:
 
-=== "categories.component.html"
+=== "category-list.component.html"
     ``` HTML hl_lines="9"
         ...
         <ng-container matColumnDef="action">
@@ -1036,7 +1070,7 @@ Ya por último, una vez tenemos el componente genérico de dialogo, vamos a util
         </ng-container>
         ...
     ```
-=== "categories.component.ts"
+=== "category-list.component.ts"
     ``` Typescript hl_lines="2 3 4 5 6 7 8 9 10 11 12 13 14"
       ...
       deleteCategory(category: Category) {    
@@ -1052,7 +1086,7 @@ Ya por último, una vez tenemos el componente genérico de dialogo, vamos a util
           }
         });
       }  
-    }
+      ...    
     ```
 
 Aquí también hemos realizado la llamada a `categoryService`, aunque no se realice ninguna acción, pero así lo dejamos listo para enlazarlo.

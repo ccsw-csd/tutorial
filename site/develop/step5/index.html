@@ -1532,7 +1532,7 @@ ng generate service services/games/game
 </span></code></pre></div>
 </div>
 <input id="__tabbed_11_3" name="__tabbed_11" type="radio" /><label for="__tabbed_11_3">Game.java</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.game.model</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.game.model</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">javax.persistence.Column</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">javax.persistence.Entity</span><span class="p">;</span>
@@ -1543,11 +1543,11 @@ ng generate service services/games/game
 <span class="kn">import</span> <span class="nn">javax.persistence.ManyToOne</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">javax.persistence.Table</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.author.model.Author</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.category.model.Category</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.author.model.Author</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.category.model.Category</span><span class="p">;</span>
 
 <span class="cm">/**</span>
-<span class="cm">* @author coedevon</span>
+<span class="cm">* @author ccsw</span>
 <span class="cm">*/</span>
 <span class="nd">@Entity</span>
 <span class="nd">@Table</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;Game&quot;</span><span class="p">)</span>
@@ -1656,13 +1656,13 @@ ng generate service services/games/game
 </code></pre></div>
 </div>
 <input id="__tabbed_11_4" name="__tabbed_11" type="radio" /><label for="__tabbed_11_4">GameDto.java</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.game.model</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.game.model</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.author.model.AuthorDto</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.category.model.CategoryDto</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.author.model.AuthorDto</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.category.model.CategoryDto</span><span class="p">;</span>
 
 <span class="cm">/**</span>
-<span class="cm">* @author coedevon</span>
+<span class="cm">* @author ccsw</span>
 <span class="cm">*/</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">GameDto</span> <span class="p">{</span>
 
@@ -1769,14 +1769,14 @@ ng generate service services/games/game
 <p>Podríamos utilizar los <a href="https://www.baeldung.com/spring-data-derived-queries">QueryMethods</a> para que Spring JPA haga su magia, pero en esta ocasión vamos a hacer una implementación concreta de este método de filtrado.
 Esta implementación la haremos en un Repository normal, y el resto de métodos nos vendrán dados por un CrudRepository como hemos hecho hasta ahora.</p>
 <div class="tabbed-set" data-tabs="12:3"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><label for="__tabbed_12_1">GameRepository.java</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.game</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.game</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">org.springframework.data.repository.CrudRepository</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.game.model.Game</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.game.model.Game</span><span class="p">;</span>
 
 <span class="cm">/**</span>
-<span class="cm">* @author coedevon</span>
+<span class="cm">* @author ccsw</span>
 <span class="cm">*/</span>
 <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">GameRepository</span> <span class="kd">extends</span> <span class="n">CrudRepository</span><span class="o">&lt;</span><span class="n">Game</span><span class="p">,</span> <span class="n">Long</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">GameCustomRepository</span> <span class="p">{</span>
 
@@ -1784,20 +1784,20 @@ Esta implementación la haremos en un Repository normal, y el resto de métodos 
 </code></pre></div>
 </div>
 <input id="__tabbed_12_2" name="__tabbed_12" type="radio" /><label for="__tabbed_12_2">GameCustomRepository.java</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.game</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.game</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.game.model.Game</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.game.model.Game</span><span class="p">;</span>
 
 <span class="cm">/**</span>
-<span class="cm">* @author coedevon</span>
+<span class="cm">* @author ccsw</span>
 <span class="cm">*</span>
 <span class="cm">*/</span>
 <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">GameCustomRepository</span> <span class="p">{</span>
 
     <span class="cm">/**</span>
-<span class="cm">    * Método para recuperar todas las {@link com.capgemini.coedevon.tutorial.game.model.Game} filtradas</span>
+<span class="cm">    * Método para recuperar todas las {@link com.capgemini.ccsw.tutorial.game.model.Game} filtradas</span>
 <span class="cm">    * @param title</span>
 <span class="cm">    * @param category</span>
 <span class="cm">    * @return</span>
@@ -1807,7 +1807,7 @@ Esta implementación la haremos en un Repository normal, y el resto de métodos 
 </code></pre></div>
 </div>
 <input id="__tabbed_12_3" name="__tabbed_12" type="radio" /><label for="__tabbed_12_3">GameCustomRepositoryImpl.java</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.game</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.game</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
 
@@ -1816,14 +1816,14 @@ Esta implementación la haremos en un Repository normal, y el resto de métodos 
 <span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">org.springframework.util.StringUtils</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.game.model.Game</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.game.model.Game</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">com.devonfw.module.basic.common.api.query.LikePatternSyntax</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">com.devonfw.module.jpa.dataaccess.api.QueryUtil</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">com.querydsl.core.alias.Alias</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">com.querydsl.jpa.impl.JPAQuery</span><span class="p">;</span>
 
 <span class="cm">/**</span>
-<span class="cm">* @author coedevon</span>
+<span class="cm">* @author ccsw</span>
 <span class="cm">*</span>
 <span class="cm">*/</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">GameCustomRepositoryImpl</span> <span class="kd">implements</span> <span class="n">GameCustomRepository</span> <span class="p">{</span>
@@ -1860,20 +1860,20 @@ Esta implementación la haremos en un Repository normal, y el resto de métodos 
 <h3 id="service">Service</h3>
 <p>Siguiente paso, la capa de lógica, es decir el <code>Service</code>.</p>
 <div class="tabbed-set" data-tabs="13:2"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><label for="__tabbed_13_1">GameService.java</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.game</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.game</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.game.model.Game</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.game.model.GameDto</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.game.model.Game</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.game.model.GameDto</span><span class="p">;</span>
 
 <span class="cm">/**</span>
-<span class="cm">* @author coedevon</span>
+<span class="cm">* @author ccsw</span>
 <span class="cm">*/</span>
 <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">GameService</span> <span class="p">{</span>
 
     <span class="cm">/**</span>
-<span class="cm">    * Método para recuperar todas las {@link com.capgemini.coedevon.tutorial.game.model.Game} filtradas</span>
+<span class="cm">    * Método para recuperar todas las {@link com.capgemini.ccsw.tutorial.game.model.Game} filtradas</span>
 <span class="cm">    * @param title</span>
 <span class="cm">    * @param category</span>
 <span class="cm">    * @return</span>
@@ -1881,7 +1881,7 @@ Esta implementación la haremos en un Repository normal, y el resto de métodos 
     <span class="n">List</span><span class="o">&lt;</span><span class="n">Game</span><span class="o">&gt;</span> <span class="nf">findByFilter</span><span class="p">(</span><span class="n">String</span> <span class="n">title</span><span class="p">,</span> <span class="n">Long</span> <span class="n">category</span><span class="p">);</span>
 
     <span class="cm">/**</span>
-<span class="cm">    * Método para crear o actualizar una {@link com.capgemini.coedevon.tutorial.game.model.Game}</span>
+<span class="cm">    * Método para crear o actualizar una {@link com.capgemini.ccsw.tutorial.game.model.Game}</span>
 <span class="cm">    * @param dto</span>
 <span class="cm">    * @return</span>
 <span class="cm">    */</span>
@@ -1891,7 +1891,7 @@ Esta implementación la haremos en un Repository normal, y el resto de métodos 
 </code></pre></div>
 </div>
 <input id="__tabbed_13_2" name="__tabbed_13" type="radio" /><label for="__tabbed_13_2">GameServiceImpl.java</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.game</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.game</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
 
@@ -1901,11 +1901,11 @@ Esta implementación la haremos en un Repository normal, y el resto de métodos 
 <span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">org.springframework.stereotype.Service</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.game.model.Game</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.game.model.GameDto</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.game.model.Game</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.game.model.GameDto</span><span class="p">;</span>
 
 <span class="cm">/**</span>
-<span class="cm">* @author coedevon</span>
+<span class="cm">* @author ccsw</span>
 <span class="cm">*/</span>
 <span class="nd">@Service</span>
 <span class="nd">@Transactional</span>
@@ -1950,43 +1950,43 @@ Esta implementación la haremos en un Repository normal, y el resto de métodos 
 <p>Una solución podría ser convertir esos DTOs a <code>Entity</code>, pero esto podría llevar a duplicidades en la cache interna de JPA, así que mejor no utilizar esta solución.</p>
 <p>Lo correcto es realizar consultas a la BBDD y traernos esas entities. Pero si recuerdas las reglas básicas, un <code>Repository</code> debe pertenecer a un solo <code>Service</code>, por lo que en lugar de llamar a métodos de los <code>AuthorRepository</code> y <code>CategoryRepository</code> desde nuestro <code>GameService</code>, debemos llamar a métodos expuestos en <code>AuthorService</code> y <code>CategoryService</code>. Para ello necesitaremos crear esos métodos get en los otros <code>Services</code>. Quedaría algo así:</p>
 <div class="tabbed-set" data-tabs="14:4"><input checked="checked" id="__tabbed_14_1" name="__tabbed_14" type="radio" /><label for="__tabbed_14_1">AuthorService.java</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.author</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.author</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">org.springframework.data.domain.Page</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.author.model.Author</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.author.model.AuthorDto</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.author.model.AuthorSearchDto</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.author.model.Author</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.author.model.AuthorDto</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.author.model.AuthorSearchDto</span><span class="p">;</span>
 
 <span class="cm">/**</span>
-<span class="cm">* @author coedevon</span>
+<span class="cm">* @author ccsw</span>
 <span class="cm">*</span>
 <span class="cm">*/</span>
 <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">AuthorService</span> <span class="p">{</span>
 
 <span class="hll">    <span class="cm">/**</span>
-</span><span class="hll"><span class="cm">    * Recupera un {@link com.capgemini.coedevon.tutorial.author.model.Author} a través de su ID</span>
+</span><span class="hll"><span class="cm">    * Recupera un {@link com.capgemini.ccsw.tutorial.author.model.Author} a través de su ID</span>
 </span><span class="hll"><span class="cm">    * @param id</span>
 </span><span class="hll"><span class="cm">    * @return</span>
 </span><span class="hll"><span class="cm">    */</span>
 </span><span class="hll">    <span class="n">Author</span> <span class="nf">get</span><span class="p">(</span><span class="n">Long</span> <span class="n">id</span><span class="p">);</span>
 </span>
     <span class="cm">/**</span>
-<span class="cm">    * Método para recuperar un listado paginado de {@link com.capgemini.coedevon.tutorial.author.model.Author}</span>
+<span class="cm">    * Método para recuperar un listado paginado de {@link com.capgemini.ccsw.tutorial.author.model.Author}</span>
 <span class="cm">    * @param dto</span>
 <span class="cm">    * @return</span>
 <span class="cm">    */</span>
     <span class="n">Page</span><span class="o">&lt;</span><span class="n">Author</span><span class="o">&gt;</span> <span class="nf">findPage</span><span class="p">(</span><span class="n">AuthorSearchDto</span> <span class="n">dto</span><span class="p">);</span>
 
     <span class="cm">/**</span>
-<span class="cm">    * Método para crear o actualizar un {@link com.capgemini.coedevon.tutorial.author.model.Author}</span>
+<span class="cm">    * Método para crear o actualizar un {@link com.capgemini.ccsw.tutorial.author.model.Author}</span>
 <span class="cm">    * @param data</span>
 <span class="cm">    * @return</span>
 <span class="cm">    */</span>
     <span class="n">Author</span> <span class="nf">save</span><span class="p">(</span><span class="n">AuthorDto</span> <span class="n">data</span><span class="p">);</span>
 
     <span class="cm">/**</span>
-<span class="cm">    * Método para crear o actualizar un {@link com.capgemini.coedevon.tutorial.author.model.Author}</span>
+<span class="cm">    * Método para crear o actualizar un {@link com.capgemini.ccsw.tutorial.author.model.Author}</span>
 <span class="cm">    * @param id</span>
 <span class="cm">    */</span>
     <span class="kt">void</span> <span class="nf">delete</span><span class="p">(</span><span class="n">Long</span> <span class="n">id</span><span class="p">);</span>
@@ -1995,7 +1995,7 @@ Esta implementación la haremos en un Repository normal, y el resto de métodos 
 </code></pre></div>
 </div>
 <input id="__tabbed_14_2" name="__tabbed_14" type="radio" /><label for="__tabbed_14_2">AuthorServiceImpl.java</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.author</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.author</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">javax.transaction.Transactional</span><span class="p">;</span>
 
@@ -2004,12 +2004,12 @@ Esta implementación la haremos en un Repository normal, y el resto de métodos 
 <span class="kn">import</span> <span class="nn">org.springframework.data.domain.Page</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">org.springframework.stereotype.Service</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.author.model.Author</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.author.model.AuthorDto</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.author.model.AuthorSearchDto</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.author.model.Author</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.author.model.AuthorDto</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.author.model.AuthorSearchDto</span><span class="p">;</span>
 
 <span class="cm">/**</span>
-<span class="cm">* @author coedevon</span>
+<span class="cm">* @author ccsw</span>
 <span class="cm">*/</span>
 <span class="nd">@Service</span>
 <span class="nd">@Transactional</span>
@@ -2067,41 +2067,41 @@ Esta implementación la haremos en un Repository normal, y el resto de métodos 
 </code></pre></div>
 </div>
 <input id="__tabbed_14_3" name="__tabbed_14" type="radio" /><label for="__tabbed_14_3">CategoryService.java</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.category</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.category</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.category.model.Category</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.category.model.CategoryDto</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.category.model.Category</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.category.model.CategoryDto</span><span class="p">;</span>
 
 <span class="cm">/**</span>
-<span class="cm">* @author coedevon</span>
+<span class="cm">* @author ccsw</span>
 <span class="cm">*</span>
 <span class="cm">*/</span>
 <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">CategoryService</span> <span class="p">{</span>
 
 <span class="hll">    <span class="cm">/**</span>
-</span><span class="hll"><span class="cm">    * Recupera una {@link com.capgemini.coedevon.tutorial.category.model.Category} a partir de su ID</span>
+</span><span class="hll"><span class="cm">    * Recupera una {@link com.capgemini.ccsw.tutorial.category.model.Category} a partir de su ID</span>
 </span><span class="hll"><span class="cm">    * @param id</span>
 </span><span class="hll"><span class="cm">    * @return</span>
 </span><span class="hll"><span class="cm">    */</span>
 </span><span class="hll">    <span class="n">Category</span> <span class="nf">get</span><span class="p">(</span><span class="n">Long</span> <span class="n">id</span><span class="p">);</span>
 </span>
     <span class="cm">/**</span>
-<span class="cm">    * Método para recuperar todas las {@link com.capgemini.coedevon.tutorial.category.model.Category}</span>
+<span class="cm">    * Método para recuperar todas las {@link com.capgemini.ccsw.tutorial.category.model.Category}</span>
 <span class="cm">    * @return</span>
 <span class="cm">    */</span>
     <span class="n">List</span><span class="o">&lt;</span><span class="n">Category</span><span class="o">&gt;</span> <span class="nf">findAll</span><span class="p">();</span>
 
     <span class="cm">/**</span>
-<span class="cm">    * Método para crear o actualizar una {@link com.capgemini.coedevon.tutorial.category.model.Category}</span>
+<span class="cm">    * Método para crear o actualizar una {@link com.capgemini.ccsw.tutorial.category.model.Category}</span>
 <span class="cm">    * @param dto</span>
 <span class="cm">    * @return</span>
 <span class="cm">    */</span>
     <span class="n">Category</span> <span class="nf">save</span><span class="p">(</span><span class="n">CategoryDto</span> <span class="n">dto</span><span class="p">);</span>
 
     <span class="cm">/**</span>
-<span class="cm">    * Método para borrar una {@link com.capgemini.coedevon.tutorial.category.model.Category}</span>
+<span class="cm">    * Método para borrar una {@link com.capgemini.ccsw.tutorial.category.model.Category}</span>
 <span class="cm">    * @param id</span>
 <span class="cm">    */</span>
     <span class="kt">void</span> <span class="nf">delete</span><span class="p">(</span><span class="n">Long</span> <span class="n">id</span><span class="p">);</span>
@@ -2109,7 +2109,7 @@ Esta implementación la haremos en un Repository normal, y el resto de métodos 
 </code></pre></div>
 </div>
 <input id="__tabbed_14_4" name="__tabbed_14" type="radio" /><label for="__tabbed_14_4">CategoryServiceImpl.java</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.category</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.category</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
 
@@ -2117,11 +2117,11 @@ Esta implementación la haremos en un Repository normal, y el resto de métodos 
 <span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">org.springframework.stereotype.Service</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.category.model.Category</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.category.model.CategoryDto</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.category.model.Category</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.category.model.CategoryDto</span><span class="p">;</span>
 
 <span class="cm">/**</span>
-<span class="cm">* @author coedevon</span>
+<span class="cm">* @author ccsw</span>
 <span class="cm">*</span>
 <span class="cm">*/</span>
 <span class="nd">@Service</span>
@@ -2184,7 +2184,7 @@ Esta implementación la haremos en un Repository normal, y el resto de métodos 
 </div>
 <p>Y ahora ya podemos implementar correctamente nuestro <code>Service</code>.</p>
 <div class="tabbed-set" data-tabs="15:1"><input checked="checked" id="__tabbed_15_1" name="__tabbed_15" type="radio" /><label for="__tabbed_15_1">GameServiceImpl.java</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.game</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.game</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
 
@@ -2194,15 +2194,15 @@ Esta implementación la haremos en un Repository normal, y el resto de métodos 
 <span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">org.springframework.stereotype.Service</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.author.AuthorService</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.author.model.Author</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.category.CategoryService</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.category.model.Category</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.game.model.Game</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.game.model.GameDto</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.author.AuthorService</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.author.model.Author</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.category.CategoryService</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.category.model.Category</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.game.model.Game</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.game.model.GameDto</span><span class="p">;</span>
 
 <span class="cm">/**</span>
-<span class="cm">* @author coedevon</span>
+<span class="cm">* @author ccsw</span>
 <span class="cm">*/</span>
 <span class="nd">@Service</span>
 <span class="nd">@Transactional</span>
@@ -2256,7 +2256,7 @@ Esta implementación la haremos en un Repository normal, y el resto de métodos 
 <h3 id="controller">Controller</h3>
 <p>Después de todo este mareo, ya podemos terminar ocn la última capa. Vamos a implementar el <code>Controller</code> para que ataque a la capa de <code>Service</code>, con los endpoints de las operaciones que vamos a publicar. Además, para realizar la búsqueda necesitaremos un nuevo <code>DTO</code> como ya vimos en el ejemplo del listado paginado.</p>
 <div class="tabbed-set" data-tabs="16:2"><input checked="checked" id="__tabbed_16_1" name="__tabbed_16" type="radio" /><label for="__tabbed_16_1">GameController.java</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.game</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.game</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
 
@@ -2267,12 +2267,12 @@ Esta implementación la haremos en un Repository normal, y el resto de métodos 
 <span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RequestMethod</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.config.mapper.BeanMapper</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.game.model.GameDto</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.game.model.GameSearchDto</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.config.mapper.BeanMapper</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.game.model.GameDto</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.game.model.GameSearchDto</span><span class="p">;</span>
 
 <span class="cm">/**</span>
-<span class="cm">* @author coedevon</span>
+<span class="cm">* @author ccsw</span>
 <span class="cm">*/</span>
 <span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">&quot;/game/v1&quot;</span><span class="p">)</span>
 <span class="nd">@RestController</span>
@@ -2286,7 +2286,7 @@ Esta implementación la haremos en un Repository normal, y el resto de métodos 
     <span class="n">BeanMapper</span> <span class="n">beanMapper</span><span class="p">;</span>
 
     <span class="cm">/*</span>
-<span class="cm">    * Método para recuperar todos los {@link com.capgemini.coedevon.tutorial.game.model.Game} filtrados</span>
+<span class="cm">    * Método para recuperar todos los {@link com.capgemini.ccsw.tutorial.game.model.Game} filtrados</span>
 <span class="cm">    * @return</span>
 <span class="cm">    */</span>
     <span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">path</span> <span class="o">=</span> <span class="s">&quot;/&quot;</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="n">RequestMethod</span><span class="p">.</span><span class="na">POST</span><span class="p">)</span>
@@ -2296,7 +2296,7 @@ Esta implementación la haremos en un Repository normal, y el resto de métodos 
     <span class="p">}</span>
 
     <span class="cm">/**</span>
-<span class="cm">    * Método para crear o actualizar un {@link com.capgemini.coedevon.tutorial.game.model.Game}</span>
+<span class="cm">    * Método para crear o actualizar un {@link com.capgemini.ccsw.tutorial.game.model.Game}</span>
 <span class="cm">    * @param dto</span>
 <span class="cm">    * @return</span>
 <span class="cm">    */</span>
@@ -2310,10 +2310,10 @@ Esta implementación la haremos en un Repository normal, y el resto de métodos 
 </code></pre></div>
 </div>
 <input id="__tabbed_16_2" name="__tabbed_16" type="radio" /><label for="__tabbed_16_2">GameSearchDto.java</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.game.model</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.game.model</span><span class="p">;</span>
 
 <span class="cm">/**</span>
-<span class="cm">* @author coedevon</span>
+<span class="cm">* @author ccsw</span>
 <span class="cm">*/</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">GameSearchDto</span> <span class="p">{</span>
 
@@ -2369,7 +2369,7 @@ Esta implementación la haremos en un Repository normal, y el resto de métodos 
 <p>Como hemos visto anteriormente en la parte de frontend, para la edición de un <code>Juego</code> nos hace falta un método que devuelva un listado de <code>Autores</code>, ya que ahora mismo la operación que tenemos implementada devuelve un objeto <code>Page</code>.</p>
 <p>Así que antes de finalizar la implementación de backend, vamos a desarrollar esta nueva operación. Por supuesto, respetaremos las operaciones previas que ya existían.</p>
 <div class="tabbed-set" data-tabs="17:3"><input checked="checked" id="__tabbed_17_1" name="__tabbed_17" type="radio" /><label for="__tabbed_17_1">AuthorController.java</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.author</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.author</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
 
@@ -2382,12 +2382,12 @@ Esta implementación la haremos en un Repository normal, y el resto de métodos 
 <span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RequestMethod</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.author.model.AuthorDto</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.author.model.AuthorSearchDto</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.config.mapper.BeanMapper</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.author.model.AuthorDto</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.author.model.AuthorSearchDto</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.config.mapper.BeanMapper</span><span class="p">;</span>
 
 <span class="cm">/**</span>
-<span class="cm">* @author coedevon</span>
+<span class="cm">* @author ccsw</span>
 <span class="cm">*/</span>
 <span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">&quot;/author/v1&quot;</span><span class="p">)</span>
 <span class="nd">@RestController</span>
@@ -2401,7 +2401,7 @@ Esta implementación la haremos en un Repository normal, y el resto de métodos 
     <span class="n">BeanMapper</span> <span class="n">beanMapper</span><span class="p">;</span>
 
 <span class="hll">    <span class="cm">/**</span>
-</span><span class="hll"><span class="cm">    * Método para recuperar un listado paginado de {@link com.capgemini.coedevon.tutorial.author.model.Author}</span>
+</span><span class="hll"><span class="cm">    * Método para recuperar un listado paginado de {@link com.capgemini.ccsw.tutorial.author.model.Author}</span>
 </span><span class="hll"><span class="cm">    * @param dto</span>
 </span><span class="hll"><span class="cm">    * @return</span>
 </span><span class="hll"><span class="cm">    */</span>
@@ -2412,7 +2412,7 @@ Esta implementación la haremos en un Repository normal, y el resto de métodos 
 </span><span class="hll">    <span class="p">}</span>
 </span>
     <span class="cm">/**</span>
-<span class="cm">    * Método para recuperar un listado paginado de {@link com.capgemini.coedevon.tutorial.author.model.Author}</span>
+<span class="cm">    * Método para recuperar un listado paginado de {@link com.capgemini.ccsw.tutorial.author.model.Author}</span>
 <span class="cm">    * @param dto</span>
 <span class="cm">    * @return</span>
 <span class="cm">    */</span>
@@ -2423,7 +2423,7 @@ Esta implementación la haremos en un Repository normal, y el resto de métodos 
     <span class="p">}</span>
 
     <span class="cm">/**</span>
-<span class="cm">    * Método para crear o actualizar un {@link com.capgemini.coedevon.tutorial.author.model.Author}</span>
+<span class="cm">    * Método para crear o actualizar un {@link com.capgemini.ccsw.tutorial.author.model.Author}</span>
 <span class="cm">    * @param data datos de la entidad</span>
 <span class="cm">    * @return</span>
 <span class="cm">    */</span>
@@ -2434,7 +2434,7 @@ Esta implementación la haremos en un Repository normal, y el resto de métodos 
     <span class="p">}</span>
 
     <span class="cm">/**</span>
-<span class="cm">    * Método para crear o actualizar un {@link com.capgemini.coedevon.tutorial.author.model.Author}</span>
+<span class="cm">    * Método para crear o actualizar un {@link com.capgemini.ccsw.tutorial.author.model.Author}</span>
 <span class="cm">    * @param id PK de la entidad</span>
 <span class="cm">    */</span>
     <span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">path</span> <span class="o">=</span> <span class="s">&quot;/{id}&quot;</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="n">RequestMethod</span><span class="p">.</span><span class="na">DELETE</span><span class="p">)</span>
@@ -2447,51 +2447,51 @@ Esta implementación la haremos en un Repository normal, y el resto de métodos 
 </code></pre></div>
 </div>
 <input id="__tabbed_17_2" name="__tabbed_17" type="radio" /><label for="__tabbed_17_2">AuthorService.java</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.author</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.author</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">org.springframework.data.domain.Page</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.author.model.Author</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.author.model.AuthorDto</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.author.model.AuthorSearchDto</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.author.model.Author</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.author.model.AuthorDto</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.author.model.AuthorSearchDto</span><span class="p">;</span>
 
 <span class="cm">/**</span>
-<span class="cm">* @author coedevon</span>
+<span class="cm">* @author ccsw</span>
 <span class="cm">*</span>
 <span class="cm">*/</span>
 <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">AuthorService</span> <span class="p">{</span>
 
     <span class="cm">/**</span>
-<span class="cm">    * Recupera un {@link com.capgemini.coedevon.tutorial.author.model.Author} a través de su ID</span>
+<span class="cm">    * Recupera un {@link com.capgemini.ccsw.tutorial.author.model.Author} a través de su ID</span>
 <span class="cm">    * @param id</span>
 <span class="cm">    * @return</span>
 <span class="cm">    */</span>
     <span class="n">Author</span> <span class="nf">get</span><span class="p">(</span><span class="n">Long</span> <span class="n">id</span><span class="p">);</span>
 
     <span class="cm">/**</span>
-<span class="cm">    * Método para recuperar un listado paginado de {@link com.capgemini.coedevon.tutorial.author.model.Author}</span>
+<span class="cm">    * Método para recuperar un listado paginado de {@link com.capgemini.ccsw.tutorial.author.model.Author}</span>
 <span class="cm">    * @param dto</span>
 <span class="cm">    * @return</span>
 <span class="cm">    */</span>
     <span class="n">Page</span><span class="o">&lt;</span><span class="n">Author</span><span class="o">&gt;</span> <span class="nf">findPage</span><span class="p">(</span><span class="n">AuthorSearchDto</span> <span class="n">dto</span><span class="p">);</span>
 
     <span class="cm">/**</span>
-<span class="cm">    * Método para crear o actualizar un {@link com.capgemini.coedevon.tutorial.author.model.Author}</span>
+<span class="cm">    * Método para crear o actualizar un {@link com.capgemini.ccsw.tutorial.author.model.Author}</span>
 <span class="cm">    * @param data</span>
 <span class="cm">    * @return</span>
 <span class="cm">    */</span>
     <span class="n">Author</span> <span class="nf">save</span><span class="p">(</span><span class="n">AuthorDto</span> <span class="n">data</span><span class="p">);</span>
 
     <span class="cm">/**</span>
-<span class="cm">    * Método para crear o actualizar un {@link com.capgemini.coedevon.tutorial.author.model.Author}</span>
+<span class="cm">    * Método para crear o actualizar un {@link com.capgemini.ccsw.tutorial.author.model.Author}</span>
 <span class="cm">    * @param id</span>
 <span class="cm">    */</span>
     <span class="kt">void</span> <span class="nf">delete</span><span class="p">(</span><span class="n">Long</span> <span class="n">id</span><span class="p">);</span>
 
 <span class="hll">    <span class="cm">/**</span>
-</span><span class="hll"><span class="cm">    * Método para recuperar un listado completo de {@link com.capgemini.coedevon.tutorial.author.model.Author}</span>
+</span><span class="hll"><span class="cm">    * Método para recuperar un listado completo de {@link com.capgemini.ccsw.tutorial.author.model.Author}</span>
 </span><span class="hll"><span class="cm">    * @return</span>
 </span><span class="hll"><span class="cm">    */</span>
 </span><span class="hll">    <span class="n">List</span><span class="o">&lt;</span><span class="n">Author</span><span class="o">&gt;</span> <span class="nf">list</span><span class="p">();</span>
@@ -2500,7 +2500,7 @@ Esta implementación la haremos en un Repository normal, y el resto de métodos 
 </code></pre></div>
 </div>
 <input id="__tabbed_17_3" name="__tabbed_17" type="radio" /><label for="__tabbed_17_3">AuthorServiceImpl.java</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.author</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.author</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
 
@@ -2511,12 +2511,12 @@ Esta implementación la haremos en un Repository normal, y el resto de métodos 
 <span class="kn">import</span> <span class="nn">org.springframework.data.domain.Page</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">org.springframework.stereotype.Service</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.author.model.Author</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.author.model.AuthorDto</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.author.model.AuthorSearchDto</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.author.model.Author</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.author.model.AuthorDto</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.author.model.AuthorSearchDto</span><span class="p">;</span>
 
 <span class="cm">/**</span>
-<span class="cm">* @author coedevon</span>
+<span class="cm">* @author ccsw</span>
 <span class="cm">*/</span>
 <span class="nd">@Service</span>
 <span class="nd">@Transactional</span>

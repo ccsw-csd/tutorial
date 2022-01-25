@@ -827,7 +827,7 @@
     <span class="nt">&lt;version&gt;</span>2.3.0.RELEASE<span class="nt">&lt;/version&gt;</span>
     <span class="nt">&lt;relativePath/&gt;</span> <span class="c">&lt;!-- lookup parent from repository --&gt;</span>
   <span class="nt">&lt;/parent&gt;</span>
-  <span class="nt">&lt;groupId&gt;</span>com.capgemini.coedevon<span class="nt">&lt;/groupId&gt;</span>
+  <span class="nt">&lt;groupId&gt;</span>com.capgemini.ccsw<span class="nt">&lt;/groupId&gt;</span>
   <span class="nt">&lt;artifactId&gt;</span>tutorial<span class="nt">&lt;/artifactId&gt;</span>
   <span class="nt">&lt;version&gt;</span>0.0.1-SNAPSHOT<span class="nt">&lt;/version&gt;</span>
   <span class="nt">&lt;name&gt;</span>tutorial<span class="nt">&lt;/name&gt;</span>
@@ -921,15 +921,15 @@
 </div>
 <p>Ojo, que hemos sustituido la dependencia de Spring-JPA por la dependencia de Devonfw-JPA ya que nos permite utilizar más funcionalidades extendidas sobre repositorios JPA. Además de esa dependencia, hemos añadido una utilidad para hacer mapeos entre objetos y para configurar los servicios Rest.</p>
 <h3 id="configurar-utilidades-devonfw">Configurar utilidades Devonfw</h3>
-<p>El siguiente punto es crear las clases de configuración para las librerías que hemos añadido. Para ello vamos a crear un package de configuración general de la aplicación <code>com.capgemini.coedevon.tutorial.config</code> donde crearemos tres clases (dos de ellas dentro del subpaquete <code>mapper</code>).</p>
+<p>El siguiente punto es crear las clases de configuración para las librerías que hemos añadido. Para ello vamos a crear un package de configuración general de la aplicación <code>com.capgemini.ccsw.tutorial.config</code> donde crearemos tres clases (dos de ellas dentro del subpaquete <code>mapper</code>).</p>
 <div class="tabbed-set" data-tabs="2:3"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">BeansOrikaConfig.java</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.config</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.config</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Bean</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Configuration</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.config.mapper.BeanMapper</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.config.mapper.BeanMapperImpl</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.config.mapper.BeanMapper</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.config.mapper.BeanMapperImpl</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">com.devonfw.module.beanmapping.common.base.BaseOrikaConfig</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">com.devonfw.module.json.common.base.ObjectMapperFactory</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">com.fasterxml.jackson.databind.Module</span><span class="p">;</span>
@@ -965,12 +965,12 @@
 </code></pre></div>
 </div>
 <input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><label for="__tabbed_2_2">mapper/BeanMapper.java</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.config.mapper</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.config.mapper</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">org.springframework.data.domain.Page</span><span class="p">;</span>
 
 <span class="cm">/**</span>
-<span class="cm">* @author coedevon</span>
+<span class="cm">* @author ccsw</span>
 <span class="cm">*/</span>
 <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">BeanMapper</span> <span class="kd">extends</span> <span class="n">com</span><span class="p">.</span><span class="na">devonfw</span><span class="p">.</span><span class="na">module</span><span class="p">.</span><span class="na">beanmapping</span><span class="p">.</span><span class="na">common</span><span class="p">.</span><span class="na">api</span><span class="p">.</span><span class="na">BeanMapper</span> <span class="p">{</span>
 
@@ -987,7 +987,7 @@
 </code></pre></div>
 </div>
 <input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><label for="__tabbed_2_3">mapper/BeanMapperImpl.java</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.config.mapper</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.config.mapper</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
 
@@ -997,7 +997,7 @@
 <span class="kn">import</span> <span class="nn">com.devonfw.module.beanmapping.common.impl.orika.BeanMapperImplOrika</span><span class="p">;</span>
 
 <span class="cm">/**</span>
-<span class="cm">* @author coedevon</span>
+<span class="cm">* @author ccsw</span>
 <span class="cm">*/</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">BeanMapperImpl</span> <span class="kd">extends</span> <span class="n">BeanMapperImplOrika</span> <span class="kd">implements</span> <span class="n">BeanMapper</span> <span class="p">{</span>
 
@@ -1022,7 +1022,7 @@
 <p>Listo, ya podemos empezar a desarrollar nuestros servicios.</p>
 <h2 id="estructurar-el-codigo">Estructurar el código</h2>
 <p>Vamos a hacer un breve refresco de la estructura del código que ya se ha visto en puntos anteriores.</p>
-<p>Las clases deben estar agrupadas por ámbito funcional, en nuestro caso como vamos a hacer la funcionalidad de <code>Categorías</code> pues debería estar todo dentro de un package del tipo <code>com.capgemini.coedevon.tutorial.category</code>.</p>
+<p>Las clases deben estar agrupadas por ámbito funcional, en nuestro caso como vamos a hacer la funcionalidad de <code>Categorías</code> pues debería estar todo dentro de un package del tipo <code>com.capgemini.ccsw.tutorial.category</code>.</p>
 <p>Además, deberíamos aplicar la separación por capas como ya se vió en el esquema:</p>
 <p><img alt="estructura-capas" src="../../assets/images/estructura-capas.png" /></p>
 <p>La primera capa, la de <code>Controlador</code>, se encargará de procesar las peticiones y transformar datos. Esta capa llamará a la capa de <code>Lógica</code> de negocio que ejecutará las operaciones, ayudándose de otros objetos de esa misma capa de <code>Lógica</code> o bien de llamadas a datos a través de la capa de <code>Acceso a Datos</code></p>
@@ -1030,9 +1030,9 @@
 <h2 id="capa-de-operaciones-controller">Capa de operaciones: Controller</h2>
 <p>En esta capa es donde se definen las operaciones que pueden ser consumidas por los clientes. Se caracterizan por estar anotadas con las anotaciones @Controller o @RestController y por las anotaciones @RequestMapping que nos permiten definir las rutas de acceso.</p>
 <h3 id="controller-de-ejemplo">Controller de ejemplo</h3>
-<p>Vamos a crear una clase <code>CategoryController.java</code> dentro del package <code>com.capgemini.coedevon.tutorial.category</code> para definir las rutas de las operaciones.</p>
+<p>Vamos a crear una clase <code>CategoryController.java</code> dentro del package <code>com.capgemini.ccsw.tutorial.category</code> para definir las rutas de las operaciones.</p>
 <div class="tabbed-set" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><label for="__tabbed_3_1">CategoryController.java</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.category</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.category</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
 
@@ -1042,7 +1042,7 @@
 <span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="p">;</span>
 
 <span class="cm">/**</span>
-<span class="cm">* @author coedevon</span>
+<span class="cm">* @author ccsw</span>
 <span class="cm">*/</span>
 <span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">&quot;/category/v1&quot;</span><span class="p">)</span>
 <span class="nd">@RestController</span>
@@ -1066,12 +1066,12 @@
 <h3 id="implementar-operaciones">Implementar operaciones</h3>
 <p>Ahora que ya tenemos un controlador y una operacion de negocio ficticia, vamos a borrarla y añadir las operaciones reales que consumirá nuestra pantalla. Deberemos añadir una operación para listar, una para actualizar, una para guardar y una para borrar. Aunque para hacerlo más cómodo, utilizaremos la misma operación para guardar y para actualizar. Además, no estar trabajando con tipos simples, vamos a utilizar un objeto para recibir información y para enviar información.</p>
 <p>Estos objetos típicamente se denominan DTO (Data Transfer Object) y nos sirven justamente para encapsular información que queremos transportar. En realidad no son más que clases pojo sencilla con propiedades y getters y setters. </p>
-<p>Para nuestro ejemplo crearemos una clase <code>CategoryDto</code> dentro del package <code>com.capgemini.coedevon.tutorial.category.model</code> con el siguiente contenido:</p>
+<p>Para nuestro ejemplo crearemos una clase <code>CategoryDto</code> dentro del package <code>com.capgemini.ccsw.tutorial.category.model</code> con el siguiente contenido:</p>
 <div class="tabbed-set" data-tabs="4:1"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><label for="__tabbed_4_1">CategoryDto.java</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.category.model</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.category.model</span><span class="p">;</span>
 
 <span class="cm">/**</span>
-<span class="cm">* @author coedevon</span>
+<span class="cm">* @author ccsw</span>
 <span class="cm">*/</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">CategoryDto</span> <span class="p">{</span>
   <span class="kd">private</span> <span class="n">Long</span> <span class="n">id</span><span class="p">;</span>
@@ -1117,7 +1117,7 @@
 <p>A continuación utilizaremos esta clase en nuestro Controller para implementar las tres operaciones de negocio.</p>
 <div class="tabbed-set" data-tabs="5:1"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><label for="__tabbed_5_1">CategoryController.java</label><div class="tabbed-content"></div>
 </div>
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.category</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.category</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">java.util.HashMap</span><span class="p">;</span>
@@ -1130,10 +1130,10 @@
 <span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RequestMethod</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.category.model.CategoryDto</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.category.model.CategoryDto</span><span class="p">;</span>
 
 <span class="cm">/**</span>
-<span class="cm">* @author coedevon</span>
+<span class="cm">* @author ccsw</span>
 <span class="cm">*/</span>
 <span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">&quot;/category/v1&quot;</span><span class="p">)</span>
 <span class="nd">@RestController</span>
@@ -1223,14 +1223,14 @@
 <h3 id="implementar-servicios">Implementar servicios</h3>
 <p>Pues vamos a arreglarlo. Vamos a crear un servicio y vamos a mover la lógica de negocio al servicio.</p>
 <div class="tabbed-set" data-tabs="6:3"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><label for="__tabbed_6_1">CategoryService.java</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.category</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.category</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.category.model.CategoryDto</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.category.model.CategoryDto</span><span class="p">;</span>
 
 <span class="cm">/**</span>
-<span class="cm">* @author coedevon</span>
+<span class="cm">* @author ccsw</span>
 <span class="cm">*</span>
 <span class="cm">*/</span>
 <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">CategoryService</span> <span class="p">{</span>
@@ -1257,7 +1257,7 @@
 </code></pre></div>
 </div>
 <input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><label for="__tabbed_6_2">CategoryServiceImpl.java</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.category</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.category</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">java.util.HashMap</span><span class="p">;</span>
@@ -1266,10 +1266,10 @@
 
 <span class="kn">import</span> <span class="nn">org.springframework.stereotype.Service</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.category.model.CategoryDto</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.category.model.CategoryDto</span><span class="p">;</span>
 
 <span class="cm">/**</span>
-<span class="cm">* @author coedevon</span>
+<span class="cm">* @author ccsw</span>
 <span class="cm">*</span>
 <span class="cm">*/</span>
 <span class="nd">@Service</span>
@@ -1319,7 +1319,7 @@
 </code></pre></div>
 </div>
 <input id="__tabbed_6_3" name="__tabbed_6" type="radio" /><label for="__tabbed_6_3">CategoryController.java</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.category</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.category</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
 
@@ -1330,10 +1330,10 @@
 <span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RequestMethod</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.category.model.CategoryDto</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.category.model.CategoryDto</span><span class="p">;</span>
 
 <span class="cm">/**</span>
-<span class="cm">* @author coedevon</span>
+<span class="cm">* @author ccsw</span>
 <span class="cm">*/</span>
 <span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">&quot;/category/v1&quot;</span><span class="p">)</span>
 <span class="nd">@RestController</span>
@@ -1414,7 +1414,7 @@ Estos accesos se deben hacer desde la capa de acceso a datos, y en concreto para
 <h3 id="implementar-entity">Implementar Entity</h3>
 <p>Una vez creada la BBDD el siguiente paso es crear la entidad con la que vamos a persistir y recuperar información. Las entidades igual que los DTOs deberían estar agrupados dentro del package <code>model</code> de cada funcionalidad, así que vamos a crear una nueva clase java.</p>
 <div class="tabbed-set" data-tabs="8:1"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><label for="__tabbed_8_1">Category.java</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.category.model</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.category.model</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">javax.persistence.Column</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">javax.persistence.Entity</span><span class="p">;</span>
@@ -1424,7 +1424,7 @@ Estos accesos se deben hacer desde la capa de acceso a datos, y en concreto para
 <span class="kn">import</span> <span class="nn">javax.persistence.Table</span><span class="p">;</span>
 
 <span class="cm">/**</span>
-<span class="cm">* @author coedevon</span>
+<span class="cm">* @author ccsw</span>
 <span class="cm">*/</span>
 <span class="nd">@Entity</span>
 <span class="nd">@Table</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;Category&quot;</span><span class="p">)</span>
@@ -1496,14 +1496,14 @@ Estos accesos se deben hacer desde la capa de acceso a datos, y en concreto para
 <p>Ahora que ya tenemos la entidad implementada, vamos a utilizarla para acceder a BBDD, y esto lo haremos con un <code>Repository</code>. Existen varias formas de utilizar los repositories, desde el todo automático y magia de JPA hasta el repositorio manual en el que hay que codificar todo. En el tutorial voy a explicar varias formas de implementarlo para este CRUD y los siguientes CRUDs.</p>
 <p>Como ya se dijo en puntos anteriores, el acceso a datos se debe hacer siempre a través de un <code>Repository</code>, así que vamos a implementar uno. En esta capa, al igual que pasaba con los services, es recomendable utilizar el patrón fachada, para poder sustituir implementaciones sin afectar al código.</p>
 <div class="tabbed-set" data-tabs="9:1"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><label for="__tabbed_9_1">CategoryRepository.java</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.category</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.category</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">org.springframework.data.repository.CrudRepository</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.category.model.Category</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.category.model.Category</span><span class="p">;</span>
 
 <span class="cm">/**</span>
-<span class="cm">* @author coedevon</span>
+<span class="cm">* @author ccsw</span>
 <span class="cm">*/</span>
 <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">CategoryRepository</span> <span class="kd">extends</span> <span class="n">CrudRepository</span><span class="o">&lt;</span><span class="n">Category</span><span class="p">,</span> <span class="n">Long</span><span class="o">&gt;</span> <span class="p">{</span>
 
@@ -1524,7 +1524,7 @@ Estos accesos se deben hacer desde la capa de acceso a datos, y en concreto para
 <p>Parece un lio, pero ya verás como es muy sencillo ahora que veremos el ejemplo. Una última cosa, para hacer esas transformaciones, las podemos hacer a mano usando getters y setters o bien utilizar el objeto <code>BeanMapper</code> que hemos configurado al principio como utilidad de Devonfw.</p>
 <p>El código debería quedar así:</p>
 <div class="tabbed-set" data-tabs="10:3"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><label for="__tabbed_10_1">CategoryServiceImpl.java</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.category</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.category</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
 
@@ -1532,11 +1532,11 @@ Estos accesos se deben hacer desde la capa de acceso a datos, y en concreto para
 <span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">org.springframework.stereotype.Service</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.category.model.Category</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.category.model.CategoryDto</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.category.model.Category</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.category.model.CategoryDto</span><span class="p">;</span>
 
 <span class="cm">/**</span>
-<span class="cm">* @author coedevon</span>
+<span class="cm">* @author ccsw</span>
 <span class="cm">*</span>
 <span class="cm">*/</span>
 <span class="nd">@Service</span>
@@ -1584,34 +1584,34 @@ Estos accesos se deben hacer desde la capa de acceso a datos, y en concreto para
 </code></pre></div>
 </div>
 <input id="__tabbed_10_2" name="__tabbed_10" type="radio" /><label for="__tabbed_10_2">CategoryService.java</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.category</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.category</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.category.model.Category</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.category.model.CategoryDto</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.category.model.Category</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.category.model.CategoryDto</span><span class="p">;</span>
 
 <span class="cm">/**</span>
-<span class="cm">* @author coedevon</span>
+<span class="cm">* @author ccsw</span>
 <span class="cm">*</span>
 <span class="cm">*/</span>
 <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">CategoryService</span> <span class="p">{</span>
 
   <span class="cm">/**</span>
-<span class="cm">  * Método para recuperar todas las {@link com.capgemini.coedevon.tutorial.category.model.Category}</span>
+<span class="cm">  * Método para recuperar todas las {@link com.capgemini.ccsw.tutorial.category.model.Category}</span>
 <span class="cm">  * @return</span>
 <span class="cm">  */</span>
   <span class="n">List</span><span class="o">&lt;</span><span class="n">Category</span><span class="o">&gt;</span> <span class="nf">findAll</span><span class="p">();</span>
 
   <span class="cm">/**</span>
-<span class="cm">  * Método para crear o actualizar una {@link com.capgemini.coedevon.tutorial.category.model.Category}</span>
+<span class="cm">  * Método para crear o actualizar una {@link com.capgemini.ccsw.tutorial.category.model.Category}</span>
 <span class="cm">  * @param dto</span>
 <span class="cm">  * @return</span>
 <span class="cm">  */</span>
   <span class="n">Category</span> <span class="nf">save</span><span class="p">(</span><span class="n">CategoryDto</span> <span class="n">dto</span><span class="p">);</span>
 
   <span class="cm">/**</span>
-<span class="cm">  * Método para borrar una {@link com.capgemini.coedevon.tutorial.category.model.Category}</span>
+<span class="cm">  * Método para borrar una {@link com.capgemini.ccsw.tutorial.category.model.Category}</span>
 <span class="cm">  * @param id</span>
 <span class="cm">  */</span>
   <span class="kt">void</span> <span class="nf">delete</span><span class="p">(</span><span class="n">Long</span> <span class="n">id</span><span class="p">);</span>
@@ -1619,7 +1619,7 @@ Estos accesos se deben hacer desde la capa de acceso a datos, y en concreto para
 </code></pre></div>
 </div>
 <input id="__tabbed_10_3" name="__tabbed_10" type="radio" /><label for="__tabbed_10_3">CategoryController.java</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.category</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.category</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
 
@@ -1630,11 +1630,11 @@ Estos accesos se deben hacer desde la capa de acceso a datos, y en concreto para
 <span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RequestMethod</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.category.model.CategoryDto</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.category.model.CategoryDto</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">com.devonfw.module.beanmapping.common.api.BeanMapper</span><span class="p">;</span>
 
 <span class="cm">/**</span>
-<span class="cm">* @author coedevon</span>
+<span class="cm">* @author ccsw</span>
 <span class="cm">*/</span>
 <span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">&quot;/category/v1&quot;</span><span class="p">)</span>
 <span class="nd">@RestController</span>
@@ -1647,7 +1647,7 @@ Estos accesos se deben hacer desde la capa de acceso a datos, y en concreto para
 <span class="hll">  <span class="n">BeanMapper</span> <span class="n">beanMapper</span><span class="p">;</span>
 </span>
   <span class="cm">/**</span>
-<span class="cm">  * Método para recuperar todas las {@link com.capgemini.coedevon.tutorial.category.model.Category}</span>
+<span class="cm">  * Método para recuperar todas las {@link com.capgemini.ccsw.tutorial.category.model.Category}</span>
 <span class="cm">  * @return</span>
 <span class="cm">  */</span>
   <span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">path</span> <span class="o">=</span> <span class="s">&quot;/&quot;</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="n">RequestMethod</span><span class="p">.</span><span class="na">GET</span><span class="p">)</span>
@@ -1657,7 +1657,7 @@ Estos accesos se deben hacer desde la capa de acceso a datos, y en concreto para
 </span>  <span class="p">}</span>
 
   <span class="cm">/**</span>
-<span class="cm">  * Método para crear o actualizar una {@link com.capgemini.coedevon.tutorial.category.model.Category}</span>
+<span class="cm">  * Método para crear o actualizar una {@link com.capgemini.ccsw.tutorial.category.model.Category}</span>
 <span class="cm">  * @param dto</span>
 <span class="cm">  * @return</span>
 <span class="cm">  */</span>
@@ -1668,7 +1668,7 @@ Estos accesos se deben hacer desde la capa de acceso a datos, y en concreto para
 </span>  <span class="p">}</span>
 
   <span class="cm">/**</span>
-<span class="cm">  * Método para borrar una {@link com.capgemini.coedevon.tutorial.category.model.Category}</span>
+<span class="cm">  * Método para borrar una {@link com.capgemini.ccsw.tutorial.category.model.Category}</span>
 <span class="cm">  * @param id</span>
 <span class="cm">  */</span>
   <span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">path</span> <span class="o">=</span> <span class="s">&quot;/{id}&quot;</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="n">RequestMethod</span><span class="p">.</span><span class="na">DELETE</span><span class="p">)</span>
@@ -1697,7 +1697,7 @@ Estos accesos se deben hacer desde la capa de acceso a datos, y en concreto para
 <h2 id="que-hemos-aprendido">¿Que hemos aprendido?</h2>
 <p>Resumiendo un poco los pasos que hemos seguido:</p>
 <ul>
-<li>Hay que definir y agrupar por ámbito funcional, hemos creado el package <code>com.capgemini.coedevon.tutorial.category</code> para aglutinar todas las clases</li>
+<li>Hay que definir y agrupar por ámbito funcional, hemos creado el package <code>com.capgemini.ccsw.tutorial.category</code> para aglutinar todas las clases</li>
 <li>La implementación se debería separar por capas:<ul>
 <li><code>Controller</code> → Maneja las peticiones de entrada del cliente y realiza transformaciones. No ejecuta directamente lógica de negocio, para eso utiliza llamadas a la siguiente capa.</li>
 <li><code>Service</code> → Ejecuta la lógica de negocio en sus métodos o llamando a otros objetos de la misma capa. No ejecuta directamente accesos a datos, para eso utiliza la siguiente capa.</li>

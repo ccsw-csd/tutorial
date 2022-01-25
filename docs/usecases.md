@@ -8,6 +8,9 @@ Como es un buen amigo de la infancia, hemos decidido ayudar a Ernesto y colabora
 
 Por cierto, la Ludoteca al final se va a llamar *Ludoteca Tán*.
 
+!!! info "Info"
+    Las imágenes que aparecen a continuación son mockups o diseños de alambre de las pantallas que vamos a desarrollar durante el tutorial. No quiere decir que el estilo final de las pantallas deba ser así, ni mucho menos. Es simplemente una forma sencilla de ejemplificar como debe quedar más o menos una pantalla.
+
 ## ** Diseño de BD **
 
 Para el proyecto que vamos a crear vamos a modelizar y gestionar 3 entidades: `GAME`, `CATEGORY` y `AUTHOR`.

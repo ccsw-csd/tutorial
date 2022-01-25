@@ -1255,7 +1255,7 @@ ng generate service services/authors/author
 </span></code></pre></div>
 </div>
 <input id="__tabbed_9_3" name="__tabbed_9" type="radio" /><label for="__tabbed_9_3">Author.java</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.author.model</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.author.model</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">javax.persistence.Column</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">javax.persistence.Entity</span><span class="p">;</span>
@@ -1265,7 +1265,7 @@ ng generate service services/authors/author
 <span class="kn">import</span> <span class="nn">javax.persistence.Table</span><span class="p">;</span>
 
 <span class="cm">/**</span>
-<span class="cm">* @author coedevon</span>
+<span class="cm">* @author ccsw</span>
 <span class="cm">*/</span>
 <span class="nd">@Entity</span>
 <span class="nd">@Table</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;Author&quot;</span><span class="p">)</span>
@@ -1334,10 +1334,10 @@ ng generate service services/authors/author
 </code></pre></div>
 </div>
 <input id="__tabbed_9_4" name="__tabbed_9" type="radio" /><label for="__tabbed_9_4">AuthorDto.java</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.author.model</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.author.model</span><span class="p">;</span>
 
 <span class="cm">/**</span>
-<span class="cm">* @author coedevon</span>
+<span class="cm">* @author ccsw</span>
 <span class="cm">*/</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">AuthorDto</span> <span class="p">{</span>
 
@@ -1402,21 +1402,21 @@ ng generate service services/authors/author
 <h3 id="repository">Repository</h3>
 <p>Para desarrollar todas las operaciones, esta vez vamos a ir de más bajo a más alto nivel. Empezaremos por el acceso a datos, crearemos el Repository.</p>
 <div class="tabbed-set" data-tabs="10:1"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><label for="__tabbed_10_1">AuthorRepository.java</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.author</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.author</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">org.springframework.data.domain.Page</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">org.springframework.data.domain.Pageable</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">org.springframework.data.repository.CrudRepository</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.author.model.Author</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.author.model.Author</span><span class="p">;</span>
 
 <span class="cm">/**</span>
-<span class="cm">* @author coedevon</span>
+<span class="cm">* @author ccsw</span>
 <span class="cm">*/</span>
 <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">AuthorRepository</span> <span class="kd">extends</span> <span class="n">CrudRepository</span><span class="o">&lt;</span><span class="n">Author</span><span class="p">,</span> <span class="n">Long</span><span class="o">&gt;</span> <span class="p">{</span>
 
     <span class="cm">/**</span>
-<span class="cm">    * Método para recuperar un listado paginado de {@link com.capgemini.coedevon.tutorial.author.model.Author}</span>
+<span class="cm">    * Método para recuperar un listado paginado de {@link com.capgemini.ccsw.tutorial.author.model.Author}</span>
 <span class="cm">    * @param page</span>
 <span class="cm">    * @return</span>
 <span class="cm">    */</span>
@@ -1435,36 +1435,36 @@ ng generate service services/authors/author
 <h3 id="service">Service</h3>
 <p>La siguiente capa que vamos a implementar es justamente la capa que hace uso del <code>Repository</code>, es decir el <code>Service</code>.</p>
 <div class="tabbed-set" data-tabs="11:3"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><label for="__tabbed_11_1">AuthorService.java</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.author</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.author</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">org.springframework.data.domain.Page</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.author.model.Author</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.author.model.AuthorDto</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.author.model.AuthorSearchDto</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.author.model.Author</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.author.model.AuthorDto</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.author.model.AuthorSearchDto</span><span class="p">;</span>
 
 <span class="cm">/**</span>
-<span class="cm">* @author coedevon</span>
+<span class="cm">* @author ccsw</span>
 <span class="cm">*</span>
 <span class="cm">*/</span>
 <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">AuthorService</span> <span class="p">{</span>
 
     <span class="cm">/**</span>
-<span class="cm">    * Método para recuperar un listado paginado de {@link com.capgemini.coedevon.tutorial.author.model.Author}</span>
+<span class="cm">    * Método para recuperar un listado paginado de {@link com.capgemini.ccsw.tutorial.author.model.Author}</span>
 <span class="cm">    * @param dto</span>
 <span class="cm">    * @return</span>
 <span class="cm">    */</span>
     <span class="n">Page</span><span class="o">&lt;</span><span class="n">Author</span><span class="o">&gt;</span> <span class="nf">findPage</span><span class="p">(</span><span class="n">AuthorSearchDto</span> <span class="n">dto</span><span class="p">);</span>
 
     <span class="cm">/**</span>
-<span class="cm">    * Método para crear o actualizar un {@link com.capgemini.coedevon.tutorial.author.model.Author}</span>
+<span class="cm">    * Método para crear o actualizar un {@link com.capgemini.ccsw.tutorial.author.model.Author}</span>
 <span class="cm">    * @param data</span>
 <span class="cm">    * @return</span>
 <span class="cm">    */</span>
     <span class="n">Author</span> <span class="nf">save</span><span class="p">(</span><span class="n">AuthorDto</span> <span class="n">data</span><span class="p">);</span>
 
     <span class="cm">/**</span>
-<span class="cm">    * Método para crear o actualizar un {@link com.capgemini.coedevon.tutorial.author.model.Author}</span>
+<span class="cm">    * Método para crear o actualizar un {@link com.capgemini.ccsw.tutorial.author.model.Author}</span>
 <span class="cm">    * @param id</span>
 <span class="cm">    */</span>
     <span class="kt">void</span> <span class="nf">delete</span><span class="p">(</span><span class="n">Long</span> <span class="n">id</span><span class="p">);</span>
@@ -1473,7 +1473,7 @@ ng generate service services/authors/author
 </code></pre></div>
 </div>
 <input id="__tabbed_11_2" name="__tabbed_11" type="radio" /><label for="__tabbed_11_2">AuthorServiceImpl.java</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.author</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.author</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">javax.transaction.Transactional</span><span class="p">;</span>
 
@@ -1482,12 +1482,12 @@ ng generate service services/authors/author
 <span class="kn">import</span> <span class="nn">org.springframework.data.domain.Page</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">org.springframework.stereotype.Service</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.author.model.Author</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.author.model.AuthorDto</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.author.model.AuthorSearchDto</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.author.model.Author</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.author.model.AuthorDto</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.author.model.AuthorSearchDto</span><span class="p">;</span>
 
 <span class="cm">/**</span>
-<span class="cm">* @author coedevon</span>
+<span class="cm">* @author ccsw</span>
 <span class="cm">*/</span>
 <span class="nd">@Service</span>
 <span class="nd">@Transactional</span>
@@ -1536,12 +1536,12 @@ ng generate service services/authors/author
 </code></pre></div>
 </div>
 <input id="__tabbed_11_3" name="__tabbed_11" type="radio" /><label for="__tabbed_11_3">AuthorSearchDto.java</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.author.model</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.author.model</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">org.springframework.data.domain.Pageable</span><span class="p">;</span>
 
 <span class="cm">/**</span>
-<span class="cm">* @author coedevon</span>
+<span class="cm">* @author ccsw</span>
 <span class="cm">*/</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">AuthorSearchDto</span> <span class="p">{</span>
 
@@ -1576,7 +1576,7 @@ ng generate service services/authors/author
 <h3 id="controller">Controller</h3>
 <p>Para terminar, vamos a implementar el <code>Controller</code> para que ataque a la capa de <code>Service</code>, con los endpoints de las operaciones que vamos a publicar.</p>
 <div class="tabbed-set" data-tabs="12:1"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><label for="__tabbed_12_1">AuthorController.java</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.coedevon.tutorial.author</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.author</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">org.springframework.data.domain.Page</span><span class="p">;</span>
@@ -1587,12 +1587,12 @@ ng generate service services/authors/author
 <span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RequestMethod</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.author.model.AuthorDto</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.author.model.AuthorSearchDto</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.capgemini.coedevon.tutorial.config.mapper.BeanMapper</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.author.model.AuthorDto</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.author.model.AuthorSearchDto</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.config.mapper.BeanMapper</span><span class="p">;</span>
 
 <span class="cm">/**</span>
-<span class="cm">* @author coedevon</span>
+<span class="cm">* @author ccsw</span>
 <span class="cm">*/</span>
 <span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">&quot;/author/v1&quot;</span><span class="p">)</span>
 <span class="nd">@RestController</span>
@@ -1606,7 +1606,7 @@ ng generate service services/authors/author
     <span class="n">BeanMapper</span> <span class="n">beanMapper</span><span class="p">;</span>
 
     <span class="cm">/**</span>
-<span class="cm">    * Método para recuperar un listado paginado de {@link com.capgemini.coedevon.tutorial.author.model.Author}</span>
+<span class="cm">    * Método para recuperar un listado paginado de {@link com.capgemini.ccsw.tutorial.author.model.Author}</span>
 <span class="cm">    * @param dto</span>
 <span class="cm">    * @return</span>
 <span class="cm">    */</span>
@@ -1618,7 +1618,7 @@ ng generate service services/authors/author
     <span class="p">}</span>
 
     <span class="cm">/**</span>
-<span class="cm">    * Método para crear o actualizar un {@link com.capgemini.coedevon.tutorial.author.model.Author}</span>
+<span class="cm">    * Método para crear o actualizar un {@link com.capgemini.ccsw.tutorial.author.model.Author}</span>
 <span class="cm">    * @param data datos de la entidad</span>
 <span class="cm">    * @return</span>
 <span class="cm">    */</span>
@@ -1629,7 +1629,7 @@ ng generate service services/authors/author
     <span class="p">}</span>
 
     <span class="cm">/**</span>
-<span class="cm">    * Método para crear o actualizar un {@link com.capgemini.coedevon.tutorial.author.model.Author}</span>
+<span class="cm">    * Método para crear o actualizar un {@link com.capgemini.ccsw.tutorial.author.model.Author}</span>
 <span class="cm">    * @param id PK de la entidad</span>
 <span class="cm">    */</span>
     <span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">path</span> <span class="o">=</span> <span class="s">&quot;/{id}&quot;</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="n">RequestMethod</span><span class="p">.</span><span class="na">DELETE</span><span class="p">)</span>

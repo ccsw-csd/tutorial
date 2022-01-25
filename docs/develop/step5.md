@@ -812,7 +812,7 @@ Lo primero que vamos a hacer es crear los modelos para trabajar con BBDD y con p
     ```
 === "Game.java"
     ``` Java
-    package com.capgemini.coedevon.tutorial.game.model;
+    package com.capgemini.ccsw.tutorial.game.model;
 
     import javax.persistence.Column;
     import javax.persistence.Entity;
@@ -823,11 +823,11 @@ Lo primero que vamos a hacer es crear los modelos para trabajar con BBDD y con p
     import javax.persistence.ManyToOne;
     import javax.persistence.Table;
 
-    import com.capgemini.coedevon.tutorial.author.model.Author;
-    import com.capgemini.coedevon.tutorial.category.model.Category;
+    import com.capgemini.ccsw.tutorial.author.model.Author;
+    import com.capgemini.ccsw.tutorial.category.model.Category;
 
     /**
-    * @author coedevon
+    * @author ccsw
     */
     @Entity
     @Table(name = "Game")
@@ -936,13 +936,13 @@ Lo primero que vamos a hacer es crear los modelos para trabajar con BBDD y con p
     ```
 === "GameDto.java"
     ``` Java
-    package com.capgemini.coedevon.tutorial.game.model;
+    package com.capgemini.ccsw.tutorial.game.model;
 
-    import com.capgemini.coedevon.tutorial.author.model.AuthorDto;
-    import com.capgemini.coedevon.tutorial.category.model.CategoryDto;
+    import com.capgemini.ccsw.tutorial.author.model.AuthorDto;
+    import com.capgemini.ccsw.tutorial.category.model.CategoryDto;
 
     /**
-    * @author coedevon
+    * @author ccsw
     */
     public class GameDto {
 
@@ -1051,14 +1051,14 @@ Esta implementación la haremos en un Repository normal, y el resto de métodos 
 
 === "GameRepository.java"
     ``` Java
-    package com.capgemini.coedevon.tutorial.game;
+    package com.capgemini.ccsw.tutorial.game;
 
     import org.springframework.data.repository.CrudRepository;
 
-    import com.capgemini.coedevon.tutorial.game.model.Game;
+    import com.capgemini.ccsw.tutorial.game.model.Game;
 
     /**
-    * @author coedevon
+    * @author ccsw
     */
     public interface GameRepository extends CrudRepository<Game, Long>, GameCustomRepository {
 
@@ -1066,20 +1066,20 @@ Esta implementación la haremos en un Repository normal, y el resto de métodos 
     ```
 === "GameCustomRepository.java"
     ``` Java
-    package com.capgemini.coedevon.tutorial.game;
+    package com.capgemini.ccsw.tutorial.game;
 
     import java.util.List;
 
-    import com.capgemini.coedevon.tutorial.game.model.Game;
+    import com.capgemini.ccsw.tutorial.game.model.Game;
 
     /**
-    * @author coedevon
+    * @author ccsw
     *
     */
     public interface GameCustomRepository {
 
         /**
-        * Método para recuperar todas las {@link com.capgemini.coedevon.tutorial.game.model.Game} filtradas
+        * Método para recuperar todas las {@link com.capgemini.ccsw.tutorial.game.model.Game} filtradas
         * @param title
         * @param category
         * @return
@@ -1089,7 +1089,7 @@ Esta implementación la haremos en un Repository normal, y el resto de métodos 
     ```
 === "GameCustomRepositoryImpl.java"
     ``` Java
-    package com.capgemini.coedevon.tutorial.game;
+    package com.capgemini.ccsw.tutorial.game;
 
     import java.util.List;
 
@@ -1098,14 +1098,14 @@ Esta implementación la haremos en un Repository normal, y el resto de métodos 
     import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.util.StringUtils;
 
-    import com.capgemini.coedevon.tutorial.game.model.Game;
+    import com.capgemini.ccsw.tutorial.game.model.Game;
     import com.devonfw.module.basic.common.api.query.LikePatternSyntax;
     import com.devonfw.module.jpa.dataaccess.api.QueryUtil;
     import com.querydsl.core.alias.Alias;
     import com.querydsl.jpa.impl.JPAQuery;
 
     /**
-    * @author coedevon
+    * @author ccsw
     *
     */
     public class GameCustomRepositoryImpl implements GameCustomRepository {
@@ -1147,20 +1147,20 @@ Siguiente paso, la capa de lógica, es decir el `Service`.
 
 === "GameService.java"
     ``` Java
-    package com.capgemini.coedevon.tutorial.game;
+    package com.capgemini.ccsw.tutorial.game;
 
     import java.util.List;
 
-    import com.capgemini.coedevon.tutorial.game.model.Game;
-    import com.capgemini.coedevon.tutorial.game.model.GameDto;
+    import com.capgemini.ccsw.tutorial.game.model.Game;
+    import com.capgemini.ccsw.tutorial.game.model.GameDto;
 
     /**
-    * @author coedevon
+    * @author ccsw
     */
     public interface GameService {
 
         /**
-        * Método para recuperar todas las {@link com.capgemini.coedevon.tutorial.game.model.Game} filtradas
+        * Método para recuperar todas las {@link com.capgemini.ccsw.tutorial.game.model.Game} filtradas
         * @param title
         * @param category
         * @return
@@ -1168,7 +1168,7 @@ Siguiente paso, la capa de lógica, es decir el `Service`.
         List<Game> findByFilter(String title, Long category);
 
         /**
-        * Método para crear o actualizar una {@link com.capgemini.coedevon.tutorial.game.model.Game}
+        * Método para crear o actualizar una {@link com.capgemini.ccsw.tutorial.game.model.Game}
         * @param dto
         * @return
         */
@@ -1178,7 +1178,7 @@ Siguiente paso, la capa de lógica, es decir el `Service`.
     ```
 === "GameServiceImpl.java"
     ``` Java
-    package com.capgemini.coedevon.tutorial.game;
+    package com.capgemini.ccsw.tutorial.game;
 
     import java.util.List;
 
@@ -1188,11 +1188,11 @@ Siguiente paso, la capa de lógica, es decir el `Service`.
     import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.stereotype.Service;
 
-    import com.capgemini.coedevon.tutorial.game.model.Game;
-    import com.capgemini.coedevon.tutorial.game.model.GameDto;
+    import com.capgemini.ccsw.tutorial.game.model.Game;
+    import com.capgemini.ccsw.tutorial.game.model.GameDto;
 
     /**
-    * @author coedevon
+    * @author ccsw
     */
     @Service
     @Transactional
@@ -1240,43 +1240,43 @@ Lo correcto es realizar consultas a la BBDD y traernos esas entities. Pero si re
 
 === "AuthorService.java"
     ``` Java hl_lines="15 16 17 18 19 20"
-    package com.capgemini.coedevon.tutorial.author;
+    package com.capgemini.ccsw.tutorial.author;
 
     import org.springframework.data.domain.Page;
 
-    import com.capgemini.coedevon.tutorial.author.model.Author;
-    import com.capgemini.coedevon.tutorial.author.model.AuthorDto;
-    import com.capgemini.coedevon.tutorial.author.model.AuthorSearchDto;
+    import com.capgemini.ccsw.tutorial.author.model.Author;
+    import com.capgemini.ccsw.tutorial.author.model.AuthorDto;
+    import com.capgemini.ccsw.tutorial.author.model.AuthorSearchDto;
 
     /**
-    * @author coedevon
+    * @author ccsw
     *
     */
     public interface AuthorService {
 
         /**
-        * Recupera un {@link com.capgemini.coedevon.tutorial.author.model.Author} a través de su ID
+        * Recupera un {@link com.capgemini.ccsw.tutorial.author.model.Author} a través de su ID
         * @param id
         * @return
         */
         Author get(Long id);
 
         /**
-        * Método para recuperar un listado paginado de {@link com.capgemini.coedevon.tutorial.author.model.Author}
+        * Método para recuperar un listado paginado de {@link com.capgemini.ccsw.tutorial.author.model.Author}
         * @param dto
         * @return
         */
         Page<Author> findPage(AuthorSearchDto dto);
 
         /**
-        * Método para crear o actualizar un {@link com.capgemini.coedevon.tutorial.author.model.Author}
+        * Método para crear o actualizar un {@link com.capgemini.ccsw.tutorial.author.model.Author}
         * @param data
         * @return
         */
         Author save(AuthorDto data);
 
         /**
-        * Método para crear o actualizar un {@link com.capgemini.coedevon.tutorial.author.model.Author}
+        * Método para crear o actualizar un {@link com.capgemini.ccsw.tutorial.author.model.Author}
         * @param id
         */
         void delete(Long id);
@@ -1285,7 +1285,7 @@ Lo correcto es realizar consultas a la BBDD y traernos esas entities. Pero si re
     ```
 === "AuthorServiceImpl.java"
     ``` Java hl_lines="24 25 26 27 28 29 30 31 50"
-    package com.capgemini.coedevon.tutorial.author;
+    package com.capgemini.ccsw.tutorial.author;
 
     import javax.transaction.Transactional;
 
@@ -1294,12 +1294,12 @@ Lo correcto es realizar consultas a la BBDD y traernos esas entities. Pero si re
     import org.springframework.data.domain.Page;
     import org.springframework.stereotype.Service;
 
-    import com.capgemini.coedevon.tutorial.author.model.Author;
-    import com.capgemini.coedevon.tutorial.author.model.AuthorDto;
-    import com.capgemini.coedevon.tutorial.author.model.AuthorSearchDto;
+    import com.capgemini.ccsw.tutorial.author.model.Author;
+    import com.capgemini.ccsw.tutorial.author.model.AuthorDto;
+    import com.capgemini.ccsw.tutorial.author.model.AuthorSearchDto;
 
     /**
-    * @author coedevon
+    * @author ccsw
     */
     @Service
     @Transactional
@@ -1357,41 +1357,41 @@ Lo correcto es realizar consultas a la BBDD y traernos esas entities. Pero si re
     ```
 === "CategoryService.java"
     ``` Java hl_lines="14 15 16 17 18 19"
-    package com.capgemini.coedevon.tutorial.category;
+    package com.capgemini.ccsw.tutorial.category;
 
     import java.util.List;
 
-    import com.capgemini.coedevon.tutorial.category.model.Category;
-    import com.capgemini.coedevon.tutorial.category.model.CategoryDto;
+    import com.capgemini.ccsw.tutorial.category.model.Category;
+    import com.capgemini.ccsw.tutorial.category.model.CategoryDto;
 
     /**
-    * @author coedevon
+    * @author ccsw
     *
     */
     public interface CategoryService {
 
         /**
-        * Recupera una {@link com.capgemini.coedevon.tutorial.category.model.Category} a partir de su ID
+        * Recupera una {@link com.capgemini.ccsw.tutorial.category.model.Category} a partir de su ID
         * @param id
         * @return
         */
         Category get(Long id);
 
         /**
-        * Método para recuperar todas las {@link com.capgemini.coedevon.tutorial.category.model.Category}
+        * Método para recuperar todas las {@link com.capgemini.ccsw.tutorial.category.model.Category}
         * @return
         */
         List<Category> findAll();
 
         /**
-        * Método para crear o actualizar una {@link com.capgemini.coedevon.tutorial.category.model.Category}
+        * Método para crear o actualizar una {@link com.capgemini.ccsw.tutorial.category.model.Category}
         * @param dto
         * @return
         */
         Category save(CategoryDto dto);
 
         /**
-        * Método para borrar una {@link com.capgemini.coedevon.tutorial.category.model.Category}
+        * Método para borrar una {@link com.capgemini.ccsw.tutorial.category.model.Category}
         * @param id
         */
         void delete(Long id);
@@ -1399,7 +1399,7 @@ Lo correcto es realizar consultas a la BBDD y traernos esas entities. Pero si re
     ```
 === "CategoryServiceImpl.java"
     ``` Java hl_lines="22 23 24 25 26 27 28 29 48"
-    package com.capgemini.coedevon.tutorial.category;
+    package com.capgemini.ccsw.tutorial.category;
 
     import java.util.List;
 
@@ -1407,11 +1407,11 @@ Lo correcto es realizar consultas a la BBDD y traernos esas entities. Pero si re
     import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.stereotype.Service;
 
-    import com.capgemini.coedevon.tutorial.category.model.Category;
-    import com.capgemini.coedevon.tutorial.category.model.CategoryDto;
+    import com.capgemini.ccsw.tutorial.category.model.Category;
+    import com.capgemini.ccsw.tutorial.category.model.CategoryDto;
 
     /**
-    * @author coedevon
+    * @author ccsw
     *
     */
     @Service
@@ -1475,7 +1475,7 @@ Y ahora ya podemos implementar correctamente nuestro `Service`.
 
 === "GameServiceImpl.java"
     ``` Java hl_lines="28 29 31 32 57 58 60 61"
-    package com.capgemini.coedevon.tutorial.game;
+    package com.capgemini.ccsw.tutorial.game;
 
     import java.util.List;
 
@@ -1485,15 +1485,15 @@ Y ahora ya podemos implementar correctamente nuestro `Service`.
     import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.stereotype.Service;
 
-    import com.capgemini.coedevon.tutorial.author.AuthorService;
-    import com.capgemini.coedevon.tutorial.author.model.Author;
-    import com.capgemini.coedevon.tutorial.category.CategoryService;
-    import com.capgemini.coedevon.tutorial.category.model.Category;
-    import com.capgemini.coedevon.tutorial.game.model.Game;
-    import com.capgemini.coedevon.tutorial.game.model.GameDto;
+    import com.capgemini.ccsw.tutorial.author.AuthorService;
+    import com.capgemini.ccsw.tutorial.author.model.Author;
+    import com.capgemini.ccsw.tutorial.category.CategoryService;
+    import com.capgemini.ccsw.tutorial.category.model.Category;
+    import com.capgemini.ccsw.tutorial.game.model.Game;
+    import com.capgemini.ccsw.tutorial.game.model.GameDto;
 
     /**
-    * @author coedevon
+    * @author ccsw
     */
     @Service
     @Transactional
@@ -1549,7 +1549,7 @@ Después de todo este mareo, ya podemos terminar ocn la última capa. Vamos a im
 
 === "GameController.java"
     ``` Java
-    package com.capgemini.coedevon.tutorial.game;
+    package com.capgemini.ccsw.tutorial.game;
 
     import java.util.List;
 
@@ -1560,12 +1560,12 @@ Después de todo este mareo, ya podemos terminar ocn la última capa. Vamos a im
     import org.springframework.web.bind.annotation.RequestMethod;
     import org.springframework.web.bind.annotation.RestController;
 
-    import com.capgemini.coedevon.tutorial.config.mapper.BeanMapper;
-    import com.capgemini.coedevon.tutorial.game.model.GameDto;
-    import com.capgemini.coedevon.tutorial.game.model.GameSearchDto;
+    import com.capgemini.ccsw.tutorial.config.mapper.BeanMapper;
+    import com.capgemini.ccsw.tutorial.game.model.GameDto;
+    import com.capgemini.ccsw.tutorial.game.model.GameSearchDto;
 
     /**
-    * @author coedevon
+    * @author ccsw
     */
     @RequestMapping(value = "/game/v1")
     @RestController
@@ -1579,7 +1579,7 @@ Después de todo este mareo, ya podemos terminar ocn la última capa. Vamos a im
         BeanMapper beanMapper;
 
         /*
-        * Método para recuperar todos los {@link com.capgemini.coedevon.tutorial.game.model.Game} filtrados
+        * Método para recuperar todos los {@link com.capgemini.ccsw.tutorial.game.model.Game} filtrados
         * @return
         */
         @RequestMapping(path = "/", method = RequestMethod.POST)
@@ -1589,7 +1589,7 @@ Después de todo este mareo, ya podemos terminar ocn la última capa. Vamos a im
         }
 
         /**
-        * Método para crear o actualizar un {@link com.capgemini.coedevon.tutorial.game.model.Game}
+        * Método para crear o actualizar un {@link com.capgemini.ccsw.tutorial.game.model.Game}
         * @param dto
         * @return
         */
@@ -1604,10 +1604,10 @@ Después de todo este mareo, ya podemos terminar ocn la última capa. Vamos a im
     ```
 === "GameSearchDto.java"
     ``` Java
-    package com.capgemini.coedevon.tutorial.game.model;
+    package com.capgemini.ccsw.tutorial.game.model;
 
     /**
-    * @author coedevon
+    * @author ccsw
     */
     public class GameSearchDto {
 
@@ -1674,7 +1674,7 @@ Así que antes de finalizar la implementación de backend, vamos a desarrollar e
 
 === "AuthorController.java"
     ``` Java hl_lines="32 33 34 35 36 37 38 39 40 41"
-    package com.capgemini.coedevon.tutorial.author;
+    package com.capgemini.ccsw.tutorial.author;
 
     import java.util.List;
 
@@ -1687,12 +1687,12 @@ Así que antes de finalizar la implementación de backend, vamos a desarrollar e
     import org.springframework.web.bind.annotation.RequestMethod;
     import org.springframework.web.bind.annotation.RestController;
 
-    import com.capgemini.coedevon.tutorial.author.model.AuthorDto;
-    import com.capgemini.coedevon.tutorial.author.model.AuthorSearchDto;
-    import com.capgemini.coedevon.tutorial.config.mapper.BeanMapper;
+    import com.capgemini.ccsw.tutorial.author.model.AuthorDto;
+    import com.capgemini.ccsw.tutorial.author.model.AuthorSearchDto;
+    import com.capgemini.ccsw.tutorial.config.mapper.BeanMapper;
 
     /**
-    * @author coedevon
+    * @author ccsw
     */
     @RequestMapping(value = "/author/v1")
     @RestController
@@ -1706,7 +1706,7 @@ Así que antes de finalizar la implementación de backend, vamos a desarrollar e
         BeanMapper beanMapper;
 
         /**
-        * Método para recuperar un listado paginado de {@link com.capgemini.coedevon.tutorial.author.model.Author}
+        * Método para recuperar un listado paginado de {@link com.capgemini.ccsw.tutorial.author.model.Author}
         * @param dto
         * @return
         */
@@ -1717,7 +1717,7 @@ Así que antes de finalizar la implementación de backend, vamos a desarrollar e
         }
 
         /**
-        * Método para recuperar un listado paginado de {@link com.capgemini.coedevon.tutorial.author.model.Author}
+        * Método para recuperar un listado paginado de {@link com.capgemini.ccsw.tutorial.author.model.Author}
         * @param dto
         * @return
         */
@@ -1728,7 +1728,7 @@ Así que antes de finalizar la implementación de backend, vamos a desarrollar e
         }
 
         /**
-        * Método para crear o actualizar un {@link com.capgemini.coedevon.tutorial.author.model.Author}
+        * Método para crear o actualizar un {@link com.capgemini.ccsw.tutorial.author.model.Author}
         * @param data datos de la entidad
         * @return
         */
@@ -1739,7 +1739,7 @@ Así que antes de finalizar la implementación de backend, vamos a desarrollar e
         }
 
         /**
-        * Método para crear o actualizar un {@link com.capgemini.coedevon.tutorial.author.model.Author}
+        * Método para crear o actualizar un {@link com.capgemini.ccsw.tutorial.author.model.Author}
         * @param id PK de la entidad
         */
         @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
@@ -1752,51 +1752,51 @@ Así que antes de finalizar la implementación de backend, vamos a desarrollar e
     ```
 === "AuthorService.java"
     ``` Java hl_lines="44 45 46 47 48"
-    package com.capgemini.coedevon.tutorial.author;
+    package com.capgemini.ccsw.tutorial.author;
 
     import java.util.List;
 
     import org.springframework.data.domain.Page;
 
-    import com.capgemini.coedevon.tutorial.author.model.Author;
-    import com.capgemini.coedevon.tutorial.author.model.AuthorDto;
-    import com.capgemini.coedevon.tutorial.author.model.AuthorSearchDto;
+    import com.capgemini.ccsw.tutorial.author.model.Author;
+    import com.capgemini.ccsw.tutorial.author.model.AuthorDto;
+    import com.capgemini.ccsw.tutorial.author.model.AuthorSearchDto;
 
     /**
-    * @author coedevon
+    * @author ccsw
     *
     */
     public interface AuthorService {
 
         /**
-        * Recupera un {@link com.capgemini.coedevon.tutorial.author.model.Author} a través de su ID
+        * Recupera un {@link com.capgemini.ccsw.tutorial.author.model.Author} a través de su ID
         * @param id
         * @return
         */
         Author get(Long id);
 
         /**
-        * Método para recuperar un listado paginado de {@link com.capgemini.coedevon.tutorial.author.model.Author}
+        * Método para recuperar un listado paginado de {@link com.capgemini.ccsw.tutorial.author.model.Author}
         * @param dto
         * @return
         */
         Page<Author> findPage(AuthorSearchDto dto);
 
         /**
-        * Método para crear o actualizar un {@link com.capgemini.coedevon.tutorial.author.model.Author}
+        * Método para crear o actualizar un {@link com.capgemini.ccsw.tutorial.author.model.Author}
         * @param data
         * @return
         */
         Author save(AuthorDto data);
 
         /**
-        * Método para crear o actualizar un {@link com.capgemini.coedevon.tutorial.author.model.Author}
+        * Método para crear o actualizar un {@link com.capgemini.ccsw.tutorial.author.model.Author}
         * @param id
         */
         void delete(Long id);
 
         /**
-        * Método para recuperar un listado completo de {@link com.capgemini.coedevon.tutorial.author.model.Author}
+        * Método para recuperar un listado completo de {@link com.capgemini.ccsw.tutorial.author.model.Author}
         * @return
         */
         List<Author> list();
@@ -1805,7 +1805,7 @@ Así que antes de finalizar la implementación de backend, vamos a desarrollar e
     ```
 === "AuthorServiceImpl.java"
     ``` Java hl_lines="70 71 72 73 74 75 76 77"
-    package com.capgemini.coedevon.tutorial.author;
+    package com.capgemini.ccsw.tutorial.author;
 
     import java.util.List;
 
@@ -1816,12 +1816,12 @@ Así que antes de finalizar la implementación de backend, vamos a desarrollar e
     import org.springframework.data.domain.Page;
     import org.springframework.stereotype.Service;
 
-    import com.capgemini.coedevon.tutorial.author.model.Author;
-    import com.capgemini.coedevon.tutorial.author.model.AuthorDto;
-    import com.capgemini.coedevon.tutorial.author.model.AuthorSearchDto;
+    import com.capgemini.ccsw.tutorial.author.model.Author;
+    import com.capgemini.ccsw.tutorial.author.model.AuthorDto;
+    import com.capgemini.ccsw.tutorial.author.model.AuthorSearchDto;
 
     /**
-    * @author coedevon
+    * @author ccsw
     */
     @Service
     @Transactional

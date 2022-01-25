@@ -546,7 +546,7 @@ Lo primero que vamos a hacer es crear los modelos para trabajar con BBDD y con p
     ```
 === "Author.java"
     ``` Java
-    package com.capgemini.coedevon.tutorial.author.model;
+    package com.capgemini.ccsw.tutorial.author.model;
 
     import javax.persistence.Column;
     import javax.persistence.Entity;
@@ -556,7 +556,7 @@ Lo primero que vamos a hacer es crear los modelos para trabajar con BBDD y con p
     import javax.persistence.Table;
 
     /**
-    * @author coedevon
+    * @author ccsw
     */
     @Entity
     @Table(name = "Author")
@@ -625,10 +625,10 @@ Lo primero que vamos a hacer es crear los modelos para trabajar con BBDD y con p
     ```
 === "AuthorDto.java"
     ``` Java
-    package com.capgemini.coedevon.tutorial.author.model;
+    package com.capgemini.ccsw.tutorial.author.model;
 
     /**
-    * @author coedevon
+    * @author ccsw
     */
     public class AuthorDto {
 
@@ -695,21 +695,21 @@ Para desarrollar todas las operaciones, esta vez vamos a ir de más bajo a más 
 
 === "AuthorRepository.java"
     ``` Java
-    package com.capgemini.coedevon.tutorial.author;
+    package com.capgemini.ccsw.tutorial.author;
 
     import org.springframework.data.domain.Page;
     import org.springframework.data.domain.Pageable;
     import org.springframework.data.repository.CrudRepository;
 
-    import com.capgemini.coedevon.tutorial.author.model.Author;
+    import com.capgemini.ccsw.tutorial.author.model.Author;
 
     /**
-    * @author coedevon
+    * @author ccsw
     */
     public interface AuthorRepository extends CrudRepository<Author, Long> {
 
         /**
-        * Método para recuperar un listado paginado de {@link com.capgemini.coedevon.tutorial.author.model.Author}
+        * Método para recuperar un listado paginado de {@link com.capgemini.ccsw.tutorial.author.model.Author}
         * @param page
         * @return
         */
@@ -731,36 +731,36 @@ La siguiente capa que vamos a implementar es justamente la capa que hace uso del
 
 === "AuthorService.java"
     ``` Java
-    package com.capgemini.coedevon.tutorial.author;
+    package com.capgemini.ccsw.tutorial.author;
 
     import org.springframework.data.domain.Page;
 
-    import com.capgemini.coedevon.tutorial.author.model.Author;
-    import com.capgemini.coedevon.tutorial.author.model.AuthorDto;
-    import com.capgemini.coedevon.tutorial.author.model.AuthorSearchDto;
+    import com.capgemini.ccsw.tutorial.author.model.Author;
+    import com.capgemini.ccsw.tutorial.author.model.AuthorDto;
+    import com.capgemini.ccsw.tutorial.author.model.AuthorSearchDto;
 
     /**
-    * @author coedevon
+    * @author ccsw
     *
     */
     public interface AuthorService {
 
         /**
-        * Método para recuperar un listado paginado de {@link com.capgemini.coedevon.tutorial.author.model.Author}
+        * Método para recuperar un listado paginado de {@link com.capgemini.ccsw.tutorial.author.model.Author}
         * @param dto
         * @return
         */
         Page<Author> findPage(AuthorSearchDto dto);
 
         /**
-        * Método para crear o actualizar un {@link com.capgemini.coedevon.tutorial.author.model.Author}
+        * Método para crear o actualizar un {@link com.capgemini.ccsw.tutorial.author.model.Author}
         * @param data
         * @return
         */
         Author save(AuthorDto data);
 
         /**
-        * Método para crear o actualizar un {@link com.capgemini.coedevon.tutorial.author.model.Author}
+        * Método para crear o actualizar un {@link com.capgemini.ccsw.tutorial.author.model.Author}
         * @param id
         */
         void delete(Long id);
@@ -769,7 +769,7 @@ La siguiente capa que vamos a implementar es justamente la capa que hace uso del
     ```
 === "AuthorServiceImpl.java"
     ``` Java
-    package com.capgemini.coedevon.tutorial.author;
+    package com.capgemini.ccsw.tutorial.author;
 
     import javax.transaction.Transactional;
 
@@ -778,12 +778,12 @@ La siguiente capa que vamos a implementar es justamente la capa que hace uso del
     import org.springframework.data.domain.Page;
     import org.springframework.stereotype.Service;
 
-    import com.capgemini.coedevon.tutorial.author.model.Author;
-    import com.capgemini.coedevon.tutorial.author.model.AuthorDto;
-    import com.capgemini.coedevon.tutorial.author.model.AuthorSearchDto;
+    import com.capgemini.ccsw.tutorial.author.model.Author;
+    import com.capgemini.ccsw.tutorial.author.model.AuthorDto;
+    import com.capgemini.ccsw.tutorial.author.model.AuthorSearchDto;
 
     /**
-    * @author coedevon
+    * @author ccsw
     */
     @Service
     @Transactional
@@ -832,12 +832,12 @@ La siguiente capa que vamos a implementar es justamente la capa que hace uso del
     ```
 === "AuthorSearchDto.java"
     ``` Java
-    package com.capgemini.coedevon.tutorial.author.model;
+    package com.capgemini.ccsw.tutorial.author.model;
 
     import org.springframework.data.domain.Pageable;
 
     /**
-    * @author coedevon
+    * @author ccsw
     */
     public class AuthorSearchDto {
 
@@ -877,7 +877,7 @@ Para terminar, vamos a implementar el `Controller` para que ataque a la capa de 
 
 === "AuthorController.java"
     ``` Java
-    package com.capgemini.coedevon.tutorial.author;
+    package com.capgemini.ccsw.tutorial.author;
 
     import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.data.domain.Page;
@@ -888,12 +888,12 @@ Para terminar, vamos a implementar el `Controller` para que ataque a la capa de 
     import org.springframework.web.bind.annotation.RequestMethod;
     import org.springframework.web.bind.annotation.RestController;
 
-    import com.capgemini.coedevon.tutorial.author.model.AuthorDto;
-    import com.capgemini.coedevon.tutorial.author.model.AuthorSearchDto;
-    import com.capgemini.coedevon.tutorial.config.mapper.BeanMapper;
+    import com.capgemini.ccsw.tutorial.author.model.AuthorDto;
+    import com.capgemini.ccsw.tutorial.author.model.AuthorSearchDto;
+    import com.capgemini.ccsw.tutorial.config.mapper.BeanMapper;
 
     /**
-    * @author coedevon
+    * @author ccsw
     */
     @RequestMapping(value = "/author/v1")
     @RestController
@@ -907,7 +907,7 @@ Para terminar, vamos a implementar el `Controller` para que ataque a la capa de 
         BeanMapper beanMapper;
 
         /**
-        * Método para recuperar un listado paginado de {@link com.capgemini.coedevon.tutorial.author.model.Author}
+        * Método para recuperar un listado paginado de {@link com.capgemini.ccsw.tutorial.author.model.Author}
         * @param dto
         * @return
         */
@@ -919,7 +919,7 @@ Para terminar, vamos a implementar el `Controller` para que ataque a la capa de 
         }
 
         /**
-        * Método para crear o actualizar un {@link com.capgemini.coedevon.tutorial.author.model.Author}
+        * Método para crear o actualizar un {@link com.capgemini.ccsw.tutorial.author.model.Author}
         * @param data datos de la entidad
         * @return
         */
@@ -930,7 +930,7 @@ Para terminar, vamos a implementar el `Controller` para que ataque a la capa de 
         }
 
         /**
-        * Método para crear o actualizar un {@link com.capgemini.coedevon.tutorial.author.model.Author}
+        * Método para crear o actualizar un {@link com.capgemini.ccsw.tutorial.author.model.Author}
         * @param id PK de la entidad
         */
         @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
