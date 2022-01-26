@@ -3,26 +3,62 @@
 Ya tienes tu primer listado desarrollado, tanto en front como en back. ¿Ha sido sencillo, verdad?.
 
 Ahora vamos a implementar un listado un poco más complejo, este tiene datos paginados en servidor, esto quiere decir que no nos sirve un array de datos como en el anterior ejemplo. 
-Un listado paginado en servidor, debe enviar en cada petición que página está mostrando y cual es el tamaño de la página, para que el servidor devuelva un subconjunto de datos.
+Para que un listado paginado en servidor funcione, el cliente debe enviar en cada petición que página está solicitando y cual es el tamaño de la página, para que el servidor devuelva solamente un subconjunto de datos, en lugar de devolver el listado completo.
 
 Como ya conocemos como se debe desarrollar, en este ejemplo vamos a ir más rápidos y nos vamos a centrar únicamente en las novedades.
 
 ## Desarrollo Angular
 
-### Crear componentes
+### Crear modulo y componentes
 
 Vamos a desarrollar el listado de `Autores` así que, debemos crear los componentes:
 
 ```
-ng generate component views/authors
-ng generate component views/authors/author-dialog
+ng generate module author
+ng generate component author/author-list
+ng generate component author/author-edit
 
-ng generate service services/authors/author
+ng generate service author/author
 ```
+
+Este módulo lo vamos a añadir a la aplicación para que se cargue en el arranque. Abrimos el fichero `app.module.ts` y añadimos el módulo:
+
+
+=== "app.module.ts" 
+    ``` Typescript hl_lines="9 20"
+    import { NgModule } from '@angular/core';
+    import { BrowserModule } from '@angular/platform-browser';
+
+    import { AppRoutingModule } from './app-routing.module';
+    import { AppComponent } from './app.component';
+    import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+    import { CoreModule } from './core/core.module';
+    import { CategoryModule } from './category/category.module';
+    import { AuthorModule } from './author/author.module';
+
+    @NgModule({
+    declarations: [
+        AppComponent
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        CoreModule,
+        CategoryModule,
+        AuthorModule,
+        BrowserAnimationsModule
+    ],
+    providers: [],
+    bootstrap: [AppComponent]
+    })
+    export class AppModule { }
+    ```
+
+
 
 ### Crear el modelo 
 
-Creamos el modelo en `models/authors/Author.ts` con las propiedades necesarias para trabajar con la información de un autor:
+Creamos el modelo en `author/model/Author.ts` con las propiedades necesarias para trabajar con la información de un autor:
 
 === "Author.ts"
     ``` TypeScript
@@ -38,16 +74,15 @@ Creamos el modelo en `models/authors/Author.ts` con las propiedades necesarias p
 Añadimos la ruta al menú para que podamos acceder a la pantalla:
 
 === "app-routing.module.ts" 
-    ``` Typescript hl_lines="9"
+    ``` Typescript hl_lines="8"
     import { NgModule } from '@angular/core';
     import { Routes, RouterModule } from '@angular/router';
-    import { CategoriesComponent } from './views/categories/categories.component';
-    import { AuthorsComponent } from './views/authors/authors.component';
-
+    import { CategoryListComponent } from './category/category-list/category-list.component';
+    import { AuthorListComponent } from './author/author-list/author-list.component';
 
     const routes: Routes = [
         { path: 'categories', component: CategoriesComponent },
-        { path: 'authors', component: AuthorsComponent },
+        { path: 'authors', component: AuthorListComponent },
     ];
 
     @NgModule({
@@ -81,7 +116,7 @@ Por defecto el esquema de datos de Spring para la paginación es como el siguien
     }
     ```
 
-Así que necesitamos poder enviar y recuperar esa información desde Angular, nos hace falta crear esos objetos. Los objetos de paginación los crearé en `models/page`, mientras que la paginación de `Author` la crearé en `models/authors`.
+Así que necesitamos poder enviar y recuperar esa información desde Angular, nos hace falta crear esos objetos. Los objetos de paginación al ser comunes a toda la aplicación, vamos a crearlos en `core/model/page`, mientras que la paginación de `AuthorPage.ts` la crearé en su propio model dentro de `author/model`.
 
 === "SortPage.ts"
     ``` TypeScript
@@ -102,8 +137,8 @@ Así que necesitamos poder enviar y recuperar esa información desde Angular, no
     ```
 === "AuthorPage.ts"
     ``` TypeScript
-    import { Author } from './Author';
-    import { Pageable } from '../page/Pageable';
+    import { Pageable } from "src/app/core/model/page/Pageable";
+    import { Author } from "./Author";
 
     export class AuthorPage {
         content: Author[];
@@ -116,7 +151,7 @@ Con estos objetos creados ya podemos implementar el servicio y sus datos mockead
 
 === "mock-authors.ts"
     ``` TypeScript
-    import { AuthorPage } from 'src/app/models/authors/AuthorPage';
+    import { AuthorPage } from "./AuthorPage";
 
     export const AUTHOR_DATA: AuthorPage = {
         content: [
@@ -129,7 +164,7 @@ Con estos objetos creados ya podemos implementar el servicio y sus datos mockead
             { id: 7, name: 'Corey Young', nationality: 'Estados Unidos' },
         ],  
         pageable : {
-            pageSize: 7,
+            pageSize: 5,
             pageNumber: 0,
             sort: [
                 {property: "id", direction: "ASC"}
@@ -141,11 +176,11 @@ Con estos objetos creados ya podemos implementar el servicio y sus datos mockead
 === "author.service.ts"
     ``` TypeScript
     import { Injectable } from '@angular/core';
-    import { Pageable } from 'src/app/models/page/Pageable';
-    import { AuthorPage } from 'src/app/models/authors/AuthorPage';
     import { Observable, of } from 'rxjs';
-    import { Author } from 'src/app/models/authors/Author';
-    import { AUTHOR_DATA } from './mock-authors';
+    import { Pageable } from '../core/model/page/Pageable';
+    import { Author } from './model/Author';
+    import { AuthorPage } from './model/AuthorPage';
+    import { AUTHOR_DATA } from './model/mock-authors';
 
     @Injectable({
         providedIn: 'root'
@@ -158,11 +193,11 @@ Con estos objetos creados ya podemos implementar el servicio y sus datos mockead
             return of(AUTHOR_DATA);
         }
 
-        saveAuthor(author: Author): Observable<Author> {
+        saveAuthor(author: Author): Observable<void> {
             return of(null);
         }
 
-        deleteAuthor(idAuthor : number): Observable<any> {
+        deleteAuthor(idAuthor : number): Observable<void> {
             return of(null);
         }    
     }
@@ -172,7 +207,7 @@ Con estos objetos creados ya podemos implementar el servicio y sus datos mockead
 
 Ya tenemos el servicio con los datos, ahora vamos a por el listado paginado.
 
-=== "authors.component.html"
+=== "author-list.component.html"
     ``` HTML hl_lines="36"
     <div class="container">
         <h1>Listado de Autores</h1>
@@ -216,7 +251,7 @@ Ya tenemos el servicio con los datos, ahora vamos a por el listado paginado.
         </div>   
     </div>
     ```
-=== "authors.component.scss"
+=== "author-list.component.scss"
     ``` CSS
     .container {
         margin: 20px;
@@ -251,23 +286,24 @@ Ya tenemos el servicio con los datos, ahora vamos a por el listado paginado.
         }
     }
     ```
-=== "authors.component.ts"
-    ``` TypeScript hl_lines="17 18 19 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57"
+=== "author-list.component.ts"
+    ``` TypeScript hl_lines="18-20 34-57"
     import { Component, OnInit } from '@angular/core';
-    import { MatTableDataSource } from '@angular/material/table';
-    import { Author } from 'src/app/models/authors/Author';
     import { MatDialog } from '@angular/material/dialog';
-    import { AuthorPage } from 'src/app/models/authors/AuthorPage';
-    import { Pageable } from 'src/app/models/page/Pageable';
-    import { DialogConfirmationComponent } from 'src/app/shared/dialog-confirmation/dialog-confirmation/dialog-confirmation.component';
-    import { AuthorDialogComponent } from './author-dialog/author-dialog.component';
+    import { PageEvent } from '@angular/material/paginator';
+    import { MatTableDataSource } from '@angular/material/table';
+    import { DialogConfirmationComponent } from 'src/app/core/dialog-confirmation/dialog-confirmation.component';
+    import { Pageable } from 'src/app/core/model/page/Pageable';
+    import { AuthorEditComponent } from '../author-edit/author-edit.component';
+    import { AuthorService } from '../author.service';
+    import { Author } from '../model/Author';
 
     @Component({
-        selector: 'app-authors',
-        templateUrl: './authors.component.html',
-        styleUrls: ['./authors.component.scss']
+    selector: 'app-author-list',
+    templateUrl: './author-list.component.html',
+    styleUrls: ['./author-list.component.scss']
     })
-    export class AuthorsComponent implements OnInit {
+    export class AuthorListComponent implements OnInit {
 
         pageNumber: number = 0;
         pageSize: number = 5;
@@ -291,8 +327,8 @@ Ya tenemos el servicio con los datos, ahora vamos a por el listado paginado.
                 pageNumber: this.pageNumber,
                 pageSize: this.pageSize,
                 sort: [{
-                property: 'id',
-                direction: 'ASC'
+                    property: 'id',
+                    direction: 'ASC'
                 }]
             }
 
@@ -306,13 +342,12 @@ Ya tenemos el servicio con los datos, ahora vamos a por el listado paginado.
                 this.pageNumber = data.pageable.pageNumber;
                 this.pageSize = data.pageable.pageSize;
                 this.totalElements = data.totalElements;
-            }
-            );
+            });
 
         }  
-        
+
         createAuthor() {      
-            const dialogRef = this.dialog.open(AuthorDialogComponent, {
+            const dialogRef = this.dialog.open(AuthorEditComponent, {
                 data: {}
             });
 
@@ -322,7 +357,7 @@ Ya tenemos el servicio con los datos, ahora vamos a por el listado paginado.
         }  
 
         editAuthor(author: Author) {    
-            const dialogRef = this.dialog.open(AuthorDialogComponent, {
+            const dialogRef = this.dialog.open(AuthorEditComponent, {
                 data: { author: author }
             });
 
@@ -345,6 +380,7 @@ Ya tenemos el servicio con los datos, ahora vamos a por el listado paginado.
             });
         }  
     }
+
     ```
 
 Fíjate como hemos añadido la paginación. 
@@ -352,27 +388,30 @@ Fíjate como hemos añadido la paginación.
 *   Al HTML le hemos añadido un componente nuevo `mat-paginator`, lo que nos va a obligar a añadirlo al módulo también como dependencia. Ese componente le hemos definido un método `page` que se ejecuta cada vez que la página cambia, y unas propiedades con las que calculará la página, el tamaño y el número total de páginas.
 *   Al Typescript le hemos tenido que añadir esas variables y hemos creado un método para cargar datos que lo que hace es construir un objeto `pageable` con los valores actuales del componente paginador y lanza la petición con esos datos en el body. Obviamente al ser un mock no funcionará el cambio de página y demás.
 
-Como hemos comentado, añadimos la dependencia al módulo para que todo funcione.
+Como siempre, añadimos las dependencias al módulo, vamos a intentar añadir todas las que vamos a necesitar a futuro.
 
-=== "views.module.ts"
-    ``` TypeScript hl_lines="14 28"
+=== "author.module.ts"
+    ``` TypeScript
     import { NgModule } from '@angular/core';
     import { CommonModule } from '@angular/common';
+    import { AuthorListComponent } from './author-list/author-list.component';
+    import { AuthorEditComponent } from './author-edit/author-edit.component';
     import { MatTableModule } from '@angular/material/table';
-    import { MatIconModule } from '@angular/material/icon';
-    import { MatButtonModule } from '@angular/material/button';
-    import { CategoriesComponent } from './categories/categories.component';
-    import { CategoryDialogComponent } from './categories/category-dialog/category-dialog.component';
-    import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
-    import { MatFormFieldModule } from '@angular/material/form-field';
-    import { MatInputModule } from '@angular/material/input';
     import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-    import { AuthorsComponent } from './authors/authors.component';
-    import { AuthorDialogComponent } from './authors/author-dialog/author-dialog.component';
+    import { MatButtonModule } from '@angular/material/button';
+    import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
+    import { MatFormFieldModule } from '@angular/material/form-field';
+    import { MatIconModule } from '@angular/material/icon';
+    import { MatInputModule } from '@angular/material/input';
     import { MatPaginatorModule } from '@angular/material/paginator';
 
+
+
     @NgModule({
-    declarations: [CategoriesComponent, CategoryDialogComponent, AuthorsComponent, AuthorDialogComponent],
+    declarations: [
+        AuthorListComponent,
+        AuthorEditComponent
+    ],
     imports: [
         CommonModule,
         MatTableModule,
@@ -392,8 +431,9 @@ Como hemos comentado, añadimos la dependencia al módulo para que todo funcione
         },
     ]
     })
-    export class ViewsModule { }
+    export class AuthorModule { }
     ```
+
 
 Debería verse algo similar a esto:
 
@@ -403,7 +443,7 @@ Debería verse algo similar a esto:
 
 El último paso, es definir la pantalla de dialogo que realizará el alta y modificado de los datos de un `Autor`.
 
-=== "author-dialog.component.html"
+=== "author-edit.component.html"
     ``` HTML
     <div class="container">
         <h1 *ngIf="author.id == null">Crear autor</h1>
@@ -434,7 +474,7 @@ El último paso, es definir la pantalla de dialogo que realizará el alta y modi
         </div>
     </div>
     ```
-=== "author-dialog.component.scss"
+=== "author-edit.component.scss"
     ``` CSS
     .container {
         min-width: 350px;
@@ -456,28 +496,28 @@ El último paso, es definir la pantalla de dialogo que realizará el alta y modi
         }
     }
     ```
-=== "author-dialog.component.ts"
+=== "author-edit.component.ts"
     ``` TypeScript
-    import { Component, OnInit, Inject } from '@angular/core';
+    import { Component, Inject, OnInit } from '@angular/core';
     import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-    import { Author } from 'src/app/models/authors/Author';
-    import { AuthorService } from 'src/app/services/authors/author.service';
+    import { AuthorService } from '../author.service';
+    import { Author } from '../model/Author';
 
     @Component({
-        selector: 'app-author-dialog',
-        templateUrl: './author-dialog.component.html',
-        styleUrls: ['./author-dialog.component.scss']
+    selector: 'app-author-edit',
+    templateUrl: './author-edit.component.html',
+    styleUrls: ['./author-edit.component.scss']
     })
-    export class AuthorDialogComponent implements OnInit {
+    export class AuthorEditComponent implements OnInit {
 
         author : Author;
-    
+
         constructor(
-            public dialogRef: MatDialogRef<AuthorDialogComponent>,
+            public dialogRef: MatDialogRef<AuthorEditComponent>,
             @Inject(MAT_DIALOG_DATA) public data: any,
             private authorService: AuthorService
         ) { }
-    
+
         ngOnInit(): void {
             if (this.data.author != null) {
                 this.author = Object.assign({}, this.data.author);
@@ -486,17 +526,17 @@ El último paso, es definir la pantalla de dialogo que realizará el alta y modi
                 this.author = new Author();
             }
         }
-    
+
         onSave() {
             this.authorService.saveAuthor(this.author).subscribe(result =>  {
                 this.dialogRef.close();
             }); 
         }  
-    
+
         onClose() {
             this.dialogRef.close();
         }
-    
+
     }
     ```
 
@@ -511,14 +551,12 @@ Que debería quedar algo así:
 
 Lo primero que vamos a hacer es crear los modelos para trabajar con BBDD y con peticiones hacia el front. Además, también tenemos que añadir datos al script de inicialización de BBDD.
 
-=== "V0001__Create_Schema.sql"
-    ``` SQL hl_lines="11 13 14 15 16 17"
-    CREATE SEQUENCE HIBERNATE_SEQUENCE START WITH 1000000;
-
+=== "schema.sql"
+    ``` SQL hl_lines="9-15"
     DROP TABLE IF EXISTS CATEGORY;
 
     CREATE TABLE CATEGORY (
-        id BIGINT AUTO_INCREMENT PRIMARY KEY,
+        id BIGINT IDENTITY NOT NULL PRIMARY KEY,
         name VARCHAR(250) NOT NULL
     );
 
@@ -526,12 +564,12 @@ Lo primero que vamos a hacer es crear los modelos para trabajar con BBDD y con p
     DROP TABLE IF EXISTS AUTHOR;
 
     CREATE TABLE AUTHOR (
-        id BIGINT AUTO_INCREMENT PRIMARY KEY,
+        id BIGINT IDENTITY NOT NULL PRIMARY KEY,
         name VARCHAR(400) NOT NULL,
         nationality VARCHAR(250) NOT NULL
     );
     ```
-=== "V0002__Create_Data.sql"
+=== "data.sql"
     ``` SQL hl_lines="5 6 7 8 9 10"
     INSERT INTO CATEGORY(id, name) VALUES (1, 'Eurogames');
     INSERT INTO CATEGORY(id, name) VALUES (2, 'Ameritrash');
@@ -563,7 +601,7 @@ Lo primero que vamos a hacer es crear los modelos para trabajar con BBDD y con p
     public class Author {
 
         @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Column(name = "id", nullable = false)
         private Long id;
 
@@ -689,46 +727,352 @@ Lo primero que vamos a hacer es crear los modelos para trabajar con BBDD y con p
     }
     ```
 
-### Repository
+### TDD - Pruebas
 
-Para desarrollar todas las operaciones, esta vez vamos a ir de más bajo a más alto nivel. Empezaremos por el acceso a datos, crearemos el Repository.
+Para desarrollar todas las operaciones, empezaremos primero diseñando las pruebas y luego implementando el código necesario que haga funcionar correctamente esas pruebas. Para ir más rápido vamos a poner todas las pruebas de golpe, pero realmente se deberían crear una a una e ir implementando el código necesario para esa prueba. Para evitar tantas iteraciones en el tutorial las haremos todas de golpe.
 
-=== "AuthorRepository.java"
+Vamos a pararnos a pensar un poco que necesitamos en la pantalla. Ahora mismo nos sirve con:
+
+* Una consulta paginada, que reciba datos de la página a consultar y devuelva los datos paginados
+* Una operación de guardado y modificación
+* Una operación de borrado
+
+Para la primera prueba necesitaremos que hemos descrito (consulta paginada) se necesita un objeto que contenga los datos de la página a consultar. Así que crearemos una clase `AuthorSearchDto` para utilizarlo como 'paginador'. 
+
+!!! tip "Paginación en Springframework"
+    Cuando utilicemos paginación en Springframework, debemos recordar que ya vienen implementados algunos objetos que podemos utilizar y que nos facilitan la vida. Es el caso de `Pageable` y `Page`.
+
+    * El objeto `Pageable` no es más que una interface que le permite a Spring JPA saber que página se quiere buscar, cual es el tamaño de página y cuales son las propiedades de ordenación que se debe lanzar en la consulta.
+    * El objeto `PageRequest` es una utilidad que permite crear objetos de tipo `Pageable` de forma sencilla. Se utiliza mucho para codificación de test.
+    * El objeto `Page` no es más que un contenedor que engloba la información básica de la página que se está consultando (número de página, tamaño de página, número total de resultados) y el conjunto de datos de la BBDD que contiene esa página una vez han sido buscados y ordenados.
+
+
+También crearemos una clase `AuthorController` dentro del package de `com.capgemini.ccsw.tutorial.author` con la implementación de los métodos vacíos, para que no falle la compilación.
+
+¡Vamos a implementar test!
+
+
+=== "AuthorSearchDto.java"
     ``` Java
-    package com.capgemini.ccsw.tutorial.author;
+    package com.capgemini.ccsw.tutorial.author.model;
 
-    import org.springframework.data.domain.Page;
     import org.springframework.data.domain.Pageable;
-    import org.springframework.data.repository.CrudRepository;
-
-    import com.capgemini.ccsw.tutorial.author.model.Author;
 
     /**
     * @author ccsw
     */
-    public interface AuthorRepository extends CrudRepository<Author, Long> {
+    public class AuthorSearchDto {
+
+        private Pageable pageable;
 
         /**
-        * Método para recuperar un listado paginado de {@link com.capgemini.ccsw.tutorial.author.model.Author}
-        * @param page
-        * @return
+        * @return pageable
         */
-        Page<Author> findAll(Pageable page);
+        public Pageable getPageable() {
+
+            return this.pageable;
+        }
+
+        /**
+        * @param pageable new value of {@link #getPageable}.
+        */
+        public void setPageable(Pageable pageable) {
+
+            this.pageable = pageable;
+        }
 
     }
     ```
+=== "AuthorController.java"
+    ``` Java
+    package com.capgemini.ccsw.tutorial.author;
 
-Si te fijas, este `Repository` ya no está vacío como el anterior, no nos sirve con las operaciones básicas del `CrudRepository` en este caso tenemos que añadir un método nuevo al que pasandole un objeto de tipo `Pageable` nos devuelva una `Page`.
+    import org.springframework.data.domain.Page;
+    
+    import com.capgemini.ccsw.tutorial.author.model.AuthorDto;
+    import com.capgemini.ccsw.tutorial.author.model.AuthorSearchDto;
 
-* El objeto `Pageable` no es más que una interface que le permite a Spring JPA saber que página se quiere buscar, cual es el tamaño de página y cuales son las propiedades de ordenación que se debe lanzar en la consulta.
-* El objeto `Page` no es más que un contenedor que engloba la información básica de la página que se está consultando (número de página, tamaño de página, número total de resultados) y el conjunto de datos de la BBDD que contiene esa página una vez han sido buscados y ordenados.
+    /**
+    * @author ccsw
+    */
+    public class AuthorController {
 
-Además, la mágina de Spring JPA hará su trabajo y nosotros no necesitamos implementar ninguna query, Spring ya entiende que un `findAll` significa que debe recuperar todos los datos de la tabla `Author` y además deben estar paginados. Nos ahorra tener que buscar una página concreta de datos y hacer un `count` de la tabla para obtener el total de resultados. Para ver otros ejemplos y más información, visita la página de [QueryMethods](https://www.baeldung.com/spring-data-derived-queries).
+        /**
+        * Método para recuperar un listado paginado de {@link com.capgemini.ccsw.tutorial.author.model.Author}
+        * @param dto
+        * @return
+        */
+        public Page<AuthorDto> findPage(AuthorSearchDto dto) {
 
-### Service
+            return null;
 
-La siguiente capa que vamos a implementar es justamente la capa que hace uso del `Repository`, es decir el `Service`.
+        }
 
+        /**
+        * Método para crear o actualizar un {@link com.capgemini.ccsw.tutorial.author.model.Author}
+        * @param id
+        * @param data datos de la entidad 
+        */
+        public void save(Long id, AuthorDto data) {
+
+        }
+
+        /**
+        * Método para crear o actualizar un {@link com.capgemini.ccsw.tutorial.author.model.Author}
+        * @param id PK de la entidad
+        */
+        public void delete(Long id) {
+
+        }
+    }
+    ```
+=== "AuthorTest.java"
+    ``` Java
+    package com.capgemini.ccsw.tutorial.author;
+
+    import static org.junit.jupiter.api.Assertions.assertEquals;
+    import static org.junit.jupiter.api.Assertions.assertNotNull;
+    import static org.junit.jupiter.api.Assertions.assertThrows;
+
+    import org.junit.jupiter.api.Test;
+    import org.springframework.beans.factory.annotation.Autowired;
+    import org.springframework.boot.test.context.SpringBootTest;
+    import org.springframework.data.domain.Page;
+    import org.springframework.data.domain.PageRequest;
+    import org.springframework.transaction.annotation.Transactional;
+
+    import com.capgemini.ccsw.tutorial.author.model.AuthorDto;
+    import com.capgemini.ccsw.tutorial.author.model.AuthorSearchDto;
+    import com.capgemini.ccsw.tutorial.category.model.CategoryDto;
+
+    @SpringBootTest
+    @Transactional
+    public class AuthorTest {
+
+        private static final int TOTAL_AUTORS = 6;
+
+        @Autowired
+        private AuthorController authorController;
+
+        @Test
+        public void findFirstPageWithFiveSizeShouldReturnFirstFiveResults() {
+
+            int pageSize = 5;
+
+            assertNotNull(authorController);
+
+            AuthorSearchDto dto = new AuthorSearchDto();
+            dto.setPageable(PageRequest.of(0, pageSize));
+
+            Page<AuthorDto> resultPage = authorController.findPage(dto);
+
+            assertNotNull(resultPage);
+
+            assertEquals(TOTAL_AUTORS, resultPage.getTotalElements());
+            assertEquals(pageSize, resultPage.getContent().size());
+
+        }
+
+        @Test
+        public void findSecondPageWithFiveSizeShouldReturnLastTwoResults() {
+
+            int pageSize = 5;
+            int elementsCount = TOTAL_AUTORS - pageSize;
+
+            assertNotNull(authorController);
+
+            AuthorSearchDto searchDto = new AuthorSearchDto();
+            searchDto.setPageable(PageRequest.of(1, pageSize));
+
+            Page<AuthorDto> resultPage = authorController.findPage(searchDto);
+
+            assertNotNull(resultPage);
+
+            assertEquals(TOTAL_AUTORS, resultPage.getTotalElements());
+            assertEquals(elementsCount, resultPage.getContent().size());
+
+        }
+
+        @Test
+        public void saveWithoutIdShouldCreateNewAuthor() {
+
+            assertNotNull(authorController);
+
+            String newAuthorName = "Nuevo Autor";
+            String newNationality = "Nueva Nacionalidad";
+
+            long newAuthorId = TOTAL_AUTORS + 1;
+            long newAuthorSize = TOTAL_AUTORS + 1;
+
+            AuthorDto dto = new AuthorDto();
+            dto.setName(newAuthorName);
+            dto.setNationality(newNationality);
+
+            authorController.save(null, dto);
+
+            AuthorSearchDto searchDto = new AuthorSearchDto();
+            searchDto.setPageable(PageRequest.of(0, (int) newAuthorSize));
+
+            Page<AuthorDto> resultPage = authorController.findPage(searchDto);
+
+            assertNotNull(resultPage);
+            assertEquals(newAuthorSize, resultPage.getTotalElements());
+
+            AuthorDto author = resultPage.getContent().stream().filter(item -> item.getId().equals(newAuthorId)).findFirst().orElse(null);
+            assertNotNull(author);
+            assertEquals(newAuthorName, author.getName());
+
+        }
+
+        @Test
+        public void modifyWithExistIdShouldModifyCategory() {
+
+            assertNotNull(authorController);
+
+            String newAuthorName = "Nuevo Autor";
+            long authorId = 3;
+
+            CategoryDto dto = new CategoryDto();
+            dto.setName(newAuthorName);
+
+            authorController.save(authorId, dto);
+
+            AuthorSearchDto searchDto = new AuthorSearchDto();
+            searchDto.setPageable(PageRequest.of(0, (int) authorId));
+
+            Page<AuthorDto> resultPage = authorController.findPage(searchDto);
+
+            assertNotNull(resultPage);
+            assertEquals(TOTAL_AUTORS, resultPage.getTotalElements());
+
+            AuthorDto author = resultPage.getContent().stream().filter(item -> item.getId().equals(authorId)).findFirst().orElse(null);
+            assertNotNull(author);
+            assertEquals(newAuthorName, author.getName());
+
+        }
+
+        @Test
+        public void modifyWithNotExistIdShouldThrowException() {
+
+            assertNotNull(authorController);
+
+            String newAuthorName = "Nuevo Autor";
+            long authorId = TOTAL_AUTORS + 1;
+
+            CategoryDto dto = new CategoryDto();
+            dto.setName(newAuthorName);
+
+            assertThrows(Exception.class, () -> authorController.save(authorId, dto));
+        }
+
+        @Test
+        public void deleteWithExistsIdShouldDeleteCategory() {
+
+            assertNotNull(authorController);
+
+            long newAuthorsSize = TOTAL_AUTORS - 1;
+            long deleteAuthorId = 3;
+
+            authorController.delete(deleteAuthorId);
+
+            AuthorSearchDto searchDto = new AuthorSearchDto();
+            searchDto.setPageable(PageRequest.of(0, TOTAL_AUTORS));
+
+            Page<AuthorDto> resultPage = authorController.findPage(searchDto);
+
+            assertNotNull(resultPage);
+            assertEquals(newAuthorsSize, resultPage.getTotalElements());
+
+        }
+
+        @Test
+        public void deleteWithNotExistsIdShouldThrowException() {
+
+            assertNotNull(authorController);
+
+            long deleteAuthorId = TOTAL_AUTORS + 1;
+
+            assertThrows(Exception.class, () -> authorController.delete(deleteAuthorId));
+
+        }
+    }
+    ```
+
+!!! info "Cuidado con las clases de Test"
+    Recuerda que el código de aplicación debe ir en `src/main/java`, mientras que las clases de test deben ir en `src/test/java` para que no se mezclen unas con otras y se empaquete todo en el artefacto final. En este caso `AuthorTest.java` va en el directorio de test `src/test/java`.
+
+
+Si ejecutamos los test, el resultado será 7 maravillosos test que fallan su ejecución. Es normal, puesto que no hemos implementado nada de código de aplicación para corresponder esos test.
+
+
+### Controller
+
+Si recuerdas, esta capa de `Controller` es la que tiene los endpoints de entrada a la aplicación. Nosotros ya tenemos definidas 3 operaciones, que hemos diseñado directamente desde los tests. Ahora vamos a implementar esos métodos con el código necesario para que los test funcionen correctamente, y teniendo en mente que debemos apoyarnos en las capas inferiores `Service` y `Repository` para repartir lógica de negocio y acceso a datos.
+
+=== "AuthorController.java"
+    ``` Java hl_lines="24 25"
+    package com.capgemini.ccsw.tutorial.author;
+
+    import org.springframework.beans.factory.annotation.Autowired;
+    import org.springframework.data.domain.Page;
+    import org.springframework.web.bind.annotation.CrossOrigin;
+    import org.springframework.web.bind.annotation.PathVariable;
+    import org.springframework.web.bind.annotation.RequestBody;
+    import org.springframework.web.bind.annotation.RequestMapping;
+    import org.springframework.web.bind.annotation.RequestMethod;
+    import org.springframework.web.bind.annotation.RestController;
+
+    import com.capgemini.ccsw.tutorial.author.model.AuthorDto;
+    import com.capgemini.ccsw.tutorial.author.model.AuthorSearchDto;
+    import com.capgemini.ccsw.tutorial.config.mapper.BeanMapper;
+
+    /**
+    * @author ccsw
+    */
+    @RequestMapping(value = "/author")
+    @RestController
+    @CrossOrigin(origins = "*")
+    public class AuthorController {
+
+        @Autowired
+        AuthorService authorService;
+
+        @Autowired
+        BeanMapper beanMapper;
+
+        /**
+        * Método para recuperar un listado paginado de {@link com.capgemini.ccsw.tutorial.author.model.Author}
+        * @param dto
+        * @return
+        */
+        @RequestMapping(path = "", method = RequestMethod.POST)
+        public Page<AuthorDto> findPage(@RequestBody AuthorSearchDto dto) {
+
+            return this.beanMapper.mapPage(this.authorService.findPage(dto), AuthorDto.class);
+        }
+
+        /**
+        * Método para crear o actualizar un {@link com.capgemini.ccsw.tutorial.author.model.Author}
+        * @param id
+        * @param data datos de la entidad 
+        */
+        @RequestMapping(path = { "", "/{id}" }, method = RequestMethod.PUT)
+        public void save(@PathVariable(name = "id", required = false) Long id, @RequestBody AuthorDto data) {
+
+            this.authorService.save(id, data);
+        }
+
+        /**
+        * Método para crear o actualizar un {@link com.capgemini.ccsw.tutorial.author.model.Author}
+        * @param id PK de la entidad
+        */
+        @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
+        public void delete(@PathVariable("id") Long id) {
+
+            this.authorService.delete(id);
+        }
+    }
+    ```
 === "AuthorService.java"
     ``` Java
     package com.capgemini.ccsw.tutorial.author;
@@ -741,7 +1085,6 @@ La siguiente capa que vamos a implementar es justamente la capa que hace uso del
 
     /**
     * @author ccsw
-    *
     */
     public interface AuthorService {
 
@@ -754,10 +1097,10 @@ La siguiente capa que vamos a implementar es justamente la capa que hace uso del
 
         /**
         * Método para crear o actualizar un {@link com.capgemini.ccsw.tutorial.author.model.Author}
+        * @param id
         * @param data
-        * @return
         */
-        Author save(AuthorDto data);
+        void save(Long id, AuthorDto data);
 
         /**
         * Método para crear o actualizar un {@link com.capgemini.ccsw.tutorial.author.model.Author}
@@ -767,8 +1110,24 @@ La siguiente capa que vamos a implementar es justamente la capa que hace uso del
 
     }
     ```
+
+Si te fijas, hemos trasladado toda la lógica a llamadas al `AuthorService` que hemos inyectado, y para que no falle la compilación hemos creado una interface con los métodos necesarios.
+
+
+En la clase `AuthorController` es donde se hacen las conversiones de cara al cliente, pasaremos de un `Page<Author>` (modelo entidad) a un `Page<AuthorDto>` (modelo DTO) con la ayuda del beanMapper. Recuerda que al cliente no le deben llegar modelos entidades sino DTOs.
+
+Además, el método de carga `findPage` ya no es un método de tipo `GET`, ahora es de tipo `POST` porque le tenemos que enviar los datos de la paginación para que Spring JPA pueda hacer su magia.
+
+
+Ahora debemos implementar la siguiente capa.
+
+
+### Service
+
+La siguiente capa que vamos a implementar es justamente la capa que contiene toda la lógica de negocio, hace uso del `Repository` para acceder a los datos, y recibe llamadas generalmente de los `Controller`.
+
 === "AuthorServiceImpl.java"
-    ``` Java
+    ``` Java hl_lines="21 22 45"
     package com.capgemini.ccsw.tutorial.author;
 
     import javax.transaction.Transactional;
@@ -805,17 +1164,17 @@ La siguiente capa que vamos a implementar es justamente la capa que hace uso del
         * {@inheritDoc}
         */
         @Override
-        public Author save(AuthorDto data) {
+        public void save(Long id, AuthorDto data) {
 
             Author author = null;
-            if (data.getId() != null)
-                author = this.authorRepository.findById(data.getId()).orElse(null);
+            if (id != null)
+                author = this.authorRepository.findById(id).orElse(null);
             else
                 author = new Author();
 
-            BeanUtils.copyProperties(data, author);
+            BeanUtils.copyProperties(data, author, new String[] { "id" });
 
-            return this.authorRepository.save(author);
+            this.authorRepository.save(author);
         }
 
         /**
@@ -830,136 +1189,116 @@ La siguiente capa que vamos a implementar es justamente la capa que hace uso del
 
     }
     ```
-=== "AuthorSearchDto.java"
-    ``` Java
-    package com.capgemini.ccsw.tutorial.author.model;
-
-    import org.springframework.data.domain.Pageable;
-
-    /**
-    * @author ccsw
-    */
-    public class AuthorSearchDto {
-
-        private Pageable pageable;
-
-        /**
-        * @return pageable
-        */
-        public Pageable getPageable() {
-
-            return this.pageable;
-        }
-
-        /**
-        * @param pageable new value of {@link #getPageable}.
-        */
-        public void setPageable(Pageable pageable) {
-
-            this.pageable = pageable;
-        }
-
-    }
-    ```
-
-En esta capa, si te fijas, ya no devolvemos un `List<Author>`, sino que ahora devolvemos un `Page<Author>` que es el método que hemos añadido al `Repository`. 
-
-Además, hemos creado un objeto nuevo `AuthorSearchDto`, ya que es necesario para realizar la peticion con el objeto `Pageable`.
-
-!!! note "¿Demasiados de DTOs?"
-    No tengas miedo en crear muchos DTOs, de hecho la implementación óptima debería tener un DTO de entrada y de otro de salida para cada uno de los métodos del `Controller`. No llegaremos hasta ese extremo y reutilizaremos todo el código que podamos, pero no pasa nada si creas 3, 4 o incluso 10 DTOs si realmente los necesitas.
-
-
-
-### Controller
-
-Para terminar, vamos a implementar el `Controller` para que ataque a la capa de `Service`, con los endpoints de las operaciones que vamos a publicar.
-
-=== "AuthorController.java"
-    ``` Java
+=== "AuthorRepository.java"
+    ``` Java hl_lines="12"
     package com.capgemini.ccsw.tutorial.author;
 
-    import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.data.domain.Page;
-    import org.springframework.web.bind.annotation.CrossOrigin;
-    import org.springframework.web.bind.annotation.PathVariable;
-    import org.springframework.web.bind.annotation.RequestBody;
-    import org.springframework.web.bind.annotation.RequestMapping;
-    import org.springframework.web.bind.annotation.RequestMethod;
-    import org.springframework.web.bind.annotation.RestController;
+    import org.springframework.data.domain.Pageable;
+    import org.springframework.data.repository.CrudRepository;
 
-    import com.capgemini.ccsw.tutorial.author.model.AuthorDto;
-    import com.capgemini.ccsw.tutorial.author.model.AuthorSearchDto;
-    import com.capgemini.ccsw.tutorial.config.mapper.BeanMapper;
+    import com.capgemini.ccsw.tutorial.author.model.Author;
 
     /**
     * @author ccsw
     */
-    @RequestMapping(value = "/author/v1")
-    @RestController
-    @CrossOrigin(origins = "*")
-    public class AuthorController {
-
-        @Autowired
-        AuthorService authorService;
-
-        @Autowired
-        BeanMapper beanMapper;
+    public interface AuthorRepository extends CrudRepository<Author, Long> {
 
         /**
         * Método para recuperar un listado paginado de {@link com.capgemini.ccsw.tutorial.author.model.Author}
-        * @param dto
+        * @param page
         * @return
         */
-        @RequestMapping(path = "/", method = RequestMethod.POST)
-        public Page<AuthorDto> findPage(@RequestBody AuthorSearchDto dto) {
+        Page<Author> findAll(Pageable pageable);
 
-            return this.beanMapper.mapPage(this.authorService.findPage(dto), AuthorDto.class);
-
-        }
-
-        /**
-        * Método para crear o actualizar un {@link com.capgemini.ccsw.tutorial.author.model.Author}
-        * @param data datos de la entidad
-        * @return
-        */
-        @RequestMapping(path = "/", method = RequestMethod.PUT)
-        public AuthorDto save(@RequestBody AuthorDto data) {
-
-            return this.beanMapper.map(this.authorService.save(data), AuthorDto.class);
-        }
-
-        /**
-        * Método para crear o actualizar un {@link com.capgemini.ccsw.tutorial.author.model.Author}
-        * @param id PK de la entidad
-        */
-        @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
-        public void delete(@PathVariable("id") Long id) {
-
-            this.authorService.delete(id);
-
-        }
     }
     ```
 
-En esta capa hemos hecho la conversión de un `Page<Author>` (modelo entidad) a un `Page<AuthorDto>` (modelo DTO) con la ayuda del beanMapper de devonfw. Recuerda que al cliente no le deben llegar modelos entidades sino DTOs.
+De nuevo pasa lo mismo que con la capa anterior, aquí delegamos muchas operaciones de consulta y guardado de datos en `AuthorRepository`. Hemos tenido que crearlo como interface para que no falle la compilación. Recuerda que cuando creamos un `Repository` es de gran ayuda hacerlo extender de `CrudRepository<T, ID>` ya que tiene muchos métodos implementados de base que nos pueden servir, como el `delete` o el `save`.
 
-Además, el método de carga `findPage` ya no es un método de tipo `GET`, ahora es de tipo `POST` porque le tenemos que enviar los datos de la paginación para que Spring JPA pueda hacer su magia.
+Fíjate también que cuando queremos copiar más de un dato de una clase a otra, tenemos una utilidad llamada `BeanUtils` que nos permite realizar esa copia (siempre que las propiedades de ambas clases se llamen igual). Además, en nuestro ejemplo hemos ignorado el 'id' para que no nos copie un null a la clase destino.
+
+
+### Repository
+
+Y llegamos a la última capa, la que está más cerca de los datos finales. Tenemos la siguiente interface:
+
+=== "AuthorRepository.java"
+    ``` Java
+    package com.capgemini.ccsw.tutorial.author;
+
+    import org.springframework.data.domain.Page;
+    import org.springframework.data.domain.Pageable;
+    import org.springframework.data.repository.CrudRepository;
+
+    import com.capgemini.ccsw.tutorial.author.model.Author;
+
+    /**
+    * @author ccsw
+    */
+    public interface AuthorRepository extends CrudRepository<Author, Long> {
+
+        /**
+        * Método para recuperar un listado paginado de {@link com.capgemini.ccsw.tutorial.author.model.Author}
+        * @param page
+        * @return
+        */
+        Page<Author> findAll(Pageable pageable);
+
+    }
+    ```
+
+    
+Si te fijas, este `Repository` ya no está vacío como el anterior, no nos sirve con las operaciones básicas del `CrudRepository` en este caso hemos tenido que añadir un método nuevo al que pasandole un objeto de tipo `Pageable` nos devuelva una `Page`.
+
+Pues bien, resulta que la mágina de Spring JPA en este caso hará su trabajo y nosotros no necesitamos implementar ninguna query, Spring ya entiende que un `findAll` significa que debe recuperar todos los datos de la tabla `Author` (que es la tabla que tiene como `generico` en `CrudRepository`) y además deben estar paginados ya que el método devuelve un objeto tipo `Page`. Nos ahorra tener que generar una sql para buscar una página concreta de datos y hacer un `count` de la tabla para obtener el total de resultados. Para ver otros ejemplos y más información, visita la página de [QueryMethods](https://www.baeldung.com/spring-data-derived-queries). Realmente se puede hacer muchísimas cosas con solo escribir el nombre del método, sin tener que pensar ni teclear ninguna sql.
+
+Con esto ya lo tendríamos todo. 
+
 
 ### Prueba de las operaciones
 
-Si ahora levantamos la aplicación y probamos con el postman, podemos ver los resultados que nos ofrece el back.
+Si ahora ejecutamos los test jUnit, veremos que todos funcionan y están en verde. Hemos implementado todas nuestras pruebas y la aplicación es correcta.
 
-** POST ** nos devuelve un listado paginado de `Autores`. Fíjate que los datos que se envían están en el body como formato JSON (parte izquierda de la imagen). Si no envías datos con formato `Pageable`, te dará un error. También fíjate que la respuesta es de tipo `Page`.
+![step4-java0](../assets/images/step4-java0.png)
+
+Aun así, debemos realizar pruebas con el postman para ver los resultados que nos ofrece el back. Para ello, tienes que levantar la aplición y ejecutar las siguientes operaciones:
+
+** POST /author ** 
+```
+{
+    "pageable": {
+        "pageSize" : 4,
+        "pageNumber" : 0,
+        "sort" : [
+            {
+                "property": "name",
+                "direction": "ASC"
+            }
+        ]
+    }
+}
+```
+Nos devuelve un listado paginado de `Autores`. Fíjate que los datos que se envían están en el body como formato JSON (parte izquierda de la imagen). Si no envías datos con formato `Pageable`, te dará un error. También fíjate que la respuesta es de tipo `Page`. Prueba a jugar con los datos de paginación e incluso de ordenación. No hemos programado ninguna SQL pero Spring hace su magia.
+
 
 ![step4-java1](../assets/images/step4-java1.png)
 
-** PUT ** nos sirve para insertar `Autores` nuevas (si no tienen el id informado) o para actualizar `Autores` (si tienen el id informado).  Fíjate que los datos que se envían están en el body como formato JSON (parte izquierda de la imagen). Si no te dará un error.
+** PUT /author ** 
+
+** PUT /author/{id} ** 
+```
+{
+    "name" : "Nuevo autor",
+    "nationality" : "Nueva nacionalidad"
+}
+```
+Nos sirve para insertar `Autores` nuevas (si no tienen el id informado) o para actualizar `Autores` (si tienen el id informado en la URL).  Fíjate que los datos que se envían están en el body como formato JSON (parte izquierda de la imagen). Si no te dará un error.
 
 ![step4-java2](../assets/images/step4-java2.png)
 ![step4-java3](../assets/images/step4-java3.png)
 
-** DELETE ** nos sirve eliminar `Autores`. Fíjate que el dato del ID que se envía está en el path.
+** DELETE /author/{id} **  nos sirve eliminar `Autores`. Fíjate que el dato del ID que se envía está en el path.
 
 ![step4-java4](../assets/images/step4-java4.png)
 
@@ -969,16 +1308,16 @@ Si ahora levantamos la aplicación y probamos con el postman, podemos ver los re
 Una vez implementado front y back, lo que nos queda es modificar el servicio del front para que conecte directamente con las operaciones ofrecidas por el back.
 
 === "author.service.ts"
-    ``` TypeScript hl_lines="18 22 26"
-    import { Injectable } from '@angular/core';
-    import { Pageable } from 'src/app/models/page/Pageable';
-    import { AuthorPage } from 'src/app/models/authors/AuthorPage';
-    import { Observable, of } from 'rxjs';
-    import { Author } from 'src/app/models/authors/Author';
+    ``` TypeScript hl_lines="14 18 22-25 29"
     import { HttpClient } from '@angular/common/http';
+    import { Injectable } from '@angular/core';
+    import { Observable, of } from 'rxjs';
+    import { Pageable } from '../core/model/page/Pageable';
+    import { Author } from './model/Author';
+    import { AuthorPage } from './model/AuthorPage';
 
     @Injectable({
-        providedIn: 'root'
+    providedIn: 'root'
     })
     export class AuthorService {
 
@@ -987,15 +1326,18 @@ Una vez implementado front y back, lo que nos queda es modificar el servicio del
         ) { }
 
         getAuthors(pageable: Pageable): Observable<AuthorPage> {
-            return this.http.post<AuthorPage>('http://localhost:8080/author/v1/', {pageable:pageable});
+            return this.http.post<AuthorPage>('http://localhost:8080/author', {pageable:pageable});
         }
 
-        saveAuthor(author: Author): Observable<Author> {
-            return this.http.put<Author>('http://localhost:8080/author/v1/', author);
+        saveAuthor(author: Author): Observable<void> {
+            let url = 'http://localhost:8080/author';
+            if (author.id != null) url += '/'+author.id;
+
+            return this.http.put<void>(url, author);
         }
 
-        deleteAuthor(idAuthor : number): Observable<any> {
-            return this.http.delete('http://localhost:8080/author/v1/'+idAuthor);
+        deleteAuthor(idAuthor : number): Observable<void> {
+            return this.http.delete<void>('http://localhost:8080/author/'+idAuthor);
         }    
     }
     ```

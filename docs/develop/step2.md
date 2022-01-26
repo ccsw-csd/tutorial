@@ -436,7 +436,7 @@ Para esto, si te acuerdas de cuando creamos la aplicación, existen unos fichero
     DROP TABLE IF EXISTS CATEGORY;
 
     CREATE TABLE CATEGORY (
-      id BIGINT AUTO_INCREMENT PRIMARY KEY,
+      id BIGINT IDENTITY NOT NULL PRIMARY KEY,
       name VARCHAR(250) NOT NULL
     );
     ```
@@ -471,7 +471,7 @@ Una vez creada la BBDD el siguiente paso es crear la entidad con la que vamos a 
     public class Category {
 
       @Id
-      @GeneratedValue(strategy = GenerationType.AUTO)
+      @GeneratedValue(strategy = GenerationType.IDENTITY)
       @Column(name = "id", nullable = false)
       private Long id;
 

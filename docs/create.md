@@ -273,7 +273,7 @@ El siguiente punto es crear las clases de configuración para las librerías que
       * @param targetClass
       * @return
       */
-      <T> Page<T> mapPage(Page<T> source, Class<T> targetClass);
+      <T> Page<T> mapPage(Page<?> source, Class<T> targetClass);
 
     }
     ```
@@ -296,7 +296,7 @@ El siguiente punto es crear las clases de configuración para las librerías que
       /**
       * {@inheritDoc}
       */
-      public <T> Page<T> mapPage(Page<T> source, Class<T> targetClass) {
+      public <T> Page<T> mapPage(Page<?> source, Class<T> targetClass) {
 
         if (source == null) {
           return null;
