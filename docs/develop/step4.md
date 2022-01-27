@@ -1172,7 +1172,7 @@ La siguiente capa que vamos a implementar es justamente la capa que contiene tod
             else
                 author = new Author();
 
-            BeanUtils.copyProperties(data, author, new String[] { "id" });
+            BeanUtils.copyProperties(data, author, "id");
 
             this.authorRepository.save(author);
         }

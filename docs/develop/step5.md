@@ -13,21 +13,59 @@ Vamos a desarrollar el listado de `Juegos`. Este listado es un tanto peculiar, p
 Manos a la obra:
 
 ```
-ng generate component views/games
-ng generate component views/games/game-detail
-ng generate component views/games/game-dialog
+ng generate module game
 
-ng generate service services/games/game
+ng generate component game/game-list
+ng generate component game/game-list/game-item
+ng generate component game/game-edit
+
+ng generate service game/game
 ```
 
-### Crear el modelo 
-
-Lo primero que vamos a hacer es crear el modelo en `models/games/Game.ts` con todas las propiedades necesarias para trabajar con un juego:
+Y añadimos el nuevo módulo al `app.module.ts` como hemos hecho con el resto de módulos.
 
 === "Game.ts"
     ``` TypeScript
-    import { Category } from '../categories/Category';
-    import { Author } from '../authors/Author';
+    import { NgModule } from '@angular/core';
+    import { BrowserModule } from '@angular/platform-browser';
+
+    import { AppRoutingModule } from './app-routing.module';
+    import { AppComponent } from './app.component';
+    import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+    import { CoreModule } from './core/core.module';
+    import { CategoryModule } from './category/category.module';
+    import { AuthorModule } from './author/author.module';
+    import { GameModule } from './game/game.module';
+
+    @NgModule({
+        declarations: [
+            AppComponent
+        ],
+        imports: [
+            BrowserModule,
+            AppRoutingModule,
+            CoreModule,
+            CategoryModule,
+            AuthorModule,
+            GameModule,
+            BrowserAnimationsModule
+        ],
+        providers: [],
+        bootstrap: [AppComponent]
+    })
+    export class AppModule { }
+    ```
+
+
+
+### Crear el modelo 
+
+Lo primero que vamos a hacer es crear el modelo en `game/model/Game.ts` con todas las propiedades necesarias para trabajar con un juego:
+
+=== "Game.ts"
+    ``` TypeScript
+    import { Category } from "src/app/category/model/Category";
+    import { Author } from "src/app/author/model/Author";
 
     export class Game {
         id: number;
@@ -48,16 +86,16 @@ Añadimos la ruta al menú para que podamos navegar a esta pantalla:
     ``` TypeScript hl_lines="5 9 12"
     import { NgModule } from '@angular/core';
     import { Routes, RouterModule } from '@angular/router';
-    import { CategoriesComponent } from './views/categories/categories.component';
-    import { AuthorsComponent } from './views/authors/authors.component';
-    import { GamesComponent } from './views/games/games.component';
+    import { AuthorListComponent } from './author/author-list/author-list.component';
+    import { CategoryListComponent } from './category/category-list/category-list.component';
+    import { GameListComponent } from './game/game-list/game-list.component';
 
 
     const routes: Routes = [
         { path: '', redirectTo: '/games', pathMatch: 'full'},
-        { path: 'categories', component: CategoriesComponent },
-        { path: 'authors', component: AuthorsComponent },
-        { path: 'games', component: GamesComponent },
+        { path: 'categories', component: CategoryListComponent },
+        { path: 'authors', component: AuthorListComponent },
+        { path: 'games', component: GameListComponent },
     ];
 
     @NgModule({
@@ -69,7 +107,7 @@ Añadimos la ruta al menú para que podamos navegar a esta pantalla:
 
 
 
-Además, hemos añadido una regla adicional para que cuando se cargue la página inicial (sin ruta) por defecto redirija al catálogo de juegos.
+Además, hemos añadido una regla adicional con el path vacío para indicar que si no pone ruta, por defecto la página inicial redirija al path `/games`, que es nuevo path que hemos añadido.
 
 
 ### Implementar servicio
@@ -78,7 +116,7 @@ A continuación implementamos el servicio y mockeamos datos de ejemplo:
 
 === "mock-games.ts"
     ``` TypeScript
-    import { Game } from "src/app/models/games/Game";
+    import { Game } from "./Game";
 
     export const GAME_DATA: Game[] = [
         { id: 1, title: 'Juego 1', age: 6, category: { id: 1, name: 'Categoría 1' }, author: { id: 1, name: 'Autor 1', nationality: 'Nacionalidad 1' } },
@@ -94,9 +132,9 @@ A continuación implementamos el servicio y mockeamos datos de ejemplo:
 === "game.service.ts"
     ``` TypeScript
     import { Injectable } from '@angular/core';
-    import { Game } from 'src/app/models/games/Game';
     import { Observable, of } from 'rxjs';
-    import { GAME_DATA } from './mock-games';
+    import { Game } from './model/Game';
+    import { GAME_DATA } from './model/mock-games';
 
     @Injectable({
         providedIn: 'root'
@@ -109,7 +147,7 @@ A continuación implementamos el servicio y mockeamos datos de ejemplo:
             return of(GAME_DATA);
         }
 
-        saveGame(game: Game): Observable<Game> {
+        saveGame(game: Game): Observable<void> {
             return of(null);
         }
 
@@ -121,7 +159,7 @@ A continuación implementamos el servicio y mockeamos datos de ejemplo:
 Ya tenemos las operaciones del servicio con datoos, así que ahora vamos a por el listado filtrado.
 
 
-=== "games.component.html"
+=== "game-list.component.html"
     ``` HTML
     <div class="container">
         <h1>Catálogo de juegos</h1>
@@ -148,8 +186,8 @@ Ya tenemos las operaciones del servicio con datoos, así que ahora vamos a por e
         </div>   
 
         <div class="game-list">
-            <app-game-detail *ngFor="let game of games; let i = index;" (click)="editGame(game)">
-            </app-game-detail>
+            <app-game-item *ngFor="let game of games; let i = index;" (click)="editGame(game)">
+            </app-game-item>
         </div>
         
         <div class="buttons">
@@ -157,7 +195,7 @@ Ya tenemos las operaciones del servicio con datoos, así que ahora vamos a por e
         </div>   
     </div>
     ```
-=== "games.component.scss"
+=== "game-list.component.scss"
     ``` CSS
     .container {
         margin: 20px;
@@ -198,22 +236,22 @@ Ya tenemos las operaciones del servicio con datoos, así que ahora vamos a por e
         width: 125px;
     }
     ```
-=== "games.component.ts"
+=== "game-list.component.ts"
     ``` TypeScript
     import { Component, OnInit } from '@angular/core';
-    import { Category } from 'src/app/models/categories/Category';
-    import { Game } from 'src/app/models/games/Game';
-    import { GameService } from 'src/app/services/games/game.service';
-    import { CategoryService } from 'src/app/services/categories/category.service';
-    import { GameDialogComponent } from './game-dialog/game-dialog.component';
     import { MatDialog } from '@angular/material/dialog';
+    import { CategoryService } from 'src/app/category/category.service';
+    import { Category } from 'src/app/category/model/Category';
+    import { GameEditComponent } from '../game-edit/game-edit.component';
+    import { GameService } from '../game.service';
+    import { Game } from '../model/Game';
 
     @Component({
-        selector: 'app-games',
-        templateUrl: './games.component.html',
-        styleUrls: ['./games.component.scss']
+        selector: 'app-game-list',
+        templateUrl: './game-list.component.html',
+        styleUrls: ['./game-list.component.scss']
     })
-    export class GamesComponent implements OnInit {
+    export class GameListComponent implements OnInit {
 
         categories : Category[];
         games: Game[];
@@ -255,7 +293,7 @@ Ya tenemos las operaciones del servicio con datoos, así que ahora vamos a por e
         }
 
         createGame() {    
-            const dialogRef = this.dialog.open(GameDialogComponent, {
+            const dialogRef = this.dialog.open(GameEditComponent, {
                 data: {}
             });
 
@@ -265,7 +303,7 @@ Ya tenemos las operaciones del servicio con datoos, así que ahora vamos a por e
         }  
 
         editGame(game: Game) {
-            const dialogRef = this.dialog.open(GameDialogComponent, {
+            const dialogRef = this.dialog.open(GameEditComponent, {
                 data: { game: game }
             });
 
@@ -273,71 +311,70 @@ Ya tenemos las operaciones del servicio con datoos, así que ahora vamos a por e
                 this.onSearch();
             });
         }
-
     }
     ```
 
-Recuerda que cada vez que utilizamos un componente nuevo (en este caso el mat-select y mat-option) debemos incluirlo en el módulo padre.
+Recuerda, de nuevo, que todos los componentes de Angular que utilicemos hay que importarlos en el módulo padre correspondiente para que se puedan precargar correctamente.
 
-=== "views.module.ts"
-    ``` TypeScript hl_lines="18 19 34 35"
+=== "game.module.ts"
+    ``` TypeScript
     import { NgModule } from '@angular/core';
     import { CommonModule } from '@angular/common';
-    import { MatTableModule } from '@angular/material/table';
-    import { MatIconModule } from '@angular/material/icon';
-    import { MatButtonModule } from '@angular/material/button';
-    import { CategoriesComponent } from './categories/categories.component';
-    import { CategoryDialogComponent } from './categories/category-dialog/category-dialog.component';
-    import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
-    import { MatFormFieldModule } from '@angular/material/form-field';
-    import { MatInputModule } from '@angular/material/input';
+    import { GameListComponent } from './game-list/game-list.component';
+    import { GameEditComponent } from './game-edit/game-edit.component';
+    import { GameItemComponent } from './game-list/game-item/game-item.component';
     import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-    import { AuthorsComponent } from './authors/authors.component';
-    import { AuthorDialogComponent } from './authors/author-dialog/author-dialog.component';
-    import { MatPaginatorModule } from '@angular/material/paginator';
-    import { GamesComponent } from './games/games.component';
-    import { GameDetailComponent } from './games/game-detail/game-detail.component';
-    import { GameDialogComponent } from './games/game-dialog/game-dialog.component';
+    import { MatButtonModule } from '@angular/material/button';
     import { MatOptionModule } from '@angular/material/core';
+    import { MatDialogModule } from '@angular/material/dialog';
+    import { MatFormFieldModule } from '@angular/material/form-field';
+    import { MatIconModule } from '@angular/material/icon';
+    import { MatInputModule } from '@angular/material/input';
+    import { MatPaginatorModule } from '@angular/material/paginator';
     import { MatSelectModule } from '@angular/material/select';
+    import { MatTableModule } from '@angular/material/table';
+    import { MatCardModule } from '@angular/material/card';
+
 
     @NgModule({
-        declarations: [CategoriesComponent, CategoryDialogComponent, AuthorsComponent, AuthorDialogComponent, GamesComponent, GameDetailComponent, GameDialogComponent],
-        imports: [
-            CommonModule,
-            MatTableModule,
-            MatIconModule, 
-            MatButtonModule,
-            MatDialogModule,
-            MatFormFieldModule,
-            MatInputModule,
-            FormsModule,
-            ReactiveFormsModule,
-            MatPaginatorModule,
-            MatOptionModule,
-            MatSelectModule,
-        ],
-        providers: [
-            {
-                provide: MAT_DIALOG_DATA,
-                useValue: {},
-            },
-        ]
+    declarations: [
+        GameListComponent,
+        GameEditComponent,
+        GameItemComponent
+    ],
+    imports: [
+        CommonModule,
+        MatTableModule,
+        MatIconModule, 
+        MatButtonModule,
+        MatDialogModule,
+        MatFormFieldModule,
+        MatInputModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatPaginatorModule,
+        MatOptionModule,
+        MatSelectModule,
+        MatCardModule,
+    ]
     })
-    export class ViewsModule { }
+    export class GameModule { }
     ```
 
 
-
-Debe quedar algo similar a esto:
+Con todos estos cambios y si refrescamos el navegador, debería verse una pantalla similar a esta:
 
 ![step5-angular1](../assets/images/step5-angular1.png)
 
 Tenemos una pantalla con una sección de filtros en la parte superior, donde podemos introducir un texto o seleccionar una categoría de un dropdown, un listado que de momento tiene todos los componentes básicos en una fila uno detrás del otro, y un botón para crear juegos nuevos.
 
+!!! tip "Dropdown"
+    El componente `Dropdown` es uno de los componentes más utilizados en las pantallas y formularios de Angular. Ves familiarizándote con él porque lo vas a usar mucho. Es bastante potente y medianamente sencillo de utilizar. Los datos del listado pueden ser dinámicos (desde servidor) o estáticos (si los valores ya los tienes prefijados).
+
+
 ### Implementar detalle del item
 
-Ahora vamos a implementar el detalle de cada uno de los items que forman el listado. Para ello lo primero que haremos será pasarle la información del juego a cada componente como un dato de entrada `Input`.
+Ahora vamos a implementar el detalle de cada uno de los items que forman el listado. Para ello lo primero que haremos será pasarle la información del juego a cada componente como un dato de entrada `Input` hacia el componente.
 
 === "games.component.html"
     ``` HTML hl_lines="26"
@@ -366,8 +403,8 @@ Ahora vamos a implementar el detalle de cada uno de los items que forman el list
         </div>   
 
         <div class="game-list">
-            <app-game-detail *ngFor="let game of games; let i = index;" (click)="editGame(game)" [game]="game">
-            </app-game-detail>
+            <app-game-item *ngFor="let game of games; let i = index;" (click)="editGame(game)" [game]="game">
+            </app-game-item>
         </div>
         
         <div class="buttons">
@@ -380,9 +417,9 @@ También vamos a necesitar una foto de ejemplo para poner dentro de la tarjeta d
 
 <img src="../../assets/images/foto.png" width="100">
 
-Y ya para terminar, implementamos el componente de detalle:
+Descárgala y déjala dentro del proyecto en `assets/foto.png`. Y ya para terminar, implementamos el componente de detalle:
 
-=== "game-detail.component.html"
+=== "game-item.component.html"
     ``` HTML
     <div class="container">
         <mat-card>
@@ -401,7 +438,7 @@ Y ya para terminar, implementamos el componente de detalle:
         </mat-card>
     </div>
     ```
-=== "game-detail.component.scss"
+=== "game-item.component.scss"
     ``` CSS
     .container {
         display: flex;
@@ -438,17 +475,17 @@ Y ya para terminar, implementamos el componente de detalle:
         }
     }    
     ```
-=== "game-detail.component.ts"
+=== "game-item.component.ts"
     ``` TypeScript hl_lines="11"
     import { Component, OnInit, Input } from '@angular/core';
-    import { Game } from 'src/app/models/games/Game';
+    import { Game } from '../../model/Game';
 
     @Component({
-        selector: 'app-game-detail',
-        templateUrl: './game-detail.component.html',
-        styleUrls: ['./game-detail.component.scss']
+        selector: 'app-game-item',
+        templateUrl: './game-item.component.html',
+        styleUrls: ['./game-item.component.scss']
     })
-    export class GameDetailComponent implements OnInit {
+    export class GameItemComponent implements OnInit {
 
         @Input() game: Game;
 
@@ -458,58 +495,6 @@ Y ya para terminar, implementamos el componente de detalle:
         }
 
     }
-    ```
-
-Y de nuevo, al utilizar un componente nuevo (en este caso el mat-card) debemos incluirlo en el módulo padre.
-
-=== "views.module.ts"
-    ``` TypeScript hl_lines="20 37"
-    import { NgModule } from '@angular/core';
-    import { CommonModule } from '@angular/common';
-    import { MatTableModule } from '@angular/material/table';
-    import { MatIconModule } from '@angular/material/icon';
-    import { MatButtonModule } from '@angular/material/button';
-    import { CategoriesComponent } from './categories/categories.component';
-    import { CategoryDialogComponent } from './categories/category-dialog/category-dialog.component';
-    import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
-    import { MatFormFieldModule } from '@angular/material/form-field';
-    import { MatInputModule } from '@angular/material/input';
-    import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-    import { AuthorsComponent } from './authors/authors.component';
-    import { AuthorDialogComponent } from './authors/author-dialog/author-dialog.component';
-    import { MatPaginatorModule } from '@angular/material/paginator';
-    import { GamesComponent } from './games/games.component';
-    import { GameDetailComponent } from './games/game-detail/game-detail.component';
-    import { GameDialogComponent } from './games/game-dialog/game-dialog.component';
-    import { MatOptionModule } from '@angular/material/core';
-    import { MatSelectModule } from '@angular/material/select';
-    import { MatCardModule } from '@angular/material/card';
-
-    @NgModule({
-        declarations: [CategoriesComponent, CategoryDialogComponent, AuthorsComponent, AuthorDialogComponent, GamesComponent, GameDetailComponent, GameDialogComponent],
-        imports: [
-            CommonModule,
-            MatTableModule,
-            MatIconModule, 
-            MatButtonModule,
-            MatDialogModule,
-            MatFormFieldModule,
-            MatInputModule,
-            FormsModule,
-            ReactiveFormsModule,
-            MatPaginatorModule,
-            MatOptionModule,
-            MatSelectModule,
-            MatCardModule    
-        ],
-        providers: [
-            {
-                provide: MAT_DIALOG_DATA,
-                useValue: {},
-            },
-        ]
-    })
-    export class ViewsModule { }
     ```
 
 Ahora si que debería quedar algo similar a esta pantalla:
@@ -527,7 +512,7 @@ Así que lo primero que haremos será implementar una operación `getAllAuthors`
 
 === "mock-authors-list.ts"
     ``` TypeScript
-    import { Author } from 'src/app/models/authors/Author';
+    import { Author } from "./Author";
 
     export const AUTHOR_DATA_LIST : Author[] = [
         { id: 1, name: 'Klaus Teuber', nationality: 'Alemania' },
@@ -537,32 +522,15 @@ Así que lo primero que haremos será implementar una operación `getAllAuthors`
         { id: 5, name: 'Kelly Adams', nationality: 'Estados Unidos' },
     ]    
     ```
-=== "mock-authors.ts"
-    ``` TypeScript hl_lines="2 5"
-    import { AuthorPage } from 'src/app/models/authors/AuthorPage';
-    import { AUTHOR_DATA_LIST } from './mock-authors-list';
-
-    export const AUTHOR_DATA: AuthorPage = {
-        content: AUTHOR_DATA_LIST,  
-        pageable : {
-            pageSize: 5,
-            pageNumber: 0,
-            sort: [
-                {property: "id", direction: "ASC"}
-            ]
-        },
-        totalElements: 7
-    }
-    ```
 === "author.service.ts"
-    ``` TypeScript hl_lines="7 30 31 32"
-    import { Injectable } from '@angular/core';
-    import { Pageable } from 'src/app/models/page/Pageable';
-    import { AuthorPage } from 'src/app/models/authors/AuthorPage';
-    import { Observable, of } from 'rxjs';
-    import { Author } from 'src/app/models/authors/Author';
+    ``` TypeScript hl_lines="7 34-36"
     import { HttpClient } from '@angular/common/http';
-    import { AUTHOR_DATA_LIST } from './mock-authors-list';
+    import { Injectable } from '@angular/core';
+    import { Observable, of } from 'rxjs';
+    import { Pageable } from '../core/model/page/Pageable';
+    import { Author } from './model/Author';
+    import { AuthorPage } from './model/AuthorPage';
+    import { AUTHOR_DATA_LIST } from './model/mock-authors-list';
 
     @Injectable({
         providedIn: 'root'
@@ -574,15 +542,19 @@ Así que lo primero que haremos será implementar una operación `getAllAuthors`
         ) { }
 
         getAuthors(pageable: Pageable): Observable<AuthorPage> {
-            return this.http.post<AuthorPage>('http://localhost:8080/author/v1/', {pageable:pageable});
+            return this.http.post<AuthorPage>('http://localhost:8080/author', {pageable:pageable});
         }
 
-        saveAuthor(author: Author): Observable<Author> {
-            return this.http.put<Author>('http://localhost:8080/author/v1/', author);
+        saveAuthor(author: Author): Observable<void> {
+
+            let url = 'http://localhost:8080/author';
+            if (author.id != null) url += '/'+author.id;
+
+            return this.http.put<void>(url, author);
         }
 
-        deleteAuthor(idAuthor : number): Observable<any> {
-            return this.http.delete('http://localhost:8080/author/v1/'+idAuthor);
+        deleteAuthor(idAuthor : number): Observable<void> {
+            return this.http.delete<void>('http://localhost:8080/author/'+idAuthor);
         }    
 
         getAllAuthors(): Observable<Author[]> {
@@ -592,12 +564,9 @@ Así que lo primero que haremos será implementar una operación `getAllAuthors`
     }
     ```    
 
-!!! tip "Clean Code"
-    Acuerdate de lo que hemos comentado antes, siempre debes tener presente el `Clean Code`. ¡No dupliques código!, es muy importante de cara al futuro mantenimiento. En este caso, en tanto en mock-authors como en mock-authors-list teníamos un listado de autores. Lo mejor es que no dupliquemos el código y uno de ellos haga uso del otro.
-
 Ahora sí que tenemos todo listo para implementar el cuadro de dialogo para dar de alta o editar juegos.
 
-=== "game-dialog.component.html"
+=== "game-edit.component.html"
     ``` HTML
     <div class="container">
         <h1 *ngIf="game.id == null">Crear juego</h1>
@@ -644,7 +613,7 @@ Ahora sí que tenemos todo listo para implementar el cuadro de dialogo para dar 
         </div>
     </div>
     ```
-=== "game-dialog.component.scss"
+=== "game-edit.component.scss"
     ``` CSS
     .container {
         min-width: 350px;
@@ -666,30 +635,30 @@ Ahora sí que tenemos todo listo para implementar el cuadro de dialogo para dar 
         }
     }
     ```
-=== "game-dialog.component.ts"
+=== "game-edit.component.ts"
     ``` TypeScript
-    import { Component, OnInit, Inject } from '@angular/core';
+    import { Component, Inject, OnInit } from '@angular/core';
     import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-    import { Game } from 'src/app/models/games/Game';
-    import { GameService } from 'src/app/services/games/game.service';
-    import { Author } from 'src/app/models/authors/Author';
-    import { Category } from 'src/app/models/categories/Category';
-    import { AuthorService } from 'src/app/services/authors/author.service';
-    import { CategoryService } from 'src/app/services/categories/category.service';
+    import { AuthorService } from 'src/app/author/author.service';
+    import { Author } from 'src/app/author/model/Author';
+    import { CategoryService } from 'src/app/category/category.service';
+    import { Category } from 'src/app/category/model/Category';
+    import { GameService } from '../game.service';
+    import { Game } from '../model/Game';
 
     @Component({
-        selector: 'app-game-dialog',
-        templateUrl: './game-dialog.component.html',
-        styleUrls: ['./game-dialog.component.scss']
+        selector: 'app-game-edit',
+        templateUrl: './game-edit.component.html',
+        styleUrls: ['./game-edit.component.scss']
     })
-    export class GameDialogComponent implements OnInit {
+    export class GameEditComponent implements OnInit {
 
         game: Game; 
         authors: Author[];
         categories: Category[];
 
         constructor(
-            public dialogRef: MatDialogRef<GameDialogComponent>,
+            public dialogRef: MatDialogRef<GameEditComponent>,
             @Inject(MAT_DIALOG_DATA) public data: any,
             private gameService: GameService,
             private categoryService: CategoryService,
@@ -755,14 +724,12 @@ De esta forma, no estamos cogiendo directamente los datos del listado, sino que 
 
 Lo primero que vamos a hacer es crear los modelos para trabajar con BBDD y con peticiones hacia el front. Además, también tenemos que añadir datos al script de inicialización de BBDD.
 
-=== "V0001__Create_Schema.sql"
-    ``` SQL hl_lines="20 22 23 24 25 26 27 28 30 31"
-    CREATE SEQUENCE HIBERNATE_SEQUENCE START WITH 1000000;
-
+=== "schema.sql"
+    ``` SQL hl_lines="18 20-26 28 29"
     DROP TABLE IF EXISTS CATEGORY;
 
     CREATE TABLE CATEGORY (
-        id BIGINT AUTO_INCREMENT PRIMARY KEY,
+        id BIGINT IDENTITY NOT NULL PRIMARY KEY,
         name VARCHAR(250) NOT NULL
     );
 
@@ -770,7 +737,7 @@ Lo primero que vamos a hacer es crear los modelos para trabajar con BBDD y con p
     DROP TABLE IF EXISTS AUTHOR;
 
     CREATE TABLE AUTHOR (
-        id BIGINT AUTO_INCREMENT PRIMARY KEY,
+        id BIGINT IDENTITY NOT NULL PRIMARY KEY,
         name VARCHAR(400) NOT NULL,
         nationality VARCHAR(250) NOT NULL
     );
@@ -779,7 +746,7 @@ Lo primero que vamos a hacer es crear los modelos para trabajar con BBDD y con p
     DROP TABLE IF EXISTS GAME;
 
     CREATE TABLE GAME (
-        id BIGINT AUTO_INCREMENT PRIMARY KEY,
+        id BIGINT IDENTITY NOT NULL PRIMARY KEY,
         title VARCHAR(250) NOT NULL,
         age VARCHAR(3) NOT NULL,
         category_id BIGINT DEFAULT NULL,
@@ -789,7 +756,7 @@ Lo primero que vamos a hacer es crear los modelos para trabajar con BBDD y con p
     ALTER TABLE GAME ADD FOREIGN KEY (category_id) REFERENCES CATEGORY(id);
     ALTER TABLE GAME ADD FOREIGN KEY (author_id) REFERENCES AUTHOR(id);
     ```
-=== "V0002__Create_Data.sql"
+=== "data.sql"
     ``` SQL hl_lines="12 13 14 15 16 17 18"
     INSERT INTO CATEGORY(id, name) VALUES (1, 'Eurogames');
     INSERT INTO CATEGORY(id, name) VALUES (2, 'Ameritrash');
@@ -834,7 +801,7 @@ Lo primero que vamos a hacer es crear los modelos para trabajar con BBDD y con p
     public class Game {
 
         @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Column(name = "id", nullable = false)
         private Long id;
 
@@ -1039,111 +1006,278 @@ Lo primero que vamos a hacer es crear los modelos para trabajar con BBDD y con p
     }
     ```
 
-### Repository
+!!! note "Relaciones anidadas"
+    Fíjate que tanto la `Entity` como el `Dto` tienen relaciones con `Author` y `Category`. Gracias a Spring JPA se pueden resolver de esta forma y tener toda la información de las relaciones hijas dentro del objeto padre. Muy importante recordar que *en el mundo entity* las relaciones serán con objetos `Entity` mientras que *en el mundo dto* las relaciones deben ser siempre con objetos `Dto`. La utilidad beanMapper ya hará las conversiones necesarias, siempre que tengan el mismo nombre de propiedades.
 
-Para esta ocasión, vamos a necesitar un listado filtrado por título o por categoría, así que necesitaremos pasarle esos datos y filtrar la query. Para el título vamos a buscar por una cadena contenida, así que el parámetro será de tipo `String`, mientras que para la categoría vamos a buscar por su primary key, así que el parámetro será de tipo `Long`.
 
-!!! tip "Búsquedas en BBDD"
-    Siempre deberíamos buscar a los hijos por primary keys, nunca hay que hacerlo por una descripción libre ya que el usuario podría teclear el mismo nombre de diferentes formas y no habría manera de buscar correctamente el resultado. Así que siempre que haya un dropdown, se debe filtrar por su ID.
 
-Podríamos utilizar los [QueryMethods](https://www.baeldung.com/spring-data-derived-queries) para que Spring JPA haga su magia, pero en esta ocasión vamos a hacer una implementación concreta de este método de filtrado.
-Esta implementación la haremos en un Repository normal, y el resto de métodos nos vendrán dados por un CrudRepository como hemos hecho hasta ahora.
+### TDD - Pruebas
 
-=== "GameRepository.java"
-    ``` Java
-    package com.capgemini.ccsw.tutorial.game;
+Para desarrollar todas las operaciones, empezaremos primero diseñando las pruebas y luego implementando el código necesario que haga funcionar correctamente esas pruebas. Para ir más rápido vamos a poner todas las pruebas de golpe, pero realmente se deberían crear una a una e ir implementando el código necesario para esa prueba. Para evitar tantas iteraciones en el tutorial las haremos todas de golpe.
 
-    import org.springframework.data.repository.CrudRepository;
+Vamos a pararnos a pensar un poco que necesitamos en la pantalla. En este caso solo tenemos dos operaciones:
 
-    import com.capgemini.ccsw.tutorial.game.model.Game;
+* Una consulta filtrada, que reciba datos de filtro opcionales (título e idCategoría) y devuelva los datos ya filtrados
+* Una operación de guardado y modificación
 
-    /**
-    * @author ccsw
-    */
-    public interface GameRepository extends CrudRepository<Game, Long>, GameCustomRepository {
+De nuevo tendremos que desglosar esto en varios casos de prueba:
 
-    }
-    ```
-=== "GameCustomRepository.java"
-    ``` Java
-    package com.capgemini.ccsw.tutorial.game;
+* Buscar un juego sin filtros
+* Buscar un título que exista
+* Buscar una categoría que exista
+* Buscar un título y una categoría que existan
+* Buscar un título que no exista
+* Buscar una categoría que no exista
+* Buscar un título y una categoría que no existan
+* Crear un juego nuevo (en realidad deberíamos probar diferentes combinaciones y errores)
+* Modificar un juego que exista
+* Modificar un juego que no exista
 
-    import java.util.List;
 
-    import com.capgemini.ccsw.tutorial.game.model.Game;
+También crearemos una clase `GameController` dentro del package de `com.capgemini.ccsw.tutorial.game` con la implementación de los métodos vacíos, para que no falle la compilación.
 
-    /**
-    * @author ccsw
-    *
-    */
-    public interface GameCustomRepository {
+¡Vamos a implementar test!
 
-        /**
-        * Método para recuperar todas las {@link com.capgemini.ccsw.tutorial.game.model.Game} filtradas
-        * @param title
-        * @param category
-        * @return
-        */
-        List<Game> findByFilter(String title, Long category);
-    }
-    ```
-=== "GameCustomRepositoryImpl.java"
+
+=== "GameController.java"
     ``` Java
     package com.capgemini.ccsw.tutorial.game;
 
     import java.util.List;
 
-    import javax.persistence.EntityManager;
+    import org.springframework.web.bind.annotation.RestController;
 
+    import com.capgemini.ccsw.tutorial.game.model.GameDto;
+
+    @RestController
+    public class GameController {
+
+        public List<GameDto> find(String title, Long idCategory) {
+            return null;
+        }
+
+        public void save(Long id, GameDto dto) {
+
+        }
+
+    }
+    ```
+=== "GameTest.java"
+    ``` Java
+    package com.capgemini.ccsw.tutorial.game;
+
+    import static org.junit.jupiter.api.Assertions.assertEquals;
+    import static org.junit.jupiter.api.Assertions.assertNotNull;
+    import static org.junit.jupiter.api.Assertions.assertThrows;
+
+    import java.util.List;
+
+    import org.junit.jupiter.api.Test;
     import org.springframework.beans.factory.annotation.Autowired;
-    import org.springframework.util.StringUtils;
+    import org.springframework.boot.test.context.SpringBootTest;
+    import org.springframework.transaction.annotation.Transactional;
 
-    import com.capgemini.ccsw.tutorial.game.model.Game;
-    import com.devonfw.module.basic.common.api.query.LikePatternSyntax;
-    import com.devonfw.module.jpa.dataaccess.api.QueryUtil;
-    import com.querydsl.core.alias.Alias;
-    import com.querydsl.jpa.impl.JPAQuery;
+    import com.capgemini.ccsw.tutorial.author.model.AuthorDto;
+    import com.capgemini.ccsw.tutorial.category.model.CategoryDto;
+    import com.capgemini.ccsw.tutorial.game.model.GameDto;
 
-    /**
-    * @author ccsw
-    *
-    */
-    public class GameCustomRepositoryImpl implements GameCustomRepository {
+    @SpringBootTest
+    @Transactional
+    public class GameTest {
 
         @Autowired
-        private EntityManager entityManager;
+        private GameController gameController;
 
-        /**
-        * {@inheritDoc}
-        */
-        public List<Game> findByFilter(String title, Long category) {
+        private final String notExistsTitle = "NotExists";
+        private final String existsTitle = "Aventureros";
+        private final Long notExistsCategory = 0L;
+        private final Long existsCategory = 3L;
 
-            Game alias = Alias.alias(Game.class);
-            JPAQuery<Game> query = new JPAQuery<Game>(this.entityManager).from(Alias.$(alias));
+        @Test
+        public void findWithoutFiltersShouldReturnAllGamesInDB() {
 
-            if (StringUtils.hasText(title)) {
-                QueryUtil.get().whereLike(query, Alias.$(alias.getTitle()), title, LikePatternSyntax.SQL, true, true);
-            }
+            assertNotNull(gameController);
 
-            if (category != null) {
-                query.where(Alias.$(alias.getCategory().getId()).eq(category));
-            }
+            int GAMES_WITH_FILTER = 7;
 
-            return query.fetch();
+            List<GameDto> games = gameController.find(null, null);
+
+            assertNotNull(games);
+            assertEquals(GAMES_WITH_FILTER, games.size());
+        }
+
+        @Test
+        public void findExistsTitleShouldReturnGames() {
+
+            assertNotNull(gameController);
+
+            int GAMES_WITH_FILTER = 1;
+
+            List<GameDto> games = gameController.find(existsTitle, null);
+
+            assertNotNull(games);
+            assertEquals(GAMES_WITH_FILTER, games.size());
+        }
+
+        @Test
+        public void findExistsCategoryShouldReturnGames() {
+
+            assertNotNull(gameController);
+
+            int GAMES_WITH_FILTER = 3;
+
+            List<GameDto> games = gameController.find(null, existsCategory);
+
+            assertNotNull(games);
+            assertEquals(GAMES_WITH_FILTER, games.size());
+        }
+
+        @Test
+        public void findExistsTitleAndCategoryShouldReturnGames() {
+
+            assertNotNull(gameController);
+
+            int GAMES_WITH_FILTER = 1;
+
+            List<GameDto> games = gameController.find(existsTitle, existsCategory);
+
+            assertNotNull(games);
+            assertEquals(GAMES_WITH_FILTER, games.size());
+        }
+
+        @Test
+        public void findNotExistsTitleShouldReturnEmpty() {
+
+            assertNotNull(gameController);
+
+            int GAMES_WITH_FILTER = 0;
+
+            List<GameDto> games = gameController.find(notExistsTitle, null);
+
+            assertNotNull(games);
+            assertEquals(GAMES_WITH_FILTER, games.size());
+        }
+
+        @Test
+        public void findNotExistsCategoryShouldReturnEmpty() {
+
+            assertNotNull(gameController);
+
+            int GAMES_WITH_FILTER = 0;
+
+            List<GameDto> games = gameController.find(null, notExistsCategory);
+
+            assertNotNull(games);
+            assertEquals(GAMES_WITH_FILTER, games.size());
+        }
+
+        @Test
+        public void findNotExistsTitleOrCategoryShouldReturnEmpty() {
+
+            assertNotNull(gameController);
+
+            int GAMES_WITH_FILTER = 0;
+
+            List<GameDto> games = gameController.find(notExistsTitle, notExistsCategory);
+            assertNotNull(games);
+            assertEquals(GAMES_WITH_FILTER, games.size());
+
+            games = gameController.find(notExistsTitle, existsCategory);
+            assertNotNull(games);
+            assertEquals(GAMES_WITH_FILTER, games.size());
+
+            games = gameController.find(existsTitle, notExistsCategory);
+            assertNotNull(games);
+            assertEquals(GAMES_WITH_FILTER, games.size());
+
+        }
+
+        @Test
+        public void saveWithoutIdShouldCreateNewGame() {
+
+            String newTitle = "Nuevo juego";
+
+            GameDto dto = new GameDto();
+            AuthorDto authorDto = new AuthorDto();
+            authorDto.setId(1L);
+
+            CategoryDto categoryDto = new CategoryDto();
+            categoryDto.setId(1L);
+
+            dto.setTitle(newTitle);
+            dto.setAge("18");
+            dto.setAuthor(authorDto);
+            dto.setCategory(categoryDto);
+
+            List<GameDto> games = gameController.find(newTitle, null);
+            assertNotNull(games);
+            assertEquals(0, games.size());
+
+            gameController.save(null, dto);
+
+            games = gameController.find(newTitle, null);
+            assertNotNull(games);
+            assertEquals(1, games.size());
+        }
+
+        @Test
+        public void modifyWithExistIdShouldModifyGame() {
+
+            Long gameId = 1L;
+            String newTitle = "Nuevo juego";
+
+            GameDto dto = new GameDto();
+            AuthorDto authorDto = new AuthorDto();
+            authorDto.setId(1L);
+
+            CategoryDto categoryDto = new CategoryDto();
+            categoryDto.setId(1L);
+
+            dto.setTitle(newTitle);
+            dto.setAge("18");
+            dto.setAuthor(authorDto);
+            dto.setCategory(categoryDto);
+
+            List<GameDto> games = gameController.find(newTitle, null);
+            assertNotNull(games);
+            assertEquals(0, games.size());
+
+            gameController.save(gameId, dto);
+
+            games = gameController.find(newTitle, null);
+            assertNotNull(games);
+            assertEquals(1, games.size());
+
+            GameDto game = games.get(0);
+            assertEquals(gameId, game.getId());
+
+        }
+
+        @Test
+        public void modifyWithNotExistIdShouldThrowException() {
+            assertNotNull(gameController);
+
+            String newTitle = "Nuevo juego";
+            long gameId = 0;
+
+            GameDto dto = new GameDto();
+            dto.setTitle(newTitle);
+
+            assertThrows(Exception.class, () -> gameController.save(gameId, dto));
         }
 
     }
     ```
 
-No se puede implementar un `CrudRepository` ya que es una interface que tiene su propia implementación en Spring JPA. El truco que podemos hacer es crear una interface y una implementación custom con los métodos que necesitemos y en nuestro `GameRepository` extender la interface custom.
+!!! tip "Búsquedas en BBDD"
+    Siempre deberíamos buscar a los hijos por primary keys, nunca hay que hacerlo por una descripción libre ya que el usuario podría teclear el mismo nombre de diferentes formas y no habría manera de buscar correctamente el resultado. Así que siempre que haya un dropdown, se debe filtrar por su ID.
 
-De esta forma únicamente utilizamos un objeto `Repository`, pero realmente Spring JPA provee los métodos de Crud y nosotros proveemos los métodos custom.
 
-La implementación de las queries que hagamos dentro del custom repository ya es cosa nuestra y podemos utilizar lo que necesitemos. En este caso hemos optado por utilizar Criteria para hacer la Query ayudándonos de unas clases de utilidad que provee Devonfw, muy recomendables para hacer queries paginadas. 
+Si ahora ejecutas los jUnits, verás que en este caso hemos construido 10 pruebas, para cubrir los casos básicos del `Controller`, y todas ellas fallan la ejecución. Vamos a seguir implementando el resto de capas para hacer que los test funcionen.
 
-### Service
+### Controller
 
-Siguiente paso, la capa de lógica, es decir el `Service`.
+De nuevo para poder compilar esta capa, nos hace falta delegar sus operaciones de lógica de negocio en un `Service` así que lo crearemos al mismo tiempo que lo vamos necesitando.
 
 === "GameService.java"
     ``` Java
@@ -1160,24 +1294,83 @@ Siguiente paso, la capa de lógica, es decir el `Service`.
     public interface GameService {
 
         /**
-        * Método para recuperar todas las {@link com.capgemini.ccsw.tutorial.game.model.Game} filtradas
+        * Recupera los juegos filtrando opcionalmente por título y/o categoría
         * @param title
-        * @param category
+        * @param idCategory
         * @return
         */
-        List<Game> findByFilter(String title, Long category);
+        List<Game> find(String title, Long idCategory);
 
         /**
-        * Método para crear o actualizar una {@link com.capgemini.ccsw.tutorial.game.model.Game}
+        * Guarda o modifica un juego, dependiendo de si el id está o no informado
+        * @param id
         * @param dto
-        * @return
         */
-        public Game save(GameDto dto);
+        void save(Long id, GameDto dto);
 
     }
     ```
+=== "GameController.java"
+    ``` Java hl_lines="21-23 26-27 29-30 32-39 41-45"
+    package com.capgemini.ccsw.tutorial.game;
+
+    import java.util.List;
+
+    import org.springframework.beans.factory.annotation.Autowired;
+    import org.springframework.web.bind.annotation.CrossOrigin;
+    import org.springframework.web.bind.annotation.PathVariable;
+    import org.springframework.web.bind.annotation.RequestBody;
+    import org.springframework.web.bind.annotation.RequestMapping;
+    import org.springframework.web.bind.annotation.RequestMethod;
+    import org.springframework.web.bind.annotation.RequestParam;
+    import org.springframework.web.bind.annotation.RestController;
+
+    import com.capgemini.ccsw.tutorial.game.model.Game;
+    import com.capgemini.ccsw.tutorial.game.model.GameDto;
+    import com.devonfw.module.beanmapping.common.api.BeanMapper;
+
+    /**
+    * @author ccsw
+    */
+    @RequestMapping(value = "/game")
+    @RestController
+    @CrossOrigin(origins = "*")
+    public class GameController {
+
+        @Autowired
+        GameService gameService;
+
+        @Autowired
+        BeanMapper beanMapper;
+
+        @RequestMapping(path = "", method = RequestMethod.GET)
+        public List<GameDto> find(@RequestParam(value = "title", required = false) String title,
+                @RequestParam(value = "idCategory", required = false) Long idCategory) {
+
+            List<Game> games = gameService.find(title, idCategory);
+
+            return beanMapper.mapList(games, GameDto.class);
+        }
+
+        @RequestMapping(path = { "", "/{id}" }, method = RequestMethod.PUT)
+        public void save(@PathVariable(name = "id", required = false) Long id, @RequestBody GameDto dto) {
+
+            gameService.save(id, dto);
+        }
+
+    }
+    ```
+
+En esta ocasión, para el método de búsqueda hemos decidido utilizar parámetros en la URL de tal forma que nos quedará algo así `http://localhost:8080/game/?title=xxx&idCategoria=yyy`. Queremos recuperar el recurso `Game` que es el raiz de la ruta, pero filtrado por cero o varios parámetros.
+
+
+### Service
+
+Siguiente paso, la capa de lógica de negocio, es decir el `Service`, que por tanto hará uso de un `Repository`.
+
+
 === "GameServiceImpl.java"
-    ``` Java
+    ``` Java hl_lines="30 46"
     package com.capgemini.ccsw.tutorial.game;
 
     import java.util.List;
@@ -1205,41 +1398,57 @@ Siguiente paso, la capa de lógica, es decir el `Service`.
         * {@inheritDoc}
         */
         @Override
-        public List<Game> findByFilter(String title, Long category) {
+        public List<Game> find(String title, Long category) {
 
-            return this.gameRepository.findByFilter(title, category);
+            return this.gameRepository.find(title, category);
         }
 
         /**
         * {@inheritDoc}
         */
         @Override
-        public Game save(GameDto dto) {
+        public void save(Long id, GameDto dto) {
 
             Game game = null;
-            if (dto.getId() != null)
-                game = this.gameRepository.findById(dto.getId()).orElse(null);
-            else
+
+            if (id == null)
                 game = new Game();
+            else
+                game = this.gameRepository.findById(id).orElse(null);
 
-            BeanUtils.copyProperties(dto, game, "author", "category");
+            BeanUtils.copyProperties(dto, game, "id", "author", "category");
 
-            //TODO: Setear categoria y autor
-
-            return this.gameRepository.save(game);
+            this.gameRepository.save(game);
         }
 
     }
     ```
+=== "GameRepository.java"
+    ``` Java
+    package com.capgemini.ccsw.tutorial.game;
 
-En este `Service` volvemos a utilizar el List en lugar del Page, y hemos eliminado el método `delete` ya que no se pueden borrar juegos. Pero, la novedad está en el `save`. Si recuerdas, un `Game` tiene una relación con `Author` y otra relación con `Category`. Estas relaciones se hacen a nivel de `Entity`, sin embargo en nuestro dto de entrada al método `GameDto` estamos tratando con `CategoryDto` y `AuthorDto`.
+    import java.util.List;
 
-Una solución podría ser convertir esos DTOs a `Entity`, pero esto podría llevar a duplicidades en la cache interna de JPA, así que mejor no utilizar esta solución.
+    import org.springframework.data.repository.CrudRepository;
 
-Lo correcto es realizar consultas a la BBDD y traernos esas entities. Pero si recuerdas las reglas básicas, un `Repository` debe pertenecer a un solo `Service`, por lo que en lugar de llamar a métodos de los `AuthorRepository` y `CategoryRepository` desde nuestro `GameService`, debemos llamar a métodos expuestos en `AuthorService` y `CategoryService`. Para ello necesitaremos crear esos métodos get en los otros `Services`. Quedaría algo así:
+    import com.capgemini.ccsw.tutorial.game.model.Game;
+
+    public interface GameRepository extends CrudRepository<Game, Long> {
+
+        List<Game> find(String title, Long category);
+
+    }
+    ```
+
+Este servicio tiene dos peculiaridades, remarcadas en amarillo en la clase anterior. Por un lado tenemos la consulta, que no es un listado completo ni un listado paginado, sino que es un listado con filtros. Luego veremos como se hace eso, de momento lo dejaremos como un método que recibe los dos filtros.
+
+La segunda peculiaridad es que de cliente nos está llegando un `GameDto`, que internamente tiene un `AuthorDto` y un `CategoryDto`, pero nosotros lo tenemos que traducir a entidades de BBDD. No sirve con copiar las propiedades tal cual, ya que entonces Spring lo que hará será crear un objeto nuevo y persistir ese objeto nuevo de `Author` y de `Category`. Además, de cliente generalmente tan solo nos llega el ID de esos objetos hijo, y no el resto de información de la entidad. Por esos motivos lo hemos *ignorado* del copyProperties.
+
+Pero de alguna forma tendremos que setearle esos valores a la entidad `Game`. Si conocemos sus ID que es lo que generalmente llega, podemos recuperar esos objetos de BBDD y setearlos en el objeto `Game`. Si recuerdas las reglas básicas, un `Repository` debe pertenecer a un solo `Service`, por lo que en lugar de llamar a métodos de los `AuthorRepository` y `CategoryRepository` desde nuestro `GameServiceImpl`, debemos llamar a métodos expuestos en `AuthorService` y `CategoryService`, que son los que gestionan sus repositorios. Para ello necesitaremos crear esos métodos get en los otros `Services`. Quedaría algo así:
+
 
 === "AuthorService.java"
-    ``` Java hl_lines="15 16 17 18 19 20"
+    ``` Java hl_lines="14-19"
     package com.capgemini.ccsw.tutorial.author;
 
     import org.springframework.data.domain.Page;
@@ -1250,7 +1459,6 @@ Lo correcto es realizar consultas a la BBDD y traernos esas entities. Pero si re
 
     /**
     * @author ccsw
-    *
     */
     public interface AuthorService {
 
@@ -1270,10 +1478,10 @@ Lo correcto es realizar consultas a la BBDD y traernos esas entities. Pero si re
 
         /**
         * Método para crear o actualizar un {@link com.capgemini.ccsw.tutorial.author.model.Author}
+        * @param id
         * @param data
-        * @return
         */
-        Author save(AuthorDto data);
+        void save(Long id, AuthorDto data);
 
         /**
         * Método para crear o actualizar un {@link com.capgemini.ccsw.tutorial.author.model.Author}
@@ -1282,9 +1490,10 @@ Lo correcto es realizar consultas a la BBDD y traernos esas entities. Pero si re
         void delete(Long id);
 
     }
+
     ```
 === "AuthorServiceImpl.java"
-    ``` Java hl_lines="24 25 26 27 28 29 30 31 50"
+    ``` Java hl_lines="24-31 50"
     package com.capgemini.ccsw.tutorial.author;
 
     import javax.transaction.Transactional;
@@ -1330,17 +1539,17 @@ Lo correcto es realizar consultas a la BBDD y traernos esas entities. Pero si re
         * {@inheritDoc}
         */
         @Override
-        public Author save(AuthorDto data) {
+        public void save(Long id, AuthorDto data) {
 
-            Author categoria = null;
-            if (data.getId() != null)
-                categoria = get(data.getId());
+            Author author = null;
+            if (id != null)
+                author = this.get(id);
             else
-                categoria = new Author();
+                author = new Author();
 
-            BeanUtils.copyProperties(data, categoria);
+            BeanUtils.copyProperties(data, author, "id");
 
-            return this.authorRepository.save(categoria);
+            this.authorRepository.save(author);
         }
 
         /**
@@ -1356,7 +1565,7 @@ Lo correcto es realizar consultas a la BBDD y traernos esas entities. Pero si re
     }    
     ```
 === "CategoryService.java"
-    ``` Java hl_lines="14 15 16 17 18 19"
+    ``` Java hl_lines="14-19"
     package com.capgemini.ccsw.tutorial.category;
 
     import java.util.List;
@@ -1388,7 +1597,7 @@ Lo correcto es realizar consultas a la BBDD y traernos esas entities. Pero si re
         * @param dto
         * @return
         */
-        Category save(CategoryDto dto);
+        void save(Long id, CategoryDto dto);
 
         /**
         * Método para borrar una {@link com.capgemini.ccsw.tutorial.category.model.Category}
@@ -1398,12 +1607,11 @@ Lo correcto es realizar consultas a la BBDD y traernos esas entities. Pero si re
     }
     ```
 === "CategoryServiceImpl.java"
-    ``` Java hl_lines="22 23 24 25 26 27 28 29 48"
+    ``` Java hl_lines="21-28 50"
     package com.capgemini.ccsw.tutorial.category;
 
     import java.util.List;
 
-    import org.springframework.beans.BeanUtils;
     import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.stereotype.Service;
 
@@ -1442,17 +1650,18 @@ Lo correcto es realizar consultas a la BBDD y traernos esas entities. Pero si re
         * {@inheritDoc}
         */
         @Override
-        public Category save(CategoryDto dto) {
+        public void save(Long id, CategoryDto dto) {
 
             Category categoria = null;
-            if (dto.getId() != null)
-                categoria = get(dto.getId());
-            else
+
+            if (id == null)
                 categoria = new Category();
+            else
+                categoria = this.get(id);
 
-            BeanUtils.copyProperties(dto, categoria);
+            categoria.setName(dto.getName());
 
-            return this.categoryRepository.save(categoria);
+            this.categoryRepository.save(categoria);
         }
 
         /**
@@ -1471,10 +1680,11 @@ Lo correcto es realizar consultas a la BBDD y traernos esas entities. Pero si re
     A la hora de implementar métodos nuevos, ten siempre presente el `Clean Code`. ¡No dupliques código!, es muy importante de cara al futuro mantenimiento. Si en nuestro método `save` hacíamos uso de una operación `findById` y ahora hemos creado una nueva operación `get`, hagamos uso de esta nueva operación y no repitamos el código.
 
 
-Y ahora ya podemos implementar correctamente nuestro `Service`.
+Y ahora que ya tenemos los métodos necesarios ya podemos implementar correctamente nuestro `GameServiceImpl`.
+
 
 === "GameServiceImpl.java"
-    ``` Java hl_lines="28 29 31 32 57 58 60 61"
+    ``` Java hl_lines="26-27 29-30 56-57"
     package com.capgemini.ccsw.tutorial.game;
 
     import java.util.List;
@@ -1486,9 +1696,7 @@ Y ahora ya podemos implementar correctamente nuestro `Service`.
     import org.springframework.stereotype.Service;
 
     import com.capgemini.ccsw.tutorial.author.AuthorService;
-    import com.capgemini.ccsw.tutorial.author.model.Author;
     import com.capgemini.ccsw.tutorial.category.CategoryService;
-    import com.capgemini.ccsw.tutorial.category.model.Category;
     import com.capgemini.ccsw.tutorial.game.model.Game;
     import com.capgemini.ccsw.tutorial.game.model.GameDto;
 
@@ -1512,145 +1720,90 @@ Y ahora ya podemos implementar correctamente nuestro `Service`.
         * {@inheritDoc}
         */
         @Override
-        public List<Game> findByFilter(String title, Long category) {
+        public List<Game> find(String title, Long category) {
 
-            return this.gameRepository.findByFilter(title, category);
+            return this.gameRepository.find(title, category);
         }
 
         /**
         * {@inheritDoc}
         */
         @Override
-        public Game save(GameDto dto) {
+        public void save(Long id, GameDto dto) {
 
             Game game = null;
-            if (dto.getId() != null)
-                game = this.gameRepository.findById(dto.getId()).orElse(null);
-            else
+
+            if (id == null)
                 game = new Game();
+            else
+                game = this.gameRepository.findById(id).orElse(null);
 
-            BeanUtils.copyProperties(dto, game, "author", "category");
+            BeanUtils.copyProperties(dto, game, "id", "author", "category");
 
-            Author author = this.authorService.get(dto.getAuthor().getId());
-            game.setAuthor(author);
+            game.setAuthor(authorService.get(dto.getAuthor().getId()));
+            game.setCategory(categoryService.get(dto.getCategory().getId()));
 
-            Category category = this.categoryService.get(dto.getCategory().getId());
-            game.setCategory(category);
-
-            return this.gameRepository.save(game);
+            this.gameRepository.save(game);
         }
 
     }
     ```
 
-### Controller
+Ahora si que tenemos la capa de lógica de negocio terminada, podemos pasar a la siguiente capa.
 
-Después de todo este mareo, ya podemos terminar ocn la última capa. Vamos a implementar el `Controller` para que ataque a la capa de `Service`, con los endpoints de las operaciones que vamos a publicar. Además, para realizar la búsqueda necesitaremos un nuevo `DTO` como ya vimos en el ejemplo del listado paginado.
 
-=== "GameController.java"
+### Repository
+
+Y llegamos a la última capa donde, si recordamos, teníamos un método `find` que recibe dos parámetros. Algo así:
+
+
+=== "GameRepository.java"
     ``` Java
     package com.capgemini.ccsw.tutorial.game;
 
     import java.util.List;
 
-    import org.springframework.beans.factory.annotation.Autowired;
-    import org.springframework.web.bind.annotation.CrossOrigin;
-    import org.springframework.web.bind.annotation.RequestBody;
-    import org.springframework.web.bind.annotation.RequestMapping;
-    import org.springframework.web.bind.annotation.RequestMethod;
-    import org.springframework.web.bind.annotation.RestController;
+    import org.springframework.data.repository.CrudRepository;
 
-    import com.capgemini.ccsw.tutorial.config.mapper.BeanMapper;
-    import com.capgemini.ccsw.tutorial.game.model.GameDto;
-    import com.capgemini.ccsw.tutorial.game.model.GameSearchDto;
+    import com.capgemini.ccsw.tutorial.game.model.Game;
 
-    /**
-    * @author ccsw
-    */
-    @RequestMapping(value = "/game/v1")
-    @RestController
-    @CrossOrigin(origins = "*")
-    public class GameController {
+    public interface GameRepository extends CrudRepository<Game, Long> {
 
-        @Autowired
-        GameService gameService;
-
-        @Autowired
-        BeanMapper beanMapper;
-
-        /*
-        * Método para recuperar todos los {@link com.capgemini.ccsw.tutorial.game.model.Game} filtrados
-        * @return
-        */
-        @RequestMapping(path = "/", method = RequestMethod.POST)
-        public List<GameDto> findByFilter(@RequestBody GameSearchDto dto) {
-
-            return this.beanMapper.mapList(this.gameService.findByFilter(dto.getTitle(), dto.getCategoryId()), GameDto.class);
-        }
-
-        /**
-        * Método para crear o actualizar un {@link com.capgemini.ccsw.tutorial.game.model.Game}
-        * @param dto
-        * @return
-        */
-        @RequestMapping(path = "/", method = RequestMethod.PUT)
-        public GameDto save(@RequestBody GameDto dto) {
-
-            return this.beanMapper.map(this.gameService.save(dto), GameDto.class);
-        }
-
-    }
-
-    ```
-=== "GameSearchDto.java"
-    ``` Java
-    package com.capgemini.ccsw.tutorial.game.model;
-
-    /**
-    * @author ccsw
-    */
-    public class GameSearchDto {
-
-        private String title;
-
-        private Long categoryId;
-
-        /**
-        * @return title
-        */
-        public String getTitle() {
-
-            return this.title;
-        }
-
-        /**
-        * @param title new value of {@link #getTitle}.
-        */
-        public void setTitle(String title) {
-
-            this.title = title;
-        }
-
-        /**
-        * @return categoryId
-        */
-        public Long getCategoryId() {
-
-            return this.categoryId;
-        }
-
-        /**
-        * @param categoryId new value of {@link #getcategoryId}.
-        */
-        public void setCategoryId(Long categoryId) {
-
-            this.categoryId = categoryId;
-        }
+        List<Game> find(String title, Long category);
 
     }
     ```
 
-Pues con esto ya tendríamos todas las consultas de `Game` implementadas. Ahora solo falta probarlas.
+
+Para esta ocasión, vamos a necesitar un listado filtrado por título o por categoría, así que necesitaremos pasarle esos datos y filtrar la query. Para el título vamos a buscar por una cadena contenida, así que el parámetro será de tipo `String`, mientras que para la categoría vamos a buscar por su primary key, así que el parámetro será de tipo `Long`.
+
+Existen varias estrategias para abordar esta implementación. Podríamos utilizar los [QueryMethods](https://www.baeldung.com/spring-data-derived-queries) para que Spring JPA haga su magia, pero en esta ocasión sería bastante complicado encontrar un predicado correcto.
+
+También podríamos hacer una implementación de la interface y hacer la consulta directamente con Criteria. Pero en esta ocasión vamos a utilizar otra *magia* que nos ofrece Spring JPA y es utilizar la [anotación @Query](https://www.baeldung.com/spring-data-jpa-query).
+
+Esta anotación nos permite definir una consulta en SQL nativo o en HQL (lenguaje de consulta de objetos) y Spring JPA se encargará de realizar todo el mapeo y conversión de los datos de entrada y salida. Veamos un ejemplo y luego lo explicamos en detalle:
+
+=== "GameRepository.java"
+    ``` Java hl_lines="11-12"
+    package com.capgemini.ccsw.tutorial.game;
+
+    import java.util.List;
+
+    import org.springframework.data.repository.CrudRepository;
+
+    import com.capgemini.ccsw.tutorial.game.model.Game;
+
+    public interface GameRepository extends CrudRepository<Game, Long> {
+
+        @Query("from Game where (:title is null or title like '%'||:title||'%') and (:category is null or category.id = :category)")
+        List<Game> find(@Param("title") String title, @Param("category") Long category);
+
+    }
+    ```
+
+
+AQUIIIIIIIIIIIII!!!!
+
 
 ### Prueba de las operaciones
 

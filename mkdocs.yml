@@ -6,21 +6,20 @@ nav:
   - Contexto de la aplicación: usecases.md
   - Entorno de desarrollo: install.md
   - Creación de proyecto: create.md
-  - Estructura y Clean Code (TBD): cleancode.md
+  - Estructura y Clean Code: cleancode.md
   - "Code: Desarrollo con Angular": develop/step1.md
   - "Code: Desarrollo con Springboot": develop/step2.md
   - "Code: Conectar front con back": develop/step3.md
   - "Code: Listado paginado": develop/step4.md
   - "Code: Listado filtrado": develop/step5.md  
-  - "Code: Validaciones (TBD)": develop/step6.md
-  - "Code: Crear Login (TBD)": develop/step7.md
-  - "Code: Testing (TBD)": develop/step8.md
   - Ahora hazlo tu!: exercise.md
   - Anexo. Detalle REST: appendix/rest.md
-  - Anexo. TDD: appendix/tdd.md
+  - Anexo. TDD (TBD): appendix/tdd.md
+  - Anexo. Tutorial básico de Git: appendix/git.md
+  - Anexo. Validaciones (TBD): develop/step6.md
+  - Anexo. Crear Login (TBD): develop/step7.md
   - Anexo. Estilos (TBD): appendix/styles.md
   - Anexo. Fechas (TBD): appendix/dates.md
-  - Anexo. Tutorial básico de Git: appendix/git.md
 
 theme:
     name: material
