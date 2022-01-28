@@ -14,7 +14,7 @@
     
     
       
-        <title>Anexo. Crear Login (TBC) - Tutorial Springboot - Angular</title>
+        <title>Anexo. TDD - Tutorial Springboot - Angular</title>
       
     
     
@@ -63,7 +63,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#seguridad" class="md-skip">
+        <a href="#tdd-test-driven-development" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -95,7 +95,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Anexo. Crear Login (TBC)
+              Anexo. TDD
             
           </span>
         </div>
@@ -272,7 +272,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../step1/" class="md-nav__link">
+      <a href="../../develop/step1/" class="md-nav__link">
         Code: Desarrollo con Angular
       </a>
     </li>
@@ -287,7 +287,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../step2/" class="md-nav__link">
+      <a href="../../develop/step2/" class="md-nav__link">
         Code: Desarrollo con Springboot
       </a>
     </li>
@@ -302,7 +302,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../step3/" class="md-nav__link">
+      <a href="../../develop/step3/" class="md-nav__link">
         Code: Conectar front con back
       </a>
     </li>
@@ -317,7 +317,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../step4/" class="md-nav__link">
+      <a href="../../develop/step4/" class="md-nav__link">
         Code: Listado paginado
       </a>
     </li>
@@ -332,7 +332,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../step5/" class="md-nav__link">
+      <a href="../../develop/step5/" class="md-nav__link">
         Code: Listado filtrado
       </a>
     </li>
@@ -362,7 +362,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../appendix/git/" class="md-nav__link">
+      <a href="../git/" class="md-nav__link">
         Anexo. Tutorial básico de Git
       </a>
     </li>
@@ -377,38 +377,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../appendix/rest/" class="md-nav__link">
+      <a href="../rest/" class="md-nav__link">
         Anexo. Detalle REST
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../appendix/tdd/" class="md-nav__link">
-        Anexo. TDD
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../step6/" class="md-nav__link">
-        Anexo. Validaciones (TBC)
       </a>
     </li>
   
@@ -432,7 +402,7 @@
       
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        Anexo. Crear Login (TBC)
+        Anexo. TDD
       </a>
       
     </li>
@@ -447,7 +417,37 @@
   
   
     <li class="md-nav__item">
-      <a href="../../appendix/styles/" class="md-nav__link">
+      <a href="../../develop/step6/" class="md-nav__link">
+        Anexo. Validaciones (TBC)
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/step7/" class="md-nav__link">
+        Anexo. Crear Login (TBC)
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../styles/" class="md-nav__link">
         Anexo. Estilos (TBC)
       </a>
     </li>
@@ -462,7 +462,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../appendix/dates/" class="md-nav__link">
+      <a href="../dates/" class="md-nav__link">
         Anexo. Fechas (TBC)
       </a>
     </li>
@@ -501,11 +501,28 @@
               
                 
                 
-                <h1 id="seguridad">Seguridad</h1>
-<div class="admonition warning">
-<p class="admonition-title">Atención</p>
-<p>Esta sección está incompleta y todavía en desarrollo. Puedes leerla pero seguramente cambiará o ampliará su información.</p>
-</div>
+                <h1 id="tdd-test-driven-development">TDD (Test Driven Development)</h1>
+<p>Se trata de una práctica de programación que consiste en escribir primero las pruebas (generalmente unitarias), después escribir el código fuente que pase la prueba satisfactoriamente y, por último, refactorizar el código escrito.</p>
+<p>Este ciclo se suele representar con la siguiente imagen:</p>
+<p><img alt="tdd1" src="../../assets/images/tdd1.png" /></p>
+<p>Con esta práctica se consigue entre otras cosas: un código más robusto, más seguro, más mantenible y una mayor rapidez en el desarrollo.</p>
+<p>Los pasos que se siguen son:</p>
+<ol>
+<li>
+<p>Primero hay que escribir el test o los tests que cubran la funcionalidad que voy a implementar. Los test no solo deben probar los casos correctos, sino que deben probar los casos erróneos e incluso los casos en los que se provoca una excepción. Cuantos más test hagas, mejor probada y más robusta será tu aplicación.</p>
+<p>Además, como efecto colateral, al escribir el test estás pensando el diseño de cómo va a funcionar la aplicación. En vez de liarte a programar como loco, te estás forzando a pensar primero y ver cual es la mejor solución. Por ejemplo para implementar una operación de calculadora primero piensas en qué es lo que necesitarás: una clase Calculadora con un método que se llame Suma y que tenga dos parámetros.</p>
+</li>
+<li>
+<p>El segundo paso una vez tengo definido el test, que evidentemente fallará (e incluso a menudo ni siquiera compilará), es implementar el código necesario para que los tests funcionen. Aquí muchas veces pecamos de querer implementar demasiadas cosas o pensando en que en un futuro necesitaremos modificar ciertas partes y lo dejamos ya preparado para ello. Hay que ir con mucho cuidado con las <code>optimizaciones prematuras</code>, a menudo no son necesarias y solo hacen que dificultar nuestro código.</p>
+<p>Piensa en construir el mínimo código que haga que tus tests funcionen correctamente. Además, no es necesario que sea un código demasiado purista y limpio.</p>
+</li>
+<li>
+<p>El último paso y a menudo el más olvidado es el <code>Refactor</code>. Una vez te has asegurado que tu código funciona y que los tests funcionan correctamente (ojo no solo los tuyos sino todos los que ya existan en la aplicación) llega el paso de sacarle brillo a tu código.</p>
+<p>En este paso tienes que intentar mejorar tu código, evitar duplicidades, evitar malos olores de programación, eliminar posibles malos usos del lenguaje, etc. En definitiva que tu código se lea y se entienda mejor.</p>
+</li>
+</ol>
+<p>Si seguimos estos pasos a la hora de programar, nuestra aplicación estará muy bien testada. Cada vez que hagamos un cambio tendremos una certeza muy elevada, de forma rápida y sencilla, de si la aplicación sigue funcionando o hemos roto algo.
+Y lo mejor de todo, las implementaciones que hagamos estarán bien pensadas y diseñadas y acotadas realmente a lo que necesitamos.</p>
                 
               
               
@@ -525,7 +542,7 @@
     <nav class="md-footer__inner md-grid" aria-label="Pie">
       
         
-        <a href="../step6/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Anexo. Validaciones (TBC)" rel="prev">
+        <a href="../rest/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Anexo. Detalle REST" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -534,20 +551,20 @@
               <span class="md-footer__direction">
                 Anterior
               </span>
-              Anexo. Validaciones (TBC)
+              Anexo. Detalle REST
             </div>
           </div>
         </a>
       
       
         
-        <a href="../../appendix/styles/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Anexo. Estilos (TBC)" rel="next">
+        <a href="../../develop/step6/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Anexo. Validaciones (TBC)" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Siguiente
               </span>
-              Anexo. Estilos (TBC)
+              Anexo. Validaciones (TBC)
             </div>
           </div>
           <div class="md-footer__button md-icon">

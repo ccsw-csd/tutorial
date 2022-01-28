@@ -314,7 +314,7 @@
   
     <li class="md-nav__item">
       <a href="../cleancode/" class="md-nav__link">
-        Estructura y Clean Code (TBD)
+        Estructura y Clean Code
       </a>
     </li>
   
@@ -403,51 +403,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../develop/step6/" class="md-nav__link">
-        Code: Validaciones (TBD)
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../develop/step7/" class="md-nav__link">
-        Code: Crear Login (TBD)
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../develop/step8/" class="md-nav__link">
-        Code: Testing (TBD)
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../exercise/" class="md-nav__link">
         Ahora hazlo tu!
       </a>
@@ -463,8 +418,83 @@
   
   
     <li class="md-nav__item">
+      <a href="../appendix/git/" class="md-nav__link">
+        Anexo. Tutorial básico de Git
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix/rest/" class="md-nav__link">
+        Anexo. Detalle REST
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix/tdd/" class="md-nav__link">
+        Anexo. TDD
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../develop/step6/" class="md-nav__link">
+        Anexo. Validaciones (TBC)
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../develop/step7/" class="md-nav__link">
+        Anexo. Crear Login (TBC)
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../appendix/styles/" class="md-nav__link">
-        Anexo. Estilos (TBD)
+        Anexo. Estilos (TBC)
       </a>
     </li>
   
@@ -479,22 +509,7 @@
   
     <li class="md-nav__item">
       <a href="../appendix/dates/" class="md-nav__link">
-        Anexo. Fechas (TBD)
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../appendix/git/" class="md-nav__link">
-        Anexo. Tutorial básico de Git
+        Anexo. Fechas (TBC)
       </a>
     </li>
   
@@ -566,9 +581,10 @@
 <p>Las herramientas básicas que vamos a utilizar para el desarrollo del tutorial son:</p>
 <ul>
 <li>Para el desarrollo Back<ul>
-<li>Eclipse</li>
-<li>Java 8+</li>
-<li>Maven</li>
+<li><a href="https://www.eclipse.org/downloads/">Eclide IDE</a></li>
+<li><a href="https://www.oracle.com/java/technologies/downloads/#java8-windows">Java 8</a></li>
+<li>Maven <em>(viene por defecto con Eclipse IDE)</em></li>
+<li><a href="https://www.postman.com/">Postman</a></li>
 </ul>
 </li>
 <li>Para el desarrollo Front<ul>
@@ -579,9 +595,11 @@
 </li>
 </ul>
 <h2 id="instalacion-de-herramientas-para-desarrollo-back">Instalación de herramientas para desarrollo Back</h2>
-<p>Necesitamos instalar un IDE de desarrollo, en nuestro caso será Eclipse IDE y la máquina virtual de java necesaria para ejecutar el código. El tutorial está basado en Java8, aunque puedes instalar cualquier otra versión superior.</p>
+<p>Necesitamos instalar un IDE de desarrollo, en nuestro caso será Eclipse IDE y la máquina virtual de java necesaria para ejecutar el código. Recomendamos Java8, que es la versión con la que está desarrollado el tutorial, aunque puedes instalar cualquier otra versión superior.</p>
 <p>Para instalar el IDE deberás acceder a <a href="https://www.eclipse.org/downloads/">Eclide IDE</a> y descargarte la última versión del instalador. Una vez lo ejecutes te pedirá el tipo de instalación que deseas instalar. Por lo general con la de "Eclipse IDE for Java Developers" es suficiente. Con esta versión ya tiene integrado los plugins de Maven y Git.</p>
-<p>En la siguiente pantalla te pedirá que elijas la versión de Java para instalar. Os recomendamos realizar el tutorial con la versión 8 de <a href="https://www.java.com/es/download/">java</a>, para versiones superiores no está probado y podría dar algún fallo.</p>
+<p>En la siguiente pantalla te pedirá que elijas la versión de Java para instalar. Os recomendamos realizar el tutorial con la versión <a href="https://www.oracle.com/java/technologies/downloads/#java8-windows">8 de java</a>, para versiones superiores no está probado y podría dar algún fallo.</p>
+<p>Una vez instalado eclipse, debes asegurarte que está usando por defecto la versión de Java 8. Para ello, abre el menú <code>Window -&gt; Preferences</code> y dentro de la opción <code>Java - Installed JREs</code> verifica que es correcto. Si no fuera así, añade la versión correcta y márcala como <code>default</code>.</p>
+<p><img alt="Installed JREs" src="../assets/images/install-eclipse.png" /></p>
 <h2 id="instalacion-de-herramientas-para-desarrollo-front">Instalación de herramientas para desarrollo Front</h2>
 <p>Ahora necesitamos instalar las herramientas para el desarrollo front.</p>
 <ul>
@@ -592,12 +610,13 @@
 <p>Instalaremos <a href="https://nodejs.org/es/">Nodejs</a>. Entrando en la página de descargas e instalando la última versión estable.</p>
 </li>
 <li>
-<p>Por último tendremos que tener el CLI de Angular instalado para poder arrancar el servidor y ejecutar los comandos necesarios para el tutorial. Tan solo hay que abrir una consola de msdos y ejecutar el comando:</p>
+<p>Por último tendremos que instalar el CLI de Angular para desarrollar y compilar la aplicación. Para poder instalarlo, tan solo hay que abrir una consola de msdos y ejecutar el comando:</p>
 </li>
 </ul>
 <div class="highlight"><pre><span></span><code>npm install -g @angular/cli
 </code></pre></div>
-<p>Con esto ya tendremos todo instalado, listo para empezar a crear los proyectos.</p>
+<p>Nodejs ya hará el resto. </p>
+<p>Y con esto ya tendremos todo instalado, listo para empezar a crear los proyectos.</p>
                 
               
               
