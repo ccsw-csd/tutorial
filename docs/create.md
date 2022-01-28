@@ -70,7 +70,7 @@ La mayoría de los proyectos Springboot en los que trabajamos normalmente, suele
 
 ### (Rápido) - Uso de plantilla base
 
-Puedes descargarte una [plantilla ya construida](./assets/project-template.7z), con un proyecto generado a partir de Sprint Initializr y configurada con los pasos detallados en los puntos siguientes y así te ahorras tiempo.
+Puedes descargarte una [plantilla ya construida](./assets/project-template.zip), con un proyecto generado a partir de Sprint Initializr y configurada con los pasos detallados en los puntos siguientes y así te ahorras tiempo.
 
 #### Importar en eclipse
 
