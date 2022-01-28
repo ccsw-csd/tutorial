@@ -775,7 +775,6 @@ Lo primero que vamos a hacer es crear los modelos para trabajar con BBDD y con p
     INSERT INTO GAME(id, title, age, category_id, author_id) VALUES (4, 'Barrage', '14', 1, 3);
     INSERT INTO GAME(id, title, age, category_id, author_id) VALUES (5, 'Los viajes de Marco Polo', '12', 1, 3);
     INSERT INTO GAME(id, title, age, category_id, author_id) VALUES (6, 'Azul', '8', 3, 5);
-    INSERT INTO GAME(id, title, age, category_id, author_id) VALUES (7, 'Osopark', '8', 3, 6);
     ```
 === "Game.java"
     ``` Java
@@ -1098,7 +1097,7 @@ También crearemos una clase `GameController` dentro del package de `com.capgemi
 
             assertNotNull(gameController);
 
-            int GAMES_WITH_FILTER = 7;
+            int GAMES_WITH_FILTER = 6;
 
             List<GameDto> games = gameController.find(null, null);
 
@@ -1124,7 +1123,7 @@ También crearemos una clase `GameController` dentro del package de `com.capgemi
 
             assertNotNull(gameController);
 
-            int GAMES_WITH_FILTER = 3;
+            int GAMES_WITH_FILTER = 2;
 
             List<GameDto> games = gameController.find(null, existsCategory);
 
@@ -1444,9 +1443,62 @@ Este servicio tiene dos peculiaridades, remarcadas en amarillo en la clase anter
 
 La segunda peculiaridad es que de cliente nos está llegando un `GameDto`, que internamente tiene un `AuthorDto` y un `CategoryDto`, pero nosotros lo tenemos que traducir a entidades de BBDD. No sirve con copiar las propiedades tal cual, ya que entonces Spring lo que hará será crear un objeto nuevo y persistir ese objeto nuevo de `Author` y de `Category`. Además, de cliente generalmente tan solo nos llega el ID de esos objetos hijo, y no el resto de información de la entidad. Por esos motivos lo hemos *ignorado* del copyProperties.
 
-Pero de alguna forma tendremos que setearle esos valores a la entidad `Game`. Si conocemos sus ID que es lo que generalmente llega, podemos recuperar esos objetos de BBDD y setearlos en el objeto `Game`. Si recuerdas las reglas básicas, un `Repository` debe pertenecer a un solo `Service`, por lo que en lugar de llamar a métodos de los `AuthorRepository` y `CategoryRepository` desde nuestro `GameServiceImpl`, debemos llamar a métodos expuestos en `AuthorService` y `CategoryService`, que son los que gestionan sus repositorios. Para ello necesitaremos crear esos métodos get en los otros `Services`. Quedaría algo así:
+Pero de alguna forma tendremos que setearle esos valores a la entidad `Game`. Si conocemos sus ID que es lo que generalmente llega, podemos recuperar esos objetos de BBDD y setearlos en el objeto `Game`. Si recuerdas las reglas básicas, un `Repository` debe pertenecer a un solo `Service`, por lo que en lugar de llamar a métodos de los `AuthorRepository` y `CategoryRepository` desde nuestro `GameServiceImpl`, debemos llamar a métodos expuestos en `AuthorService` y `CategoryService`, que son los que gestionan sus repositorios. Para ello necesitaremos crear esos métodos get en los otros `Services`. 
+
+Y ya sabes, para implementar nuevos métodos, antes se deben hacer las pruebas jUnit. Recuerda que los test van en `src/test/java`
 
 
+=== "AuthorServiceTest.java"
+    ``` Java
+    package com.capgemini.ccsw.tutorial.author;
+
+    import static org.junit.jupiter.api.Assertions.assertEquals;
+    import static org.junit.jupiter.api.Assertions.assertNotNull;
+    import static org.junit.jupiter.api.Assertions.assertNull;
+
+    import org.junit.jupiter.api.Test;
+    import org.springframework.beans.factory.annotation.Autowired;
+    import org.springframework.boot.test.context.SpringBootTest;
+    import org.springframework.transaction.annotation.Transactional;
+
+    import com.capgemini.ccsw.tutorial.author.model.Author;
+
+    @SpringBootTest
+    @Transactional
+    public class AuthorServiceTest {
+
+        @Autowired
+        private AuthorService authorService;
+
+        @Test
+        public void getExistsAuthorIdShouldReturnAuthor() {
+            assertNotNull(authorService);
+
+            Long authorId = 1L;
+
+            Author author = authorService.get(1L);
+
+            assertNotNull(author);
+
+            assertEquals(authorId, author.getId());
+
+        }
+
+        @Test
+        public void getNotExistsAuthorIdShouldReturnNull() {
+            assertNotNull(authorService);
+
+            Long authorId = 0L;
+
+            Author author = authorService.get(authorId);
+
+            assertNull(author);
+
+        }
+
+    }
+
+    ```
 === "AuthorService.java"
     ``` Java hl_lines="14-19"
     package com.capgemini.ccsw.tutorial.author;
@@ -1563,6 +1615,60 @@ Pero de alguna forma tendremos que setearle esos valores a la entidad `Game`. Si
         }
 
     }    
+    ```
+
+Y lo mismo para categorías.
+
+
+=== "CategoryServiceTest.java"
+    ``` Java
+    package com.capgemini.ccsw.tutorial.category;
+
+    import static org.junit.jupiter.api.Assertions.assertEquals;
+    import static org.junit.jupiter.api.Assertions.assertNotNull;
+    import static org.junit.jupiter.api.Assertions.assertNull;
+
+    import org.junit.jupiter.api.Test;
+    import org.springframework.beans.factory.annotation.Autowired;
+    import org.springframework.boot.test.context.SpringBootTest;
+    import org.springframework.transaction.annotation.Transactional;
+
+    import com.capgemini.ccsw.tutorial.category.model.Category;
+
+    @SpringBootTest
+    @Transactional
+    public class CategoryServiceTest {
+
+        @Autowired
+        private CategoryService categoryService;
+
+        @Test
+        public void getExistsCategoryIdShouldReturnCategory() {
+            assertNotNull(categoryService);
+
+            Long categoryId = 1L;
+
+            Category category = categoryService.get(1L);
+
+            assertNotNull(category);
+
+            assertEquals(categoryId, category.getId());
+
+        }
+
+        @Test
+        public void getNotExistsCategoryIdShouldReturnNull() {
+            assertNotNull(categoryService);
+
+            Long categoryId = 0L;
+
+            Category category = categoryService.get(categoryId);
+
+            assertNull(category);
+
+        }
+
+    }
     ```
 === "CategoryService.java"
     ``` Java hl_lines="14-19"
@@ -1781,7 +1887,7 @@ Existen varias estrategias para abordar esta implementación. Podríamos utiliza
 
 También podríamos hacer una implementación de la interface y hacer la consulta directamente con Criteria. Pero en esta ocasión vamos a utilizar otra *magia* que nos ofrece Spring JPA y es utilizar la [anotación @Query](https://www.baeldung.com/spring-data-jpa-query).
 
-Esta anotación nos permite definir una consulta en SQL nativo o en HQL (lenguaje de consulta de objetos) y Spring JPA se encargará de realizar todo el mapeo y conversión de los datos de entrada y salida. Veamos un ejemplo y luego lo explicamos en detalle:
+Esta anotación nos permite definir una consulta en SQL nativo o en JPQL (Java Persistence Query Language) y Spring JPA se encargará de realizar todo el mapeo y conversión de los datos de entrada y salida. Veamos un ejemplo y luego lo explicamos en detalle:
 
 === "GameRepository.java"
     ``` Java hl_lines="11-12"
@@ -1795,25 +1901,58 @@ Esta anotación nos permite definir una consulta en SQL nativo o en HQL (lenguaj
 
     public interface GameRepository extends CrudRepository<Game, Long> {
 
-        @Query("from Game where (:title is null or title like '%'||:title||'%') and (:category is null or category.id = :category)")
+        @Query("select g from Game g where (:title is null or g.title like '%'||:title||'%') and (:category is null or g.category.id = :category)")
         List<Game> find(@Param("title") String title, @Param("category") Long category);
 
     }
     ```
 
+Si te fijas en las dos líneas que hemos modificado, por un lado hemos puesto nombre a los parámetros de entrada con la anotación @Param. Esto solo nos sirve para poder utilizar los parametros dentro de la query.
 
-AQUIIIIIIIIIIIII!!!!
+Por otro lado, hemos creado una query en un lenguaje similar a SQL, pero en lugar de hacer uso de tablas y columnas, hacemos uso de objetos entity y propiedades. Dentro del where hemos puesto las dos condiciones, o bien que el parámetro título sea nulo o bien si no es nulo, que la propiedad contenga el texto del parámetro título. Para categoría hemos hecho lo mismo. 
+Con esta quuery, Spring JPA generará el SQL correcto y mapeará los resultados a un listado de `Game` que es lo que queremos obtener.
+
+Es otra forma, bastante sencilla de implementar consultas a BBDD.
 
 
 ### Prueba de las operaciones
 
-Si ahora levantamos la aplicación y probamos con el postman, podemos ver los resultados que nos ofrece el back.
 
-** POST ** nos devuelve un listado paginado de `Juegos`, fíjate bien en la petición donde envíamos los filtros y la respuesta que tiene los objetos `Categoria` y `Autor` incluídos.
+Si ahora ejecutamos de nuevo los jUnits, vemos que todos los que hemos desarrollado en `GameTest` ya funcionan correctamente, e incluso el resto de test de la aplicación también funcionan correctamente. 
+
+!!! tip "Pruebas jUnit"
+    Cada vez que desarrollemos un caso de uso nuevo, debemos relanzar todas las pruebas automáticas que tenga la aplicación. Es muy común que al implementar algún desarrollo nuevo, interfiramos de alguna forma en el funcionamiento de otra funcionalidad. Si lanzamos toda la batería de pruebas, nos daremos cuenta si algo ha dejado de funcionar y podremos solucionarlo antes de llevar ese error a Producción. Las pruebas jUnit son nuestra red de seguridad.
+
+
+Además de las pruebas automáticas, podemos ver como se comporta la aplicación y que respuesta nos ofrece, lanzando peticiones Rest con Postman, como hemos hecho en los casos anteriores. Así que podemos levantar la aplicación y lanzar las operaciones:
+
+** GET http://localhost:8080/game ** 
+
+** GET http://localhost:8080/game?title=xxx **
+
+** GET http://localhost:8080/game?idCategory=xxx **
+
+Nos devuelve un listado filtrado de `Game`. Fíjate bien en la petición donde envíamos los filtros y la respuesta que tiene los objetos `Category` y `Author` incluídos.
 
 ![step5-java1](../assets/images/step5-java1.png)
 
-** PUT ** nos sirve para insertar `Juegos` nuevos (si no tienen el id informado) o para actualizar `Juegos` (si tienen el id informado). Fíjate que para enlazar `Categoria` y `Autor` tan solo hace falta el id de cada no de ellos, ya que en el método `save` se hace una consulta `get` para recuperarlos por su id. Además que no tendría sentido enviar toda la información de esas entidades ya que no estás dando de alta una `Categoria` ni un `Autor`.
+** PUT http://localhost:8080/game ** 
+** PUT http://localhost:8080/game/{id} ** 
+
+```
+{
+    "title": "Nuevo juego",
+    "age": "18",
+    "category": {
+        "id": 3
+    },
+    "author": {
+        "id": 1
+    }
+}
+```
+
+Nos sirve para insertar un `Game` nuevo (si no tienen el id informado) o para actualizar un `Game` (si tienen el id informado). Fíjate que para enlazar `Category` y `Author` tan solo hace falta el id de cada no de ellos, ya que en el método `save` se hace una consulta `get` para recuperarlos por su id. Además que no tendría sentido enviar toda la información de esas entidades ya que no estás dando de alta una `Category` ni un `Author`.
 
 ![step5-java2](../assets/images/step5-java2.png)
 ![step5-java3](../assets/images/step5-java3.png)
@@ -1821,222 +1960,73 @@ Si ahora levantamos la aplicación y probamos con el postman, podemos ver los re
 
 ### Implementar listado Autores
 
-Como hemos visto anteriormente en la parte de frontend, para la edición de un `Juego` nos hace falta un método que devuelva un listado de `Autores`, ya que ahora mismo la operación que tenemos implementada devuelve un objeto `Page`.
+Antes de poder conectar front con back, si recuerdas, en la edición de un `Game`, nos hacía falta un listado de `Author` y un listado de `Category`. El segundo ya lo tenemos ya que lo reutilizaremos del listado de categorías que implementamos. Pero el primero no lo tenemos, porque en la pantalla que hicimos, se mostraban de forma paginada. 
 
-Así que antes de finalizar la implementación de backend, vamos a desarrollar esta nueva operación. Por supuesto, respetaremos las operaciones previas que ya existían.
+Así que necesitamos implementar esa funcionalidad, y como siempre vamos de la capa de testing hacia las siguientes capas. Deberíamos añadir los siguientes métodos:
 
-=== "AuthorController.java"
-    ``` Java hl_lines="32 33 34 35 36 37 38 39 40 41"
-    package com.capgemini.ccsw.tutorial.author;
 
-    import java.util.List;
+=== "AuthorTest.java"
+    ``` Java
+    ...
 
-    import org.springframework.beans.factory.annotation.Autowired;
-    import org.springframework.data.domain.Page;
-    import org.springframework.web.bind.annotation.CrossOrigin;
-    import org.springframework.web.bind.annotation.PathVariable;
-    import org.springframework.web.bind.annotation.RequestBody;
-    import org.springframework.web.bind.annotation.RequestMapping;
-    import org.springframework.web.bind.annotation.RequestMethod;
-    import org.springframework.web.bind.annotation.RestController;
+    @Test
+    public void findAllShouldReturnAllAuthorInDB() {
+        assertNotNull(authorController);
 
-    import com.capgemini.ccsw.tutorial.author.model.AuthorDto;
-    import com.capgemini.ccsw.tutorial.author.model.AuthorSearchDto;
-    import com.capgemini.ccsw.tutorial.config.mapper.BeanMapper;
+        List<AuthorDto> authors = authorController.findAll();
 
-    /**
-    * @author ccsw
-    */
-    @RequestMapping(value = "/author/v1")
-    @RestController
-    @CrossOrigin(origins = "*")
-    public class AuthorController {
+        assertNotNull(authors);
 
-        @Autowired
-        AuthorService authorService;
-
-        @Autowired
-        BeanMapper beanMapper;
-
-        /**
-        * Método para recuperar un listado paginado de {@link com.capgemini.ccsw.tutorial.author.model.Author}
-        * @param dto
-        * @return
-        */
-        @RequestMapping(path = "/", method = RequestMethod.GET)
-        public List<AuthorDto> list() {
-
-            return this.beanMapper.mapList(this.authorService.list(), AuthorDto.class);
-        }
-
-        /**
-        * Método para recuperar un listado paginado de {@link com.capgemini.ccsw.tutorial.author.model.Author}
-        * @param dto
-        * @return
-        */
-        @RequestMapping(path = "/", method = RequestMethod.POST)
-        public Page<AuthorDto> findPage(@RequestBody AuthorSearchDto dto) {
-
-            return this.beanMapper.mapPage(this.authorService.findPage(dto), AuthorDto.class);
-        }
-
-        /**
-        * Método para crear o actualizar un {@link com.capgemini.ccsw.tutorial.author.model.Author}
-        * @param data datos de la entidad
-        * @return
-        */
-        @RequestMapping(path = "/", method = RequestMethod.PUT)
-        public AuthorDto save(@RequestBody AuthorDto data) {
-
-            return this.beanMapper.map(this.authorService.save(data), AuthorDto.class);
-        }
-
-        /**
-        * Método para crear o actualizar un {@link com.capgemini.ccsw.tutorial.author.model.Author}
-        * @param id PK de la entidad
-        */
-        @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
-        public void delete(@PathVariable("id") Long id) {
-
-            this.authorService.delete(id);
-        }
+        assertEquals(TOTAL_AUTORS, authors.size());
 
     }
+
+    ...
+    ```
+=== "AuthorController.java"
+    ``` Java
+    ...
+
+    /**
+    * Recupera un listado de autores
+    * @return
+    */
+    public List<AuthorDto> findAll() {
+
+        List<Author> authors = this.authorService.findAll();
+
+        return this.beanMapper.mapList(authors, AuthorDto.class);
+    }
+
+    ...
     ```
 === "AuthorService.java"
-    ``` Java hl_lines="44 45 46 47 48"
-    package com.capgemini.ccsw.tutorial.author;
-
-    import java.util.List;
-
-    import org.springframework.data.domain.Page;
-
-    import com.capgemini.ccsw.tutorial.author.model.Author;
-    import com.capgemini.ccsw.tutorial.author.model.AuthorDto;
-    import com.capgemini.ccsw.tutorial.author.model.AuthorSearchDto;
+    ``` Java
+    ...
 
     /**
-    * @author ccsw
-    *
+    * Recupera un listado de autores
+    * @return
     */
-    public interface AuthorService {
+    List<Author> findAll();
 
-        /**
-        * Recupera un {@link com.capgemini.ccsw.tutorial.author.model.Author} a través de su ID
-        * @param id
-        * @return
-        */
-        Author get(Long id);
-
-        /**
-        * Método para recuperar un listado paginado de {@link com.capgemini.ccsw.tutorial.author.model.Author}
-        * @param dto
-        * @return
-        */
-        Page<Author> findPage(AuthorSearchDto dto);
-
-        /**
-        * Método para crear o actualizar un {@link com.capgemini.ccsw.tutorial.author.model.Author}
-        * @param data
-        * @return
-        */
-        Author save(AuthorDto data);
-
-        /**
-        * Método para crear o actualizar un {@link com.capgemini.ccsw.tutorial.author.model.Author}
-        * @param id
-        */
-        void delete(Long id);
-
-        /**
-        * Método para recuperar un listado completo de {@link com.capgemini.ccsw.tutorial.author.model.Author}
-        * @return
-        */
-        List<Author> list();
-
-    }
+    ...
     ```
 === "AuthorServiceImpl.java"
-    ``` Java hl_lines="70 71 72 73 74 75 76 77"
-    package com.capgemini.ccsw.tutorial.author;
-
-    import java.util.List;
-
-    import javax.transaction.Transactional;
-
-    import org.springframework.beans.BeanUtils;
-    import org.springframework.beans.factory.annotation.Autowired;
-    import org.springframework.data.domain.Page;
-    import org.springframework.stereotype.Service;
-
-    import com.capgemini.ccsw.tutorial.author.model.Author;
-    import com.capgemini.ccsw.tutorial.author.model.AuthorDto;
-    import com.capgemini.ccsw.tutorial.author.model.AuthorSearchDto;
+    ``` Java
+    ...
 
     /**
-    * @author ccsw
+    * {@inheritDoc}
     */
-    @Service
-    @Transactional
-    public class AuthorServiceImpl implements AuthorService {
+    @Override
+    public List<Author> findAll() {
 
-        @Autowired
-        AuthorRepository authorRepository;
-
-        /**
-        * {@inheritDoc}
-        */
-        @Override
-        public Author get(Long id) {
-
-            return this.authorRepository.findById(id).orElse(null);
-        }
-
-        /**
-        * {@inheritDoc}
-        */
-        @Override
-        public Page<Author> findPage(AuthorSearchDto dto) {
-
-            return this.authorRepository.findAll(dto.getPageable());
-        }
-
-        /**
-        * {@inheritDoc}
-        */
-        @Override
-        public Author save(AuthorDto data) {
-
-            Author categoria = null;
-            if (data.getId() != null)
-                categoria = get(data.getId());
-            else
-                categoria = new Author();
-
-            BeanUtils.copyProperties(data, categoria);
-
-            return this.authorRepository.save(categoria);
-        }
-
-        /**
-        * {@inheritDoc}
-        */
-        @Override
-        public void delete(Long id) {
-
-            this.authorRepository.deleteById(id);
-        }
-
-        /**
-        * {@inheritDoc}
-        */
-        @Override
-        public List<Author> list() {
-
-            return (List<Author>) this.authorRepository.findAll();
-        }
-
+        return (List<Author>) this.authorRepository.findAll();
     }
+
+
+    ...
     ```
 
 Ahora sí, todo listo para seguir al siguiente punto.
@@ -2046,13 +2036,13 @@ Ahora sí, todo listo para seguir al siguiente punto.
 Una vez implementado front y back, lo que nos queda es modificar el servicio del front para que conecte directamente con las operaciones ofrecidas por el back.
 
 === "author-service.ts"
-    ``` Typescript hl_lines="29 30 31"
-    import { Injectable } from '@angular/core';
-    import { Pageable } from 'src/app/models/page/Pageable';
-    import { AuthorPage } from 'src/app/models/authors/AuthorPage';
-    import { Observable, of } from 'rxjs';
-    import { Author } from 'src/app/models/authors/Author';
+    ``` Typescript hl_lines="33-35"
     import { HttpClient } from '@angular/common/http';
+    import { Injectable } from '@angular/core';
+    import { Observable, of } from 'rxjs';
+    import { Pageable } from '../core/model/page/Pageable';
+    import { Author } from './model/Author';
+    import { AuthorPage } from './model/AuthorPage';
 
     @Injectable({
         providedIn: 'root'
@@ -2064,29 +2054,33 @@ Una vez implementado front y back, lo que nos queda es modificar el servicio del
         ) { }
 
         getAuthors(pageable: Pageable): Observable<AuthorPage> {
-            return this.http.post<AuthorPage>('http://localhost:8080/author/v1/', {pageable:pageable});
+            return this.http.post<AuthorPage>('http://localhost:8080/author', {pageable:pageable});
         }
 
-        saveAuthor(author: Author): Observable<Author> {
-            return this.http.put<Author>('http://localhost:8080/author/v1/', author);
+        saveAuthor(author: Author): Observable<void> {
+
+            let url = 'http://localhost:8080/author';
+            if (author.id != null) url += '/'+author.id;
+
+            return this.http.put<void>(url, author);
         }
 
-        deleteAuthor(idAuthor : number): Observable<any> {
-            return this.http.delete('http://localhost:8080/author/v1/'+idAuthor);
+        deleteAuthor(idAuthor : number): Observable<void> {
+            return this.http.delete<void>('http://localhost:8080/author/'+idAuthor);
         }    
 
         getAllAuthors(): Observable<Author[]> {
-            return this.http.get<Author[]>('http://localhost:8080/author/v1/');
+            return this.http.get<Author[]>('http://localhost:8080/author');
         }
 
     }
     ```
 === "game-service.ts"
-    ``` Typescript hl_lines="12 16 17 18 19 20 21 22 26"
-    import { Injectable } from '@angular/core';
-    import { Game } from 'src/app/models/games/Game';
-    import { Observable, of } from 'rxjs';
+    ``` Typescript hl_lines="12 16 20-26 29-45"
     import { HttpClient } from '@angular/common/http';
+    import { Injectable } from '@angular/core';
+    import { Observable, of } from 'rxjs';
+    import { Game } from './model/Game';
 
     @Injectable({
         providedIn: 'root'
@@ -2097,21 +2091,38 @@ Una vez implementado front y back, lo que nos queda es modificar el servicio del
             private http: HttpClient
         ) { }
 
-        getGames(title?: String, categoryId?: number): Observable<Game[]> {
-
-            let data = {
-                title: title != null ? title : null, 
-                categoryId: categoryId != null ? categoryId : null
-            };
-
-            return this.http.post<Game[]>('http://localhost:8080/game/v1/', data);
+        getGames(title?: String, categoryId?: number): Observable<Game[]> {            
+            return this.http.get<Game[]>(this.composeFindUrl(title, categoryId));
         }
 
-        saveGame(game: Game): Observable<Game> {
-            return this.http.put<Game>('http://localhost:8080/game/v1/', game);
+        saveGame(game: Game): Observable<void> {
+            let url = 'http://localhost:8080/game';
+
+            if (game.id != null) {
+                url += '/'+game.id;
+            }
+
+            return this.http.put<void>(url, game);
         }
 
+        private composeFindUrl(title?: String, categoryId?: number) : string {
+            let params = '';
+            
+            if (title != null) {
+                params += 'title='+title;
+            }
+            
+            if (categoryId != null) {
+                if (params != '') params += "&";
+                params += "idCategory="+categoryId;
+            }
+            
+            let url = 'http://localhost:8080/game'
+
+            if (params == '') return url;
+            else return url + '?'+params;
+        }
     }
     ```
 
-
+Y ahora si, podemos navegar por la web y ver el resultado completo.

@@ -19,12 +19,18 @@ Y por último desarrollaremos paso a paso el back y el front de la aplicación.
 
 Durante todo el tutorial intentaré dar unas pautas y consejos de buenas prácticas que todos deberíamos adoptar, en la medida de lo posible, para homogeneizar el desarrollo de todos los proyectos.
 
-
 ## ¿Y luego qué?
 
 Pues al final del tutorial, expondremos unos ejercicios prácticos para que los resuelvas tu mismo, aplicando los conocimientos adquiridos en el tutorial. Para ver si has comprendido correctamente todo lo aquí descrito.
 
 No te preocupes, no es un examen :laughing:
+
+## Recomendaciones
+
+Te recomiendo que leas todo el tutorial, que no te saltes ningún punto y si se hace referencia a los anexos, que los visites y los leas también. Si tan solo copias y pegas, no serás capaz de hacer el último ejercicio por ti mismo. Debes leer y comprender lo que se está haciendo.
+
+Además, los anexos están ahí por algo, sirven para completar información y para que conozcas los motivos por los que estamos programando así el tutorial. Por favor, échales un ojo también cuando te lo indique.
+
 
 ## Por último, ¡no te olvides!
 

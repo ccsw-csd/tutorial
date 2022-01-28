@@ -971,7 +971,7 @@ Ya por último implementamos las pruebas de borrado.
         assertNotNull(categoryController);
 
         long newCategoriesSize = 2;
-        long deleteCategoryId = 3;
+        long deleteCategoryId = 2;
 
         categoryController.delete(deleteCategoryId);
 

@@ -971,7 +971,7 @@ También crearemos una clase `AuthorController` dentro del package de `com.capge
             assertNotNull(authorController);
 
             long newAuthorsSize = TOTAL_AUTORS - 1;
-            long deleteAuthorId = 3;
+            long deleteAuthorId = 6;
 
             authorController.delete(deleteAuthorId);
 

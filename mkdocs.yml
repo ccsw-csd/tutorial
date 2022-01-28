@@ -13,13 +13,13 @@ nav:
   - "Code: Listado paginado": develop/step4.md
   - "Code: Listado filtrado": develop/step5.md  
   - Ahora hazlo tu!: exercise.md
-  - Anexo. Detalle REST: appendix/rest.md
-  - Anexo. TDD (TBD): appendix/tdd.md
   - Anexo. Tutorial básico de Git: appendix/git.md
-  - Anexo. Validaciones (TBD): develop/step6.md
-  - Anexo. Crear Login (TBD): develop/step7.md
-  - Anexo. Estilos (TBD): appendix/styles.md
-  - Anexo. Fechas (TBD): appendix/dates.md
+  - Anexo. Detalle REST: appendix/rest.md
+  - Anexo. TDD: appendix/tdd.md
+  - Anexo. Validaciones (TBC): develop/step6.md
+  - Anexo. Crear Login (TBC): develop/step7.md
+  - Anexo. Estilos (TBC): appendix/styles.md
+  - Anexo. Fechas (TBC): appendix/dates.md
 
 theme:
     name: material
