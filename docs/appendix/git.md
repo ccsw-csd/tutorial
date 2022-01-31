@@ -5,13 +5,70 @@ Cada vez se tiende más a utilizar repositorios de código Git y, aunque no sea 
 En el mercado existen multitud de herramientas para gestionar repositorios Git, podemos utilizar cualquiera de ellas, aunque desde devonfw se recomienda utilizar [Git SCM](https://git-scm.com/download/win).
 Además, existen también multitud de servidores de código que implementan repositorios Git, como podrían ser GitHub, GitLab, Bitbucket, etc. Todos ellos trabajan de la misma forma, así que este resumen servirá para todos ellos.
 
-!!tip "Info"
+!!!tip "Info"
     Este anexo muestra un resumen muy sencillo y básico de los comandos más comunes que se utilizan en Git. Para ver detalles más avanzados o un tutorial completo te recomiendo que leas la guia de [Atlassian](https://www.atlassian.com/es/git).
 
-Ahora si, vamos al resumen básico de Git. 
+
+## Funcionamiento básico
+
+Existen dos conceptos en Git que debes tener muy claros: las ramas y los repositorios. Vamos a ver como funciona cada uno de ellos.
+
+### Ramas
+
+Por un lado tenemos las `ramas` de Git. El repositorio puede tener tantas ramas como se quiera, pero por lo general debe existir una rama maestra a menudo llamada **develop** o **master**, y luego muchas ramas con cada una de las funcionalidades desarrolladas.
+
+![apendix_git-preview_1](../assets/images/apendix_git-preview_1.png)
+
+Las ramas **siempre** se deben crear a partir de una rama (en el ejemplo llamaremos *develop*), con una foto concreta y determinada de esa rama. Esta rama deberá tener un nombre que describa lo que va a contener esa rama (en el ejemplo *feature/xxx*). Y por lo general, esa rama se `mergeará` con otra rama del repositorio, que puede ser la rama de origen o cualquier otra (en el ejemplo será con la rama origen *develop*).
+
+Así pues, podemos tener algo así:
+
+![apendix_git-workflow_3](../assets/images/apendix_git-workflow_3.png)
 
 
-## Estructuras y flujo de trabajo
+Las acciones de crear ramas y mergear ramas están explicadas más abajo. En este punto solo es necesario que seas conocedor de:
+
+* existen ramas maestras --> que contienen el código completo de la aplicación
+* existen ramas de desarrollo --> que generalmente se crean de una rama maestra en un punto temporal concreto
+* en algún momento esas ramas de desarrollo se deben mergear en una rama maestra
+* **ojo cuidado**, cuando hay varias personas en el equipo trabajando, habrán varias ramas de desarrollo que nazcan de diferentes puntos temporales y que habrá que tener en cuenta para posibles conflictos. Recuerda que no estás solo programando, hay más gente modificando el código.
+
+
+### Repositorios
+
+El otro concepto que debe queda claro, es el de repositorios. Por defecto, en Git, se trabaja con el repositorio local, en el que puedes crear ramas, modificar código, mergear, etc. pero todos esos cambios que se hagan, serán todos en local, nadie más tendrá acceso.
+
+También existe el repositorio remoto, también llamado `origin`. Este repositorio es el que todos los integrantes del equipo utilizan como referencia. Existen acciones de Git que permite sincronizar los repositorios.
+
+![apendix_git-preview_2](../assets/images/apendix_git-preview_2.png)
+
+En este punto solo es necesario que seas conocedor de:
+
+* Los cambios que realices en local (en tu repositorio local) solo serán visibles por ti. Puedes crear ramas y borrarlas, pero solo tu las verás.
+* Los cambios que se suban al repositorio remoto serán visibles para todos. Pueden haber ramas protegidas para que no se puedan modificar desde el equipo, típicamente las ramas maestras. Estas ramas solo pueden modificarse previa validación y `pull request` o `merge request` (depende de la aplicación usada para Git).
+* Existen acciones que permiten subir tus cambios de local a remoto. Recuerda que pueden existir ramas protegidas.
+* Existen acciones que permiten actualizar tus ramas locales con los cambios remotos.
+* Recuerda que no trabajas solo, es posible que tu repositorio local **no** esté sincronizado, tus compañeros han podido subir código y deberías sincronizarte frecuentemente.
+
+
+### Acciones más típicas
+
+En la [Guía rápida](./git.md#guia-rapida) puedes ver más detalle de estas acciones pero por lo general:
+
+* Lo primero es descargarse una copia del repositorio con todas sus ramas. Se descargaría de remoto a local. A partir de este momento se trabaja en local.
+* Cada nueva funcionalidad debería tener su rama asociada, por tanto, lo lógico es crear una rama de desarrollo (típicamente *feature/xxx*) a partir de una rama maestra (típicamente *develop* o *master*).
+* Se trabajaría de forma local con esa rama. Es buena práctica que si llevas mucho tiempo con la rama creada, de vez en cuando, sincronices tu repositorio local con lo que exista en el repositorio remoto. Además, como es posible que la rama maestra de la que partía haya cambiado, esos cambios deberías llevarlos también a tu rama en desarrollo. Con esto consigues que tu punto temporal sea más moderno y tengas menos conflictos. Recuerda que no estás solo trabajando.
+* Cuando lo tengas listo y antes de subir nada, deberías realizar una última sincronización de remoto a local. Después deberías hacer un merge de tus ramas locales de desarrollo con las ramas maestras locales de las que partieron, por los posibles cambios que alguien hubiera podido subir.
+* Por último, una vez tengas todo actualizado, ya puedes subir el código al repositorio remoto (tu rama de desarrollo), y solicitar un `pull request` o `merge request` contra la rama maestra que quieras modificar.
+* Alguien, diferente a ti, debe revisar esa solicitud y aprobarla antes de que se realice todo el merge correcto en remoto. Y vuelta a empezar.
+
+
+## Funcionamiento avanzado
+
+A continuación vamos a describir estos mismos conceptos y acciones que hemos visto, pero más en profundidad para que veas como trabaja internamente Git. No es necesario que leas este punto, aunque es recomendable.
+
+
+### Estructuras y flujo de trabajo
 
 Lo primero que debes conocer de Git es su funcionamiento básico de flujo de trabajo. Tu repositorio local está compuesto por tres "estructuras" que contienen los archivos y los cambios de los ficheros del repositorio. 
 
@@ -27,7 +84,7 @@ Existen operaciones que nos permiten añadir o borrar ficheros dentro de cada un
 
 Así pues, los comandos básicos dentro de nuestro repositorio local son los siguientes.
 
-### **add y commmit**
+#### **add y commmit**
 
 Puedes registrar los cambios realizados en tu `working directory` y añadirlos al `staging area` usando el comando
 
@@ -48,7 +105,7 @@ git commit -m "<Commit message>"
 A partir de ese momento, los ficheros modificados y añadidos al `local repository` se han persistido y se han añadido a tu `HEAD`, aunque todavía siguen estando el local, no lo has enviado a ningún repositorio remoto.
 
 
-### **reset**
+#### **reset**
 
 De la misma manera que se han añadido ficheros a `staging area` o a `local repository`, podemos retirarlos de estas estructuras y volver a recuperar los ficheros que teníamos anteriormente en el `working directory`. Por ejemplo, si nos hemos equivocado al incluir ficheros en un commit o simplemente queremos deshacer los cambios que hemos realizado bastaría con lanzar el comando
 
@@ -61,7 +118,7 @@ git reset <COMMIT>
 ```
 
 
-## Trabajo con ramas
+### Trabajo con ramas
 
 Para complicarlo todo un poco más, el trabajo con git siempre se realiza mediante ramas. Estas ramas nos sirven para desarrollar funcionalidades aisladas unas de otras y poder hacer mezclas de código de unas ramas a otras. Las ramas más comunes dentro de git suelen ser:
 
@@ -74,7 +131,7 @@ Siempre que trabajes con ramas debes tener en cuenta que al empezar tu desarroll
 
 ![apendix_git-workflow_3](../assets/images/apendix_git-workflow_3.png)
 
-### Crear ramas
+#### Crear ramas
 
 Crear ramas en local es tan sencillo como ejecutar este comando:
     
@@ -85,7 +142,7 @@ git checkout -b <NOMBRE_RAMA>
 Eso nos creará una rama con el nombre que le hayamos dicho y moverá el `Working Directory` a dicha rama.
 
 
-### Cambiar de rama
+#### Cambiar de rama
 
 Para cambiar de una rama a otra en local tan solo debemos ejecutar el comando:
     
@@ -96,7 +153,7 @@ git checkout <NOMBRE_RAMA>
 La rama debe existir, sino se quejará de que no encuentra la rama. Este comando nos moverá el `Working Directory` a la rama que le hayamos indicado. Si tenemos cambios en el `Staging Area` que no hayan sido movidos al `Local Repository` **NO** nos permitirá movernos a la rama ya que perderíamos los cambios. Antes de poder movernos debemos `resetear` los cambios o bien `commitearlos`.
 
 
-## Remote repository
+### Remote repository
 
 Hasta aquí es todo más o menos sencillo, trabajamos con nuestro repositorio local, creamos ramas, commiteamos o reseteamos cambios de código, pero todo esto lo hacemos en local. Ahora necesitamos que esos cambios se distribuyan y puedan leerlos el resto de integrantes de nuestro equipo.
 
@@ -107,7 +164,7 @@ Aquí es donde entra en juego los repositorios remotos.
 Aquí debemos tener MUY en cuenta que el código que vamos a publicar en remoto **SOLO** es posible publicarlo desde el `Local Repository`. Es decir que para poder subir código a remote antes debemos añadirlo a `Staging Area` y hacer un commit para persistirlo en el `Local Repository`.
 
 
-### clone
+#### clone
 
 Antes de empezar a tocar código del proyecto podemos crear un `Local Repository` vacío o bien bajarnos un proyecto que ya exista en un `Remote Repository`. Esta última opción es la más normal.
 
@@ -119,7 +176,7 @@ git clone <REMOTE_URL>
 
 Esto te creará una carpeta con el nombre del proyecto y dentro se descargará la estructura completa del repositorio y te moverá al `Working Directory` todo el código de la rama por defecto para ese repositorio.
 
-### envío de cambios
+#### envío de cambios
 
 El envío de datos a un `Remote Repository` tan solo es posible realizarlo desde `Local Repository` (por lo que antes deberás commitear cambios allí), y se debe ejecutar el comando:
 
@@ -127,7 +184,7 @@ El envío de datos a un `Remote Repository` tan solo es posible realizarlo desde
 git push origin
 ```
 
-### actualizar y fusionar
+#### actualizar y fusionar
 
 En ocasiones (bastante habitual) será necesario descargarse los cambios de un `Remote Repository` para poder trabajar con la última versión. Para ello debemos ejecutar el comando:
 
@@ -146,7 +203,7 @@ git merge <RAMA_ORIGEN>
 Esto hará lo mismo que un pull en local y fusionará el código de una rama en otra. También es posible que se produzcan conflictos que deberás resolver de forma manual.
 
 
-### Merge Request
+#### Merge Request
 
 Ya por último, como estamos trabajando con ramas, lo único que hacemos es subir y bajar ramas, pero en algún momento alguien debe fusionar el contenido de una rama en la rama `develop`, `release` o `master`, que son las ramas principales.
 
@@ -181,7 +238,7 @@ git clone
     o 
 git init
 ```
-- Una vez estamos trabajando con nuestro repositorio remoto, cada vez que vayamos a comenzar una funcionalidad nueva, debemos crear una rama nueva siempre partiendo desde `develop` mediante el comando 
+- Una vez estamos trabajando con nuestro repositorio local, cada vez que vayamos a comenzar una funcionalidad nueva, debemos crear una rama nueva siempre partiendo desde una rama maestra mediante el comando: (en nuestro ejemplo la rama maestra será `develop`)
 ```
 git checkout -b <rama>
 ```
