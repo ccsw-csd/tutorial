@@ -30,7 +30,8 @@ markdown_extensions:
   - pymdownx.details
   - pymdownx.critic
   - codehilite
-  - pymdownx.tabbed
+  - pymdownx.tabbed:
+      alternate_style: true 
   - pymdownx.superfences
   - markdown.extensions.toc:
       permalink: false

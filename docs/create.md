@@ -319,6 +319,10 @@ Por último, vamos a dejar configurada la BBDD en memoria. Para ello crearemos d
 * schema.sql → Será el fichero que utilizaremos para crear el esquema de BBDD
 * data.sql → Será el fichero que utilizaremos para rellenar con datos iniciales el esquema de BBDD
 
+Estos ficheros no pueden estar vacíos ya que si no dará un error al arrancar. Puedes añadirle la siguiente query (que no hace nada) para que pueda arrancar el proyecto.
+
+```select 1 from dual;```
+
 
 ### Arrancar el proyecto
 
