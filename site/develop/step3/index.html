@@ -578,7 +578,9 @@ El siguiente paso, como es obvio será hacer que Angular llame directamente al s
 <h2 id="llamada-del-listado">Llamada del listado</h2>
 <p>La idea es que el método <code>getCategories()</code> de <code>category.service.ts</code> en lugar de devolver datos estáticos, realice una llamada al servidor a la ruta <code>http://localhost:8080/category</code>.</p>
 <p>Abrimos el fichero y susituimos la línea que antes devolvía los datos estáticos por esto:</p>
-<div class="tabbed-set" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">category.service.ts</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">category.service.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="hll"><span class="k">import</span> <span class="p">{</span> <span class="nx">HttpClient</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/common/http&#39;</span><span class="p">;</span>
 </span><span class="k">import</span> <span class="p">{</span> <span class="nx">Injectable</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Observable</span><span class="p">,</span> <span class="k">of</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;rxjs&#39;</span><span class="p">;</span>
@@ -608,8 +610,12 @@ El siguiente paso, como es obvio será hacer que Angular llame directamente al s
 </code></pre></div>
 </div>
 </div>
+</div>
 <p>Como hemos añadido un componente nuevo <code>HttpClient</code> tenemos que añadir la dependencial al módulo padre.</p>
-<div class="tabbed-set" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">services.module.ts</label><div class="tabbed-content"></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">services.module.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
 </div>
 <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">NgModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">CommonModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/common&#39;</span><span class="p">;</span>
@@ -657,7 +663,10 @@ El siguiente paso, como es obvio será hacer que Angular llame directamente al s
 <p>El error de CORS es muy habitual cuando se está trabajando en local y se tienen varios servidores levantados. Hay que tener mucho ojo con este filtro. Para más ver más información de como funciona y su casuística visita <a href="https://developer.mozilla.org/es/docs/Web/HTTP/Access_control_CORS">Control de acceso HTTP</a>.</p>
 </div>
 <p>Para solucionarlo hay varias formas, pero la más cómoda en desarrollo es habilitar el permiso de CORS para cualquier origen en el servidor. Para ello vamos al código de servidor y añadimos una nueva anotación:</p>
-<div class="tabbed-set" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><label for="__tabbed_3_1">CategoryController.java</label><div class="tabbed-content"></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">CategoryController.java</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
 </div>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.category</span><span class="p">;</span>
 
@@ -693,7 +702,9 @@ El siguiente paso, como es obvio será hacer que Angular llame directamente al s
 <p><img alt="step3-angular1" src="../../assets/images/step3-angular1.png" /></p>
 <h2 id="llamada-de-guardado-edicion">Llamada de guardado / edición</h2>
 <p>Para la llamada de guardado haríamos lo mismo, pero invocando la operación de negocio <code>put</code>.</p>
-<div class="tabbed-set" data-tabs="4:1"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><label for="__tabbed_4_1">category.service.ts</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="4:1"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">category.service.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">HttpClient</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/common/http&#39;</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Injectable</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Observable</span><span class="p">,</span> <span class="k">of</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;rxjs&#39;</span><span class="p">;</span>
@@ -728,10 +739,13 @@ El siguiente paso, como es obvio será hacer que Angular llame directamente al s
 </code></pre></div>
 </div>
 </div>
+</div>
 <p>Ahora podemos probar a modificar o añadir una nueva categoría desde la pantalla y debería aparecer los nuevos datos en el listado.</p>
 <h2 id="llamada-de-borrado">Llamada de borrado</h2>
 <p>Y ya por último, la llamada de borrado, deberíamos cambiarla e invocar a la operación de negocio <code>delete</code>.</p>
-<div class="tabbed-set" data-tabs="5:1"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><label for="__tabbed_5_1">category.service.ts</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="5:1"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">category.service.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">HttpClient</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/common/http&#39;</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Injectable</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Observable</span><span class="p">,</span> <span class="k">of</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;rxjs&#39;</span><span class="p">;</span>
@@ -764,6 +778,7 @@ El siguiente paso, como es obvio será hacer que Angular llame directamente al s
 
 <span class="p">}</span> 
 </code></pre></div>
+</div>
 </div>
 </div>
 <p>Ahora podemos probar a modificar o añadir una nueva categoría desde la pantalla y debería aparecer los nuevos datos en el listado.</p>

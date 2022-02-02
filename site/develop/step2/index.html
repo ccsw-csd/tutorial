@@ -882,7 +882,9 @@
 </div>
 <h3 id="controller-de-ejemplo">Controller de ejemplo</h3>
 <p>Vamos a crear una clase <code>CategoryController.java</code> dentro del package <code>com.capgemini.ccsw.tutorial.category</code> para definir las rutas de las operaciones.</p>
-<div class="tabbed-set" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">CategoryController.java</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">CategoryController.java</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.category</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
@@ -913,12 +915,15 @@
 </code></pre></div>
 </div>
 </div>
+</div>
 <p>Ahora si arrancamos la aplicación server, abrimos el <a href="https://www.postman.com/">Postman</a> y creamos una petición GET a la url http://localhost:8080/category nos responderá con el mensaje que hemos programado.</p>
 <h3 id="implementar-operaciones">Implementar operaciones</h3>
 <p>Ahora que ya tenemos un controlador y una operacion de negocio ficticia, vamos a borrarla y añadir las operaciones reales que consumirá nuestra pantalla. Deberemos añadir una operación para listar, una para actualizar, una para guardar y una para borrar. Aunque para hacerlo más cómodo, utilizaremos la misma operación para guardar y para actualizar. Además, no vamos a trabajar directamente con datos simples, sino que usaremos objetos para recibir información y para enviar información.</p>
 <p>Estos objetos típicamente se denominan DTO (Data Transfer Object) y nos sirven justamente para encapsular información que queremos transportar. En realidad no son más que clases <em>pojo</em> sencillas con propiedades, getters y setters. </p>
 <p>Para nuestro ejemplo crearemos una clase <code>CategoryDto</code> dentro del package <code>com.capgemini.ccsw.tutorial.category.model</code> con el siguiente contenido:</p>
-<div class="tabbed-set" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">CategoryDto.java</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">CategoryDto.java</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.category.model</span><span class="p">;</span>
 
 <span class="cm">/**</span>
@@ -965,8 +970,12 @@
 </code></pre></div>
 </div>
 </div>
+</div>
 <p>A continuación utilizaremos esta clase en nuestro Controller para implementar las tres operaciones de negocio.</p>
-<div class="tabbed-set" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><label for="__tabbed_3_1">CategoryController.java</label><div class="tabbed-content"></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">CategoryController.java</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
 </div>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.category</span><span class="p">;</span>
 
@@ -1072,7 +1081,9 @@
 <p>Pero en realidad la cosa no funciona así. Hemos implementado parte de la lógica de negocio (las operaciones/acciones de guardado, borrado y listado) dentro de lo que sería la capa de operaciones o servicios al cliente. Esta capa no debe ejecutar lógica de negocio, tan solo debe hacer transformaciones de datos y enrutar peticiones, toda la lógica debería ir en la capa de servicio.</p>
 <h3 id="implementar-servicios">Implementar servicios</h3>
 <p>Pues vamos a arreglarlo. Vamos a crear un servicio y vamos a mover la lógica de negocio al servicio.</p>
-<div class="tabbed-set" data-tabs="4:3"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><label for="__tabbed_4_1">CategoryService.java</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="4:3"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><input id="__tabbed_4_3" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">CategoryService.java</label><label for="__tabbed_4_2">CategoryServiceImpl.java</label><label for="__tabbed_4_3">CategoryController.java</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.category</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
@@ -1106,7 +1117,7 @@
 <span class="p">}</span>
 </code></pre></div>
 </div>
-<input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><label for="__tabbed_4_2">CategoryServiceImpl.java</label><div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.category</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="p">;</span>
@@ -1168,7 +1179,7 @@
 <span class="p">}</span>
 </code></pre></div>
 </div>
-<input id="__tabbed_4_3" name="__tabbed_4" type="radio" /><label for="__tabbed_4_3">CategoryController.java</label><div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.category</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
@@ -1226,6 +1237,7 @@
 </code></pre></div>
 </div>
 </div>
+</div>
 <p>Ahora ya tenemos bien estructurado nuestro proyecto. Ya tenemos las dos capas necesarias Controladores y Servicios y cada uno se encarga de llevar a cabo su cometido de forma correcta.</p>
 <h3 id="aspectos-importantes_1">Aspectos importantes</h3>
 <p>Los aspectos importantes de la capa <code>Service</code> son:</p>
@@ -1242,7 +1254,9 @@ Estos accesos se deben hacer desde la capa de acceso a datos, y en concreto para
 <h3 id="creacion-de-bbdd">Creación de BBDD</h3>
 <p>Para el tutorial no necesitamos configurar una BBDD externa ni complicarnos demasiado. Vamos a utilizar una librería muy útil llamada <code>H2</code> que nos permite levantar una BBDD en memoria persistiendo los datos en memoria o en disco.</p>
 <p>Para esto, si te acuerdas de cuando creamos la aplicación, existen unos ficheros que se encuentran dentro de la carpeta <code>src/main/resources/</code> y que nos permiten ir depositando scripts versionados para que se ejecuten en orden una vez se levante la aplicación. Vamos a crear los nuestros:</p>
-<div class="tabbed-set" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><label for="__tabbed_5_1">schema.sql</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">schema.sql</label><label for="__tabbed_5_2">data.sql</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="k">DROP</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="n">CATEGORY</span><span class="p">;</span><span class="w"></span>
 
 <span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">CATEGORY</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
@@ -1251,16 +1265,19 @@ Estos accesos se deben hacer desde la capa de acceso a datos, y en concreto para
 <span class="p">);</span><span class="w"></span>
 </code></pre></div>
 </div>
-<input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><label for="__tabbed_5_2">data.sql</label><div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">CATEGORY</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Eurogames&#39;</span><span class="p">);</span><span class="w"></span>
 <span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">CATEGORY</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Ameritrash&#39;</span><span class="p">);</span><span class="w"></span>
 <span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">CATEGORY</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Familiar&#39;</span><span class="p">);</span><span class="w"></span>
 </code></pre></div>
 </div>
 </div>
+</div>
 <h3 id="implementar-entity">Implementar Entity</h3>
 <p>Una vez creada la BBDD el siguiente paso es crear la entidad con la que vamos a persistir y recuperar información. Las entidades igual que los DTOs deberían estar agrupados dentro del package <code>model</code> de cada funcionalidad, así que vamos a crear una nueva clase java.</p>
-<div class="tabbed-set" data-tabs="6:1"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><label for="__tabbed_6_1">Category.java</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="6:1"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">Category.java</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.category.model</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">javax.persistence.Column</span><span class="p">;</span>
@@ -1321,6 +1338,7 @@ Estos accesos se deben hacer desde la capa de acceso a datos, y en concreto para
 </code></pre></div>
 </div>
 </div>
+</div>
 <p>Si te fijas, la Entity suele ser muy similar a un DTO, tiene unas propiedades y sus getters y setters. Pero a diferencia de los DTOs, esta clase tiene una serie de anotaciones que permiten a JPA hacer su magia y generar consultas SQL a la BBDD. En este ejemplo vemos 4 anotaciones importantes:</p>
 <ul>
 <li><code>@Entity</code> → Le indica a Springboot que se trata de una clase que implementa una Entidad de BBDD. Sin esta anotación no es posible hacer queries.</li>
@@ -1342,7 +1360,9 @@ Estos accesos se deben hacer desde la capa de acceso a datos, y en concreto para
 <h3 id="implementar-repository">Implementar Repository</h3>
 <p>Ahora que ya tenemos la entidad implementada, vamos a utilizarla para acceder a BBDD, y esto lo haremos con un <code>Repository</code>. Existen varias formas de utilizar los repositories, desde el todo automático y magia de JPA hasta el repositorio manual en el que hay que codificar todo. En el tutorial voy a explicar varias formas de implementarlo para este CRUD y los siguientes CRUDs.</p>
 <p>Como ya se dijo en puntos anteriores, el acceso a datos se debe hacer siempre a través de un <code>Repository</code>, así que vamos a implementar uno. En esta capa, al igual que pasaba con los services, es recomendable utilizar el patrón fachada, para poder sustituir implementaciones sin afectar al código.</p>
-<div class="tabbed-set" data-tabs="7:1"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><label for="__tabbed_7_1">CategoryRepository.java</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="7:1"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">CategoryRepository.java</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.category</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">org.springframework.data.repository.CrudRepository</span><span class="p">;</span>
@@ -1358,6 +1378,7 @@ Estos accesos se deben hacer desde la capa de acceso a datos, y en concreto para
 </code></pre></div>
 </div>
 </div>
+</div>
 <p>¿Que te parece?, sencillo, ¿no?. Spring ya tiene una implementación por defecto de un CrudRepository, tan solo tenemos que crear una interface que extienda de la interface <code>CrudRepository</code> pasandole como tipos la <code>Entity</code> y el tipo de la Primary Key. Con eso Spring construye el resto y nos provee de los métodos típicos y necesarios para un CRUD.</p>
 <p>Ahora vamos a utilizarla en el <code>Service</code>, pero hay un problema. El <code>Repository</code> devuelve un objeto tipo <code>Category</code> y el <code>Service</code> y <code>Controller</code> devuelven un objeto tipo <code>CategoryDto</code>. Esto es porque en cada capa se debe con un ámbito de modelos diferente. Podríamos hacer que todo el back trabajara con <code>Category</code> que son entidades de persistencia, pero no es lo correcto y nos podría llevar a cometer errores, o modificar el objeto y que sin que nosotros lo ordenásemos se persistiera ese cambio en BBDD.</p>
 <p>El ámbito de trabajo  de las capas con el que solemos trabajar y está más extendido es el siguiente:</p>
@@ -1370,7 +1391,9 @@ Estos accesos se deben hacer desde la capa de acceso a datos, y en concreto para
 </ul>
 <p>Parece un lio, pero ya verás como es muy sencillo ahora que veremos el ejemplo. Una última cosa, para hacer esas transformaciones, las podemos hacer a mano usando getters y setters o bien utilizar el objeto <code>BeanMapper</code> que hemos configurado al principio como utilidad de Devonfw.</p>
 <p>El código debería quedar así:</p>
-<div class="tabbed-set" data-tabs="8:3"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><label for="__tabbed_8_1">CategoryServiceImpl.java</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="8:3"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><input id="__tabbed_8_3" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">CategoryServiceImpl.java</label><label for="__tabbed_8_2">CategoryService.java</label><label for="__tabbed_8_3">CategoryController.java</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.category</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
@@ -1431,7 +1454,7 @@ Estos accesos se deben hacer desde la capa de acceso a datos, y en concreto para
 <span class="p">}</span>
 </code></pre></div>
 </div>
-<input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><label for="__tabbed_8_2">CategoryService.java</label><div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.category</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
@@ -1466,7 +1489,7 @@ Estos accesos se deben hacer desde la capa de acceso a datos, y en concreto para
 <span class="p">}</span>
 </code></pre></div>
 </div>
-<input id="__tabbed_8_3" name="__tabbed_8" type="radio" /><label for="__tabbed_8_3">CategoryController.java</label><div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.category</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
@@ -1529,6 +1552,7 @@ Estos accesos se deben hacer desde la capa de acceso a datos, y en concreto para
 </code></pre></div>
 </div>
 </div>
+</div>
 <p>El <code>Service</code> no tiene nada raro, simplemente accede al <code>Repository</code> (siempre anotado como <code>@Autowired</code>) y recupera datos o los guarda. Fíjate en el caso especial del save que la única diferencia es que en un caso tendrá id != null y por tanto internamente hará un update, y en otro caso tendrá id == null y por tanto internamente hará un save.</p>
 <p>En cuanto a la interface, lo único que cambiamos fue los objetos de respuesta, que ahora pasan a ser de tipo <code>Category</code>. Los de entrada se mantienen como <code>CategoryDto</code>.</p>
 <p>Por último, en el <code>Controller</code> se puede ver como se utiliza el conversor de <code>BeanMapper</code> (siempre anotado como <code>@Autowired</code>), que permite traducir una lista a un tipo concreto, o un objeto único a un tipo concreto. La forma de hacer estas conversiones siempre es por nombre de propiedad. Las propiedades del objeto destino se deben llamar igual que las propiedades del objeto origen. En caso contrario se quedarán a null.</p>
@@ -1560,7 +1584,9 @@ Hemos hecho desarrollado este primer caso de uso con una ordenación peculiar co
 <h3 id="pruebas-de-listado">Pruebas de listado</h3>
 <p>Vamos a empezar haciendo una clase de test dentro de la carpeta <code>src/test/java</code>. No queremos que los test formen parte del código productivo de la aplicación, por eso utilizamos esa ruta que queda fuera del package general de la aplicación.</p>
 <p>Crearemos la clase <code>com.capgemini.ccsw.tutorial.category.CategoryTest</code>.</p>
-<div class="tabbed-set" data-tabs="9:1"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><label for="__tabbed_9_1">CategoryTest.java</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="9:1"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">CategoryTest.java</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.category</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">org.springframework.boot.test.context.SpringBootTest</span><span class="p">;</span>
@@ -1577,13 +1603,16 @@ Hemos hecho desarrollado este primer caso de uso con una ordenación peculiar co
 </code></pre></div>
 </div>
 </div>
+</div>
 <p>Esta clase es sencilla y tan solo tiene dos anotaciones de Springboot:</p>
 <ul>
 <li><code>@SpringBootTest</code>. Esta anotación lo que hace es inicializar el contexto de Spring cada vez que se inician los test de jUnit. Aunque el contexto tarda unos segundos en arrancar, lo bueno que tiene es que solo se inicializa una vez y se lanzan todos los jUnits en batería con el mismo contexto.</li>
 <li><code>@Transactional</code>. Esta anotación le indica a Spring que los test van a ser transaccionales, y por tanto cuando termine la ejecución de cada uno de los test, automáticamente por la anotación de arriba, Spring hará un rollback y dejará el estado de la BBDD como estaba inicialmente.</li>
 </ul>
 <p>También nos faltará configurar la aplicación de test al igual que hicimos con la aplicación 'productiva'. Deberemos abrir el fichero <code>src/test/resources/application.properties</code> y añadir la configuración de la BBDD. Para este tutorial vamos a utilizar la misma BBDD que la aplicación productiva, pero de normal la aplicación se conectará a una BBDD, generalmente física, mientras que los test jUnit se conectarán a otra BBDD, generalmente en memoria.</p>
-<div class="tabbed-set" data-tabs="10:1"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><label for="__tabbed_10_1">application.properties</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="10:1"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">application.properties</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="c">#Database</span><span class="w"></span>
 <span class="na">spring.jpa.hibernate.ddl-auto</span><span class="o">=</span><span class="s">none</span><span class="w"></span>
 <span class="na">spring.datasource.driver-class-name</span><span class="o">=</span><span class="s">org.h2.Driver</span><span class="w"></span>
@@ -1594,8 +1623,11 @@ Hemos hecho desarrollado este primer caso de uso con una ordenación peculiar co
 </code></pre></div>
 </div>
 </div>
+</div>
 <p>Con todo esto ya podemos crear nuestro primer test. Iremos a la clase <code>CategoryTest</code> y añadiremos un método público. Los test siempre tienen que ser métodos públicos que devuelvan el tipo <code>void</code>.</p>
-<div class="tabbed-set" data-tabs="11:1"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><label for="__tabbed_11_1">CategoryTest.java</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="11:1"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><div class="tabbed-labels"><label for="__tabbed_11_1">CategoryTest.java</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.category</span><span class="p">;</span>
 
 <span class="hll"><span class="kn">import static</span> <span class="nn">org.junit.jupiter.api.Assertions.assertEquals</span><span class="p">;</span>
@@ -1635,6 +1667,7 @@ Hemos hecho desarrollado este primer caso de uso con una ordenación peculiar co
 </code></pre></div>
 </div>
 </div>
+</div>
 <p>Es muy importante marcar cada método de prueba con la anotación <code>@Test</code>, en caso contrario no se ejecutará. Lo que se debe hacer en cada método que implementemos es probar <strong>una y solo una</strong> acción. En el ejemplo anterior, hemos probado que llamando al método findAll() comprobamos que realmente nos devuelve 3 resultados, que son los que hay en BBDD inicialmente.</p>
 <div class="admonition tip">
 <p class="admonition-title">Muy importante: Nomenclatura de los tests</p>
@@ -1644,7 +1677,9 @@ Hemos hecho desarrollado este primer caso de uso con una ordenación peculiar co
 <p><img alt="step2-java6" src="../../assets/images/step2-java6.png" /></p>
 <h3 id="pruebas-de-creacion">Pruebas de creación</h3>
 <p>Vamos con los siguientes test, los que probarán una creación de una nueva <code>Categoría</code>. Añadimos el siguiente método a la clase de test:</p>
-<div class="tabbed-set" data-tabs="12:1"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><label for="__tabbed_12_1">CategoryTest.java</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="12:1"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><div class="tabbed-labels"><label for="__tabbed_12_1">CategoryTest.java</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="nd">@Test</span>
 <span class="kd">public</span> <span class="kt">void</span> <span class="nf">saveWithoutIdShouldCreateNewCategory</span><span class="p">()</span> <span class="p">{</span>
 
@@ -1671,13 +1706,16 @@ Hemos hecho desarrollado este primer caso de uso con una ordenación peculiar co
 </code></pre></div>
 </div>
 </div>
+</div>
 <p>En este caso, estamos construyendo un objeto <code>CategoryDto</code> para darle un nombre a la <code>Categoría</code> e invocamos al método <code>save</code> pasandole un ID a nulo.
 Seguidamente, recuperamos de nuevo la lista de categorías y en este caso debería tener 4 resultados. Hacemos un filtrado buscando la nueva <code>Categoría</code> que debería tener un ID = 4 y debería ser la que acabamos de crear. </p>
 <p>Si ejecutamos, veremos que ambos test ahora aparecen en verde.</p>
 <h3 id="pruebas-de-modificacion">Pruebas de modificación</h3>
 <p>Para este caso de prueba, vamos a realizar dos test, como hemos comentado anteriormente. Tenemos que probar que es lo que pasa cuando intentamos modificar un elemento que existe pero también debemos probar que es lo que pasa cuando intentamos modificar un elemento que <strong>no</strong> existe.</p>
 <p>Empezamos con el sencillo, un test que pruebe una modificación existente.</p>
-<div class="tabbed-set" data-tabs="13:1"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><label for="__tabbed_13_1">CategoryTest.java</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="13:1"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><div class="tabbed-labels"><label for="__tabbed_13_1">CategoryTest.java</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="nd">@Test</span>
 <span class="kd">public</span> <span class="kt">void</span> <span class="nf">modifyWithExistsIdShouldModifyCategory</span><span class="p">()</span> <span class="p">{</span>
 
@@ -1704,9 +1742,12 @@ Seguidamente, recuperamos de nuevo la lista de categorías y en este caso deber�
 </code></pre></div>
 </div>
 </div>
+</div>
 <p>La misma filosofía que en el test anterior pero esta vez modificamos la <code>Categoría</code> de ID = 3. Luego la filtramos y vemos que realmente se ha modificado. Además comprobamos que el listado de todas los registros sigue siengo 3 y no se ha creado un nuevo registro.</p>
 <p>En el siguiente test, probaremos un resultado erróneo. Es un pelín más compleja, pero no mucho.</p>
-<div class="tabbed-set" data-tabs="14:1"><input checked="checked" id="__tabbed_14_1" name="__tabbed_14" type="radio" /><label for="__tabbed_14_1">CategoryTest.java</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="14:1"><input checked="checked" id="__tabbed_14_1" name="__tabbed_14" type="radio" /><div class="tabbed-labels"><label for="__tabbed_14_1">CategoryTest.java</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="nd">@Test</span>
 <span class="kd">public</span> <span class="kt">void</span> <span class="nf">modifyWithNotExistsIdShouldThrowException</span><span class="p">()</span> <span class="p">{</span>
 
@@ -1723,10 +1764,13 @@ Seguidamente, recuperamos de nuevo la lista de categorías y en este caso deber�
 </code></pre></div>
 </div>
 </div>
+</div>
 <p>Intentamos modificar el ID = 4, que no debería existir en BBDD y por tanto lo que se espera en el test es que lance un <code>NullPointerException</code> al llamar al método <code>save</code>.</p>
 <h3 id="pruebas-de-borrado">Pruebas de borrado</h3>
 <p>Ya por último implementamos las pruebas de borrado.</p>
-<div class="tabbed-set" data-tabs="15:1"><input checked="checked" id="__tabbed_15_1" name="__tabbed_15" type="radio" /><label for="__tabbed_15_1">CategoryTest.java</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="15:1"><input checked="checked" id="__tabbed_15_1" name="__tabbed_15" type="radio" /><div class="tabbed-labels"><label for="__tabbed_15_1">CategoryTest.java</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="nd">@Test</span>
 <span class="kd">public</span> <span class="kt">void</span> <span class="nf">deleteWithExistsIdShouldDeleteCategory</span><span class="p">()</span> <span class="p">{</span>
 
@@ -1755,6 +1799,7 @@ Seguidamente, recuperamos de nuevo la lista de categorías y en este caso deber�
 
 <span class="p">}</span>
 </code></pre></div>
+</div>
 </div>
 </div>
 <p>En el primer test, se comprueba que el listado tiene un tamaño de 2 (uno menos que el original) y en el segundo test se comprueba que con ID no válido, devuelve una <code>Exception</code>.</p>

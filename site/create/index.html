@@ -853,7 +853,9 @@ Si sigues leyendo verás como configurar paso a paso un proyecto de cero, con la
 <p>El siguiente paso, ovbiamente es descomprimir el proyecto generado e importarlo como proyecto Maven. Abrimos el eclipse, pulsamos en File → Import y seleccionamos <code>Existing Maven Projects</code>. Buscamos el proyecto y le damos a importar.</p>
 <h4 id="configurar-las-dependencias">Configurar las dependencias</h4>
 <p>Lo primero que vamos a hacer es añadir las dependencias a librerías de devonfw. Abriremos el fichero <code>pom.xml</code> que nos ha generado el Spring Initilizr y añadiremos las siguientes líneas:</p>
-<div class="tabbed-set" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">pom.xml</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">pom.xml</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
 <span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0&quot;</span> <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
   <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd&quot;</span><span class="nt">&gt;</span>
@@ -946,6 +948,7 @@ Si sigues leyendo verás como configurar paso a paso un proyecto de cero, con la
 </code></pre></div>
 </div>
 </div>
+</div>
 <p>Hemos añadido las dependencias de Devonfw-JPA ya que nos permite utilizar más funcionalidades extendidas sobre repositorios JPA. Además de esa dependencia, hemos añadido una utilidad para hacer mapeos entre objetos y para configurar los servicios Rest.</p>
 <div class="admonition tip">
 <p class="admonition-title">Uso de defonfw</p>
@@ -953,7 +956,9 @@ Si sigues leyendo verás como configurar paso a paso un proyecto de cero, con la
 </div>
 <h4 id="configurar-librerias-devonfw">Configurar librerias devonfw</h4>
 <p>El siguiente punto es crear las clases de configuración para las librerías que hemos añadido. Para ello vamos a crear un package de configuración general de la aplicación <code>com.capgemini.ccsw.tutorial.config</code> donde crearemos tres clases (dos de ellas dentro del subpaquete <code>mapper</code>).</p>
-<div class="tabbed-set" data-tabs="2:3"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">BeansOrikaConfig.java</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="2:3"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">BeansOrikaConfig.java</label><label for="__tabbed_2_2">mapper/BeanMapper.java</label><label for="__tabbed_2_3">mapper/BeanMapperImpl.java</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.config</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Bean</span><span class="p">;</span>
@@ -996,7 +1001,7 @@ Si sigues leyendo verás como configurar paso a paso un proyecto de cero, con la
 <span class="p">}</span>
 </code></pre></div>
 </div>
-<input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><label for="__tabbed_2_2">mapper/BeanMapper.java</label><div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.config.mapper</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">org.springframework.data.domain.Page</span><span class="p">;</span>
@@ -1018,7 +1023,7 @@ Si sigues leyendo verás como configurar paso a paso un proyecto de cero, con la
 <span class="p">}</span>
 </code></pre></div>
 </div>
-<input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><label for="__tabbed_2_3">mapper/BeanMapperImpl.java</label><div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.config.mapper</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
@@ -1051,6 +1056,7 @@ Si sigues leyendo verás como configurar paso a paso un proyecto de cero, con la
 </code></pre></div>
 </div>
 </div>
+</div>
 <p>Listo, ya podemos empezar a desarrollar nuestros servicios.</p>
 <h4 id="configurar-la-bbdd">Configurar la BBDD</h4>
 <p>Por último, vamos a dejar configurada la BBDD en memoria. Para ello crearemos dos ficheros, de momento en blanco, dentro de <code>src/main/resources/</code>:</p>
@@ -1058,6 +1064,8 @@ Si sigues leyendo verás como configurar paso a paso un proyecto de cero, con la
 <li>schema.sql → Será el fichero que utilizaremos para crear el esquema de BBDD</li>
 <li>data.sql → Será el fichero que utilizaremos para rellenar con datos iniciales el esquema de BBDD</li>
 </ul>
+<p>Estos ficheros no pueden estar vacíos ya que si no dará un error al arrancar. Puedes añadirle la siguiente query (que no hace nada) para que pueda arrancar el proyecto.</p>
+<p><code>select 1 from dual;</code></p>
 <h3 id="arrancar-el-proyecto_1">Arrancar el proyecto</h3>
 <p>Por último ya solo nos queda arrancar el proyecto creado. Para ello buscaremos la clase <code>TutorialApplication.java</code> (o la clase principal del proyecto) y con el botón derecho seleccionaremos Run As → Java Application. La aplicación al estar basada en Springboot arrancará internamente un Tomcat embebido donde se despliegará el proyecto. Si habéis seguido el tutorial la aplicación estará disponible en <a href="http://localhost:8080">http://localhost:8080</a>, aunque de momento aun no tenemos nada accesible.</p>
 

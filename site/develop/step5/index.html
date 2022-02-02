@@ -807,7 +807,9 @@ ng generate component game/game-edit
 ng generate service game/game
 </code></pre></div>
 <p>Y añadimos el nuevo módulo al <code>app.module.ts</code> como hemos hecho con el resto de módulos.</p>
-<div class="tabbed-set" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">Game.ts</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Game.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">NgModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">BrowserModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/platform-browser&#39;</span><span class="p">;</span>
 
@@ -839,9 +841,12 @@ ng generate service game/game
 </code></pre></div>
 </div>
 </div>
+</div>
 <h3 id="crear-el-modelo">Crear el modelo</h3>
 <p>Lo primero que vamos a hacer es crear el modelo en <code>game/model/Game.ts</code> con todas las propiedades necesarias para trabajar con un juego:</p>
-<div class="tabbed-set" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">Game.ts</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Game.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Category</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&quot;src/app/category/model/Category&quot;</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Author</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&quot;src/app/author/model/Author&quot;</span><span class="p">;</span>
 
@@ -855,10 +860,13 @@ ng generate service game/game
 </code></pre></div>
 </div>
 </div>
+</div>
 <p>Como ves, el juego tiene dos objetos para mapear categoría y autor.</p>
 <h3 id="anadir-el-punto-de-entrada">Añadir el punto de entrada</h3>
 <p>Añadimos la ruta al menú para que podamos navegar a esta pantalla:</p>
-<div class="tabbed-set" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><label for="__tabbed_3_1">app-routing.module.ts</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">app-routing.module.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">NgModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Routes</span><span class="p">,</span> <span class="nx">RouterModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/router&#39;</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">AuthorListComponent</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;./author/author-list/author-list.component&#39;</span><span class="p">;</span>
@@ -881,10 +889,13 @@ ng generate service game/game
 </code></pre></div>
 </div>
 </div>
+</div>
 <p>Además, hemos añadido una regla adicional con el path vacío para indicar que si no pone ruta, por defecto la página inicial redirija al path <code>/games</code>, que es nuevo path que hemos añadido.</p>
 <h3 id="implementar-servicio">Implementar servicio</h3>
 <p>A continuación implementamos el servicio y mockeamos datos de ejemplo:</p>
-<div class="tabbed-set" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><label for="__tabbed_4_1">mock-games.ts</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">mock-games.ts</label><label for="__tabbed_4_2">game.service.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Game</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&quot;./Game&quot;</span><span class="p">;</span>
 
 <span class="k">export</span> <span class="kd">const</span> <span class="nx">GAME_DATA</span>: <span class="kt">Game</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[</span>
@@ -899,7 +910,7 @@ ng generate service game/game
 <span class="p">]</span>
 </code></pre></div>
 </div>
-<input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><label for="__tabbed_4_2">game.service.ts</label><div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Injectable</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Observable</span><span class="p">,</span> <span class="k">of</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;rxjs&#39;</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Game</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;./model/Game&#39;</span><span class="p">;</span>
@@ -924,9 +935,12 @@ ng generate service game/game
 </code></pre></div>
 </div>
 </div>
+</div>
 <h3 id="implementar-listado">Implementar listado</h3>
 <p>Ya tenemos las operaciones del servicio con datoos, así que ahora vamos a por el listado filtrado.</p>
-<div class="tabbed-set" data-tabs="5:3"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><label for="__tabbed_5_1">game-list.component.html</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="5:3"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><input id="__tabbed_5_3" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">game-list.component.html</label><label for="__tabbed_5_2">game-list.component.scss</label><label for="__tabbed_5_3">game-list.component.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;container&quot;</span><span class="p">&gt;</span>
     <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Catálogo de juegos<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
 
@@ -962,7 +976,7 @@ ng generate service game/game
 <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 </code></pre></div>
 </div>
-<input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><label for="__tabbed_5_2">game-list.component.scss</label><div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="p">.</span><span class="nc">container</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="k">margin</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="kt">px</span><span class="p">;</span><span class="w"></span>
 
@@ -1003,7 +1017,7 @@ ng generate service game/game
 <span class="p">}</span><span class="w"></span>
 </code></pre></div>
 </div>
-<input id="__tabbed_5_3" name="__tabbed_5" type="radio" /><label for="__tabbed_5_3">game-list.component.ts</label><div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Component</span><span class="p">,</span> <span class="nx">OnInit</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">MatDialog</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/material/dialog&#39;</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">CategoryService</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;src/app/category/category.service&#39;</span><span class="p">;</span>
@@ -1081,8 +1095,11 @@ ng generate service game/game
 </code></pre></div>
 </div>
 </div>
+</div>
 <p>Recuerda, de nuevo, que todos los componentes de Angular que utilicemos hay que importarlos en el módulo padre correspondiente para que se puedan precargar correctamente.</p>
-<div class="tabbed-set" data-tabs="6:1"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><label for="__tabbed_6_1">game.module.ts</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="6:1"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">game.module.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">NgModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">CommonModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/common&#39;</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">GameListComponent</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;./game-list/game-list.component&#39;</span><span class="p">;</span>
@@ -1127,6 +1144,7 @@ ng generate service game/game
 </code></pre></div>
 </div>
 </div>
+</div>
 <p>Con todos estos cambios y si refrescamos el navegador, debería verse una pantalla similar a esta:</p>
 <p><img alt="step5-angular1" src="../../assets/images/step5-angular1.png" /></p>
 <p>Tenemos una pantalla con una sección de filtros en la parte superior, donde podemos introducir un texto o seleccionar una categoría de un dropdown, un listado que de momento tiene todos los componentes básicos en una fila uno detrás del otro, y un botón para crear juegos nuevos.</p>
@@ -1136,7 +1154,9 @@ ng generate service game/game
 </div>
 <h3 id="implementar-detalle-del-item">Implementar detalle del item</h3>
 <p>Ahora vamos a implementar el detalle de cada uno de los items que forman el listado. Para ello lo primero que haremos será pasarle la información del juego a cada componente como un dato de entrada <code>Input</code> hacia el componente.</p>
-<div class="tabbed-set" data-tabs="7:1"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><label for="__tabbed_7_1">games.component.html</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="7:1"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">games.component.html</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;container&quot;</span><span class="p">&gt;</span>
     <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Catálogo de juegos<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
 
@@ -1173,10 +1193,13 @@ ng generate service game/game
 </code></pre></div>
 </div>
 </div>
+</div>
 <p>También vamos a necesitar una foto de ejemplo para poner dentro de la tarjeta detalle de los juegos. Vamos a utilizar esta imagen:</p>
 <p><img src="../../assets/images/foto.png" width="100"></p>
 <p>Descárgala y déjala dentro del proyecto en <code>assets/foto.png</code>. Y ya para terminar, implementamos el componente de detalle:</p>
-<div class="tabbed-set" data-tabs="8:3"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><label for="__tabbed_8_1">game-item.component.html</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="8:3"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><input id="__tabbed_8_3" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">game-item.component.html</label><label for="__tabbed_8_2">game-item.component.scss</label><label for="__tabbed_8_3">game-item.component.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;container&quot;</span><span class="p">&gt;</span>
     <span class="p">&lt;</span><span class="nt">mat-card</span><span class="p">&gt;</span>
         <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;photo&quot;</span><span class="p">&gt;</span>
@@ -1195,7 +1218,7 @@ ng generate service game/game
 <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 </code></pre></div>
 </div>
-<input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><label for="__tabbed_8_2">game-item.component.scss</label><div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="p">.</span><span class="nc">container</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="k">display</span><span class="p">:</span><span class="w"> </span><span class="kc">flex</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="k">width</span><span class="p">:</span><span class="w"> </span><span class="mi">325</span><span class="kt">px</span><span class="p">;</span><span class="w"></span>
@@ -1232,7 +1255,7 @@ ng generate service game/game
 <span class="err">}</span><span class="w">    </span>
 </code></pre></div>
 </div>
-<input id="__tabbed_8_3" name="__tabbed_8" type="radio" /><label for="__tabbed_8_3">game-item.component.ts</label><div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Component</span><span class="p">,</span> <span class="nx">OnInit</span><span class="p">,</span> <span class="nx">Input</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Game</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;../../model/Game&#39;</span><span class="p">;</span>
 
@@ -1254,13 +1277,16 @@ ng generate service game/game
 </code></pre></div>
 </div>
 </div>
+</div>
 <p>Ahora si que debería quedar algo similar a esta pantalla:</p>
 <p><img alt="step5-angular2" src="../../assets/images/step5-angular2.png" /></p>
 <h3 id="implementar-dialogo-de-edicion">Implementar dialogo de edición</h3>
 <p>Ya solo nos falta el último paso, implementar el cuadro de edición / alta de un nuevo juego. Pero tenemos un pequeño problema, y es que al crear o editar un juego debemos seleccionar una <code>Categoría</code> y un <code>Autor</code>. </p>
 <p>Para la <code>Categoría</code> no tenemos ningún problema, pero para el <code>Autor</code> no tenemos un servicio que nos devuelva todos los autores, solo tenemos un servicio que nos devuelve una <code>Page</code> de autores.</p>
 <p>Así que lo primero que haremos será implementar una operación <code>getAllAuthors</code> para poder recuperar una lista.</p>
-<div class="tabbed-set" data-tabs="9:2"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><label for="__tabbed_9_1">mock-authors-list.ts</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="9:2"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">mock-authors-list.ts</label><label for="__tabbed_9_2">author.service.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Author</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&quot;./Author&quot;</span><span class="p">;</span>
 
 <span class="k">export</span> <span class="kd">const</span> <span class="nx">AUTHOR_DATA_LIST</span> : <span class="kt">Author</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[</span>
@@ -1272,7 +1298,7 @@ ng generate service game/game
 <span class="p">]</span>    
 </code></pre></div>
 </div>
-<input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><label for="__tabbed_9_2">author.service.ts</label><div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">HttpClient</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/common/http&#39;</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Injectable</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Observable</span><span class="p">,</span> <span class="k">of</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;rxjs&#39;</span><span class="p">;</span>
@@ -1314,8 +1340,11 @@ ng generate service game/game
 </code></pre></div>
 </div>
 </div>
+</div>
 <p>Ahora sí que tenemos todo listo para implementar el cuadro de dialogo para dar de alta o editar juegos.</p>
-<div class="tabbed-set" data-tabs="10:3"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><label for="__tabbed_10_1">game-edit.component.html</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="10:3"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><input id="__tabbed_10_2" name="__tabbed_10" type="radio" /><input id="__tabbed_10_3" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">game-edit.component.html</label><label for="__tabbed_10_2">game-edit.component.scss</label><label for="__tabbed_10_3">game-edit.component.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;container&quot;</span><span class="p">&gt;</span>
     <span class="p">&lt;</span><span class="nt">h1</span> <span class="err">*</span><span class="na">ngIf</span><span class="o">=</span><span class="s">&quot;game.id == null&quot;</span><span class="p">&gt;</span>Crear juego<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
     <span class="p">&lt;</span><span class="nt">h1</span> <span class="err">*</span><span class="na">ngIf</span><span class="o">=</span><span class="s">&quot;game.id != null&quot;</span><span class="p">&gt;</span>Modificar juego<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
@@ -1362,7 +1391,7 @@ ng generate service game/game
 <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 </code></pre></div>
 </div>
-<input id="__tabbed_10_2" name="__tabbed_10" type="radio" /><label for="__tabbed_10_2">game-edit.component.scss</label><div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="p">.</span><span class="nc">container</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="k">min-width</span><span class="p">:</span><span class="w"> </span><span class="mi">350</span><span class="kt">px</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="k">max-width</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="kt">px</span><span class="p">;</span><span class="w"></span>
@@ -1384,7 +1413,7 @@ ng generate service game/game
 <span class="err">}</span><span class="w"></span>
 </code></pre></div>
 </div>
-<input id="__tabbed_10_3" name="__tabbed_10" type="radio" /><label for="__tabbed_10_3">game-edit.component.ts</label><div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Component</span><span class="p">,</span> <span class="nx">Inject</span><span class="p">,</span> <span class="nx">OnInit</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">MatDialogRef</span><span class="p">,</span> <span class="nx">MAT_DIALOG_DATA</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/material/dialog&#39;</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">AuthorService</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;src/app/author/author.service&#39;</span><span class="p">;</span>
@@ -1462,12 +1491,15 @@ ng generate service game/game
 </code></pre></div>
 </div>
 </div>
+</div>
 <p>Como puedes ver, para rellenar los componentes seleccionables de dropdown, hemos realizado una consulta al servicio para recuperar todos los autores y categorias, y en la respuesta de cada uno de ellos, hemos buscado en los resultados cual es el que coincide con el ID enviado desde el listado, y ese es el que hemos fijado en el objeto <code>Game</code>.</p>
 <p>De esta forma, no estamos cogiendo directamente los datos del listado, sino que no estamos asegurando que los datos de autor y de categoría son los que vienen del servicio, siempre filtrando por su ID.</p>
 <h2 id="desarrollo-springboot">Desarrollo Springboot</h2>
 <h3 id="modelos">Modelos</h3>
 <p>Lo primero que vamos a hacer es crear los modelos para trabajar con BBDD y con peticiones hacia el front. Además, también tenemos que añadir datos al script de inicialización de BBDD.</p>
-<div class="tabbed-set" data-tabs="11:4"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><label for="__tabbed_11_1">schema.sql</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="11:4"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><input id="__tabbed_11_2" name="__tabbed_11" type="radio" /><input id="__tabbed_11_3" name="__tabbed_11" type="radio" /><input id="__tabbed_11_4" name="__tabbed_11" type="radio" /><div class="tabbed-labels"><label for="__tabbed_11_1">schema.sql</label><label for="__tabbed_11_2">data.sql</label><label for="__tabbed_11_3">Game.java</label><label for="__tabbed_11_4">GameDto.java</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="k">DROP</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="n">CATEGORY</span><span class="p">;</span><span class="w"></span>
 
 <span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">CATEGORY</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
@@ -1499,7 +1531,7 @@ ng generate service game/game
 </span><span class="hll"><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">GAME</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">author_id</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">AUTHOR</span><span class="p">(</span><span class="n">id</span><span class="p">);</span><span class="w"></span>
 </span></code></pre></div>
 </div>
-<input id="__tabbed_11_2" name="__tabbed_11" type="radio" /><label for="__tabbed_11_2">data.sql</label><div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">CATEGORY</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Eurogames&#39;</span><span class="p">);</span><span class="w"></span>
 <span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">CATEGORY</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Ameritrash&#39;</span><span class="p">);</span><span class="w"></span>
 <span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">CATEGORY</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Familiar&#39;</span><span class="p">);</span><span class="w"></span>
@@ -1519,7 +1551,7 @@ ng generate service game/game
 </span><span class="hll"><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">GAME</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">title</span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="p">,</span><span class="w"> </span><span class="n">category_id</span><span class="p">,</span><span class="w"> </span><span class="n">author_id</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Azul&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;8&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">);</span><span class="w"></span>
 </span></code></pre></div>
 </div>
-<input id="__tabbed_11_3" name="__tabbed_11" type="radio" /><label for="__tabbed_11_3">Game.java</label><div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.game.model</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">javax.persistence.Column</span><span class="p">;</span>
@@ -1643,7 +1675,7 @@ ng generate service game/game
 <span class="p">}</span>
 </code></pre></div>
 </div>
-<input id="__tabbed_11_4" name="__tabbed_11" type="radio" /><label for="__tabbed_11_4">GameDto.java</label><div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.game.model</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.author.model.AuthorDto</span><span class="p">;</span>
@@ -1748,6 +1780,7 @@ ng generate service game/game
 </code></pre></div>
 </div>
 </div>
+</div>
 <div class="admonition note">
 <p class="admonition-title">Relaciones anidadas</p>
 <p>Fíjate que tanto la <code>Entity</code> como el <code>Dto</code> tienen relaciones con <code>Author</code> y <code>Category</code>. Gracias a Spring JPA se pueden resolver de esta forma y tener toda la información de las relaciones hijas dentro del objeto padre. Muy importante recordar que <em>en el mundo entity</em> las relaciones serán con objetos <code>Entity</code> mientras que <em>en el mundo dto</em> las relaciones deben ser siempre con objetos <code>Dto</code>. La utilidad beanMapper ya hará las conversiones necesarias, siempre que tengan el mismo nombre de propiedades.</p>
@@ -1774,7 +1807,9 @@ ng generate service game/game
 </ul>
 <p>También crearemos una clase <code>GameController</code> dentro del package de <code>com.capgemini.ccsw.tutorial.game</code> con la implementación de los métodos vacíos, para que no falle la compilación.</p>
 <p>¡Vamos a implementar test!</p>
-<div class="tabbed-set" data-tabs="12:2"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><label for="__tabbed_12_1">GameController.java</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="12:2"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><input id="__tabbed_12_2" name="__tabbed_12" type="radio" /><div class="tabbed-labels"><label for="__tabbed_12_1">GameController.java</label><label for="__tabbed_12_2">GameTest.java</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.game</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
@@ -1797,7 +1832,7 @@ ng generate service game/game
 <span class="p">}</span>
 </code></pre></div>
 </div>
-<input id="__tabbed_12_2" name="__tabbed_12" type="radio" /><label for="__tabbed_12_2">GameTest.java</label><div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.game</span><span class="p">;</span>
 
 <span class="kn">import static</span> <span class="nn">org.junit.jupiter.api.Assertions.assertEquals</span><span class="p">;</span>
@@ -2004,6 +2039,7 @@ ng generate service game/game
 </code></pre></div>
 </div>
 </div>
+</div>
 <div class="admonition tip">
 <p class="admonition-title">Búsquedas en BBDD</p>
 <p>Siempre deberíamos buscar a los hijos por primary keys, nunca hay que hacerlo por una descripción libre ya que el usuario podría teclear el mismo nombre de diferentes formas y no habría manera de buscar correctamente el resultado. Así que siempre que haya un dropdown, se debe filtrar por su ID.</p>
@@ -2011,7 +2047,9 @@ ng generate service game/game
 <p>Si ahora ejecutas los jUnits, verás que en este caso hemos construido 10 pruebas, para cubrir los casos básicos del <code>Controller</code>, y todas ellas fallan la ejecución. Vamos a seguir implementando el resto de capas para hacer que los test funcionen.</p>
 <h3 id="controller">Controller</h3>
 <p>De nuevo para poder compilar esta capa, nos hace falta delegar sus operaciones de lógica de negocio en un <code>Service</code> así que lo crearemos al mismo tiempo que lo vamos necesitando.</p>
-<div class="tabbed-set" data-tabs="13:2"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><label for="__tabbed_13_1">GameService.java</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="13:2"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><input id="__tabbed_13_2" name="__tabbed_13" type="radio" /><div class="tabbed-labels"><label for="__tabbed_13_1">GameService.java</label><label for="__tabbed_13_2">GameController.java</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.game</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
@@ -2042,7 +2080,7 @@ ng generate service game/game
 <span class="p">}</span>
 </code></pre></div>
 </div>
-<input id="__tabbed_13_2" name="__tabbed_13" type="radio" /><label for="__tabbed_13_2">GameController.java</label><div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.game</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
@@ -2093,10 +2131,13 @@ ng generate service game/game
 </code></pre></div>
 </div>
 </div>
+</div>
 <p>En esta ocasión, para el método de búsqueda hemos decidido utilizar parámetros en la URL de tal forma que nos quedará algo así <code>http://localhost:8080/game/?title=xxx&amp;idCategoria=yyy</code>. Queremos recuperar el recurso <code>Game</code> que es el raiz de la ruta, pero filtrado por cero o varios parámetros.</p>
 <h3 id="service">Service</h3>
 <p>Siguiente paso, la capa de lógica de negocio, es decir el <code>Service</code>, que por tanto hará uso de un <code>Repository</code>.</p>
-<div class="tabbed-set" data-tabs="14:2"><input checked="checked" id="__tabbed_14_1" name="__tabbed_14" type="radio" /><label for="__tabbed_14_1">GameServiceImpl.java</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="14:2"><input checked="checked" id="__tabbed_14_1" name="__tabbed_14" type="radio" /><input id="__tabbed_14_2" name="__tabbed_14" type="radio" /><div class="tabbed-labels"><label for="__tabbed_14_1">GameServiceImpl.java</label><label for="__tabbed_14_2">GameRepository.java</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.game</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
@@ -2150,7 +2191,7 @@ ng generate service game/game
 <span class="p">}</span>
 </code></pre></div>
 </div>
-<input id="__tabbed_14_2" name="__tabbed_14" type="radio" /><label for="__tabbed_14_2">GameRepository.java</label><div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.game</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
@@ -2167,11 +2208,14 @@ ng generate service game/game
 </code></pre></div>
 </div>
 </div>
+</div>
 <p>Este servicio tiene dos peculiaridades, remarcadas en amarillo en la clase anterior. Por un lado tenemos la consulta, que no es un listado completo ni un listado paginado, sino que es un listado con filtros. Luego veremos como se hace eso, de momento lo dejaremos como un método que recibe los dos filtros.</p>
 <p>La segunda peculiaridad es que de cliente nos está llegando un <code>GameDto</code>, que internamente tiene un <code>AuthorDto</code> y un <code>CategoryDto</code>, pero nosotros lo tenemos que traducir a entidades de BBDD. No sirve con copiar las propiedades tal cual, ya que entonces Spring lo que hará será crear un objeto nuevo y persistir ese objeto nuevo de <code>Author</code> y de <code>Category</code>. Además, de cliente generalmente tan solo nos llega el ID de esos objetos hijo, y no el resto de información de la entidad. Por esos motivos lo hemos <em>ignorado</em> del copyProperties.</p>
 <p>Pero de alguna forma tendremos que setearle esos valores a la entidad <code>Game</code>. Si conocemos sus ID que es lo que generalmente llega, podemos recuperar esos objetos de BBDD y setearlos en el objeto <code>Game</code>. Si recuerdas las reglas básicas, un <code>Repository</code> debe pertenecer a un solo <code>Service</code>, por lo que en lugar de llamar a métodos de los <code>AuthorRepository</code> y <code>CategoryRepository</code> desde nuestro <code>GameServiceImpl</code>, debemos llamar a métodos expuestos en <code>AuthorService</code> y <code>CategoryService</code>, que son los que gestionan sus repositorios. Para ello necesitaremos crear esos métodos get en los otros <code>Services</code>. </p>
 <p>Y ya sabes, para implementar nuevos métodos, antes se deben hacer las pruebas jUnit. Recuerda que los test van en <code>src/test/java</code></p>
-<div class="tabbed-set" data-tabs="15:3"><input checked="checked" id="__tabbed_15_1" name="__tabbed_15" type="radio" /><label for="__tabbed_15_1">AuthorServiceTest.java</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="15:3"><input checked="checked" id="__tabbed_15_1" name="__tabbed_15" type="radio" /><input id="__tabbed_15_2" name="__tabbed_15" type="radio" /><input id="__tabbed_15_3" name="__tabbed_15" type="radio" /><div class="tabbed-labels"><label for="__tabbed_15_1">AuthorServiceTest.java</label><label for="__tabbed_15_2">AuthorService.java</label><label for="__tabbed_15_3">AuthorServiceImpl.java</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.author</span><span class="p">;</span>
 
 <span class="kn">import static</span> <span class="nn">org.junit.jupiter.api.Assertions.assertEquals</span><span class="p">;</span>
@@ -2221,7 +2265,7 @@ ng generate service game/game
 <span class="p">}</span>
 </code></pre></div>
 </div>
-<input id="__tabbed_15_2" name="__tabbed_15" type="radio" /><label for="__tabbed_15_2">AuthorService.java</label><div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.author</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">org.springframework.data.domain.Page</span><span class="p">;</span>
@@ -2265,7 +2309,7 @@ ng generate service game/game
 <span class="p">}</span>
 </code></pre></div>
 </div>
-<input id="__tabbed_15_3" name="__tabbed_15" type="radio" /><label for="__tabbed_15_3">AuthorServiceImpl.java</label><div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.author</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">javax.transaction.Transactional</span><span class="p">;</span>
@@ -2338,8 +2382,11 @@ ng generate service game/game
 </code></pre></div>
 </div>
 </div>
+</div>
 <p>Y lo mismo para categorías.</p>
-<div class="tabbed-set" data-tabs="16:3"><input checked="checked" id="__tabbed_16_1" name="__tabbed_16" type="radio" /><label for="__tabbed_16_1">CategoryServiceTest.java</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="16:3"><input checked="checked" id="__tabbed_16_1" name="__tabbed_16" type="radio" /><input id="__tabbed_16_2" name="__tabbed_16" type="radio" /><input id="__tabbed_16_3" name="__tabbed_16" type="radio" /><div class="tabbed-labels"><label for="__tabbed_16_1">CategoryServiceTest.java</label><label for="__tabbed_16_2">CategoryService.java</label><label for="__tabbed_16_3">CategoryServiceImpl.java</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.category</span><span class="p">;</span>
 
 <span class="kn">import static</span> <span class="nn">org.junit.jupiter.api.Assertions.assertEquals</span><span class="p">;</span>
@@ -2389,7 +2436,7 @@ ng generate service game/game
 <span class="p">}</span>
 </code></pre></div>
 </div>
-<input id="__tabbed_16_2" name="__tabbed_16" type="radio" /><label for="__tabbed_16_2">CategoryService.java</label><div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.category</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
@@ -2431,7 +2478,7 @@ ng generate service game/game
 <span class="p">}</span>
 </code></pre></div>
 </div>
-<input id="__tabbed_16_3" name="__tabbed_16" type="radio" /><label for="__tabbed_16_3">CategoryServiceImpl.java</label><div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.category</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
@@ -2501,12 +2548,15 @@ ng generate service game/game
 </code></pre></div>
 </div>
 </div>
+</div>
 <div class="admonition tip">
 <p class="admonition-title">Clean Code</p>
 <p>A la hora de implementar métodos nuevos, ten siempre presente el <code>Clean Code</code>. ¡No dupliques código!, es muy importante de cara al futuro mantenimiento. Si en nuestro método <code>save</code> hacíamos uso de una operación <code>findById</code> y ahora hemos creado una nueva operación <code>get</code>, hagamos uso de esta nueva operación y no repitamos el código.</p>
 </div>
 <p>Y ahora que ya tenemos los métodos necesarios ya podemos implementar correctamente nuestro <code>GameServiceImpl</code>.</p>
-<div class="tabbed-set" data-tabs="17:1"><input checked="checked" id="__tabbed_17_1" name="__tabbed_17" type="radio" /><label for="__tabbed_17_1">GameServiceImpl.java</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="17:1"><input checked="checked" id="__tabbed_17_1" name="__tabbed_17" type="radio" /><div class="tabbed-labels"><label for="__tabbed_17_1">GameServiceImpl.java</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.game</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
@@ -2572,10 +2622,13 @@ ng generate service game/game
 </code></pre></div>
 </div>
 </div>
+</div>
 <p>Ahora si que tenemos la capa de lógica de negocio terminada, podemos pasar a la siguiente capa.</p>
 <h3 id="repository">Repository</h3>
 <p>Y llegamos a la última capa donde, si recordamos, teníamos un método <code>find</code> que recibe dos parámetros. Algo así:</p>
-<div class="tabbed-set" data-tabs="18:1"><input checked="checked" id="__tabbed_18_1" name="__tabbed_18" type="radio" /><label for="__tabbed_18_1">GameRepository.java</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="18:1"><input checked="checked" id="__tabbed_18_1" name="__tabbed_18" type="radio" /><div class="tabbed-labels"><label for="__tabbed_18_1">GameRepository.java</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.game</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
@@ -2592,11 +2645,14 @@ ng generate service game/game
 </code></pre></div>
 </div>
 </div>
+</div>
 <p>Para esta ocasión, vamos a necesitar un listado filtrado por título o por categoría, así que necesitaremos pasarle esos datos y filtrar la query. Para el título vamos a buscar por una cadena contenida, así que el parámetro será de tipo <code>String</code>, mientras que para la categoría vamos a buscar por su primary key, así que el parámetro será de tipo <code>Long</code>.</p>
 <p>Existen varias estrategias para abordar esta implementación. Podríamos utilizar los <a href="https://www.baeldung.com/spring-data-derived-queries">QueryMethods</a> para que Spring JPA haga su magia, pero en esta ocasión sería bastante complicado encontrar un predicado correcto.</p>
 <p>También podríamos hacer una implementación de la interface y hacer la consulta directamente con Criteria. Pero en esta ocasión vamos a utilizar otra <em>magia</em> que nos ofrece Spring JPA y es utilizar la <a href="https://www.baeldung.com/spring-data-jpa-query">anotación @Query</a>.</p>
 <p>Esta anotación nos permite definir una consulta en SQL nativo o en JPQL (Java Persistence Query Language) y Spring JPA se encargará de realizar todo el mapeo y conversión de los datos de entrada y salida. Veamos un ejemplo y luego lo explicamos en detalle:</p>
-<div class="tabbed-set" data-tabs="19:1"><input checked="checked" id="__tabbed_19_1" name="__tabbed_19" type="radio" /><label for="__tabbed_19_1">GameRepository.java</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="19:1"><input checked="checked" id="__tabbed_19_1" name="__tabbed_19" type="radio" /><div class="tabbed-labels"><label for="__tabbed_19_1">GameRepository.java</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.game</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
@@ -2612,6 +2668,7 @@ ng generate service game/game
 </span>
 <span class="p">}</span>
 </code></pre></div>
+</div>
 </div>
 </div>
 <p>Si te fijas en las dos líneas que hemos modificado, por un lado hemos puesto nombre a los parámetros de entrada con la anotación @Param. Esto solo nos sirve para poder utilizar los parametros dentro de la query.</p>
@@ -2649,7 +2706,9 @@ Con esta quuery, Spring JPA generará el SQL correcto y mapeará los resultados 
 <h3 id="implementar-listado-autores">Implementar listado Autores</h3>
 <p>Antes de poder conectar front con back, si recuerdas, en la edición de un <code>Game</code>, nos hacía falta un listado de <code>Author</code> y un listado de <code>Category</code>. El segundo ya lo tenemos ya que lo reutilizaremos del listado de categorías que implementamos. Pero el primero no lo tenemos, porque en la pantalla que hicimos, se mostraban de forma paginada. </p>
 <p>Así que necesitamos implementar esa funcionalidad, y como siempre vamos de la capa de testing hacia las siguientes capas. Deberíamos añadir los siguientes métodos:</p>
-<div class="tabbed-set" data-tabs="20:4"><input checked="checked" id="__tabbed_20_1" name="__tabbed_20" type="radio" /><label for="__tabbed_20_1">AuthorTest.java</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="20:4"><input checked="checked" id="__tabbed_20_1" name="__tabbed_20" type="radio" /><input id="__tabbed_20_2" name="__tabbed_20" type="radio" /><input id="__tabbed_20_3" name="__tabbed_20" type="radio" /><input id="__tabbed_20_4" name="__tabbed_20" type="radio" /><div class="tabbed-labels"><label for="__tabbed_20_1">AuthorTest.java</label><label for="__tabbed_20_2">AuthorController.java</label><label for="__tabbed_20_3">AuthorService.java</label><label for="__tabbed_20_4">AuthorServiceImpl.java</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="p">...</span>
 
 <span class="nd">@Test</span>
@@ -2667,7 +2726,7 @@ Con esta quuery, Spring JPA generará el SQL correcto y mapeará los resultados 
 <span class="p">...</span>
 </code></pre></div>
 </div>
-<input id="__tabbed_20_2" name="__tabbed_20" type="radio" /><label for="__tabbed_20_2">AuthorController.java</label><div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="p">...</span>
 
 <span class="cm">/**</span>
@@ -2684,7 +2743,7 @@ Con esta quuery, Spring JPA generará el SQL correcto y mapeará los resultados 
 <span class="p">...</span>
 </code></pre></div>
 </div>
-<input id="__tabbed_20_3" name="__tabbed_20" type="radio" /><label for="__tabbed_20_3">AuthorService.java</label><div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="p">...</span>
 
 <span class="cm">/**</span>
@@ -2696,7 +2755,7 @@ Con esta quuery, Spring JPA generará el SQL correcto y mapeará los resultados 
 <span class="p">...</span>
 </code></pre></div>
 </div>
-<input id="__tabbed_20_4" name="__tabbed_20" type="radio" /><label for="__tabbed_20_4">AuthorServiceImpl.java</label><div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="p">...</span>
 
 <span class="cm">/**</span>
@@ -2713,10 +2772,13 @@ Con esta quuery, Spring JPA generará el SQL correcto y mapeará los resultados 
 </code></pre></div>
 </div>
 </div>
+</div>
 <p>Ahora sí, todo listo para seguir al siguiente punto.</p>
 <h2 id="conectar-front-con-back">Conectar front con back</h2>
 <p>Una vez implementado front y back, lo que nos queda es modificar el servicio del front para que conecte directamente con las operaciones ofrecidas por el back.</p>
-<div class="tabbed-set" data-tabs="21:2"><input checked="checked" id="__tabbed_21_1" name="__tabbed_21" type="radio" /><label for="__tabbed_21_1">author-service.ts</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="21:2"><input checked="checked" id="__tabbed_21_1" name="__tabbed_21" type="radio" /><input id="__tabbed_21_2" name="__tabbed_21" type="radio" /><div class="tabbed-labels"><label for="__tabbed_21_1">author-service.ts</label><label for="__tabbed_21_2">game-service.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">HttpClient</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/common/http&#39;</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Injectable</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Observable</span><span class="p">,</span> <span class="k">of</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;rxjs&#39;</span><span class="p">;</span>
@@ -2756,7 +2818,7 @@ Con esta quuery, Spring JPA generará el SQL correcto y mapeará los resultados 
 <span class="p">}</span>
 </code></pre></div>
 </div>
-<input id="__tabbed_21_2" name="__tabbed_21" type="radio" /><label for="__tabbed_21_2">game-service.ts</label><div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">HttpClient</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/common/http&#39;</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Injectable</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Observable</span><span class="p">,</span> <span class="k">of</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;rxjs&#39;</span><span class="p">;</span>
@@ -2804,6 +2866,7 @@ Con esta quuery, Spring JPA generará el SQL correcto y mapeará los resultados 
 </span><span class="hll">    <span class="p">}</span>
 </span><span class="p">}</span>
 </code></pre></div>
+</div>
 </div>
 </div>
 <p>Y ahora si, podemos navegar por la web y ver el resultado completo.</p>

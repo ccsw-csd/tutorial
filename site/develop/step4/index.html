@@ -778,7 +778,9 @@ ng generate component author/author-edit
 ng generate service author/author
 </code></pre></div>
 <p>Este módulo lo vamos a añadir a la aplicación para que se cargue en el arranque. Abrimos el fichero <code>app.module.ts</code> y añadimos el módulo:</p>
-<div class="tabbed-set" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">app.module.ts</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">app.module.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">NgModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">BrowserModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/platform-browser&#39;</span><span class="p">;</span>
 
@@ -808,9 +810,12 @@ ng generate service author/author
 </code></pre></div>
 </div>
 </div>
+</div>
 <h3 id="crear-el-modelo">Crear el modelo</h3>
 <p>Creamos el modelo en <code>author/model/Author.ts</code> con las propiedades necesarias para trabajar con la información de un autor:</p>
-<div class="tabbed-set" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">Author.ts</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Author.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="k">export</span> <span class="kd">class</span> <span class="nx">Author</span> <span class="p">{</span>
     <span class="nx">id</span>: <span class="kt">number</span><span class="p">;</span>
     <span class="nx">name</span>: <span class="kt">string</span><span class="p">;</span>
@@ -819,9 +824,12 @@ ng generate service author/author
 </code></pre></div>
 </div>
 </div>
+</div>
 <h3 id="anadir-el-punto-de-entrada">Añadir el punto de entrada</h3>
 <p>Añadimos la ruta al menú para que podamos acceder a la pantalla:</p>
-<div class="tabbed-set" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><label for="__tabbed_3_1">app-routing.module.ts</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">app-routing.module.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">NgModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Routes</span><span class="p">,</span> <span class="nx">RouterModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/router&#39;</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">CategoryListComponent</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;./category/category-list/category-list.component&#39;</span><span class="p">;</span>
@@ -840,10 +848,13 @@ ng generate service author/author
 </code></pre></div>
 </div>
 </div>
+</div>
 <h3 id="implementar-servicio">Implementar servicio</h3>
 <p>Y realizamos las diferentes implementaciones. Empezaremos por el servicio. En este caso, hay un cambio sustancial con el anterior ejemplo. Al tratarse de un listado paginado, la operación <code>getAuthors</code> necesita información extra acerca de que página de datos debe mostrar, además de que el resultado ya no será un listado sino una página. </p>
 <p>Por defecto el esquema de datos de Spring para la paginación es como el siguiente:</p>
-<div class="tabbed-set" data-tabs="4:1"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><label for="__tabbed_4_1">Esquema de datos de paginación</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="4:1"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Esquema de datos de paginación</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="nt">&quot;content&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="err">&lt;lis</span><span class="kc">ta</span><span class="err">do</span><span class="w"> </span><span class="err">co</span><span class="kc">n</span><span class="w"> </span><span class="err">los</span><span class="w"> </span><span class="err">resul</span><span class="kc">ta</span><span class="err">dos</span><span class="w"> </span><span class="err">pagi</span><span class="kc">na</span><span class="err">dos&gt;</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">],</span><span class="w"></span>
 <span class="w">    </span><span class="nt">&quot;pageable&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
@@ -861,15 +872,18 @@ ng generate service author/author
 </code></pre></div>
 </div>
 </div>
+</div>
 <p>Así que necesitamos poder enviar y recuperar esa información desde Angular, nos hace falta crear esos objetos. Los objetos de paginación al ser comunes a toda la aplicación, vamos a crearlos en <code>core/model/page</code>, mientras que la paginación de <code>AuthorPage.ts</code> la crearé en su propio model dentro de <code>author/model</code>.</p>
-<div class="tabbed-set" data-tabs="5:3"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><label for="__tabbed_5_1">SortPage.ts</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="5:3"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><input id="__tabbed_5_3" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">SortPage.ts</label><label for="__tabbed_5_2">Pageable.ts</label><label for="__tabbed_5_3">AuthorPage.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="k">export</span> <span class="kd">class</span> <span class="nx">SortPage</span> <span class="p">{</span>
     <span class="nx">property</span>: <span class="kt">String</span><span class="p">;</span>
     <span class="nx">direction</span>: <span class="kt">String</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
 </div>
-<input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><label for="__tabbed_5_2">Pageable.ts</label><div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">SortPage</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;./SortPage&#39;</span><span class="p">;</span>
 
 <span class="k">export</span> <span class="kd">class</span> <span class="nx">Pageable</span> <span class="p">{</span>
@@ -879,7 +893,7 @@ ng generate service author/author
 <span class="p">}</span>
 </code></pre></div>
 </div>
-<input id="__tabbed_5_3" name="__tabbed_5" type="radio" /><label for="__tabbed_5_3">AuthorPage.ts</label><div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Pageable</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&quot;src/app/core/model/page/Pageable&quot;</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Author</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&quot;./Author&quot;</span><span class="p">;</span>
 
@@ -891,8 +905,11 @@ ng generate service author/author
 </code></pre></div>
 </div>
 </div>
+</div>
 <p>Con estos objetos creados ya podemos implementar el servicio y sus datos mockeados.</p>
-<div class="tabbed-set" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><label for="__tabbed_6_1">mock-authors.ts</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">mock-authors.ts</label><label for="__tabbed_6_2">author.service.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">AuthorPage</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&quot;./AuthorPage&quot;</span><span class="p">;</span>
 
 <span class="k">export</span> <span class="kd">const</span> <span class="nx">AUTHOR_DATA</span>: <span class="kt">AuthorPage</span> <span class="o">=</span> <span class="p">{</span>
@@ -916,7 +933,7 @@ ng generate service author/author
 <span class="p">}</span>
 </code></pre></div>
 </div>
-<input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><label for="__tabbed_6_2">author.service.ts</label><div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Injectable</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Observable</span><span class="p">,</span> <span class="k">of</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;rxjs&#39;</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Pageable</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;../core/model/page/Pageable&#39;</span><span class="p">;</span>
@@ -946,9 +963,12 @@ ng generate service author/author
 </code></pre></div>
 </div>
 </div>
+</div>
 <h3 id="implementar-listado">Implementar listado</h3>
 <p>Ya tenemos el servicio con los datos, ahora vamos a por el listado paginado.</p>
-<div class="tabbed-set" data-tabs="7:3"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><label for="__tabbed_7_1">author-list.component.html</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="7:3"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><input id="__tabbed_7_3" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">author-list.component.html</label><label for="__tabbed_7_2">author-list.component.scss</label><label for="__tabbed_7_3">author-list.component.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;container&quot;</span><span class="p">&gt;</span>
     <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Listado de Autores<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
 
@@ -992,7 +1012,7 @@ ng generate service author/author
 <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 </code></pre></div>
 </div>
-<input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><label for="__tabbed_7_2">author-list.component.scss</label><div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="p">.</span><span class="nc">container</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="k">margin</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="kt">px</span><span class="p">;</span><span class="w"></span>
 
@@ -1027,7 +1047,7 @@ ng generate service author/author
 <span class="err">}</span><span class="w"></span>
 </code></pre></div>
 </div>
-<input id="__tabbed_7_3" name="__tabbed_7" type="radio" /><label for="__tabbed_7_3">author-list.component.ts</label><div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Component</span><span class="p">,</span> <span class="nx">OnInit</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">MatDialog</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/material/dialog&#39;</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">PageEvent</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/material/paginator&#39;</span><span class="p">;</span>
@@ -1123,13 +1143,16 @@ ng generate service author/author
 </code></pre></div>
 </div>
 </div>
+</div>
 <p>Fíjate como hemos añadido la paginación. </p>
 <ul>
 <li>Al HTML le hemos añadido un componente nuevo <code>mat-paginator</code>, lo que nos va a obligar a añadirlo al módulo también como dependencia. Ese componente le hemos definido un método <code>page</code> que se ejecuta cada vez que la página cambia, y unas propiedades con las que calculará la página, el tamaño y el número total de páginas.</li>
 <li>Al Typescript le hemos tenido que añadir esas variables y hemos creado un método para cargar datos que lo que hace es construir un objeto <code>pageable</code> con los valores actuales del componente paginador y lanza la petición con esos datos en el body. Obviamente al ser un mock no funcionará el cambio de página y demás.</li>
 </ul>
 <p>Como siempre, añadimos las dependencias al módulo, vamos a intentar añadir todas las que vamos a necesitar a futuro.</p>
-<div class="tabbed-set" data-tabs="8:1"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><label for="__tabbed_8_1">author.module.ts</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="8:1"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">author.module.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">NgModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">CommonModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/common&#39;</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">AuthorListComponent</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;./author-list/author-list.component&#39;</span><span class="p">;</span>
@@ -1173,11 +1196,14 @@ ng generate service author/author
 </code></pre></div>
 </div>
 </div>
+</div>
 <p>Debería verse algo similar a esto:</p>
 <p><img alt="step4-angular1" src="../../assets/images/step4-angular1.png" /></p>
 <h3 id="implementar-dialogo-edicion">Implementar dialogo edición</h3>
 <p>El último paso, es definir la pantalla de dialogo que realizará el alta y modificado de los datos de un <code>Autor</code>.</p>
-<div class="tabbed-set" data-tabs="9:3"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><label for="__tabbed_9_1">author-edit.component.html</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="9:3"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><input id="__tabbed_9_3" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">author-edit.component.html</label><label for="__tabbed_9_2">author-edit.component.scss</label><label for="__tabbed_9_3">author-edit.component.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;container&quot;</span><span class="p">&gt;</span>
     <span class="p">&lt;</span><span class="nt">h1</span> <span class="err">*</span><span class="na">ngIf</span><span class="o">=</span><span class="s">&quot;author.id == null&quot;</span><span class="p">&gt;</span>Crear autor<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
     <span class="p">&lt;</span><span class="nt">h1</span> <span class="err">*</span><span class="na">ngIf</span><span class="o">=</span><span class="s">&quot;author.id != null&quot;</span><span class="p">&gt;</span>Modificar autor<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
@@ -1208,7 +1234,7 @@ ng generate service author/author
 <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 </code></pre></div>
 </div>
-<input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><label for="__tabbed_9_2">author-edit.component.scss</label><div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="p">.</span><span class="nc">container</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="k">min-width</span><span class="p">:</span><span class="w"> </span><span class="mi">350</span><span class="kt">px</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="k">max-width</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="kt">px</span><span class="p">;</span><span class="w"></span>
@@ -1230,7 +1256,7 @@ ng generate service author/author
 <span class="err">}</span><span class="w"></span>
 </code></pre></div>
 </div>
-<input id="__tabbed_9_3" name="__tabbed_9" type="radio" /><label for="__tabbed_9_3">author-edit.component.ts</label><div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Component</span><span class="p">,</span> <span class="nx">Inject</span><span class="p">,</span> <span class="nx">OnInit</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">MatDialogRef</span><span class="p">,</span> <span class="nx">MAT_DIALOG_DATA</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/material/dialog&#39;</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">AuthorService</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;../author.service&#39;</span><span class="p">;</span>
@@ -1274,12 +1300,15 @@ ng generate service author/author
 </code></pre></div>
 </div>
 </div>
+</div>
 <p>Que debería quedar algo así:</p>
 <p><img alt="step4-angular2" src="../../assets/images/step4-angular2.png" /></p>
 <h2 id="desarrollo-springboot">Desarrollo Springboot</h2>
 <h3 id="modelos">Modelos</h3>
 <p>Lo primero que vamos a hacer es crear los modelos para trabajar con BBDD y con peticiones hacia el front. Además, también tenemos que añadir datos al script de inicialización de BBDD.</p>
-<div class="tabbed-set" data-tabs="10:4"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><label for="__tabbed_10_1">schema.sql</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="10:4"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><input id="__tabbed_10_2" name="__tabbed_10" type="radio" /><input id="__tabbed_10_3" name="__tabbed_10" type="radio" /><input id="__tabbed_10_4" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">schema.sql</label><label for="__tabbed_10_2">data.sql</label><label for="__tabbed_10_3">Author.java</label><label for="__tabbed_10_4">AuthorDto.java</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="k">DROP</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="n">CATEGORY</span><span class="p">;</span><span class="w"></span>
 
 <span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">CATEGORY</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
@@ -1297,7 +1326,7 @@ ng generate service author/author
 </span><span class="hll"><span class="p">);</span><span class="w"></span>
 </span></code></pre></div>
 </div>
-<input id="__tabbed_10_2" name="__tabbed_10" type="radio" /><label for="__tabbed_10_2">data.sql</label><div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">CATEGORY</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Eurogames&#39;</span><span class="p">);</span><span class="w"></span>
 <span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">CATEGORY</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Ameritrash&#39;</span><span class="p">);</span><span class="w"></span>
 <span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">CATEGORY</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Familiar&#39;</span><span class="p">);</span><span class="w"></span>
@@ -1310,7 +1339,7 @@ ng generate service author/author
 </span><span class="hll"><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">AUTHOR</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">nationality</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Phil Walker-Harding&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;US&#39;</span><span class="p">);</span><span class="w"></span>
 </span></code></pre></div>
 </div>
-<input id="__tabbed_10_3" name="__tabbed_10" type="radio" /><label for="__tabbed_10_3">Author.java</label><div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.author.model</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">javax.persistence.Column</span><span class="p">;</span>
@@ -1389,7 +1418,7 @@ ng generate service author/author
 <span class="p">}</span>
 </code></pre></div>
 </div>
-<input id="__tabbed_10_4" name="__tabbed_10" type="radio" /><label for="__tabbed_10_4">AuthorDto.java</label><div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.author.model</span><span class="p">;</span>
 
 <span class="cm">/**</span>
@@ -1455,6 +1484,7 @@ ng generate service author/author
 </code></pre></div>
 </div>
 </div>
+</div>
 <h3 id="tdd-pruebas">TDD - Pruebas</h3>
 <p>Para desarrollar todas las operaciones, empezaremos primero diseñando las pruebas y luego implementando el código necesario que haga funcionar correctamente esas pruebas. Para ir más rápido vamos a poner todas las pruebas de golpe, pero realmente se deberían crear una a una e ir implementando el código necesario para esa prueba. Para evitar tantas iteraciones en el tutorial las haremos todas de golpe.</p>
 <p>Vamos a pararnos a pensar un poco que necesitamos en la pantalla. Ahora mismo nos sirve con:</p>
@@ -1475,7 +1505,9 @@ ng generate service author/author
 </div>
 <p>También crearemos una clase <code>AuthorController</code> dentro del package de <code>com.capgemini.ccsw.tutorial.author</code> con la implementación de los métodos vacíos, para que no falle la compilación.</p>
 <p>¡Vamos a implementar test!</p>
-<div class="tabbed-set" data-tabs="11:3"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><label for="__tabbed_11_1">AuthorSearchDto.java</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="11:3"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><input id="__tabbed_11_2" name="__tabbed_11" type="radio" /><input id="__tabbed_11_3" name="__tabbed_11" type="radio" /><div class="tabbed-labels"><label for="__tabbed_11_1">AuthorSearchDto.java</label><label for="__tabbed_11_2">AuthorController.java</label><label for="__tabbed_11_3">AuthorTest.java</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.author.model</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">org.springframework.data.domain.Pageable</span><span class="p">;</span>
@@ -1506,7 +1538,7 @@ ng generate service author/author
 <span class="p">}</span>
 </code></pre></div>
 </div>
-<input id="__tabbed_11_2" name="__tabbed_11" type="radio" /><label for="__tabbed_11_2">AuthorController.java</label><div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.author</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">org.springframework.data.domain.Page</span><span class="p">;</span>
@@ -1549,7 +1581,7 @@ ng generate service author/author
 <span class="p">}</span>
 </code></pre></div>
 </div>
-<input id="__tabbed_11_3" name="__tabbed_11" type="radio" /><label for="__tabbed_11_3">AuthorTest.java</label><div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.author</span><span class="p">;</span>
 
 <span class="kn">import static</span> <span class="nn">org.junit.jupiter.api.Assertions.assertEquals</span><span class="p">;</span>
@@ -1721,6 +1753,7 @@ ng generate service author/author
 </code></pre></div>
 </div>
 </div>
+</div>
 <div class="admonition info">
 <p class="admonition-title">Cuidado con las clases de Test</p>
 <p>Recuerda que el código de aplicación debe ir en <code>src/main/java</code>, mientras que las clases de test deben ir en <code>src/test/java</code> para que no se mezclen unas con otras y se empaquete todo en el artefacto final. En este caso <code>AuthorTest.java</code> va en el directorio de test <code>src/test/java</code>.</p>
@@ -1728,7 +1761,9 @@ ng generate service author/author
 <p>Si ejecutamos los test, el resultado será 7 maravillosos test que fallan su ejecución. Es normal, puesto que no hemos implementado nada de código de aplicación para corresponder esos test.</p>
 <h3 id="controller">Controller</h3>
 <p>Si recuerdas, esta capa de <code>Controller</code> es la que tiene los endpoints de entrada a la aplicación. Nosotros ya tenemos definidas 3 operaciones, que hemos diseñado directamente desde los tests. Ahora vamos a implementar esos métodos con el código necesario para que los test funcionen correctamente, y teniendo en mente que debemos apoyarnos en las capas inferiores <code>Service</code> y <code>Repository</code> para repartir lógica de negocio y acceso a datos.</p>
-<div class="tabbed-set" data-tabs="12:2"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><label for="__tabbed_12_1">AuthorController.java</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="12:2"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><input id="__tabbed_12_2" name="__tabbed_12" type="radio" /><div class="tabbed-labels"><label for="__tabbed_12_1">AuthorController.java</label><label for="__tabbed_12_2">AuthorService.java</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.author</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="p">;</span>
@@ -1792,7 +1827,7 @@ ng generate service author/author
 <span class="p">}</span>
 </code></pre></div>
 </div>
-<input id="__tabbed_12_2" name="__tabbed_12" type="radio" /><label for="__tabbed_12_2">AuthorService.java</label><div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.author</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">org.springframework.data.domain.Page</span><span class="p">;</span>
@@ -1830,13 +1865,16 @@ ng generate service author/author
 </code></pre></div>
 </div>
 </div>
+</div>
 <p>Si te fijas, hemos trasladado toda la lógica a llamadas al <code>AuthorService</code> que hemos inyectado, y para que no falle la compilación hemos creado una interface con los métodos necesarios.</p>
 <p>En la clase <code>AuthorController</code> es donde se hacen las conversiones de cara al cliente, pasaremos de un <code>Page&lt;Author&gt;</code> (modelo entidad) a un <code>Page&lt;AuthorDto&gt;</code> (modelo DTO) con la ayuda del beanMapper. Recuerda que al cliente no le deben llegar modelos entidades sino DTOs.</p>
 <p>Además, el método de carga <code>findPage</code> ya no es un método de tipo <code>GET</code>, ahora es de tipo <code>POST</code> porque le tenemos que enviar los datos de la paginación para que Spring JPA pueda hacer su magia.</p>
 <p>Ahora debemos implementar la siguiente capa.</p>
 <h3 id="service">Service</h3>
 <p>La siguiente capa que vamos a implementar es justamente la capa que contiene toda la lógica de negocio, hace uso del <code>Repository</code> para acceder a los datos, y recibe llamadas generalmente de los <code>Controller</code>.</p>
-<div class="tabbed-set" data-tabs="13:2"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><label for="__tabbed_13_1">AuthorServiceImpl.java</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="13:2"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><input id="__tabbed_13_2" name="__tabbed_13" type="radio" /><div class="tabbed-labels"><label for="__tabbed_13_1">AuthorServiceImpl.java</label><label for="__tabbed_13_2">AuthorRepository.java</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.author</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">javax.transaction.Transactional</span><span class="p">;</span>
@@ -1899,7 +1937,7 @@ ng generate service author/author
 <span class="p">}</span>
 </code></pre></div>
 </div>
-<input id="__tabbed_13_2" name="__tabbed_13" type="radio" /><label for="__tabbed_13_2">AuthorRepository.java</label><div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.author</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">org.springframework.data.domain.Page</span><span class="p">;</span>
@@ -1924,11 +1962,14 @@ ng generate service author/author
 </code></pre></div>
 </div>
 </div>
+</div>
 <p>De nuevo pasa lo mismo que con la capa anterior, aquí delegamos muchas operaciones de consulta y guardado de datos en <code>AuthorRepository</code>. Hemos tenido que crearlo como interface para que no falle la compilación. Recuerda que cuando creamos un <code>Repository</code> es de gran ayuda hacerlo extender de <code>CrudRepository&lt;T, ID&gt;</code> ya que tiene muchos métodos implementados de base que nos pueden servir, como el <code>delete</code> o el <code>save</code>.</p>
 <p>Fíjate también que cuando queremos copiar más de un dato de una clase a otra, tenemos una utilidad llamada <code>BeanUtils</code> que nos permite realizar esa copia (siempre que las propiedades de ambas clases se llamen igual). Además, en nuestro ejemplo hemos ignorado el 'id' para que no nos copie un null a la clase destino.</p>
 <h3 id="repository">Repository</h3>
 <p>Y llegamos a la última capa, la que está más cerca de los datos finales. Tenemos la siguiente interface:</p>
-<div class="tabbed-set" data-tabs="14:1"><input checked="checked" id="__tabbed_14_1" name="__tabbed_14" type="radio" /><label for="__tabbed_14_1">AuthorRepository.java</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="14:1"><input checked="checked" id="__tabbed_14_1" name="__tabbed_14" type="radio" /><div class="tabbed-labels"><label for="__tabbed_14_1">AuthorRepository.java</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.author</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">org.springframework.data.domain.Page</span><span class="p">;</span>
@@ -1951,6 +1992,7 @@ ng generate service author/author
 
 <span class="p">}</span>
 </code></pre></div>
+</div>
 </div>
 </div>
 <p>Si te fijas, este <code>Repository</code> ya no está vacío como el anterior, no nos sirve con las operaciones básicas del <code>CrudRepository</code> en este caso hemos tenido que añadir un método nuevo al que pasandole un objeto de tipo <code>Pageable</code> nos devuelva una <code>Page</code>.</p>
@@ -1990,7 +2032,9 @@ Nos sirve para insertar <code>Autores</code> nuevas (si no tienen el id informad
 <p><img alt="step4-java4" src="../../assets/images/step4-java4.png" /></p>
 <h2 id="conectar-front-con-back">Conectar front con back</h2>
 <p>Una vez implementado front y back, lo que nos queda es modificar el servicio del front para que conecte directamente con las operaciones ofrecidas por el back.</p>
-<div class="tabbed-set" data-tabs="15:1"><input checked="checked" id="__tabbed_15_1" name="__tabbed_15" type="radio" /><label for="__tabbed_15_1">author.service.ts</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="15:1"><input checked="checked" id="__tabbed_15_1" name="__tabbed_15" type="radio" /><div class="tabbed-labels"><label for="__tabbed_15_1">author.service.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">HttpClient</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/common/http&#39;</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Injectable</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Observable</span><span class="p">,</span> <span class="k">of</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;rxjs&#39;</span><span class="p">;</span>
@@ -2023,6 +2067,7 @@ Nos sirve para insertar <code>Autores</code> nuevas (si no tienen el id informad
 </span>    <span class="p">}</span>    
 <span class="p">}</span>
 </code></pre></div>
+</div>
 </div>
 </div>
 

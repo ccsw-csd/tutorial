@@ -830,17 +830,23 @@
 <li><code>app.component.scss</code> → contiene los estilos CSS privados de la plantilla inicial.</li>
 </ul>
 <p>Vamos a modificar este código inicial para ver como funciona. Abrimos el fichero <code>app.component.ts</code> y modificamos la línea donde se asigna un valor a la variable <code>title</code>.</p>
-<div class="tabbed-set" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">app.component.ts</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">app.component.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="p">...</span>
 <span class="nx">title</span> <span class="o">=</span> <span class="s1">&#39;Tutorial de Angular + Springboot&#39;</span><span class="p">;</span>
 <span class="p">...</span>
 </code></pre></div>
 </div>
 </div>
+</div>
 <p>Ahora abrimos el fichero <code>app.component.html</code>, borramos todo el código de la plantilla y añadimos el siguiente código:</p>
-<div class="tabbed-set" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">app.component.html</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">app.component.html</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>{{title}}<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
 </code></pre></div>
+</div>
 </div>
 </div>
 <p>Las llaves dobles permiten hacen un binding entre el código del componente y la plantilla. Es decir, en este caso irá al código TypeScript y buscará el valor de la variable <code>title</code>.</p>
@@ -864,7 +870,10 @@
 <div class="highlight"><pre><span></span><code>ng generate module core
 </code></pre></div>
 <p>Y añadimos esos módulos al módulo padre de la aplicación:</p>
-<div class="tabbed-set" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><label for="__tabbed_3_1">app.module.ts</label><div class="tabbed-content"></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">app.module.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
 </div>
 <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">BrowserModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/platform-browser&#39;</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">NgModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
@@ -894,7 +903,9 @@
 </code></pre></div>
 <h3 id="codigo-de-la-pantalla">Código de la pantalla</h3>
 <p>Esto nos creará una carpeta con los ficheros del componente, donde tendremos que copiar el siguiente contenido:</p>
-<div class="tabbed-set" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><label for="__tabbed_4_1">header.component.html</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">header.component.html</label><label for="__tabbed_4_2">header.component.scss</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">mat-toolbar</span><span class="p">&gt;</span>
     <span class="p">&lt;</span><span class="nt">mat-toolbar-row</span><span class="p">&gt;</span>
         <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;header_container&quot;</span><span class="p">&gt;</span>
@@ -924,7 +935,7 @@
 <span class="p">&lt;/</span><span class="nt">mat-toolbar</span><span class="p">&gt;</span>
 </code></pre></div>
 </div>
-<input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><label for="__tabbed_4_2">header.component.scss</label><div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="p">.</span><span class="nc">mat-toolbar</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="k">background-color</span><span class="p">:</span><span class="w"> </span><span class="kc">blue</span><span class="p">;</span><span class="w"></span>
 <span class="w">  </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="kc">white</span><span class="p">;</span><span class="w"></span>
@@ -985,8 +996,11 @@
 </code></pre></div>
 </div>
 </div>
+</div>
 <p>Al utilizar etiquetas de material como <code>mat-toolbar</code> o <code>mat-icon</code> y <code>routerLink</code> necesitaremos importar las dependencias. Esto lo podemos hacer directamente en el módulo del que depende, es decir en el fichero <code>core.module.ts</code></p>
-<div class="tabbed-set" data-tabs="5:1"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><label for="__tabbed_5_1">core.module.ts</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="5:1"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">core.module.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">NgModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">CommonModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/common&#39;</span><span class="p">;</span>
 <span class="hll"><span class="k">import</span> <span class="p">{</span> <span class="nx">MatIconModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/material/icon&#39;</span><span class="p">;</span>
@@ -1011,9 +1025,12 @@
 </code></pre></div>
 </div>
 </div>
+</div>
 <p>Además de añadir las dependencias, diremos que este módulo va a exportar el componente <code>HeaderComponent</code> para poder utilizarlo desde otras páginas.</p>
 <p>Ya por último solo nos queda modificar la página general de la aplicación <code>app.component.html</code> para añadirle el componente <code>HeaderComponent</code>.</p>
-<div class="tabbed-set" data-tabs="6:1"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><label for="__tabbed_6_1">app.component.html</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="6:1"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">app.component.html</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
 <span class="hll">  <span class="p">&lt;</span><span class="nt">app-header</span><span class="p">&gt;&lt;/</span><span class="nt">app-header</span><span class="p">&gt;</span>
 </span>  <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
@@ -1021,6 +1038,7 @@
   <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 </code></pre></div>
+</div>
 </div>
 </div>
 <p>Vamos al navegador y refrescamos la página, debería aparecer una barra superior (Header) con las opciones de menú. Algo similar a esto:</p>
@@ -1037,7 +1055,10 @@ Además, recuerda que para poder utilizar componentes de otros módulos, los deb
 <div class="highlight"><pre><span></span><code>ng generate module category
 </code></pre></div>
 <p>Y por tanto, al igual que hicimos anteriormente, hay que añadir el módulo al fichero <code>app.module.ts</code></p>
-<div class="tabbed-set" data-tabs="7:1"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><label for="__tabbed_7_1">app.module.ts</label><div class="tabbed-content"></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:1"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">app.module.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
 </div>
 <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">BrowserModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/platform-browser&#39;</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">NgModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
@@ -1070,7 +1091,9 @@ Además, recuerda que para poder utilizar componentes de otros módulos, los deb
 <div class="highlight"><pre><span></span><code>ng generate component category/category-list
 </code></pre></div>
 <p>Para terminar de configurar la aplicación, vamos a añadir la ruta del componente dentro del componente routing de Angular, para poder acceder a él, para ello modificamos el fichero <code>app-routing.module.ts</code></p>
-<div class="tabbed-set" data-tabs="8:1"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><label for="__tabbed_8_1">app-routing.module.ts</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="8:1"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">app-routing.module.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">NgModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Routes</span><span class="p">,</span> <span class="nx">RouterModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/router&#39;</span><span class="p">;</span>
 <span class="hll"><span class="k">import</span> <span class="p">{</span> <span class="nx">CategoryListComponent</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;./category/category-list/category-list.component&#39;</span><span class="p">;</span>
@@ -1087,10 +1110,13 @@ Además, recuerda que para poder utilizar componentes de otros módulos, los deb
 </code></pre></div>
 </div>
 </div>
+</div>
 <p>Si abrimos el navegador y accedemos a <code>http://localhost:4200/</code> podremos navegar mediante el menú <code>Categorías</code> el cual abrirá el componente que acabamos de crear.</p>
 <h3 id="codigo-de-la-pantalla_1">Código de la pantalla</h3>
 <p>Ahora vamos a construir la pantalla. Para manejar la información del listado, necesitamos almacenar los datos en un objeto de tipo <code>model</code>. Para ello crearemos un fichero en <code>category\model\Category.ts</code> donde implementaremos la clase necesaria. Esta clase será la que utilizaremos en el código html y ts de nuestro componente.</p>
-<div class="tabbed-set" data-tabs="9:1"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><label for="__tabbed_9_1">Category.ts</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="9:1"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">Category.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="k">export</span> <span class="kd">class</span> <span class="nx">Category</span> <span class="p">{</span>
     <span class="nx">id</span>: <span class="kt">number</span><span class="p">;</span>
     <span class="nx">name</span>: <span class="kt">string</span><span class="p">;</span>
@@ -1098,8 +1124,11 @@ Además, recuerda que para poder utilizar componentes de otros módulos, los deb
 </code></pre></div>
 </div>
 </div>
+</div>
 <p>También, escribiremos el código de la pantalla de listado.</p>
-<div class="tabbed-set" data-tabs="10:3"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><label for="__tabbed_10_1">category-list.component.html</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="10:3"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><input id="__tabbed_10_2" name="__tabbed_10" type="radio" /><input id="__tabbed_10_3" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">category-list.component.html</label><label for="__tabbed_10_2">category-list.component.scss</label><label for="__tabbed_10_3">category-list.component.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;container&quot;</span><span class="p">&gt;</span>
     <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Listado de Categorías<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
 
@@ -1132,7 +1161,7 @@ Además, recuerda que para poder utilizar componentes de otros módulos, los deb
 <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 </code></pre></div>
 </div>
-<input id="__tabbed_10_2" name="__tabbed_10" type="radio" /><label for="__tabbed_10_2">category-list.component.scss</label><div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="p">.</span><span class="nc">container</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="k">margin</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="kt">px</span><span class="p">;</span><span class="w"></span>
 
@@ -1167,7 +1196,7 @@ Además, recuerda que para poder utilizar componentes de otros módulos, los deb
 <span class="err">}</span><span class="w"></span>
 </code></pre></div>
 </div>
-<input id="__tabbed_10_3" name="__tabbed_10" type="radio" /><label for="__tabbed_10_3">category-list.component.ts</label><div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Component</span><span class="p">,</span> <span class="nx">OnInit</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
 <span class="hll"><span class="k">import</span> <span class="p">{</span> <span class="nx">MatTableDataSource</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/material/table&#39;</span><span class="p">;</span>
 </span><span class="hll"><span class="k">import</span> <span class="p">{</span> <span class="nx">Category</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;../model/Category&#39;</span><span class="p">;</span>
@@ -1191,6 +1220,7 @@ Además, recuerda que para poder utilizar componentes de otros módulos, los deb
 </code></pre></div>
 </div>
 </div>
+</div>
 <p>El código HTML es fácil de seguir pero por si acaso:</p>
 <ul>
 <li>Línea 4: Creamos la tabla con la variable <code>dataSource</code> definida en el fichero .ts</li>
@@ -1200,7 +1230,9 @@ Además, recuerda que para poder utilizar componentes de otros módulos, los deb
 <li>Línea 23 y 24: Construcción de la cabecera y las filas</li>
 </ul>
 <p>Y ya por último, añadimos los componentes que se han utilizado de Angular Material a las dependencias del módulo donde está definido el componente en este caso <code>category\category.module.ts</code>:</p>
-<div class="tabbed-set" data-tabs="11:1"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><label for="__tabbed_11_1">category.module.ts</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="11:1"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><div class="tabbed-labels"><label for="__tabbed_11_1">category.module.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">NgModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">CommonModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/common&#39;</span><span class="p">;</span>
 <span class="hll"><span class="k">import</span> <span class="p">{</span> <span class="nx">MatTableModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/material/table&#39;</span><span class="p">;</span>
@@ -1221,6 +1253,7 @@ Además, recuerda que para poder utilizar componentes de otros módulos, los deb
 </code></pre></div>
 </div>
 </div>
+</div>
 <p>Si abrimos el navegador y accedemos a <code>http://localhost:4200/</code> y pulsamos en el menú de <code>Categorías</code> obtendremos una pantalla con un listado vacío (solo con cabeceras) y un botón de crear Nueva Categoría que aun no hace nada.</p>
 <h2 id="anadiendo-datos">Añadiendo datos</h2>
 <p>En este punto y para ver como responde el listado, vamos a añadir datos. Si tuvieramos el backend implementado podríamos consultar los datos directamente de una operación de negocio de backend, pero ahora mismo no lo tenemos implementado así que para no bloquear el desarrollo vamos a mockear los datos.</p>
@@ -1231,7 +1264,9 @@ Además, recuerda que para poder utilizar componentes de otros módulos, los deb
 <p>Esto nos creará un servicio, que además podemos utilizarlo inyectándolo en cualquier componente que lo necesite. </p>
 <h3 id="implementando-un-servicio">Implementando un servicio</h3>
 <p>Vamos a implementar una operación de negocio que recupere el listado de categorías y lo vamos a hacer de forma reactiva (asíncrona) para simular una petición a backend. Modificamos los siguientes ficheros:</p>
-<div class="tabbed-set" data-tabs="12:2"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><label for="__tabbed_12_1">category.service.ts</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="12:2"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><input id="__tabbed_12_2" name="__tabbed_12" type="radio" /><div class="tabbed-labels"><label for="__tabbed_12_1">category.service.ts</label><label for="__tabbed_12_2">category-list.component.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Injectable</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
 <span class="hll"><span class="k">import</span> <span class="p">{</span> <span class="nx">Observable</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;rxjs&#39;</span><span class="p">;</span>
 </span><span class="hll"><span class="k">import</span> <span class="p">{</span> <span class="nx">Category</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;./model/Category&#39;</span><span class="p">;</span>
@@ -1249,7 +1284,7 @@ Además, recuerda que para poder utilizar componentes de otros módulos, los deb
 </span><span class="p">}</span>
 </code></pre></div>
 </div>
-<input id="__tabbed_12_2" name="__tabbed_12" type="radio" /><label for="__tabbed_12_2">category-list.component.ts</label><div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Component</span><span class="p">,</span> <span class="nx">OnInit</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">MatTableDataSource</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/material/table&#39;</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Category</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;../model/Category&#39;</span><span class="p">;</span>
@@ -1278,9 +1313,12 @@ Además, recuerda que para poder utilizar componentes de otros módulos, los deb
 </code></pre></div>
 </div>
 </div>
+</div>
 <h3 id="mockeando-datos">Mockeando datos</h3>
 <p>Como hemos comentado anteriormente, el backend todavía no está implementado así que vamos a mockear datos. Nos crearemos un fichero <code>mock-categories.ts</code> dentro de model, con datos ficticios y modificaremos el servicio para que devuelva esos datos. De esta forma, cuando tengamos implementada la operación de negocio en backend, tan solo tenemos que sustuir el código que devuelve datos estáticos por una llamada http.</p>
-<div class="tabbed-set" data-tabs="13:2"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><label for="__tabbed_13_1">mock-categories.ts</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="13:2"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><input id="__tabbed_13_2" name="__tabbed_13" type="radio" /><div class="tabbed-labels"><label for="__tabbed_13_1">mock-categories.ts</label><label for="__tabbed_13_2">category.service.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Category</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&quot;./Category&quot;</span><span class="p">;</span>
 
 <span class="k">export</span> <span class="kd">const</span> <span class="nx">CATEGORY_DATA</span>: <span class="kt">Category</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[</span>
@@ -1296,7 +1334,7 @@ Además, recuerda que para poder utilizar componentes de otros módulos, los deb
 <span class="p">]</span>    
 </code></pre></div>
 </div>
-<input id="__tabbed_13_2" name="__tabbed_13" type="radio" /><label for="__tabbed_13_2">category.service.ts</label><div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Injectable</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
 <span class="hll"><span class="k">import</span> <span class="p">{</span> <span class="nx">Observable</span><span class="p">,</span> <span class="k">of</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;rxjs&#39;</span><span class="p">;</span>
 </span><span class="k">import</span> <span class="p">{</span> <span class="nx">Category</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;./model/Category&#39;</span><span class="p">;</span>
@@ -1316,11 +1354,14 @@ Además, recuerda que para poder utilizar componentes de otros módulos, los deb
 </code></pre></div>
 </div>
 </div>
+</div>
 <p>Si ahora refrescamos la página web, veremos que el listado ya tiene datos con los que vamos a interactuar.</p>
 <p><img alt="step1-angular2" src="../../assets/images/step1-angular2.png" /></p>
 <h3 id="simulando-las-otras-peticiones">Simulando las otras peticiones</h3>
 <p>Para terminar, vamos a simular las otras dos peticiones, la de editar y la de borrar para cuando tengamos que utilizarlas. El servicio debe quedar más o menos así:</p>
-<div class="tabbed-set" data-tabs="14:1"><input checked="checked" id="__tabbed_14_1" name="__tabbed_14" type="radio" /><label for="__tabbed_14_1">category.service.ts</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="14:1"><input checked="checked" id="__tabbed_14_1" name="__tabbed_14" type="radio" /><div class="tabbed-labels"><label for="__tabbed_14_1">category.service.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Injectable</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Observable</span><span class="p">,</span> <span class="k">of</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;rxjs&#39;</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Category</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;./model/Category&#39;</span><span class="p">;</span>
@@ -1348,6 +1389,7 @@ Además, recuerda que para poder utilizar componentes de otros módulos, los deb
 </code></pre></div>
 </div>
 </div>
+</div>
 <h2 id="anadiendo-acciones-al-listado">Añadiendo acciones al listado</h2>
 <h3 id="crear-componente_2">Crear componente</h3>
 <p>Ahora nos queda añadir las acciones al listado: crear, editar y eliminar. Empezaremos primero por las acciones de crear y editar, que ambas deberían abrir una ventana modal con un formulario para poder modificar datos de la entidad <code>Categoría</code>.
@@ -1355,7 +1397,9 @@ Como siempre, para crear un componente usamos el asistente de Angular, esta vez 
 <div class="highlight"><pre><span></span><code>ng generate component category/category-edit
 </code></pre></div>
 <p>Ahora vamos a hacer que se abra al pulsar el botón <code>Nueva categoría</code>. Para eso, vamos al fichero <code>category-list.component.ts</code> y añadimos un nuevo método:</p>
-<div class="tabbed-set" data-tabs="15:1"><input checked="checked" id="__tabbed_15_1" name="__tabbed_15" type="radio" /><label for="__tabbed_15_1">category-list.component.ts</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="15:1"><input checked="checked" id="__tabbed_15_1" name="__tabbed_15" type="radio" /><div class="tabbed-labels"><label for="__tabbed_15_1">category-list.component.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="p">...</span>
 <span class="hll"><span class="k">import</span> <span class="p">{</span> <span class="nx">MatDialog</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/material/dialog&#39;</span><span class="p">;</span>
 </span><span class="hll"><span class="k">import</span> <span class="p">{</span> <span class="nx">CategoryEditComponent</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;../category-edit/category-edit.component&#39;</span><span class="p">;</span>
@@ -1378,10 +1422,13 @@ Como siempre, para crear un componente usamos el asistente de Angular, esta vez 
 </code></pre></div>
 </div>
 </div>
+</div>
 <p>Para poder abrir un componente dentro de un dialogo necesitamos obtener en el constructor un MatDialog. De ahí que hayamos tenido que añadirlo como import y en el constructor.</p>
 <p>Dentro del método <code>createCategory</code> lo que hacemos es crear un dialogo con el componente <code>CategoryEditComponent</code> en su interior, pasarle unos datos de creación, donde podemos poner estilos del dialog y un objeto <code>data</code> donde pondremos los datos que queremos pasar entre los componentes. Por último, nos suscribimos al evento <code>afterClosed</code> para ejecutar las acciones que creamos oportunas, en nuestro caso volveremos a cargar el listado inicial.</p>
 <p>Como hemos utilizado un <code>MatDialog</code> en el componente, necesitamos añadirlo también al módulo, así que abrimos el fichero <code>category.module.ts</code> y añadimos:</p>
-<div class="tabbed-set" data-tabs="16:1"><input checked="checked" id="__tabbed_16_1" name="__tabbed_16" type="radio" /><label for="__tabbed_16_1">category.module.ts</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="16:1"><input checked="checked" id="__tabbed_16_1" name="__tabbed_16" type="radio" /><div class="tabbed-labels"><label for="__tabbed_16_1">category.module.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="p">...</span>
 <span class="hll"><span class="k">import</span> <span class="p">{</span> <span class="nx">MAT_DIALOG_DATA</span><span class="p">,</span> <span class="nx">MatDialogModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/material/dialog&#39;</span><span class="p">;</span>
 </span>
@@ -1402,8 +1449,11 @@ Como siempre, para crear un componente usamos el asistente de Angular, esta vez 
 </code></pre></div>
 </div>
 </div>
+</div>
 <p>Y ya por último enlazamos el click en el botón con el método que acabamos de crear para abrir el dialogo. Modificamos el fichero <code>category-list.component.html</code> y añadimos el evento click:</p>
-<div class="tabbed-set" data-tabs="17:1"><input checked="checked" id="__tabbed_17_1" name="__tabbed_17" type="radio" /><label for="__tabbed_17_1">category-list.component.html</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="17:1"><input checked="checked" id="__tabbed_17_1" name="__tabbed_17" type="radio" /><div class="tabbed-labels"><label for="__tabbed_17_1">category-list.component.html</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="p">...</span>
     <span class="o">&lt;</span><span class="nx">div</span> <span class="kd">class</span><span class="o">=</span><span class="s2">&quot;buttons&quot;</span><span class="o">&gt;</span>
 <span class="hll">        <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">mat</span><span class="o">-</span><span class="nx">flat</span><span class="o">-</span><span class="nx">button</span> <span class="nx">color</span><span class="o">=</span><span class="s2">&quot;primary&quot;</span> <span class="p">(</span><span class="nx">click</span><span class="p">)</span><span class="o">=</span><span class="s2">&quot;createCategory()&quot;</span><span class="o">&gt;</span><span class="nx">Nueva</span> <span class="nx">categoría</span><span class="o">&lt;</span><span class="err">/button&gt; </span>
@@ -1412,10 +1462,13 @@ Como siempre, para crear un componente usamos el asistente de Angular, esta vez 
 </code></pre></div>
 </div>
 </div>
+</div>
 <p>Si refrescamos el navegador y pulsamos el botón <code>Nueva categoría</code> veremos como se abre una ventana modal de tipo Dialog con el componente nuevo que hemos creado, aunque solo se leerá <code>category-edit works!</code> que es el contenido por defecto del componente.</p>
 <h3 id="codigo-del-dialogo">Código del dialogo</h3>
 <p>Ahora vamos a darle forma al formulario de editar y crear. Para ello vamos al html, ts y css del componente y pegamos el siguiente contenido:</p>
-<div class="tabbed-set" data-tabs="18:3"><input checked="checked" id="__tabbed_18_1" name="__tabbed_18" type="radio" /><label for="__tabbed_18_1">category-edit.component.html</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="18:3"><input checked="checked" id="__tabbed_18_1" name="__tabbed_18" type="radio" /><input id="__tabbed_18_2" name="__tabbed_18" type="radio" /><input id="__tabbed_18_3" name="__tabbed_18" type="radio" /><div class="tabbed-labels"><label for="__tabbed_18_1">category-edit.component.html</label><label for="__tabbed_18_2">category-edit.component.scss</label><label for="__tabbed_18_3">category-edit.component.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;container&quot;</span><span class="p">&gt;</span>
     <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Crear categoría<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
 
@@ -1439,7 +1492,7 @@ Como siempre, para crear un componente usamos el asistente de Angular, esta vez 
 <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 </code></pre></div>
 </div>
-<input id="__tabbed_18_2" name="__tabbed_18" type="radio" /><label for="__tabbed_18_2">category-edit.component.scss</label><div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="p">.</span><span class="nc">container</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="k">min-width</span><span class="p">:</span><span class="w"> </span><span class="mi">350</span><span class="kt">px</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="k">max-width</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="kt">px</span><span class="p">;</span><span class="w"></span>
@@ -1461,7 +1514,7 @@ Como siempre, para crear un componente usamos el asistente de Angular, esta vez 
 <span class="err">}</span><span class="w"></span>
 </code></pre></div>
 </div>
-<input id="__tabbed_18_3" name="__tabbed_18" type="radio" /><label for="__tabbed_18_3">category-edit.component.ts</label><div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Component</span><span class="p">,</span> <span class="nx">OnInit</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">MatDialogRef</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/material/dialog&#39;</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">CategoryService</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;../category.service&#39;</span><span class="p">;</span>
@@ -1499,9 +1552,12 @@ Como siempre, para crear un componente usamos el asistente de Angular, esta vez 
 </code></pre></div>
 </div>
 </div>
+</div>
 <p>Si te fijas en el código TypeScript, hemos añadido en el método <code>onSave</code> una llamada al servicio de <code>CategoryService</code> que aunque no realice ninguna operación de momento, por lo menos lo dejamos preparado para conectar con el servidor.</p>
 <p>Además, como siempre, al utilizar componentes <code>matInput</code>, <code>matForm</code>, <code>matError</code> hay que añadirlos como dependencias en el módulo <code>category.module.ts</code>:</p>
-<div class="tabbed-set" data-tabs="19:1"><input checked="checked" id="__tabbed_19_1" name="__tabbed_19" type="radio" /><label for="__tabbed_19_1">category.module.ts</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="19:1"><input checked="checked" id="__tabbed_19_1" name="__tabbed_19" type="radio" /><div class="tabbed-labels"><label for="__tabbed_19_1">category.module.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="p">...</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">MAT_DIALOG_DATA</span><span class="p">,</span> <span class="nx">MatDialogModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/material/dialog&#39;</span><span class="p">;</span>
 <span class="hll"><span class="k">import</span> <span class="p">{</span> <span class="nx">MatFormFieldModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/material/form-field&#39;</span><span class="p">;</span>
@@ -1529,11 +1585,14 @@ Como siempre, para crear un componente usamos el asistente de Angular, esta vez 
 </code></pre></div>
 </div>
 </div>
+</div>
 <p>Ahora podemos navegar y abrir el cuadro de dialogo mediante el botón <code>Nueva categoría</code> para ver como queda nuestro formulario.</p>
 <h3 id="utilizar-el-dialogo-para-editar">Utilizar el dialogo para editar</h3>
 <p>El mismo componente que hemos utilizado para crear una nueva categoría, nos sirve también para editar una categoría existente. Tan solo tenemos que utilizar la funcionalidad que Angular nos proporciona y pasarle los datos a editar en la llamada de apertura del Dialog.
 Vamos a implementar funcionalidad sobre el icono <code>editar</code>, tendremos que modificar unos cuantos ficheros:</p>
-<div class="tabbed-set" data-tabs="20:2"><input checked="checked" id="__tabbed_20_1" name="__tabbed_20" type="radio" /><label for="__tabbed_20_1">category-list.component.html</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="20:2"><input checked="checked" id="__tabbed_20_1" name="__tabbed_20" type="radio" /><input id="__tabbed_20_2" name="__tabbed_20" type="radio" /><div class="tabbed-labels"><label for="__tabbed_20_1">category-list.component.html</label><label for="__tabbed_20_2">category-list.component.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;container&quot;</span><span class="p">&gt;</span>
     <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Listado de Categorías<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
 
@@ -1568,7 +1627,7 @@ Vamos a implementar funcionalidad sobre el icono <code>editar</code>, tendremos 
 <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 </code></pre></div>
 </div>
-<input id="__tabbed_20_2" name="__tabbed_20" type="radio" /><label for="__tabbed_20_2">category-list.component.ts</label><div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="k">export</span> <span class="kd">class</span> <span class="nx">CategoriesComponent</span> <span class="k">implements</span> <span class="nx">OnInit</span> <span class="p">{</span>
 
   <span class="nx">dataSource</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">MatTableDataSource</span><span class="o">&lt;</span><span class="nx">Category</span><span class="o">&gt;</span><span class="p">();</span>
@@ -1608,8 +1667,11 @@ Vamos a implementar funcionalidad sobre el icono <code>editar</code>, tendremos 
 </code></pre></div>
 </div>
 </div>
+</div>
 <p>Y los Dialog:</p>
-<div class="tabbed-set" data-tabs="21:2"><input checked="checked" id="__tabbed_21_1" name="__tabbed_21" type="radio" /><label for="__tabbed_21_1">category-edit.component.html</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="21:2"><input checked="checked" id="__tabbed_21_1" name="__tabbed_21" type="radio" /><input id="__tabbed_21_2" name="__tabbed_21" type="radio" /><div class="tabbed-labels"><label for="__tabbed_21_1">category-edit.component.html</label><label for="__tabbed_21_2">category-edit.component.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="o">&lt;</span><span class="nx">div</span> <span class="kd">class</span><span class="o">=</span><span class="s2">&quot;container&quot;</span><span class="o">&gt;</span>
 <span class="hll">    <span class="o">&lt;</span><span class="nx">h1</span> <span class="o">*</span><span class="nx">ngIf</span><span class="o">=</span><span class="s2">&quot;category.id == null&quot;</span><span class="o">&gt;</span><span class="nx">Crear</span> <span class="nx">categoría</span><span class="o">&lt;</span><span class="err">/h1&gt;</span>
 </span><span class="hll">    <span class="o">&lt;</span><span class="nx">h1</span> <span class="o">*</span><span class="nx">ngIf</span><span class="o">=</span><span class="s2">&quot;category.id != null&quot;</span><span class="o">&gt;</span><span class="nx">Modificar</span> <span class="nx">categoría</span><span class="o">&lt;</span><span class="err">/h1&gt;</span>
@@ -1619,7 +1681,7 @@ Vamos a implementar funcionalidad sobre el icono <code>editar</code>, tendremos 
 <span class="p">...</span>
 </code></pre></div>
 </div>
-<input id="__tabbed_21_2" name="__tabbed_21" type="radio" /><label for="__tabbed_21_2">category-edit.component.ts</label><div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="hll"><span class="k">import</span> <span class="p">{</span> <span class="nx">Component</span><span class="p">,</span> <span class="nx">OnInit</span><span class="p">,</span> <span class="nx">Inject</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
 </span><span class="hll"><span class="k">import</span> <span class="p">{</span> <span class="nx">MatDialogRef</span><span class="p">,</span> <span class="nx">MAT_DIALOG_DATA</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/material/dialog&#39;</span><span class="p">;</span>
 </span><span class="k">import</span> <span class="p">{</span> <span class="nx">CategoryService</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;../category.service&#39;</span><span class="p">;</span>
@@ -1663,11 +1725,14 @@ Vamos a implementar funcionalidad sobre el icono <code>editar</code>, tendremos 
 </code></pre></div>
 </div>
 </div>
+</div>
 <p>Navegando ahora por la página y pulsando en el icono de editar, se debería abrir una ventana con los datos que hemos seleccionado, similar a esta imagen:</p>
 <p><img alt="step1-angular3" src="../../assets/images/step1-angular3.png" /></p>
 <p>Si te fijas, al modificar los datos dentro de la ventana de diálogo se modifica también en el listado. Esto es porque estamos pasando el mismo objeto desde el listado a la ventana dialogo y al ser el listado y el formulario reactivos los dos, cualquier cambio sobre los datos se refresca directamente en la pantalla. </p>
 <p>Hay veces en la que este comportamiento nos interesa, pero en este caso no queremos que se modifique el listado. Para solucionarlo debemos hacer una copia del objeto, para que ambos modelos (formulario y listado) utilicen objetos diferentes. Es tan sencillo como modificar <code>category-edit.component.ts</code> y añadirle una copia del dato</p>
-<div class="tabbed-set" data-tabs="22:1"><input checked="checked" id="__tabbed_22_1" name="__tabbed_22" type="radio" /><label for="__tabbed_22_1">category-edit.component.ts</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="22:1"><input checked="checked" id="__tabbed_22_1" name="__tabbed_22" type="radio" /><div class="tabbed-labels"><label for="__tabbed_22_1">category-edit.component.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code>    <span class="p">...</span>
     <span class="nx">ngOnInit</span><span class="p">()</span><span class="o">:</span> <span class="ow">void</span> <span class="p">{</span>
       <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">category</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
@@ -1681,6 +1746,7 @@ Vamos a implementar funcionalidad sobre el icono <code>editar</code>, tendremos 
 </code></pre></div>
 </div>
 </div>
+</div>
 <div class="admonition tip">
 <p class="admonition-title">Cuidado</p>
 <p>Hay que tener mucho cuidado con el binding de los objetos. Hay veces que al modificar un objeto NO queremos que se modifique en todas sus instancias y tenemos que poner especial cuidado en esos aspectos.</p>
@@ -1691,7 +1757,9 @@ Vamos a implementar funcionalidad sobre el icono <code>editar</code>, tendremos 
 <div class="highlight"><pre><span></span><code>ng generate component core/dialog-confirmation
 </code></pre></div>
 <p>E implementamos el código que queremos que tenga el componente. Al ser un componente genérico vamos a aprovechar y leeremos las variables que le pasemos en <code>data</code>.</p>
-<div class="tabbed-set" data-tabs="23:3"><input checked="checked" id="__tabbed_23_1" name="__tabbed_23" type="radio" /><label for="__tabbed_23_1">dialog-confirmation.component.html</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="23:3"><input checked="checked" id="__tabbed_23_1" name="__tabbed_23" type="radio" /><input id="__tabbed_23_2" name="__tabbed_23" type="radio" /><input id="__tabbed_23_3" name="__tabbed_23" type="radio" /><div class="tabbed-labels"><label for="__tabbed_23_1">dialog-confirmation.component.html</label><label for="__tabbed_23_2">dialog-confirmation.component.scss</label><label for="__tabbed_23_3">dialog-confirmation.component.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;container&quot;</span><span class="p">&gt;</span>
     <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>{{title}}<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
     <span class="p">&lt;</span><span class="nt">div</span> <span class="err">[</span><span class="na">innerHTML</span><span class="err">]=&quot;</span><span class="na">description</span><span class="err">&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;description&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
@@ -1703,7 +1771,7 @@ Vamos a implementar funcionalidad sobre el icono <code>editar</code>, tendremos 
 <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>    
 </code></pre></div>
 </div>
-<input id="__tabbed_23_2" name="__tabbed_23" type="radio" /><label for="__tabbed_23_2">dialog-confirmation.component.scss</label><div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="p">.</span><span class="nc">container</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="k">min-width</span><span class="p">:</span><span class="w"> </span><span class="mi">350</span><span class="kt">px</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="k">max-width</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="kt">px</span><span class="p">;</span><span class="w"></span>
@@ -1723,7 +1791,7 @@ Vamos a implementar funcionalidad sobre el icono <code>editar</code>, tendremos 
 <span class="err">}</span><span class="w">    </span>
 </code></pre></div>
 </div>
-<input id="__tabbed_23_3" name="__tabbed_23" type="radio" /><label for="__tabbed_23_3">dialog-confirmation.component.ts</label><div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Component</span><span class="p">,</span> <span class="nx">OnInit</span><span class="p">,</span> <span class="nx">Inject</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">MatDialogRef</span><span class="p">,</span> <span class="nx">MAT_DIALOG_DATA</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/material/dialog&#39;</span><span class="p">;</span>
 
@@ -1758,6 +1826,7 @@ Vamos a implementar funcionalidad sobre el icono <code>editar</code>, tendremos 
 </code></pre></div>
 </div>
 </div>
+</div>
 <div class="admonition info">
 <p class="admonition-title">Recuerda</p>
 <p>Recuerda que los componentes utilizados en el diálogo de confirmación se deben añadir al módulo padre al que pertenecen, en este caso a <code>core.module.ts</code>
@@ -1778,7 +1847,9 @@ providers: [
 </code></pre></div></p>
 </div>
 <p>Ya por último, una vez tenemos el componente genérico de dialogo, vamos a utilizarlo en nuestro listado al pulsar el botón eliminar:</p>
-<div class="tabbed-set" data-tabs="24:2"><input checked="checked" id="__tabbed_24_1" name="__tabbed_24" type="radio" /><label for="__tabbed_24_1">category-list.component.html</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="24:2"><input checked="checked" id="__tabbed_24_1" name="__tabbed_24" type="radio" /><input id="__tabbed_24_2" name="__tabbed_24" type="radio" /><div class="tabbed-labels"><label for="__tabbed_24_1">category-list.component.html</label><label for="__tabbed_24_2">category-list.component.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code>    ...
     <span class="p">&lt;</span><span class="nt">ng-container</span> <span class="na">matColumnDef</span><span class="o">=</span><span class="s">&quot;action&quot;</span><span class="p">&gt;</span>
         <span class="p">&lt;</span><span class="nt">mat-header-cell</span> <span class="err">*</span><span class="na">matHeaderCellDef</span><span class="p">&gt;&lt;/</span><span class="nt">mat-header-cell</span><span class="p">&gt;</span>
@@ -1794,7 +1865,7 @@ providers: [
     ...
 </code></pre></div>
 </div>
-<input id="__tabbed_24_2" name="__tabbed_24" type="radio" /><label for="__tabbed_24_2">category-list.component.ts</label><div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code>  <span class="p">...</span>
 <span class="hll">  <span class="nx">deleteCategory</span><span class="p">(</span><span class="nx">category</span>: <span class="kt">Category</span><span class="p">)</span> <span class="p">{</span>    
 </span><span class="hll">    <span class="kd">const</span> <span class="nx">dialogRef</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">dialog</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="nx">DialogConfirmationComponent</span><span class="p">,</span> <span class="p">{</span>
@@ -1811,6 +1882,7 @@ providers: [
 </span><span class="hll">  <span class="p">}</span>  
 </span>  <span class="p">...</span>    
 </code></pre></div>
+</div>
 </div>
 </div>
 <p>Aquí también hemos realizado la llamada a <code>categoryService</code>, aunque no se realice ninguna acción, pero así lo dejamos listo para enlazarlo.</p>
