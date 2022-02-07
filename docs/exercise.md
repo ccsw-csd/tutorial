@@ -76,8 +76,9 @@ Las validaciones son sencillas aunque laboriosas:
 Para empezar te daré unos consejos:
 
 - Recuerda crear la tabla de la BBDD y sus datos
-- Intenta primero hacer el listado paginado sin filtros, en el orden que más te guste: Angular o Springboot.
+- Intenta primero hacer el listado paginado sin filtros, en el orden que más te guste: Angular o Springboot. Recuerda que se trata de un listado paginado, así que deberás utilizar el obtejo `Page`.
 - Completa el listado conectando ambas capas.
-- Ahora implementa los filtros, presta atención al filtro de fecha, que es el más complejo.
+- Ahora implementa los filtros, presta atención al filtro de fecha, es el más complejo.
+- Para la paginación filtrada solo tienes que mezclar los conceptos que hemos visto en los puntos del tutorial anteriores y revisar [Baeldung](https://www.baeldung.com/spring-data-jpa-query) por si tienes dudas
 - Implementa la pantalla de alta de préstamo, sin ninguna validación.
 - Cuando ya te funcione, intenta ir añadiendo una a una las validaciones. Algunas de ellas pueden hacerse en frontend, mientras que otras deberán validarse en backend
