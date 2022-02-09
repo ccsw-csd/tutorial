@@ -82,3 +82,9 @@ Para empezar te daré unos consejos:
 - Para la paginación filtrada solo tienes que mezclar los conceptos que hemos visto en los puntos del tutorial anteriores y revisar [Baeldung](https://www.baeldung.com/spring-data-jpa-query) por si tienes dudas
 - Implementa la pantalla de alta de préstamo, sin ninguna validación.
 - Cuando ya te funcione, intenta ir añadiendo una a una las validaciones. Algunas de ellas pueden hacerse en frontend, mientras que otras deberán validarse en backend
+
+
+
+## ¿Ya has terminado?
+
+Si has llegado a este punto es porque ya tienes terminado el tutorial. Por favor no te olvides de subir los proyectos a algún repositorio Github propio (puede revisar el anexo [Tutorial básico de Git](appendix/git.md)) y avísanos para que podamos echarle un ojo y darte sugerencias y feedback :relaxed:.
