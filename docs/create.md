@@ -24,7 +24,7 @@ Para crear un proyecto de Angular, es necesario tener instalado el CLI de Angula
 Lo primero es crear un proyecto desde la consola mediante la herramienta Angular CLI.
 Para ello abrimos una consola de msdos donde tengamos instalado y enlazado Angular CLI, nos situamos en el directorio donde vamos a crear el proyecto y ejecutamos:
 
-    ng new tutorial
+    ng new tutorial --strict=false
 
 Nos realizará varias preguntas.
 
@@ -55,13 +55,6 @@ Y ya podemos empezar a trabajar con Angular.
 !!! tip "Comandos de Angular CLI"
     Si necesitas más información sobre los comandos que ofrece Angular CLI para poder crear aplicaciones, componentes, servicios, etc. los tienes disponibles en:
     [https://angular.io/cli#command-overview](https://angular.io/cli#command-overview)
-
-
-### Configurar el proyecto
-
-!!! tip "Strict mode off"
-    Este tutorial está creado y probado con una versión anterior al Angular actual, donde por defecto no estaba activado el modo estricto de TypeScript. Si sigues tal cual las instrucciones de las siguientes secciones te dará fallo por no estar codificado en modo estricto. Lo recomendable para poder hacer el tutorial sin problemas es desactivar este modo, siguiendo las instrucciones que se indican en [este enlace](https://stackoverflow.com/a/64344186/7475335).
-
 
 
 ## ** Creación de proyecto Springboot **
