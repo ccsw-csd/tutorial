@@ -843,8 +843,7 @@ También crearemos una clase `AuthorController` dentro del package de `com.capge
 
     import com.capgemini.ccsw.tutorial.author.model.AuthorDto;
     import com.capgemini.ccsw.tutorial.author.model.AuthorSearchDto;
-    import com.capgemini.ccsw.tutorial.category.model.CategoryDto;
-
+    
     @SpringBootTest
     @Transactional
     public class AuthorTest {
@@ -932,7 +931,7 @@ También crearemos una clase `AuthorController` dentro del package de `com.capge
             String newAuthorName = "Nuevo Autor";
             long authorId = 3;
 
-            CategoryDto dto = new CategoryDto();
+            AuthorDto dto = new AuthorDto();
             dto.setName(newAuthorName);
 
             authorController.save(authorId, dto);
@@ -959,7 +958,7 @@ También crearemos una clase `AuthorController` dentro del package de `com.capge
             String newAuthorName = "Nuevo Autor";
             long authorId = TOTAL_AUTORS + 1;
 
-            CategoryDto dto = new CategoryDto();
+            AuthorDto dto = new AuthorDto();
             dto.setName(newAuthorName);
 
             assertThrows(Exception.class, () -> authorController.save(authorId, dto));

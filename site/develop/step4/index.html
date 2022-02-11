@@ -1597,7 +1597,6 @@ ng generate service author/author
 
 <span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.author.model.AuthorDto</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.author.model.AuthorSearchDto</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.category.model.CategoryDto</span><span class="p">;</span>
 
 <span class="nd">@SpringBootTest</span>
 <span class="nd">@Transactional</span>
@@ -1686,7 +1685,7 @@ ng generate service author/author
         <span class="n">String</span> <span class="n">newAuthorName</span> <span class="o">=</span> <span class="s">&quot;Nuevo Autor&quot;</span><span class="p">;</span>
         <span class="kt">long</span> <span class="n">authorId</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
 
-        <span class="n">CategoryDto</span> <span class="n">dto</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CategoryDto</span><span class="p">();</span>
+        <span class="n">AuthorDto</span> <span class="n">dto</span> <span class="o">=</span> <span class="k">new</span> <span class="n">AuthorDto</span><span class="p">();</span>
         <span class="n">dto</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="n">newAuthorName</span><span class="p">);</span>
 
         <span class="n">authorController</span><span class="p">.</span><span class="na">save</span><span class="p">(</span><span class="n">authorId</span><span class="p">,</span> <span class="n">dto</span><span class="p">);</span>
@@ -1713,7 +1712,7 @@ ng generate service author/author
         <span class="n">String</span> <span class="n">newAuthorName</span> <span class="o">=</span> <span class="s">&quot;Nuevo Autor&quot;</span><span class="p">;</span>
         <span class="kt">long</span> <span class="n">authorId</span> <span class="o">=</span> <span class="n">TOTAL_AUTORS</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
 
-        <span class="n">CategoryDto</span> <span class="n">dto</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CategoryDto</span><span class="p">();</span>
+        <span class="n">AuthorDto</span> <span class="n">dto</span> <span class="o">=</span> <span class="k">new</span> <span class="n">AuthorDto</span><span class="p">();</span>
         <span class="n">dto</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="n">newAuthorName</span><span class="p">);</span>
 
         <span class="n">assertThrows</span><span class="p">(</span><span class="n">Exception</span><span class="p">.</span><span class="na">class</span><span class="p">,</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="n">authorController</span><span class="p">.</span><span class="na">save</span><span class="p">(</span><span class="n">authorId</span><span class="p">,</span> <span class="n">dto</span><span class="p">));</span>
