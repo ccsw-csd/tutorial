@@ -873,7 +873,7 @@ También crearemos una clase `AuthorController` dentro del package de `com.capge
         }
 
         @Test
-        public void findSecondPageWithFiveSizeShouldReturnLastTwoResults() {
+        public void findSecondPageWithFiveSizeShouldReturnLastResult() {
 
             int pageSize = 5;
             int elementsCount = TOTAL_AUTORS - pageSize;
@@ -924,15 +924,17 @@ También crearemos una clase `AuthorController` dentro del package de `com.capge
         }
 
         @Test
-        public void modifyWithExistIdShouldModifyCategory() {
+        public void modifyWithExistIdShouldModifyAuthor() {
 
             assertNotNull(authorController);
 
             String newAuthorName = "Nuevo Autor";
+            String newNationality = "Nueva Nacionalidad";
             long authorId = 3;
 
             AuthorDto dto = new AuthorDto();
             dto.setName(newAuthorName);
+            dto.setNationality(newNationality);
 
             authorController.save(authorId, dto);
 
@@ -947,7 +949,8 @@ También crearemos una clase `AuthorController` dentro del package de `com.capge
             AuthorDto author = resultPage.getContent().stream().filter(item -> item.getId().equals(authorId)).findFirst().orElse(null);
             assertNotNull(author);
             assertEquals(newAuthorName, author.getName());
-
+            assertEquals(newNationality, author.getNationality());
+            
         }
 
         @Test

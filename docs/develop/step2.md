@@ -9,9 +9,7 @@ Durante todo el tutorial vamos a intentar separar completamente la implementaci�
 !!! success "Antes de empezar"
     Quiero hacer hincapié en Springboot tiene una documentación muy extensa y completa, así que te recomiendo que hagas uso de ella cuando tengas cualquier duda. Tanto la propia web de [Spring](https://spring.io/projects/spring-boot) como en el portal de tutoriales de [Baeldung](https://www.baeldung.com/spring-tutorial) puedes buscar casi cualquier ejemplo que necesites.
 
-Si has seguido el tutorial, en la creación del proyecto tenías la posibilidad de crear un proyecto Springboot simple o descargarte una plantilla ya creada. 
-
-@TODO RELLENAR ESTO
+Si has seguido el tutorial, en la creación del proyecto tenías la posibilidad de crear un proyecto Springboot simple o descargarte una plantilla ya creada. De cualquiera de las dos maneras, tendrás la misma estructura que veremos a continuación.
 
 
 ## Estructurar el código
@@ -47,7 +45,6 @@ Vamos a crear una clase `CategoryController.java` dentro del package `com.capgem
 
     import java.util.List;
 
-    import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.web.bind.annotation.RequestMapping;
     import org.springframework.web.bind.annotation.RequestMethod;
     import org.springframework.web.bind.annotation.RestController;

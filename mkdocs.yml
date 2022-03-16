@@ -16,6 +16,7 @@ nav:
   - Anexo. Tutorial básico de Git: appendix/git.md
   - Anexo. Detalle REST: appendix/rest.md
   - Anexo. TDD: appendix/tdd.md
+  - Anexo. Funcionamiento JPA: appendix/jpa.md
   - Anexo. Validaciones (TBC): develop/step6.md
   - Anexo. Crear Login (TBC): develop/step7.md
   - Anexo. Estilos (TBC): appendix/styles.md

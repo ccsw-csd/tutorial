@@ -1958,6 +1958,11 @@ Nos sirve para insertar un `Game` nuevo (si no tienen el id informado) o para ac
 ![step5-java3](../assets/images/step5-java3.png)
 
 
+!!! tip "Rendimiento en las consultas JPA"
+    En este punto te recomiendo que visites el [Anexo. Funcionamiento JPA](../appendix/jpa.md) para conocer un poco más como funciona por dentro JPA y algún pequeño truco que puede mejorar el rendimiento.
+
+
+
 ### Implementar listado Autores
 
 Antes de poder conectar front con back, si recuerdas, en la edición de un `Game`, nos hacía falta un listado de `Author` y un listado de `Category`. El segundo ya lo tenemos ya que lo reutilizaremos del listado de categorías que implementamos. Pero el primero no lo tenemos, porque en la pantalla que hicimos, se mostraban de forma paginada. 
