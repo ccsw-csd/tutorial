@@ -13,7 +13,7 @@
     
     
       
-        <title>Anexo. Funcionamiento JPA - Tutorial Springboot - Angular</title>
+        <title>Anexo. Spring Data (JPA) - Tutorial Springboot - Angular</title>
       
     
     
@@ -60,7 +60,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#funcionamiento-spring-jpa" class="md-skip">
+        <a href="#funcionamiento-spring-data" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -93,7 +93,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Anexo. Funcionamiento JPA
+              Anexo. Spring Data (JPA)
             
           </span>
         </div>
@@ -414,12 +414,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          Anexo. Funcionamiento JPA
+          Anexo. Spring Data (JPA)
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        Anexo. Funcionamiento JPA
+        Anexo. Spring Data (JPA)
       </a>
       
         
@@ -438,8 +438,8 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#functionamiento-basico" class="md-nav__link">
-    Functionamiento básico
+  <a href="#funcionamiento-basico" class="md-nav__link">
+    Funcionamiento básico
   </a>
   
 </li>
@@ -473,8 +473,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#repository-custom" class="md-nav__link">
-    Repository Custom
+  <a href="#specifications" class="md-nav__link">
+    Specifications
   </a>
   
 </li>
@@ -574,8 +574,8 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#functionamiento-basico" class="md-nav__link">
-    Functionamiento básico
+  <a href="#funcionamiento-basico" class="md-nav__link">
+    Funcionamiento básico
   </a>
   
 </li>
@@ -609,8 +609,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#repository-custom" class="md-nav__link">
-    Repository Custom
+  <a href="#specifications" class="md-nav__link">
+    Specifications
   </a>
   
 </li>
@@ -628,41 +628,37 @@
               
                 
 
-<h1 id="funcionamiento-spring-jpa">Funcionamiento Spring JPA</h1>
-<div class="admonition warning">
-<p class="admonition-title">Atención</p>
-<p>Esta sección está incompleta, faltan algunos puntos por desarrollar. Puedes leer los puntos que ya estén cerrados pero te recomendamos volver a visitarla una vez esté terminada por completo.</p>
-</div>
-<p>Este anexo no pretende explicar el funcionamiento interno de Spring JPA, simplemente conocer un poco como utilizarlo y algunos pequeños tips que pueden ser interesantes.</p>
-<h2 id="functionamiento-basico">Functionamiento básico</h2>
-<p>Lo primero que deberías tener claro, es que hagas lo que hagas, al final todo termina lanzando una query nativa sobre la BBDD. Da igual que uses cualquier tipo de <em>acelerador</em> (luego veremos alguno), ya que al final Spring JPA termina convirtiendo lo que hayas programado en una query nativa.</p>
-<p>Cuanta más información le proporciones a Spring JPA, tendrás más control sobre la query final, pero más dificil será de mantener. Lo mejor es utilizar, siempre que se pueda, todos los automatismos y automagias posibles y dejar que Spring haga su faena. Habrá ocasiones en que esto no nos sirva, en ese momento tendremos que decidir si queremos bajar el nivel de implementación o queremos utilizar otra alternativa como procesos por streams.</p>
+<h1 id="funcionamiento-spring-data">Funcionamiento Spring Data</h1>
+<p>Este anexo no pretende explicar el funcionamiento interno de Spring Data, simplemente conocer un poco como utilizarlo y algunos pequeños tips que pueden ser interesantes.</p>
+<h2 id="funcionamiento-basico">Funcionamiento básico</h2>
+<p>Lo primero que deberías tener claro, es que hagas lo que hagas, al final todo termina lanzando una query nativa sobre la BBDD. Da igual que uses cualquier tipo de <em>acelerador</em> (luego veremos alguno), ya que al final Spring Data termina convirtiendo lo que hayas programado en una query nativa.</p>
+<p>Cuanta más información le proporciones a Spring Data, tendrás más control sobre la query final, pero más dificil será de mantener. Lo mejor es utilizar, siempre que se pueda, todos los automatismos y automagias posibles y dejar que Spring haga su faena. Habrá ocasiones en que esto no nos sirva, en ese momento tendremos que decidir si queremos bajar el nivel de implementación o queremos utilizar otra alternativa como procesos por streams.</p>
 <h2 id="derived-query-methods">Derived Query Methods</h2>
-<p>Para la realización de consultas a la base de datos, Spring JPA nos ofrece un sencillo mecanismo que consiste en crear definiciones de métodos con una sintaxis especifica, para luego traducirlas automáticamente a consultas nativas, por parte de Spring JPA.</p>
-<p>Esto es muy útil ya que convierte a la aplicación en agnósticos de la tecnología de BBDD utilizada y podemos migrar con facilidad entre las muchas soluciones disponibles en el mercado, delegando esta tarea en Spring.</p>
-<p>Esta es la opción mas indicada en la mayoría de los casos, siempre que puedas deberías utilizar esta forma de realizar las consultas. Como parte negativa, en algunos casos en consultas más complejas la definición de los métodos puede extenderse demasiado dificultando la lectura del código.</p>
+<p>Para la realización de consultas a la base de datos, Spring Data nos ofrece un sencillo mecanismo que consiste en crear definiciones de métodos con una sintaxis especifica, para luego traducirlas automáticamente a consultas nativas, por parte de Spring Data.</p>
+<p>Esto es muy útil, ya que convierte a la aplicación en agnósticos de la tecnología de BBDD utilizada y podemos migrar con facilidad entre las muchas soluciones disponibles en el mercado, delegando esta tarea en Spring.</p>
+<p>Esta es la opción más indicada en la mayoría de los casos, siempre que puedas deberías utilizar esta forma de realizar las consultas. Como parte negativa, en algunos casos en consultas más complejas la definición de los métodos puede extenderse demasiado dificultando la lectura del código.</p>
 <p>De esto tenemos algún ejemplo por el tutorial, en el repositorio de <a href="./step5/#repository">GameRepository</a>.</p>
 <p>Siguiendo el ejemplo del tutorial, si tuvieramos que recuperar los <code>Game</code> por el nombre del juego, se podría crear un método en el <code>GameRepository</code> de esta forma:</p>
 <div class="highlight"><pre><span></span><code><span class="n">List</span><span class="o">&lt;</span><span class="n">Game</span><span class="o">&gt;</span> <span class="nf">findByName</span><span class="p">(</span><span class="n">String</span> <span class="n">name</span><span class="p">);</span>
 </code></pre></div>
-<p>Spring JPA entendería que quieres recuperar un listado de <code>Game</code> que están filtrados por su propiedad <code>Name</code> y generaría la consulta SQL de forma automática, sin tener que implementar nada.</p>
-<p>Se pueden contruir muchos métodos diferentes, te recomiendo que leas un pequeño <a href="https://www.baeldung.com/spring-data-derived-queries">tutorial de Baeldung</a> y profundices con la <a href="https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods.query-creation">documentación oficial</a>donde podrás ver todas las opciones.</p>
+<p>Spring Data entendería que quieres recuperar un listado de <code>Game</code> que están filtrados por su propiedad <code>Name</code> y generaría la consulta SQL de forma automática, sin tener que implementar nada.</p>
+<p>Se pueden contruir muchos métodos diferentes, te recomiendo que leas un pequeño <a href="https://www.baeldung.com/spring-data-derived-queries">tutorial de Baeldung</a> y profundices con la <a href="https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods.query-creation">documentación oficial</a> donde podrás ver todas las opciones.</p>
 <h2 id="anotacion-query">Anotación @Query</h2>
 <p>Otra forma de realizar consultas, esta vez menos automática y más cercana a SQL, es la anotación @Query.</p>
 <p>Existen dos opciones a la hora de usar la anotación <code>@Query</code>. Esta anotación ya la hemos usado en el tutorial, dentro del <a href="../../develop/step5/#repository">GameRepository</a>.</p>
-<p>En primer lugar tenemos las consultas JPQL. Estas guardan un parecido con el lenguaje SQL pero al igual que en el caso anterior, son traducidas por Spring JPA a la consulta final nativa. Su uso no está recomendado ya que estamos añadiendo un nivel de concreción y por tanto estamos aumentando la complejidad del código. Aun así, es otra forma de generar consultas.</p>
+<p>En primer lugar tenemos las consultas JPQL. Estas guardan un parecido con el lenguaje SQL pero al igual que en el caso anterior, son traducidas por Spring Data a la consulta final nativa. Su uso no está recomendado ya que estamos añadiendo un nivel de concreción y por tanto estamos aumentando la complejidad del código. Aun así, es otra forma de generar consultas.</p>
 <p>Por otra parte, también es posible generar consultas nativas directamente dentro de esta anotación interactuando de forma directa con la base de datos. Esta práctica es altamente desaconsejable ya que crea acoplamientos con la tecnología de la BBDD utilizada y es una fuente de errores.</p>
 <p>Puedes ver más información de esta anotación desde este pequeño <a href="https://www.baeldung.com/spring-data-jpa-query">tutorial de Baeldung</a>.</p>
 <h2 id="acelerando-las-consultas">Acelerando las consultas</h2>
 <p>En muchas ocasiones necesitamos obtener información que no está en una única tabla por motivos de diseño de la base de datos. Debemos plasmar esta casuística con cuidado a nuestro modelo relacional para obtener resultados óptimos en cuanto al rendimiento.</p>
 <p>Para ilustrar el caso vamos a recuperar los objetos utilizados en el tutorial <code>Author</code>, <code>Gategory</code> y <code>Game</code>.
 Si recuerdas, tenemos que un <code>Game</code> tiene asociado un <code>Author</code> y tiene asociada una <code>Gategory</code>.</p>
-<p>Cuando utilizamos el método de filtrado <code>find</code> que construimos en el <code>GameRepository</code>, vemos que Spring JPA traduce la <code>@Query</code> que habíamos diseñado en una query SQL para recuperar los juegos.</p>
+<p>Cuando utilizamos el método de filtrado <code>find</code> que construimos en el <code>GameRepository</code>, vemos que Spring Data traduce la <code>@Query</code> que habíamos diseñado en una query SQL para recuperar los juegos.</p>
 <div class="highlight"><pre><span></span><code><span class="nd">@Query</span><span class="p">(</span><span class="s">&quot;select g from Game g where (:title is null or g.title like &#39;%&#39;||:title||&#39;%&#39;) and (:category is null or g.category.id = :category)&quot;</span><span class="p">)</span>
 <span class="n">List</span><span class="o">&lt;</span><span class="n">Game</span><span class="o">&gt;</span> <span class="nf">find</span><span class="p">(</span><span class="nd">@Param</span><span class="p">(</span><span class="s">&quot;title&quot;</span><span class="p">)</span> <span class="n">String</span> <span class="n">title</span><span class="p">,</span> <span class="nd">@Param</span><span class="p">(</span><span class="s">&quot;category&quot;</span><span class="p">)</span> <span class="n">Long</span> <span class="n">category</span><span class="p">);</span>
 </code></pre></div>
-<p>Esta <code>@Query</code> es la que utiliza Spring JPA para traducir las propiedades a objetos de BBDD y mapear los resultados a objetos Java.
-Si tenemos activada la property <code>spring.jpa.show-sql=true</code> podremos ver las queries que está generando Spring JPA. El resultado es el siguiente.</p>
+<p>Esta <code>@Query</code> es la que utiliza Spring Data para traducir las propiedades a objetos de BBDD y mapear los resultados a objetos Java.
+Si tenemos activada la property <code>spring.jpa.show-sql=true</code> podremos ver las queries que está generando Spring Data. El resultado es el siguiente.</p>
 <div class="highlight"><pre><span></span><code><span class="n">Hibernate</span><span class="p">:</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="n">game0_</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">id1_2_</span><span class="p">,</span><span class="w"> </span><span class="n">game0_</span><span class="p">.</span><span class="n">age</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">age2_2_</span><span class="p">,</span><span class="w"> </span><span class="n">game0_</span><span class="p">.</span><span class="n">author_id</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">author_i4_2_</span><span class="p">,</span><span class="w"> </span><span class="n">game0_</span><span class="p">.</span><span class="n">category_id</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">category5_2_</span><span class="p">,</span><span class="w"> </span><span class="n">game0_</span><span class="p">.</span><span class="n">title</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">title3_2_</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">game</span><span class="w"> </span><span class="n">game0_</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="p">(</span><span class="o">?</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">null</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="n">game0_</span><span class="p">.</span><span class="n">title</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;%&#39;</span><span class="o">||?||</span><span class="s1">&#39;%&#39;</span><span class="p">))</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="p">(</span><span class="o">?</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">null</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="n">game0_</span><span class="p">.</span><span class="n">category_id</span><span class="o">=?</span><span class="p">)</span><span class="w"></span>
 <span class="n">Hibernate</span><span class="p">:</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="n">author0_</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">id1_0_0_</span><span class="p">,</span><span class="w"> </span><span class="n">author0_</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">name2_0_0_</span><span class="p">,</span><span class="w"> </span><span class="n">author0_</span><span class="p">.</span><span class="n">nationality</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">national3_0_0_</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">author</span><span class="w"> </span><span class="n">author0_</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">author0_</span><span class="p">.</span><span class="n">id</span><span class="o">=?</span><span class="w"></span>
 <span class="n">Hibernate</span><span class="p">:</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="n">category0_</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">id1_1_0_</span><span class="p">,</span><span class="w"> </span><span class="n">category0_</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">name2_1_0_</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">category</span><span class="w"> </span><span class="n">category0_</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">category0_</span><span class="p">.</span><span class="n">id</span><span class="o">=?</span><span class="w"></span>
@@ -672,29 +668,29 @@ Si tenemos activada la property <code>spring.jpa.show-sql=true</code> podremos v
 <span class="n">Hibernate</span><span class="p">:</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="n">author0_</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">id1_0_0_</span><span class="p">,</span><span class="w"> </span><span class="n">author0_</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">name2_0_0_</span><span class="p">,</span><span class="w"> </span><span class="n">author0_</span><span class="p">.</span><span class="n">nationality</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">national3_0_0_</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">author</span><span class="w"> </span><span class="n">author0_</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">author0_</span><span class="p">.</span><span class="n">id</span><span class="o">=?</span><span class="w"></span>
 <span class="n">Hibernate</span><span class="p">:</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="n">author0_</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">id1_0_0_</span><span class="p">,</span><span class="w"> </span><span class="n">author0_</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">name2_0_0_</span><span class="p">,</span><span class="w"> </span><span class="n">author0_</span><span class="p">.</span><span class="n">nationality</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">national3_0_0_</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">author</span><span class="w"> </span><span class="n">author0_</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">author0_</span><span class="p">.</span><span class="n">id</span><span class="o">=?</span><span class="w"></span>
 </code></pre></div>
-<p>Si te fijas ha generado una query SQL para filtrar los <code>Game</code>, pero luego cuando ha intentado construir los objetos Java, ha tenido que lanzar una serie de queries para recuperar los diferentes <code>Author</code> y <code>Category</code> a través de sus <code>id</code>. Obviamente Spring JPA es muy lista y cachea los resultados obtenidos para no tener que recuperarlos n veces, pero aun así, lanza unas cuantas consultas. Esto penaliza el rendimiento de nuestra operación ya que tiene que lanzar n queries a BBDD que, aunque son muy óptimas, incrementan unos milisegundos el tiempo total.</p>
-<p>Para evitar esta circunstancia, disponemos de la anotación denominada <code>@EnitityGraph</code> la cual proporciona directrices a Spring JPA sobre la forma en la que deseamos realizar la consulta, permitiendo que realice agrupaciones y uniones de tablas en una única query que, aun siendo mas compleja, en muchos casos el rendimiento es mucho mejor que realizar múltiples interacciones con la BBDD.</p>
+<p>Si te fijas ha generado una query SQL para filtrar los <code>Game</code>, pero luego cuando ha intentado construir los objetos Java, ha tenido que lanzar una serie de queries para recuperar los diferentes <code>Author</code> y <code>Category</code> a través de sus <code>id</code>. Obviamente Spring Data es muy lista y cachea los resultados obtenidos para no tener que recuperarlos n veces, pero aun así, lanza unas cuantas consultas. Esto penaliza el rendimiento de nuestra operación, ya que tiene que lanzar n queries a BBDD que, aunque son muy óptimas, incrementan unos milisegundos el tiempo total.</p>
+<p>Para evitar esta circunstancia, disponemos de la anotación denominada <code>@EnitityGraph</code> la cual proporciona directrices a Spring Data sobre la forma en la que deseamos realizar la consulta, permitiendo que realice agrupaciones y uniones de tablas en una única query que, aun siendo mas compleja, en muchos casos el rendimiento es mucho mejor que realizar múltiples interacciones con la BBDD.</p>
 <p>Siguiendo el ejemplo anterior podríamos utilizar la anotación de esta forma:</p>
 <div class="highlight"><pre><span></span><code><span class="nd">@Query</span><span class="p">(</span><span class="s">&quot;select g from Game g where (:title is null or g.title like &#39;%&#39;||:title||&#39;%&#39;) and (:category is null or g.category.id = :category)&quot;</span><span class="p">)</span>
 <span class="hll"><span class="nd">@EntityGraph</span><span class="p">(</span><span class="n">attributePaths</span> <span class="o">=</span> <span class="p">{</span><span class="s">&quot;category&quot;</span><span class="p">,</span> <span class="s">&quot;author&quot;</span><span class="p">})</span>
 </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Game</span><span class="o">&gt;</span> <span class="nf">find</span><span class="p">(</span><span class="nd">@Param</span><span class="p">(</span><span class="s">&quot;title&quot;</span><span class="p">)</span> <span class="n">String</span> <span class="n">title</span><span class="p">,</span> <span class="nd">@Param</span><span class="p">(</span><span class="s">&quot;category&quot;</span><span class="p">)</span> <span class="n">Long</span> <span class="n">category</span><span class="p">);</span>
 </code></pre></div>
-<p>Donde le estamos diciendo a Spring JPA que cuando realice la query, haga el cruce con las propiedades <code>category</code> y <code>author</code>, que a su vez son entidades y por tanto mapean dos tablas de BBDD.
+<p>Donde le estamos diciendo a Spring Data que cuando realice la query, haga el cruce con las propiedades <code>category</code> y <code>author</code>, que a su vez son entidades y por tanto mapean dos tablas de BBDD.
 El resultado es el siguiente:</p>
 <div class="highlight"><pre><span></span><code><span class="n">Hibernate</span><span class="p">:</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="n">game0_</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">id1_2_0_</span><span class="p">,</span><span class="w"> </span><span class="n">category1_</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">id1_1_1_</span><span class="p">,</span><span class="w"> </span><span class="n">author2_</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">id1_0_2_</span><span class="p">,</span><span class="w"> </span><span class="n">game0_</span><span class="p">.</span><span class="n">age</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">age2_2_0_</span><span class="p">,</span><span class="w"> </span><span class="n">game0_</span><span class="p">.</span><span class="n">author_id</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">author_i4_2_0_</span><span class="p">,</span><span class="w"> </span><span class="n">game0_</span><span class="p">.</span><span class="n">category_id</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">category5_2_0_</span><span class="p">,</span><span class="w"> </span><span class="n">game0_</span><span class="p">.</span><span class="n">title</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">title3_2_0_</span><span class="p">,</span><span class="w"> </span><span class="n">category1_</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">name2_1_1_</span><span class="p">,</span><span class="w"> </span><span class="n">author2_</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">name2_0_2_</span><span class="p">,</span><span class="w"> </span><span class="n">author2_</span><span class="p">.</span><span class="n">nationality</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">national3_0_2_</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">game</span><span class="w"> </span><span class="n">game0_</span><span class="w"> </span><span class="k">left</span><span class="w"> </span><span class="k">outer</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">category</span><span class="w"> </span><span class="n">category1_</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">game0_</span><span class="p">.</span><span class="n">category_id</span><span class="o">=</span><span class="n">category1_</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="k">left</span><span class="w"> </span><span class="k">outer</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">author</span><span class="w"> </span><span class="n">author2_</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">game0_</span><span class="p">.</span><span class="n">author_id</span><span class="o">=</span><span class="n">author2_</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="p">(</span><span class="o">?</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">null</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="n">game0_</span><span class="p">.</span><span class="n">title</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;%&#39;</span><span class="o">||?||</span><span class="s1">&#39;%&#39;</span><span class="p">))</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="p">(</span><span class="o">?</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">null</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="n">game0_</span><span class="p">.</span><span class="n">category_id</span><span class="o">=?</span><span class="p">)</span><span class="w"></span>
 </code></pre></div>
-<p>Una única query, que es más compleja que la anterior ya que hace dos cruces con tablas de BBDD, pero que nos evita tener que lanzar n queries diferentes para recuperar <code>Author</code> y <code>Category</code>.</p>
+<p>Una única query, que es más compleja que la anterior, ya que hace dos cruces con tablas de BBDD, pero que nos evita tener que lanzar n queries diferentes para recuperar <code>Author</code> y <code>Category</code>.</p>
 <p>Generalmente, el uso de <code>@EntityGraph</code> acelera mucho los resultados y es muy recomendable utilizarlo para realizar los cruces inline. Se puede utilizar tanto con <code>@Query</code> como con <code>Derived Query Methods</code>. Puedes leer más información en este pequeño <a href="https://www.baeldung.com/jpa-entity-graph">tutorial de Baeldung</a>.</p>
 <h2 id="alternativa-de-streams">Alternativa de Streams</h2>
 <p>A partir de Java 8 disponemos de los Java Streams. Se trata de una herramienta que nos permite multitud de opciones relativas tratamiento y trasformación de los datos manejados.</p>
 <p>En este apartado únicamente se menciona debido a que en muchas ocasiones cuando nos enfrentamos a consultas complejas, puede ser beneficioso evitar ofuscar las consultas y realizar las trasformaciones necesarias mediante los Streams.</p>
-<p>Un ejemplo de uso practico podría ser, evitar usar la cláusula <code>IN</code> de SQL en una determinada consulta que podría penalizar notablemente el rendimiento de las consultas. En vez de eso se podría utilizar el método de JAVA <code>filter</code> sobre el conjunto de elementos para obtener el mismo resultado.</p>
+<p>Un ejemplo de uso práctico podría ser, evitar usar la cláusula <code>IN</code> de SQL en una determinada consulta que podría penalizar notablemente el rendimiento de las consultas. En vez de eso se podría utilizar el método de JAVA <code>filter</code> sobre el conjunto de elementos para obtener el mismo resultado.</p>
 <p>Puedes leer más información en el <a href="https://www.baeldung.com/java-8-streams">tutorial de Baeldung</a>.</p>
-<h2 id="repository-custom">Repository Custom</h2>
-<div class="admonition warning">
-<p class="admonition-title">Atención</p>
-<p>Este punto falta por desarrollar.</p>
-</div>
+<h2 id="specifications">Specifications</h2>
+<p>En algunos casos puede ocurrir que con las herramientas descritas anteriormente no tengamos suficiente alcance, bien porque las definiciones de los métodos se complican y alargan demasiado o debido a que la consulta es demasiado genérica como para realizarlo de este modo.</p>
+<p>Para este caso se dispone de las Specifications que nos proveen de una forma de escribir consultas reutilizables mediante una API que ofrece una forma fluida de crear y combinar consultas complejas.</p>
+<p>Un ejemplo de caso de uso podría ser un CRUD de una determinada entidad que debe poder filtrar por todos los atributos de esta, donde el tipo de filtrado viene especificado en la propia consulta y no siempre es requerido. En este caso no podríamos construir una consulta basada en definir un determinado método ya no conocemos de ante mano que filtros ni que atributos vamos a recibir y deberemos recurrir al uso de las Specifications.</p>
+<p>Puedes leer más información en el <a href="https://www.baeldung.com/rest-api-search-language-spring-data-specifications">tutorial de Baeldung</a>.</p>
 
               
             </article>
