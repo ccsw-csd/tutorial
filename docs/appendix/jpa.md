@@ -1,80 +1,123 @@
-# Funcionamiento JPA
+# Funcionamiento Spring JPA
 
-Este anexo no pretende explicar el funcionamiento interno de JPA, simplemente conocer un poco como utilizarlo y algunos pequeños tips que pueden ser interesantes.
+!!! warning "Atención"
+	Esta sección está incompleta, faltan algunos puntos por desarrollar. Puedes leer los puntos que ya estén cerrados pero te recomendamos volver a visitarla una vez esté terminada por completo.
+
+
+Este anexo no pretende explicar el funcionamiento interno de Spring JPA, simplemente conocer un poco como utilizarlo y algunos pequeños tips que pueden ser interesantes.
 
 
 ## Functionamiento básico
 
 Lo primero que deberías tener claro, es que hagas lo que hagas, al final todo termina lanzando una query nativa sobre la BBDD. Da igual que uses cualquier tipo de *acelerador* (luego veremos alguno), ya que al final Spring JPA termina convirtiendo lo que hayas programado en una query nativa.
 
-Cuanta más información le proporciones a JPA, tendrás más control sobre la query final, pero más dificil será de mantener. Lo mejor es utilizar, siempre que se pueda, todos los automatismos y automagias posibles y dejar que Spring haga su faena. Habrá ocasiones en que esto no nos sirva, en ese momento tendremos que decidir si queremos bajar el nivel de implementación o queremos utilizar otra alternativa como procesos por streams.
+Cuanta más información le proporciones a Spring JPA, tendrás más control sobre la query final, pero más dificil será de mantener. Lo mejor es utilizar, siempre que se pueda, todos los automatismos y automagias posibles y dejar que Spring haga su faena. Habrá ocasiones en que esto no nos sirva, en ese momento tendremos que decidir si queremos bajar el nivel de implementación o queremos utilizar otra alternativa como procesos por streams.
 
 
 ## Derived Query Methods
 
-Para la realización de consultas a la base de datos, JPA nos ofrece un sencillo mecanismo el cual consiste en crear definiciones de métodos con una sintaxis especifica los cuales se traducen a consultas nativas por parte de JPA.
+Para la realización de consultas a la base de datos, Spring JPA nos ofrece un sencillo mecanismo que consiste en crear definiciones de métodos con una sintaxis especifica, para luego traducirlas automáticamente a consultas nativas, por parte de Spring JPA.
 
-Esto es muy útil ya nos convertimos en agnósticos de la tecnología de BBDD utilizada y podemos migrar con facilidad entre las muchas soluciones disponibles en el mercado, delegando esta tarea en Spring.
+Esto es muy útil ya que convierte a la aplicación en agnósticos de la tecnología de BBDD utilizada y podemos migrar con facilidad entre las muchas soluciones disponibles en el mercado, delegando esta tarea en Spring.
 
-Esta opción es la mas indicada en la mayoría de los casos, como parte negativa, en algunos casos en consultas más complejas la definición de los métodos puede extenderse demasiado dificultado la lectura del código.
+Esta es la opción mas indicada en la mayoría de los casos, siempre que puedas deberías utilizar esta forma de realizar las consultas. Como parte negativa, en algunos casos en consultas más complejas la definición de los métodos puede extenderse demasiado dificultando la lectura del código.
 
-Como ejemplo, si tenemos la entidad libro que tiene un atributo nombre (name), la consulta de libros por nombre quedaría en:
+De esto tenemos algún ejemplo por el tutorial, en el repositorio de [GameRepository](./step5/#repository).
 
-List < Book > findByName(String name)
+Siguiendo el ejemplo del tutorial, si tuvieramos que recuperar los `Game` por el nombre del juego, se podría crear un método en el `GameRepository` de esta forma:
 
+``` Java
+List<Game> findByName(String name);
+```
 
-[Link a Doc](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods.query-creation)
+Spring JPA entendería que quieres recuperar un listado de `Game` que están filtrados por su propiedad `Name` y generaría la consulta SQL de forma automática, sin tener que implementar nada.
 
-[Link a Baeldung](https://www.baeldung.com/spring-data-derived-queries)
+Se pueden contruir muchos métodos diferentes, te recomiendo que leas un pequeño [tutorial de Baeldung](https://www.baeldung.com/spring-data-derived-queries) y profundices con la [documentación oficial](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods.query-creation)donde podrás ver todas las opciones.
+
 
 
 
 ## Anotación @Query
 
-También se dispone de la anotación @Query la cual nos ofrece la posibilidad de realizar consultas de forma más cercana a los lenguajes SQL.
+Otra forma de realizar consultas, esta vez menos automática y más cercana a SQL, es la anotación @Query.
 
-En primer lugar, las consultas JPQL, estas consultas guardan un parecido con el lenguaje SQL pero al igual que en el caso las “Drived Query Methos” son traducidas por JPA a la consulta final nativa. Su uso no es muy recomendado ya que al subir la complejidad de las consultas se vuelven difíciles de mantener.
+Existen dos opciones a la hora de usar la anotación `@Query`. Esta anotación ya la hemos usado en el tutorial, dentro del [GameRepository](../../develop/step5/#repository).
 
-Por otra parte, es posible inyectad consultas nativas directamente dentro de esta anotación interactuando de forma directa con la base de datos. Esta práctica es altamente desaconsejable ya que crea acoplamientos con la tecnología de la BBDD utilizada y es una fuente de errores.
+En primer lugar tenemos las consultas JPQL. Estas guardan un parecido con el lenguaje SQL pero al igual que en el caso anterior, son traducidas por Spring JPA a la consulta final nativa. Su uso no está recomendado ya que estamos añadiendo un nivel de concreción y por tanto estamos aumentando la complejidad del código. Aun así, es otra forma de generar consultas.
 
-[Link a Baeldung](https://www.baeldung.com/spring-data-jpa-query)
+Por otra parte, también es posible generar consultas nativas directamente dentro de esta anotación interactuando de forma directa con la base de datos. Esta práctica es altamente desaconsejable ya que crea acoplamientos con la tecnología de la BBDD utilizada y es una fuente de errores.
+
+Puedes ver más información de esta anotación desde este pequeño [tutorial de Baeldung](https://www.baeldung.com/spring-data-jpa-query).
 
 
 ## Acelerando las consultas
 
 En muchas ocasiones necesitamos obtener información que no está en una única tabla por motivos de diseño de la base de datos. Debemos plasmar esta casuística con cuidado a nuestro modelo relacional para obtener resultados óptimos en cuanto al rendimiento.
 
-Para ilustrar el caso vamos a tomar el ejemplo de un listado de libros que tienen asociados categorías y autores, los cuales a su vez tienen asociada una nacionalidad.
+Para ilustrar el caso vamos a recuperar los objetos utilizados en el tutorial `Author`, `Gategory` y `Game`.
+Si recuerdas, tenemos que un `Game` tiene asociado un `Author` y tiene asociada una `Gategory`.
 
-Así tendríamos la entidad Book que tendría un join con la entidad Category y Author la que tendría su correspondiente join con la entidad Nationality.
+Cuando utilizamos el método de filtrado `find` que construimos en el `GameRepository`, vemos que Spring JPA traduce la `@Query` que habíamos diseñado en una query SQL para recuperar los juegos.
 
-Si utilizamos el método findAll, heredado del repository de la entidad Book, el resultado seria 1 consulta a la base de datos para obtener todos los libros de la tabla correspondiente, además realizaría una consulta por cada categoría y autor diferente presente en la tabla y además una consulta por cada nacionalidad diferente de cada autor.
+``` Java
+@Query("select g from Game g where (:title is null or g.title like '%'||:title||'%') and (:category is null or g.category.id = :category)")
+List<Game> find(@Param("title") String title, @Param("category") Long category);
+```
 
-En total se realizarían, en el peor de los casos, 1 + n (categoría) +  n (autor) + n * n (nacionalidad) consultas, esto seria muy costoso y nuestra consulta seria muy lenta dado el volumen de transacciones necesarias con la base de datos.
+Esta `@Query` es la que utiliza Spring JPA para traducir las propiedades a objetos de BBDD y mapear los resultados a objetos Java.
+Si tenemos activada la property `spring.jpa.show-sql=true` podremos ver las queries que está generando Spring JPA. El resultado es el siguiente.
 
-Para evitar esta circunstancia, disponemos de la anotación denominada EnitityGraph la cual proporciona directrices a JPA de la forma en la que deseamos realizar la consulta para que agrupe todas las consultas en una única, aun siendo mas compleja, en muchos casos el rendimiento es mucho mejor que realizar múltiples interacciones con la BBDD.
+``` SQL
+Hibernate: select game0_.id as id1_2_, game0_.age as age2_2_, game0_.author_id as author_i4_2_, game0_.category_id as category5_2_, game0_.title as title3_2_ from game game0_ where (? is null or game0_.title like ('%'||?||'%')) and (? is null or game0_.category_id=?)
+Hibernate: select author0_.id as id1_0_0_, author0_.name as name2_0_0_, author0_.nationality as national3_0_0_ from author author0_ where author0_.id=?
+Hibernate: select category0_.id as id1_1_0_, category0_.name as name2_1_0_ from category category0_ where category0_.id=?
+Hibernate: select author0_.id as id1_0_0_, author0_.name as name2_0_0_, author0_.nationality as national3_0_0_ from author author0_ where author0_.id=?
+Hibernate: select category0_.id as id1_1_0_, category0_.name as name2_1_0_ from category category0_ where category0_.id=?
+Hibernate: select author0_.id as id1_0_0_, author0_.name as name2_0_0_, author0_.nationality as national3_0_0_ from author author0_ where author0_.id=?
+Hibernate: select author0_.id as id1_0_0_, author0_.name as name2_0_0_, author0_.nationality as national3_0_0_ from author author0_ where author0_.id=?
+Hibernate: select author0_.id as id1_0_0_, author0_.name as name2_0_0_, author0_.nationality as national3_0_0_ from author author0_ where author0_.id=?
+```
+
+Si te fijas ha generado una query SQL para filtrar los `Game`, pero luego cuando ha intentado construir los objetos Java, ha tenido que lanzar una serie de queries para recuperar los diferentes `Author` y `Category` a través de sus `id`. Obviamente Spring JPA es muy lista y cachea los resultados obtenidos para no tener que recuperarlos n veces, pero aun así, lanza unas cuantas consultas. Esto penaliza el rendimiento de nuestra operación ya que tiene que lanzar n queries a BBDD que, aunque son muy óptimas, incrementan unos milisegundos el tiempo total.
+
+Para evitar esta circunstancia, disponemos de la anotación denominada `@EnitityGraph` la cual proporciona directrices a Spring JPA sobre la forma en la que deseamos realizar la consulta, permitiendo que realice agrupaciones y uniones de tablas en una única query que, aun siendo mas compleja, en muchos casos el rendimiento es mucho mejor que realizar múltiples interacciones con la BBDD.
+
+Siguiendo el ejemplo anterior podríamos utilizar la anotación de esta forma:
+
+``` Java hl_lines="2"
+@Query("select g from Game g where (:title is null or g.title like '%'||:title||'%') and (:category is null or g.category.id = :category)")
+@EntityGraph(attributePaths = {"category", "author"})
+List<Game> find(@Param("title") String title, @Param("category") Long category);
+```
+
+Donde le estamos diciendo a Spring JPA que cuando realice la query, haga el cruce con las propiedades `category` y `author`, que a su vez son entidades y por tanto mapean dos tablas de BBDD.
+El resultado es el siguiente:
 
 
-Ejemplo de anotación en el método findAll: 
+``` SQL
+Hibernate: select game0_.id as id1_2_0_, category1_.id as id1_1_1_, author2_.id as id1_0_2_, game0_.age as age2_2_0_, game0_.author_id as author_i4_2_0_, game0_.category_id as category5_2_0_, game0_.title as title3_2_0_, category1_.name as name2_1_1_, author2_.name as name2_0_2_, author2_.nationality as national3_0_2_ from game game0_ left outer join category category1_ on game0_.category_id=category1_.id left outer join author author2_ on game0_.author_id=author2_.id where (? is null or game0_.title like ('%'||?||'%')) and (? is null or game0_.category_id=?)
+```
 
-@EntityGraph(attributePaths = { "category", "author", "author.nationality" })
+Una única query, que es más compleja que la anterior ya que hace dos cruces con tablas de BBDD, pero que nos evita tener que lanzar n queries diferentes para recuperar `Author` y `Category`.
 
-[Link a Baeldung](https://www.baeldung.com/jpa-entity-graph)
+Generalmente, el uso de `@EntityGraph` acelera mucho los resultados y es muy recomendable utilizarlo para realizar los cruces inline. Se puede utilizar tanto con `@Query` como con `Derived Query Methods`. Puedes leer más información en este pequeño [tutorial de Baeldung](https://www.baeldung.com/jpa-entity-graph).
 
 
 ## Alternativa de Streams
 
-Desde Java 8 disponemos de los Java Streams. Se trata de una herramienta que nos permite multitud de opciones relativas tratamiento y trasformación de los datos manejados.
+A partir de Java 8 disponemos de los Java Streams. Se trata de una herramienta que nos permite multitud de opciones relativas tratamiento y trasformación de los datos manejados.
 
 En este apartado únicamente se menciona debido a que en muchas ocasiones cuando nos enfrentamos a consultas complejas, puede ser beneficioso evitar ofuscar las consultas y realizar las trasformaciones necesarias mediante los Streams.
 
-Un ejemplo de uso practico podría ser, evitar usar la cláusula “IN” en una determinada consulta la cual penaliza notablemente el rendimiento de las consultas. En vez de esos se podría utilizar el método “filter” sobre el conjunto de elementos para obtener el mismo resultado.
+Un ejemplo de uso practico podría ser, evitar usar la cláusula `IN` de SQL en una determinada consulta que podría penalizar notablemente el rendimiento de las consultas. En vez de eso se podría utilizar el método de JAVA `filter` sobre el conjunto de elementos para obtener el mismo resultado.
 
-[Link a Baeldung](https://www.baeldung.com/java-8-streams)
+Puedes leer más información en el [tutorial de Baeldung](https://www.baeldung.com/java-8-streams).
 
 
 ## Repository Custom
 
-Explicar como hacer una Impl de la interface y cosas de Criteria y Predicates, etc.
+!!! warning "Atención"
+	Este punto falta por desarrollar.
+
 
 

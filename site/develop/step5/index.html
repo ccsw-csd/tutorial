@@ -569,6 +569,21 @@
   
   
     <li class="md-nav__item">
+      <a href="../../appendix/jpa/" class="md-nav__link">
+        Anexo. Funcionamiento JPA
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../step6/" class="md-nav__link">
         Anexo. Validaciones (TBC)
       </a>
@@ -2703,6 +2718,10 @@ Con esta quuery, Spring JPA generará el SQL correcto y mapeará los resultados 
 <p>Nos sirve para insertar un <code>Game</code> nuevo (si no tienen el id informado) o para actualizar un <code>Game</code> (si tienen el id informado). Fíjate que para enlazar <code>Category</code> y <code>Author</code> tan solo hace falta el id de cada no de ellos, ya que en el método <code>save</code> se hace una consulta <code>get</code> para recuperarlos por su id. Además que no tendría sentido enviar toda la información de esas entidades ya que no estás dando de alta una <code>Category</code> ni un <code>Author</code>.</p>
 <p><img alt="step5-java2" src="../../assets/images/step5-java2.png" />
 <img alt="step5-java3" src="../../assets/images/step5-java3.png" /></p>
+<div class="admonition tip">
+<p class="admonition-title">Rendimiento en las consultas JPA</p>
+<p>En este punto te recomiendo que visites el <a href="../../appendix/jpa/">Anexo. Funcionamiento JPA</a> para conocer un poco más como funciona por dentro JPA y algún pequeño truco que puede mejorar el rendimiento.</p>
+</div>
 <h3 id="implementar-listado-autores">Implementar listado Autores</h3>
 <p>Antes de poder conectar front con back, si recuerdas, en la edición de un <code>Game</code>, nos hacía falta un listado de <code>Author</code> y un listado de <code>Category</code>. El segundo ya lo tenemos ya que lo reutilizaremos del listado de categorías que implementamos. Pero el primero no lo tenemos, porque en la pantalla que hicimos, se mostraban de forma paginada. </p>
 <p>Así que necesitamos implementar esa funcionalidad, y como siempre vamos de la capa de testing hacia las siguientes capas. Deberíamos añadir los siguientes métodos:</p>

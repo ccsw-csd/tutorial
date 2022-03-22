@@ -555,6 +555,21 @@
   
   
     <li class="md-nav__item">
+      <a href="../../appendix/jpa/" class="md-nav__link">
+        Anexo. Funcionamiento JPA
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../step6/" class="md-nav__link">
         Anexo. Validaciones (TBC)
       </a>
@@ -1627,7 +1642,7 @@ ng generate service author/author
     <span class="p">}</span>
 
     <span class="nd">@Test</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">findSecondPageWithFiveSizeShouldReturnLastTwoResults</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">findSecondPageWithFiveSizeShouldReturnLastResult</span><span class="p">()</span> <span class="p">{</span>
 
         <span class="kt">int</span> <span class="n">pageSize</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
         <span class="kt">int</span> <span class="n">elementsCount</span> <span class="o">=</span> <span class="n">TOTAL_AUTORS</span> <span class="o">-</span> <span class="n">pageSize</span><span class="p">;</span>
@@ -1678,15 +1693,17 @@ ng generate service author/author
     <span class="p">}</span>
 
     <span class="nd">@Test</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">modifyWithExistIdShouldModifyCategory</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">modifyWithExistIdShouldModifyAuthor</span><span class="p">()</span> <span class="p">{</span>
 
         <span class="n">assertNotNull</span><span class="p">(</span><span class="n">authorController</span><span class="p">);</span>
 
         <span class="n">String</span> <span class="n">newAuthorName</span> <span class="o">=</span> <span class="s">&quot;Nuevo Autor&quot;</span><span class="p">;</span>
+        <span class="n">String</span> <span class="n">newNationality</span> <span class="o">=</span> <span class="s">&quot;Nueva Nacionalidad&quot;</span><span class="p">;</span>
         <span class="kt">long</span> <span class="n">authorId</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
 
         <span class="n">AuthorDto</span> <span class="n">dto</span> <span class="o">=</span> <span class="k">new</span> <span class="n">AuthorDto</span><span class="p">();</span>
         <span class="n">dto</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="n">newAuthorName</span><span class="p">);</span>
+        <span class="n">dto</span><span class="p">.</span><span class="na">setNationality</span><span class="p">(</span><span class="n">newNationality</span><span class="p">);</span>
 
         <span class="n">authorController</span><span class="p">.</span><span class="na">save</span><span class="p">(</span><span class="n">authorId</span><span class="p">,</span> <span class="n">dto</span><span class="p">);</span>
 
@@ -1701,6 +1718,7 @@ ng generate service author/author
         <span class="n">AuthorDto</span> <span class="n">author</span> <span class="o">=</span> <span class="n">resultPage</span><span class="p">.</span><span class="na">getContent</span><span class="p">().</span><span class="na">stream</span><span class="p">().</span><span class="na">filter</span><span class="p">(</span><span class="n">item</span> <span class="o">-&gt;</span> <span class="n">item</span><span class="p">.</span><span class="na">getId</span><span class="p">().</span><span class="na">equals</span><span class="p">(</span><span class="n">authorId</span><span class="p">)).</span><span class="na">findFirst</span><span class="p">().</span><span class="na">orElse</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
         <span class="n">assertNotNull</span><span class="p">(</span><span class="n">author</span><span class="p">);</span>
         <span class="n">assertEquals</span><span class="p">(</span><span class="n">newAuthorName</span><span class="p">,</span> <span class="n">author</span><span class="p">.</span><span class="na">getName</span><span class="p">());</span>
+        <span class="n">assertEquals</span><span class="p">(</span><span class="n">newNationality</span><span class="p">,</span> <span class="n">author</span><span class="p">.</span><span class="na">getNationality</span><span class="p">());</span>
 
     <span class="p">}</span>
 
