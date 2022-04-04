@@ -2752,6 +2752,7 @@ Con esta quuery, Spring JPA generará el SQL correcto y mapeará los resultados 
 <span class="cm">* Recupera un listado de autores</span>
 <span class="cm">* @return</span>
 <span class="cm">*/</span>
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">path</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="n">RequestMethod</span><span class="p">.</span><span class="na">GET</span><span class="p">)</span>
 <span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">AuthorDto</span><span class="o">&gt;</span> <span class="nf">findAll</span><span class="p">()</span> <span class="p">{</span>
 
     <span class="n">List</span><span class="o">&lt;</span><span class="n">Author</span><span class="o">&gt;</span> <span class="n">authors</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="na">authorService</span><span class="p">.</span><span class="na">findAll</span><span class="p">();</span>

@@ -1996,6 +1996,7 @@ Así que necesitamos implementar esa funcionalidad, y como siempre vamos de la c
     * Recupera un listado de autores
     * @return
     */
+    @RequestMapping(path = "", method = RequestMethod.GET)
     public List<AuthorDto> findAll() {
 
         List<Author> authors = this.authorService.findAll();
