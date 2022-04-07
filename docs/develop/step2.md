@@ -746,16 +746,30 @@ Los aspectos importantes de la capa `Repository` son:
 Por último y aunque no es lo último que se desarrolla sino todo lo contrario, debería ser lo primero en desarrollar, tenemos la batería de pruebas.
 Hemos hecho desarrollado este primer caso de uso con una ordenación peculiar con fines didácticos, pero en realidad deberíamos ir aplicando [TDD (Test Driven Development)](../appendix/tdd.md) para el desarrollo. Si quieres aprender las reglas básicas de como aplicar TDD al desarrollo diario, te recomiendo que leas el [Anexo. TDD](../appendix/tdd.md).
 
-En este caso, y sin que sirva de precedente, ya tenemos implementados los métodos de la aplicación, y ahora vamos a testearlos. Existen muchas formas de testing en función del componente o la capa que yo quiera testear. En realidad, a medida que vayas programando irás aprendiendo todas ellas, de momento me sirve con que hagas un test simple que pruebe las casuísticas de los métodos.
+En este caso, y sin que sirva de precedente, ya tenemos implementados los métodos de la aplicación, y ahora vamos a testearlos. Existen muchas formas de testing en función del componente o la capa que yo quiera testear. En realidad, a medida que vayas programando irás aprendiendo todas ellas, de momento realizaremos dos tipos de test simples que prueben las casuísticas de los métodos.
+
+Los enfoques serán desde la perspectiva de los test de integración y los test unitarios.
+
+* **Test de integración**: Se tratan de pruebas completas de un determinado endpoint que conlleva inicializar el contexto de Spring (base de datos incluida) y realizar una llama REST para comprobar el flujo completo de la API.
+* **Test unitarios**: Se trata de pruebas estrictamente relativas a la calidad estática del código de una determinada operación de la capa de la lógica de negocio (Service). Estas pruebas no inicializan el contexto de Spring y deben simular todas las piezas ajenas a la funcionalidad testeada.
 
 Lo primero será conocer que queremos probar y para ello nos vamos a hacer una lista:
 
-* Pruebas de listado, debe recuperar los elementos de la tabla `Categoría`
+Test de integración:
+
+* Prueba de listado, debe recuperar los elementos de la tabla `Categoría`
 * Prueba de creación, debe crear una nueva `Categoría`
 * Prueba de modificación correcta, debe modificar una `Categoría` existente
 * Prueba de modificación incorrecta, debe dar error al modificar una `Categoría` que no existe
 * Prueba de borrado correcta, debe borrar una `Categoría` existente
 * Prueba de borrado incorrecta, debe dar error al borrar una `Categoría` que no existe
+
+Test unitarios:
+
+* Prueba de listado, debe comprobar la operación de negocio de consulta de `Categoría`
+* Prueba de creación, debe comprobar la operación de negocio de creación una nueva `Categoría`
+* Prueba de modificación, debe comprobar la operación de negocio de modificación una `Categoría` existente
+* Prueba de borrado, debe comprobar la operación de negocio borrado de una `Categoría` existente
 
 Se podrían hacer muchos más tests, pero creo que con esos son suficientes para que entiendas como se comporta esta capa. Si te fijas, hay que probar tanto los resultados correctos como los resultados incorrectos. El usuario no siempre se va a comportar como nosotros pensamos.
 
@@ -765,31 +779,58 @@ Pues vamos a ello.
 
 Vamos a empezar haciendo una clase de test dentro de la carpeta `src/test/java`. No queremos que los test formen parte del código productivo de la aplicación, por eso utilizamos esa ruta que queda fuera del package general de la aplicación.
 
-Crearemos la clase `com.capgemini.ccsw.tutorial.category.CategoryTest`.
+Crearemos las clases:
 
-=== "CategoryTest.java"
+* Test de integración: `com.capgemini.ccsw.tutorial.category.CategoryIT` 
+* Test unitarios: `com.capgemini.ccsw.tutorial.category.CategoryTest`
+
+=== "CategoryIT.java"
     ``` Java
     package com.capgemini.ccsw.tutorial.category;
 
     import org.springframework.boot.test.context.SpringBootTest;
-    import org.springframework.transaction.annotation.Transactional;
+    import org.springframework.boot.test.web.client.TestRestTemplate;
+    import org.springframework.boot.web.server.LocalServerPort;
+    import org.springframework.test.annotation.DirtiesContext;
 
     /**
     * @author ccsw
     */
-    @SpringBootTest
-    @Transactional
+    @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+    @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
+    public class CategoryIT {
+
+        @LocalServerPort
+        private int port;
+        
+        @Autowired
+        private TestRestTemplate restTemplate;
+
+    }
+    ```
+=== "CategoryTest.java"
+    ``` Java
+    package com.capgemini.ccsw.tutorial.category;
+
+    import org.junit.jupiter.api.extension.ExtendWith;
+    import org.mockito.junit.jupiter.MockitoExtension;
+
+    /**
+    * @author ccsw
+    */
+    @ExtendWith(MockitoExtension.class)
     public class CategoryTest {
 
     }
     ```
-
-Esta clase es sencilla y tan solo tiene dos anotaciones de Springboot:
+    
+Estas clases son sencillas y tan solo tienen anotaciones específicas de Springboot para cada tipo de test:
 
 * `@SpringBootTest`. Esta anotación lo que hace es inicializar el contexto de Spring cada vez que se inician los test de jUnit. Aunque el contexto tarda unos segundos en arrancar, lo bueno que tiene es que solo se inicializa una vez y se lanzan todos los jUnits en batería con el mismo contexto.
-* `@Transactional`. Esta anotación le indica a Spring que los test van a ser transaccionales, y por tanto cuando termine la ejecución de cada uno de los test, automáticamente por la anotación de arriba, Spring hará un rollback y dejará el estado de la BBDD como estaba inicialmente.
+* `@DirtiesContext`. Esta anotación le indica a Spring que los test van a ser transaccionales, y por tanto cuando termine la ejecución de cada uno de los test, automáticamente por la anotación de arriba, Spring hará un rearranque parcial del contexto y dejará el estado de la BBDD como estaba inicialmente.
+* `@ExtendWith`. Esta anotación le indica a Spring que no debe inicializar el contexto, ya que se trata de test estáticos que no lo requieren.
 
-También nos faltará configurar la aplicación de test al igual que hicimos con la aplicación 'productiva'. Deberemos abrir el fichero `src/test/resources/application.properties` y añadir la configuración de la BBDD. Para este tutorial vamos a utilizar la misma BBDD que la aplicación productiva, pero de normal la aplicación se conectará a una BBDD, generalmente física, mientras que los test jUnit se conectarán a otra BBDD, generalmente en memoria.
+Para las pruebas de integración nos faltará configurar la aplicación de test, al igual que hicimos con la aplicación 'productiva'. Deberemos abrir el fichero `src/test/resources/application.properties` y añadir la configuración de la BBDD. Para este tutorial vamos a utilizar la misma BBDD que la aplicación productiva, pero de normal la aplicación se conectará a una BBDD, generalmente física, mientras que los test jUnit se conectarán a otra BBDD, generalmente en memoria.
 
 === "application.properties"
     ``` properties
@@ -802,55 +843,105 @@ También nos faltará configurar la aplicación de test al igual que hicimos con
     spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
     ```
 
-Con todo esto ya podemos crear nuestro primer test. Iremos a la clase `CategoryTest` y añadiremos un método público. Los test siempre tienen que ser métodos públicos que devuelvan el tipo `void`.
+Con todo esto ya podemos crear nuestro primer test. Iremos a las clases `CategoryIT` y `CategoryTest` donde añadiremos un método público. Los test siempre tienen que ser métodos públicos que devuelvan el tipo `void`.
 
 
-=== "CategoryTest.java"
-    ``` Java hl_lines="3 4 6 8 9 13 19 20 22-34"
+=== "CategoryIT.java"
+    ``` Java hl_lines="3-5 9-10 13 15 21 22 30 32-39"
     package com.capgemini.ccsw.tutorial.category;
-
-    import static org.junit.jupiter.api.Assertions.assertEquals;
-    import static org.junit.jupiter.api.Assertions.assertNotNull;
-
-    import java.util.List;
-
+    
+    import com.capgemini.ccsw.tutorial.category.model.CategoryDto;
     import org.junit.jupiter.api.Test;
     import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.boot.test.context.SpringBootTest;
-    import org.springframework.transaction.annotation.Transactional;
-
-    import com.capgemini.ccsw.tutorial.category.model.CategoryDto;
-
-    @SpringBootTest
-    @Transactional
-    public class CategoryTest {
-
-      @Autowired
-      private CategoryController categoryController;
-
-      @Test
-      public void findAllShouldReturnAllCategoriesInDB() {
-
-          assertNotNull(categoryController);
-
-          long categoriesSize = 3;
-
-          List<CategoryDto> categories = categoryController.findAll();
-
-          assertNotNull(categories);
-          assertEquals(categoriesSize, categories.size());
-
-      }
-
+    import org.springframework.boot.test.web.client.TestRestTemplate;
+    import org.springframework.boot.web.server.LocalServerPort;
+    import org.springframework.core.ParameterizedTypeReference;
+    import org.springframework.http.ResponseEntity;
+    import org.springframework.test.annotation.DirtiesContext;
+    
+    import java.util.List;
+    
+    import static org.junit.jupiter.api.Assertions.*;
+    
+    @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+    @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
+    public class CategoryIT {
+    
+        public static final String LOCALHOST = "http://localhost:";
+        public static final String SERVICE_PATH = "/category/";
+        
+        @LocalServerPort
+        private int port;
+        
+        @Autowired
+        private TestRestTemplate restTemplate;
+        
+        ParameterizedTypeReference<List<CategoryDto>> responseType = new ParameterizedTypeReference<List<CategoryDto>>(){};
+        
+        @Test
+        public void findAllShouldReturnAllCategories() {
+        
+              ResponseEntity<List<CategoryDto>> response = restTemplate.exchange(LOCALHOST + port + SERVICE_PATH, HttpMethod.GET, null, responseType);
+        
+              assertNotNull(response);
+              assertEquals(3, response.getBody().size());
+        }
     }
     ```
+=== "CategoryTest.java"
+    ``` Java hl_lines="3-5 7 8 11 12 14 15 20 21 23 24 26-38"
+    package com.capgemini.ccsw.tutorial.category;
+    
+    import com.capgemini.ccsw.tutorial.category.model.Category;
+    import com.capgemini.ccsw.tutorial.category.model.CategoryDto;
+    import org.junit.jupiter.api.Test;
+    import org.junit.jupiter.api.extension.ExtendWith;
+    import org.mockito.InjectMocks;
+    import org.mockito.Mock;
+    import org.mockito.junit.jupiter.MockitoExtension;
+    
+    import java.util.ArrayList;
+    import java.util.List;
+    
+    import static org.junit.jupiter.api.Assertions.*;
+    import static org.mockito.Mockito.*;
+    
+    @ExtendWith(MockitoExtension.class)
+    public class CategoryTest {
+        
+        @Mock
+        private CategoryRepository categoryRepository;
+        
+        @InjectMocks
+        private CategoryServiceImpl categoryService;
+        
+        @Test
+        public void findAllShouldReturnAllCategories() {
+        
+              List<Category> list = new ArrayList<>();
+              list.add(mock(Category.class));
+        
+              when(categoryRepository.findAll()).thenReturn(list);
+        
+              List<Category> categories = categoryService.findAll();
+        
+              assertNotNull(categories);
+              assertEquals(1, categories.size());
+        }
+    }
+    ```
+    
+Es muy importante marcar cada método de prueba con la anotación `@Test`, en caso contrario no se ejecutará. Lo que se debe hacer en cada método que implementemos es probar **una y solo una** acción. 
 
-Es muy importante marcar cada método de prueba con la anotación `@Test`, en caso contrario no se ejecutará. Lo que se debe hacer en cada método que implementemos es probar **una y solo una** acción. En el ejemplo anterior, hemos probado que llamando al método findAll() comprobamos que realmente nos devuelve 3 resultados, que son los que hay en BBDD inicialmente.
+En los ejemplos anteriores, hemos probado por un lado, la llamando al método `GET` del endpoint `http://localhost:XXXX/category/` comprobando que realmente nos devuelve 3 resultados, que son los que hay en BBDD inicialmente.
+
+Mientras que por otro lado, hemos comprobado el método `findAll()` el cual por debajo invoca una llamada al repository de categoría, la cual hemos simulado con una respuesta ficticia limitándonos únicamente a la lógica contenida en la operación de negocio.
 
 !!! tip "Muy importante: Nomenclatura de los tests"
-    La nomenclatura de los métodos de test debe sigue una estructura determinada. Hay muchas formas de nombrar a los métodos, pero nosotros solemos utilizar la estructura 'should', para indicar lo que va a hacer. En el ejemplo anterior el método 'findAll' debe devolver 'AllCategoriesInDB'. De esta forma sabemos cual es la intención del test, y si por cualquier motivo diera un fallo, sabemos que es lo que NO está funcionando de nuestra aplicación.
+    La nomenclatura de los métodos de test debe sigue una estructura determinada. Hay muchas formas de nombrar a los métodos, pero nosotros solemos utilizar la estructura 'should', para indicar lo que va a hacer. En el ejemplo anterior el método 'findAll' debe devolver 'AllCategories'. De esta forma sabemos cuál es la intención del test, y si por cualquier motivo diera un fallo, sabemos que es lo que NO está funcionando de nuestra aplicación.
 
-Para comprobar que el test funciona, podemos darle botón derecho sobre la clase de `CategoryTest` y pulsar en `Run as` -> `JUnit Test`. Si todo funciona correctamente, deberá aparecer una pantalla de ejecución y todos nuestros tests (en este caso solo uno) corriendo correctamente (en verde).
+Para comprobar que el test funciona, podemos darle botón derecho sobre la clase de `CategoryIT` y pulsar en `Run as` -> `JUnit Test`. Si todo funciona correctamente, deberá aparecer una pantalla de ejecución y todos nuestros tests (en este caso solo uno) corriendo correctamente (en verde). El proceso es el mismo para la clase `CategoryTest`.
 
 ![step2-java6](../assets/images/step2-java6.png)
 
@@ -860,139 +951,173 @@ Para comprobar que el test funciona, podemos darle botón derecho sobre la clase
 Vamos con los siguientes test, los que probarán una creación de una nueva `Categoría`. Añadimos el siguiente método a la clase de test:
 
 
-=== "CategoryTest.java"
+=== "CategoryIT.java"
     ``` Java
+
+    public static final Long NEW_CATEGORY_ID = 4L;
+    public static final String NEW_CATEGORY_NAME = "CAT4";
 
     @Test
     public void saveWithoutIdShouldCreateNewCategory() {
-
-        assertNotNull(categoryController);
-
-        String newCategoryName = "Nueva Categoria";
-        long newCategoryId = 4;
-        long newCategoriesSize = newCategoryId;
-
-        CategoryDto dto = new CategoryDto();
-        dto.setName(newCategoryName);
-
-        categoryController.save(null, dto);
-
-        List<CategoryDto> categories = categoryController.findAll();
-        assertNotNull(categories);
-        assertEquals(newCategoriesSize, categories.size());
-
-        CategoryDto categorySearch = categories.stream().filter(item -> item.getId().equals(newCategoryId)).findFirst().orElse(null);
-        assertNotNull(categorySearch);
-        assertEquals(newCategoryName, categorySearch.getName());
-
+    
+          CategoryDto dto = new CategoryDto();
+          dto.setName(NEW_CATEGORY_NAME);
+    
+          restTemplate.exchange(LOCALHOST + port + SERVICE_PATH, HttpMethod.PUT, new HttpEntity<>(dto), Void.class);
+    
+          ResponseEntity<List<CategoryDto>> response = restTemplate.exchange(LOCALHOST + port + SERVICE_PATH, HttpMethod.GET, null, responseType);
+          assertNotNull(response);
+          assertEquals(4, response.getBody().size());
+    
+          CategoryDto categorySearch = response.getBody().stream().filter(item -> item.getId().equals(NEW_CATEGORY_ID)).findFirst().orElse(null);
+          assertNotNull(categorySearch);
+          assertEquals(NEW_CATEGORY_NAME, categorySearch.getName());
     }
     ```
+=== "CategoryTest.java"
+    ``` Java
 
-En este caso, estamos construyendo un objeto `CategoryDto` para darle un nombre a la `Categoría` e invocamos al método `save` pasandole un ID a nulo.
+    public static final String CATEGORY_NAME = "CAT1";
+
+    @Test
+    public void saveNotExistsCategoryIdShouldInsert() {
+    
+          CategoryDto categoryDto = new CategoryDto();
+          categoryDto.setName(CATEGORY_NAME);
+    
+          ArgumentCaptor<Category> category = ArgumentCaptor.forClass(Category.class);
+    
+          categoryService.save(null, categoryDto);
+    
+          verify(categoryRepository).save(category.capture());
+    
+          assertEquals(CATEGORY_NAME, category.getValue().getName());
+    }
+    ```
+    
+En el primer caso, estamos construyendo un objeto `CategoryDto` para darle un nombre a la `Categoría` e invocamos al método `PUT` sin añadir en la ruta referencia al identificador.
 Seguidamente, recuperamos de nuevo la lista de categorías y en este caso debería tener 4 resultados. Hacemos un filtrado buscando la nueva `Categoría` que debería tener un ID = 4 y debería ser la que acabamos de crear. 
+
+De forma similar en el segundo caso, estamos construyendo un objeto `CategoryDto` para darle un nombre a la `Categoría` e invocamos a la operación `save` pasandole un ID a nulo. Para identificar que el funcionamiento es el esperado, capturamos la categoría que se proporciona al repository al intentar realizar la acción ficticia de guardado y comprobamos que el valor es el que se proporciona en la invocación.
 
 Si ejecutamos, veremos que ambos test ahora aparecen en verde.
 
 
 ### Pruebas de modificación
 
-Para este caso de prueba, vamos a realizar dos test, como hemos comentado anteriormente. Tenemos que probar que es lo que pasa cuando intentamos modificar un elemento que existe pero también debemos probar que es lo que pasa cuando intentamos modificar un elemento que **no** existe.
+Para este caso de prueba, vamos a realizar varios test, como hemos comentado anteriormente. Tenemos que probar que es lo que pasa cuando intentamos modificar un elemento que existe, pero también debemos probar que es lo que pasa cuando intentamos modificar un elemento que **no** existe.
 
 Empezamos con el sencillo, un test que pruebe una modificación existente.
 
 
+=== "CategoryIT.java"
+    ``` Java
+
+    public static final Long MODIFY_CATEGORY_ID = 3L;
+
+    @Test
+    public void modifyWithExistIdShouldModifyCategory() {
+    
+          CategoryDto dto = new CategoryDto();
+          dto.setName(NEW_CATEGORY_NAME);
+    
+          restTemplate.exchange(LOCALHOST + port + SERVICE_PATH + MODIFY_CATEGORY_ID, HttpMethod.PUT, new HttpEntity<>(dto), Void.class);
+    
+          ResponseEntity<List<CategoryDto>> response = restTemplate.exchange(LOCALHOST + port + SERVICE_PATH, HttpMethod.GET, null, responseType);
+          assertNotNull(response);
+          assertEquals(3, response.getBody().size());
+    
+          CategoryDto categorySearch = response.getBody().stream().filter(item -> item.getId().equals(MODIFY_CATEGORY_ID)).findFirst().orElse(null);
+          assertNotNull(categorySearch);
+          assertEquals(NEW_CATEGORY_NAME, categorySearch.getName());
+    }
+    ```
 === "CategoryTest.java"
     ``` Java
 
+    public static final Long EXISTS_CATEGORY_ID = 1L;
+
     @Test
-    public void modifyWithExistsIdShouldModifyCategory() {
-
-        assertNotNull(categoryController);
-
-        String newCategoryName = "Nueva Categoria";
-        long categoryId = 3;
-        long categoriesSize = 3;
-
-        CategoryDto dto = new CategoryDto();
-        dto.setName(newCategoryName);
-
-        categoryController.save(categoryId, dto);
-
-        List<CategoryDto> categories = categoryController.findAll();
-        assertNotNull(categories);
-        assertEquals(categoriesSize, categories.size());
-
-        CategoryDto categorySearch = categories.stream().filter(item -> item.getId().equals(categoryId)).findFirst().orElse(null);
-        assertNotNull(categorySearch);
-        assertEquals(newCategoryName, categorySearch.getName());
-
+    public void saveExistsCategoryIdShouldUpdate() {
+    
+      CategoryDto categoryDto = new CategoryDto();
+      categoryDto.setName(CATEGORY_NAME);
+    
+      Category category = mock(Category.class);
+      when(categoryRepository.findById(EXISTS_CATEGORY_ID)).thenReturn(Optional.of(category));
+    
+      categoryService.save(EXISTS_CATEGORY_ID, categoryDto);
+    
+      verify(categoryRepository).save(category);
     }
     ```
 
-La misma filosofía que en el test anterior pero esta vez modificamos la `Categoría` de ID = 3. Luego la filtramos y vemos que realmente se ha modificado. Además comprobamos que el listado de todas los registros sigue siengo 3 y no se ha creado un nuevo registro.
+En el caso de los test de integración, la misma filosofía que en el test anterior, pero esta vez modificamos la `Categoría` de ID = 3. Luego la filtramos y vemos que realmente se ha modificado. Además comprobamos que el listado de todas los registros sigue siendo 3 y no se ha creado un nuevo registro.
 
-En el siguiente test, probaremos un resultado erróneo. Es un pelín más compleja, pero no mucho.
+En cuanto al test unitario, comprobamos el camino de la modificación simulando que el repository nos devuelve una categoría que modificar y verificado que se invoca el guardado sobre la misma.
 
+En el siguiente test, probaremos un resultado erróneo.
 
-=== "CategoryTest.java"
+=== "CategoryIT.java"
     ``` Java
 
     @Test
-    public void modifyWithNotExistsIdShouldThrowException() {
-
-        assertNotNull(categoryController);
-
-        String newCategoryName = "Nueva Categoria";
-        long categoryId = 4;
-
-        CategoryDto dto = new CategoryDto();
-        dto.setName(newCategoryName);
-
-        assertThrows(NullPointerException.class, () -> categoryController.save(categoryId, dto));
+    public void modifyWithNotExistIdShouldInternalError() {
+    
+          CategoryDto dto = new CategoryDto();
+          dto.setName(NEW_CATEGORY_NAME);
+    
+          ResponseEntity<?> response = restTemplate.exchange(LOCALHOST + port + SERVICE_PATH + NEW_CATEGORY_ID, HttpMethod.PUT, new HttpEntity<>(dto), Void.class);
+    
+          assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
     }
     ```
 
-Intentamos modificar el ID = 4, que no debería existir en BBDD y por tanto lo que se espera en el test es que lance un `NullPointerException` al llamar al método `save`.
+Intentamos modificar el ID = 4, que no debería existir en BBDD y por tanto lo que se espera en el test es que lance un `500 Internal Server Error` al llamar al método `PUT`.
 
 
 ### Pruebas de borrado
 
 Ya por último implementamos las pruebas de borrado.
 
+=== "CategoryIT.java"
+    ``` Java
+    
+    public static final Long DELETE_CATEGORY_ID = 2L;
+
+    @Test
+    public void deleteWithExistsIdShouldDeleteCategory() {
+    
+          restTemplate.exchange(LOCALHOST + port + SERVICE_PATH + DELETE_CATEGORY_ID, HttpMethod.DELETE, null, Void.class);
+    
+          ResponseEntity<List<CategoryDto>> response = restTemplate.exchange(LOCALHOST + port + SERVICE_PATH, HttpMethod.GET, null, responseType);
+          assertNotNull(response);
+          assertEquals(2, response.getBody().size());
+    }
+    
+    @Test
+    public void deleteWithNotExistsIdShouldInternalError() {
+    
+          ResponseEntity<?> response = restTemplate.exchange(LOCALHOST + port + SERVICE_PATH + NEW_CATEGORY_ID, HttpMethod.DELETE, null, Void.class);
+    
+          assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
+    }
+    ```
 === "CategoryTest.java"
     ``` Java
 
     @Test
-    public void deleteWithExistsIdShouldDeleteCategory() {
-
-        assertNotNull(categoryController);
-
-        long newCategoriesSize = 2;
-        long deleteCategoryId = 2;
-
-        categoryController.delete(deleteCategoryId);
-
-        List<CategoryDto> categories = categoryController.findAll();
-
-        assertNotNull(categories);
-        assertEquals(newCategoriesSize, categories.size());
-
-    }
-
-    @Test
-    public void deleteWithNotExistsIdShouldThrowException() {
-
-        assertNotNull(categoryController);
-
-        long deleteCategoryId = 4;
-
-        assertThrows(Exception.class, () -> categoryController.delete(deleteCategoryId));
-
+    public void deleteExistsCategoryIdShouldDelete() {
+    
+          categoryService.delete(EXISTS_CATEGORY_ID);
+    
+          verify(categoryRepository).deleteById(EXISTS_CATEGORY_ID);
     }
     ```
 
-En el primer test, se comprueba que el listado tiene un tamaño de 2 (uno menos que el original) y en el segundo test se comprueba que con ID no válido, devuelve una `Exception`.
+En lo relativo a las pruebas de integración, en el primer test, se invoca el método `DELETE` y posteriormente se comprueba que el listado tiene un tamaño de 2 (uno menos que el original). Mientras que en el segundo test, se comprueba que con ID no válido, devuelve un `500 Internal Server Error`.
 
+En cuanto al test unitario, se invoca a la operación `delete` y se verifica que la operación requerida del repository es invocado con el atributo correcto.
 
 Con esto tendríamos más o menos probados los casos básicos de nuestra aplicación y tendríamos una pequeña red de seguridad que nos ayudaría por si a futuro necesitamos hacer algún cambio o evolutivo.
 

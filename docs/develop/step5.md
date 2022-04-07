@@ -1061,210 +1061,260 @@ También crearemos una clase `GameController` dentro del package de `com.capgemi
 
     }
     ```
-=== "GameTest.java"
+=== "GameIT.java"
     ``` Java
     package com.capgemini.ccsw.tutorial.game;
-
-    import static org.junit.jupiter.api.Assertions.assertEquals;
-    import static org.junit.jupiter.api.Assertions.assertNotNull;
-    import static org.junit.jupiter.api.Assertions.assertThrows;
-
-    import java.util.List;
-
-    import org.junit.jupiter.api.Test;
-    import org.springframework.beans.factory.annotation.Autowired;
-    import org.springframework.boot.test.context.SpringBootTest;
-    import org.springframework.transaction.annotation.Transactional;
-
+    
     import com.capgemini.ccsw.tutorial.author.model.AuthorDto;
     import com.capgemini.ccsw.tutorial.category.model.CategoryDto;
     import com.capgemini.ccsw.tutorial.game.model.GameDto;
-
-    @SpringBootTest
-    @Transactional
-    public class GameTest {
-
+    import org.junit.jupiter.api.Test;
+    import org.springframework.beans.factory.annotation.Autowired;
+    import org.springframework.boot.test.context.SpringBootTest;
+    import org.springframework.boot.test.web.client.TestRestTemplate;
+    import org.springframework.boot.web.server.LocalServerPort;
+    import org.springframework.core.ParameterizedTypeReference;
+    import org.springframework.http.HttpEntity;
+    import org.springframework.http.HttpMethod;
+    import org.springframework.http.HttpStatus;
+    import org.springframework.http.ResponseEntity;
+    import org.springframework.test.annotation.DirtiesContext;
+    import org.springframework.web.util.UriComponentsBuilder;
+    
+    import java.util.HashMap;
+    import java.util.List;
+    import java.util.Map;
+    
+    import static org.junit.jupiter.api.Assertions.*;
+    
+    @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+    @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
+    public class GameIT {
+    
+        public static final String LOCALHOST = "http://localhost:";
+        public static final String SERVICE_PATH = "/game/";
+        
+        public static final Long EXISTS_GAME_ID = 1L;
+        public static final Long NOT_EXISTS_GAME_ID = 0L;
+        private static final String NOT_EXISTS_TITLE = "NotExists";
+        private static final String EXISTS_TITLE = "Aventureros";
+        private static final String NEW_TITLE = "Nuevo juego";
+        private static final Long NOT_EXISTS_CATEGORY = 0L;
+        private static final Long EXISTS_CATEGORY = 3L;
+        
+        private static final String TITLE_PARAM = "title";
+        private static final String CATEGORY_ID_PARAM = "idCategory";
+        
+        @LocalServerPort
+        private int port;
+        
         @Autowired
-        private GameController gameController;
-
-        private final String notExistsTitle = "NotExists";
-        private final String existsTitle = "Aventureros";
-        private final Long notExistsCategory = 0L;
-        private final Long existsCategory = 3L;
-
+        private TestRestTemplate restTemplate;
+        
+        ParameterizedTypeReference<List<GameDto>> responseType = new ParameterizedTypeReference<List<GameDto>>(){};
+        
+        private String getUrlWithParams(){
+            return UriComponentsBuilder.fromHttpUrl(LOCALHOST + port + SERVICE_PATH)
+            .queryParam(TITLE_PARAM, "{" + TITLE_PARAM +"}")
+            .queryParam(CATEGORY_ID_PARAM, "{" + CATEGORY_ID_PARAM +"}")
+            .encode()
+            .toUriString();
+        }
+        
         @Test
         public void findWithoutFiltersShouldReturnAllGamesInDB() {
-
-            assertNotNull(gameController);
-
-            int GAMES_WITH_FILTER = 6;
-
-            List<GameDto> games = gameController.find(null, null);
-
-            assertNotNull(games);
-            assertEquals(GAMES_WITH_FILTER, games.size());
+        
+              int GAMES_WITH_FILTER = 6;
+        
+              Map<String, Object> params = new HashMap<>();
+              params.put(TITLE_PARAM, null);
+              params.put(CATEGORY_ID_PARAM, null);
+        
+              ResponseEntity<List<GameDto>> response = restTemplate.exchange(getUrlWithParams(), HttpMethod.GET, null, responseType, params);
+        
+              assertNotNull(response);
+              assertEquals(GAMES_WITH_FILTER, response.getBody().size());
         }
-
+        
         @Test
         public void findExistsTitleShouldReturnGames() {
-
-            assertNotNull(gameController);
-
-            int GAMES_WITH_FILTER = 1;
-
-            List<GameDto> games = gameController.find(existsTitle, null);
-
-            assertNotNull(games);
-            assertEquals(GAMES_WITH_FILTER, games.size());
+        
+              int GAMES_WITH_FILTER = 1;
+        
+              Map<String, Object> params = new HashMap<>();
+              params.put(TITLE_PARAM, EXISTS_TITLE);
+              params.put(CATEGORY_ID_PARAM, null);
+        
+              ResponseEntity<List<GameDto>> response = restTemplate.exchange(getUrlWithParams(), HttpMethod.GET, null, responseType, params);
+        
+              assertNotNull(response);
+              assertEquals(GAMES_WITH_FILTER, response.getBody().size());
         }
-
+        
         @Test
         public void findExistsCategoryShouldReturnGames() {
-
-            assertNotNull(gameController);
-
-            int GAMES_WITH_FILTER = 2;
-
-            List<GameDto> games = gameController.find(null, existsCategory);
-
-            assertNotNull(games);
-            assertEquals(GAMES_WITH_FILTER, games.size());
+        
+              int GAMES_WITH_FILTER = 2;
+        
+              Map<String, Object> params = new HashMap<>();
+              params.put(TITLE_PARAM, null);
+              params.put(CATEGORY_ID_PARAM, EXISTS_CATEGORY);
+        
+              ResponseEntity<List<GameDto>> response = restTemplate.exchange(getUrlWithParams(), HttpMethod.GET, null, responseType, params);
+        
+              assertNotNull(response);
+              assertEquals(GAMES_WITH_FILTER, response.getBody().size());
         }
-
+        
         @Test
         public void findExistsTitleAndCategoryShouldReturnGames() {
-
-            assertNotNull(gameController);
-
-            int GAMES_WITH_FILTER = 1;
-
-            List<GameDto> games = gameController.find(existsTitle, existsCategory);
-
-            assertNotNull(games);
-            assertEquals(GAMES_WITH_FILTER, games.size());
+        
+              int GAMES_WITH_FILTER = 1;
+        
+              Map<String, Object> params = new HashMap<>();
+              params.put(TITLE_PARAM, EXISTS_TITLE);
+              params.put(CATEGORY_ID_PARAM, EXISTS_CATEGORY);
+        
+              ResponseEntity<List<GameDto>> response = restTemplate.exchange(getUrlWithParams(), HttpMethod.GET, null, responseType, params);
+        
+              assertNotNull(response);
+              assertEquals(GAMES_WITH_FILTER, response.getBody().size());
         }
-
+        
         @Test
         public void findNotExistsTitleShouldReturnEmpty() {
-
-            assertNotNull(gameController);
-
-            int GAMES_WITH_FILTER = 0;
-
-            List<GameDto> games = gameController.find(notExistsTitle, null);
-
-            assertNotNull(games);
-            assertEquals(GAMES_WITH_FILTER, games.size());
+        
+              int GAMES_WITH_FILTER = 0;
+        
+              Map<String, Object> params = new HashMap<>();
+              params.put(TITLE_PARAM, NOT_EXISTS_TITLE);
+              params.put(CATEGORY_ID_PARAM, null);
+        
+              ResponseEntity<List<GameDto>> response = restTemplate.exchange(getUrlWithParams(), HttpMethod.GET, null, responseType, params);
+        
+              assertNotNull(response);
+              assertEquals(GAMES_WITH_FILTER, response.getBody().size());
         }
-
+        
         @Test
         public void findNotExistsCategoryShouldReturnEmpty() {
-
-            assertNotNull(gameController);
-
-            int GAMES_WITH_FILTER = 0;
-
-            List<GameDto> games = gameController.find(null, notExistsCategory);
-
-            assertNotNull(games);
-            assertEquals(GAMES_WITH_FILTER, games.size());
+        
+              int GAMES_WITH_FILTER = 0;
+        
+              Map<String, Object> params = new HashMap<>();
+              params.put(TITLE_PARAM, null);
+              params.put(CATEGORY_ID_PARAM, NOT_EXISTS_CATEGORY);
+        
+              ResponseEntity<List<GameDto>> response = restTemplate.exchange(getUrlWithParams(), HttpMethod.GET, null, responseType, params);
+        
+              assertNotNull(response);
+              assertEquals(GAMES_WITH_FILTER, response.getBody().size());
         }
-
+        
         @Test
         public void findNotExistsTitleOrCategoryShouldReturnEmpty() {
-
-            assertNotNull(gameController);
-
-            int GAMES_WITH_FILTER = 0;
-
-            List<GameDto> games = gameController.find(notExistsTitle, notExistsCategory);
-            assertNotNull(games);
-            assertEquals(GAMES_WITH_FILTER, games.size());
-
-            games = gameController.find(notExistsTitle, existsCategory);
-            assertNotNull(games);
-            assertEquals(GAMES_WITH_FILTER, games.size());
-
-            games = gameController.find(existsTitle, notExistsCategory);
-            assertNotNull(games);
-            assertEquals(GAMES_WITH_FILTER, games.size());
-
+        
+              int GAMES_WITH_FILTER = 0;
+        
+              Map<String, Object> params = new HashMap<>();
+              params.put(TITLE_PARAM, NOT_EXISTS_TITLE);
+              params.put(CATEGORY_ID_PARAM, NOT_EXISTS_CATEGORY);
+        
+              ResponseEntity<List<GameDto>> response = restTemplate.exchange(getUrlWithParams(), HttpMethod.GET, null, responseType, params);
+              assertNotNull(response);
+              assertEquals(GAMES_WITH_FILTER, response.getBody().size());
+        
+              params.put(TITLE_PARAM, NOT_EXISTS_TITLE);
+              params.put(CATEGORY_ID_PARAM, EXISTS_CATEGORY);
+        
+              response = restTemplate.exchange(getUrlWithParams(), HttpMethod.GET, null, responseType, params);
+              assertNotNull(response);
+              assertEquals(GAMES_WITH_FILTER, response.getBody().size());
+        
+              params.put(TITLE_PARAM, EXISTS_TITLE);
+              params.put(CATEGORY_ID_PARAM, NOT_EXISTS_CATEGORY);
+        
+              response = restTemplate.exchange(getUrlWithParams(), HttpMethod.GET, null, responseType, params);
+              assertNotNull(response);
+              assertEquals(GAMES_WITH_FILTER, response.getBody().size());
         }
-
+        
         @Test
         public void saveWithoutIdShouldCreateNewGame() {
-
-            String newTitle = "Nuevo juego";
-
-            GameDto dto = new GameDto();
-            AuthorDto authorDto = new AuthorDto();
-            authorDto.setId(1L);
-
-            CategoryDto categoryDto = new CategoryDto();
-            categoryDto.setId(1L);
-
-            dto.setTitle(newTitle);
-            dto.setAge("18");
-            dto.setAuthor(authorDto);
-            dto.setCategory(categoryDto);
-
-            List<GameDto> games = gameController.find(newTitle, null);
-            assertNotNull(games);
-            assertEquals(0, games.size());
-
-            gameController.save(null, dto);
-
-            games = gameController.find(newTitle, null);
-            assertNotNull(games);
-            assertEquals(1, games.size());
+        
+              GameDto dto = new GameDto();
+              AuthorDto authorDto = new AuthorDto();
+              authorDto.setId(1L);
+        
+              CategoryDto categoryDto = new CategoryDto();
+              categoryDto.setId(1L);
+        
+              dto.setTitle(NEW_TITLE);
+              dto.setAge("18");
+              dto.setAuthor(authorDto);
+              dto.setCategory(categoryDto);
+        
+              Map<String, Object> params = new HashMap<>();
+              params.put(TITLE_PARAM, NEW_TITLE);
+              params.put(CATEGORY_ID_PARAM, null);
+        
+              ResponseEntity<List<GameDto>> response = restTemplate.exchange(getUrlWithParams(), HttpMethod.GET, null, responseType, params);
+        
+              assertNotNull(response);
+              assertEquals(0, response.getBody().size());
+        
+              restTemplate.exchange(LOCALHOST + port + SERVICE_PATH, HttpMethod.PUT, new HttpEntity<>(dto), Void.class);
+        
+              response = restTemplate.exchange(getUrlWithParams(), HttpMethod.GET, null, responseType, params);
+        
+              assertNotNull(response);
+              assertEquals(1, response.getBody().size());
         }
-
+        
         @Test
         public void modifyWithExistIdShouldModifyGame() {
-
-            Long gameId = 1L;
-            String newTitle = "Nuevo juego";
-
-            GameDto dto = new GameDto();
-            AuthorDto authorDto = new AuthorDto();
-            authorDto.setId(1L);
-
-            CategoryDto categoryDto = new CategoryDto();
-            categoryDto.setId(1L);
-
-            dto.setTitle(newTitle);
-            dto.setAge("18");
-            dto.setAuthor(authorDto);
-            dto.setCategory(categoryDto);
-
-            List<GameDto> games = gameController.find(newTitle, null);
-            assertNotNull(games);
-            assertEquals(0, games.size());
-
-            gameController.save(gameId, dto);
-
-            games = gameController.find(newTitle, null);
-            assertNotNull(games);
-            assertEquals(1, games.size());
-
-            GameDto game = games.get(0);
-            assertEquals(gameId, game.getId());
-
+        
+              GameDto dto = new GameDto();
+              AuthorDto authorDto = new AuthorDto();
+              authorDto.setId(1L);
+        
+              CategoryDto categoryDto = new CategoryDto();
+              categoryDto.setId(1L);
+        
+              dto.setTitle(NEW_TITLE);
+              dto.setAge("18");
+              dto.setAuthor(authorDto);
+              dto.setCategory(categoryDto);
+        
+              Map<String, Object> params = new HashMap<>();
+              params.put(TITLE_PARAM, NEW_TITLE);
+              params.put(CATEGORY_ID_PARAM, null);
+        
+              ResponseEntity<List<GameDto>> response = restTemplate.exchange(getUrlWithParams(), HttpMethod.GET, null, responseType, params);
+        
+              assertNotNull(response);
+              assertEquals(0, response.getBody().size());
+        
+              restTemplate.exchange(LOCALHOST + port + SERVICE_PATH + EXISTS_GAME_ID, HttpMethod.PUT, new HttpEntity<>(dto), Void.class);
+        
+              response = restTemplate.exchange(getUrlWithParams(), HttpMethod.GET, null, responseType, params);
+        
+              assertNotNull(response);
+              assertEquals(1, response.getBody().size());
+              assertEquals(EXISTS_GAME_ID, response.getBody().get(0).getId());
         }
-
+        
         @Test
         public void modifyWithNotExistIdShouldThrowException() {
-            assertNotNull(gameController);
-
-            String newTitle = "Nuevo juego";
-            long gameId = 0;
-
-            GameDto dto = new GameDto();
-            dto.setTitle(newTitle);
-
-            assertThrows(Exception.class, () -> gameController.save(gameId, dto));
+        
+              GameDto dto = new GameDto();
+              dto.setTitle(NEW_TITLE);
+        
+              ResponseEntity<?> response = restTemplate.exchange(LOCALHOST + port + SERVICE_PATH + NOT_EXISTS_GAME_ID, HttpMethod.PUT, new HttpEntity<>(dto), Void.class);
+        
+              assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
         }
-
+    
     }
     ```
 
@@ -1445,59 +1495,65 @@ La segunda peculiaridad es que de cliente nos está llegando un `GameDto`, que i
 
 Pero de alguna forma tendremos que setearle esos valores a la entidad `Game`. Si conocemos sus ID que es lo que generalmente llega, podemos recuperar esos objetos de BBDD y setearlos en el objeto `Game`. Si recuerdas las reglas básicas, un `Repository` debe pertenecer a un solo `Service`, por lo que en lugar de llamar a métodos de los `AuthorRepository` y `CategoryRepository` desde nuestro `GameServiceImpl`, debemos llamar a métodos expuestos en `AuthorService` y `CategoryService`, que son los que gestionan sus repositorios. Para ello necesitaremos crear esos métodos get en los otros `Services`. 
 
-Y ya sabes, para implementar nuevos métodos, antes se deben hacer las pruebas jUnit. Recuerda que los test van en `src/test/java`
+Y ya sabes, para implementar nuevos métodos, antes se deben hacer las pruebas jUnit, que en este caso, por variar, cubriremos con pruebas unitarias. Recuerda que los test van en `src/test/java`
 
-
-=== "AuthorServiceTest.java"
+=== "AuthorTest.java"
     ``` Java
     package com.capgemini.ccsw.tutorial.author;
 
     import static org.junit.jupiter.api.Assertions.assertEquals;
     import static org.junit.jupiter.api.Assertions.assertNotNull;
     import static org.junit.jupiter.api.Assertions.assertNull;
-
+    import static org.mockito.Mockito.mock;
+    import static org.mockito.Mockito.when;
+    
     import org.junit.jupiter.api.Test;
-    import org.springframework.beans.factory.annotation.Autowired;
-    import org.springframework.boot.test.context.SpringBootTest;
-    import org.springframework.transaction.annotation.Transactional;
-
+    import org.junit.jupiter.api.extension.ExtendWith;
+    import org.mockito.InjectMocks;
+    import org.mockito.Mock;
+    import org.mockito.junit.jupiter.MockitoExtension;
+    
     import com.capgemini.ccsw.tutorial.author.model.Author;
-
-    @SpringBootTest
-    @Transactional
-    public class AuthorServiceTest {
-
-        @Autowired
-        private AuthorService authorService;
-
-        @Test
-        public void getExistsAuthorIdShouldReturnAuthor() {
-            assertNotNull(authorService);
-
-            Long authorId = 1L;
-
-            Author author = authorService.get(1L);
-
-            assertNotNull(author);
-
-            assertEquals(authorId, author.getId());
-
-        }
-
-        @Test
-        public void getNotExistsAuthorIdShouldReturnNull() {
-            assertNotNull(authorService);
-
-            Long authorId = 0L;
-
-            Author author = authorService.get(authorId);
-
-            assertNull(author);
-
-        }
-
+    
+    import java.util.Optional;
+    
+    @ExtendWith(MockitoExtension.class)
+    public class AuthorTest {
+    
+       public static final Long EXISTS_AUTHOR_ID = 1L;
+       public static final Long NOT_EXISTS_AUTHOR_ID = 0L;
+    
+       @Mock
+       private AuthorRepository authorRepository;
+    
+       @InjectMocks
+       private AuthorServiceImpl authorService;
+    
+       @Test
+       public void getExistsAuthorIdShouldReturnAuthor() {
+    
+          Author author = mock(Author.class);
+          when(author.getId()).thenReturn(EXISTS_AUTHOR_ID);
+          when(authorRepository.findById(EXISTS_AUTHOR_ID)).thenReturn(Optional.of(author));
+    
+          Author authorResponse = authorService.get(EXISTS_AUTHOR_ID);
+    
+          assertNotNull(authorResponse);
+    
+          assertEquals(EXISTS_AUTHOR_ID, authorResponse.getId());
+       }
+    
+       @Test
+       public void getNotExistsAuthorIdShouldReturnNull() {
+    
+          when(authorRepository.findById(NOT_EXISTS_AUTHOR_ID)).thenReturn(Optional.empty());
+    
+          Author author = authorService.get(NOT_EXISTS_AUTHOR_ID);
+    
+          assertNull(author);
+       }
+    
     }
-
     ```
 === "AuthorService.java"
     ``` Java hl_lines="14-19"
@@ -1620,54 +1676,29 @@ Y ya sabes, para implementar nuevos métodos, antes se deben hacer las pruebas j
 Y lo mismo para categorías.
 
 
-=== "CategoryServiceTest.java"
+=== "CategoryTest.java"
     ``` Java
-    package com.capgemini.ccsw.tutorial.category;
-
-    import static org.junit.jupiter.api.Assertions.assertEquals;
-    import static org.junit.jupiter.api.Assertions.assertNotNull;
-    import static org.junit.jupiter.api.Assertions.assertNull;
-
-    import org.junit.jupiter.api.Test;
-    import org.springframework.beans.factory.annotation.Autowired;
-    import org.springframework.boot.test.context.SpringBootTest;
-    import org.springframework.transaction.annotation.Transactional;
-
-    import com.capgemini.ccsw.tutorial.category.model.Category;
-
-    @SpringBootTest
-    @Transactional
-    public class CategoryServiceTest {
-
-        @Autowired
-        private CategoryService categoryService;
-
-        @Test
-        public void getExistsCategoryIdShouldReturnCategory() {
-            assertNotNull(categoryService);
-
-            Long categoryId = 1L;
-
-            Category category = categoryService.get(1L);
-
-            assertNotNull(category);
-
-            assertEquals(categoryId, category.getId());
-
-        }
-
-        @Test
-        public void getNotExistsCategoryIdShouldReturnNull() {
-            assertNotNull(categoryService);
-
-            Long categoryId = 0L;
-
-            Category category = categoryService.get(categoryId);
-
-            assertNull(category);
-
-        }
-
+    @Test
+    public void getExistsCategoryIdShouldReturnCategory() {
+    
+          Category category = mock(Category.class);
+          when(category.getId()).thenReturn(EXISTS_CATEGORY_ID);
+          when(categoryRepository.findById(EXISTS_CATEGORY_ID)).thenReturn(Optional.of(category));
+    
+          Category categoryResponse = categoryService.get(EXISTS_CATEGORY_ID);
+    
+          assertNotNull(categoryResponse);
+          assertEquals(EXISTS_CATEGORY_ID, category.getId());
+    }
+    
+    @Test
+    public void getNotExistsCategoryIdShouldReturnNull() {
+    
+          when(categoryRepository.findById(NOT_EXISTS_CATEGORY_ID)).thenReturn(Optional.empty());
+    
+          Category category = categoryService.get(NOT_EXISTS_CATEGORY_ID);
+    
+          assertNull(category);
     }
     ```
 === "CategoryService.java"
@@ -1918,7 +1949,7 @@ Es otra forma, bastante sencilla de implementar consultas a BBDD.
 ### Prueba de las operaciones
 
 
-Si ahora ejecutamos de nuevo los jUnits, vemos que todos los que hemos desarrollado en `GameTest` ya funcionan correctamente, e incluso el resto de test de la aplicación también funcionan correctamente. 
+Si ahora ejecutamos de nuevo los jUnits, vemos que todos los que hemos desarrollado en `GameIT` ya funcionan correctamente, e incluso el resto de test de la aplicación también funcionan correctamente. 
 
 !!! tip "Pruebas jUnit"
     Cada vez que desarrollemos un caso de uso nuevo, debemos relanzar todas las pruebas automáticas que tenga la aplicación. Es muy común que al implementar algún desarrollo nuevo, interfiramos de alguna forma en el funcionamiento de otra funcionalidad. Si lanzamos toda la batería de pruebas, nos daremos cuenta si algo ha dejado de funcionar y podremos solucionarlo antes de llevar ese error a Producción. Las pruebas jUnit son nuestra red de seguridad.
@@ -1932,7 +1963,7 @@ Además de las pruebas automáticas, podemos ver como se comporta la aplicación
 
 ** GET http://localhost:8080/game?idCategory=xxx **
 
-Nos devuelve un listado filtrado de `Game`. Fíjate bien en la petición donde envíamos los filtros y la respuesta que tiene los objetos `Category` y `Author` incluídos.
+Nos devuelve un listado filtrado de `Game`. Fíjate bien en la petición donde enviamos los filtros y la respuesta que tiene los objetos `Category` y `Author` incluídos.
 
 ![step5-java1](../assets/images/step5-java1.png)
 
@@ -1970,20 +2001,19 @@ Antes de poder conectar front con back, si recuerdas, en la edición de un `Game
 Así que necesitamos implementar esa funcionalidad, y como siempre vamos de la capa de testing hacia las siguientes capas. Deberíamos añadir los siguientes métodos:
 
 
-=== "AuthorTest.java"
+=== "AuthorIT.java"
     ``` Java
     ...
 
+    ParameterizedTypeReference<List<AuthorDto>> responseTypeList = new ParameterizedTypeReference<List<AuthorDto>>(){};
+    
     @Test
-    public void findAllShouldReturnAllAuthorInDB() {
-        assertNotNull(authorController);
-
-        List<AuthorDto> authors = authorController.findAll();
-
-        assertNotNull(authors);
-
-        assertEquals(TOTAL_AUTORS, authors.size());
-
+    public void findAllShouldReturnAllAuthor() {
+    
+          ResponseEntity<List<AuthorDto>> response = restTemplate.exchange(LOCALHOST + port + SERVICE_PATH, HttpMethod.GET, null, responseTypeList);
+    
+          assertNotNull(response);
+          assertEquals(TOTAL_AUTHORS, response.getBody().size());
     }
 
     ...

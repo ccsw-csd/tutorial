@@ -826,176 +826,167 @@ También crearemos una clase `AuthorController` dentro del package de `com.capge
         }
     }
     ```
-=== "AuthorTest.java"
+=== "AuthorIT.java"
     ``` Java
     package com.capgemini.ccsw.tutorial.author;
-
-    import static org.junit.jupiter.api.Assertions.assertEquals;
-    import static org.junit.jupiter.api.Assertions.assertNotNull;
-    import static org.junit.jupiter.api.Assertions.assertThrows;
-
+    
+    import com.capgemini.ccsw.tutorial.author.model.AuthorDto;
+    import com.capgemini.ccsw.tutorial.author.model.AuthorSearchDto;
     import org.junit.jupiter.api.Test;
     import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.boot.test.context.SpringBootTest;
+    import org.springframework.boot.test.web.client.TestRestTemplate;
+    import org.springframework.boot.web.server.LocalServerPort;
+    import org.springframework.core.ParameterizedTypeReference;
     import org.springframework.data.domain.Page;
     import org.springframework.data.domain.PageRequest;
-    import org.springframework.transaction.annotation.Transactional;
-
-    import com.capgemini.ccsw.tutorial.author.model.AuthorDto;
-    import com.capgemini.ccsw.tutorial.author.model.AuthorSearchDto;
+    import org.springframework.http.HttpEntity;
+    import org.springframework.http.HttpMethod;
+    import org.springframework.http.HttpStatus;
+    import org.springframework.http.ResponseEntity;
+    import org.springframework.test.annotation.DirtiesContext;
     
-    @SpringBootTest
-    @Transactional
-    public class AuthorTest {
-
-        private static final int TOTAL_AUTORS = 6;
-
+    import static org.junit.jupiter.api.Assertions.*;
+    
+    @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+    @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
+    public class AuthorIT {
+    
+        public static final String LOCALHOST = "http://localhost:";
+        public static final String SERVICE_PATH = "/author/";
+        
+        public static final Long DELETE_AUTHOR_ID = 6L;
+        public static final Long MODIFY_AUTHOR_ID = 3L;
+        public static final String NEW_AUTHOR_NAME = "Nuevo Autor";
+        public static final String NEW_NATIONALITY = "Nueva Nacionalidad";
+        
+        private static final int TOTAL_AUTHORS = 6;
+        private static final int PAGE_SIZE = 5;
+        
+        @LocalServerPort
+        private int port;
+        
         @Autowired
-        private AuthorController authorController;
-
+        private TestRestTemplate restTemplate;
+        
+        ParameterizedTypeReference<Page<AuthorDto>> responseTypePage = new ParameterizedTypeReference<Page<AuthorDto>>(){};
+        
         @Test
         public void findFirstPageWithFiveSizeShouldReturnFirstFiveResults() {
-
-            int pageSize = 5;
-
-            assertNotNull(authorController);
-
-            AuthorSearchDto dto = new AuthorSearchDto();
-            dto.setPageable(PageRequest.of(0, pageSize));
-
-            Page<AuthorDto> resultPage = authorController.findPage(dto);
-
-            assertNotNull(resultPage);
-
-            assertEquals(TOTAL_AUTORS, resultPage.getTotalElements());
-            assertEquals(pageSize, resultPage.getContent().size());
-
+        
+              AuthorSearchDto searchDto = new AuthorSearchDto();
+              searchDto.setPageable(PageRequest.of(0, PAGE_SIZE));
+        
+              ResponseEntity<Page<AuthorDto>> response = restTemplate.exchange(LOCALHOST + port + SERVICE_PATH, HttpMethod.POST, new HttpEntity<>(searchDto), responseTypePage);
+        
+              assertNotNull(response);
+              assertEquals(TOTAL_AUTHORS, response.getBody().getTotalElements());
+              assertEquals(PAGE_SIZE, response.getBody().getContent().size());
         }
-
+        
         @Test
         public void findSecondPageWithFiveSizeShouldReturnLastResult() {
-
-            int pageSize = 5;
-            int elementsCount = TOTAL_AUTORS - pageSize;
-
-            assertNotNull(authorController);
-
-            AuthorSearchDto searchDto = new AuthorSearchDto();
-            searchDto.setPageable(PageRequest.of(1, pageSize));
-
-            Page<AuthorDto> resultPage = authorController.findPage(searchDto);
-
-            assertNotNull(resultPage);
-
-            assertEquals(TOTAL_AUTORS, resultPage.getTotalElements());
-            assertEquals(elementsCount, resultPage.getContent().size());
-
+        
+              int elementsCount = TOTAL_AUTHORS - PAGE_SIZE;
+        
+              AuthorSearchDto searchDto = new AuthorSearchDto();
+              searchDto.setPageable(PageRequest.of(1, PAGE_SIZE));
+        
+              ResponseEntity<Page<AuthorDto>> response = restTemplate.exchange(LOCALHOST + port + SERVICE_PATH, HttpMethod.POST, new HttpEntity<>(searchDto), responseTypePage);
+        
+              assertNotNull(response);
+              assertEquals(TOTAL_AUTHORS, response.getBody().getTotalElements());
+              assertEquals(elementsCount, response.getBody().getContent().size());
         }
-
+        
         @Test
         public void saveWithoutIdShouldCreateNewAuthor() {
-
-            assertNotNull(authorController);
-
-            String newAuthorName = "Nuevo Autor";
-            String newNationality = "Nueva Nacionalidad";
-
-            long newAuthorId = TOTAL_AUTORS + 1;
-            long newAuthorSize = TOTAL_AUTORS + 1;
-
-            AuthorDto dto = new AuthorDto();
-            dto.setName(newAuthorName);
-            dto.setNationality(newNationality);
-
-            authorController.save(null, dto);
-
-            AuthorSearchDto searchDto = new AuthorSearchDto();
-            searchDto.setPageable(PageRequest.of(0, (int) newAuthorSize));
-
-            Page<AuthorDto> resultPage = authorController.findPage(searchDto);
-
-            assertNotNull(resultPage);
-            assertEquals(newAuthorSize, resultPage.getTotalElements());
-
-            AuthorDto author = resultPage.getContent().stream().filter(item -> item.getId().equals(newAuthorId)).findFirst().orElse(null);
-            assertNotNull(author);
-            assertEquals(newAuthorName, author.getName());
-
+        
+              long newAuthorId = TOTAL_AUTHORS + 1;
+              long newAuthorSize = TOTAL_AUTHORS + 1;
+        
+              AuthorDto dto = new AuthorDto();
+              dto.setName(NEW_AUTHOR_NAME);
+              dto.setNationality(NEW_NATIONALITY);
+        
+              restTemplate.exchange(LOCALHOST + port + SERVICE_PATH, HttpMethod.PUT, new HttpEntity<>(dto), Void.class);
+        
+              AuthorSearchDto searchDto = new AuthorSearchDto();
+              searchDto.setPageable(PageRequest.of(0, (int) newAuthorSize));
+        
+              ResponseEntity<Page<AuthorDto>> response = restTemplate.exchange(LOCALHOST + port + SERVICE_PATH, HttpMethod.POST, new HttpEntity<>(searchDto), responseTypePage);
+        
+              assertNotNull(response);
+              assertEquals(newAuthorSize, response.getBody().getTotalElements());
+        
+              AuthorDto author = response.getBody().getContent().stream().filter(item -> item.getId().equals(newAuthorId)).findFirst().orElse(null);
+              assertNotNull(author);
+              assertEquals(NEW_AUTHOR_NAME, author.getName());
+        
         }
-
+        
         @Test
         public void modifyWithExistIdShouldModifyAuthor() {
-
-            assertNotNull(authorController);
-
-            String newAuthorName = "Nuevo Autor";
-            String newNationality = "Nueva Nacionalidad";
-            long authorId = 3;
-
-            AuthorDto dto = new AuthorDto();
-            dto.setName(newAuthorName);
-            dto.setNationality(newNationality);
-
-            authorController.save(authorId, dto);
-
-            AuthorSearchDto searchDto = new AuthorSearchDto();
-            searchDto.setPageable(PageRequest.of(0, (int) authorId));
-
-            Page<AuthorDto> resultPage = authorController.findPage(searchDto);
-
-            assertNotNull(resultPage);
-            assertEquals(TOTAL_AUTORS, resultPage.getTotalElements());
-
-            AuthorDto author = resultPage.getContent().stream().filter(item -> item.getId().equals(authorId)).findFirst().orElse(null);
-            assertNotNull(author);
-            assertEquals(newAuthorName, author.getName());
-            assertEquals(newNationality, author.getNationality());
-            
+        
+              AuthorDto dto = new AuthorDto();
+              dto.setName(NEW_AUTHOR_NAME);
+              dto.setNationality(NEW_NATIONALITY);
+        
+              restTemplate.exchange(LOCALHOST + port + SERVICE_PATH + MODIFY_AUTHOR_ID, HttpMethod.PUT, new HttpEntity<>(dto), Void.class);
+        
+              AuthorSearchDto searchDto = new AuthorSearchDto();
+              searchDto.setPageable(PageRequest.of(0, PAGE_SIZE));
+        
+              ResponseEntity<Page<AuthorDto>> response = restTemplate.exchange(LOCALHOST + port + SERVICE_PATH, HttpMethod.POST, new HttpEntity<>(searchDto), responseTypePage);
+        
+              assertNotNull(response);
+              assertEquals(TOTAL_AUTHORS, response.getBody().getTotalElements());
+        
+              AuthorDto author = response.getBody().getContent().stream().filter(item -> item.getId().equals(MODIFY_AUTHOR_ID)).findFirst().orElse(null);
+              assertNotNull(author);
+              assertEquals(NEW_AUTHOR_NAME, author.getName());
+              assertEquals(NEW_NATIONALITY, author.getNationality());
+        
         }
-
+        
         @Test
         public void modifyWithNotExistIdShouldThrowException() {
-
-            assertNotNull(authorController);
-
-            String newAuthorName = "Nuevo Autor";
-            long authorId = TOTAL_AUTORS + 1;
-
-            AuthorDto dto = new AuthorDto();
-            dto.setName(newAuthorName);
-
-            assertThrows(Exception.class, () -> authorController.save(authorId, dto));
+        
+              long authorId = TOTAL_AUTHORS + 1;
+        
+              AuthorDto dto = new AuthorDto();
+              dto.setName(NEW_AUTHOR_NAME);
+        
+              ResponseEntity<?> response = restTemplate.exchange(LOCALHOST + port + SERVICE_PATH + authorId, HttpMethod.PUT, new HttpEntity<>(dto), Void.class);
+        
+              assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
         }
-
+        
         @Test
         public void deleteWithExistsIdShouldDeleteCategory() {
-
-            assertNotNull(authorController);
-
-            long newAuthorsSize = TOTAL_AUTORS - 1;
-            long deleteAuthorId = 6;
-
-            authorController.delete(deleteAuthorId);
-
-            AuthorSearchDto searchDto = new AuthorSearchDto();
-            searchDto.setPageable(PageRequest.of(0, TOTAL_AUTORS));
-
-            Page<AuthorDto> resultPage = authorController.findPage(searchDto);
-
-            assertNotNull(resultPage);
-            assertEquals(newAuthorsSize, resultPage.getTotalElements());
-
+        
+              long newAuthorsSize = TOTAL_AUTHORS - 1;
+        
+              restTemplate.exchange(LOCALHOST + port + SERVICE_PATH + DELETE_AUTHOR_ID, HttpMethod.DELETE, null, Void.class);
+        
+              AuthorSearchDto searchDto = new AuthorSearchDto();
+              searchDto.setPageable(PageRequest.of(0, TOTAL_AUTHORS));
+        
+              ResponseEntity<Page<AuthorDto>> response = restTemplate.exchange(LOCALHOST + port + SERVICE_PATH, HttpMethod.POST, new HttpEntity<>(searchDto), responseTypePage);
+        
+              assertNotNull(response);
+              assertEquals(newAuthorsSize, response.getBody().getTotalElements());
+        
         }
-
+        
         @Test
         public void deleteWithNotExistsIdShouldThrowException() {
-
-            assertNotNull(authorController);
-
-            long deleteAuthorId = TOTAL_AUTORS + 1;
-
-            assertThrows(Exception.class, () -> authorController.delete(deleteAuthorId));
-
+        
+              long deleteAuthorId = TOTAL_AUTHORS + 1;
+        
+              ResponseEntity<?> response = restTemplate.exchange(LOCALHOST + port + SERVICE_PATH + deleteAuthorId, HttpMethod.DELETE, null, Void.class);
+        
+              assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
         }
     }
     ```
@@ -1215,11 +1206,10 @@ La siguiente capa que vamos a implementar es justamente la capa que contiene tod
 
     }
     ```
-
+    
 De nuevo pasa lo mismo que con la capa anterior, aquí delegamos muchas operaciones de consulta y guardado de datos en `AuthorRepository`. Hemos tenido que crearlo como interface para que no falle la compilación. Recuerda que cuando creamos un `Repository` es de gran ayuda hacerlo extender de `CrudRepository<T, ID>` ya que tiene muchos métodos implementados de base que nos pueden servir, como el `delete` o el `save`.
 
 Fíjate también que cuando queremos copiar más de un dato de una clase a otra, tenemos una utilidad llamada `BeanUtils` que nos permite realizar esa copia (siempre que las propiedades de ambas clases se llamen igual). Además, en nuestro ejemplo hemos ignorado el 'id' para que no nos copie un null a la clase destino.
-
 
 ### Repository
 
