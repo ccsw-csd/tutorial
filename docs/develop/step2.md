@@ -743,17 +743,27 @@ Los aspectos importantes de la capa `Repository` son:
 
 ## Capa de Testing: TDD
 
-Por último y aunque no es lo último que se desarrolla sino todo lo contrario, debería ser lo primero en desarrollar, tenemos la batería de pruebas.
-Hemos hecho desarrollado este primer caso de uso con una ordenación peculiar con fines didácticos, pero en realidad deberíamos ir aplicando [TDD (Test Driven Development)](../appendix/tdd.md) para el desarrollo. Si quieres aprender las reglas básicas de como aplicar TDD al desarrollo diario, te recomiendo que leas el [Anexo. TDD](../appendix/tdd.md).
+Por último y aunque no debería ser lo último que se desarrolla sino todo lo contrario, debería ser lo primero en desarrollar, tenemos la batería de pruebas.
+Con fines didáctivos, he querido enseñarte un ciclo de desarrollo para ir recorriendo las diferentes capas de una aplicación pero, en realidad, para realizar el desarrollo debería aplicar [TDD (Test Driven Development)](../appendix/tdd.md). Si quieres aprender las reglas básicas de como aplicar TDD al desarrollo diario, te recomiendo que leas el [Anexo. TDD](../appendix/tdd.md).
 
-En este caso, y sin que sirva de precedente, ya tenemos implementados los métodos de la aplicación, y ahora vamos a testearlos. Existen muchas formas de testing en función del componente o la capa que yo quiera testear. En realidad, a medida que vayas programando irás aprendiendo todas ellas, de momento realizaremos dos tipos de test simples que prueben las casuísticas de los métodos.
+En este caso, y sin que sirva de precedente, ya tenemos implementados los métodos de la aplicación, y ahora vamos a testearlos. Existen muchas formas de testing en función del componente o la capa que se quiera testear. En realidad, a medida que vayas programando irás aprendiendo todas ellas, de momento realizaremos dos tipos de test simples que prueben las casuísticas de los métodos.
 
-Los enfoques serán desde la perspectiva de los test de integración y los test unitarios.
+El enfoque que seguiremos en este tutorial será realizar las pruebas mediante test unitarios y test de integración.
 
-* **Test de integración**: Se tratan de pruebas completas de un determinado endpoint que conlleva inicializar el contexto de Spring (base de datos incluida) y realizar una llama REST para comprobar el flujo completo de la API.
 * **Test unitarios**: Se trata de pruebas estrictamente relativas a la calidad estática del código de una determinada operación de la capa de la lógica de negocio (Service). Estas pruebas no inicializan el contexto de Spring y deben simular todas las piezas ajenas a la funcionalidad testeada.
+* **Test de integración**: Se tratan de pruebas completas de un determinado endpoint que conlleva inicializar el contexto de Spring (base de datos incluida) y realizar una llama REST para comprobar el flujo completo de la API.
+
 
 Lo primero será conocer que queremos probar y para ello nos vamos a hacer una lista:
+
+
+Test unitarios:
+
+* Prueba de listado, debe probar la lógica dentro de la operación de negocio de consulta de `Categoría`
+* Prueba de creación, debe probar la lógica dentro de la operación de negocio de creación una nueva `Categoría`
+* Prueba de modificación, debe probar la lógica dentro de la operación de negocio de modificación una `Categoría` existente
+* Prueba de borrado, debe probar la lógica dentro de la operación de negocio de borrado de una `Categoría` existente
+
 
 Test de integración:
 
@@ -764,12 +774,6 @@ Test de integración:
 * Prueba de borrado correcta, debe borrar una `Categoría` existente
 * Prueba de borrado incorrecta, debe dar error al borrar una `Categoría` que no existe
 
-Test unitarios:
-
-* Prueba de listado, debe comprobar la operación de negocio de consulta de `Categoría`
-* Prueba de creación, debe comprobar la operación de negocio de creación una nueva `Categoría`
-* Prueba de modificación, debe comprobar la operación de negocio de modificación una `Categoría` existente
-* Prueba de borrado, debe comprobar la operación de negocio borrado de una `Categoría` existente
 
 Se podrían hacer muchos más tests, pero creo que con esos son suficientes para que entiendas como se comporta esta capa. Si te fijas, hay que probar tanto los resultados correctos como los resultados incorrectos. El usuario no siempre se va a comportar como nosotros pensamos.
 
@@ -781,9 +785,24 @@ Vamos a empezar haciendo una clase de test dentro de la carpeta `src/test/java`.
 
 Crearemos las clases:
 
-* Test de integración: `com.capgemini.ccsw.tutorial.category.CategoryIT` 
 * Test unitarios: `com.capgemini.ccsw.tutorial.category.CategoryTest`
+* Test de integración: `com.capgemini.ccsw.tutorial.category.CategoryIT` 
 
+=== "CategoryTest.java"
+    ``` Java
+    package com.capgemini.ccsw.tutorial.category;
+
+    import org.junit.jupiter.api.extension.ExtendWith;
+    import org.mockito.junit.jupiter.MockitoExtension;
+
+    /**
+    * @author ccsw
+    */
+    @ExtendWith(MockitoExtension.class)
+    public class CategoryTest {
+
+    }
+    ```
 === "CategoryIT.java"
     ``` Java
     package com.capgemini.ccsw.tutorial.category;
@@ -808,22 +827,7 @@ Crearemos las clases:
 
     }
     ```
-=== "CategoryTest.java"
-    ``` Java
-    package com.capgemini.ccsw.tutorial.category;
 
-    import org.junit.jupiter.api.extension.ExtendWith;
-    import org.mockito.junit.jupiter.MockitoExtension;
-
-    /**
-    * @author ccsw
-    */
-    @ExtendWith(MockitoExtension.class)
-    public class CategoryTest {
-
-    }
-    ```
-    
 Estas clases son sencillas y tan solo tienen anotaciones específicas de Springboot para cada tipo de test:
 
 * `@SpringBootTest`. Esta anotación lo que hace es inicializar el contexto de Spring cada vez que se inician los test de jUnit. Aunque el contexto tarda unos segundos en arrancar, lo bueno que tiene es que solo se inicializa una vez y se lanzan todos los jUnits en batería con el mismo contexto.
@@ -846,49 +850,6 @@ Para las pruebas de integración nos faltará configurar la aplicación de test,
 Con todo esto ya podemos crear nuestro primer test. Iremos a las clases `CategoryIT` y `CategoryTest` donde añadiremos un método público. Los test siempre tienen que ser métodos públicos que devuelvan el tipo `void`.
 
 
-=== "CategoryIT.java"
-    ``` Java hl_lines="3-5 9-10 13 15 21 22 30 32-39"
-    package com.capgemini.ccsw.tutorial.category;
-    
-    import com.capgemini.ccsw.tutorial.category.model.CategoryDto;
-    import org.junit.jupiter.api.Test;
-    import org.springframework.beans.factory.annotation.Autowired;
-    import org.springframework.boot.test.context.SpringBootTest;
-    import org.springframework.boot.test.web.client.TestRestTemplate;
-    import org.springframework.boot.web.server.LocalServerPort;
-    import org.springframework.core.ParameterizedTypeReference;
-    import org.springframework.http.ResponseEntity;
-    import org.springframework.test.annotation.DirtiesContext;
-    
-    import java.util.List;
-    
-    import static org.junit.jupiter.api.Assertions.*;
-    
-    @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-    @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
-    public class CategoryIT {
-    
-        public static final String LOCALHOST = "http://localhost:";
-        public static final String SERVICE_PATH = "/category/";
-        
-        @LocalServerPort
-        private int port;
-        
-        @Autowired
-        private TestRestTemplate restTemplate;
-        
-        ParameterizedTypeReference<List<CategoryDto>> responseType = new ParameterizedTypeReference<List<CategoryDto>>(){};
-        
-        @Test
-        public void findAllShouldReturnAllCategories() {
-        
-              ResponseEntity<List<CategoryDto>> response = restTemplate.exchange(LOCALHOST + port + SERVICE_PATH, HttpMethod.GET, null, responseType);
-        
-              assertNotNull(response);
-              assertEquals(3, response.getBody().size());
-        }
-    }
-    ```
 === "CategoryTest.java"
     ``` Java hl_lines="3-5 7 8 11 12 14 15 20 21 23 24 26-38"
     package com.capgemini.ccsw.tutorial.category;
@@ -931,12 +892,56 @@ Con todo esto ya podemos crear nuestro primer test. Iremos a las clases `Categor
         }
     }
     ```
+=== "CategoryIT.java"
+    ``` Java hl_lines="3-5 9-10 13 15 21 22 30 32-39"
+    package com.capgemini.ccsw.tutorial.category;
+    
+    import com.capgemini.ccsw.tutorial.category.model.CategoryDto;
+    import org.junit.jupiter.api.Test;
+    import org.springframework.beans.factory.annotation.Autowired;
+    import org.springframework.boot.test.context.SpringBootTest;
+    import org.springframework.boot.test.web.client.TestRestTemplate;
+    import org.springframework.boot.web.server.LocalServerPort;
+    import org.springframework.core.ParameterizedTypeReference;
+    import org.springframework.http.ResponseEntity;
+    import org.springframework.test.annotation.DirtiesContext;
+    
+    import java.util.List;
+    
+    import static org.junit.jupiter.api.Assertions.*;
+    
+    @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+    @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
+    public class CategoryIT {
+    
+        public static final String LOCALHOST = "http://localhost:";
+        public static final String SERVICE_PATH = "/category/";
+        
+        @LocalServerPort
+        private int port;
+        
+        @Autowired
+        private TestRestTemplate restTemplate;
+        
+        ParameterizedTypeReference<List<CategoryDto>> responseType = new ParameterizedTypeReference<List<CategoryDto>>(){};
+        
+        @Test
+        public void findAllShouldReturnAllCategories() {
+        
+              ResponseEntity<List<CategoryDto>> response = restTemplate.exchange(LOCALHOST + port + SERVICE_PATH, HttpMethod.GET, null, responseType);
+        
+              assertNotNull(response);
+              assertEquals(3, response.getBody().size());
+        }
+    }
+    ```    
     
 Es muy importante marcar cada método de prueba con la anotación `@Test`, en caso contrario no se ejecutará. Lo que se debe hacer en cada método que implementemos es probar **una y solo una** acción. 
 
-En los ejemplos anteriores, hemos probado por un lado, la llamando al método `GET` del endpoint `http://localhost:XXXX/category/` comprobando que realmente nos devuelve 3 resultados, que son los que hay en BBDD inicialmente.
+En los ejemplos anteriores `(CategoryTest)`, por un lado hemos comprobado el método `findAll()` el cual por debajo invoca una llamada al repository de categoría, la cual hemos simulado con una respuesta ficticia limitándonos únicamente a la lógica contenida en la operación de negocio.
 
-Mientras que por otro lado, hemos comprobado el método `findAll()` el cual por debajo invoca una llamada al repository de categoría, la cual hemos simulado con una respuesta ficticia limitándonos únicamente a la lógica contenida en la operación de negocio.
+Mientras que por otro lado `(CategoryIT)`, hemos probado la llamando al método `GET` del endpoint `http://localhost:XXXX/category/` comprobando que realmente nos devuelve 3 resultados, que son los que hay en BBDD inicialmente.
+
 
 !!! tip "Muy importante: Nomenclatura de los tests"
     La nomenclatura de los métodos de test debe sigue una estructura determinada. Hay muchas formas de nombrar a los métodos, pero nosotros solemos utilizar la estructura 'should', para indicar lo que va a hacer. En el ejemplo anterior el método 'findAll' debe devolver 'AllCategories'. De esta forma sabemos cuál es la intención del test, y si por cualquier motivo diera un fallo, sabemos que es lo que NO está funcionando de nuestra aplicación.
@@ -951,6 +956,26 @@ Para comprobar que el test funciona, podemos darle botón derecho sobre la clase
 Vamos con los siguientes test, los que probarán una creación de una nueva `Categoría`. Añadimos el siguiente método a la clase de test:
 
 
+=== "CategoryTest.java"
+    ``` Java
+
+    public static final String CATEGORY_NAME = "CAT1";
+
+    @Test
+    public void saveNotExistsCategoryIdShouldInsert() {
+    
+          CategoryDto categoryDto = new CategoryDto();
+          categoryDto.setName(CATEGORY_NAME);
+    
+          ArgumentCaptor<Category> category = ArgumentCaptor.forClass(Category.class);
+    
+          categoryService.save(null, categoryDto);
+    
+          verify(categoryRepository).save(category.capture());
+    
+          assertEquals(CATEGORY_NAME, category.getValue().getName());
+    }
+    ```
 === "CategoryIT.java"
     ``` Java
 
@@ -973,32 +998,12 @@ Vamos con los siguientes test, los que probarán una creación de una nueva `Cat
           assertNotNull(categorySearch);
           assertEquals(NEW_CATEGORY_NAME, categorySearch.getName());
     }
-    ```
-=== "CategoryTest.java"
-    ``` Java
+    ```    
+    
+En el primer caso, estamos construyendo un objeto `CategoryDto` para darle un nombre a la `Categoría` e invocamos a la operación `save` pasandole un ID a nulo. Para identificar que el funcionamiento es el esperado, capturamos la categoría que se proporciona al repository al intentar realizar la acción ficticia de guardado y comprobamos que el valor es el que se proporciona en la invocación.
 
-    public static final String CATEGORY_NAME = "CAT1";
-
-    @Test
-    public void saveNotExistsCategoryIdShouldInsert() {
-    
-          CategoryDto categoryDto = new CategoryDto();
-          categoryDto.setName(CATEGORY_NAME);
-    
-          ArgumentCaptor<Category> category = ArgumentCaptor.forClass(Category.class);
-    
-          categoryService.save(null, categoryDto);
-    
-          verify(categoryRepository).save(category.capture());
-    
-          assertEquals(CATEGORY_NAME, category.getValue().getName());
-    }
-    ```
-    
-En el primer caso, estamos construyendo un objeto `CategoryDto` para darle un nombre a la `Categoría` e invocamos al método `PUT` sin añadir en la ruta referencia al identificador.
+De forma similar en el segundo caso, estamos construyendo un objeto `CategoryDto` para darle un nombre a la `Categoría` e invocamos al método `PUT` sin añadir en la ruta referencia al identificador.
 Seguidamente, recuperamos de nuevo la lista de categorías y en este caso debería tener 4 resultados. Hacemos un filtrado buscando la nueva `Categoría` que debería tener un ID = 4 y debería ser la que acabamos de crear. 
-
-De forma similar en el segundo caso, estamos construyendo un objeto `CategoryDto` para darle un nombre a la `Categoría` e invocamos a la operación `save` pasandole un ID a nulo. Para identificar que el funcionamiento es el esperado, capturamos la categoría que se proporciona al repository al intentar realizar la acción ficticia de guardado y comprobamos que el valor es el que se proporciona en la invocación.
 
 Si ejecutamos, veremos que ambos test ahora aparecen en verde.
 
@@ -1009,7 +1014,25 @@ Para este caso de prueba, vamos a realizar varios test, como hemos comentado ant
 
 Empezamos con el sencillo, un test que pruebe una modificación existente.
 
+=== "CategoryTest.java"
+    ``` Java
 
+    public static final Long EXISTS_CATEGORY_ID = 1L;
+
+    @Test
+    public void saveExistsCategoryIdShouldUpdate() {
+    
+      CategoryDto categoryDto = new CategoryDto();
+      categoryDto.setName(CATEGORY_NAME);
+    
+      Category category = mock(Category.class);
+      when(categoryRepository.findById(EXISTS_CATEGORY_ID)).thenReturn(Optional.of(category));
+    
+      categoryService.save(EXISTS_CATEGORY_ID, categoryDto);
+    
+      verify(categoryRepository).save(category);
+    }
+    ```
 === "CategoryIT.java"
     ``` Java
 
@@ -1032,29 +1055,11 @@ Empezamos con el sencillo, un test que pruebe una modificación existente.
           assertEquals(NEW_CATEGORY_NAME, categorySearch.getName());
     }
     ```
-=== "CategoryTest.java"
-    ``` Java
 
-    public static final Long EXISTS_CATEGORY_ID = 1L;
-
-    @Test
-    public void saveExistsCategoryIdShouldUpdate() {
-    
-      CategoryDto categoryDto = new CategoryDto();
-      categoryDto.setName(CATEGORY_NAME);
-    
-      Category category = mock(Category.class);
-      when(categoryRepository.findById(EXISTS_CATEGORY_ID)).thenReturn(Optional.of(category));
-    
-      categoryService.save(EXISTS_CATEGORY_ID, categoryDto);
-    
-      verify(categoryRepository).save(category);
-    }
-    ```
+En el caso de los test unitarios, comprobamos la lógica de la modificación simulando que el repository nos devuelve una categoría que modificar y verificado que se invoca el guardado sobre la misma.
 
 En el caso de los test de integración, la misma filosofía que en el test anterior, pero esta vez modificamos la `Categoría` de ID = 3. Luego la filtramos y vemos que realmente se ha modificado. Además comprobamos que el listado de todas los registros sigue siendo 3 y no se ha creado un nuevo registro.
 
-En cuanto al test unitario, comprobamos el camino de la modificación simulando que el repository nos devuelve una categoría que modificar y verificado que se invoca el guardado sobre la misma.
 
 En el siguiente test, probaremos un resultado erróneo.
 
@@ -1080,6 +1085,17 @@ Intentamos modificar el ID = 4, que no debería existir en BBDD y por tanto lo q
 
 Ya por último implementamos las pruebas de borrado.
 
+=== "CategoryTest.java"
+    ``` Java
+
+    @Test
+    public void deleteExistsCategoryIdShouldDelete() {
+    
+          categoryService.delete(EXISTS_CATEGORY_ID);
+    
+          verify(categoryRepository).deleteById(EXISTS_CATEGORY_ID);
+    }
+    ```
 === "CategoryIT.java"
     ``` Java
     
@@ -1103,21 +1119,10 @@ Ya por último implementamos las pruebas de borrado.
           assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
     }
     ```
-=== "CategoryTest.java"
-    ``` Java
 
-    @Test
-    public void deleteExistsCategoryIdShouldDelete() {
-    
-          categoryService.delete(EXISTS_CATEGORY_ID);
-    
-          verify(categoryRepository).deleteById(EXISTS_CATEGORY_ID);
-    }
-    ```
+En cuanto al test unitario, se invoca a la operación `delete` y se verifica que la operación requerida del repository es invocado con el atributo correcto.    
 
 En lo relativo a las pruebas de integración, en el primer test, se invoca el método `DELETE` y posteriormente se comprueba que el listado tiene un tamaño de 2 (uno menos que el original). Mientras que en el segundo test, se comprueba que con ID no válido, devuelve un `500 Internal Server Error`.
-
-En cuanto al test unitario, se invoca a la operación `delete` y se verifica que la operación requerida del repository es invocado con el atributo correcto.
 
 Con esto tendríamos más o menos probados los casos básicos de nuestra aplicación y tendríamos una pequeña red de seguridad que nos ayudaría por si a futuro necesitamos hacer algún cambio o evolutivo.
 
@@ -1127,7 +1132,7 @@ Con esto tendríamos más o menos probados los casos básicos de nuestra aplicac
 Resumiendo un poco los pasos que hemos seguido:
 
 * Hay que definir y agrupar por ámbito funcional, hemos creado el package `com.capgemini.ccsw.tutorial.category` para aglutinar todas las clases.
-* Lo primero que debemos empezar a construir **siempre** son los test, aunque en este tutorial lo hemos hecho al revés solo con fines didácticos. En los siguientes puntos lo haremos de forma correcta, y esto nos ayudará a pensar y diseñar que es lo que queremos implementar realmente.
+* Lo primero que debemos empezar a construir **siempre** son los test, aunque en este capítulo del tutorial lo hemos hecho al revés solo con fines didácticos. En los siguientes capítulos lo haremos de forma correcta, y esto nos ayudará a pensar y diseñar que es lo que queremos implementar realmente.
 * La implementación de la aplicación se debería separar por capas:
     * `Controller` → Maneja las peticiones de entrada del cliente y realiza transformaciones. No ejecuta directamente lógica de negocio, para eso utiliza llamadas a la siguiente capa.
     * `Service` → Ejecuta la lógica de negocio en sus métodos o llamando a otros objetos de la misma capa. No ejecuta directamente accesos a datos, para eso utiliza la siguiente capa.
