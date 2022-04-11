@@ -86,7 +86,7 @@ Esta página está disponible desde [Spring Initializr](https://start.spring.io/
 * Group: com.capgemini.ccsw
 * ArtifactId: tutorial
 * Versión Java: 8
-* Dependencias: Spring Web, H2 Database
+* Dependencias: Spring Web, Spring Data JPA, H2 Database
 
 ![initializr](./assets/images/initializr.png)
 
