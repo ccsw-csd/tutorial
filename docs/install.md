@@ -27,6 +27,32 @@ Una vez instalado eclipse, debes asegurarte que está usando por defecto la vers
 
 ![Installed JREs](./assets/images/install-eclipse.png)
 
+Ademas, a fin de crear código homogéneo y mantenible, vamos a configurar el formateador de código automático.
+
+Para ello nos dirigiremos a las preferencias de Eclipse.
+
+![Formatting](./assets/images/install-eclipse-format_1.png)
+
+Seleccionamos la sección `Formatter` de Java.
+
+![Formatting](./assets/images/install-eclipse-format_2.png)
+
+Aquí crearemos un nuevo perfil heredando la configuración por defecto.
+
+![Formatting](./assets/images/install-eclipse-format_3.png)
+
+En el nuevo perfil configuramos que se use espacios en vez de tabuladores con sangrado de 4 caracteres.
+
+![Formatting](./assets/images/install-eclipse-format_4.png)
+
+Una vez cofigurado el nuevo formateador debemos activar que se aplique en el guardado. Para ello volvemos acceder a las preferencias de Eclipse y nos dirigimos a la sub sección `Save Actions` del la sección `Editor` nuevamente de Java.
+
+![Formatting](./assets/images/install-eclipse-format_5.png)
+
+Aquí aplicamos la configuración deseada.
+
+![Formatting](./assets/images/install-eclipse-format_6.png)
+
 
 ## Instalación de herramientas para desarrollo Front
 
