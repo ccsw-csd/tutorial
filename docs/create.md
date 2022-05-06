@@ -83,7 +83,7 @@ Esta página está disponible desde [Spring Initializr](https://start.spring.io/
 * Tipo de proyecto: Maven
 * Lenguage: Java
 * Versión Spring boot: 2.4.4
-* Group: com.capgemini.ccsw
+* Group: com.ccsw
 * ArtifactId: tutorial
 * Versión Java: 8
 * Dependencias: Spring Web, Spring Data JPA, H2 Database
@@ -116,7 +116,7 @@ Lo primero que vamos a hacer es añadir las dependencias a librerías de devonfw
         <relativePath/> <!-- lookup parent from repository -->
       </parent>
 
-      <groupId>com.capgemini.ccsw</groupId>
+      <groupId>com.ccsw</groupId>
       <artifactId>tutorial</artifactId>
       <version>0.0.1-SNAPSHOT</version>
       <name>tutorial</name>
@@ -198,22 +198,22 @@ Lo primero que vamos a hacer es añadir las dependencias a librerías de devonfw
 Hemos añadido las dependencias de Devonfw-JPA ya que nos permite utilizar más funcionalidades extendidas sobre repositorios JPA. Además de esa dependencia, hemos añadido una utilidad para hacer mapeos entre objetos y para configurar los servicios Rest.
 
 !!! tip "Uso de defonfw"
-    Vamos a utilizar algunas librerías de devonfw (fwk Opensource desarrollado por Capgemini, entre otros) que nos facilitan la vida a la hora de desarrollar una aplicación. Podríamos hacerlo directamente con los módulos de Spring pero hay ciertas utilidades que nos interesa usar de devonfw. Para más información puedes consultar su [Web Oficial](https://devonfw.com/)
+    Vamos a utilizar algunas librerías de devonfw que nos facilitan la vida a la hora de desarrollar una aplicación. Podríamos hacerlo directamente con los módulos de Spring pero hay ciertas utilidades que nos interesa usar de devonfw. Para más información puedes consultar su [Web Oficial](https://devonfw.com/)
 
 
 #### Configurar librerias devonfw
 
-El siguiente punto es crear las clases de configuración para las librerías que hemos añadido. Para ello vamos a crear un package de configuración general de la aplicación `com.capgemini.ccsw.tutorial.config` donde crearemos tres clases (dos de ellas dentro del subpaquete `mapper`).
+El siguiente punto es crear las clases de configuración para las librerías que hemos añadido. Para ello vamos a crear un package de configuración general de la aplicación `com.ccsw.tutorial.config` donde crearemos tres clases (dos de ellas dentro del subpaquete `mapper`).
 
 === "BeansOrikaConfig.java"
     ``` Java
-    package com.capgemini.ccsw.tutorial.config;
+    package com.ccsw.tutorial.config;
 
     import org.springframework.context.annotation.Bean;
     import org.springframework.context.annotation.Configuration;
 
-    import com.capgemini.ccsw.tutorial.config.mapper.BeanMapper;
-    import com.capgemini.ccsw.tutorial.config.mapper.BeanMapperImpl;
+    import com.ccsw.tutorial.config.mapper.BeanMapper;
+    import com.ccsw.tutorial.config.mapper.BeanMapperImpl;
     import com.devonfw.module.beanmapping.common.base.BaseOrikaConfig;
     import com.devonfw.module.json.common.base.ObjectMapperFactory;
     import com.fasterxml.jackson.databind.Module;
@@ -250,7 +250,7 @@ El siguiente punto es crear las clases de configuración para las librerías que
     ```
 === "mapper/BeanMapper.java"
     ``` Java
-    package com.capgemini.ccsw.tutorial.config.mapper;
+    package com.ccsw.tutorial.config.mapper;
 
     import org.springframework.data.domain.Page;
 
@@ -272,7 +272,7 @@ El siguiente punto es crear las clases de configuración para las librerías que
     ```
 === "mapper/BeanMapperImpl.java"
     ``` Java
-    package com.capgemini.ccsw.tutorial.config.mapper;
+    package com.ccsw.tutorial.config.mapper;
 
     import java.util.List;
 

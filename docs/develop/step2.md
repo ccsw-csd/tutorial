@@ -16,7 +16,7 @@ Si has seguido el tutorial, en la creación del proyecto tenías la posibilidad 
 
 Vamos a hacer un breve refresco de la estructura del código que ya se ha visto en puntos anteriores.
 
-Las clases deben estar agrupadas por ámbito funcional, en nuestro caso como vamos a hacer la funcionalidad de `Categorías` pues debería estar todo dentro de un package del tipo `com.capgemini.ccsw.tutorial.category`.
+Las clases deben estar agrupadas por ámbito funcional, en nuestro caso como vamos a hacer la funcionalidad de `Categorías` pues debería estar todo dentro de un package del tipo `com.ccsw.tutorial.category`.
 
 Además, deberíamos aplicar la separación por capas como ya se vió en el esquema:
 
@@ -37,11 +37,11 @@ En esta capa es donde se definen las operaciones que pueden ser consumidas por l
 
 ### Controller de ejemplo
 
-Vamos a crear una clase `CategoryController.java` dentro del package `com.capgemini.ccsw.tutorial.category` para definir las rutas de las operaciones.
+Vamos a crear una clase `CategoryController.java` dentro del package `com.ccsw.tutorial.category` para definir las rutas de las operaciones.
 
 === "CategoryController.java"
     ``` Java
-    package com.capgemini.ccsw.tutorial.category;
+    package com.ccsw.tutorial.category;
 
     import java.util.List;
 
@@ -79,11 +79,11 @@ Ahora que ya tenemos un controlador y una operacion de negocio ficticia, vamos a
 
 Estos objetos típicamente se denominan DTO (Data Transfer Object) y nos sirven justamente para encapsular información que queremos transportar. En realidad no son más que clases *pojo* sencillas con propiedades, getters y setters. 
 
-Para nuestro ejemplo crearemos una clase `CategoryDto` dentro del package `com.capgemini.ccsw.tutorial.category.model` con el siguiente contenido:
+Para nuestro ejemplo crearemos una clase `CategoryDto` dentro del package `com.ccsw.tutorial.category.model` con el siguiente contenido:
 
 === "CategoryDto.java"
     ``` Java
-    package com.capgemini.ccsw.tutorial.category.model;
+    package com.ccsw.tutorial.category.model;
 
     /**
     * @author ccsw
@@ -132,7 +132,7 @@ A continuación utilizaremos esta clase en nuestro Controller para implementar l
 
 === "CategoryController.java"
   ``` Java
-  package com.capgemini.ccsw.tutorial.category;
+  package com.ccsw.tutorial.category;
 
   import java.util.ArrayList;
   import java.util.HashMap;
@@ -145,7 +145,7 @@ A continuación utilizaremos esta clase en nuestro Controller para implementar l
   import org.springframework.web.bind.annotation.RequestMethod;
   import org.springframework.web.bind.annotation.RestController;
 
-  import com.capgemini.ccsw.tutorial.category.model.CategoryDto;
+  import com.ccsw.tutorial.category.model.CategoryDto;
 
   /**
   * @author ccsw
@@ -251,11 +251,11 @@ Pues vamos a arreglarlo. Vamos a crear un servicio y vamos a mover la lógica de
 
 === "CategoryService.java"
     ``` Java
-    package com.capgemini.ccsw.tutorial.category;
+    package com.ccsw.tutorial.category;
 
     import java.util.List;
 
-    import com.capgemini.ccsw.tutorial.category.model.CategoryDto;
+    import com.ccsw.tutorial.category.model.CategoryDto;
 
     /**
     * @author ccsw
@@ -285,7 +285,7 @@ Pues vamos a arreglarlo. Vamos a crear un servicio y vamos a mover la lógica de
     ```
 === "CategoryServiceImpl.java"
     ``` Java
-    package com.capgemini.ccsw.tutorial.category;
+    package com.ccsw.tutorial.category;
 
     import java.util.ArrayList;
     import java.util.HashMap;
@@ -294,7 +294,7 @@ Pues vamos a arreglarlo. Vamos a crear un servicio y vamos a mover la lógica de
 
     import org.springframework.stereotype.Service;
 
-    import com.capgemini.ccsw.tutorial.category.model.CategoryDto;
+    import com.ccsw.tutorial.category.model.CategoryDto;
 
     /**
     * @author ccsw
@@ -347,7 +347,7 @@ Pues vamos a arreglarlo. Vamos a crear un servicio y vamos a mover la lógica de
     ```
 === "CategoryController.java"
     ``` Java
-    package com.capgemini.ccsw.tutorial.category;
+    package com.ccsw.tutorial.category;
 
     import java.util.List;
 
@@ -358,7 +358,7 @@ Pues vamos a arreglarlo. Vamos a crear un servicio y vamos a mover la lógica de
     import org.springframework.web.bind.annotation.RequestMethod;
     import org.springframework.web.bind.annotation.RestController;
 
-    import com.capgemini.ccsw.tutorial.category.model.CategoryDto;
+    import com.ccsw.tutorial.category.model.CategoryDto;
 
     /**
     * @author ccsw
@@ -451,7 +451,7 @@ Una vez creada la BBDD el siguiente paso es crear la entidad con la que vamos a 
 
 === "Category.java"
     ``` Java
-    package com.capgemini.ccsw.tutorial.category.model;
+    package com.ccsw.tutorial.category.model;
 
     import javax.persistence.Column;
     import javax.persistence.Entity;
@@ -534,11 +534,11 @@ Como ya se dijo en puntos anteriores, el acceso a datos se debe hacer siempre a 
 
 === "CategoryRepository.java"
     ``` Java
-    package com.capgemini.ccsw.tutorial.category;
+    package com.ccsw.tutorial.category;
 
     import org.springframework.data.repository.CrudRepository;
 
-    import com.capgemini.ccsw.tutorial.category.model.Category;
+    import com.ccsw.tutorial.category.model.Category;
 
     /**
     * @author ccsw
@@ -567,7 +567,7 @@ El código debería quedar así:
 
 === "CategoryServiceImpl.java"
     ``` Java
-    package com.capgemini.ccsw.tutorial.category;
+    package com.ccsw.tutorial.category;
 
     import java.util.List;
 
@@ -575,8 +575,8 @@ El código debería quedar así:
     import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.stereotype.Service;
 
-    import com.capgemini.ccsw.tutorial.category.model.Category;
-    import com.capgemini.ccsw.tutorial.category.model.CategoryDto;
+    import com.ccsw.tutorial.category.model.Category;
+    import com.ccsw.tutorial.category.model.CategoryDto;
 
     /**
     * @author ccsw
@@ -628,12 +628,12 @@ El código debería quedar así:
     ```
 === "CategoryService.java"
     ``` Java
-    package com.capgemini.ccsw.tutorial.category;
+    package com.ccsw.tutorial.category;
 
     import java.util.List;
 
-    import com.capgemini.ccsw.tutorial.category.model.Category;
-    import com.capgemini.ccsw.tutorial.category.model.CategoryDto;
+    import com.ccsw.tutorial.category.model.Category;
+    import com.ccsw.tutorial.category.model.CategoryDto;
 
     /**
     * @author ccsw
@@ -642,20 +642,20 @@ El código debería quedar así:
     public interface CategoryService {
 
       /**
-      * Método para recuperar todas las {@link com.capgemini.ccsw.tutorial.category.model.Category}
+      * Método para recuperar todas las {@link com.ccsw.tutorial.category.model.Category}
       * @return
       */
       List<Category> findAll();
 
       /**
-      * Método para crear o actualizar una {@link com.capgemini.ccsw.tutorial.category.model.Category}
+      * Método para crear o actualizar una {@link com.ccsw.tutorial.category.model.Category}
       * @param dto
       * @return
       */
       void save(Long id, CategoryDto dto);
 
       /**
-      * Método para borrar una {@link com.capgemini.ccsw.tutorial.category.model.Category}
+      * Método para borrar una {@link com.ccsw.tutorial.category.model.Category}
       * @param id
       */
       void delete(Long id);
@@ -663,7 +663,7 @@ El código debería quedar así:
     ```
 === "CategoryController.java"
     ``` Java hl_lines="26 35"
-    package com.capgemini.ccsw.tutorial.category;
+    package com.ccsw.tutorial.category;
 
     import java.util.List;
 
@@ -674,7 +674,7 @@ El código debería quedar así:
     import org.springframework.web.bind.annotation.RequestMethod;
     import org.springframework.web.bind.annotation.RestController;
 
-    import com.capgemini.ccsw.tutorial.category.model.CategoryDto;
+    import com.ccsw.tutorial.category.model.CategoryDto;
     import com.devonfw.module.beanmapping.common.api.BeanMapper;
 
     /**
@@ -691,7 +691,7 @@ El código debería quedar así:
       BeanMapper beanMapper;
 
       /**
-      * Método para recuperar todas las {@link com.capgemini.ccsw.tutorial.category.model.Category}
+      * Método para recuperar todas las {@link com.ccsw.tutorial.category.model.Category}
       * @return
       */
       @RequestMapping(path = "", method = RequestMethod.GET)
@@ -701,7 +701,7 @@ El código debería quedar así:
       }
 
       /**
-      * Método para crear o actualizar una {@link com.capgemini.ccsw.tutorial.category.model.Category}
+      * Método para crear o actualizar una {@link com.ccsw.tutorial.category.model.Category}
       * @param dto
       * @return
       */
@@ -712,7 +712,7 @@ El código debería quedar así:
       }
 
       /**
-      * Método para borrar una {@link com.capgemini.ccsw.tutorial.category.model.Category}
+      * Método para borrar una {@link com.ccsw.tutorial.category.model.Category}
       * @param id
       */
       @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
@@ -785,12 +785,12 @@ Vamos a empezar haciendo una clase de test dentro de la carpeta `src/test/java`.
 
 Crearemos las clases:
 
-* Test unitarios: `com.capgemini.ccsw.tutorial.category.CategoryTest`
-* Test de integración: `com.capgemini.ccsw.tutorial.category.CategoryIT` 
+* Test unitarios: `com.ccsw.tutorial.category.CategoryTest`
+* Test de integración: `com.ccsw.tutorial.category.CategoryIT` 
 
 === "CategoryTest.java"
     ``` Java
-    package com.capgemini.ccsw.tutorial.category;
+    package com.ccsw.tutorial.category;
 
     import org.junit.jupiter.api.extension.ExtendWith;
     import org.mockito.junit.jupiter.MockitoExtension;
@@ -805,7 +805,7 @@ Crearemos las clases:
     ```
 === "CategoryIT.java"
     ``` Java
-    package com.capgemini.ccsw.tutorial.category;
+    package com.ccsw.tutorial.category;
 
     import org.springframework.boot.test.context.SpringBootTest;
     import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -852,10 +852,10 @@ Con todo esto ya podemos crear nuestro primer test. Iremos a las clases `Categor
 
 === "CategoryTest.java"
     ``` Java hl_lines="3-5 7 8 11 12 14 15 20 21 23 24 26-38"
-    package com.capgemini.ccsw.tutorial.category;
+    package com.ccsw.tutorial.category;
     
-    import com.capgemini.ccsw.tutorial.category.model.Category;
-    import com.capgemini.ccsw.tutorial.category.model.CategoryDto;
+    import com.ccsw.tutorial.category.model.Category;
+    import com.ccsw.tutorial.category.model.CategoryDto;
     import org.junit.jupiter.api.Test;
     import org.junit.jupiter.api.extension.ExtendWith;
     import org.mockito.InjectMocks;
@@ -894,9 +894,9 @@ Con todo esto ya podemos crear nuestro primer test. Iremos a las clases `Categor
     ```
 === "CategoryIT.java"
     ``` Java hl_lines="3-5 9-10 13 15 21 22 30 32-39"
-    package com.capgemini.ccsw.tutorial.category;
+    package com.ccsw.tutorial.category;
     
-    import com.capgemini.ccsw.tutorial.category.model.CategoryDto;
+    import com.ccsw.tutorial.category.model.CategoryDto;
     import org.junit.jupiter.api.Test;
     import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.boot.test.context.SpringBootTest;
@@ -1131,7 +1131,7 @@ Con esto tendríamos más o menos probados los casos básicos de nuestra aplicac
 
 Resumiendo un poco los pasos que hemos seguido:
 
-* Hay que definir y agrupar por ámbito funcional, hemos creado el package `com.capgemini.ccsw.tutorial.category` para aglutinar todas las clases.
+* Hay que definir y agrupar por ámbito funcional, hemos creado el package `com.ccsw.tutorial.category` para aglutinar todas las clases.
 * Lo primero que debemos empezar a construir **siempre** son los test, aunque en este capítulo del tutorial lo hemos hecho al revés solo con fines didácticos. En los siguientes capítulos lo haremos de forma correcta, y esto nos ayudará a pensar y diseñar que es lo que queremos implementar realmente.
 * La implementación de la aplicación se debería separar por capas:
     * `Controller` → Maneja las peticiones de entrada del cliente y realiza transformaciones. No ejecuta directamente lógica de negocio, para eso utiliza llamadas a la siguiente capa.

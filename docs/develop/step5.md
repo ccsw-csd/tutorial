@@ -778,7 +778,7 @@ Lo primero que vamos a hacer es crear los modelos para trabajar con BBDD y con p
     ```
 === "Game.java"
     ``` Java
-    package com.capgemini.ccsw.tutorial.game.model;
+    package com.ccsw.tutorial.game.model;
 
     import javax.persistence.Column;
     import javax.persistence.Entity;
@@ -789,8 +789,8 @@ Lo primero que vamos a hacer es crear los modelos para trabajar con BBDD y con p
     import javax.persistence.ManyToOne;
     import javax.persistence.Table;
 
-    import com.capgemini.ccsw.tutorial.author.model.Author;
-    import com.capgemini.ccsw.tutorial.category.model.Category;
+    import com.ccsw.tutorial.author.model.Author;
+    import com.ccsw.tutorial.category.model.Category;
 
     /**
     * @author ccsw
@@ -902,10 +902,10 @@ Lo primero que vamos a hacer es crear los modelos para trabajar con BBDD y con p
     ```
 === "GameDto.java"
     ``` Java
-    package com.capgemini.ccsw.tutorial.game.model;
+    package com.ccsw.tutorial.game.model;
 
-    import com.capgemini.ccsw.tutorial.author.model.AuthorDto;
-    import com.capgemini.ccsw.tutorial.category.model.CategoryDto;
+    import com.ccsw.tutorial.author.model.AuthorDto;
+    import com.ccsw.tutorial.category.model.CategoryDto;
 
     /**
     * @author ccsw
@@ -1033,20 +1033,20 @@ De nuevo tendremos que desglosar esto en varios casos de prueba:
 * Modificar un juego que no exista
 
 
-También crearemos una clase `GameController` dentro del package de `com.capgemini.ccsw.tutorial.game` con la implementación de los métodos vacíos, para que no falle la compilación.
+También crearemos una clase `GameController` dentro del package de `com.ccsw.tutorial.game` con la implementación de los métodos vacíos, para que no falle la compilación.
 
 ¡Vamos a implementar test!
 
 
 === "GameController.java"
     ``` Java
-    package com.capgemini.ccsw.tutorial.game;
+    package com.ccsw.tutorial.game;
 
     import java.util.List;
 
     import org.springframework.web.bind.annotation.RestController;
 
-    import com.capgemini.ccsw.tutorial.game.model.GameDto;
+    import com.ccsw.tutorial.game.model.GameDto;
 
     @RestController
     public class GameController {
@@ -1063,11 +1063,11 @@ También crearemos una clase `GameController` dentro del package de `com.capgemi
     ```
 === "GameIT.java"
     ``` Java
-    package com.capgemini.ccsw.tutorial.game;
+    package com.ccsw.tutorial.game;
     
-    import com.capgemini.ccsw.tutorial.author.model.AuthorDto;
-    import com.capgemini.ccsw.tutorial.category.model.CategoryDto;
-    import com.capgemini.ccsw.tutorial.game.model.GameDto;
+    import com.ccsw.tutorial.author.model.AuthorDto;
+    import com.ccsw.tutorial.category.model.CategoryDto;
+    import com.ccsw.tutorial.game.model.GameDto;
     import org.junit.jupiter.api.Test;
     import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.boot.test.context.SpringBootTest;
@@ -1330,12 +1330,12 @@ De nuevo para poder compilar esta capa, nos hace falta delegar sus operaciones d
 
 === "GameService.java"
     ``` Java
-    package com.capgemini.ccsw.tutorial.game;
+    package com.ccsw.tutorial.game;
 
     import java.util.List;
 
-    import com.capgemini.ccsw.tutorial.game.model.Game;
-    import com.capgemini.ccsw.tutorial.game.model.GameDto;
+    import com.ccsw.tutorial.game.model.Game;
+    import com.ccsw.tutorial.game.model.GameDto;
 
     /**
     * @author ccsw
@@ -1361,7 +1361,7 @@ De nuevo para poder compilar esta capa, nos hace falta delegar sus operaciones d
     ```
 === "GameController.java"
     ``` Java hl_lines="21-23 26-27 29-30 32-39 41-45"
-    package com.capgemini.ccsw.tutorial.game;
+    package com.ccsw.tutorial.game;
 
     import java.util.List;
 
@@ -1374,8 +1374,8 @@ De nuevo para poder compilar esta capa, nos hace falta delegar sus operaciones d
     import org.springframework.web.bind.annotation.RequestParam;
     import org.springframework.web.bind.annotation.RestController;
 
-    import com.capgemini.ccsw.tutorial.game.model.Game;
-    import com.capgemini.ccsw.tutorial.game.model.GameDto;
+    import com.ccsw.tutorial.game.model.Game;
+    import com.ccsw.tutorial.game.model.GameDto;
     import com.devonfw.module.beanmapping.common.api.BeanMapper;
 
     /**
@@ -1420,7 +1420,7 @@ Siguiente paso, la capa de lógica de negocio, es decir el `Service`, que por ta
 
 === "GameServiceImpl.java"
     ``` Java hl_lines="30 46"
-    package com.capgemini.ccsw.tutorial.game;
+    package com.ccsw.tutorial.game;
 
     import java.util.List;
 
@@ -1430,8 +1430,8 @@ Siguiente paso, la capa de lógica de negocio, es decir el `Service`, que por ta
     import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.stereotype.Service;
 
-    import com.capgemini.ccsw.tutorial.game.model.Game;
-    import com.capgemini.ccsw.tutorial.game.model.GameDto;
+    import com.ccsw.tutorial.game.model.Game;
+    import com.ccsw.tutorial.game.model.GameDto;
 
     /**
     * @author ccsw
@@ -1474,13 +1474,13 @@ Siguiente paso, la capa de lógica de negocio, es decir el `Service`, que por ta
     ```
 === "GameRepository.java"
     ``` Java
-    package com.capgemini.ccsw.tutorial.game;
+    package com.ccsw.tutorial.game;
 
     import java.util.List;
 
     import org.springframework.data.repository.CrudRepository;
 
-    import com.capgemini.ccsw.tutorial.game.model.Game;
+    import com.ccsw.tutorial.game.model.Game;
 
     public interface GameRepository extends CrudRepository<Game, Long> {
 
@@ -1499,7 +1499,7 @@ Y ya sabes, para implementar nuevos métodos, antes se deben hacer las pruebas j
 
 === "AuthorTest.java"
     ``` Java
-    package com.capgemini.ccsw.tutorial.author;
+    package com.ccsw.tutorial.author;
 
     import static org.junit.jupiter.api.Assertions.assertEquals;
     import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -1513,7 +1513,7 @@ Y ya sabes, para implementar nuevos métodos, antes se deben hacer las pruebas j
     import org.mockito.Mock;
     import org.mockito.junit.jupiter.MockitoExtension;
     
-    import com.capgemini.ccsw.tutorial.author.model.Author;
+    import com.ccsw.tutorial.author.model.Author;
     
     import java.util.Optional;
     
@@ -1557,13 +1557,13 @@ Y ya sabes, para implementar nuevos métodos, antes se deben hacer las pruebas j
     ```
 === "AuthorService.java"
     ``` Java hl_lines="14-19"
-    package com.capgemini.ccsw.tutorial.author;
+    package com.ccsw.tutorial.author;
 
     import org.springframework.data.domain.Page;
 
-    import com.capgemini.ccsw.tutorial.author.model.Author;
-    import com.capgemini.ccsw.tutorial.author.model.AuthorDto;
-    import com.capgemini.ccsw.tutorial.author.model.AuthorSearchDto;
+    import com.ccsw.tutorial.author.model.Author;
+    import com.ccsw.tutorial.author.model.AuthorDto;
+    import com.ccsw.tutorial.author.model.AuthorSearchDto;
 
     /**
     * @author ccsw
@@ -1571,28 +1571,28 @@ Y ya sabes, para implementar nuevos métodos, antes se deben hacer las pruebas j
     public interface AuthorService {
 
         /**
-        * Recupera un {@link com.capgemini.ccsw.tutorial.author.model.Author} a través de su ID
+        * Recupera un {@link com.ccsw.tutorial.author.model.Author} a través de su ID
         * @param id
         * @return
         */
         Author get(Long id);
 
         /**
-        * Método para recuperar un listado paginado de {@link com.capgemini.ccsw.tutorial.author.model.Author}
+        * Método para recuperar un listado paginado de {@link com.ccsw.tutorial.author.model.Author}
         * @param dto
         * @return
         */
         Page<Author> findPage(AuthorSearchDto dto);
 
         /**
-        * Método para crear o actualizar un {@link com.capgemini.ccsw.tutorial.author.model.Author}
+        * Método para crear o actualizar un {@link com.ccsw.tutorial.author.model.Author}
         * @param id
         * @param data
         */
         void save(Long id, AuthorDto data);
 
         /**
-        * Método para crear o actualizar un {@link com.capgemini.ccsw.tutorial.author.model.Author}
+        * Método para crear o actualizar un {@link com.ccsw.tutorial.author.model.Author}
         * @param id
         */
         void delete(Long id);
@@ -1602,7 +1602,7 @@ Y ya sabes, para implementar nuevos métodos, antes se deben hacer las pruebas j
     ```
 === "AuthorServiceImpl.java"
     ``` Java hl_lines="24-31 50"
-    package com.capgemini.ccsw.tutorial.author;
+    package com.ccsw.tutorial.author;
 
     import javax.transaction.Transactional;
 
@@ -1611,9 +1611,9 @@ Y ya sabes, para implementar nuevos métodos, antes se deben hacer las pruebas j
     import org.springframework.data.domain.Page;
     import org.springframework.stereotype.Service;
 
-    import com.capgemini.ccsw.tutorial.author.model.Author;
-    import com.capgemini.ccsw.tutorial.author.model.AuthorDto;
-    import com.capgemini.ccsw.tutorial.author.model.AuthorSearchDto;
+    import com.ccsw.tutorial.author.model.Author;
+    import com.ccsw.tutorial.author.model.AuthorDto;
+    import com.ccsw.tutorial.author.model.AuthorSearchDto;
 
     /**
     * @author ccsw
@@ -1703,12 +1703,12 @@ Y lo mismo para categorías.
     ```
 === "CategoryService.java"
     ``` Java hl_lines="14-19"
-    package com.capgemini.ccsw.tutorial.category;
+    package com.ccsw.tutorial.category;
 
     import java.util.List;
 
-    import com.capgemini.ccsw.tutorial.category.model.Category;
-    import com.capgemini.ccsw.tutorial.category.model.CategoryDto;
+    import com.ccsw.tutorial.category.model.Category;
+    import com.ccsw.tutorial.category.model.CategoryDto;
 
     /**
     * @author ccsw
@@ -1717,27 +1717,27 @@ Y lo mismo para categorías.
     public interface CategoryService {
 
         /**
-        * Recupera una {@link com.capgemini.ccsw.tutorial.category.model.Category} a partir de su ID
+        * Recupera una {@link com.ccsw.tutorial.category.model.Category} a partir de su ID
         * @param id
         * @return
         */
         Category get(Long id);
 
         /**
-        * Método para recuperar todas las {@link com.capgemini.ccsw.tutorial.category.model.Category}
+        * Método para recuperar todas las {@link com.ccsw.tutorial.category.model.Category}
         * @return
         */
         List<Category> findAll();
 
         /**
-        * Método para crear o actualizar una {@link com.capgemini.ccsw.tutorial.category.model.Category}
+        * Método para crear o actualizar una {@link com.ccsw.tutorial.category.model.Category}
         * @param dto
         * @return
         */
         void save(Long id, CategoryDto dto);
 
         /**
-        * Método para borrar una {@link com.capgemini.ccsw.tutorial.category.model.Category}
+        * Método para borrar una {@link com.ccsw.tutorial.category.model.Category}
         * @param id
         */
         void delete(Long id);
@@ -1745,15 +1745,15 @@ Y lo mismo para categorías.
     ```
 === "CategoryServiceImpl.java"
     ``` Java hl_lines="21-28 50"
-    package com.capgemini.ccsw.tutorial.category;
+    package com.ccsw.tutorial.category;
 
     import java.util.List;
 
     import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.stereotype.Service;
 
-    import com.capgemini.ccsw.tutorial.category.model.Category;
-    import com.capgemini.ccsw.tutorial.category.model.CategoryDto;
+    import com.ccsw.tutorial.category.model.Category;
+    import com.ccsw.tutorial.category.model.CategoryDto;
 
     /**
     * @author ccsw
@@ -1822,7 +1822,7 @@ Y ahora que ya tenemos los métodos necesarios ya podemos implementar correctame
 
 === "GameServiceImpl.java"
     ``` Java hl_lines="26-27 29-30 56-57"
-    package com.capgemini.ccsw.tutorial.game;
+    package com.ccsw.tutorial.game;
 
     import java.util.List;
 
@@ -1832,10 +1832,10 @@ Y ahora que ya tenemos los métodos necesarios ya podemos implementar correctame
     import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.stereotype.Service;
 
-    import com.capgemini.ccsw.tutorial.author.AuthorService;
-    import com.capgemini.ccsw.tutorial.category.CategoryService;
-    import com.capgemini.ccsw.tutorial.game.model.Game;
-    import com.capgemini.ccsw.tutorial.game.model.GameDto;
+    import com.ccsw.tutorial.author.AuthorService;
+    import com.ccsw.tutorial.category.CategoryService;
+    import com.ccsw.tutorial.game.model.Game;
+    import com.ccsw.tutorial.game.model.GameDto;
 
     /**
     * @author ccsw
@@ -1896,13 +1896,13 @@ Y llegamos a la última capa donde, si recordamos, teníamos un método `find` q
 
 === "GameRepository.java"
     ``` Java
-    package com.capgemini.ccsw.tutorial.game;
+    package com.ccsw.tutorial.game;
 
     import java.util.List;
 
     import org.springframework.data.repository.CrudRepository;
 
-    import com.capgemini.ccsw.tutorial.game.model.Game;
+    import com.ccsw.tutorial.game.model.Game;
 
     public interface GameRepository extends CrudRepository<Game, Long> {
 
@@ -1922,13 +1922,13 @@ Esta anotación nos permite definir una consulta en SQL nativo o en JPQL (Java P
 
 === "GameRepository.java"
     ``` Java hl_lines="11-12"
-    package com.capgemini.ccsw.tutorial.game;
+    package com.ccsw.tutorial.game;
 
     import java.util.List;
 
     import org.springframework.data.repository.CrudRepository;
 
-    import com.capgemini.ccsw.tutorial.game.model.Game;
+    import com.ccsw.tutorial.game.model.Game;
 
     public interface GameRepository extends CrudRepository<Game, Long> {
 

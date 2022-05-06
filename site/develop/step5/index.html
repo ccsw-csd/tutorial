@@ -1567,7 +1567,7 @@ ng generate service game/game
 </span></code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.game.model</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.ccsw.tutorial.game.model</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">javax.persistence.Column</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">javax.persistence.Entity</span><span class="p">;</span>
@@ -1578,8 +1578,8 @@ ng generate service game/game
 <span class="kn">import</span> <span class="nn">javax.persistence.ManyToOne</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">javax.persistence.Table</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.author.model.Author</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.category.model.Category</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.ccsw.tutorial.author.model.Author</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.ccsw.tutorial.category.model.Category</span><span class="p">;</span>
 
 <span class="cm">/**</span>
 <span class="cm">* @author ccsw</span>
@@ -1691,10 +1691,10 @@ ng generate service game/game
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.game.model</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.ccsw.tutorial.game.model</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.author.model.AuthorDto</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.category.model.CategoryDto</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.ccsw.tutorial.author.model.AuthorDto</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.ccsw.tutorial.category.model.CategoryDto</span><span class="p">;</span>
 
 <span class="cm">/**</span>
 <span class="cm">* @author ccsw</span>
@@ -1820,18 +1820,18 @@ ng generate service game/game
 <li>Modificar un juego que exista</li>
 <li>Modificar un juego que no exista</li>
 </ul>
-<p>También crearemos una clase <code>GameController</code> dentro del package de <code>com.capgemini.ccsw.tutorial.game</code> con la implementación de los métodos vacíos, para que no falle la compilación.</p>
+<p>También crearemos una clase <code>GameController</code> dentro del package de <code>com.ccsw.tutorial.game</code> con la implementación de los métodos vacíos, para que no falle la compilación.</p>
 <p>¡Vamos a implementar test!</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="12:2"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><input id="__tabbed_12_2" name="__tabbed_12" type="radio" /><div class="tabbed-labels"><label for="__tabbed_12_1">GameController.java</label><label for="__tabbed_12_2">GameIT.java</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.game</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.ccsw.tutorial.game</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.game.model.GameDto</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.ccsw.tutorial.game.model.GameDto</span><span class="p">;</span>
 
 <span class="nd">@RestController</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">GameController</span> <span class="p">{</span>
@@ -1848,11 +1848,11 @@ ng generate service game/game
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.game</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.ccsw.tutorial.game</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.author.model.AuthorDto</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.category.model.CategoryDto</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.game.model.GameDto</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.ccsw.tutorial.author.model.AuthorDto</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.ccsw.tutorial.category.model.CategoryDto</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.ccsw.tutorial.game.model.GameDto</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">org.junit.jupiter.api.Test</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">org.springframework.boot.test.context.SpringBootTest</span><span class="p">;</span>
@@ -2115,12 +2115,12 @@ ng generate service game/game
 <div class="tabbed-set tabbed-alternate" data-tabs="13:2"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><input id="__tabbed_13_2" name="__tabbed_13" type="radio" /><div class="tabbed-labels"><label for="__tabbed_13_1">GameService.java</label><label for="__tabbed_13_2">GameController.java</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.game</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.ccsw.tutorial.game</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.game.model.Game</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.game.model.GameDto</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.ccsw.tutorial.game.model.Game</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.ccsw.tutorial.game.model.GameDto</span><span class="p">;</span>
 
 <span class="cm">/**</span>
 <span class="cm">* @author ccsw</span>
@@ -2146,7 +2146,7 @@ ng generate service game/game
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.game</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.ccsw.tutorial.game</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
 
@@ -2159,8 +2159,8 @@ ng generate service game/game
 <span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RequestParam</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.game.model.Game</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.game.model.GameDto</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.ccsw.tutorial.game.model.Game</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.ccsw.tutorial.game.model.GameDto</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">com.devonfw.module.beanmapping.common.api.BeanMapper</span><span class="p">;</span>
 
 <span class="cm">/**</span>
@@ -2203,7 +2203,7 @@ ng generate service game/game
 <div class="tabbed-set tabbed-alternate" data-tabs="14:2"><input checked="checked" id="__tabbed_14_1" name="__tabbed_14" type="radio" /><input id="__tabbed_14_2" name="__tabbed_14" type="radio" /><div class="tabbed-labels"><label for="__tabbed_14_1">GameServiceImpl.java</label><label for="__tabbed_14_2">GameRepository.java</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.game</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.ccsw.tutorial.game</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
 
@@ -2213,8 +2213,8 @@ ng generate service game/game
 <span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">org.springframework.stereotype.Service</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.game.model.Game</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.game.model.GameDto</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.ccsw.tutorial.game.model.Game</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.ccsw.tutorial.game.model.GameDto</span><span class="p">;</span>
 
 <span class="cm">/**</span>
 <span class="cm">* @author ccsw</span>
@@ -2257,13 +2257,13 @@ ng generate service game/game
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.game</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.ccsw.tutorial.game</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">org.springframework.data.repository.CrudRepository</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.game.model.Game</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.ccsw.tutorial.game.model.Game</span><span class="p">;</span>
 
 <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">GameRepository</span> <span class="kd">extends</span> <span class="n">CrudRepository</span><span class="o">&lt;</span><span class="n">Game</span><span class="p">,</span> <span class="n">Long</span><span class="o">&gt;</span> <span class="p">{</span>
 
@@ -2281,7 +2281,7 @@ ng generate service game/game
 <div class="tabbed-set tabbed-alternate" data-tabs="15:3"><input checked="checked" id="__tabbed_15_1" name="__tabbed_15" type="radio" /><input id="__tabbed_15_2" name="__tabbed_15" type="radio" /><input id="__tabbed_15_3" name="__tabbed_15" type="radio" /><div class="tabbed-labels"><label for="__tabbed_15_1">AuthorTest.java</label><label for="__tabbed_15_2">AuthorService.java</label><label for="__tabbed_15_3">AuthorServiceImpl.java</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.author</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.ccsw.tutorial.author</span><span class="p">;</span>
 
 <span class="kn">import static</span> <span class="nn">org.junit.jupiter.api.Assertions.assertEquals</span><span class="p">;</span>
 <span class="kn">import static</span> <span class="nn">org.junit.jupiter.api.Assertions.assertNotNull</span><span class="p">;</span>
@@ -2295,7 +2295,7 @@ ng generate service game/game
 <span class="kn">import</span> <span class="nn">org.mockito.Mock</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">org.mockito.junit.jupiter.MockitoExtension</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.author.model.Author</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.ccsw.tutorial.author.model.Author</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.Optional</span><span class="p">;</span>
 
@@ -2339,13 +2339,13 @@ ng generate service game/game
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.author</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.ccsw.tutorial.author</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">org.springframework.data.domain.Page</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.author.model.Author</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.author.model.AuthorDto</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.author.model.AuthorSearchDto</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.ccsw.tutorial.author.model.Author</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.ccsw.tutorial.author.model.AuthorDto</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.ccsw.tutorial.author.model.AuthorSearchDto</span><span class="p">;</span>
 
 <span class="cm">/**</span>
 <span class="cm">* @author ccsw</span>
@@ -2353,28 +2353,28 @@ ng generate service game/game
 <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">AuthorService</span> <span class="p">{</span>
 
 <span class="hll">    <span class="cm">/**</span>
-</span><span class="hll"><span class="cm">    * Recupera un {@link com.capgemini.ccsw.tutorial.author.model.Author} a través de su ID</span>
+</span><span class="hll"><span class="cm">    * Recupera un {@link com.ccsw.tutorial.author.model.Author} a través de su ID</span>
 </span><span class="hll"><span class="cm">    * @param id</span>
 </span><span class="hll"><span class="cm">    * @return</span>
 </span><span class="hll"><span class="cm">    */</span>
 </span><span class="hll">    <span class="n">Author</span> <span class="nf">get</span><span class="p">(</span><span class="n">Long</span> <span class="n">id</span><span class="p">);</span>
 </span>
     <span class="cm">/**</span>
-<span class="cm">    * Método para recuperar un listado paginado de {@link com.capgemini.ccsw.tutorial.author.model.Author}</span>
+<span class="cm">    * Método para recuperar un listado paginado de {@link com.ccsw.tutorial.author.model.Author}</span>
 <span class="cm">    * @param dto</span>
 <span class="cm">    * @return</span>
 <span class="cm">    */</span>
     <span class="n">Page</span><span class="o">&lt;</span><span class="n">Author</span><span class="o">&gt;</span> <span class="nf">findPage</span><span class="p">(</span><span class="n">AuthorSearchDto</span> <span class="n">dto</span><span class="p">);</span>
 
     <span class="cm">/**</span>
-<span class="cm">    * Método para crear o actualizar un {@link com.capgemini.ccsw.tutorial.author.model.Author}</span>
+<span class="cm">    * Método para crear o actualizar un {@link com.ccsw.tutorial.author.model.Author}</span>
 <span class="cm">    * @param id</span>
 <span class="cm">    * @param data</span>
 <span class="cm">    */</span>
     <span class="kt">void</span> <span class="nf">save</span><span class="p">(</span><span class="n">Long</span> <span class="n">id</span><span class="p">,</span> <span class="n">AuthorDto</span> <span class="n">data</span><span class="p">);</span>
 
     <span class="cm">/**</span>
-<span class="cm">    * Método para crear o actualizar un {@link com.capgemini.ccsw.tutorial.author.model.Author}</span>
+<span class="cm">    * Método para crear o actualizar un {@link com.ccsw.tutorial.author.model.Author}</span>
 <span class="cm">    * @param id</span>
 <span class="cm">    */</span>
     <span class="kt">void</span> <span class="nf">delete</span><span class="p">(</span><span class="n">Long</span> <span class="n">id</span><span class="p">);</span>
@@ -2383,7 +2383,7 @@ ng generate service game/game
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.author</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.ccsw.tutorial.author</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">javax.transaction.Transactional</span><span class="p">;</span>
 
@@ -2392,9 +2392,9 @@ ng generate service game/game
 <span class="kn">import</span> <span class="nn">org.springframework.data.domain.Page</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">org.springframework.stereotype.Service</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.author.model.Author</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.author.model.AuthorDto</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.author.model.AuthorSearchDto</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.ccsw.tutorial.author.model.Author</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.ccsw.tutorial.author.model.AuthorDto</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.ccsw.tutorial.author.model.AuthorSearchDto</span><span class="p">;</span>
 
 <span class="cm">/**</span>
 <span class="cm">* @author ccsw</span>
@@ -2485,12 +2485,12 @@ ng generate service game/game
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.category</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.ccsw.tutorial.category</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.category.model.Category</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.category.model.CategoryDto</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.ccsw.tutorial.category.model.Category</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.ccsw.tutorial.category.model.CategoryDto</span><span class="p">;</span>
 
 <span class="cm">/**</span>
 <span class="cm">* @author ccsw</span>
@@ -2499,27 +2499,27 @@ ng generate service game/game
 <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">CategoryService</span> <span class="p">{</span>
 
 <span class="hll">    <span class="cm">/**</span>
-</span><span class="hll"><span class="cm">    * Recupera una {@link com.capgemini.ccsw.tutorial.category.model.Category} a partir de su ID</span>
+</span><span class="hll"><span class="cm">    * Recupera una {@link com.ccsw.tutorial.category.model.Category} a partir de su ID</span>
 </span><span class="hll"><span class="cm">    * @param id</span>
 </span><span class="hll"><span class="cm">    * @return</span>
 </span><span class="hll"><span class="cm">    */</span>
 </span><span class="hll">    <span class="n">Category</span> <span class="nf">get</span><span class="p">(</span><span class="n">Long</span> <span class="n">id</span><span class="p">);</span>
 </span>
     <span class="cm">/**</span>
-<span class="cm">    * Método para recuperar todas las {@link com.capgemini.ccsw.tutorial.category.model.Category}</span>
+<span class="cm">    * Método para recuperar todas las {@link com.ccsw.tutorial.category.model.Category}</span>
 <span class="cm">    * @return</span>
 <span class="cm">    */</span>
     <span class="n">List</span><span class="o">&lt;</span><span class="n">Category</span><span class="o">&gt;</span> <span class="nf">findAll</span><span class="p">();</span>
 
     <span class="cm">/**</span>
-<span class="cm">    * Método para crear o actualizar una {@link com.capgemini.ccsw.tutorial.category.model.Category}</span>
+<span class="cm">    * Método para crear o actualizar una {@link com.ccsw.tutorial.category.model.Category}</span>
 <span class="cm">    * @param dto</span>
 <span class="cm">    * @return</span>
 <span class="cm">    */</span>
     <span class="kt">void</span> <span class="nf">save</span><span class="p">(</span><span class="n">Long</span> <span class="n">id</span><span class="p">,</span> <span class="n">CategoryDto</span> <span class="n">dto</span><span class="p">);</span>
 
     <span class="cm">/**</span>
-<span class="cm">    * Método para borrar una {@link com.capgemini.ccsw.tutorial.category.model.Category}</span>
+<span class="cm">    * Método para borrar una {@link com.ccsw.tutorial.category.model.Category}</span>
 <span class="cm">    * @param id</span>
 <span class="cm">    */</span>
     <span class="kt">void</span> <span class="nf">delete</span><span class="p">(</span><span class="n">Long</span> <span class="n">id</span><span class="p">);</span>
@@ -2527,15 +2527,15 @@ ng generate service game/game
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.category</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.ccsw.tutorial.category</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">org.springframework.stereotype.Service</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.category.model.Category</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.category.model.CategoryDto</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.ccsw.tutorial.category.model.Category</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.ccsw.tutorial.category.model.CategoryDto</span><span class="p">;</span>
 
 <span class="cm">/**</span>
 <span class="cm">* @author ccsw</span>
@@ -2605,7 +2605,7 @@ ng generate service game/game
 <div class="tabbed-set tabbed-alternate" data-tabs="17:1"><input checked="checked" id="__tabbed_17_1" name="__tabbed_17" type="radio" /><div class="tabbed-labels"><label for="__tabbed_17_1">GameServiceImpl.java</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.game</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.ccsw.tutorial.game</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
 
@@ -2615,10 +2615,10 @@ ng generate service game/game
 <span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">org.springframework.stereotype.Service</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.author.AuthorService</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.category.CategoryService</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.game.model.Game</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.game.model.GameDto</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.ccsw.tutorial.author.AuthorService</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.ccsw.tutorial.category.CategoryService</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.ccsw.tutorial.game.model.Game</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.ccsw.tutorial.game.model.GameDto</span><span class="p">;</span>
 
 <span class="cm">/**</span>
 <span class="cm">* @author ccsw</span>
@@ -2677,13 +2677,13 @@ ng generate service game/game
 <div class="tabbed-set tabbed-alternate" data-tabs="18:1"><input checked="checked" id="__tabbed_18_1" name="__tabbed_18" type="radio" /><div class="tabbed-labels"><label for="__tabbed_18_1">GameRepository.java</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.game</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.ccsw.tutorial.game</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">org.springframework.data.repository.CrudRepository</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.game.model.Game</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.ccsw.tutorial.game.model.Game</span><span class="p">;</span>
 
 <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">GameRepository</span> <span class="kd">extends</span> <span class="n">CrudRepository</span><span class="o">&lt;</span><span class="n">Game</span><span class="p">,</span> <span class="n">Long</span><span class="o">&gt;</span> <span class="p">{</span>
 
@@ -2701,13 +2701,13 @@ ng generate service game/game
 <div class="tabbed-set tabbed-alternate" data-tabs="19:1"><input checked="checked" id="__tabbed_19_1" name="__tabbed_19" type="radio" /><div class="tabbed-labels"><label for="__tabbed_19_1">GameRepository.java</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.game</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.ccsw.tutorial.game</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">org.springframework.data.repository.CrudRepository</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.game.model.Game</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.ccsw.tutorial.game.model.Game</span><span class="p">;</span>
 
 <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">GameRepository</span> <span class="kd">extends</span> <span class="n">CrudRepository</span><span class="o">&lt;</span><span class="n">Game</span><span class="p">,</span> <span class="n">Long</span><span class="o">&gt;</span> <span class="p">{</span>
 

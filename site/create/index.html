@@ -838,7 +838,7 @@ Si sigues leyendo verás como configurar paso a paso un proyecto de cero, con la
 <li>Tipo de proyecto: Maven</li>
 <li>Lenguage: Java</li>
 <li>Versión Spring boot: 2.4.4</li>
-<li>Group: com.capgemini.ccsw</li>
+<li>Group: com.ccsw</li>
 <li>ArtifactId: tutorial</li>
 <li>Versión Java: 8</li>
 <li>Dependencias: Spring Web, Spring Data JPA, H2 Database</li>
@@ -864,7 +864,7 @@ Si sigues leyendo verás como configurar paso a paso un proyecto de cero, con la
     <span class="nt">&lt;relativePath/&gt;</span> <span class="cm">&lt;!-- lookup parent from repository --&gt;</span>
   <span class="nt">&lt;/parent&gt;</span>
 
-  <span class="nt">&lt;groupId&gt;</span>com.capgemini.ccsw<span class="nt">&lt;/groupId&gt;</span>
+  <span class="nt">&lt;groupId&gt;</span>com.ccsw<span class="nt">&lt;/groupId&gt;</span>
   <span class="nt">&lt;artifactId&gt;</span>tutorial<span class="nt">&lt;/artifactId&gt;</span>
   <span class="nt">&lt;version&gt;</span>0.0.1-SNAPSHOT<span class="nt">&lt;/version&gt;</span>
   <span class="nt">&lt;name&gt;</span>tutorial<span class="nt">&lt;/name&gt;</span>
@@ -948,20 +948,20 @@ Si sigues leyendo verás como configurar paso a paso un proyecto de cero, con la
 <p>Hemos añadido las dependencias de Devonfw-JPA ya que nos permite utilizar más funcionalidades extendidas sobre repositorios JPA. Además de esa dependencia, hemos añadido una utilidad para hacer mapeos entre objetos y para configurar los servicios Rest.</p>
 <div class="admonition tip">
 <p class="admonition-title">Uso de defonfw</p>
-<p>Vamos a utilizar algunas librerías de devonfw (fwk Opensource desarrollado por Capgemini, entre otros) que nos facilitan la vida a la hora de desarrollar una aplicación. Podríamos hacerlo directamente con los módulos de Spring pero hay ciertas utilidades que nos interesa usar de devonfw. Para más información puedes consultar su <a href="https://devonfw.com/">Web Oficial</a></p>
+<p>Vamos a utilizar algunas librerías de devonfw que nos facilitan la vida a la hora de desarrollar una aplicación. Podríamos hacerlo directamente con los módulos de Spring pero hay ciertas utilidades que nos interesa usar de devonfw. Para más información puedes consultar su <a href="https://devonfw.com/">Web Oficial</a></p>
 </div>
 <h4 id="configurar-librerias-devonfw">Configurar librerias devonfw</h4>
-<p>El siguiente punto es crear las clases de configuración para las librerías que hemos añadido. Para ello vamos a crear un package de configuración general de la aplicación <code>com.capgemini.ccsw.tutorial.config</code> donde crearemos tres clases (dos de ellas dentro del subpaquete <code>mapper</code>).</p>
+<p>El siguiente punto es crear las clases de configuración para las librerías que hemos añadido. Para ello vamos a crear un package de configuración general de la aplicación <code>com.ccsw.tutorial.config</code> donde crearemos tres clases (dos de ellas dentro del subpaquete <code>mapper</code>).</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:3"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">BeansOrikaConfig.java</label><label for="__tabbed_2_2">mapper/BeanMapper.java</label><label for="__tabbed_2_3">mapper/BeanMapperImpl.java</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.config</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.ccsw.tutorial.config</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Bean</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Configuration</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.config.mapper.BeanMapper</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.config.mapper.BeanMapperImpl</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.ccsw.tutorial.config.mapper.BeanMapper</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.ccsw.tutorial.config.mapper.BeanMapperImpl</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">com.devonfw.module.beanmapping.common.base.BaseOrikaConfig</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">com.devonfw.module.json.common.base.ObjectMapperFactory</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">com.fasterxml.jackson.databind.Module</span><span class="p">;</span>
@@ -998,7 +998,7 @@ Si sigues leyendo verás como configurar paso a paso un proyecto de cero, con la
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.config.mapper</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.ccsw.tutorial.config.mapper</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">org.springframework.data.domain.Page</span><span class="p">;</span>
 
@@ -1020,7 +1020,7 @@ Si sigues leyendo verás como configurar paso a paso un proyecto de cero, con la
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.config.mapper</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.ccsw.tutorial.config.mapper</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
 

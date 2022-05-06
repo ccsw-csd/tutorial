@@ -883,7 +883,7 @@
 <p>Si has seguido el tutorial, en la creación del proyecto tenías la posibilidad de crear un proyecto Springboot simple o descargarte una plantilla ya creada. De cualquiera de las dos maneras, tendrás la misma estructura que veremos a continuación.</p>
 <h2 id="estructurar-el-codigo">Estructurar el código</h2>
 <p>Vamos a hacer un breve refresco de la estructura del código que ya se ha visto en puntos anteriores.</p>
-<p>Las clases deben estar agrupadas por ámbito funcional, en nuestro caso como vamos a hacer la funcionalidad de <code>Categorías</code> pues debería estar todo dentro de un package del tipo <code>com.capgemini.ccsw.tutorial.category</code>.</p>
+<p>Las clases deben estar agrupadas por ámbito funcional, en nuestro caso como vamos a hacer la funcionalidad de <code>Categorías</code> pues debería estar todo dentro de un package del tipo <code>com.ccsw.tutorial.category</code>.</p>
 <p>Además, deberíamos aplicar la separación por capas como ya se vió en el esquema:</p>
 <p><img alt="estructura-capas" src="../../assets/images/estructura-capas.png" /></p>
 <p>La primera capa, la de <code>Controlador</code>, se encargará de procesar las peticiones y transformar datos. Esta capa llamará a la capa de <code>Lógica</code> de negocio que ejecutará las operaciones, ayudándose de otros objetos de esa misma capa de <code>Lógica</code> o bien de llamadas a datos a través de la capa de <code>Acceso a Datos</code></p>
@@ -895,11 +895,11 @@
 <p>Antes de continuar te recomiendo encarecidamente que leas el <a href="../../appendix/rest/">Anexo: Detalle REST</a> donde se explica brevemente como estructurar los servicios REST que veremos a continuación.</p>
 </div>
 <h3 id="controller-de-ejemplo">Controller de ejemplo</h3>
-<p>Vamos a crear una clase <code>CategoryController.java</code> dentro del package <code>com.capgemini.ccsw.tutorial.category</code> para definir las rutas de las operaciones.</p>
+<p>Vamos a crear una clase <code>CategoryController.java</code> dentro del package <code>com.ccsw.tutorial.category</code> para definir las rutas de las operaciones.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">CategoryController.java</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.category</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.ccsw.tutorial.category</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
 
@@ -933,11 +933,11 @@
 <h3 id="implementar-operaciones">Implementar operaciones</h3>
 <p>Ahora que ya tenemos un controlador y una operacion de negocio ficticia, vamos a borrarla y añadir las operaciones reales que consumirá nuestra pantalla. Deberemos añadir una operación para listar, una para actualizar, una para guardar y una para borrar. Aunque para hacerlo más cómodo, utilizaremos la misma operación para guardar y para actualizar. Además, no vamos a trabajar directamente con datos simples, sino que usaremos objetos para recibir información y para enviar información.</p>
 <p>Estos objetos típicamente se denominan DTO (Data Transfer Object) y nos sirven justamente para encapsular información que queremos transportar. En realidad no son más que clases <em>pojo</em> sencillas con propiedades, getters y setters. </p>
-<p>Para nuestro ejemplo crearemos una clase <code>CategoryDto</code> dentro del package <code>com.capgemini.ccsw.tutorial.category.model</code> con el siguiente contenido:</p>
+<p>Para nuestro ejemplo crearemos una clase <code>CategoryDto</code> dentro del package <code>com.ccsw.tutorial.category.model</code> con el siguiente contenido:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">CategoryDto.java</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.category.model</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.ccsw.tutorial.category.model</span><span class="p">;</span>
 
 <span class="cm">/**</span>
 <span class="cm">* @author ccsw</span>
@@ -990,7 +990,7 @@
 <div class="tabbed-block"></div>
 </div>
 </div>
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.category</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.ccsw.tutorial.category</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">java.util.HashMap</span><span class="p">;</span>
@@ -1003,7 +1003,7 @@
 <span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RequestMethod</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.category.model.CategoryDto</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.ccsw.tutorial.category.model.CategoryDto</span><span class="p">;</span>
 
 <span class="cm">/**</span>
 <span class="cm">* @author ccsw</span>
@@ -1097,11 +1097,11 @@
 <div class="tabbed-set tabbed-alternate" data-tabs="4:3"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><input id="__tabbed_4_3" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">CategoryService.java</label><label for="__tabbed_4_2">CategoryServiceImpl.java</label><label for="__tabbed_4_3">CategoryController.java</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.category</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.ccsw.tutorial.category</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.category.model.CategoryDto</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.ccsw.tutorial.category.model.CategoryDto</span><span class="p">;</span>
 
 <span class="cm">/**</span>
 <span class="cm">* @author ccsw</span>
@@ -1131,7 +1131,7 @@
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.category</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.ccsw.tutorial.category</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">java.util.HashMap</span><span class="p">;</span>
@@ -1140,7 +1140,7 @@
 
 <span class="kn">import</span> <span class="nn">org.springframework.stereotype.Service</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.category.model.CategoryDto</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.ccsw.tutorial.category.model.CategoryDto</span><span class="p">;</span>
 
 <span class="cm">/**</span>
 <span class="cm">* @author ccsw</span>
@@ -1193,7 +1193,7 @@
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.category</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.ccsw.tutorial.category</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
 
@@ -1204,7 +1204,7 @@
 <span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RequestMethod</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.category.model.CategoryDto</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.ccsw.tutorial.category.model.CategoryDto</span><span class="p">;</span>
 
 <span class="cm">/**</span>
 <span class="cm">* @author ccsw</span>
@@ -1291,7 +1291,7 @@ Estos accesos se deben hacer desde la capa de acceso a datos, y en concreto para
 <div class="tabbed-set tabbed-alternate" data-tabs="6:1"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">Category.java</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.category.model</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.ccsw.tutorial.category.model</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">javax.persistence.Column</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">javax.persistence.Entity</span><span class="p">;</span>
@@ -1376,11 +1376,11 @@ Estos accesos se deben hacer desde la capa de acceso a datos, y en concreto para
 <div class="tabbed-set tabbed-alternate" data-tabs="7:1"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">CategoryRepository.java</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.category</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.ccsw.tutorial.category</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">org.springframework.data.repository.CrudRepository</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.category.model.Category</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.ccsw.tutorial.category.model.Category</span><span class="p">;</span>
 
 <span class="cm">/**</span>
 <span class="cm">* @author ccsw</span>
@@ -1407,7 +1407,7 @@ Estos accesos se deben hacer desde la capa de acceso a datos, y en concreto para
 <div class="tabbed-set tabbed-alternate" data-tabs="8:3"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><input id="__tabbed_8_3" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">CategoryServiceImpl.java</label><label for="__tabbed_8_2">CategoryService.java</label><label for="__tabbed_8_3">CategoryController.java</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.category</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.ccsw.tutorial.category</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
 
@@ -1415,8 +1415,8 @@ Estos accesos se deben hacer desde la capa de acceso a datos, y en concreto para
 <span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">org.springframework.stereotype.Service</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.category.model.Category</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.category.model.CategoryDto</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.ccsw.tutorial.category.model.Category</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.ccsw.tutorial.category.model.CategoryDto</span><span class="p">;</span>
 
 <span class="cm">/**</span>
 <span class="cm">* @author ccsw</span>
@@ -1468,12 +1468,12 @@ Estos accesos se deben hacer desde la capa de acceso a datos, y en concreto para
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.category</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.ccsw.tutorial.category</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.category.model.Category</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.category.model.CategoryDto</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.ccsw.tutorial.category.model.Category</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.ccsw.tutorial.category.model.CategoryDto</span><span class="p">;</span>
 
 <span class="cm">/**</span>
 <span class="cm">* @author ccsw</span>
@@ -1482,20 +1482,20 @@ Estos accesos se deben hacer desde la capa de acceso a datos, y en concreto para
 <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">CategoryService</span> <span class="p">{</span>
 
   <span class="cm">/**</span>
-<span class="cm">  * Método para recuperar todas las {@link com.capgemini.ccsw.tutorial.category.model.Category}</span>
+<span class="cm">  * Método para recuperar todas las {@link com.ccsw.tutorial.category.model.Category}</span>
 <span class="cm">  * @return</span>
 <span class="cm">  */</span>
   <span class="n">List</span><span class="o">&lt;</span><span class="n">Category</span><span class="o">&gt;</span> <span class="nf">findAll</span><span class="p">();</span>
 
   <span class="cm">/**</span>
-<span class="cm">  * Método para crear o actualizar una {@link com.capgemini.ccsw.tutorial.category.model.Category}</span>
+<span class="cm">  * Método para crear o actualizar una {@link com.ccsw.tutorial.category.model.Category}</span>
 <span class="cm">  * @param dto</span>
 <span class="cm">  * @return</span>
 <span class="cm">  */</span>
   <span class="kt">void</span> <span class="nf">save</span><span class="p">(</span><span class="n">Long</span> <span class="n">id</span><span class="p">,</span> <span class="n">CategoryDto</span> <span class="n">dto</span><span class="p">);</span>
 
   <span class="cm">/**</span>
-<span class="cm">  * Método para borrar una {@link com.capgemini.ccsw.tutorial.category.model.Category}</span>
+<span class="cm">  * Método para borrar una {@link com.ccsw.tutorial.category.model.Category}</span>
 <span class="cm">  * @param id</span>
 <span class="cm">  */</span>
   <span class="kt">void</span> <span class="nf">delete</span><span class="p">(</span><span class="n">Long</span> <span class="n">id</span><span class="p">);</span>
@@ -1503,7 +1503,7 @@ Estos accesos se deben hacer desde la capa de acceso a datos, y en concreto para
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.category</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.ccsw.tutorial.category</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
 
@@ -1514,7 +1514,7 @@ Estos accesos se deben hacer desde la capa de acceso a datos, y en concreto para
 <span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RequestMethod</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.category.model.CategoryDto</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.ccsw.tutorial.category.model.CategoryDto</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">com.devonfw.module.beanmapping.common.api.BeanMapper</span><span class="p">;</span>
 
 <span class="cm">/**</span>
@@ -1531,7 +1531,7 @@ Estos accesos se deben hacer desde la capa de acceso a datos, y en concreto para
 <span class="hll">  <span class="n">BeanMapper</span> <span class="n">beanMapper</span><span class="p">;</span>
 </span>
   <span class="cm">/**</span>
-<span class="cm">  * Método para recuperar todas las {@link com.capgemini.ccsw.tutorial.category.model.Category}</span>
+<span class="cm">  * Método para recuperar todas las {@link com.ccsw.tutorial.category.model.Category}</span>
 <span class="cm">  * @return</span>
 <span class="cm">  */</span>
   <span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">path</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="n">RequestMethod</span><span class="p">.</span><span class="na">GET</span><span class="p">)</span>
@@ -1541,7 +1541,7 @@ Estos accesos se deben hacer desde la capa de acceso a datos, y en concreto para
 </span>  <span class="p">}</span>
 
   <span class="cm">/**</span>
-<span class="cm">  * Método para crear o actualizar una {@link com.capgemini.ccsw.tutorial.category.model.Category}</span>
+<span class="cm">  * Método para crear o actualizar una {@link com.ccsw.tutorial.category.model.Category}</span>
 <span class="cm">  * @param dto</span>
 <span class="cm">  * @return</span>
 <span class="cm">  */</span>
@@ -1552,7 +1552,7 @@ Estos accesos se deben hacer desde la capa de acceso a datos, y en concreto para
   <span class="p">}</span>
 
   <span class="cm">/**</span>
-<span class="cm">  * Método para borrar una {@link com.capgemini.ccsw.tutorial.category.model.Category}</span>
+<span class="cm">  * Método para borrar una {@link com.ccsw.tutorial.category.model.Category}</span>
 <span class="cm">  * @param id</span>
 <span class="cm">  */</span>
   <span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">path</span> <span class="o">=</span> <span class="s">&quot;/{id}&quot;</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="n">RequestMethod</span><span class="p">.</span><span class="na">DELETE</span><span class="p">)</span>
@@ -1611,13 +1611,13 @@ Con fines didáctivos, he querido enseñarte un ciclo de desarrollo para ir reco
 <p>Vamos a empezar haciendo una clase de test dentro de la carpeta <code>src/test/java</code>. No queremos que los test formen parte del código productivo de la aplicación, por eso utilizamos esa ruta que queda fuera del package general de la aplicación.</p>
 <p>Crearemos las clases:</p>
 <ul>
-<li>Test unitarios: <code>com.capgemini.ccsw.tutorial.category.CategoryTest</code></li>
-<li>Test de integración: <code>com.capgemini.ccsw.tutorial.category.CategoryIT</code> </li>
+<li>Test unitarios: <code>com.ccsw.tutorial.category.CategoryTest</code></li>
+<li>Test de integración: <code>com.ccsw.tutorial.category.CategoryIT</code> </li>
 </ul>
 <div class="tabbed-set tabbed-alternate" data-tabs="9:2"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">CategoryTest.java</label><label for="__tabbed_9_2">CategoryIT.java</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.category</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.ccsw.tutorial.category</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">org.junit.jupiter.api.extension.ExtendWith</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">org.mockito.junit.jupiter.MockitoExtension</span><span class="p">;</span>
@@ -1632,7 +1632,7 @@ Con fines didáctivos, he querido enseñarte un ciclo de desarrollo para ir reco
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.category</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.ccsw.tutorial.category</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">org.springframework.boot.test.context.SpringBootTest</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">org.springframework.boot.test.web.client.TestRestTemplate</span><span class="p">;</span>
@@ -1682,10 +1682,10 @@ Con fines didáctivos, he querido enseñarte un ciclo de desarrollo para ir reco
 <div class="tabbed-set tabbed-alternate" data-tabs="11:2"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><input id="__tabbed_11_2" name="__tabbed_11" type="radio" /><div class="tabbed-labels"><label for="__tabbed_11_1">CategoryTest.java</label><label for="__tabbed_11_2">CategoryIT.java</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.category</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.ccsw.tutorial.category</span><span class="p">;</span>
 
-<span class="hll"><span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.category.model.Category</span><span class="p">;</span>
-</span><span class="hll"><span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.category.model.CategoryDto</span><span class="p">;</span>
+<span class="hll"><span class="kn">import</span> <span class="nn">com.ccsw.tutorial.category.model.Category</span><span class="p">;</span>
+</span><span class="hll"><span class="kn">import</span> <span class="nn">com.ccsw.tutorial.category.model.CategoryDto</span><span class="p">;</span>
 </span><span class="hll"><span class="kn">import</span> <span class="nn">org.junit.jupiter.api.Test</span><span class="p">;</span>
 </span><span class="kn">import</span> <span class="nn">org.junit.jupiter.api.extension.ExtendWith</span><span class="p">;</span>
 <span class="hll"><span class="kn">import</span> <span class="nn">org.mockito.InjectMocks</span><span class="p">;</span>
@@ -1724,9 +1724,9 @@ Con fines didáctivos, he querido enseñarte un ciclo de desarrollo para ir reco
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.capgemini.ccsw.tutorial.category</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.ccsw.tutorial.category</span><span class="p">;</span>
 
-<span class="hll"><span class="kn">import</span> <span class="nn">com.capgemini.ccsw.tutorial.category.model.CategoryDto</span><span class="p">;</span>
+<span class="hll"><span class="kn">import</span> <span class="nn">com.ccsw.tutorial.category.model.CategoryDto</span><span class="p">;</span>
 </span><span class="hll"><span class="kn">import</span> <span class="nn">org.junit.jupiter.api.Test</span><span class="p">;</span>
 </span><span class="hll"><span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="p">;</span>
 </span><span class="kn">import</span> <span class="nn">org.springframework.boot.test.context.SpringBootTest</span><span class="p">;</span>
@@ -1939,7 +1939,7 @@ Seguidamente, recuperamos de nuevo la lista de categorías y en este caso deber�
 <h2 id="que-hemos-aprendido">¿Que hemos aprendido?</h2>
 <p>Resumiendo un poco los pasos que hemos seguido:</p>
 <ul>
-<li>Hay que definir y agrupar por ámbito funcional, hemos creado el package <code>com.capgemini.ccsw.tutorial.category</code> para aglutinar todas las clases.</li>
+<li>Hay que definir y agrupar por ámbito funcional, hemos creado el package <code>com.ccsw.tutorial.category</code> para aglutinar todas las clases.</li>
 <li>Lo primero que debemos empezar a construir <strong>siempre</strong> son los test, aunque en este capítulo del tutorial lo hemos hecho al revés solo con fines didácticos. En los siguientes capítulos lo haremos de forma correcta, y esto nos ayudará a pensar y diseñar que es lo que queremos implementar realmente.</li>
 <li>La implementación de la aplicación se debería separar por capas:<ul>
 <li><code>Controller</code> → Maneja las peticiones de entrada del cliente y realiza transformaciones. No ejecuta directamente lógica de negocio, para eso utiliza llamadas a la siguiente capa.</li>

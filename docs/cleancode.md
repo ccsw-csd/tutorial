@@ -1,5 +1,33 @@
 # Estructura de proyecto y Clean Code
 
+## Proyectos y aplicaciones Web
+
+En todas las aplicaciones web modernas y los proyectos en los que trabajamos se pueden diferenciar, de forma general, tres grandes *bloques funcionales*, como se muestra en la imagen inferior.
+
+![app-layers](./assets/images/app-layers.png)
+
+El funcionamiento es muy sencillo y difiere de las aplicaciones instalables que se ejecuta todo en una misma máquina o servidor.
+
+* Con esta estructura, el usuario accede a la aplicación mediante un navegador web instalado en su máquina local.
+* Este navegador solicita información mediante una URL a un servidor de recursos estáticos. Esto es lo que denominaremos un servidor frontend. Para programar servidores frontend se pueden usar muchas tecnologías, en este tutorial lo desarrollaremos en Angular.
+Este código frontend se descarga y se ejecuta dentro del navegador, y contiene la representación visual de las pantallas y ciertos comportamientos y navegación entre componentes. Sin embargo, por lo general, no tiene datos ni ejecuta lógica de negocio.
+* Para estas labores de obtener datos o ejecutar lógica de negocio, el código frontend necesita invocar endpoints de la *segunda capa*, el backend. Al igual que antes, el backend, puede estar desarrollado en muchas tecnologías, en este tutorial se utilizará Java-Springboot. Lo importante de esta capa es que es necesario exponer unos endpoints que sean invocados por la capa de frontend. Típicamente estos endpoints son operaciones API Rest que veremos más adelante.
+* Por último, el servidor backend / capa backend, necesitará leer y guardar datos de algún sitio. Esto se hace utilizando la *tercera capa*, la capa de datos. Normalmente esta capa de datos será una BBDD instalada en algún servidor externo, aunque en nuestro caso, en el tutorial lo ejecutaremos de forma embebida en la memoria del servidor backend. Pero por norma general, esta capa es externa.
+
+
+Así pues el flujo normal de una aplicación sería el siguiente:
+
+* El usuario abre el navegador y solicita una web mediante una URL
+* El servidor frontend, le sirve los recursos (páginas web, javascript, imágenes, ...) y se cargan en el navegador
+* El navegador renderiza las páginas web, ejecuta los procesos javascript y realiza las navegaciones
+* Si en algún momento se requiere invocar una operación, el navegador lanzará una petición contra una URL del backend
+* El backend estará escuchando las peticiones y las ejecutará en el momento que le invoquen devulviendo un resultado al navegador
+* Si hiciera falta leer o guardar datos, el backend lo realizará lanzando consultas SQL contra la BBDD
+
+
+A continuación se explican un poco más en detalle las capas de frontend y backend, su estructura y su funcionamiento general.
+
+
 ## Angular
 
 !!! info "Nota"

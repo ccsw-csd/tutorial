@@ -584,7 +584,7 @@ Lo primero que vamos a hacer es crear los modelos para trabajar con BBDD y con p
     ```
 === "Author.java"
     ``` Java
-    package com.capgemini.ccsw.tutorial.author.model;
+    package com.ccsw.tutorial.author.model;
 
     import javax.persistence.Column;
     import javax.persistence.Entity;
@@ -663,7 +663,7 @@ Lo primero que vamos a hacer es crear los modelos para trabajar con BBDD y con p
     ```
 === "AuthorDto.java"
     ``` Java
-    package com.capgemini.ccsw.tutorial.author.model;
+    package com.ccsw.tutorial.author.model;
 
     /**
     * @author ccsw
@@ -747,14 +747,14 @@ Para la primera prueba necesitaremos que hemos descrito (consulta paginada) se n
     * El objeto `Page` no es más que un contenedor que engloba la información básica de la página que se está consultando (número de página, tamaño de página, número total de resultados) y el conjunto de datos de la BBDD que contiene esa página una vez han sido buscados y ordenados.
 
 
-También crearemos una clase `AuthorController` dentro del package de `com.capgemini.ccsw.tutorial.author` con la implementación de los métodos vacíos, para que no falle la compilación.
+También crearemos una clase `AuthorController` dentro del package de `com.ccsw.tutorial.author` con la implementación de los métodos vacíos, para que no falle la compilación.
 
 ¡Vamos a implementar test!
 
 
 === "AuthorSearchDto.java"
     ``` Java
-    package com.capgemini.ccsw.tutorial.author.model;
+    package com.ccsw.tutorial.author.model;
 
     import org.springframework.data.domain.Pageable;
 
@@ -785,12 +785,12 @@ También crearemos una clase `AuthorController` dentro del package de `com.capge
     ```
 === "AuthorController.java"
     ``` Java
-    package com.capgemini.ccsw.tutorial.author;
+    package com.ccsw.tutorial.author;
 
     import org.springframework.data.domain.Page;
     
-    import com.capgemini.ccsw.tutorial.author.model.AuthorDto;
-    import com.capgemini.ccsw.tutorial.author.model.AuthorSearchDto;
+    import com.ccsw.tutorial.author.model.AuthorDto;
+    import com.ccsw.tutorial.author.model.AuthorSearchDto;
 
     /**
     * @author ccsw
@@ -798,7 +798,7 @@ También crearemos una clase `AuthorController` dentro del package de `com.capge
     public class AuthorController {
 
         /**
-        * Método para recuperar un listado paginado de {@link com.capgemini.ccsw.tutorial.author.model.Author}
+        * Método para recuperar un listado paginado de {@link com.ccsw.tutorial.author.model.Author}
         * @param dto
         * @return
         */
@@ -809,7 +809,7 @@ También crearemos una clase `AuthorController` dentro del package de `com.capge
         }
 
         /**
-        * Método para crear o actualizar un {@link com.capgemini.ccsw.tutorial.author.model.Author}
+        * Método para crear o actualizar un {@link com.ccsw.tutorial.author.model.Author}
         * @param id
         * @param data datos de la entidad 
         */
@@ -818,7 +818,7 @@ También crearemos una clase `AuthorController` dentro del package de `com.capge
         }
 
         /**
-        * Método para crear o actualizar un {@link com.capgemini.ccsw.tutorial.author.model.Author}
+        * Método para crear o actualizar un {@link com.ccsw.tutorial.author.model.Author}
         * @param id PK de la entidad
         */
         public void delete(Long id) {
@@ -828,10 +828,10 @@ También crearemos una clase `AuthorController` dentro del package de `com.capge
     ```
 === "AuthorIT.java"
     ``` Java
-    package com.capgemini.ccsw.tutorial.author;
+    package com.ccsw.tutorial.author;
     
-    import com.capgemini.ccsw.tutorial.author.model.AuthorDto;
-    import com.capgemini.ccsw.tutorial.author.model.AuthorSearchDto;
+    import com.ccsw.tutorial.author.model.AuthorDto;
+    import com.ccsw.tutorial.author.model.AuthorSearchDto;
     import org.junit.jupiter.api.Test;
     import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.boot.test.context.SpringBootTest;
@@ -1004,7 +1004,7 @@ Si recuerdas, esta capa de `Controller` es la que tiene los endpoints de entrada
 
 === "AuthorController.java"
     ``` Java hl_lines="24 25"
-    package com.capgemini.ccsw.tutorial.author;
+    package com.ccsw.tutorial.author;
 
     import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.data.domain.Page;
@@ -1015,9 +1015,9 @@ Si recuerdas, esta capa de `Controller` es la que tiene los endpoints de entrada
     import org.springframework.web.bind.annotation.RequestMethod;
     import org.springframework.web.bind.annotation.RestController;
 
-    import com.capgemini.ccsw.tutorial.author.model.AuthorDto;
-    import com.capgemini.ccsw.tutorial.author.model.AuthorSearchDto;
-    import com.capgemini.ccsw.tutorial.config.mapper.BeanMapper;
+    import com.ccsw.tutorial.author.model.AuthorDto;
+    import com.ccsw.tutorial.author.model.AuthorSearchDto;
+    import com.ccsw.tutorial.config.mapper.BeanMapper;
 
     /**
     * @author ccsw
@@ -1034,7 +1034,7 @@ Si recuerdas, esta capa de `Controller` es la que tiene los endpoints de entrada
         BeanMapper beanMapper;
 
         /**
-        * Método para recuperar un listado paginado de {@link com.capgemini.ccsw.tutorial.author.model.Author}
+        * Método para recuperar un listado paginado de {@link com.ccsw.tutorial.author.model.Author}
         * @param dto
         * @return
         */
@@ -1045,7 +1045,7 @@ Si recuerdas, esta capa de `Controller` es la que tiene los endpoints de entrada
         }
 
         /**
-        * Método para crear o actualizar un {@link com.capgemini.ccsw.tutorial.author.model.Author}
+        * Método para crear o actualizar un {@link com.ccsw.tutorial.author.model.Author}
         * @param id
         * @param data datos de la entidad 
         */
@@ -1056,7 +1056,7 @@ Si recuerdas, esta capa de `Controller` es la que tiene los endpoints de entrada
         }
 
         /**
-        * Método para crear o actualizar un {@link com.capgemini.ccsw.tutorial.author.model.Author}
+        * Método para crear o actualizar un {@link com.ccsw.tutorial.author.model.Author}
         * @param id PK de la entidad
         */
         @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
@@ -1068,13 +1068,13 @@ Si recuerdas, esta capa de `Controller` es la que tiene los endpoints de entrada
     ```
 === "AuthorService.java"
     ``` Java
-    package com.capgemini.ccsw.tutorial.author;
+    package com.ccsw.tutorial.author;
 
     import org.springframework.data.domain.Page;
 
-    import com.capgemini.ccsw.tutorial.author.model.Author;
-    import com.capgemini.ccsw.tutorial.author.model.AuthorDto;
-    import com.capgemini.ccsw.tutorial.author.model.AuthorSearchDto;
+    import com.ccsw.tutorial.author.model.Author;
+    import com.ccsw.tutorial.author.model.AuthorDto;
+    import com.ccsw.tutorial.author.model.AuthorSearchDto;
 
     /**
     * @author ccsw
@@ -1082,21 +1082,21 @@ Si recuerdas, esta capa de `Controller` es la que tiene los endpoints de entrada
     public interface AuthorService {
 
         /**
-        * Método para recuperar un listado paginado de {@link com.capgemini.ccsw.tutorial.author.model.Author}
+        * Método para recuperar un listado paginado de {@link com.ccsw.tutorial.author.model.Author}
         * @param dto
         * @return
         */
         Page<Author> findPage(AuthorSearchDto dto);
 
         /**
-        * Método para crear o actualizar un {@link com.capgemini.ccsw.tutorial.author.model.Author}
+        * Método para crear o actualizar un {@link com.ccsw.tutorial.author.model.Author}
         * @param id
         * @param data
         */
         void save(Long id, AuthorDto data);
 
         /**
-        * Método para crear o actualizar un {@link com.capgemini.ccsw.tutorial.author.model.Author}
+        * Método para crear o actualizar un {@link com.ccsw.tutorial.author.model.Author}
         * @param id
         */
         void delete(Long id);
@@ -1121,7 +1121,7 @@ La siguiente capa que vamos a implementar es justamente la capa que contiene tod
 
 === "AuthorServiceImpl.java"
     ``` Java hl_lines="21 22 45"
-    package com.capgemini.ccsw.tutorial.author;
+    package com.ccsw.tutorial.author;
 
     import javax.transaction.Transactional;
 
@@ -1130,9 +1130,9 @@ La siguiente capa que vamos a implementar es justamente la capa que contiene tod
     import org.springframework.data.domain.Page;
     import org.springframework.stereotype.Service;
 
-    import com.capgemini.ccsw.tutorial.author.model.Author;
-    import com.capgemini.ccsw.tutorial.author.model.AuthorDto;
-    import com.capgemini.ccsw.tutorial.author.model.AuthorSearchDto;
+    import com.ccsw.tutorial.author.model.Author;
+    import com.ccsw.tutorial.author.model.AuthorDto;
+    import com.ccsw.tutorial.author.model.AuthorSearchDto;
 
     /**
     * @author ccsw
@@ -1184,13 +1184,13 @@ La siguiente capa que vamos a implementar es justamente la capa que contiene tod
     ```
 === "AuthorRepository.java"
     ``` Java hl_lines="12"
-    package com.capgemini.ccsw.tutorial.author;
+    package com.ccsw.tutorial.author;
 
     import org.springframework.data.domain.Page;
     import org.springframework.data.domain.Pageable;
     import org.springframework.data.repository.CrudRepository;
 
-    import com.capgemini.ccsw.tutorial.author.model.Author;
+    import com.ccsw.tutorial.author.model.Author;
 
     /**
     * @author ccsw
@@ -1198,7 +1198,7 @@ La siguiente capa que vamos a implementar es justamente la capa que contiene tod
     public interface AuthorRepository extends CrudRepository<Author, Long> {
 
         /**
-        * Método para recuperar un listado paginado de {@link com.capgemini.ccsw.tutorial.author.model.Author}
+        * Método para recuperar un listado paginado de {@link com.ccsw.tutorial.author.model.Author}
         * @param page
         * @return
         */
@@ -1217,13 +1217,13 @@ Y llegamos a la última capa, la que está más cerca de los datos finales. Tene
 
 === "AuthorRepository.java"
     ``` Java
-    package com.capgemini.ccsw.tutorial.author;
+    package com.ccsw.tutorial.author;
 
     import org.springframework.data.domain.Page;
     import org.springframework.data.domain.Pageable;
     import org.springframework.data.repository.CrudRepository;
 
-    import com.capgemini.ccsw.tutorial.author.model.Author;
+    import com.ccsw.tutorial.author.model.Author;
 
     /**
     * @author ccsw
@@ -1231,7 +1231,7 @@ Y llegamos a la última capa, la que está más cerca de los datos finales. Tene
     public interface AuthorRepository extends CrudRepository<Author, Long> {
 
         /**
-        * Método para recuperar un listado paginado de {@link com.capgemini.ccsw.tutorial.author.model.Author}
+        * Método para recuperar un listado paginado de {@link com.ccsw.tutorial.author.model.Author}
         * @param page
         * @return
         */
