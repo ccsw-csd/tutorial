@@ -1,11 +1,36 @@
 # Creación de proyecto
 
-Por lo general necesitaremos un mínimo de dos proyectos para desarrollar una aplicación:
+## Proyectos y aplicaciones Web
 
-* Por un lado tendremos un proyecto Springboot que se ejecutará en un servidor de aplicaciones, tipo Tomcat. Este proyecto tendrá la lógica de negocio de las operaciones, el acceso a los datos de la BBDD y cualquier integración con servicios de terceros. La forma de exponer estas operaciones de negocio será mediante endpoints de acceso, en concreto llamadas tipo REST.
-* Por otro lado tendremos un proyecto Angular que se ejecutará en un servidor web de ficheros estáticos, tipo Apache. Este proyecto será código javascript, css y html, que se ejecutará en el navegador Web y que realizará ciertas operaciones sencillas y validaciones en local y llamadas a nuestro servidor Springboot para ejecutar las operaciones de negocio.
+En todas las aplicaciones web modernas y los proyectos en los que trabajamos se pueden diferenciar, de forma general, tres grandes *bloques funcionales*, como se muestra en la imagen inferior.
 
-Puede haber otro tipo de proyectos dentro de la aplicación, sobretodo si están basados en microservicios o tienen componentes batch, pero estos proyectos no vamos a verlos en el tutorial.
+![app-layers](./assets/images/app-layers.png)
+
+El funcionamiento es muy sencillo y difiere de las aplicaciones instalables que se ejecuta todo en una misma máquina o servidor.
+
+* Con esta estructura, el usuario accede a la aplicación mediante un navegador web instalado en su máquina local.
+* Este navegador solicita información mediante una URL a un servidor de recursos estáticos. Esto es lo que denominaremos un servidor frontend. Para programar servidores frontend se pueden usar muchas tecnologías, en este tutorial lo desarrollaremos en Angular.
+Este código frontend se descarga y se ejecuta dentro del navegador, y contiene la representación visual de las pantallas y ciertos comportamientos y navegación entre componentes. Sin embargo, por lo general, no tiene datos ni ejecuta lógica de negocio.
+* Para estas labores de obtener datos o ejecutar lógica de negocio, el código frontend necesita invocar endpoints de la *segunda capa*, el backend. Al igual que antes, el backend, puede estar desarrollado en muchas tecnologías, en este tutorial se utilizará Java-Springboot. Lo importante de esta capa es que es necesario exponer unos endpoints que sean invocados por la capa de frontend. Típicamente estos endpoints son operaciones API Rest que veremos más adelante.
+* Por último, el servidor backend / capa backend, necesitará leer y guardar datos de algún sitio. Esto se hace utilizando la *tercera capa*, la capa de datos. Normalmente esta capa de datos será una BBDD instalada en algún servidor externo, aunque en nuestro caso, en el tutorial lo ejecutaremos de forma embebida en la memoria del servidor backend. Pero por norma general, esta capa es externa.
+
+
+Así pues el flujo normal de una aplicación sería el siguiente:
+
+* El usuario abre el navegador y solicita una web mediante una URL
+* El servidor frontend, le sirve los recursos (páginas web, javascript, imágenes, ...) y se cargan en el navegador
+* El navegador renderiza las páginas web, ejecuta los procesos javascript y realiza las navegaciones
+* Si en algún momento se requiere invocar una operación, el navegador lanzará una petición contra una URL del backend
+* El backend estará escuchando las peticiones y las ejecutará en el momento que le invoquen devulviendo un resultado al navegador
+* Si hiciera falta leer o guardar datos, el backend lo realizará lanzando consultas SQL contra la BBDD
+
+
+Dicho esto, por lo general necesitaremos un mínimo de dos proyectos para desarrollar una aplicación:
+
+* Por un lado tendremos un proyecto Springboot que se ejecutará en un servidor de aplicaciones, tipo Tomcat y **lo arrancaremos desde el Eclipse**. Este proyecto tendrá la lógica de negocio de las operaciones, el acceso a los datos de la BBDD y cualquier integración con servicios de terceros. La forma de exponer estas operaciones de negocio será mediante endpoints de acceso, en concreto llamadas tipo REST.
+* Por otro lado tendremos un proyecto Angular que se ejecutará en un servidor web de ficheros estáticos, tipo Apache, y **lo arrancaremos desde Angular Cli o Visual Studio Code**. Este proyecto será código javascript, css y html, que se renderizará en el navegador Web y que realizará ciertas operaciones sencillas y validaciones en local y llamadas a nuestro servidor Springboot para ejecutar las operaciones de negocio.
+
+Pueden haber otros tipos de proyectos dentro de la aplicación, sobretodo si están basados en microservicios o tienen componentes batch, pero estos proyectos no vamos a verlos en el tutorial.
 
 !!! tip "Consejo"
     Como norma cada uno de los proyectos que componen la aplicación, debería estar conectado a un repositorio de código diferente para poder evolucionar y trabajar con cada uno de ellos de forma aislada sin afectar a los demás. Así además podemos tener equipos aislados que trabajen con cada uno de los proyectos por separado.

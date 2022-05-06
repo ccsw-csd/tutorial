@@ -273,6 +273,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#proyectos-y-aplicaciones-web" class="md-nav__link">
+    Proyectos y aplicaciones Web
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#creacion-de-proyecto-angular" class="md-nav__link">
     Creación de proyecto Angular
   </a>
@@ -647,6 +654,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#proyectos-y-aplicaciones-web" class="md-nav__link">
+    Proyectos y aplicaciones Web
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#creacion-de-proyecto-angular" class="md-nav__link">
     Creación de proyecto Angular
   </a>
@@ -775,12 +789,32 @@
                 
 
 <h1 id="creacion-de-proyecto">Creación de proyecto</h1>
-<p>Por lo general necesitaremos un mínimo de dos proyectos para desarrollar una aplicación:</p>
+<h2 id="proyectos-y-aplicaciones-web">Proyectos y aplicaciones Web</h2>
+<p>En todas las aplicaciones web modernas y los proyectos en los que trabajamos se pueden diferenciar, de forma general, tres grandes <em>bloques funcionales</em>, como se muestra en la imagen inferior.</p>
+<p><img alt="app-layers" src="../assets/images/app-layers.png" /></p>
+<p>El funcionamiento es muy sencillo y difiere de las aplicaciones instalables que se ejecuta todo en una misma máquina o servidor.</p>
 <ul>
-<li>Por un lado tendremos un proyecto Springboot que se ejecutará en un servidor de aplicaciones, tipo Tomcat. Este proyecto tendrá la lógica de negocio de las operaciones, el acceso a los datos de la BBDD y cualquier integración con servicios de terceros. La forma de exponer estas operaciones de negocio será mediante endpoints de acceso, en concreto llamadas tipo REST.</li>
-<li>Por otro lado tendremos un proyecto Angular que se ejecutará en un servidor web de ficheros estáticos, tipo Apache. Este proyecto será código javascript, css y html, que se ejecutará en el navegador Web y que realizará ciertas operaciones sencillas y validaciones en local y llamadas a nuestro servidor Springboot para ejecutar las operaciones de negocio.</li>
+<li>Con esta estructura, el usuario accede a la aplicación mediante un navegador web instalado en su máquina local.</li>
+<li>Este navegador solicita información mediante una URL a un servidor de recursos estáticos. Esto es lo que denominaremos un servidor frontend. Para programar servidores frontend se pueden usar muchas tecnologías, en este tutorial lo desarrollaremos en Angular.
+Este código frontend se descarga y se ejecuta dentro del navegador, y contiene la representación visual de las pantallas y ciertos comportamientos y navegación entre componentes. Sin embargo, por lo general, no tiene datos ni ejecuta lógica de negocio.</li>
+<li>Para estas labores de obtener datos o ejecutar lógica de negocio, el código frontend necesita invocar endpoints de la <em>segunda capa</em>, el backend. Al igual que antes, el backend, puede estar desarrollado en muchas tecnologías, en este tutorial se utilizará Java-Springboot. Lo importante de esta capa es que es necesario exponer unos endpoints que sean invocados por la capa de frontend. Típicamente estos endpoints son operaciones API Rest que veremos más adelante.</li>
+<li>Por último, el servidor backend / capa backend, necesitará leer y guardar datos de algún sitio. Esto se hace utilizando la <em>tercera capa</em>, la capa de datos. Normalmente esta capa de datos será una BBDD instalada en algún servidor externo, aunque en nuestro caso, en el tutorial lo ejecutaremos de forma embebida en la memoria del servidor backend. Pero por norma general, esta capa es externa.</li>
 </ul>
-<p>Puede haber otro tipo de proyectos dentro de la aplicación, sobretodo si están basados en microservicios o tienen componentes batch, pero estos proyectos no vamos a verlos en el tutorial.</p>
+<p>Así pues el flujo normal de una aplicación sería el siguiente:</p>
+<ul>
+<li>El usuario abre el navegador y solicita una web mediante una URL</li>
+<li>El servidor frontend, le sirve los recursos (páginas web, javascript, imágenes, ...) y se cargan en el navegador</li>
+<li>El navegador renderiza las páginas web, ejecuta los procesos javascript y realiza las navegaciones</li>
+<li>Si en algún momento se requiere invocar una operación, el navegador lanzará una petición contra una URL del backend</li>
+<li>El backend estará escuchando las peticiones y las ejecutará en el momento que le invoquen devulviendo un resultado al navegador</li>
+<li>Si hiciera falta leer o guardar datos, el backend lo realizará lanzando consultas SQL contra la BBDD</li>
+</ul>
+<p>Dicho esto, por lo general necesitaremos un mínimo de dos proyectos para desarrollar una aplicación:</p>
+<ul>
+<li>Por un lado tendremos un proyecto Springboot que se ejecutará en un servidor de aplicaciones, tipo Tomcat y <strong>lo arrancaremos desde el Eclipse</strong>. Este proyecto tendrá la lógica de negocio de las operaciones, el acceso a los datos de la BBDD y cualquier integración con servicios de terceros. La forma de exponer estas operaciones de negocio será mediante endpoints de acceso, en concreto llamadas tipo REST.</li>
+<li>Por otro lado tendremos un proyecto Angular que se ejecutará en un servidor web de ficheros estáticos, tipo Apache, y <strong>lo arrancaremos desde Angular Cli o Visual Studio Code</strong>. Este proyecto será código javascript, css y html, que se renderizará en el navegador Web y que realizará ciertas operaciones sencillas y validaciones en local y llamadas a nuestro servidor Springboot para ejecutar las operaciones de negocio.</li>
+</ul>
+<p>Pueden haber otros tipos de proyectos dentro de la aplicación, sobretodo si están basados en microservicios o tienen componentes batch, pero estos proyectos no vamos a verlos en el tutorial.</p>
 <div class="admonition tip">
 <p class="admonition-title">Consejo</p>
 <p>Como norma cada uno de los proyectos que componen la aplicación, debería estar conectado a un repositorio de código diferente para poder evolucionar y trabajar con cada uno de ellos de forma aislada sin afectar a los demás. Así además podemos tener equipos aislados que trabajen con cada uno de los proyectos por separado.</p>
