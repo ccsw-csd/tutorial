@@ -19,9 +19,13 @@ Las herramientas básicas que vamos a utilizar para el desarrollo del tutorial s
 
 Necesitamos instalar un IDE de desarrollo, en nuestro caso será Eclipse IDE y la máquina virtual de java necesaria para ejecutar el código. Recomendamos Java8, que es la versión con la que está desarrollado el tutorial, aunque puedes instalar cualquier otra versión superior.
 
+!!! tip "Atención"
+    Si se utiliza otra versión de Java diferente a la 8 o la 11, las dependencias utilizadas por Springboot en este tutorial **NO** funcionarán y dará un fallo al arrancar. Por favor, utiliza la versión de Java 8 o la versión de Java 11.
+
+
 Para instalar el IDE deberás acceder a [Eclide IDE](https://www.eclipse.org/downloads/) y descargarte la última versión del instalador. Una vez lo ejecutes te pedirá el tipo de instalación que deseas instalar. Por lo general con la de "Eclipse IDE for Java Developers" es suficiente. Con esta versión ya tiene integrado los plugins de Maven y Git.
 
-En la siguiente pantalla te pedirá que elijas la versión de Java para instalar. Os recomendamos realizar el tutorial con la versión [8 de java](https://www.oracle.com/java/technologies/downloads/#java8-windows), para versiones superiores no está probado y podría dar algún fallo.
+En la siguiente pantalla te pedirá que elijas la versión de Java para instalar. Deberías descargar la versión  [8 de java](https://www.oracle.com/java/technologies/downloads/#java8-windows).
 
 Una vez instalado eclipse, debes asegurarte que está usando por defecto la versión de Java 8. Para ello, abre el menú `Window -> Preferences` y dentro de la opción `Java - Installed JREs` verifica que es correcto. Si no fuera así, añade la versión correcta y márcala como `default`.
 

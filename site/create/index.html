@@ -871,12 +871,16 @@ Si sigues leyendo verás como configurar paso a paso un proyecto de cero, con la
 <ul>
 <li>Tipo de proyecto: Maven</li>
 <li>Lenguage: Java</li>
-<li>Versión Spring boot: 2.4.4</li>
+<li>Versión Spring boot: 2.6.x</li>
 <li>Group: com.ccsw</li>
 <li>ArtifactId: tutorial</li>
 <li>Versión Java: 8</li>
 <li>Dependencias: Spring Web, Spring Data JPA, H2 Database</li>
 </ul>
+<div class="admonition tip">
+<p class="admonition-title">Atención</p>
+<p>La versión de SpringFramework debe ser una versión inferior a 2.7.0. Para versiones superiores hay métodos de las librerías (por ejemplo de acceso a BBDD) que están deprecados y no funcionará el tutorial. Elige una versión 2.6.x o si no existiera es versión, puedes descargarte una anterior y luego modificar el fichero <code>pom.xml</code> cambiando la línea de la versión de springboot por la 2.6.6.</p>
+</div>
 <p><img alt="initializr" src="../assets/images/initializr.png" /></p>
 <p>Esto nos generará un proyecto que ya vendrá configurado con Spring Web y H2 para crear una BBDD en memoria de ejemplo con la que trabajaremos durante el tutorial.</p>
 <h4 id="importar-en-eclipse_1">Importar en eclipse</h4>

@@ -107,11 +107,15 @@ Esta página está disponible desde [Spring Initializr](https://start.spring.io/
 
 * Tipo de proyecto: Maven
 * Lenguage: Java
-* Versión Spring boot: 2.4.4
+* Versión Spring boot: 2.6.x
 * Group: com.ccsw
 * ArtifactId: tutorial
 * Versión Java: 8
 * Dependencias: Spring Web, Spring Data JPA, H2 Database
+
+!!! tip "Atención"
+    La versión de SpringFramework debe ser una versión inferior a 2.7.0. Para versiones superiores hay métodos de las librerías (por ejemplo de acceso a BBDD) que están deprecados y no funcionará el tutorial. Elige una versión 2.6.x o si no existiera es versión, puedes descargarte una anterior y luego modificar el fichero `pom.xml` cambiando la línea de la versión de springboot por la 2.6.6.
+
 
 ![initializr](./assets/images/initializr.png)
 

@@ -606,8 +606,12 @@
 </ul>
 <h2 id="instalacion-de-herramientas-para-desarrollo-back">Instalación de herramientas para desarrollo Back</h2>
 <p>Necesitamos instalar un IDE de desarrollo, en nuestro caso será Eclipse IDE y la máquina virtual de java necesaria para ejecutar el código. Recomendamos Java8, que es la versión con la que está desarrollado el tutorial, aunque puedes instalar cualquier otra versión superior.</p>
+<div class="admonition tip">
+<p class="admonition-title">Atención</p>
+<p>Si se utiliza otra versión de Java diferente a la 8 o la 11, las dependencias utilizadas por Springboot en este tutorial <strong>NO</strong> funcionarán y dará un fallo al arrancar. Por favor, utiliza la versión de Java 8 o la versión de Java 11.</p>
+</div>
 <p>Para instalar el IDE deberás acceder a <a href="https://www.eclipse.org/downloads/">Eclide IDE</a> y descargarte la última versión del instalador. Una vez lo ejecutes te pedirá el tipo de instalación que deseas instalar. Por lo general con la de "Eclipse IDE for Java Developers" es suficiente. Con esta versión ya tiene integrado los plugins de Maven y Git.</p>
-<p>En la siguiente pantalla te pedirá que elijas la versión de Java para instalar. Os recomendamos realizar el tutorial con la versión <a href="https://www.oracle.com/java/technologies/downloads/#java8-windows">8 de java</a>, para versiones superiores no está probado y podría dar algún fallo.</p>
+<p>En la siguiente pantalla te pedirá que elijas la versión de Java para instalar. Deberías descargar la versión  <a href="https://www.oracle.com/java/technologies/downloads/#java8-windows">8 de java</a>.</p>
 <p>Una vez instalado eclipse, debes asegurarte que está usando por defecto la versión de Java 8. Para ello, abre el menú <code>Window -&gt; Preferences</code> y dentro de la opción <code>Java - Installed JREs</code> verifica que es correcto. Si no fuera así, añade la versión correcta y márcala como <code>default</code>.</p>
 <p><img alt="Installed JREs" src="../assets/images/install-eclipse.png" /></p>
 <p>Ademas, a fin de crear código homogéneo y mantenible, vamos a configurar el formateador de código automático.</p>
