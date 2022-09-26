@@ -1100,6 +1100,22 @@ Si sigues leyendo verás como configurar paso a paso un proyecto de cero, con la
 </ul>
 <p>Estos ficheros no pueden estar vacíos ya que si no dará un error al arrancar. Puedes añadirle la siguiente query (que no hace nada) para que pueda arrancar el proyecto.</p>
 <p><code>select 1 from dual;</code></p>
+<p>Y ahora le vamos a decir a Springboot que la BBDD será en memoria, que use un motor similar al de MySQL y que no la cree automáticamente sino que utilice los ficheros <code>schema.sql</code> y <code>data.sql</code>. Para ello hay que configurar el fichero <code>application.properties</code> que está dentro de <code>src/main/resources/</code>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">application.properties</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="c">#Database</span><span class="w"></span>
+<span class="na">spring.jpa.hibernate.ddl-auto</span><span class="o">=</span><span class="s">none</span><span class="w"></span>
+<span class="na">spring.datasource.driver-class-name</span><span class="o">=</span><span class="s">org.h2.Driver</span><span class="w"></span>
+<span class="na">spring.datasource.url</span><span class="o">=</span><span class="s">jdbc:h2:mem:test;mode=mysql</span><span class="w"></span>
+<span class="na">spring.datasource.username</span><span class="o">=</span><span class="s">sa</span><span class="w"></span>
+<span class="na">spring.datasource.password</span><span class="o">=</span><span class="s">sa</span><span class="w"></span>
+<span class="na">spring.jpa.database-platform</span><span class="o">=</span><span class="s">org.hibernate.dialect.H2Dialect</span><span class="w"></span>
+
+<span class="na">spring.jpa.show-sql</span><span class="o">=</span><span class="s">true</span><span class="w"></span>
+</code></pre></div>
 <h3 id="arrancar-el-proyecto_1">Arrancar el proyecto</h3>
 <p>Por último ya solo nos queda arrancar el proyecto creado. Para ello buscaremos la clase <code>TutorialApplication.java</code> (o la clase principal del proyecto) y con el botón derecho seleccionaremos Run As → Java Application. La aplicación al estar basada en Springboot arrancará internamente un Tomcat embebido donde se despliegará el proyecto. Si habéis seguido el tutorial la aplicación estará disponible en <a href="http://localhost:8080">http://localhost:8080</a>, aunque de momento aun no tenemos nada accesible.</p>
 

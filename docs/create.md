@@ -345,6 +345,21 @@ Estos ficheros no pueden estar vacíos ya que si no dará un error al arrancar. 
 
 ```select 1 from dual;```
 
+Y ahora le vamos a decir a Springboot que la BBDD será en memoria, que use un motor similar al de MySQL y que no la cree automáticamente sino que utilice los ficheros `schema.sql` y `data.sql`. Para ello hay que configurar el fichero `application.properties` que está dentro de `src/main/resources/`:
+
+=== "application.properties"
+  ``` properties
+  #Database
+  spring.jpa.hibernate.ddl-auto=none
+  spring.datasource.driver-class-name=org.h2.Driver
+  spring.datasource.url=jdbc:h2:mem:test;mode=mysql
+  spring.datasource.username=sa
+  spring.datasource.password=sa
+  spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
+
+  spring.jpa.show-sql=true
+  ```
+
 
 ### Arrancar el proyecto
 
