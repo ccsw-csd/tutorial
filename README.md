@@ -22,4 +22,5 @@ Con el fichero "build.bat" se compilará todo el proyecto y generará el html es
 
 
 ## Actualizar mkdocs
+
 `pip install --upgrade --force-reinstall mkdocs-material`

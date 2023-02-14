@@ -45,7 +45,7 @@ La pantalla tendrá dos zonas:
 - Una zona de filtrado donde se permitirá filtrar por:
 	- Título del juego, que deberá ser un combo seleccionable con los juegos del catálogo de la Ludoteca.
 	- Cliente, que deberá ser un combo seleccionable con los clientes dados de alta en la aplicación.
-	- Fecha, que deberá ser de tipo calendario y que permitirá elegir una fecha de búsqueda. Al elegir un día nos deberá mostrar que juegos están prestados para dicho día. **OJO** que los préstamos son con fecha de inicio y de fin, si elijo un día intermedio debería aparecer el elemento en la tabla.
+	- Fecha, que deberá ser de tipo Datepicker y que permitirá elegir una fecha de búsqueda. Al elegir un día nos deberá mostrar que juegos están prestados para dicho día. **OJO** que los préstamos son con fecha de inicio y de fin, si elijo un día intermedio debería aparecer el elemento en la tabla.
 - Una zona de listado **paginado** que deberá mostrar
 	- El identificador del préstamo
 	- El nombre del juego prestado
@@ -67,8 +67,8 @@ Las validaciones son sencillas aunque laboriosas:
 
 - La fecha de fin **NO** podrá ser anterior a la fecha de inicio
 - El periodo de préstamo máximo solo podrá ser de 14 días. Si el usuario quiere un préstamo para más de 14 días la aplicación no debe permitirlo mostrando una alerta al intentar guardar.
-- El mismo juego no puede estar prestado a dos clientes distintos en un mismo día. **OJO** que los préstamos tienen fecha de inicio y fecha fin, el juego no puede estar prestado a más de un cliente para ninguno de los días que contemplan las fechas actuales del formulario.
-- Un mismo cliente no puede tener prestados más de 2 juegos en un mismo día. **OJO** que los préstamos tienen fecha de inicio y fecha fin, el cliente no puede tener más de dos préstamos para ninguno de los días que contemplan las fechas actuales del formulario.
+- El mismo juego no puede estar prestado a dos clientes distintos en un mismo día. **OJO** que los préstamos tienen fecha de inicio y fecha fin, el juego no puede estar prestado a más de un cliente para ninguno de los días que contemplan las fechas actuales del rango.
+- Un mismo cliente no puede tener prestados más de 2 juegos en un mismo día. **OJO** que los préstamos tienen fecha de inicio y fecha fin, el cliente no puede tener más de dos préstamos para ninguno de los días que contemplan las fechas actuales del rango.
 
 
 ### Consejos

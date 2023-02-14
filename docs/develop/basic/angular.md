@@ -495,11 +495,11 @@ Vamos a implementar una operación de negocio que recupere el listado de categor
     import { CategoryService } from '../category.service';
     
     @Component({
-      selector: 'app-categories',
-      templateUrl: './categories.component.html',
-      styleUrls: ['./categories.component.scss']
+      selector: 'app-category-list',
+      templateUrl: './category-list.component.html',
+      styleUrls: ['./category-list.component.scss']
     })
-    export class CategoriesComponent implements OnInit {
+    export class CategoryListComponent implements OnInit {
 
       dataSource = new MatTableDataSource<Category>();
       displayedColumns: string[] = ['id', 'name', 'action'];
@@ -814,8 +814,8 @@ Vamos a implementar funcionalidad sobre el icono `editar`, tendremos que modific
             <ng-container matColumnDef="action">
                 <mat-header-cell *matHeaderCellDef></mat-header-cell>
                 <mat-cell *matCellDef="let element">
-                    <button mat-icon-button color="primary">
-                        <mat-icon (click)="editCategory(element)">edit</mat-icon>
+                    <button mat-icon-button color="primary" (click)="editCategory(element)">
+                        <mat-icon>edit</mat-icon>
                     </button>
                     <button mat-icon-button color="accent"><mat-icon>clear</mat-icon></button>
                 </mat-cell>
@@ -832,7 +832,7 @@ Vamos a implementar funcionalidad sobre el icono `editar`, tendremos que modific
     ```
 === "category-list.component.ts"
     ``` TypeScript hl_lines="27 28 29 30 31 32 33 34 35"
-    export class CategoriesComponent implements OnInit {
+    export class CategoryListComponent implements OnInit {
 
       dataSource = new MatTableDataSource<Category>();
       displayedColumns: string[] = ['id', 'name', 'action'];
@@ -1058,11 +1058,11 @@ Ya por último, una vez tenemos el componente genérico de dialogo, vamos a util
         <ng-container matColumnDef="action">
             <mat-header-cell *matHeaderCellDef></mat-header-cell>
             <mat-cell *matCellDef="let element">
-                <button mat-icon-button color="primary">
-                    <mat-icon (click)="editCategory(element)">edit</mat-icon>
+                <button mat-icon-button color="primary" (click)="editCategory(element)">
+                    <mat-icon>edit</mat-icon>
                 </button>
-                <button mat-icon-button color="accent">
-                    <mat-icon (click)="deleteCategory(element)">clear</mat-icon>
+                <button mat-icon-button color="accent" (click)="deleteCategory(element)">
+                    <mat-icon>clear</mat-icon>
                 </button>
             </mat-cell>
         </ng-container>
@@ -1138,9 +1138,9 @@ Abrimos el fichero y susituimos la línea que antes devolvía los datos estátic
     }
     ```
 
-Como hemos añadido un componente nuevo `HttpClient` tenemos que añadir la dependencial al módulo padre.
+Como hemos añadido un componente nuevo `HttpClient` tenemos que añadir la dependencia al módulo padre.
 
-=== "services.module.ts"
+=== "category.module.ts"
 ``` Typescript hl_lines="12 26"
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';

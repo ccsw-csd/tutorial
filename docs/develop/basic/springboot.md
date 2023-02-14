@@ -213,14 +213,18 @@ Fíjate que el método `save` tiene dos rutas. La ruta normal `category/` y la r
 !!! tip "Atención"
     Los datos que se reciben pueden venir informados como un parámetro en la URL Get, como una variable en el propio path o dentro del body de la petición. Cada uno de ellos se recupera con una anotación especial: `@RequestParam`, `@PathVariable` y `@RequestBody` respectivamente.
 
-**GET /category** nos devuelve un listado de `Categorías`
-
-![step2-java1](../../assets/images/step2-java1.png)
+Como no tenemos ningún dato dado de alta, podemos probar en primer lugar a realizar una inserción de datos con el método PUT.
 
 **PUT /category** nos sirve para insertar `Categorías` nuevas (si no tienen el id informado) o para actualizar `Categorías` (si tienen el id informado). Fíjate que los datos que se envían están en el body como formato JSON (parte izquierda de la imagen). Si no envías datos, te dará un error.
 
 ![step2-java2](../../assets/images/step2-java2.png)
 ![step2-java3](../../assets/images/step2-java3.png)
+
+
+**GET /category** nos devuelve un listado de `Categorías`, siempre que hayamos insertado algo antes.
+
+![step2-java1](../../assets/images/step2-java1.png)
+
 
 **DELETE /category** nos sirve eliminar `Categorías`. Fíjate que el dato del ID que se envía está en el path.
 
@@ -900,16 +904,17 @@ Con todo esto ya podemos crear nuestro primer test. Iremos a las clases `Categor
     }
     ```
 === "CategoryIT.java"
-    ``` Java hl_lines="3-5 9-10 13 15 21 22 30 32-39"
+    ``` Java hl_lines="3-16 22 23 31 33-40"
     package com.ccsw.tutorial.category;
     
     import com.ccsw.tutorial.category.model.CategoryDto;
     import org.junit.jupiter.api.Test;
     import org.springframework.beans.factory.annotation.Autowired;
-    import org.springframework.boot.test.context.SpringBootTest;
+    import org.springframework.boot.test.context.SpringBootTest;    
     import org.springframework.boot.test.web.client.TestRestTemplate;
     import org.springframework.boot.web.server.LocalServerPort;
     import org.springframework.core.ParameterizedTypeReference;
+    import org.springframework.http.HttpMethod;
     import org.springframework.http.ResponseEntity;
     import org.springframework.test.annotation.DirtiesContext;
     
