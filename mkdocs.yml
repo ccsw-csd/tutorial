@@ -1,30 +1,41 @@
-site_name: Tutorial Springboot - Angular
+site_name: Tutorial Frontend - Backend
 
 nav:
   - Bienvenido!: index.md
   - Agradecimientos!: thanks.md
   - Contexto de la aplicación: usecases.md
-  - Entorno de desarrollo: install.md
-  - Creación de proyecto: create.md
-  - Estructura y Clean Code: cleancode.md
-  - "Code: Desarrollo con Angular": develop/step1.md
-  - "Code: Desarrollo con Springboot": develop/step2.md
-  - "Code: Conectar front con back": develop/step3.md
-  - "Code: Listado paginado": develop/step4.md
-  - "Code: Listado filtrado": develop/step5.md  
+  - Entorno de desarrollo:
+    - 🔵 Angular: install/angular.md
+    - 🟢 Springboot: install/springboot.md
+    - 🟢 Nodejs: install/nodejs.md
+  - Estructura y buenas prácticas:
+    - 🔵 Angular: cleancode/angular.md
+    - 🟢 Springboot: cleancode/springboot.md
+    - 🟢 Nodejs: cleancode/nodejs.md
+  - "Code: Listado simple":
+    - 🔵 Angular: develop/basic/angular.md
+    - 🟢 Springboot: develop/basic/springboot.md
+    - 🟢 Nodejs: develop/basic/nodejs.md
+  - "Code: Listado paginado":
+    - 🔵 Angular: develop/paginated/angular.md
+    - 🟢 Springboot: develop/paginated/springboot.md
+    - 🟢 Nodejs: develop/paginated/nodejs.md
+  - "Code: Listado filtrado":    
+    - 🔵 Angular: develop/filtered/angular.md
+    - 🟢 Springboot: develop/filtered/springboot.md
+    - 🟢 Nodejs: develop/filtered/nodejs.md
   - Ahora hazlo tu!: exercise.md
   - Anexo. Tutorial básico de Git: appendix/git.md
   - Anexo. Detalle REST: appendix/rest.md
   - Anexo. TDD: appendix/tdd.md
   - Anexo. Spring Data (JPA): appendix/jpa.md
-  - Anexo. Validaciones (TBC): develop/step6.md
-  - Anexo. Crear Login (TBC): develop/step7.md
-  - Anexo. Estilos (TBC): appendix/styles.md
-  - Anexo. Fechas (TBC): appendix/dates.md
 
 theme:
     name: material
     language: es
+    features:
+      - navigation.path
+      - navigation.indexes
     
 markdown_extensions:
   - admonition

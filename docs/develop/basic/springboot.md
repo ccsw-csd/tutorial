@@ -1,8 +1,7 @@
-# Desarrollo con Springboot
+# Listado simple - Springboot
 
-Ahora que ya tenemos listo tanto el proyecto back de SpringBoot (en el puerto 8080) como el proyecto front de Angular (en el puerto 4200), ya podemos empezar a codificar la solución.
+Ahora que ya tenemos listo el proyecto backend de SpringBoot (en el puerto 8080) ya podemos empezar a codificar la solución.
 
-Durante todo el tutorial vamos a intentar separar completamente la implementación de front de la implementación de back, para que quede claro como se debe realizar en cada una de las tecnologías.
 
 ## Primeros pasos
 
@@ -20,7 +19,7 @@ Las clases deben estar agrupadas por ámbito funcional, en nuestro caso como vam
 
 Además, deberíamos aplicar la separación por capas como ya se vió en el esquema:
 
-![estructura-capas](../assets/images/estructura-capas.png)
+![estructura-capas](../../assets/images/estructura-capas.png)
 
 La primera capa, la de `Controlador`, se encargará de procesar las peticiones y transformar datos. Esta capa llamará a la capa de `Lógica` de negocio que ejecutará las operaciones, ayudándose de otros objetos de esa misma capa de `Lógica` o bien de llamadas a datos a través de la capa de `Acceso a Datos`
 
@@ -31,7 +30,7 @@ Ahora sí, vamos a programar!.
 En esta capa es donde se definen las operaciones que pueden ser consumidas por los clientes. Se caracterizan por estar anotadas con las anotaciones @Controller o @RestController y por las anotaciones @RequestMapping que nos permiten definir las rutas de acceso.
 
 !!! tip "Recomendación: Breve detalle REST"
-    Antes de continuar te recomiendo encarecidamente que leas el [Anexo: Detalle REST](../appendix/rest.md) donde se explica brevemente como estructurar los servicios REST que veremos a continuación.
+    Antes de continuar te recomiendo encarecidamente que leas el [Anexo: Detalle REST](../../appendix/rest.md) donde se explica brevemente como estructurar los servicios REST que veremos a continuación.
 
 
 
@@ -45,6 +44,7 @@ Vamos a crear una clase `CategoryController.java` dentro del package `com.ccsw.t
 
     import java.util.List;
 
+    import org.springframework.web.bind.annotation.CrossOrigin;
     import org.springframework.web.bind.annotation.RequestMapping;
     import org.springframework.web.bind.annotation.RequestMethod;
     import org.springframework.web.bind.annotation.RestController;
@@ -54,6 +54,7 @@ Vamos a crear una clase `CategoryController.java` dentro del package `com.ccsw.t
     */
     @RequestMapping(value = "/category")
     @RestController
+    @CrossOrigin(origins = "*")
     public class CategoryController {
 
       /**
@@ -139,6 +140,7 @@ A continuación utilizaremos esta clase en nuestro Controller para implementar l
   import java.util.List;
   import java.util.Map;
 
+  import org.springframework.web.bind.annotation.CrossOrigin;
   import org.springframework.web.bind.annotation.PathVariable;
   import org.springframework.web.bind.annotation.RequestBody;
   import org.springframework.web.bind.annotation.RequestMapping;
@@ -152,6 +154,7 @@ A continuación utilizaremos esta clase en nuestro Controller para implementar l
   */
   @RequestMapping(value = "/category")
   @RestController
+  @CrossOrigin(origins = "*")
   public class CategoryController {
 
     private long SEQUENCE = 1;
@@ -212,16 +215,16 @@ Fíjate que el método `save` tiene dos rutas. La ruta normal `category/` y la r
 
 **GET /category** nos devuelve un listado de `Categorías`
 
-![step2-java1](../assets/images/step2-java1.png)
+![step2-java1](../../assets/images/step2-java1.png)
 
 **PUT /category** nos sirve para insertar `Categorías` nuevas (si no tienen el id informado) o para actualizar `Categorías` (si tienen el id informado). Fíjate que los datos que se envían están en el body como formato JSON (parte izquierda de la imagen). Si no envías datos, te dará un error.
 
-![step2-java2](../assets/images/step2-java2.png)
-![step2-java3](../assets/images/step2-java3.png)
+![step2-java2](../../assets/images/step2-java2.png)
+![step2-java3](../../assets/images/step2-java3.png)
 
 **DELETE /category** nos sirve eliminar `Categorías`. Fíjate que el dato del ID que se envía está en el path.
 
-![step2-java4](../assets/images/step2-java4.png)
+![step2-java4](../../assets/images/step2-java4.png)
 
 
 Prueba a jugar borrando categorías que no existen o modificando categorías que no existen. Tal y como está programado, el borrado no dará error, pero la modificación debería dar un NullPointerException al no existir el dato a modificar.
@@ -351,6 +354,7 @@ Pues vamos a arreglarlo. Vamos a crear un servicio y vamos a mover la lógica de
 
     import java.util.List;
 
+    import org.springframework.web.bind.annotation.CrossOrigin;
     import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.web.bind.annotation.PathVariable;
     import org.springframework.web.bind.annotation.RequestBody;
@@ -365,6 +369,7 @@ Pues vamos a arreglarlo. Vamos a crear un servicio y vamos a mover la lógica de
     */
     @RequestMapping(value = "/category")
     @RestController
+    @CrossOrigin(origins = "*")
     public class CategoryController {
 
       @Autowired
@@ -554,7 +559,7 @@ Ahora vamos a utilizarla en el `Service`, pero hay un problema. El `Repository` 
 
 El ámbito de trabajo  de las capas con el que solemos trabajar y está más extendido es el siguiente:
 
-![step2-java5](../assets/images/step2-java5.png)
+![step2-java5](../../assets/images/step2-java5.png)
 
 * Los datos que vienen y van al cliente, deberían ser en la mayoría de los casos datos en formato json
 * Al entrar en un `Controller` esos datos json se transforman en un DTO. Al salir del `Controller` hacia el cliente, esos DTOs se transforman en formato json. Estas conversiones son automáticas, las hace Springboot (en realidad las hace la librería de jackson codehaus).
@@ -662,11 +667,12 @@ El código debería quedar así:
     }
     ```
 === "CategoryController.java"
-    ``` Java hl_lines="26 35"
+    ``` Java hl_lines="28 37"
     package com.ccsw.tutorial.category;
 
     import java.util.List;
 
+    import org.springframework.web.bind.annotation.CrossOrigin;
     import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.web.bind.annotation.PathVariable;
     import org.springframework.web.bind.annotation.RequestBody;
@@ -682,6 +688,7 @@ El código debería quedar así:
     */
     @RequestMapping(value = "/category")
     @RestController
+    @CrossOrigin(origins = "*")
     public class CategoryController {
 
       @Autowired
@@ -744,7 +751,7 @@ Los aspectos importantes de la capa `Repository` son:
 ## Capa de Testing: TDD
 
 Por último y aunque no debería ser lo último que se desarrolla sino todo lo contrario, debería ser lo primero en desarrollar, tenemos la batería de pruebas.
-Con fines didáctivos, he querido enseñarte un ciclo de desarrollo para ir recorriendo las diferentes capas de una aplicación pero, en realidad, para realizar el desarrollo debería aplicar [TDD (Test Driven Development)](../appendix/tdd.md). Si quieres aprender las reglas básicas de como aplicar TDD al desarrollo diario, te recomiendo que leas el [Anexo. TDD](../appendix/tdd.md).
+Con fines didáctivos, he querido enseñarte un ciclo de desarrollo para ir recorriendo las diferentes capas de una aplicación pero, en realidad, para realizar el desarrollo debería aplicar [TDD (Test Driven Development)](../../appendix/tdd.md). Si quieres aprender las reglas básicas de como aplicar TDD al desarrollo diario, te recomiendo que leas el [Anexo. TDD](../../appendix/tdd.md).
 
 En este caso, y sin que sirva de precedente, ya tenemos implementados los métodos de la aplicación, y ahora vamos a testearlos. Existen muchas formas de testing en función del componente o la capa que se quiera testear. En realidad, a medida que vayas programando irás aprendiendo todas ellas, de momento realizaremos dos tipos de test simples que prueben las casuísticas de los métodos.
 
@@ -948,7 +955,7 @@ Mientras que por otro lado `(CategoryIT)`, hemos probado la llamando al método 
 
 Para comprobar que el test funciona, podemos darle botón derecho sobre la clase de `CategoryIT` y pulsar en `Run as` -> `JUnit Test`. Si todo funciona correctamente, deberá aparecer una pantalla de ejecución y todos nuestros tests (en este caso solo uno) corriendo correctamente (en verde). El proceso es el mismo para la clase `CategoryTest`.
 
-![step2-java6](../assets/images/step2-java6.png)
+![step2-java6](../../assets/images/step2-java6.png)
 
 
 ### Pruebas de creación

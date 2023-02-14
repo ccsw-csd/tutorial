@@ -1,8 +1,6 @@
-# Desarrollo con Angular
+# Listado simple - Angular
 
-Ahora que ya tenemos listo tanto el proyecto back de SpringBoot (en el puerto 8080) como el proyecto front de Angular (en el puerto 4200), ya podemos empezar a codificar la solución.
-
-Durante todo el tutorial vamos a intentar separar completamente la implementación de front de la implementación de back, para que quede claro como se debe realizar en cada una de las tecnologías.
+Ahora que ya tenemos listo el proyecto frontend de Angular (en el puerto 4200), ya podemos empezar a codificar la solución.
 
 ## Primeros pasos
 
@@ -20,7 +18,7 @@ Vamos a modificar este código inicial para ver como funciona. Abrimos el ficher
 === "app.component.ts"
     ``` TypeScript
     ...
-    title = 'Tutorial de Angular + Springboot';
+    title = 'Tutorial de Angular';
     ...
     ```
 
@@ -234,7 +232,7 @@ Ya por último solo nos queda modificar la página general de la aplicación `ap
 
 Vamos al navegador y refrescamos la página, debería aparecer una barra superior (Header) con las opciones de menú. Algo similar a esto:
 
-![step1-angular1](../assets/images/step1-angular1.png)
+![step1-angular1](../../assets/images/step1-angular1.png)
 
 
 !!! todo "Recuerda"
@@ -560,7 +558,7 @@ Como hemos comentado anteriormente, el backend todavía no está implementado as
 
 Si ahora refrescamos la página web, veremos que el listado ya tiene datos con los que vamos a interactuar.
 
-![step1-angular2](../assets/images/step1-angular2.png)
+![step1-angular2](../../assets/images/step1-angular2.png)
 
 ### Simulando las otras peticiones
 
@@ -930,7 +928,7 @@ Y los Dialog:
 
 Navegando ahora por la página y pulsando en el icono de editar, se debería abrir una ventana con los datos que hemos seleccionado, similar a esta imagen:
 
-![step1-angular3](../assets/images/step1-angular3.png)
+![step1-angular3](../../assets/images/step1-angular3.png)
 
 Si te fijas, al modificar los datos dentro de la ventana de diálogo se modifica también en el listado. Esto es porque estamos pasando el mismo objeto desde el listado a la ventana dialogo y al ser el listado y el formulario reactivos los dos, cualquier cambio sobre los datos se refresca directamente en la pantalla. 
 
@@ -1091,4 +1089,186 @@ Ya por último, una vez tenemos el componente genérico de dialogo, vamos a util
 
 Aquí también hemos realizado la llamada a `categoryService`, aunque no se realice ninguna acción, pero así lo dejamos listo para enlazarlo.
 
-Llegados a este punto, ya solo nos queda enlazar las acciones de la pantalla con las operaciones de negocio del backend. Pero eso lo dejaremos para más adelante, primero hay que implementar las operaciones, en la siguiente sección.
+Llegados a este punto, ya solo nos queda enlazar las acciones de la pantalla con las operaciones de negocio del backend.
+
+
+## Conectar con Backend
+
+!!! warning "Antes de seguir"
+    Antes de seguir con este punto, debes implementar el código de backend en la tecnología que quieras ([Springboot](springboot.md) o [Nodejs](nodejs.md)). Si has empezado este capítulo implementando el frontend, por favor accede a la sección correspondiente de backend para poder continuar con el tutorial. Una vez tengas implementadas todas las operaciones para este listado, puedes volver a este punto y continuar con Angular.
+
+
+El siguiente paso, como es obvio será hacer que Angular llame directamente al servidor backend para leer y escribir datos y eliminar los datos mockeados en Angular.
+
+Manos a la obra!
+
+### Llamada del listado
+
+La idea es que el método `getCategories()` de `category.service.ts` en lugar de devolver datos estáticos, realice una llamada al servidor a la ruta `http://localhost:8080/category`.
+
+Abrimos el fichero y susituimos la línea que antes devolvía los datos estáticos por esto:
+
+=== "category.service.ts"
+    ``` Typescript hl_lines="1 12 16"
+    import { HttpClient } from '@angular/common/http';
+    import { Injectable } from '@angular/core';
+    import { Observable, of } from 'rxjs';
+    import { Category } from './model/Category';
+
+    @Injectable({
+    providedIn: 'root'
+    })
+    export class CategoryService { 
+
+        constructor(
+            private http: HttpClient
+        ) { }
+
+        getCategories(): Observable<Category[]> {
+            return this.http.get<Category[]>('http://localhost:8080/category');
+        }
+
+        saveCategory(category: Category): Observable<Category> {
+            return of(null);
+        }
+
+        deleteCategory(idCategory : number): Observable<any> {
+            return of(null);
+        }  
+    }
+    ```
+
+Como hemos añadido un componente nuevo `HttpClient` tenemos que añadir la dependencial al módulo padre.
+
+=== "services.module.ts"
+``` Typescript hl_lines="12 26"
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatTableModule } from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { CategoryListComponent } from './category-list/category-list.component';
+import { CategoryEditComponent } from './category-edit/category-edit.component';
+import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+
+@NgModule({
+  declarations: [CategoryListComponent, CategoryEditComponent],
+  imports: [
+    CommonModule,
+    MatTableModule,
+    MatIconModule, 
+    MatButtonModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+  ],
+  providers: [
+    {
+      provide: MAT_DIALOG_DATA,
+      useValue: {},
+    },
+  ]
+})
+export class CategoryModule { }
+```
+
+Si ahora refrescas el navegador (recuerda tener arrancado también el servidor) y accedes a la pantalla de `Categorías` debería aparecer el listado con los datos que vienen del servidor.
+
+![step3-angular1](../../assets/images/step3-angular1.png)
+
+### Llamada de guardado / edición
+
+Para la llamada de guardado haríamos lo mismo, pero invocando la operación de negocio `put`.
+
+=== "category.service.ts"
+    ``` Typescript hl_lines="21-24"
+    import { HttpClient } from '@angular/common/http';
+    import { Injectable } from '@angular/core';
+    import { Observable, of } from 'rxjs';
+    import { Category } from './model/Category';
+
+    @Injectable({
+    providedIn: 'root'
+    })
+    export class CategoryService { 
+
+        constructor(
+            private http: HttpClient
+        ) { }
+
+        getCategories(): Observable<Category[]> {
+            return this.http.get<Category[]>('http://localhost:8080/category');
+        }
+
+        saveCategory(category: Category): Observable<Category> {
+
+            let url = 'http://localhost:8080/category';
+            if (category.id != null) url += '/'+category.id;
+
+            return this.http.put<Category>(url, category);
+        }
+
+        deleteCategory(idCategory : number): Observable<any> {
+            return of(null);
+        }  
+
+    } 
+    ```
+
+Ahora podemos probar a modificar o añadir una nueva categoría desde la pantalla y debería aparecer los nuevos datos en el listado.
+
+
+### Llamada de borrado
+
+Y ya por último, la llamada de borrado, deberíamos cambiarla e invocar a la operación de negocio `delete`.
+
+=== "category.service.ts"
+    ``` Typescript hl_lines="28"
+    import { HttpClient } from '@angular/common/http';
+    import { Injectable } from '@angular/core';
+    import { Observable, of } from 'rxjs';
+    import { Category } from './model/Category';
+
+    @Injectable({
+    providedIn: 'root'
+    })
+    export class CategoryService { 
+
+        constructor(
+            private http: HttpClient
+        ) { }
+
+        getCategories(): Observable<Category[]> {
+            return this.http.get<Category[]>('http://localhost:8080/category');
+        }
+
+        saveCategory(category: Category): Observable<Category> {
+
+            let url = 'http://localhost:8080/category';
+            if (category.id != null) url += '/'+category.id;
+
+            return this.http.put<Category>(url, category);
+        }
+
+        deleteCategory(idCategory : number): Observable<any> {
+            return this.http.delete('http://localhost:8080/category/'+idCategory);
+        }  
+
+    } 
+    ```
+
+Ahora podemos probar a modificar o añadir una nueva categoría desde la pantalla y debería aparecer los nuevos datos en el listado.
+
+Como ves, es bastante sencillo conectar server y client.
+
+
+
+
+

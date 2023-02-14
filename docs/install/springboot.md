@@ -1,94 +1,78 @@
-# Creación de proyecto
+# Entorno de desarrollo - Springboot
 
-## Proyectos y aplicaciones Web
+## Instalación de herramientas
+Las herramientas básicas que vamos a utilizar para esta tecnología son:
 
-En todas las aplicaciones web modernas y los proyectos en los que trabajamos se pueden diferenciar, de forma general, tres grandes *bloques funcionales*, como se muestra en la imagen inferior.
-
-![app-layers](./assets/images/app-layers.png)
-
-El funcionamiento es muy sencillo y difiere de las aplicaciones instalables que se ejecuta todo en una misma máquina o servidor.
-
-* Con esta estructura, el usuario accede a la aplicación mediante un navegador web instalado en su máquina local.
-* Este navegador solicita información mediante una URL a un servidor de recursos estáticos. Esto es lo que denominaremos un servidor frontend. Para programar servidores frontend se pueden usar muchas tecnologías, en este tutorial lo desarrollaremos en Angular.
-Este código frontend se descarga y se ejecuta dentro del navegador, y contiene la representación visual de las pantallas y ciertos comportamientos y navegación entre componentes. Sin embargo, por lo general, no tiene datos ni ejecuta lógica de negocio.
-* Para estas labores de obtener datos o ejecutar lógica de negocio, el código frontend necesita invocar endpoints de la *segunda capa*, el backend. Al igual que antes, el backend, puede estar desarrollado en muchas tecnologías, en este tutorial se utilizará Java-Springboot. Lo importante de esta capa es que es necesario exponer unos endpoints que sean invocados por la capa de frontend. Típicamente estos endpoints son operaciones API Rest que veremos más adelante.
-* Por último, el servidor backend / capa backend, necesitará leer y guardar datos de algún sitio. Esto se hace utilizando la *tercera capa*, la capa de datos. Normalmente esta capa de datos será una BBDD instalada en algún servidor externo, aunque en nuestro caso, en el tutorial lo ejecutaremos de forma embebida en la memoria del servidor backend. Pero por norma general, esta capa es externa.
+* [Eclide IDE](https://www.eclipse.org/downloads/)
+* Maven *(viene por defecto con Eclipse IDE)*
+* [Java 11](https://www.oracle.com/java/technologies/downloads/#java11-windows)
+* [Postman](https://www.postman.com/)
 
 
-Así pues el flujo normal de una aplicación sería el siguiente:
 
-* El usuario abre el navegador y solicita una web mediante una URL
-* El servidor frontend, le sirve los recursos (páginas web, javascript, imágenes, ...) y se cargan en el navegador
-* El navegador renderiza las páginas web, ejecuta los procesos javascript y realiza las navegaciones
-* Si en algún momento se requiere invocar una operación, el navegador lanzará una petición contra una URL del backend
-* El backend estará escuchando las peticiones y las ejecutará en el momento que le invoquen devulviendo un resultado al navegador
-* Si hiciera falta leer o guardar datos, el backend lo realizará lanzando consultas SQL contra la BBDD
+### Instalación de IDE - Eclipse
 
+Necesitamos instalar un IDE de desarrollo, en nuestro caso será Eclipse IDE y la máquina virtual de java necesaria para ejecutar el código. Recomendamos Java11, que es la versión con la que está desarrollado y probado el tutorial. 
 
-Dicho esto, por lo general necesitaremos un mínimo de dos proyectos para desarrollar una aplicación:
-
-* Por un lado tendremos un proyecto Springboot que se ejecutará en un servidor de aplicaciones, tipo Tomcat y **lo arrancaremos desde el Eclipse**. Este proyecto tendrá la lógica de negocio de las operaciones, el acceso a los datos de la BBDD y cualquier integración con servicios de terceros. La forma de exponer estas operaciones de negocio será mediante endpoints de acceso, en concreto llamadas tipo REST.
-* Por otro lado tendremos un proyecto Angular que se ejecutará en un servidor web de ficheros estáticos, tipo Apache, y **lo arrancaremos desde Angular Cli o Visual Studio Code**. Este proyecto será código javascript, css y html, que se renderizará en el navegador Web y que realizará ciertas operaciones sencillas y validaciones en local y llamadas a nuestro servidor Springboot para ejecutar las operaciones de negocio.
-
-Pueden haber otros tipos de proyectos dentro de la aplicación, sobretodo si están basados en microservicios o tienen componentes batch, pero estos proyectos no vamos a verlos en el tutorial.
-
-!!! tip "Consejo"
-    Como norma cada uno de los proyectos que componen la aplicación, debería estar conectado a un repositorio de código diferente para poder evolucionar y trabajar con cada uno de ellos de forma aislada sin afectar a los demás. Así además podemos tener equipos aislados que trabajen con cada uno de los proyectos por separado.
-
-!!! info "Info"
-    Durante todo el tutorial, voy a intentar separar la construcción del proyecto Angular de la construcción del proyecto Springboot, para terminar haciendo una integración entre los dos. De esta forma podrás comprobar como se puede desarrollar por separado cada uno de los dos proyectos sin ningún problema.
-
-## ** Creación de proyecto Angular **
-
-La mayoría de los proyectos con Angular en los que trabajamos normalmente, suelen ser proyectos web usando las librerías mas comunes de angular, como angular material.
-
-Para crear un proyecto de Angular, es necesario tener instalado el CLI de Angular. Si no lo tienes instalado, por favor, acude a la sección `Entorno de desarrollo` y verifica que tienes instalado todo lo necesario.
-
-### Nuevo proyecto
-
-Lo primero es crear un proyecto desde la consola mediante la herramienta Angular CLI.
-Para ello abrimos una consola de msdos donde tengamos instalado y enlazado Angular CLI, nos situamos en el directorio donde vamos a crear el proyecto y ejecutamos:
-
-    ng new tutorial --strict=false
-
-Nos realizará varias preguntas.
-
-> Would you like to add Angular routing? (y/N)
-
->  `Preferiblemente: y`
-
-> Which stylesheet format would you like to use?
-
->  `Preferiblemente: SCSS`
-
-En el caso del tutorial como vamos a tener dos proyectos para nuestra aplicación (front y back), para poder seguir correctamente las explicaciones, voy a renombrar la carpeta para poder diferenciarla del otro proyecto. A partir de ahora se llamará `client`.
-
-!!! info "Info"
-    Si durante el desarrollo del proyecto necesitas añadir nuevos módulos al proyecto Angular, será necesario resolver las dependencias antes de arrancar el servidor. Esto se puede realizar mediante el gestor yarn (que es más eficiente que el propio gestio de npm), directamente en consola ejecuta el comando `yarn` y descargará e instalará las nuevas dependencias.
+!!! tip "Atención"
+    Si se utiliza otra versión de Java diferente a la 8 o la 11, las dependencias utilizadas por Springboot en este tutorial **NO** funcionarán y dará un fallo al arrancar. Por favor, utiliza la versión de Java 8 o la versión de Java 11.
 
 
-### Arrancar el proyecto
+Para instalar el IDE deberás acceder a [Eclide IDE](https://www.eclipse.org/downloads/) y descargarte la última versión del instalador. Una vez lo ejecutes te pedirá el tipo de instalación que deseas instalar. Por lo general con la de "Eclipse IDE for Java Developers" es suficiente. Con esta versión ya tiene integrado los plugins de Maven y Git.
 
-Para arrancar el proyecto, tan solo necesitamos ejecutar en consola el siguiente comando siempre dentro del directorio creado por Angular CLI:
+Una vez instalado eclipse, debes asegurarte que está usando por defecto la versión de Java 11 y para ello deberás instalarla. Descargala del siguiente [enlace](https://www.oracle.com/java/technologies/downloads/#java11-windows). Es posible que te pida un registro de correo, utiliza el email que quieras. Revisa bien el enlace para buscar y descargar la versión 11 para Windows: 
 
-    ng serve
-
-Angular compilará el código fuente, levantará un servidor local al que podremos acceder por defecto mediante la URL: [http://localhost:4200/](http://localhost:4200/)
-
-Y ya podemos empezar a trabajar con Angular.
-
-!!! tip "Comandos de Angular CLI"
-    Si necesitas más información sobre los comandos que ofrece Angular CLI para poder crear aplicaciones, componentes, servicios, etc. los tienes disponibles en:
-    [https://angular.io/cli#command-overview](https://angular.io/cli#command-overview)
+![Installed JREs](../assets/images/install-java.png)
 
 
-## ** Creación de proyecto Springboot **
+Ya solo queda añadir Java al Eclipse. Para ello, abre el menú `Window -> Preferences`:
+
+![Formatting](../assets/images/install-eclipse-format_1.png)
+
+y dentro de la sección `Java - Installed JREs` añade la versión que acabas de descargar, buscando el directorio `home` de la instalación de Java. Además, la debes marcar como `default`.
+
+![Installed JREs](../assets/images/install-eclipse.png)
+
+
+### Configuración de IDE - Eclipse
+
+Como complemento al Eclipse, con el fin de crear código homogéneo y mantenible, vamos a configurar el formateador de código automático.
+
+Para ello de nuevo abrimos el menú `Window -> Preferences`, nos vamos a la sección `Formatter` de Java:
+
+![Formatting](../assets/images/install-eclipse-format_2.png)
+
+Aquí crearemos un nuevo perfil heredando la configuración por defecto.
+
+![Formatting](../assets/images/install-eclipse-format_3.png)
+
+En el nuevo perfil configuramos que se use espacios en vez de tabuladores con sangrado de 4 caracteres.
+
+![Formatting](../assets/images/install-eclipse-format_4.png)
+
+Una vez cofigurado el nuevo formateador debemos activar que se aplique en el guardado. Para ello volvemos acceder a las preferencias de Eclipse y nos dirigimos a la sub sección `Save Actions` del la sección `Editor` nuevamente de Java.
+
+![Formatting](../assets/images/install-eclipse-format_5.png)
+
+Aquí aplicamos la configuración deseada.
+
+![Formatting](../assets/images/install-eclipse-format_6.png)
+
+
+### Herramientas para pruebas
+
+Para poder probar las operaciones de negocio que vamos a crear, lo mejor es utilizar una herramienta que permita realizar llamadas a API Rest. Para ello te propongo utilizar [Postman](https://www.postman.com/), en su versión web o en su versión desktop, cualquiera de las dos sirve.
+
+Con esta herramienta se puede generar peticiones GET, POST, PUT, DELETE contra el servidor y pasarle parámetros de forma muy sencilla y visual. Lo usaremos durante el tutorial.
+
+
+## Creación de proyecto
 
 La mayoría de los proyectos Springboot en los que trabajamos normalmente, suelen ser proyectos web sencillos con pocas dependencias de terceros o incluso proyectos basados en microservicios que ejecutan pocas acciones. Ahora tienes dos formas de preparar el proyecto Springboot, descritas a continuación. Escoge una de ellas, la que más te guste.
 
 ### (Rápido) - Uso de plantilla base
 
-Puedes descargarte una [plantilla ya construida](./assets/project-template.zip), con un proyecto generado a partir de Sprint Initializr y configurada con los pasos detallados en los puntos siguientes y así te ahorras tiempo.
+Puedes descargarte una [plantilla ya construida](../assets/project-template.zip), con un proyecto generado a partir de Sprint Initializr y configurada con los pasos detallados en los puntos siguientes y así te ahorras tiempo.
 
 #### Importar en eclipse
 
@@ -110,17 +94,17 @@ Esta página está disponible desde [Spring Initializr](https://start.spring.io/
 * Versión Spring boot: 2.6.x
 * Group: com.ccsw
 * ArtifactId: tutorial
-* Versión Java: 8
+* Versión Java: 11
 * Dependencias: Spring Web, Spring Data JPA, H2 Database
 
 !!! tip "Atención"
-    La versión de SpringFramework debe ser una versión inferior a 2.7.0. Para versiones superiores hay métodos de las librerías (por ejemplo de acceso a BBDD) que están deprecados y no funcionará el tutorial. Elige una versión 2.6.x o si no existiera es versión, puedes descargarte una anterior y luego modificar el fichero `pom.xml` cambiando la línea de la versión de springboot por la 2.6.6.
+    La versión de SpringFramework debe ser una versión inferior a 3.0.0. Para versiones superiores hay métodos de las librerías (por ejemplo de acceso a BBDD) que están deprecados y no funcionará el tutorial. Elige una versión 2.6.x o 2.7.x. Si no existe esa versión en el generador, puedes descargarte cualquiera que sea 2.x y luego modificar el fichero `pom.xml` cambiando la línea de la versión de springboot por la 2.6.6.
 
 
-![initializr](./assets/images/initializr.png)
+![initializr](../assets/images/initializr.png)
 
 
-Esto nos generará un proyecto que ya vendrá configurado con Spring Web y H2 para crear una BBDD en memoria de ejemplo con la que trabajaremos durante el tutorial.
+Esto nos generará un proyecto que ya vendrá configurado con Spring Web, JPA y H2 para crear una BBDD en memoria de ejemplo con la que trabajaremos durante el tutorial.
 
 
 #### Importar en eclipse

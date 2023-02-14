@@ -19,3 +19,7 @@ Hay un comando dentro del repositorio que se encarga de ejecutar en local en el 
 ## Compilar para generar static
 
 Con el fichero "build.bat" se compilará todo el proyecto y generará el html estático para publicar el tutorial.
+
+
+## Actualizar mkdocs
+`pip install --upgrade --force-reinstall mkdocs-material`

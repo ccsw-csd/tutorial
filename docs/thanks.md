@@ -10,7 +10,7 @@ De verdad
 
 Mención especial a las personas que han participado en el tutorial ya sea como testers, como promotores o como desarrolladores, por orden temporal de colaboración:
 
-
+- Felipe Garcia ([@fgarciafer](https://github.com/fgarciafer))
 - Armen Mirzoyan ([@armirzoya](https://github.com/armirzoya))
 - Carlos Aguilar ([@caaguila](https://github.com/caaguila))
 - Jhonatan Core ([@corevill](https://github.com/corevill))

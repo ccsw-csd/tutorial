@@ -1,5 +1,7 @@
 # Contexto de la aplicación
 
+## ** Introducción **
+
 Nuestro amigo *Ernesto Esvida* es muy aficionado a los juegos de mesa y desde muy pequeño ha ido coleccionando muchos juegos. Hasta tal punto que ha decidido regentar una Ludoteca.
 
 Como la colección de juegos era suya personal, toda la información del catálogo de juegos la tenía perfectamente clasificado en fichas de cartón. Pero ahora que va abrir su propio negocio, necesita digitalizar esa información y hacerla más accesible.
@@ -10,6 +12,52 @@ Por cierto, la Ludoteca al final se va a llamar *Ludoteca Tán*.
 
 !!! info "Info"
     Las imágenes que aparecen a continuación son mockups o diseños de alambre de las pantallas que vamos a desarrollar durante el tutorial. No quiere decir que el estilo final de las pantallas deba ser así, ni mucho menos. Es simplemente una forma sencilla de ejemplificar como debe quedar más o menos una pantalla.
+
+### Estructura de un proyecto Web
+
+En todas las aplicaciones web modernas y los proyectos en los que trabajamos se pueden diferenciar, de forma general, tres grandes *bloques funcionales*, como se muestra en la imagen inferior.
+
+![app-layers](./assets/images/app-layers.png)
+
+El funcionamiento es muy sencillo y difiere de las aplicaciones instalables que se ejecuta todo en una misma máquina o servidor.
+
+* Con esta estructura, el usuario accede a la aplicación mediante un navegador web instalado en su máquina local.
+* Este navegador solicita información mediante una URL a un servidor de recursos estáticos. Esto es lo que denominaremos un servidor frontend. Para programar servidores frontend se pueden usar muchas tecnologías, en este tutorial lo desarrollaremos en Angular.
+Este código frontend se descarga y se ejecuta dentro del navegador, y contiene la representación visual de las pantallas y ciertos comportamientos y navegación entre componentes. Sin embargo, por lo general, no tiene datos ni ejecuta lógica de negocio.
+* Para estas labores de obtener datos o ejecutar lógica de negocio, el código frontend necesita invocar endpoints de la *segunda capa*, el backend. Al igual que antes, el backend, puede estar desarrollado en muchas tecnologías, en este tutorial se puede elegir entre Java-Springboot o Nodejs. Lo importante de esta capa es que es necesario exponer unos endpoints que sean invocados por la capa de frontend. Típicamente estos endpoints son operaciones API Rest que veremos más adelante.
+* Por último, el servidor backend / capa backend, necesitará leer y guardar datos de algún sitio. Esto se hace utilizando la *tercera capa*, la capa de datos. Normalmente esta capa de datos será una BBDD instalada en algún servidor externo, aunque a veces como es el caso del tutorial de Springboot, podemos embeber el servidor en memoria de backend. Pero por norma general, esta capa es externa.
+
+
+Así pues el flujo normal de una aplicación sería el siguiente:
+
+* El usuario abre el navegador y solicita una web mediante una URL
+* El servidor frontend, le sirve los recursos (páginas web, javascript, imágenes, ...) y se cargan en el navegador
+* El navegador renderiza las páginas web, ejecuta los procesos javascript y realiza las navegaciones
+* Si en algún momento se requiere invocar una operación, el navegador lanzará una petición contra una URL del backend
+* El backend estará escuchando las peticiones y las ejecutará en el momento que le invoquen devulviendo un resultado al navegador
+* Si hiciera falta leer o guardar datos, el backend lo realizará lanzando consultas SQL contra la BBDD
+
+
+Dicho esto, por lo general necesitaremos un mínimo de dos proyectos para desarrollar una aplicación: 
+
+* Por un lado tendremos un proyecto Frontend que se ejecutará en un servidor web de ficheros estáticos, tipo Apache. Este proyecto será código javascript, css y html, que se renderizará en el navegador Web y que realizará ciertas operaciones sencillas y validaciones en local y llamadas a nuestro servidor backend para ejecutar las operaciones de negocio.
+
+* Por otro lado tendremos un proyecto Backend que se ejecutará en un servidor de aplicaciones, tipo Tomcat o Node. Este proyecto tendrá la lógica de negocio de las operaciones, el acceso a los datos de la BBDD y cualquier integración con servicios de terceros. La forma de exponer estas operaciones de negocio será mediante endpoints de acceso, en concreto llamadas tipo REST.
+
+Pueden haber otros tipos de proyectos dentro de la aplicación, sobretodo si están basados en microservicios o tienen componentes batch, pero estos proyectos no vamos a verlos en el tutorial.
+
+A partir de ahora, para que sea más sencillo acceder al tutorial, diferenciaremos las tecnologías en el menú mediante los siguientes colores:
+
+* 🔵 Frontend
+* 🟢 Backend
+
+
+!!! tip "Consejo"
+    Como norma cada uno de los proyectos que componen la aplicación, debería estar conectado a un repositorio de código diferente para poder evolucionar y trabajar con cada uno de ellos de forma aislada sin afectar a los demás. Así además podemos tener equipos aislados que trabajen con cada uno de los proyectos por separado.
+
+!!! info "Info"
+    Durante todo el tutorial, voy a intentar separar la construcción del proyecto Frontend de la construcción del proyecto Backend. Elige una tecnología para cada una de las capas y utiliza siempre la misma en todos los apartados del tutorial.
+
 
 ## ** Diseño de BD **
 
