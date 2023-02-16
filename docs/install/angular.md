@@ -3,8 +3,8 @@
 ## Instalación de herramientas
 Las herramientas básicas que vamos a utilizar para esta tecnología son:
 
-* Visual Studio Code
-* Node
+* [Visual Studio Code](https://code.visualstudio.com/)
+* [Nodejs](https://nodejs.org/es/)
 * Angular CLI
 
 

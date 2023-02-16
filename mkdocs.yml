@@ -51,5 +51,5 @@ markdown_extensions:
       emoji_generator: !!python/name:pymdownx.emoji.to_svg
 extra_css:
   - assets/style.css  
-site_dir: 'site/new'
+site_dir: 'site/dev'
 

@@ -8,38 +8,47 @@
       
       
       
+      
+        <link rel="prev" href="../rest/">
+      
+      
+        <link rel="next" href="../jpa/">
+      
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.9">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.12">
     
     
       
-        <title>Anexo. TDD - Tutorial Springboot - Angular</title>
+        <title>Anexo. TDD - Tutorial Frontend - Backend</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.2b4465f4.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.0d440cfe.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.e6a45f82.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.2505c338.min.css">
+      
+      
+
+    
+    
+    
+      
         
-      
-    
-    
-    
-      
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
     
       <link rel="stylesheet" href="../../assets/style.css">
     
-    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
+    
     
     
   </head>
@@ -50,7 +59,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
   
     
     
@@ -74,20 +83,20 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Cabecera">
-    <a href="../.." title="Tutorial Springboot - Angular" class="md-header__button md-logo" aria-label="Tutorial Springboot - Angular" data-md-component="logo">
+    <a href="../.." title="Tutorial Frontend - Backend" class="md-header__button md-logo" aria-label="Tutorial Frontend - Backend" data-md-component="logo">
       
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
     </label>
     <div class="md-header__title" data-md-component="header-title">
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            Tutorial Springboot - Angular
+            Tutorial Frontend - Backend
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -103,7 +112,7 @@
     
     
       <label class="md-header__button md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
       </label>
       <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
@@ -111,13 +120,13 @@
     <form class="md-search__form" name="search">
       <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
       <label class="md-search__icon md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
       </label>
-      <nav class="md-search__options" aria-label="Search">
+      <nav class="md-search__options" aria-label="Buscar">
         
-        <button type="reset" class="md-search__icon md-icon" aria-label="Limpiar" tabindex="-1">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
         </button>
       </nav>
       
@@ -128,7 +137,7 @@
           <div class="md-search-result__meta">
             Inicializando búsqueda
           </div>
-          <ol class="md-search-result__list"></ol>
+          <ol class="md-search-result__list" role="presentation"></ol>
         </div>
       </div>
     </div>
@@ -160,13 +169,13 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="Tutorial Springboot - Angular" class="md-nav__button md-logo" aria-label="Tutorial Springboot - Angular" data-md-component="logo">
+    <a href="../.." title="Tutorial Frontend - Backend" class="md-nav__button md-logo" aria-label="Tutorial Frontend - Backend" data-md-component="logo">
       
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
 
     </a>
-    Tutorial Springboot - Angular
+    Tutorial Frontend - Backend
   </label>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -223,10 +232,80 @@
   
   
   
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          Entorno de desarrollo
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Entorno de desarrollo
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
     <li class="md-nav__item">
-      <a href="../../install/" class="md-nav__link">
-        Entorno de desarrollo
+      <a href="../../install/angular/" class="md-nav__link">
+        🔵 Angular
       </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../install/springboot/" class="md-nav__link">
+        🟢 Springboot
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../install/nodejs/" class="md-nav__link">
+        🟢 Nodejs
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -238,10 +317,80 @@
   
   
   
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          Estructura y buenas prácticas
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Estructura y buenas prácticas
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
     <li class="md-nav__item">
-      <a href="../../create/" class="md-nav__link">
-        Creación de proyecto
+      <a href="../../cleancode/angular/" class="md-nav__link">
+        🔵 Angular
       </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cleancode/springboot/" class="md-nav__link">
+        🟢 Springboot
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cleancode/nodejs/" class="md-nav__link">
+        🟢 Nodejs
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -253,10 +402,80 @@
   
   
   
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+          Code: Listado simple
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Code: Listado simple
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
     <li class="md-nav__item">
-      <a href="../../cleancode/" class="md-nav__link">
-        Estructura y Clean Code
+      <a href="../../develop/basic/angular/" class="md-nav__link">
+        🔵 Angular
       </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/basic/springboot/" class="md-nav__link">
+        🟢 Springboot
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/basic/nodejs/" class="md-nav__link">
+        🟢 Nodejs
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -268,10 +487,80 @@
   
   
   
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+          Code: Listado paginado
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          Code: Listado paginado
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
     <li class="md-nav__item">
-      <a href="../../develop/step1/" class="md-nav__link">
-        Code: Desarrollo con Angular
+      <a href="../../develop/paginated/angular/" class="md-nav__link">
+        🔵 Angular
       </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/paginated/springboot/" class="md-nav__link">
+        🟢 Springboot
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/paginated/nodejs/" class="md-nav__link">
+        🟢 Nodejs
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -283,55 +572,80 @@
   
   
   
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+          Code: Listado filtrado
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          Code: Listado filtrado
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
     <li class="md-nav__item">
-      <a href="../../develop/step2/" class="md-nav__link">
-        Code: Desarrollo con Springboot
+      <a href="../../develop/filtered/angular/" class="md-nav__link">
+        🔵 Angular
       </a>
     </li>
   
 
-    
-      
-      
-      
-
+            
+          
+            
+              
   
   
   
     <li class="md-nav__item">
-      <a href="../../develop/step3/" class="md-nav__link">
-        Code: Conectar front con back
+      <a href="../../develop/filtered/springboot/" class="md-nav__link">
+        🟢 Springboot
       </a>
     </li>
   
 
-    
-      
-      
-      
-
+            
+          
+            
+              
   
   
   
     <li class="md-nav__item">
-      <a href="../../develop/step4/" class="md-nav__link">
-        Code: Listado paginado
+      <a href="../../develop/filtered/nodejs/" class="md-nav__link">
+        🟢 Nodejs
       </a>
     </li>
   
 
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../develop/step5/" class="md-nav__link">
-        Code: Listado filtrado
-      </a>
+            
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -392,7 +706,7 @@
   
     <li class="md-nav__item md-nav__item--active">
       
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
         
@@ -416,66 +730,6 @@
     <li class="md-nav__item">
       <a href="../jpa/" class="md-nav__link">
         Anexo. Spring Data (JPA)
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../develop/step6/" class="md-nav__link">
-        Anexo. Validaciones (TBC)
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../develop/step7/" class="md-nav__link">
-        Anexo. Crear Login (TBC)
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../styles/" class="md-nav__link">
-        Anexo. Estilos (TBC)
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../dates/" class="md-nav__link">
-        Anexo. Fechas (TBC)
       </a>
     </li>
   
@@ -507,10 +761,13 @@
               </div>
             
           
-          <div class="md-content" data-md-component="content">
-            <article class="md-content__inner md-typeset">
-              
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
                 
+                  
+
+
 
 <h1 id="tdd-test-driven-development">TDD (Test Driven Development)</h1>
 <p>Se trata de una práctica de programación que consiste en escribir primero las pruebas (generalmente unitarias), después escribir el código fuente que pase la prueba satisfactoriamente y, por último, refactorizar el código escrito.</p>
@@ -535,49 +792,20 @@
 <p>Si seguimos estos pasos a la hora de programar, nuestra aplicación estará muy bien testada. Cada vez que hagamos un cambio tendremos una certeza muy elevada, de forma rápida y sencilla, de si la aplicación sigue funcionando o hemos roto algo.
 Y lo mejor de todo, las implementaciones que hagamos estarán bien pensadas y diseñadas y acotadas realmente a lo que necesitamos.</p>
 
-              
-            </article>
-          </div>
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
         </div>
         
       </main>
       
         <footer class="md-footer">
-  
-    <nav class="md-footer__inner md-grid" aria-label="Pie">
-      
-        
-        <a href="../rest/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Anexo. Detalle REST" rel="prev">
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-          </div>
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Anterior
-              </span>
-              Anexo. Detalle REST
-            </div>
-          </div>
-        </a>
-      
-      
-        
-        <a href="../jpa/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Anexo. Spring Data (JPA)" rel="next">
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Siguiente
-              </span>
-              Anexo. Spring Data (JPA)
-            </div>
-          </div>
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
-          </div>
-        </a>
-      
-    </nav>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -599,10 +827,11 @@ Y lo mejor de todo, las implementaciones que hagamos estarán bien pensadas y di
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copiar al portapapeles", "clipboard.copied": "Copiado al portapapeles", "search.config.lang": "es", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "B\u00fasqueda", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.term.missing": "Falta", "select.version.title": "Seleccionar versi\u00f3n"}, "search": "../../assets/javascripts/workers/search.22074ed6.min.js"}</script>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.path", "navigation.indexes"], "search": "../../assets/javascripts/workers/search.db81ec45.min.js", "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.960e086b.min.js"></script>
+      <script src="../../assets/javascripts/bundle.4b2c34cd.min.js"></script>
       
     
   </body>
