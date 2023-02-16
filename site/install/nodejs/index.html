@@ -360,6 +360,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#herramientas-para-pruebas" class="md-nav__link">
+    Herramientas para pruebas
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -369,6 +376,26 @@
   <a href="#creacion-de-proyecto" class="md-nav__link">
     Creación de proyecto
   </a>
+  
+    <nav class="md-nav" aria-label="Creación de proyecto">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#instalar-dependencias" class="md-nav__link">
+    Instalar dependencias
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configurar-la-bbdd" class="md-nav__link">
+    Configurar la BBDD
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -864,6 +891,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#herramientas-para-pruebas" class="md-nav__link">
+    Herramientas para pruebas
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -873,6 +907,26 @@
   <a href="#creacion-de-proyecto" class="md-nav__link">
     Creación de proyecto
   </a>
+  
+    <nav class="md-nav" aria-label="Creación de proyecto">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#instalar-dependencias" class="md-nav__link">
+    Instalar dependencias
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configurar-la-bbdd" class="md-nav__link">
+    Configurar la BBDD
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -915,11 +969,120 @@
 <p>El siguiente paso será instalar el motor de <a href="https://nodejs.org/es/">Nodejs</a>. Entrando en la página de descargas e instalando la última versión estable. Con esta herramienta podremos compilar y ejecutar aplicaciones basadas en Javascript y Typescript, e instalar y gestionar las dependencias de las aplicaciones.</p>
 <h3 id="mongodb-atlas">MongoDB Atlas</h3>
 <p>También necesitaremos crear una cuenta de <a href="https://www.mongodb.com/atlas/database">MongoDB Atlas</a> para crear nuestra base de datos MongoDB en la nube.</p>
-<p>Accede a la <a href="https://www.mongodb.com/atlas/database">URL</a>, registrate grátis con cualquier cuenta de correo y elige el tipo de cuenta gratuita:</p>
-<p><img alt="Formatting" src="../../assets/images/install-nodejs-mongodb.png" /></p>
-<p>Configura el cluster a tu gusto y ya tendrías una BBDD en cloud para hacer pruebas.</p>
+<p>Accede a la <a href="https://www.mongodb.com/atlas/database">URL</a>, registrate grátis con cualquier cuenta de correo y elige el tipo de cuenta gratuita 😊:</p>
+<p><img alt="Registro MongoDB" src="../../assets/images/install-nodejs-mongodb.png" /></p>
+<p>Configura el cluster a tu gusto y ya tendrías una BBDD en cloud para hacer pruebas. Lo primero que se muestra es el dashboard que se verá algo similar a lo siguiente:</p>
+<p><img alt="Dashboard" src="../../assets/images/install-nodejs-mongodb2.png" /></p>
+<p>A continuación, pulsamos en la opción <code>Database</code> del menú y, sobre el <code>Cluster0</code>, pulsamos también el botón <code>Connect</code>. Se nos abrirá el siguiente pop-up donde tendremos que elegir la opción <code>Connect your application</code>:</p>
+<p><img alt="Connect" src="../../assets/images/install-nodejs-mongodb3.png" /></p>
+<p>En el siguiente paso es donde se nos muestra la url que tendremos que utilizar en nuestra aplicación. La copiamos y guardamos para más tarde: </p>
+<p><img alt="Connect" src="../../assets/images/install-nodejs-mongodb4.png" /></p>
+<p>Pulsamos <code>Close</code> y la BBDD ya estaría creada.</p>
+<h3 id="herramientas-para-pruebas">Herramientas para pruebas</h3>
+<p>Para poder probar las operaciones de negocio que vamos a crear, lo mejor es utilizar una herramienta que permita realizar llamadas a API Rest. Para ello te propongo utilizar <a href="https://www.postman.com/">Postman</a>, en su versión web o en su versión desktop, cualquiera de las dos sirve.</p>
+<p>Con esta herramienta se puede generar peticiones GET, POST, PUT, DELETE contra el servidor y pasarle parámetros de forma muy sencilla y visual. Lo usaremos durante el tutorial.</p>
 <h2 id="creacion-de-proyecto">Creación de proyecto</h2>
+<p>Para la creación de nuestro proyecto Node nos crearemos una carpeta con el nombre que deseemos y accederemos a ella con la consola de comandos de windows. Una vez dentro ejecutaremos el siguiente comando para inicializar nuestro proyecto con npm:</p>
+<div class="highlight"><pre><span></span><code>npm init
+</code></pre></div>
+<p>Cuando ejecutemos este comando nos pedirá los valores para distintos parámetros de nuestro proyecto. Aconsejo solo cambiar el nombre y el resto dejarlo por defecto pulsando enter para cada valor. Una vez que hayamos terminado se nos habrá generado un fichero <code>package.json</code> que contendrá información básica de nuestro proyecto. Dentro de este fichero tendremos que añadir un nuevo parámetro <code>type</code> con el valor <code>module</code>, esto nos permitirá importar nuestros módulos con el estándar ES:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tutorialNode&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;main&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;index.js&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;scripts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;test&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;keywords&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
+<span class="w">  </span><span class="nt">&quot;author&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;license&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ISC&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;module&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="instalar-dependencias">Instalar dependencias</h3>
+<p>En ese fichero aparte de la información de nuestro proyecto también tendremos que añadir las dependencias que usara nuestra aplicación. </p>
+<p>Para añadir las dependencias, desde la consola de comandos y situados en la misma carpeta donde se haya creado el fichero <code>package.json</code> vamos a teclear los siguientes comandos:</p>
+<div class="highlight"><pre><span></span><code>npm i express
+npm i express-validator
+npm i dotenv
+npm i mongoose
+npm i mongoose-paginate-v2
+npm i normalize-mongoose
+npm i nodemon --save-dev
+</code></pre></div>
+<p>También podríamos haber instalado todas a la vez en dos líneas: </p>
+<div class="highlight"><pre><span></span><code>npm i express express-validator dotenv  mongoose mongoose-paginate-v2 normalize-mongoose
+npm I nodemon --save-dev
+</code></pre></div>
+<p>Las dependencias que acabamos de instalar son las siguientes: </p>
+<ul>
+<li>Express es un framework de Node que nos facilitara mucho la tarea a la hora de crear nuestra aplicación.</li>
+<li>Dotenv es una librería para usar variables de entorno.</li>
+<li>Mongoose es una librería ODM que nos ayudara a los accesos a BBDD.</li>
+<li>Nodemon y es una herramienta que nos ayuda reiniciando nuestro servidor cuando detecta un cambio en alguno de nuestros ficheros y así no tener que hacerlo manualmente.</li>
+</ul>
+<p>Ahora podemos fijarnos en nuestro fichero <code>package.json</code> donde se habrán añadido dos nuevos parametros: <code>dependencies</code> y <code>devDependencies</code>. La diferencia está en que las <code>devDependencies</code> solo se utilizar en la fase de desarrollo de nuestro proyecto y las <code>dependencies</code> se utilizarán en todo momento.</p>
+<h3 id="configurar-la-bbdd">Configurar la BBDD</h3>
+<p>A partir de aquí ya podemos abrir <a href="https://code.visualstudio.com/">Visual Studio Code</a>, el IDE recomendado, y abrir la carpeta del proyecto para poder configurarlo y programarlo. Lo primero será configurar el acceso con la BBDD.</p>
+<p>Para ello vamos a crear en la raíz de nuestro proyecto una carpeta <code>config</code> dentro de la cual crearemos un archivo llamado <code>db.js</code>. Este archivo exportará una función que recibe una url de nuestra BBDD y la conectará con mongoose. El contenido de este archivo debe ser el siguiente:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">db.js</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">mongoose</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;mongoose&#39;</span><span class="p">;</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">connectDB</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">url</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">await</span><span class="w"> </span><span class="nx">mongoose</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="nx">url</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;BBDD connected&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="s1">&#39;Error initiating BBDD:&#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">connectDB</span><span class="p">;</span>
+</code></pre></div>
+<p>Ahora vamos a crear en la raíz de nuestro proyecto un archivo con el nombre <code>.env</code>. Este archivo tendrá las variables de entorno de nuestro proyecto. Es aquí donde pondremos la url que obtuvimos al crear nuestra BBDD. Así pues, crearemos una nueva variable y pegaremos la URL. También vamos a configurar el puerto del servidor.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">.env</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="na">MONGODB_URL</span><span class="o">=</span><span class="s">&#39;mongodb+srv://your_user:your_pass@cluster0.ndr2obp.mongodb.net/?retryWrites=true&amp;w=majority&#39;</span>
+<span class="na">PORT</span><span class="o">=</span><span class="s">&#39;8080&#39;</span>
+</code></pre></div>
 <h2 id="arrancar-el-proyecto">Arrancar el proyecto</h2>
+<p>Con toda esa configuración, ahora ya podemos crear nuestra página inicial. Dentro del fichero <code>package.json</code>, en concreto en el contenido de <code>main</code> vemos que nos indica el valor de <code>index.js</code>. Este será el punto de entrada a nuestra aplicación, pero este fichero todavía no existe, así que lo crearemos con el siguiente contenido:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">index.js</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">express</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;express&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">connectDB</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;./config/db.js&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">config</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;dotenv&#39;</span><span class="p">;</span>
+
+<span class="nx">config</span><span class="p">();</span>
+<span class="nx">connectDB</span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">MONGODB_URL</span><span class="p">);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">app</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">express</span><span class="p">();</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="nx">json</span><span class="p">());</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">PORT</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Server running on port </span><span class="si">${</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">PORT</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div>
+<p>El funcionamiento de este código, resumiendo mucho, es el siguiente. Crea un servidor con express en el puerto <code>8080</code> y publica un endpoint de tipo <code>GET</code> para que cuando abramos el navegador y hagamos una petición a la URL <code>http://localhost:8080/</code> nos devuelva el texto programado en la response del método.</p>
+<p>Pero antes, para poder ejecutar nuestro servidor debemos modificar el fichero <code>package.json</code>, y añadir un script de arranque. Añadiremos la siguiente línea:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&quot;dev&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;nodemon ./index.js&quot;</span>
+</code></pre></div>
+<p>Y ahora sí, desde la consola de comando ya podemos ejecutar el siguiente comando:</p>
+<div class="highlight"><pre><span></span><code>npm run dev
+</code></pre></div>
+<p>y ya podemos navegar a la URL <code>http://localhost:8080/</code> donde veremos la respuesta del servidor.</p>
 
 
 
