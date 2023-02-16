@@ -477,9 +477,82 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          🟢 Nodejs
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         🟢 Nodejs
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#primeros-pasos" class="md-nav__link">
+    Primeros pasos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estructurar-el-codigo" class="md-nav__link">
+    Estructurar el código
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#capa-de-routes" class="md-nav__link">
+    Capa de Routes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#capa-de-controller" class="md-nav__link">
+    Capa de Controller
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#capa-de-modelo" class="md-nav__link">
+    Capa de Modelo
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#capa-de-servicio" class="md-nav__link">
+    Capa de Servicio
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#capa-de-middleware" class="md-nav__link">
+    Capa de Middleware
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -757,6 +830,63 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#primeros-pasos" class="md-nav__link">
+    Primeros pasos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estructurar-el-codigo" class="md-nav__link">
+    Estructurar el código
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#capa-de-routes" class="md-nav__link">
+    Capa de Routes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#capa-de-controller" class="md-nav__link">
+    Capa de Controller
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#capa-de-modelo" class="md-nav__link">
+    Capa de Modelo
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#capa-de-servicio" class="md-nav__link">
+    Capa de Servicio
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#capa-de-middleware" class="md-nav__link">
+    Capa de Middleware
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -772,10 +902,362 @@
 
 
 <h1 id="listado-simple-nodejs">Listado simple - Nodejs</h1>
-<div class="admonition warning">
-<p class="admonition-title">@TODO En Construcción</p>
-<p>Este capítulo está en construcción y pruebas, en breve completaremos el capítulo y subiremos una nueva versión corregida. Vuelve en unos días para ver si ya hemos publicado la versión.</p>
+<p>Ahora que ya tenemos listo tanto el proyecto backend de nodejs (en el puerto 8080) ya podemos empezar a codificar la solución.</p>
+<h2 id="primeros-pasos">Primeros pasos</h2>
+<div class="admonition success">
+<p class="admonition-title">Antes de empezar</p>
+<p>Quiero hacer hincapié en Node tiene una documentación muy extensa y completa, así que te recomiendo que hagas uso de ella cuando tengas cualquier duda. Tanto en la web de <a href="https://nodejs.org/en/">node</a> como de <a href="https://expressjs.com/">express</a> encontrarás información detallada del proceso que vamos a seguir.</p>
 </div>
+<h2 id="estructurar-el-codigo">Estructurar el código</h2>
+<p>La estructura de nuestro proyecto será la siguiente:</p>
+<p><img alt="Estructura" src="../../../assets/images/step1-nodejs1.png" /></p>
+<p>Vamos a aplicar una separación por capas. En primer lugar, tendremos una capa de rutas para reenviar las solicitudes admitidas y cualquier información codificada en las urls de solicitud a la siguiente capa de controladores. La capa de control procesará las peticiones de las rutas y se comunicará con la capa de servicios devolviendo la respuesta de esta mediante respuestas http. En la capa de servicio se ejecutará toda la lógica de la petición y se comunicará con los modelos de base de datos</p>
+<p>En nuestro caso una ruta es una sección de código Express que asocia un verbo HTTP (GET, POST, PUT, DELETE, etc.), una ruta/patrón de URL y una función que se llama para manejar ese patrón.</p>
+<p>¡Ahora sí, vamos a programar!</p>
+<h2 id="capa-de-routes">Capa de Routes</h2>
+<p>Lo primero de vamos a crear va a ser el fichero de rutas para la categoría. Para ello primero creamos una carpeta llamada <code>routes</code> en la raíz de nuestra aplicación y dentro de esta carpeta crearemos un archivo llamado <code>category.routes.js</code>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">category.routes.js</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Router</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;express&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">createCategory</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;../controllers/category.controller.js&#39;</span><span class="p">;</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">categoryRouter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Router</span><span class="p">();</span>
+<span class="nx">categoryRouter</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">createCategory</span><span class="p">);</span>
+
+<span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">categoryRouter</span><span class="p">;</span>
+</code></pre></div>
+<p>En este archivo estamos creando una ruta de tipo PUT que llamara al método <code>createCategory</code> de nuestro futuro controlador de categorias (aunque todavía no lo hemos creado y por tanto fallará).</p>
+<p>Ahora en nuestro archivo <code>index.js</code> vamos a añadir lo siguiente justo después de declarar la constante app:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">index.js</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="p">...</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="nx">json</span><span class="p">());</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="s1">&#39;/category&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">categoryRouter</span><span class="p">);</span>
+
+<span class="p">...</span>
+</code></pre></div>
+<p>De este modo estamos asociando la url <code>http://localhost:8080/category</code> a nuestro router. También usaremos <code>express.json()</code> para parsear las peticiones entrantes a formato json.</p>
+<h2 id="capa-de-controller">Capa de Controller</h2>
+<p>Lo siguiente será crear el método createCategory en nuestro controller. Para ello lo primero será crear una carpeta <code>controllers</code> en la raíz de nuestro proyecto y dentro de esta un archivo llamado <code>category.controller.js</code>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">category.controller.js</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">createCategory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">200</span><span class="p">).</span><span class="nx">json</span><span class="p">(</span><span class="mf">1</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Hemos creado la función <code>createCategory</code> que recibirá una request y una response. Estos parámetros vienen de la ruta de express y son la request y response de la petición http. De momento simplemente vamos a hacer un <code>console.log</code> de <code>req.body</code> para ver el body de la petición y vamos a hacer una response 200 para indicar que todo ha ido correctamente.</p>
+<p>Si arrancamos el servidor y hacemos una petición <code>PUT</code> con Postman a <code>http://localhost:8080/category</code> con un body que pongamos formado correctamente podremos ver la salida que hemos programado en nuestro controller y en la consola de node podemos ver el contenido de <code>req.body</code>.</p>
+<p><img alt="Postman" src="../../../assets/images/step1-nodejs2.png" /></p>
+<p><img alt="Postman" src="../../../assets/images/step1-nodejs3.png" /></p>
+<h2 id="capa-de-modelo">Capa de Modelo</h2>
+<p>Ahora para que los datos que pasemos en el body los podamos guardar en BBDD necesitaremos un modelo y un esquema para la entidad <code>Category</code>. Vamos a crear una carpeta llamada <code>schemas</code> en la raíz de nuestro proyecto. Un schema no es más que un modelo de BBDD que especifica que campos estarán presentes y cuáles serán sus tipos.
+Dentro de la carpeta de schemas creamos un archivo con el nombre <code>category.schema.js</code>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:1"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">category.schema.js</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">mongoose</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;mongoose&quot;</span><span class="p">;</span>
+<span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Schema</span><span class="p">,</span><span class="w"> </span><span class="nx">model</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">mongoose</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">normalize</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;normalize-mongoose&#39;</span><span class="p">;</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">categorySchema</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Schema</span><span class="p">({</span>
+<span class="w">    </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="nb">String</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">require</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+<span class="nx">categorySchema</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="nx">normalize</span><span class="p">);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">CategoryModel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">model</span><span class="p">(</span><span class="s1">&#39;Category&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">categorySchema</span><span class="p">);</span>
+
+<span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">CategoryModel</span><span class="p">;</span>
+</code></pre></div>
+<p>En este archivo estamos definiendo nuestro schema indicando sus propiedades y tipos, en nuestro caso únicamente <code>name</code>. Además del tipo también indicaremos que el campo es obligatorio con la validation require para indicar que ese campo es obligatorio.
+Si quieres conocer otras validaciones <a href="https://mongoosejs.com/docs/validation.html">aquí tienes más info</a>.
+Aparte de definir nuestro schema también lo estamos transformado en un modelo para poder trabajar con él. En el constructor de model le pasamos el nombre del modelo y el schema que vamos a utilizar.</p>
+<h2 id="capa-de-servicio">Capa de Servicio</h2>
+<p>Como hemos visto en nuestra estructura la capa controller no puede comunicarse con la capa modelo, debe de haber una capa intermedia, para ello vamos a crear una carpeta <code>services</code> en la raíz de nuestro proyecto y dentro un archivo <code>category.service.js</code>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:1"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">category.service.js</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">CategoryModel</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;../schemas/category.schema.js&#39;</span><span class="p">;</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">createCategory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">category</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">CategoryModel</span><span class="p">({</span><span class="w"> </span><span class="nx">name</span><span class="w"> </span><span class="p">});</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">category</span><span class="p">.</span><span class="nx">save</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="s1">&#39;Error creating category&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Hemos importado el modelo de categoría para poder realizar acciones sobre la BBDD y hemos creado una función que recogerá el nombre de la categoría y creará una nueva categoría con él. Llamamos al método save para guardar nuestra categoría y devolvemos el resultado.
+Ahora en nuestro metodo del controller solo tenemos que llamar al servicio pasándole los parámetros que nos llegan en la petición:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:1"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">category.controller.js</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="nx">CategoryService</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;../services/category.service.js&#39;</span><span class="p">;</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">createCategory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">name</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">;</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">category</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">CategoryService</span><span class="p">.</span><span class="nx">createCategory</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">200</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span>
+<span class="w">            </span><span class="nx">category</span>
+<span class="w">        </span><span class="p">});</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">400</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span>
+<span class="w">            </span><span class="nx">msg</span><span class="o">:</span><span class="w"> </span><span class="nx">err</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span>
+<span class="w">        </span><span class="p">});</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Si todo ha ido correctamente llamaremos al método de respuesta con el código 200 y la categoría creada. En caso contrario mandaremos un código de error.
+Si ahora de nuevo vamos a postman y volvemos a lanzar nuestra petición podemos ver como nos devuelve una nueva categoría:</p>
+<p><img alt="Postman" src="../../../assets/images/step1-nodejs4.png" /></p>
+<p>Ahora que ya podemos crear categorías lo siguiente será crear un endpoint para recuperar las categorías creadas en nuestra base de datos. Podemos empezar añadiendo un nuevo método en nuestro servicio:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:1"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">category.service.js</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">getCategories</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">CategoryModel</span><span class="p">.</span><span class="nx">find</span><span class="p">().</span><span class="nx">sort</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="s1">&#39;Error fetching categories&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Al igual que en el anterior método haremos uso del modelo, pero esta vez para hacer un <code>find</code> y ordenando los resultados por el campo <code>name</code>.
+Al método find se le pueden pasar <code>queries</code>, <code>projections</code> y <code>options</code>. Te dejo por aquí más info. En nuestro caso simplemente queremos que nos devuelva todas las categorías por lo que no le pasaremos nada.</p>
+<p>Creamos también un metodo en el controlador para recuperar las categorías y que hará uso del servicio:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="8:1"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">category.controller.js</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">getCategories</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">categories</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">CategoryService</span><span class="p">.</span><span class="nx">getCategories</span><span class="p">();</span>
+<span class="w">        </span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">200</span><span class="p">).</span><span class="nx">json</span><span class="p">(</span>
+<span class="w">            </span><span class="nx">categories</span>
+<span class="w">        </span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">400</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span>
+<span class="w">            </span><span class="nx">msg</span><span class="o">:</span><span class="w"> </span><span class="nx">err</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span>
+<span class="w">        </span><span class="p">});</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Y ahora que ya tenemos el método creado en el controlador lo siguiente será relacionar este método con una ruta. Para ello en nuestro archivo <code>category.routes.js</code> tendremos que añadir una nueva línea:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="9:1"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">category.routes.js</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Router</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;express&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">createCategory</span><span class="p">,</span><span class="w"> </span><span class="nx">getCategories</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;../controllers/category.controller.js&#39;</span><span class="p">;</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">categoryRouter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Router</span><span class="p">();</span>
+<span class="nx">categoryRouter</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">createCategory</span><span class="p">);</span>
+<span class="nx">categoryRouter</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">getCategories</span><span class="p">);</span>
+
+<span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">categoryRouter</span><span class="p">;</span>
+</code></pre></div>
+<p>De este modo cuando hagamos una petición GET a <code>http://localhost:8080/category</code> nos devolvera el listado de categorías existentes: </p>
+<p><img alt="Postman" src="../../../assets/images/step1-nodejs5.png" /></p>
+<p>Ahora vamos a por el método para actualizar nuestras categorías. En el servicio creamos el siguiente método:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="10:1"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">category.service.js</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">updateCategory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">id</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">category</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">CategoryModel</span><span class="p">.</span><span class="nx">findById</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">category</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="s1">&#39;There is no category with that Id&#39;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span><span class="w">    </span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">CategoryModel</span><span class="p">.</span><span class="nx">findByIdAndUpdate</span><span class="p">(</span><span class="nx">id</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nx">name</span><span class="p">});</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="s1">&#39;Error updating category&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>A este método le pasaremos de entrada el <code>id</code> y el <code>nombre</code>. Con ese <code>id</code> realizaremos una búsqueda para asegurarnos que esa categoría existe en nuestra base de datos. Si existe la categoría haremos una petición con <code>findByIdAndUpdate</code> donde el primer parámetro es el <code>id</code> y el segundo es el resto de los campos de nuestra entidad. </p>
+<p>En el controlador creamos el metodo correspondiente:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="11:1"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><div class="tabbed-labels"><label for="__tabbed_11_1">category.controller.js</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">updateCategory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">categoryId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">name</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">;</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">await</span><span class="w"> </span><span class="nx">CategoryService</span><span class="p">.</span><span class="nx">updateCategory</span><span class="p">(</span><span class="nx">categoryId</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">200</span><span class="p">).</span><span class="nx">json</span><span class="p">(</span><span class="mf">1</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">400</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span>
+<span class="w">            </span><span class="nx">msg</span><span class="o">:</span><span class="w"> </span><span class="nx">err</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span>
+<span class="w">        </span><span class="p">});</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Aquí recogeremos el parámetro <code>id</code> que nos vendrá en la url, por ejemplo: <code>http://localhost:8080/category/1</code>. Esto lo hacemos con <code>req.params.id</code>. El <code>id</code> es el nombre de la variable que le daremos en el router como veremos más adelante. 
+Y una vez creado el metodo en el controlador tendremos que añadir la ruta en nuestro fichero de rutas correspondiente pero como ya hemos dicho tendremos que indicar que nuestra ruta espera un parámetro id, lo haremos de la siguiente forma:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="12:1"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><div class="tabbed-labels"><label for="__tabbed_12_1">category.routes.js</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Router</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;express&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">createCategory</span><span class="p">,</span><span class="w"> </span><span class="nx">getCategories</span><span class="p">,</span><span class="w"> </span><span class="nx">updateCategory</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;../controllers/category.controller.js&#39;</span><span class="p">;</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">categoryRouter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Router</span><span class="p">();</span>
+<span class="nx">categoryRouter</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">createCategory</span><span class="p">);</span>
+<span class="nx">categoryRouter</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">getCategories</span><span class="p">);</span>
+<span class="nx">categoryRouter</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="s1">&#39;/:id&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">updateCategory</span><span class="p">);</span>
+
+<span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">categoryRouter</span><span class="p">;</span>
+</code></pre></div>
+<p>Y volvemos a probar en Postman:</p>
+<p><img alt="Postman" src="../../../assets/images/step1-nodejs6.png" /></p>
+<p>Y si hacemos de nuevo un <code>GET</code> vemos como la categoría se ha modificado correctamente:</p>
+<p><img alt="Postman" src="../../../assets/images/step1-nodejs7.png" /></p>
+<p>Ya solo nos faltaría la operación de <code>delete</code> para completar nuestro CRUD, en el servicio añadimos un nuevo método:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="13:1"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><div class="tabbed-labels"><label for="__tabbed_13_1">category.service.js</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">deleteCategory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">id</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">category</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">CategoryModel</span><span class="p">.</span><span class="nx">findById</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">category</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="s1">&#39;There is no category with that Id&#39;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">CategoryModel</span><span class="p">.</span><span class="nx">findByIdAndDelete</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="s1">&#39;Error deleting category&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Como vemos es muy parecido al update, recuperamos el <code>id</code> de los parámetros de la ruta y en este caso llamaremos al método <code>findByIdAndDelete</code>.
+En nuestro controlador creamos el método correspondiente:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="14:1"><input checked="checked" id="__tabbed_14_1" name="__tabbed_14" type="radio" /><div class="tabbed-labels"><label for="__tabbed_14_1">category.controller.js</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">deleteCategory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">categoryId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">deletedCategory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">CategoryService</span><span class="p">.</span><span class="nx">deleteCategory</span><span class="p">(</span><span class="nx">categoryId</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">200</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span>
+<span class="w">            </span><span class="nx">category</span><span class="o">:</span><span class="w"> </span><span class="nx">deletedCategory</span>
+<span class="w">        </span><span class="p">});</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">400</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span>
+<span class="w">            </span><span class="nx">msg</span><span class="o">:</span><span class="w"> </span><span class="nx">err</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span>
+<span class="w">        </span><span class="p">});</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Y de nuevo añadimos la ruta correspondiente al archivo de rutas:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="15:1"><input checked="checked" id="__tabbed_15_1" name="__tabbed_15" type="radio" /><div class="tabbed-labels"><label for="__tabbed_15_1">category.routes.js</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Router</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;express&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">createCategory</span><span class="p">,</span><span class="w"> </span><span class="nx">getCategories</span><span class="p">,</span><span class="w"> </span><span class="nx">updateCategory</span><span class="p">,</span><span class="w"> </span><span class="nx">deleteCategory</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;../controllers/category.controller.js&#39;</span><span class="p">;</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">categoryRouter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Router</span><span class="p">();</span>
+<span class="nx">categoryRouter</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">createCategory</span><span class="p">);</span>
+<span class="nx">categoryRouter</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">getCategories</span><span class="p">);</span>
+<span class="nx">categoryRouter</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="s1">&#39;/:id&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">updateCategory</span><span class="p">);</span>
+<span class="nx">categoryRouter</span><span class="p">.</span><span class="ow">delete</span><span class="p">(</span><span class="s1">&#39;/:id&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">deleteCategory</span><span class="p">);</span>
+
+<span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">categoryRouter</span><span class="p">;</span>
+</code></pre></div>
+<p>Y de nuevo, probamos en postman:</p>
+<p><img alt="Postman" src="../../../assets/images/step1-nodejs8.png" /></p>
+<p>Hacemos un get para comprobar que se ha borrado de nuestra base de datos:</p>
+<p><img alt="Postman" src="../../../assets/images/step1-nodejs9.png" /></p>
+<h2 id="capa-de-middleware">Capa de Middleware</h2>
+<p>Antes de pasar a nuestro siguiente CRUD vamos a ver en que consiste la <code>Capa de Middleware</code>. 
+Un <code>middleware</code> es un código que se ejecuta antes de que una petición http llegue a nuestro manejador de rutas o antes de que el cliente reciba una respuesta. </p>
+<p>En nuestro caso vamos a crear un middleware para asegurarnos que todos los campos que necesitamos en nuestras entidades vienen en el body de la petición.
+Vamos a crear una carpeta <code>middlewares</code> en la raíz de nuestro proyecto y dentro crearemos el fichero <code>validateFields.js</code>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="16:1"><input checked="checked" id="__tabbed_16_1" name="__tabbed_16" type="radio" /><div class="tabbed-labels"><label for="__tabbed_16_1">validateFields.js</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;express&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">validationResult</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;express-validator&#39;</span><span class="p">;</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">validateFields</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">response</span><span class="p">,</span><span class="w"> </span><span class="nx">next</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">errors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">validationResult</span><span class="p">(</span><span class="nx">req</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">errors</span><span class="p">.</span><span class="nx">isEmpty</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">400</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span>
+<span class="w">            </span><span class="nx">errors</span><span class="o">:</span><span class="w"> </span><span class="nx">errors</span><span class="p">.</span><span class="nx">mapped</span><span class="p">()</span>
+<span class="w">        </span><span class="p">});</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">next</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">validateFields</span><span class="p">;</span>
+</code></pre></div>
+<p>En este método nos ayudaremos de la librería <code>express-validator</code> para ver los errores que tenemos en nuestras rutas. Para ello llamaremos a la función <code>validationResult</code> que nos devolverá un array de errores que mas tarde definiremos. Si el array no va vacío es porque se ha producido algún error en las validaciones y ejecutara la response con un código de error.</p>
+<p>Ahora definiremos las validaciones en nuestro archivo de rutas, debería quedar de la siguiente manera:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="17:1"><input checked="checked" id="__tabbed_17_1" name="__tabbed_17" type="radio" /><div class="tabbed-labels"><label for="__tabbed_17_1">category.routes.js</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Router</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;express&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">check</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;express-validator&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">validateFields</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;../middlewares/validateFields.js&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">getCategories</span><span class="p">,</span><span class="w"> </span><span class="nx">createCategory</span><span class="p">,</span><span class="w"> </span><span class="nx">deleteCategory</span><span class="p">,</span><span class="w"> </span><span class="nx">updateCategory</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;../controllers/category.controller.js&#39;</span><span class="p">;</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">categoryRouter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Router</span><span class="p">();</span>
+
+<span class="nx">categoryRouter</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="s1">&#39;/:id&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="nx">check</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">).</span><span class="nx">not</span><span class="p">().</span><span class="nx">isEmpty</span><span class="p">(),</span>
+<span class="w">    </span><span class="nx">validateFields</span>
+<span class="p">],</span><span class="w"> </span><span class="nx">updateCategory</span><span class="p">);</span>
+
+<span class="nx">categoryRouter</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="nx">check</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">).</span><span class="nx">not</span><span class="p">().</span><span class="nx">isEmpty</span><span class="p">(),</span>
+<span class="w">    </span><span class="nx">validateFields</span>
+<span class="p">],</span><span class="w"> </span><span class="nx">createCategory</span><span class="p">);</span>
+
+<span class="nx">categoryRouter</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">getCategories</span><span class="p">);</span>
+<span class="nx">categoryRouter</span><span class="p">.</span><span class="ow">delete</span><span class="p">(</span><span class="s1">&#39;/:id&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">deleteCategory</span><span class="p">);</span>
+
+<span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">categoryRouter</span><span class="p">;</span>
+</code></pre></div>
+<p>Aquí nos ayudamos de nuevo de <code>express-validator</code> y de su metodo <code>check</code>. Para las rutas en las que necesitemos validaciones, añadimos un array como segundo parámetro. En este array vamos añadiendo todas las validaciones que necesitemos. En nuestro caso solo queremos que el campo name no sea vacío, pero existen muchas mas validaciones que puedes encontrar en la documentación de <a href="https://express-validator.github.io/docs/">express-validator</a>. Importamos nuestro middleware y lo añadimos en la última posición de este array. </p>
+<p>De este modo no se realizarán las peticiones que no pasen las validaciones:</p>
+<p><img alt="Postman" src="../../../assets/images/step1-nodejs10.png" /></p>
+<p>Y con esto habremos terminado nuestro primer CRUD.</p>
 
 
 

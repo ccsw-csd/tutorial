@@ -421,12 +421,45 @@
     Estructura y funcionamiento
   </a>
   
+    <nav class="md-nav" aria-label="Estructura y funcionamiento">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#estructura-en-capas" class="md-nav__link">
+    Estructura en capas
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
   <a href="#buenas-practicas" class="md-nav__link">
     Buenas prácticas
   </a>
+  
+    <nav class="md-nav" aria-label="Buenas prácticas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#accesos-entre-capas" class="md-nav__link">
+    Accesos entre capas
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usar-linters-prettier-eslint" class="md-nav__link">
+    Usar linters Prettier &amp; ESLint
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -806,12 +839,45 @@
     Estructura y funcionamiento
   </a>
   
+    <nav class="md-nav" aria-label="Estructura y funcionamiento">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#estructura-en-capas" class="md-nav__link">
+    Estructura en capas
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
   <a href="#buenas-practicas" class="md-nav__link">
     Buenas prácticas
   </a>
+  
+    <nav class="md-nav" aria-label="Buenas prácticas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#accesos-entre-capas" class="md-nav__link">
+    Accesos entre capas
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usar-linters-prettier-eslint" class="md-nav__link">
+    Usar linters Prettier &amp; ESLint
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -832,12 +898,48 @@
 
 
 <h1 id="estructura-y-buenas-practicas-nodejs">Estructura y Buenas prácticas - Nodejs</h1>
-<div class="admonition warning">
-<p class="admonition-title">@TODO En Construcción</p>
-<p>Este capítulo está en construcción y pruebas, en breve completaremos el capítulo y subiremos una nueva versión corregida. Vuelve en unos días para ver si ya hemos publicado la versión.</p>
-</div>
 <h2 id="estructura-y-funcionamiento">Estructura y funcionamiento</h2>
+<p>En los proyectos Nodejs no existe nada estandarizado y oficial que hable sobre estructura de proyectos y nomenclatura de Nodejs. Tan solo existen algunas sugerencias y buenas prácticas a la hora de desarrollar que te recomiendo que utilices en la medida de lo posible.</p>
+<div class="admonition tip consejo">
+<p class="admonition-title">Tip</p>
+<p>Piensa que el código fuente que escribes hoy, es como un libro que se leerá durante años. Alguien tendrá que coger tu código y leerlo en unos meses o años para hacer alguna modificación y, como buenos desarrolladores que somos, tenemos la obligación de facilitarle en todo lo posible la comprensión de ese código fuente. Quizá esa persona futura podrías ser tu en unos meses y quedaría muy mal que no entendieras ni tu propio código <img alt="😆" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/svg/1f606.svg" title=":laughing:" /></p>
+</div>
+<h3 id="estructura-en-capas">Estructura en capas</h3>
+<p>Todos los proyectos para crear una Rest API con node y express están divididos en capas. Como mínimo estará la capa de rutas, controlador y modelo. En nuestro caso vamos a añadir una capa mas de servicios para quitarle trabajo al controlador y desacoplarlo de la capa de datos. Así si en el futuro queremos cambiar nuestra base de datos no romperemos tanto 😊</p>
+<p><strong>Rutas</strong></p>
+<p>En nuestro proyecto una ruta será una sección de código express que asociará un verbo http, una ruta o patrón de url y una función perteneciente al controlador para manejar esa petición.</p>
+<p><strong>Controladores</strong></p>
+<p>En nuestros controladores tendremos los métodos que obtendrán las solicitudes de las rutas, se comunicarán con la capa de servicio y convertirán estas solicitudes en respuestas http.</p>
+<p><strong>Servicio</strong></p>
+<p>Nuestra capa de servicio incluirá toda la lógica de negocio de nuestra aplicación. Para realizar sus operaciones puede realizar llamadas tanto a otras clases dentro de esta capa, como a clases de la capa inferior.</p>
+<p><strong>Modelo</strong></p>
+<p>Como su nombre indica esta capa representa los modelos de datos de nuestra aplicación. En nuestro caso, al usar un ODM, solo tendremos modelos de datos definidos según sus requisitos.</p>
 <h2 id="buenas-practicas">Buenas prácticas</h2>
+<h3 id="accesos-entre-capas">Accesos entre capas</h3>
+<p>En base a la división por capas que hemos comentado arriba, y el resto de entidades implicadas, hay una serie de reglas importantísimas que debes seguir muy de cerca:</p>
+<ul>
+<li>
+<p>Un <code>Controlador</code></p>
+<ul>
+<li>NO debe contener lógica en su clase. Solo está permitido que ejecute lógica a través de una llamada al objeto de la capa Lógica.</li>
+<li>NO puede ejecutar directamente operaciones de la capa Acceso a Datos, siempre debe pasar por la capa de servicios.</li>
+<li>Debemos seguir una coherencia entre todas las URL de las operaciones. Por ejemplo, si elegimos save para guardar, usemos esa palabra en todas las operaciones que sean de ese tipo. Evitad utilizar diferentes palabras save, guardar, persistir, actualizar para la misma acción.</li>
+</ul>
+</li>
+<li>
+<p>Un <code>Servicio</code></p>
+<ul>
+<li>NO puede llamar a objetos de la la capa Controlador.</li>
+<li>NO debe llamar a Acceso a Datos que NO sean de su ámbito / competencia.</li>
+<li>Si es necesario puede llamar a otros Servicios para recuperar cierta información que no sea de su ámbito / competencia.</li>
+<li>Es un buen lugar para implementar la lógica de negocio.</li>
+</ul>
+</li>
+</ul>
+<h3 id="usar-linters-prettier-eslint">Usar linters Prettier &amp; ESLint</h3>
+<p>Un linter es una herramienta que nos ayuda a seguir las buenas prácticas o guías de estilo de nuestro código fuente. En este caso, para JavaScript, proveeremos de unos muy famosos.
+Una de las más famosas es la combinación de  <strong>Angular app to ESLint with Prettier, AirBnB Styleguide</strong>
+Recordar que añadir este tipo de configuración es opcional, pero necesaria para tener un buen código de calidad.</p>
 
 
 
