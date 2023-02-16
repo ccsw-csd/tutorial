@@ -29,9 +29,9 @@ Así que antes de empezar debes elegir bien con que tecnologías vas a comenzar 
 No es obligado tener ningún conocimiento previo, pero es altamente recomendable que al menos conozcas lo básico de las tecnologías que vamos a ver en el tutorial. Te sugiero que visites los itinerarios formativos de aquellas tecnologías que quieras aprender y al menos hacer los cursos de nivel "Esencial".
 De momento tengo estas:
 
-* 🔵 [Frontend - Angular](https://degreed.com/pathway/3pmxr0jg9n/pathway?orgsso=capgemini)
-* 🟢 [Backend - Springboot](https://degreed.com/pathway/08gxl0e7pw/pathway?orgsso=capgemini)
-* 🟢 [Backend - Nodejs](https://degreed.com/pathway/e9kx16qypo/pathway?orgsso=capgemini)
+* 🔵 [Frontend - Angular](https://degreed.com/pathway/3pmxr0jg9n/pathway)
+* 🟢 [Backend - Springboot](https://degreed.com/pathway/08gxl0e7pw/pathway)
+* 🟢 [Backend - Nodejs](https://degreed.com/pathway/e9kx16qypo/pathway)
 
 Una vez hayas hecho los cursos esenciales, ya puedes volver y continuar con este tutorial. Repito que no es obligado, si ya tienes conocimientos previos de las tecnologías no es necesario que hagas los cursos.
 
