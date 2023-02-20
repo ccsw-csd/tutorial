@@ -25,10 +25,11 @@ nav:
     - 🟢 Springboot: develop/filtered/springboot.md
     - 🟢 Nodejs: develop/filtered/nodejs.md
   - Ahora hazlo tu!: exercise.md
-  - Anexo. Tutorial básico de Git: appendix/git.md
-  - Anexo. Detalle REST: appendix/rest.md
-  - Anexo. TDD: appendix/tdd.md
-  - Anexo. Spring Data (JPA): appendix/jpa.md
+  - "Anexos": 
+    - "GIT: Tutorial básico": appendix/git.md
+    - API Rest: appendix/rest.md
+    - TDD: appendix/tdd.md
+    - "Spring Data: JPA": appendix/jpa.md
 
 theme:
     name: material
