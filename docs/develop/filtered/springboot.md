@@ -4,7 +4,7 @@ En este punto ya tenemos dos listados, uno básico y otro paginado. Ahora vamos 
 
 Como ya conocemos como se debe desarrollar, en este ejemplo vamos a ir más rápidos y nos vamos a centrar únicamente en las novedades.
 
-## Modelos
+## Crear Modelos
 
 Lo primero que vamos a hacer es crear los modelos para trabajar con BBDD y con peticiones hacia el front. Además, también tenemos que añadir datos al script de inicialización de BBDD.
 
