@@ -562,9 +562,68 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          🟢 Nodejs
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         🟢 Nodejs
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#crear-modelos" class="md-nav__link">
+    Crear modelos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementar-el-service" class="md-nav__link">
+    Implementar el Service
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementar-el-controller" class="md-nav__link">
+    Implementar el Controller
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementar-las-rutas" class="md-nav__link">
+    Implementar las Rutas
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#probar-las-operaciones" class="md-nav__link">
+    Probar las operaciones
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -757,6 +816,49 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#crear-modelos" class="md-nav__link">
+    Crear modelos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementar-el-service" class="md-nav__link">
+    Implementar el Service
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementar-el-controller" class="md-nav__link">
+    Implementar el Controller
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementar-las-rutas" class="md-nav__link">
+    Implementar las Rutas
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#probar-las-operaciones" class="md-nav__link">
+    Probar las operaciones
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -772,10 +874,262 @@
 
 
 <h1 id="listado-paginado-nodejs">Listado paginado - Nodejs</h1>
-<div class="admonition warning">
-<p class="admonition-title">@TODO En Construcción</p>
-<p>Este capítulo está en construcción y pruebas, en breve completaremos el capítulo y subiremos una nueva versión corregida. Vuelve en unos días para ver si ya hemos publicado la versión.</p>
+<p>Ahora vamos a implementar las operaciones necesarias para ayudar al front a cubrir la funcionalidad del CRUD paginado en servidor. 
+Recuerda que para que un listado paginado en servidor funcione, el cliente debe enviar en cada petición que página está solicitando y cual es el tamaño de la página, para que el servidor devuelva solamente un subconjunto de datos, en lugar de devolver el listado completo.</p>
+<p>Como ya conocemos como se debe desarrollar, en este ejemplo vamos a ir más rápidos y nos vamos a centrar únicamente en las novedades.</p>
+<h2 id="crear-modelos">Crear modelos</h2>
+<p>Lo primero que vamos a hacer es crear el modelo de author para trabajar con BBDD. En la carpeta schemas creamos el archivo <code>author.schema.js</code>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">author.schema.js</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
 </div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">mongoose</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;mongoose&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">normalize</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;normalize-mongoose&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">mongoosePaginate</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;mongoose-paginate-v2&#39;</span><span class="p">;</span>
+<span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Schema</span><span class="p">,</span><span class="w"> </span><span class="nx">model</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">mongoose</span><span class="p">;</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">authorSchema</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Schema</span><span class="p">({</span>
+<span class="w">    </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="nb">String</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">require</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nx">nationality</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="nb">String</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">require</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+<span class="nx">authorSchema</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="nx">normalize</span><span class="p">);</span>
+<span class="nx">authorSchema</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="nx">mongoosePaginate</span><span class="p">);</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">AuthorModel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">model</span><span class="p">(</span><span class="s1">&#39;Author&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">authorSchema</span><span class="p">);</span>
+
+<span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">AuthorModel</span><span class="p">;</span>
+</code></pre></div>
+<h2 id="implementar-el-service">Implementar el Service</h2>
+<p>Creamos el service correspondiente <code>author.service.js</code>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">author.service.js</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">AuthorModel</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;../schemas/author.schema.js&#39;</span><span class="p">;</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">getAuthors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">AuthorModel</span><span class="p">.</span><span class="nx">find</span><span class="p">().</span><span class="nx">sort</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="s1">&#39;Error fetching authors&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">createAuthor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">data</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">nationality</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">data</span><span class="p">;</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">author</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">AuthorModel</span><span class="p">({</span><span class="w"> </span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">nationality</span><span class="w"> </span><span class="p">});</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">author</span><span class="p">.</span><span class="nx">save</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="s1">&#39;Error creating author&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">updateAuthor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">id</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">author</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">AuthorModel</span><span class="p">.</span><span class="nx">findById</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">author</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="s1">&#39;There is no author with that Id&#39;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span><span class="w">    </span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">AuthorModel</span><span class="p">.</span><span class="nx">findByIdAndUpdate</span><span class="p">(</span><span class="nx">id</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="s1">&#39;Error updating author&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">deleteAuthor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">id</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">author</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">AuthorModel</span><span class="p">.</span><span class="nx">findById</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">author</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="s1">&#39;There is no author with that Id&#39;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">AuthorModel</span><span class="p">.</span><span class="nx">findByIdAndDelete</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="s1">&#39;Error deleting author&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">getAuthorsPageable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">page</span><span class="p">,</span><span class="w"> </span><span class="nx">limit</span><span class="p">,</span><span class="w"> </span><span class="nx">sort</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">sortObj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">[</span><span class="nx">sort</span><span class="o">?</span><span class="p">.</span><span class="nx">property</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="nx">sort</span><span class="o">?</span><span class="p">.</span><span class="nx">direction</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;DESC&#39;</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s1">&#39;DESC&#39;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;ASC&#39;</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">       </span><span class="kd">const</span><span class="w"> </span><span class="nx">options</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">page</span><span class="o">:</span><span class="w"> </span><span class="nb">parseInt</span><span class="p">(</span><span class="nx">page</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">limit</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">sort</span><span class="o">:</span><span class="w"> </span><span class="nx">sortObj</span>
+<span class="w">        </span><span class="p">};</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">AuthorModel</span><span class="p">.</span><span class="nx">paginate</span><span class="p">({},</span><span class="w"> </span><span class="nx">options</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="s1">&#39;Error deleting author&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w">    </span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Como podemos observar es muy parecido al servicio de categorías, pero hemos incluido un nuevo método <code>getAuthorsPageable</code>. Este método tendrá como parámetros de entrada la página que queramos mostrar, el tamaño de esta y las propiedades de ordenación. Moongose nos proporciona el método paginate que es muy parecido a find salvo que además podemos pasar las opciones de paginación y el solo realizará todo el trabajo.</p>
+<h2 id="implementar-el-controller">Implementar el Controller</h2>
+<p>Creamos el controlador <code>author.controller.js</code>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">author.controller.js</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="nx">AuthorService</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;../services/author.service.js&#39;</span><span class="p">;</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">getAuthors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">authors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">AuthorService</span><span class="p">.</span><span class="nx">getAuthors</span><span class="p">();</span>
+<span class="w">        </span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">200</span><span class="p">).</span><span class="nx">json</span><span class="p">(</span>
+<span class="w">            </span><span class="nx">authors</span>
+<span class="w">        </span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">400</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span>
+<span class="w">            </span><span class="nx">msg</span><span class="o">:</span><span class="w"> </span><span class="nx">err</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span>
+<span class="w">        </span><span class="p">});</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">createAuthor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">author</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">AuthorService</span><span class="p">.</span><span class="nx">createAuthor</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">200</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span>
+<span class="w">            </span><span class="nx">author</span>
+<span class="w">        </span><span class="p">});</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">400</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span>
+<span class="w">            </span><span class="nx">msg</span><span class="o">:</span><span class="w"> </span><span class="nx">err</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span>
+<span class="w">        </span><span class="p">});</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">updateAuthor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">authorId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">await</span><span class="w"> </span><span class="nx">AuthorService</span><span class="p">.</span><span class="nx">updateAuthor</span><span class="p">(</span><span class="nx">authorId</span><span class="p">,</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">200</span><span class="p">).</span><span class="nx">json</span><span class="p">(</span><span class="mf">1</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">400</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span>
+<span class="w">            </span><span class="nx">msg</span><span class="o">:</span><span class="w"> </span><span class="nx">err</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span>
+<span class="w">        </span><span class="p">});</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">deleteAuthor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">authorId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">deletedAuthor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">AuthorService</span><span class="p">.</span><span class="nx">deleteAuthor</span><span class="p">(</span><span class="nx">authorId</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">200</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span>
+<span class="w">            </span><span class="nx">author</span><span class="o">:</span><span class="w"> </span><span class="nx">deletedAuthor</span>
+<span class="w">        </span><span class="p">});</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">400</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span>
+<span class="w">            </span><span class="nx">msg</span><span class="o">:</span><span class="w"> </span><span class="nx">err</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span>
+<span class="w">        </span><span class="p">});</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">getAuthorsPageable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">page</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">pageable</span><span class="p">.</span><span class="nx">pageNumber</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">limit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">pageable</span><span class="p">.</span><span class="nx">pageSize</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="mf">5</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">sort</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">pageable</span><span class="p">.</span><span class="nx">sort</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">AuthorService</span><span class="p">.</span><span class="nx">getAuthorsPageable</span><span class="p">(</span><span class="nx">page</span><span class="p">,</span><span class="w"> </span><span class="nx">limit</span><span class="p">,</span><span class="w"> </span><span class="nx">sort</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">200</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span>
+<span class="w">            </span><span class="nx">content</span><span class="o">:</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">docs</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">pageable</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">pageNumber</span><span class="o">:</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">page</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span>
+<span class="w">                </span><span class="nx">pageSize</span><span class="o">:</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">limit</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nx">totalElements</span><span class="o">:</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">totalDocs</span>
+<span class="w">        </span><span class="p">});</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">400</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span>
+<span class="w">            </span><span class="nx">msg</span><span class="o">:</span><span class="w"> </span><span class="nx">err</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span>
+<span class="w">        </span><span class="p">});</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Y vemos que el método getAuthorsPageable lee los datos de la request, se los pasa al servicio y por último transforma la response con los datos obtenidos.</p>
+<h2 id="implementar-las-rutas">Implementar las Rutas</h2>
+<p>Creamos nuestro archivo de rutas <code>author.routes.js</code>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:1"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">author.routes.js</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Router</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;express&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">check</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;express-validator&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">validateFields</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;../middlewares/validateFields.js&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">createAuthor</span><span class="p">,</span><span class="w"> </span><span class="nx">deleteAuthor</span><span class="p">,</span><span class="w"> </span><span class="nx">getAuthors</span><span class="p">,</span><span class="w"> </span><span class="nx">updateAuthor</span><span class="p">,</span><span class="w"> </span><span class="nx">getAuthorsPageable</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;../controllers/author.controller.js&#39;</span><span class="p">;</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">authorRouter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Router</span><span class="p">();</span>
+
+<span class="nx">authorRouter</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="s1">&#39;/:id&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="nx">check</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">).</span><span class="nx">not</span><span class="p">().</span><span class="nx">isEmpty</span><span class="p">(),</span>
+<span class="w">    </span><span class="nx">check</span><span class="p">(</span><span class="s1">&#39;nationality&#39;</span><span class="p">).</span><span class="nx">not</span><span class="p">().</span><span class="nx">isEmpty</span><span class="p">(),</span>
+<span class="w">    </span><span class="nx">validateFields</span>
+<span class="p">],</span><span class="w"> </span><span class="nx">updateAuthor</span><span class="p">);</span>
+
+<span class="nx">authorRouter</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="nx">check</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">).</span><span class="nx">not</span><span class="p">().</span><span class="nx">isEmpty</span><span class="p">(),</span>
+<span class="w">    </span><span class="nx">check</span><span class="p">(</span><span class="s1">&#39;nationality&#39;</span><span class="p">).</span><span class="nx">not</span><span class="p">().</span><span class="nx">isEmpty</span><span class="p">(),</span>
+<span class="w">    </span><span class="nx">validateFields</span>
+<span class="p">],</span><span class="w"> </span><span class="nx">createAuthor</span><span class="p">);</span>
+
+<span class="nx">authorRouter</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">getAuthors</span><span class="p">);</span>
+<span class="nx">authorRouter</span><span class="p">.</span><span class="ow">delete</span><span class="p">(</span><span class="s1">&#39;/:id&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">deleteAuthor</span><span class="p">);</span>
+
+<span class="nx">authorRouter</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="nx">check</span><span class="p">(</span><span class="s1">&#39;pageable&#39;</span><span class="p">).</span><span class="nx">not</span><span class="p">().</span><span class="nx">isEmpty</span><span class="p">(),</span>
+<span class="w">    </span><span class="nx">check</span><span class="p">(</span><span class="s1">&#39;pageable.pageSize&#39;</span><span class="p">).</span><span class="nx">not</span><span class="p">().</span><span class="nx">isEmpty</span><span class="p">(),</span>
+<span class="w">    </span><span class="nx">check</span><span class="p">(</span><span class="s1">&#39;pageable.pageNumber&#39;</span><span class="p">).</span><span class="nx">not</span><span class="p">().</span><span class="nx">isEmpty</span><span class="p">(),</span>
+<span class="w">    </span><span class="nx">validateFields</span>
+<span class="p">],</span><span class="w"> </span><span class="nx">getAuthorsPageable</span><span class="p">)</span>
+
+<span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">authorRouter</span><span class="p">;</span>
+</code></pre></div>
+<p>Podemos observar que si hacemos una petición con get a <code>/author</code> nos devolverá todos los autores. Pero si hacemos una petición post con el objeto pageable en el body realizaremos el listado paginado.</p>
+<h2 id="probar-las-operaciones">Probar las operaciones</h2>
+<p>Y ahora que tenemos todo creado, ya podemos probarlo con Postman:</p>
+<p>Por un lado creamos autores con:</p>
+<p><strong> PUT /author </strong> </p>
+<p><strong> PUT /author/{id} </strong> 
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Nuevo autor&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;nationality&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Nueva nacionalidad&quot;</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<p>Nos sirve para insertar <code>Autores</code> nuevas (si no tienen el id informado) o para actualizar <code>Autores</code> (si tienen el id informado en la URL).  Fíjate que los datos que se envían están en el body como formato JSON (parte izquierda de la imagen). Si no te dará un error.</p>
+<p><img alt="Postman" src="../../../assets/images/step2-nodejs1.png" /></p>
+<p><img alt="Postman" src="../../../assets/images/step2-nodejs2.png" /></p>
+<p><strong> DELETE /author/{id} </strong>  nos sirve eliminar <code>Autores</code>. Fíjate que el dato del ID que se envía está en el path.</p>
+<p><img alt="Postman" src="../../../assets/images/step2-nodejs3.png" /></p>
+<p>Luego recuperamos los autores con el método <code>GET</code> (antes tienes que crear unos cuantos para poder ver un listado):</p>
+<p><img alt="Postman" src="../../../assets/images/step2-nodejs4.png" /></p>
+<p>Y por último listamos los autores paginados:</p>
+<p><strong> POST /author </strong></p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;pageable&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;pageSize&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;pageNumber&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;sort&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;property&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;name&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;direction&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ASC&quot;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><img alt="Postman" src="../../../assets/images/step2-nodejs5.png" /></p>
 
 
 

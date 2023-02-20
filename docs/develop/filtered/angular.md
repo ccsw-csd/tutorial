@@ -374,7 +374,7 @@ Tenemos una pantalla con una sección de filtros en la parte superior, donde pod
 
 Ahora vamos a implementar el detalle de cada uno de los items que forman el listado. Para ello lo primero que haremos será pasarle la información del juego a cada componente como un dato de entrada `Input` hacia el componente.
 
-=== "games.component.html"
+=== "game-list.component.html"
     ``` HTML hl_lines="26"
     <div class="container">
         <h1>Catálogo de juegos</h1>
