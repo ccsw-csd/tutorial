@@ -573,7 +573,7 @@ Ahora sí que tenemos todo listo para implementar el cuadro de dialogo para dar 
         <form>
             <mat-form-field>
                 <mat-label>Identificador</mat-label>
-                <input type="number" matInput placeholder="Identificador" [(ngModel)]="game.id" name="id" disabled>
+                <input type="text" matInput placeholder="Identificador" [(ngModel)]="game.id" name="id" disabled>
             </mat-form-field>
 
             <mat-form-field>

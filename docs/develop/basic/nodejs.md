@@ -1,6 +1,6 @@
 # Listado simple - Nodejs
 
-Ahora que ya tenemos listo tanto el proyecto backend de nodejs (en el puerto 8080) ya podemos empezar a codificar la solución.
+Ahora que ya tenemos listo el proyecto backend de nodejs (en el puerto 8080) ya podemos empezar a codificar la solución.
 
 
 ## Primeros pasos
@@ -22,7 +22,9 @@ En nuestro caso una ruta es una sección de código Express que asocia un verbo 
 
 ## Capa de Routes
 
-Lo primero de vamos a crear va a ser el fichero de rutas para la categoría. Para ello primero creamos una carpeta llamada `routes` en la raíz de nuestra aplicación y dentro de esta carpeta crearemos un archivo llamado `category.routes.js`:
+Lo primero de vamos a crear es la carpeta principal de nuestra aplicación donde estarán contenidos los distintos elementos de la misma. Para ello creamos una carpeta llamada `src` en la raíz de nuestra aplicación.
+
+El primero elemento que vamos a crear va a ser el fichero de rutas para la categoría. Para ello creamos una carpeta llamada `routes` en la carpeta `src` y dentro de esta carpeta crearemos un archivo llamado `category.routes.js`:
 
 === "category.routes.js"
 ``` Javascript
@@ -35,12 +37,16 @@ categoryRouter.put('/', createCategory);
 export default categoryRouter;
 ```
 
-En este archivo estamos creando una ruta de tipo PUT que llamara al método `createCategory` de nuestro futuro controlador de categorias (aunque todavía no lo hemos creado y por tanto fallará).
+En este archivo estamos creando una ruta de tipo PUT que llamara al método `createCategory` de nuestro futuro controlador de categorías (aunque todavía no lo hemos creado y por tanto fallará).
 
 Ahora en nuestro archivo `index.js` vamos a añadir lo siguiente justo después de declarar la constante app:
 
 === "index.js"
 ``` Javascript
+...
+
+import categoryRouter from './src/routes/category.routes.js';
+
 ...
 
 app.use(express.json());
@@ -54,7 +60,7 @@ De este modo estamos asociando la url `http://localhost:8080/category` a nuestro
 
 ## Capa de Controller
 
-Lo siguiente será crear el método createCategory en nuestro controller. Para ello lo primero será crear una carpeta `controllers` en la raíz de nuestro proyecto y dentro de esta un archivo llamado `category.controller.js`:
+Lo siguiente será crear el método createCategory en nuestro controller. Para ello lo primero será crear una carpeta `controllers` en la carpeta `src` de nuestro proyecto y dentro de esta un archivo llamado `category.controller.js`:
 
 === "category.controller.js"
 ``` Javascript
@@ -64,10 +70,9 @@ export const createCategory = async (req, res) => {
 }
 ```
 
-Hemos creado la función `createCategory` que recibirá una request y una response. Estos parámetros vienen de la ruta de express y son la request y response de la petición http. De momento simplemente vamos a hacer un `console.log` de `req.body` para ver el body de la petición y vamos a hacer una response 200 para indicar que todo ha ido correctamente.
+Hemos creado la función `createCategory` que recibirá una request y una response. Estos parámetros vienen de la ruta de express y son la request y response de la petición HTTP. De momento simplemente vamos a hacer un `console.log` de `req.body` para ver el body de la petición y vamos a hacer una response 200 para indicar que todo ha ido correctamente.
 
 Si arrancamos el servidor y hacemos una petición `PUT` con Postman a `http://localhost:8080/category` con un body que pongamos formado correctamente podremos ver la salida que hemos programado en nuestro controller y en la consola de node podemos ver el contenido de `req.body`.
-
 
 ![Postman](../../assets/images/step1-nodejs2.png)
 
@@ -76,7 +81,7 @@ Si arrancamos el servidor y hacemos una petición `PUT` con Postman a `http://lo
 
 ## Capa de Modelo
 
-Ahora para que los datos que pasemos en el body los podamos guardar en BBDD necesitaremos un modelo y un esquema para la entidad `Category`. Vamos a crear una carpeta llamada `schemas` en la raíz de nuestro proyecto. Un schema no es más que un modelo de BBDD que especifica que campos estarán presentes y cuáles serán sus tipos.
+Ahora para que los datos que pasemos en el body los podamos guardar en BBDD necesitaremos un modelo y un esquema para la entidad `Category`. Vamos a crear una carpeta llamada `schemas` en la carpeta `src` de nuestro proyecto. Un schema no es más que un modelo de BBDD que especifica que campos estarán presentes y cuáles serán sus tipos.
 Dentro de la carpeta de schemas creamos un archivo con el nombre `category.schema.js`:
 
 === "category.schema.js"
@@ -103,7 +108,7 @@ Aparte de definir nuestro schema también lo estamos transformado en un modelo p
 
 ## Capa de Servicio
 
-Como hemos visto en nuestra estructura la capa controller no puede comunicarse con la capa modelo, debe de haber una capa intermedia, para ello vamos a crear una carpeta `services` en la raíz de nuestro proyecto y dentro un archivo `category.service.js`:
+Como hemos visto en nuestra estructura la capa controller no puede comunicarse con la capa modelo, debe de haber una capa intermedia, para ello vamos a crear una carpeta `services` en la carpeta `src` de nuestro proyecto y dentro un archivo `category.service.js`:
 
 === "category.service.js"
 ``` Javascript
@@ -120,7 +125,7 @@ export const createCategory = async function(name) {
 ```
 
 Hemos importado el modelo de categoría para poder realizar acciones sobre la BBDD y hemos creado una función que recogerá el nombre de la categoría y creará una nueva categoría con él. Llamamos al método save para guardar nuestra categoría y devolvemos el resultado.
-Ahora en nuestro metodo del controller solo tenemos que llamar al servicio pasándole los parámetros que nos llegan en la petición:
+Ahora en nuestro método del controller solo tenemos que llamar al servicio pasándole los parámetros que nos llegan en la petición:
 
 === "category.controller.js"
 ``` Javascript
@@ -146,9 +151,11 @@ Si ahora de nuevo vamos a postman y volvemos a lanzar nuestra petición podemos 
 
 ![Postman](../../assets/images/step1-nodejs4.png)
 
+## Resto de Operaciones
+
+### Recuperación categorías
 
 Ahora que ya podemos crear categorías lo siguiente será crear un endpoint para recuperar las categorías creadas en nuestra base de datos. Podemos empezar añadiendo un nuevo método en nuestro servicio:
-
 
 === "category.service.js"
 ``` Javascript
@@ -164,7 +171,7 @@ export const getCategories = async function () {
 Al igual que en el anterior método haremos uso del modelo, pero esta vez para hacer un `find` y ordenando los resultados por el campo `name`.
 Al método find se le pueden pasar `queries`, `projections` y `options`. Te dejo por aquí más info. En nuestro caso simplemente queremos que nos devuelva todas las categorías por lo que no le pasaremos nada.
 
-Creamos también un metodo en el controlador para recuperar las categorías y que hará uso del servicio:
+Creamos también un método en el controlador para recuperar las categorías y que hará uso del servicio:
 
 === "category.controller.js"
 ``` Javascript
@@ -184,7 +191,6 @@ export const getCategories = async (req, res) => {
 
 Y ahora que ya tenemos el método creado en el controlador lo siguiente será relacionar este método con una ruta. Para ello en nuestro archivo `category.routes.js` tendremos que añadir una nueva línea:
 
-
 === "category.routes.js"
 ``` Javascript
 import { Router } from 'express';
@@ -197,9 +203,11 @@ categoryRouter.get('/', getCategories);
 export default categoryRouter;
 ```
 
-De este modo cuando hagamos una petición GET a `http://localhost:8080/category` nos devolvera el listado de categorías existentes: 
+De este modo cuando hagamos una petición GET a `http://localhost:8080/category` nos devolverá el listado de categorías existentes: 
 
 ![Postman](../../assets/images/step1-nodejs5.png)
+
+### Actualizar categoría
 
 Ahora vamos a por el método para actualizar nuestras categorías. En el servicio creamos el siguiente método:
 
@@ -213,14 +221,14 @@ export const updateCategory = async (id, name) => {
         }    
         return await CategoryModel.findByIdAndUpdate(id, {name});
     } catch (e) {
-        throw Error('Error updating category');
+        throw Error(e);
     }
 }
 ```
 
 A este método le pasaremos de entrada el `id` y el `nombre`. Con ese `id` realizaremos una búsqueda para asegurarnos que esa categoría existe en nuestra base de datos. Si existe la categoría haremos una petición con `findByIdAndUpdate` donde el primer parámetro es el `id` y el segundo es el resto de los campos de nuestra entidad. 
 
-En el controlador creamos el metodo correspondiente:
+En el controlador creamos el método correspondiente:
 
 
 === "category.controller.js"
@@ -241,7 +249,7 @@ export const updateCategory = async (req, res) => {
 ```
 
 Aquí recogeremos el parámetro `id` que nos vendrá en la url, por ejemplo: `http://localhost:8080/category/1`. Esto lo hacemos con `req.params.id`. El `id` es el nombre de la variable que le daremos en el router como veremos más adelante. 
-Y una vez creado el metodo en el controlador tendremos que añadir la ruta en nuestro fichero de rutas correspondiente pero como ya hemos dicho tendremos que indicar que nuestra ruta espera un parámetro id, lo haremos de la siguiente forma:
+Y una vez creado el método en el controlador tendremos que añadir la ruta en nuestro fichero de rutas correspondiente, pero como ya hemos dicho tendremos que indicar que nuestra ruta espera un parámetro id, lo haremos de la siguiente forma:
 
 
 === "category.routes.js"
@@ -257,7 +265,6 @@ categoryRouter.put('/:id', updateCategory);
 export default categoryRouter;
 ```
 
-
 Y volvemos a probar en Postman:
 
 ![Postman](../../assets/images/step1-nodejs6.png)
@@ -267,8 +274,9 @@ Y si hacemos de nuevo un `GET` vemos como la categoría se ha modificado correct
 ![Postman](../../assets/images/step1-nodejs7.png)
 
 
-Ya solo nos faltaría la operación de `delete` para completar nuestro CRUD, en el servicio añadimos un nuevo método:
+### Borrado categoría
 
+Ya solo nos faltaría la operación de `delete` para completar nuestro CRUD, en el servicio añadimos un nuevo método:
 
 === "category.service.js"
 ``` Javascript
@@ -279,7 +287,7 @@ export const deleteCategory = async (id) => {
             throw Error('There is no category with that Id');
         }
         return await CategoryModel.findByIdAndDelete(id);
-    } catch (err) {
+    } catch (e) {
         throw Error('Error deleting category');
     }
 }
@@ -308,7 +316,6 @@ export const deleteCategory = async (req, res) => {
 
 Y de nuevo añadimos la ruta correspondiente al archivo de rutas:
 
-
 === "category.routes.js"
 ``` Javascript
 import { Router } from 'express';
@@ -332,13 +339,13 @@ Hacemos un get para comprobar que se ha borrado de nuestra base de datos:
 ![Postman](../../assets/images/step1-nodejs9.png)
 
 
-## Capa de Middleware
+## Capa de Middleware (Validaciones)
 
 Antes de pasar a nuestro siguiente CRUD vamos a ver en que consiste la `Capa de Middleware`. 
 Un `middleware` es un código que se ejecuta antes de que una petición http llegue a nuestro manejador de rutas o antes de que el cliente reciba una respuesta. 
 
 En nuestro caso vamos a crear un middleware para asegurarnos que todos los campos que necesitamos en nuestras entidades vienen en el body de la petición.
-Vamos a crear una carpeta `middlewares` en la raíz de nuestro proyecto y dentro crearemos el fichero `validateFields.js`:
+Vamos a crear una carpeta `middlewares` en la carpeta `src` de nuestro proyecto y dentro crearemos el fichero `validateFields.js`:
 
 === "validateFields.js"
 ``` Javascript
@@ -358,7 +365,7 @@ const validateFields = (req, res = response, next) => {
 export default validateFields;
 ```
 
-En este método nos ayudaremos de la librería `express-validator` para ver los errores que tenemos en nuestras rutas. Para ello llamaremos a la función `validationResult` que nos devolverá un array de errores que mas tarde definiremos. Si el array no va vacío es porque se ha producido algún error en las validaciones y ejecutara la response con un código de error.
+En este método nos ayudaremos de la librería `express-validator` para ver los errores que tenemos en nuestras rutas. Para ello llamaremos a la función `validationResult` que nos devolverá un array de errores que más tarde definiremos. Si el array no va vacío es porque se ha producido algún error en las validaciones y ejecutara la response con un código de error.
 
 Ahora definiremos las validaciones en nuestro archivo de rutas, debería quedar de la siguiente manera:
 
@@ -387,13 +394,10 @@ categoryRouter.delete('/:id', deleteCategory);
 export default categoryRouter;
 ```
 
-Aquí nos ayudamos de nuevo de `express-validator` y de su metodo `check`. Para las rutas en las que necesitemos validaciones, añadimos un array como segundo parámetro. En este array vamos añadiendo todas las validaciones que necesitemos. En nuestro caso solo queremos que el campo name no sea vacío, pero existen muchas mas validaciones que puedes encontrar en la documentación de [express-validator](https://express-validator.github.io/docs/). Importamos nuestro middleware y lo añadimos en la última posición de este array. 
+Aquí nos ayudamos de nuevo de `express-validator` y de su método `check`. Para las rutas en las que necesitemos validaciones, añadimos un array como segundo parámetro. En este array vamos añadiendo todas las validaciones que necesitemos. En nuestro caso solo queremos que el campo name no sea vacío, pero existen muchas más validaciones que puedes encontrar en la documentación de [express-validator](https://express-validator.github.io/docs/). Importamos nuestro middleware y lo añadimos en la última posición de este array. 
 
 De este modo no se realizarán las peticiones que no pasen las validaciones:
 
 ![Postman](../../assets/images/step1-nodejs10.png)
 
-
 Y con esto habremos terminado nuestro primer CRUD.
-
-

@@ -26,10 +26,9 @@ Accede a la [URL](https://www.mongodb.com/atlas/database), registrate grátis co
 
 ![Registro MongoDB](../assets/images/install-nodejs-mongodb.png)
  
-Configura el cluster a tu gusto y ya tendrías una BBDD en cloud para hacer pruebas. Lo primero que se muestra es el dashboard que se verá algo similar a lo siguiente:
+Configura el cluster a tu gusto (selecciona la opción gratuita en el cloud que más te guste) y ya tendrías una BBDD en cloud para hacer pruebas. Lo primero que se muestra es el dashboard que se verá algo similar a lo siguiente:
 
 ![Dashboard](../assets/images/install-nodejs-mongodb2.png)
-
 
 A continuación, pulsamos en la opción `Database` del menú y, sobre el `Cluster0`, pulsamos también el botón `Connect`. Se nos abrirá el siguiente pop-up donde tendremos que elegir la opción `Connect your application`:
 
@@ -40,6 +39,8 @@ En el siguiente paso es donde se nos muestra la url que tendremos que utilizar e
 ![Connect](../assets/images/install-nodejs-mongodb4.png)
 
 Pulsamos `Close` y la BBDD ya estaría creada.
+
+*Nota: Al crear la base de datos te aprecerá un aviso para introducir tu IP en la whitelist, asegúrate no estar en la VPN cuando lo hagas, de lo contrario no tendrás conexión posteriormente.*
 
 
 ### Herramientas para pruebas
@@ -90,6 +91,7 @@ npm i dotenv
 npm i mongoose
 npm i mongoose-paginate-v2
 npm i normalize-mongoose
+npm i cors
 npm i nodemon --save-dev
 
 ```
@@ -97,8 +99,8 @@ npm i nodemon --save-dev
 También podríamos haber instalado todas a la vez en dos líneas: 
 
 ```
-npm i express express-validator dotenv  mongoose mongoose-paginate-v2 normalize-mongoose
-npm I nodemon --save-dev
+npm i express express-validator dotenv  mongoose mongoose-paginate-v2 normalize-mongoose cors
+npm i nodemon --save-dev
 ```
 
 Las dependencias que acabamos de instalar son las siguientes: 
@@ -106,9 +108,10 @@ Las dependencias que acabamos de instalar son las siguientes:
 * Express es un framework de Node que nos facilitara mucho la tarea a la hora de crear nuestra aplicación.
 * Dotenv es una librería para usar variables de entorno.
 * Mongoose es una librería ODM que nos ayudara a los accesos a BBDD.
-* Nodemon y es una herramienta que nos ayuda reiniciando nuestro servidor cuando detecta un cambio en alguno de nuestros ficheros y así no tener que hacerlo manualmente.
+* Nodemon es una herramienta que nos ayuda reiniciando nuestro servidor cuando detecta un cambio en alguno de nuestros ficheros y así no tener que hacerlo manualmente.
+* Cors es una herramienta que nos ayuda a configurar el CORS de nuestra app para que posteriormente podemos conectarlo al front.
 
-Ahora podemos fijarnos en nuestro fichero `package.json` donde se habrán añadido dos nuevos parametros: `dependencies` y `devDependencies`. La diferencia está en que las `devDependencies` solo se utilizar en la fase de desarrollo de nuestro proyecto y las `dependencies` se utilizarán en todo momento.
+Ahora podemos fijarnos en nuestro fichero `package.json` donde se habrán añadido dos nuevos parámetros: `dependencies` y `devDependencies`. La diferencia está en que las `devDependencies` solo se utilizar en la fase de desarrollo de nuestro proyecto y las `dependencies` se utilizarán en todo momento.
 
 ### Configurar la BBDD
 
@@ -137,7 +140,7 @@ Ahora vamos a crear en la raíz de nuestro proyecto un archivo con el nombre `.e
 
 === ".env"
 ``` Properties
-MONGODB_URL='mongodb+srv://your_user:your_pass@cluster0.ndr2obp.mongodb.net/?retryWrites=true&w=majority'
+MONGODB_URL='mongodb+srv://<user>:<pass>@<url>.mongodb.net/?retryWrites=true&w=majority'
 PORT='8080'
 ```
 
@@ -149,6 +152,7 @@ Con toda esa configuración, ahora ya podemos crear nuestra página inicial. Den
 === "index.js"
 ``` Javascript
 import express from 'express';
+import cors from 'cors';
 import connectDB from './config/db.js';
 import { config } from 'dotenv';
 
@@ -156,12 +160,16 @@ config();
 connectDB(process.env.MONGODB_URL);
 const app = express();
 
+app.use(cors({
+    origin: '*'
+}));
+
 app.listen(process.env.PORT, () => {
     console.log(`Server running on port ${process.env.PORT}`);
 });
 ```
 
-El funcionamiento de este código, resumiendo mucho, es el siguiente. Crea un servidor con express en el puerto `8080` y publica un endpoint de tipo `GET` para que cuando abramos el navegador y hagamos una petición a la URL `http://localhost:8080/` nos devuelva el texto programado en la response del método.
+El funcionamiento de este código, resumiendo mucho, es el siguiente. Configurar la base de datos, configurar el CORS para que posteriormente podamos realizar peticiones desde el front y crea un servidor con express en el puerto `8080`.
 
 Pero antes, para poder ejecutar nuestro servidor debemos modificar el fichero `package.json`, y añadir un script de arranque. Añadiremos la siguiente línea:
 
@@ -175,5 +183,5 @@ Y ahora sí, desde la consola de comando ya podemos ejecutar el siguiente comand
 npm run dev
 ```
 
-y ya podemos navegar a la URL `http://localhost:8080/` donde veremos la respuesta del servidor.
+y ya podremos ver en la consola como la aplicación ha arrancado correctamente con el mensaje que le hemos añadido.
 

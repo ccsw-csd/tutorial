@@ -451,7 +451,7 @@ El último paso, es definir la pantalla de dialogo que realizará el alta y modi
         <form>
             <mat-form-field>
                 <mat-label>Identificador</mat-label>
-                <input type="number" matInput placeholder="Identificador" [(ngModel)]="author.id" name="id" disabled>
+                <input type="text" matInput placeholder="Identificador" [(ngModel)]="author.id" name="id" disabled>
             </mat-form-field>
 
             <mat-form-field>

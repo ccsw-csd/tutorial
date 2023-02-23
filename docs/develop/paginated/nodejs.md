@@ -69,7 +69,7 @@ export const updateAuthor = async (id, data) => {
         }    
         return await AuthorModel.findByIdAndUpdate(id, data);
     } catch (e) {
-        throw Error('Error updating author');
+        throw Error(e);
     }
 }
 
@@ -80,8 +80,8 @@ export const deleteAuthor = async (id) => {
             throw Error('There is no author with that Id');
         }
         return await AuthorModel.findByIdAndDelete(id);
-    } catch (err) {
-        throw Error('Error deleting author');
+    } catch (e) {
+        throw Error(e);
     }
 }
 
@@ -97,8 +97,8 @@ export const getAuthorsPageable = async (page, limit, sort) => {
         };
 
         return await AuthorModel.paginate({}, options);
-    } catch (err) {
-        throw Error('Error deleting author');
+    } catch (e) {
+        throw Error('Error fetching authors page');
     }    
 }
 ```
@@ -228,6 +228,21 @@ export default authorRouter;
 ```
 
 Podemos observar que si hacemos una petición con get a `/author` nos devolverá todos los autores. Pero si hacemos una petición post con el objeto pageable en el body realizaremos el listado paginado.
+
+Finalmente en nuestro archivo `index.js` vamos a añadir el nuevo router:
+
+=== "index.js"
+``` Javascript
+...
+
+import authorRouter from './src/routes/author.routes.js';
+
+...
+
+app.use('/author', authorRouter);
+
+...
+```
 
 ## Probar las operaciones
 

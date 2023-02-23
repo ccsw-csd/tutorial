@@ -962,6 +962,8 @@ Y lo mismo para categorías.
 
 === "CategoryTest.java"
     ``` Java
+    public static final Long NOT_EXISTS_CATEGORY_ID = 0L;
+
     @Test
     public void getExistsCategoryIdShouldReturnCategory() {
     

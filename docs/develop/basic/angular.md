@@ -680,7 +680,7 @@ Ahora vamos a darle forma al formulario de editar y crear. Para ello vamos al ht
         <form>
             <mat-form-field>
                 <mat-label>Identificador</mat-label>
-                <input type="number" matInput placeholder="Identificador" [(ngModel)]="category.id" name="id" disabled>
+                <input type="text" matInput placeholder="Identificador" [(ngModel)]="category.id" name="id" disabled>
             </mat-form-field>
 
             <mat-form-field>
