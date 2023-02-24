@@ -711,6 +711,26 @@
     Implementar validaciones
   </a>
   
+    <nav class="md-nav" aria-label="Implementar validaciones">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#validacion-en-borrado" class="md-nav__link">
+    Validación en borrado
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validacion-en-creacion" class="md-nav__link">
+    Validación en creación
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -910,6 +930,26 @@
     Implementar validaciones
   </a>
   
+    <nav class="md-nav" aria-label="Implementar validaciones">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#validacion-en-borrado" class="md-nav__link">
+    Validación en borrado
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validacion-en-creacion" class="md-nav__link">
+    Validación en creación
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -1014,9 +1054,9 @@
 <span class="w">            </span><span class="nx">category</span><span class="o">:</span><span class="w"> </span><span class="nx">data</span><span class="p">.</span><span class="nx">category</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span>
 <span class="w">            </span><span class="nx">author</span><span class="o">:</span><span class="w"> </span><span class="nx">data</span><span class="p">.</span><span class="nx">author</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span>
 <span class="w">        </span><span class="p">};</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">GameModel</span><span class="p">.</span><span class="nx">findByIdAndUpdate</span><span class="p">(</span><span class="nx">gameId</span><span class="p">,</span><span class="w"> </span><span class="nx">gameToUpdate</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="ow">new</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="w"> </span><span class="p">});</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">GameModel</span><span class="p">.</span><span class="nx">findByIdAndUpdate</span><span class="p">(</span><span class="nx">id</span><span class="p">,</span><span class="w"> </span><span class="nx">gameToUpdate</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="ow">new</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="w"> </span><span class="p">});</span>
 <span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="s1">&#39;Error updating game&#39;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
@@ -1059,7 +1099,7 @@
 <span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">updateGame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">gameId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
 <span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">await</span><span class="w"> </span><span class="nx">GameModel</span><span class="p">.</span><span class="nx">updateGame</span><span class="p">(</span><span class="nx">gameId</span><span class="p">,</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">);</span>
+<span class="w">        </span><span class="k">await</span><span class="w"> </span><span class="nx">GameService</span><span class="p">.</span><span class="nx">updateGame</span><span class="p">(</span><span class="nx">gameId</span><span class="p">,</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">);</span>
 <span class="w">        </span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">200</span><span class="p">).</span><span class="nx">json</span><span class="p">(</span><span class="mf">1</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">400</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span>
@@ -1078,13 +1118,14 @@
 </div>
 <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Router</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;express&#39;</span><span class="p">;</span>
 <span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">check</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;express-validator&#39;</span><span class="p">;</span>
-<span class="k">import</span><span class="w"> </span><span class="nx">validateFields</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;../middlewares/validate-Fields.js&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">validateFields</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;../middlewares/validateFields.js&#39;</span><span class="p">;</span>
 <span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">createGame</span><span class="p">,</span><span class="w"> </span><span class="nx">getGames</span><span class="p">,</span><span class="w"> </span><span class="nx">updateGame</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;../controllers/game.controller.js&#39;</span><span class="p">;</span>
 <span class="kd">const</span><span class="w"> </span><span class="nx">gameRouter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Router</span><span class="p">();</span>
 
 <span class="nx">gameRouter</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="s1">&#39;/:id&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">[</span>
 <span class="w">    </span><span class="nx">check</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">).</span><span class="nx">not</span><span class="p">().</span><span class="nx">isEmpty</span><span class="p">(),</span>
 <span class="w">    </span><span class="nx">check</span><span class="p">(</span><span class="s1">&#39;age&#39;</span><span class="p">).</span><span class="nx">not</span><span class="p">().</span><span class="nx">isEmpty</span><span class="p">(),</span>
+<span class="w">    </span><span class="nx">check</span><span class="p">(</span><span class="s1">&#39;age&#39;</span><span class="p">).</span><span class="nx">isNumeric</span><span class="p">(),</span>
 <span class="w">    </span><span class="nx">check</span><span class="p">(</span><span class="s1">&#39;category.id&#39;</span><span class="p">).</span><span class="nx">not</span><span class="p">().</span><span class="nx">isEmpty</span><span class="p">(),</span>
 <span class="w">    </span><span class="nx">check</span><span class="p">(</span><span class="s1">&#39;author.id&#39;</span><span class="p">).</span><span class="nx">not</span><span class="p">().</span><span class="nx">isEmpty</span><span class="p">(),</span>
 <span class="w">    </span><span class="nx">validateFields</span>
@@ -1105,6 +1146,22 @@
 <span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">gameRouter</span><span class="p">;</span>
 </code></pre></div>
 <p>En este caso hemos tenido que meter dos rutas para <code>get</code>, una para cuando se informen los filtros y otra para cuando no vayan informados. Si lo hiciéramos con una única ruta nos fallaría en el otro caso.</p>
+<p>Finalmente en nuestro archivo <code>index.js</code> vamos a añadir el nuevo router:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:1"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">index.js</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="p">...</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nx">gameRouter</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;./src/routes/game.routes.js&#39;</span><span class="p">;</span>
+
+<span class="p">...</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="s1">&#39;/game&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">gameRouter</span><span class="p">);</span>
+
+<span class="p">...</span>
+</code></pre></div>
 <h2 id="probar-las-operaciones">Probar las operaciones</h2>
 <p>Y ahora que tenemos todo creado, ya podemos probarlo con Postman:</p>
 <p>Por un lado creamos juegos con:</p>
@@ -1129,14 +1186,15 @@
 <p><img alt="Postman" src="../../../assets/images/step3-nodejs2.png" /></p>
 <p><img alt="Postman" src="../../../assets/images/step3-nodejs3.png" /></p>
 <h2 id="implementar-validaciones">Implementar validaciones</h2>
-<p>Ahora que ya tenemos todos nuestros CRUDs creados vamos a introducir una pequeña validación para que no podamos borrar categorías ni autores que tengan un juego asociado. Para ello primero tendremos que crear un método en el servicio de juegos para buscar los juegos que correspondan con un campo dado. En <code>game.service.js</code> añadimos:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="5:1"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">game.service.js</label></div>
+<p>Ahora que ya tenemos todos nuestros CRUDs creados vamos a introducir unas pequeñas validaciones.</p>
+<h3 id="validacion-en-borrado">Validación en borrado</h3>
+<p>La primera validación sera para que no podamos borrar categorías ni autores que tengan un juego asociado. Para ello primero tendremos que crear un método en el servicio de juegos para buscar los juegos que correspondan con un campo dado. En <code>game.service.js</code> añadimos:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:1"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">game.service.js</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block"></div>
 </div>
 </div>
 <div class="highlight"><pre><span></span><code><span class="p">...</span>
-
 <span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">getGame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">field</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">GameModel</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="nx">field</span><span class="p">);</span>
@@ -1144,22 +1202,19 @@
 <span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="s1">&#39;Error fetching games&#39;</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
-
 <span class="p">...</span>
 </code></pre></div>
-<p>Y ahora en <code>category.service.js</code> importamos el método creado:
-Y modificamos el método para borrar categorías:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="6:1"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">category.service.js</label></div>
+<p>Y ahora en <code>category.service.js</code> importamos el método creado y modificamos el método para borrar categorías:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:1"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">category.service.js</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block"></div>
 </div>
 </div>
 <div class="highlight"><pre><span></span><code><span class="p">...</span>
-
 <span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">getGame</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;./game.service.js&#39;</span><span class="p">;</span>
-
 <span class="p">...</span>
 
+<span class="p">...</span>
 <span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">deleteCategory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">id</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">category</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">CategoryModel</span><span class="p">.</span><span class="nx">findById</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
@@ -1175,19 +1230,20 @@ Y modificamos el método para borrar categorías:</p>
 <span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
-
 <span class="p">...</span>
 </code></pre></div>
-<p>De este modo si encontramos algún juego con esta categoría no nos dejara borrarla.</p>
+<p>De este modo si encontramos algún juego con esta categoría no nos dejará borrarla.</p>
 <p>Por último, hacemos lo mismo en <code>author.service.js</code>:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="7:1"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">author.service.js</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="8:1"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">author.service.js</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block"></div>
 </div>
 </div>
 <div class="highlight"><pre><span></span><code><span class="p">...</span>
-
 <span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">getGame</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;./game.service.js&#39;</span><span class="p">;</span>
+<span class="p">...</span>
+
+<span class="p">...</span>
 <span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">deleteAuthor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">id</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">author</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">AuthorModel</span><span class="p">.</span><span class="nx">findById</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
@@ -1199,11 +1255,110 @@ Y modificamos el método para borrar categorías:</p>
 <span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="s1">&#39;There are games related to this author&#39;</span><span class="p">;</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">AuthorModel</span><span class="p">.</span><span class="nx">findByIdAndDelete</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
+<span class="p">...</span>
+</code></pre></div>
+<h3 id="validacion-en-creacion">Validación en creación</h3>
+<p>En las creaciones es conveniente validad la existencia de las entidades relacionadas para garantizar la integridad de la BBDD.</p>
+<p>Para esto vamos a introducir una validación en la creación y edición de los juegos para garantizar que la categoría y el autor proporcionados existen.</p>
+<p>En primer lugar vamos a crear los servicios de consulta de categoría y autor:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="9:1"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">category.service.js</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="p">...</span>
+<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">getCategory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">id</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">CategoryModel</span><span class="p">.</span><span class="nx">findById</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="s1">&#39;There is no category with that Id&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="p">...</span>
+</code></pre></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="10:1"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">author.service.js</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="p">...</span>
+<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">getAuthor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">id</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">AuthorModel</span><span class="p">.</span><span class="nx">findById</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="s1">&#39;There is no author with that Id&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="p">...</span>
+</code></pre></div>
+<p>Teniendo los servicios ya disponibles, vamos a añadir las validaciones a los servicios de creación y edición:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="11:1"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><div class="tabbed-labels"><label for="__tabbed_11_1">game.service.js</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="p">...</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">getCategory</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;./category.service.js&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">getAuthor</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;./author.service.js&#39;</span><span class="p">;</span>
+<span class="p">...</span>
 
+<span class="p">...</span>
+<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">createGame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">data</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">category</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">getCategory</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">category</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">category</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="s1">&#39;There is no category with that Id&#39;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">author</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">getAuthor</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">author</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">author</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="s1">&#39;There is no author with that Id&#39;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">game</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">GameModel</span><span class="p">({</span>
+<span class="w">            </span><span class="p">...</span><span class="nx">data</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">category</span><span class="o">:</span><span class="w"> </span><span class="nx">data</span><span class="p">.</span><span class="nx">category</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">author</span><span class="o">:</span><span class="w"> </span><span class="nx">data</span><span class="p">.</span><span class="nx">author</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span>
+<span class="w">        </span><span class="p">});</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">game</span><span class="p">.</span><span class="nx">save</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="p">...</span>
+
+<span class="p">...</span>
+<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">updateGame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">id</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">game</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">GameModel</span><span class="p">.</span><span class="nx">findById</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">game</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="s1">&#39;There is no game with that Id&#39;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">category</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">getCategory</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">category</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">category</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="s1">&#39;There is no category with that Id&#39;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">author</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">getAuthor</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">author</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">author</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="s1">&#39;There is no author with that Id&#39;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">gameToUpdate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="p">...</span><span class="nx">data</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">category</span><span class="o">:</span><span class="w"> </span><span class="nx">data</span><span class="p">.</span><span class="nx">category</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">author</span><span class="o">:</span><span class="w"> </span><span class="nx">data</span><span class="p">.</span><span class="nx">author</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span>
+<span class="w">        </span><span class="p">};</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">GameModel</span><span class="p">.</span><span class="nx">findByIdAndUpdate</span><span class="p">(</span><span class="nx">id</span><span class="p">,</span><span class="w"> </span><span class="nx">gameToUpdate</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="ow">new</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="w"> </span><span class="p">});</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 <span class="p">...</span>
 </code></pre></div>
 <p>Con esto ya tendríamos acabado nuestro CRUD.</p>

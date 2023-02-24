@@ -982,7 +982,7 @@ Recuerda que para que un listado paginado en servidor funcione, el cliente debe 
 <span class="w">        </span><span class="p">}</span><span class="w">    </span>
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">AuthorModel</span><span class="p">.</span><span class="nx">findByIdAndUpdate</span><span class="p">(</span><span class="nx">id</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="s1">&#39;Error updating author&#39;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 
@@ -993,8 +993,8 @@ Recuerda que para que un listado paginado en servidor funcione, el cliente debe 
 <span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="s1">&#39;There is no author with that Id&#39;</span><span class="p">);</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">AuthorModel</span><span class="p">.</span><span class="nx">findByIdAndDelete</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="s1">&#39;Error deleting author&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 
@@ -1010,8 +1010,8 @@ Recuerda que para que un listado paginado en servidor funcione, el cliente debe 
 <span class="w">        </span><span class="p">};</span>
 
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">AuthorModel</span><span class="p">.</span><span class="nx">paginate</span><span class="p">({},</span><span class="w"> </span><span class="nx">options</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="s1">&#39;Error deleting author&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="s1">&#39;Error fetching authors page&#39;</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span><span class="w">    </span>
 <span class="p">}</span>
 </code></pre></div>
@@ -1138,6 +1138,22 @@ Recuerda que para que un listado paginado en servidor funcione, el cliente debe 
 <span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">authorRouter</span><span class="p">;</span>
 </code></pre></div>
 <p>Podemos observar que si hacemos una petición con get a <code>/author</code> nos devolverá todos los autores. Pero si hacemos una petición post con el objeto pageable en el body realizaremos el listado paginado.</p>
+<p>Finalmente en nuestro archivo <code>index.js</code> vamos a añadir el nuevo router:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:1"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">index.js</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="p">...</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nx">authorRouter</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;./src/routes/author.routes.js&#39;</span><span class="p">;</span>
+
+<span class="p">...</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="s1">&#39;/author&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">authorRouter</span><span class="p">);</span>
+
+<span class="p">...</span>
+</code></pre></div>
 <h2 id="probar-las-operaciones">Probar las operaciones</h2>
 <p>Y ahora que tenemos todo creado, ya podemos probarlo con Postman:</p>
 <p>Por un lado creamos autores con:</p>
