@@ -1268,7 +1268,50 @@ Ahora podemos probar a modificar o añadir una nueva categoría desde la pantall
 
 Como ves, es bastante sencillo conectar server y client.
 
+##Depuración
 
+Una parte muy importante del desarrollo es tener la capacidad de depurar nuestro código, en este apartado vamos a explicar como se realiza `debug` en Front.
 
+Esta parte se puede realizar con nuestro navegador favorito, en este caso vamos a utilizar Chrome.
 
+El primer paso es abrir las herramientas del desarrollador del navegador presionando `F12`.
 
+![front1-debug1](../../assets/images/front1-debug1.png)
+
+En esta herramienta tenemos varias partes importantes:
+
+- Elements: Inspector de los elementos del DOM de nuestra aplicación que nos ayuda identificar el código generado.
+- Console: Consola donde podemos ver mensajes importantes que nos ayudan a identificar posibles problemas.
+- Source: El navegador de ficheros que componen nuestra aplicación.
+- Network: El registro de peticiones que realiza nuestra aplicación.
+
+Identificados los elementos importantes, vamos a depurar la operación de crear categoría.
+
+Para ello nos dirigimos a la pestaña de `Source`, en el árbol de carpetas nos dirigimos a la ruta donde está localizado el código de nuestra aplicación `webpack://src/app`.
+
+Dentro de esta carpeta esté localizado todo el código fuente de la aplicación, en nuestro caso vamos a localizar componente `category-edit.component` que crea una nueva categoría.
+
+Dentro del fichero ya podemos añadir puntos de ruptura (breakpoint), en nuestro caso queremos comprobar que el nombre introducido se captura bien y se envía al service correctamente.
+
+Colocamos el breakpoint en la línea de invocación del service (click sobre el número de la línea) y desde la interfaz creamos una nueva categoría.
+
+Hecho esto, podemos observar que a nivel de interfaz, la aplicación se detiene y aparece un panel de manejo de los puntos de interrupción:
+
+![front1-debug2](../../assets/images/front1-debug2.png)
+
+En cuanto a la herramienta del desarrollador nos lleva al punto exacto donde hemos añadido el breakpoint y se para en este punto ofreciéndonos la posibilidad de explorar el contenido de las variables del código:
+
+![front1-debug3](../../assets/images/front1-debug3.png)
+
+Aquí podemos comprobar que efectivamente la variable `category` tiene el valor que hemos introducido por pantalla y se propaga correctamente hacia el service.
+
+Para continuar con la ejecución basta con darle al botón de `play` del panel de manejo de interrupción o al que aparece dentro de la herramienta de desarrollo (parte superior derecha).
+
+Por último, vamos a revisar que la petición REST se ha realizado correctamente al backend, para ello nos dirigimos a la pestaña `Network` y comprobamos las peticiones realizadas:
+
+![front1-debug4](../../assets/images/front1-debug4.png)
+
+Aquí podemos observar el registro de todas las peticiones y haciendo click sobre una de ellas, obtenemos el detalle de esta.
+- Header: Información de las cabeceras enviadas (aquí podemos ver que se ha hecho un PUT a la ruta correcta).
+- Payload: El cuerpo de la petición (vemos el cuerpo del mensaje con el nombre enviado).
+- Preview: Respuesta de la petición normalizada (vemos la respuesta con el identificador creado para la nueva categoría).

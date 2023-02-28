@@ -20,3 +20,4 @@ Mención especial a las personas que han participado en el tutorial ya sea como 
 - Jaume Segarra ([@jaumesegarra](https://github.com/jaumesegarra))
 - Laura Medina ([@larulirea](https://github.com/larulirea))
 - Yolanda Ubeda
+- Pablo Jimenez ([@pajimene](https://github.com/pajimene))

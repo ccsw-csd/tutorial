@@ -27,8 +27,6 @@ Nuestra capa de servicio incluirá toda la lógica de negocio de nuestra aplicac
 
 Como su nombre indica esta capa representa los modelos de datos de nuestra aplicación. En nuestro caso, al usar un ODM, solo tendremos modelos de datos definidos según sus requisitos.
 
-
-
 ## Buenas prácticas
 
 ### Accesos entre capas
@@ -41,14 +39,14 @@ En base a la división por capas que hemos comentado arriba, y el resto de entid
     * Debemos seguir una coherencia entre todas las URL de las operaciones. Por ejemplo, si elegimos save para guardar, usemos esa palabra en todas las operaciones que sean de ese tipo. Evitad utilizar diferentes palabras save, guardar, persistir, actualizar para la misma acción.
 
 * Un `Servicio`
-    * NO puede llamar a objetos de la la capa Controlador.
+    * NO puede llamar a objetos de la capa Controlador.
     * NO debe llamar a Acceso a Datos que NO sean de su ámbito / competencia.
     * Si es necesario puede llamar a otros Servicios para recuperar cierta información que no sea de su ámbito / competencia.
     * Es un buen lugar para implementar la lógica de negocio.
 
 
-### Usar linters Prettier & ESLint
+### Usar linters Prettier & ESLint (Se recomienda encarecidamente)
 
 Un linter es una herramienta que nos ayuda a seguir las buenas prácticas o guías de estilo de nuestro código fuente. En este caso, para JavaScript, proveeremos de unos muy famosos.
-Una de las más famosas es la combinación de  **Angular app to ESLint with Prettier, AirBnB Styleguide**
+Una de las más famosas es la combinación de **Angular app to ESLint with Prettier, AirBnB Styleguide**
 Recordar que añadir este tipo de configuración es opcional, pero necesaria para tener un buen código de calidad.

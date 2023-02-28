@@ -44,10 +44,13 @@ Ahora en nuestro archivo `index.js` vamos a añadir lo siguiente justo después 
 === "index.js"
 ``` Javascript
 ...
-
 import categoryRouter from './src/routes/category.routes.js';
+...
 
 ...
+app.use(cors({
+    origin: '*'
+}));
 
 app.use(express.json());
 app.use('/category', categoryRouter);
@@ -401,3 +404,39 @@ De este modo no se realizarán las peticiones que no pasen las validaciones:
 ![Postman](../../assets/images/step1-nodejs10.png)
 
 Y con esto habremos terminado nuestro primer CRUD.
+
+##Depuración
+
+Una parte muy importante del desarrollo es tener la capacidad de depurar nuestro código, en este apartado vamos a explicar como se realiza `debug` en Backend.
+
+Esta parte se realiza con las herramientas incluidas dentro de nuestro IDE favorito, en este caso vamos a utilizar el Visual Estudio.
+
+Lo primero que debemos hacer es configurar el modo `Debug` de nuestro proyecto.
+
+Para ello nos dirigimos a la opción `Run and Debug` y creamos el fichero de launch necesario:
+
+![back1-debug1](../../assets/images/back2-debug1.png)
+
+Esto nos creará el fichero necesario y ya podremos arrancar la aplicación mediante esta herramienta presionando el botón `Launch Program` (seleccionamos tipo de aplicación Node y el script de arranque que será el que hemos utilizado en el desarrollo):
+
+![back1-debug1](../../assets/images/back2-debug2.png)
+
+Arrancada la aplicación de este modo, vamos a depurar la operación de crear categoría.
+
+Para ello vamos a abrir nuestro fichero donde tenemos la implementación del servicio de creación de la capa de la lógica de negocio `category.service.js`.
+
+Dentro del fichero ya podemos añadir puntos de ruptura (breakpoint), en nuestro caso queremos comprobar que el nombre introducido se recibe correctamente.
+
+Colocamos el breakpoint en la primera línea del método (click sobre el número de la línea) y desde la interfaz/postman creamos una nueva categoría.
+
+Hecho esto, podemos observar que a nivel de interfaz/postman, la petición se queda esperando y el IDE mostrará un panel de manejo de los puntos de interrupción:
+
+![back1-debug1](../../assets/images/back2-debug3.png)
+
+El IDE nos lleva al punto exacto donde hemos añadido el breakpoint y se para en este punto ofreciéndonos la posibilidad de explorar el contenido de las variables del código:
+
+![back1-debug1](../../assets/images/back2-debug4.png)
+
+Aquí podemos comprobar que efectivamente la variable `name` tiene el valor que hemos introducido por pantalla/postman.
+
+Para continuar con la ejecución basta con darle al botón de `play` del panel de manejo de los puntos de interrupción.

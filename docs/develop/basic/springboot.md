@@ -1153,3 +1153,35 @@ Resumiendo un poco los pasos que hemos seguido:
     * `Json` → Los datos que vienen y van del cliente al `Controller`.
     * `DTO` → Los datos se mueven dentro del `Controller` y sirven para invocar llamadas. También son los datos que devuelve un `Controller`.
     * `Entity` → Los datos que sirven para persistir y leer datos de una BBDD y que **NUNCA** deberían ir más allá del `Controller`.
+    
+##Depuración
+
+Una parte muy importante del desarrollo es tener la capacidad de depurar nuestro código, en este apartado vamos a explicar como se realiza `debug` en Backend.
+
+Esta parte se realiza con las herramientas incluidas dentro de nuestro IDE favorito, en este caso vamos a utilizar el Eclipse.
+
+Lo primero que debemos hacer es arrancar la aplicación en modo `Debug`:
+
+![back1-debug1](../../assets/images/back1-debug1.png)
+
+Arrancada la aplicación en este modo, vamos a depurar la operación de crear categoría.
+
+Para ello vamos a abrir nuestro fichero donde tenemos la implementación del servicio de creación de la capa de la lógica de negocio `CategoryServiceImpl`.
+
+Dentro del fichero ya podemos añadir puntos de ruptura (breakpoint), en nuestro caso queremos comprobar que el nombre introducido se recibe correctamente.
+
+Colocamos el breakpoint en la primera línea del método (click sobre el número de la línea) y desde la interfaz/postman creamos una nueva categoría.
+
+Hecho esto, podemos observar que a nivel de interfaz/postman, la petición se queda esperando y el IDE pasa modo `Debug` (la primera vez nos preguntará si queremos hacerlo, le decimos que si):
+
+![back1-debug1](../../assets/images/back1-debug2.png)
+
+El IDE nos lleva al punto exacto donde hemos añadido el breakpoint y se para en este punto ofreciéndonos la posibilidad de explorar el contenido de las variables del código:
+
+![back1-debug1](../../assets/images/back1-debug3.png)
+
+Aquí podemos comprobar que efectivamente el atributo `name` de la variable `dto` tiene el valor que hemos introducido por pantalla/postman.
+
+Para continuar con la ejecución basta con darle al botón de `play` de la barra de herramientas superior.
+
+Nota: para volver al modo `Java` de Eclipse, presionamos el botón que se sitúa a la derecha del modo `Debug` en el que ha entrado el IDE automáticamente.
