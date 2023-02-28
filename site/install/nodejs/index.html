@@ -1012,13 +1012,14 @@
 <p>También necesitaremos crear una cuenta de <a href="https://www.mongodb.com/atlas/database">MongoDB Atlas</a> para crear nuestra base de datos MongoDB en la nube.</p>
 <p>Accede a la <a href="https://www.mongodb.com/atlas/database">URL</a>, registrate grátis con cualquier cuenta de correo y elige el tipo de cuenta gratuita 😊:</p>
 <p><img alt="Registro MongoDB" src="../../assets/images/install-nodejs-mongodb.png" /></p>
-<p>Configura el cluster a tu gusto y ya tendrías una BBDD en cloud para hacer pruebas. Lo primero que se muestra es el dashboard que se verá algo similar a lo siguiente:</p>
+<p>Configura el cluster a tu gusto (selecciona la opción gratuita en el cloud que más te guste) y ya tendrías una BBDD en cloud para hacer pruebas. Lo primero que se muestra es el dashboard que se verá algo similar a lo siguiente:</p>
 <p><img alt="Dashboard" src="../../assets/images/install-nodejs-mongodb2.png" /></p>
 <p>A continuación, pulsamos en la opción <code>Database</code> del menú y, sobre el <code>Cluster0</code>, pulsamos también el botón <code>Connect</code>. Se nos abrirá el siguiente pop-up donde tendremos que elegir la opción <code>Connect your application</code>:</p>
 <p><img alt="Connect" src="../../assets/images/install-nodejs-mongodb3.png" /></p>
 <p>En el siguiente paso es donde se nos muestra la url que tendremos que utilizar en nuestra aplicación. La copiamos y guardamos para más tarde: </p>
 <p><img alt="Connect" src="../../assets/images/install-nodejs-mongodb4.png" /></p>
 <p>Pulsamos <code>Close</code> y la BBDD ya estaría creada.</p>
+<p><em>Nota: Al crear la base de datos te aprecerá un aviso para introducir tu IP en la whitelist, asegúrate no estar en la VPN cuando lo hagas, de lo contrario no tendrás conexión posteriormente.</em></p>
 <h3 id="herramientas-para-pruebas">Herramientas para pruebas</h3>
 <p>Para poder probar las operaciones de negocio que vamos a crear, lo mejor es utilizar una herramienta que permita realizar llamadas a API Rest. Para ello te propongo utilizar <a href="https://www.postman.com/">Postman</a>, en su versión web o en su versión desktop, cualquiera de las dos sirve.</p>
 <p>Con esta herramienta se puede generar peticiones GET, POST, PUT, DELETE contra el servidor y pasarle parámetros de forma muy sencilla y visual. Lo usaremos durante el tutorial.</p>
@@ -1050,20 +1051,22 @@ npm i dotenv
 npm i mongoose
 npm i mongoose-paginate-v2
 npm i normalize-mongoose
+npm i cors
 npm i nodemon --save-dev
 </code></pre></div>
 <p>También podríamos haber instalado todas a la vez en dos líneas: </p>
-<div class="highlight"><pre><span></span><code>npm i express express-validator dotenv  mongoose mongoose-paginate-v2 normalize-mongoose
-npm I nodemon --save-dev
+<div class="highlight"><pre><span></span><code>npm i express express-validator dotenv  mongoose mongoose-paginate-v2 normalize-mongoose cors
+npm i nodemon --save-dev
 </code></pre></div>
 <p>Las dependencias que acabamos de instalar son las siguientes: </p>
 <ul>
 <li>Express es un framework de Node que nos facilitara mucho la tarea a la hora de crear nuestra aplicación.</li>
 <li>Dotenv es una librería para usar variables de entorno.</li>
 <li>Mongoose es una librería ODM que nos ayudara a los accesos a BBDD.</li>
-<li>Nodemon y es una herramienta que nos ayuda reiniciando nuestro servidor cuando detecta un cambio en alguno de nuestros ficheros y así no tener que hacerlo manualmente.</li>
+<li>Nodemon es una herramienta que nos ayuda reiniciando nuestro servidor cuando detecta un cambio en alguno de nuestros ficheros y así no tener que hacerlo manualmente.</li>
+<li>Cors es una herramienta que nos ayuda a configurar el CORS de nuestra app para que posteriormente podemos conectarlo al front.</li>
 </ul>
-<p>Ahora podemos fijarnos en nuestro fichero <code>package.json</code> donde se habrán añadido dos nuevos parametros: <code>dependencies</code> y <code>devDependencies</code>. La diferencia está en que las <code>devDependencies</code> solo se utilizar en la fase de desarrollo de nuestro proyecto y las <code>dependencies</code> se utilizarán en todo momento.</p>
+<p>Ahora podemos fijarnos en nuestro fichero <code>package.json</code> donde se habrán añadido dos nuevos parámetros: <code>dependencies</code> y <code>devDependencies</code>. La diferencia está en que las <code>devDependencies</code> solo se utilizar en la fase de desarrollo de nuestro proyecto y las <code>dependencies</code> se utilizarán en todo momento.</p>
 <h3 id="configurar-la-bbdd">Configurar la BBDD</h3>
 <p>A partir de aquí ya podemos abrir <a href="https://code.visualstudio.com/">Visual Studio Code</a>, el IDE recomendado, y abrir la carpeta del proyecto para poder configurarlo y programarlo. Lo primero será configurar el acceso con la BBDD.</p>
 <p>Para ello vamos a crear en la raíz de nuestro proyecto una carpeta <code>config</code> dentro de la cual crearemos un archivo llamado <code>db.js</code>. Este archivo exportará una función que recibe una url de nuestra BBDD y la conectará con mongoose. El contenido de este archivo debe ser el siguiente:</p>
@@ -1092,7 +1095,7 @@ npm I nodemon --save-dev
 <div class="tabbed-block"></div>
 </div>
 </div>
-<div class="highlight"><pre><span></span><code><span class="na">MONGODB_URL</span><span class="o">=</span><span class="s">&#39;mongodb+srv://your_user:your_pass@cluster0.ndr2obp.mongodb.net/?retryWrites=true&amp;w=majority&#39;</span>
+<div class="highlight"><pre><span></span><code><span class="na">MONGODB_URL</span><span class="o">=</span><span class="s">&#39;mongodb+srv://&lt;user&gt;:&lt;pass&gt;@&lt;url&gt;.mongodb.net/?retryWrites=true&amp;w=majority&#39;</span>
 <span class="na">PORT</span><span class="o">=</span><span class="s">&#39;8080&#39;</span>
 </code></pre></div>
 <h2 id="arrancar-el-proyecto">Arrancar el proyecto</h2>
@@ -1103,6 +1106,7 @@ npm I nodemon --save-dev
 </div>
 </div>
 <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">express</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;express&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">cors</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;cors&#39;</span><span class="p">;</span>
 <span class="k">import</span><span class="w"> </span><span class="nx">connectDB</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;./config/db.js&#39;</span><span class="p">;</span>
 <span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">config</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;dotenv&#39;</span><span class="p">;</span>
 
@@ -1110,18 +1114,22 @@ npm I nodemon --save-dev
 <span class="nx">connectDB</span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">MONGODB_URL</span><span class="p">);</span>
 <span class="kd">const</span><span class="w"> </span><span class="nx">app</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">express</span><span class="p">();</span>
 
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">cors</span><span class="p">({</span>
+<span class="w">    </span><span class="nx">origin</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;*&#39;</span>
+<span class="p">}));</span>
+
 <span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">PORT</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Server running on port </span><span class="si">${</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">PORT</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
 <span class="p">});</span>
 </code></pre></div>
-<p>El funcionamiento de este código, resumiendo mucho, es el siguiente. Crea un servidor con express en el puerto <code>8080</code> y publica un endpoint de tipo <code>GET</code> para que cuando abramos el navegador y hagamos una petición a la URL <code>http://localhost:8080/</code> nos devuelva el texto programado en la response del método.</p>
+<p>El funcionamiento de este código, resumiendo mucho, es el siguiente. Configurar la base de datos, configurar el CORS para que posteriormente podamos realizar peticiones desde el front y crea un servidor con express en el puerto <code>8080</code>.</p>
 <p>Pero antes, para poder ejecutar nuestro servidor debemos modificar el fichero <code>package.json</code>, y añadir un script de arranque. Añadiremos la siguiente línea:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">&quot;dev&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;nodemon ./index.js&quot;</span>
 </code></pre></div>
 <p>Y ahora sí, desde la consola de comando ya podemos ejecutar el siguiente comando:</p>
 <div class="highlight"><pre><span></span><code>npm run dev
 </code></pre></div>
-<p>y ya podemos navegar a la URL <code>http://localhost:8080/</code> donde veremos la respuesta del servidor.</p>
+<p>y ya podremos ver en la consola como la aplicación ha arrancado correctamente con el mensaje que le hemos añadido.</p>
 
 
 
