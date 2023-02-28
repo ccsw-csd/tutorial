@@ -1184,4 +1184,4 @@ Aquí podemos comprobar que efectivamente el atributo `name` de la variable `dto
 
 Para continuar con la ejecución basta con darle al botón de `play` de la barra de herramientas superior.
 
-Nota: para volver al modo `Java` de Eclipse, presionamos el botón que se sitúa a la derecha del modo `Debug` en el que ha entrado el IDE automáticamente.
+Nota: para volver al modo `Java` de Eclipse, presionamos el botón que se sitúa a la izquierda del modo `Debug` en el que ha entrado el IDE automáticamente.

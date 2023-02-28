@@ -1312,6 +1312,7 @@ Por último, vamos a revisar que la petición REST se ha realizado correctamente
 ![front1-debug4](../../assets/images/front1-debug4.png)
 
 Aquí podemos observar el registro de todas las peticiones y haciendo click sobre una de ellas, obtenemos el detalle de esta.
+
 - Header: Información de las cabeceras enviadas (aquí podemos ver que se ha hecho un PUT a la ruta correcta).
 - Payload: El cuerpo de la petición (vemos el cuerpo del mensaje con el nombre enviado).
 - Preview: Respuesta de la petición normalizada (vemos la respuesta con el identificador creado para la nueva categoría).
