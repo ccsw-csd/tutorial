@@ -383,7 +383,7 @@ Ahora vamos a implementar el detalle de cada uno de los items que forman el list
             <form>
                 <mat-form-field>
                     <mat-label>Título del juego</mat-label>
-                    <input type="text" matInput placeholder="Título del juego" [(ngModel)]="filterName" name="title">
+                    <input type="text" matInput placeholder="Título del juego" [(ngModel)]="filterTitle" name="title">
                 </mat-form-field>
 
                 <mat-form-field>
