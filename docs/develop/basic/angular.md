@@ -814,8 +814,8 @@ Vamos a implementar funcionalidad sobre el icono `editar`, tendremos que modific
             <ng-container matColumnDef="action">
                 <mat-header-cell *matHeaderCellDef></mat-header-cell>
                 <mat-cell *matCellDef="let element">
-                    <button mat-icon-button color="primary" (click)="editCategory(element)">
-                        <mat-icon>edit</mat-icon>
+                    <button mat-icon-button color="primary">
+                        <mat-icon (click)="editCategory(element)">edit</mat-icon>
                     </button>
                     <button mat-icon-button color="accent"><mat-icon>clear</mat-icon></button>
                 </mat-cell>
@@ -1058,11 +1058,11 @@ Ya por último, una vez tenemos el componente genérico de dialogo, vamos a util
         <ng-container matColumnDef="action">
             <mat-header-cell *matHeaderCellDef></mat-header-cell>
             <mat-cell *matCellDef="let element">
-                <button mat-icon-button color="primary" (click)="editCategory(element)">
-                    <mat-icon>edit</mat-icon>
+                <button mat-icon-button color="primary">
+                    <mat-icon (click)="editCategory(element)">edit</mat-icon>
                 </button>
-                <button mat-icon-button color="accent" (click)="deleteCategory(element)">
-                    <mat-icon>clear</mat-icon>
+                <button mat-icon-button color="accent">
+                    <mat-icon (click)="deleteCategory(element)">clear</mat-icon>
                 </button>
             </mat-cell>
         </ng-container>
