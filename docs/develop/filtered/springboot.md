@@ -711,7 +711,7 @@ Siguiente paso, la capa de lógica de negocio, es decir el `Service`, que por ta
 
 
 === "GameServiceImpl.java"
-    ``` Java hl_lines="36 53"
+    ``` Java hl_lines="30 47"
     package com.ccsw.tutorial.game;
 
     import com.ccsw.tutorial.game.model.Game;

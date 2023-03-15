@@ -13,7 +13,7 @@
     
     
       
-        <title>🟢 Springboot - Tutorial Frontend - Backend</title>
+        <title>🟢 Spring Boot - Tutorial Frontend - Backend</title>
       
     
     
@@ -94,7 +94,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              🟢 Springboot
+              🟢 Spring Boot
             
           </span>
         </div>
@@ -274,7 +274,7 @@
   
     <li class="md-nav__item">
       <a href="../../../install/springboot/" class="md-nav__link">
-        🟢 Springboot
+        🟢 Spring Boot
       </a>
     </li>
   
@@ -358,7 +358,7 @@
   
     <li class="md-nav__item">
       <a href="../../../cleancode/springboot/" class="md-nav__link">
-        🟢 Springboot
+        🟢 Spring Boot
       </a>
     </li>
   
@@ -442,7 +442,7 @@
   
     <li class="md-nav__item">
       <a href="../../basic/springboot/" class="md-nav__link">
-        🟢 Springboot
+        🟢 Spring Boot
       </a>
     </li>
   
@@ -526,7 +526,7 @@
   
     <li class="md-nav__item">
       <a href="../../paginated/springboot/" class="md-nav__link">
-        🟢 Springboot
+        🟢 Spring Boot
       </a>
     </li>
   
@@ -621,12 +621,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          🟢 Springboot
+          🟢 Spring Boot
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        🟢 Springboot
+        🟢 Spring Boot
       </a>
       
         
@@ -1674,14 +1674,14 @@
     <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Game</span><span class="o">&gt;</span> <span class="nf">find</span><span class="p">(</span><span class="n">String</span> <span class="n">title</span><span class="p">,</span> <span class="n">Long</span> <span class="n">idCategory</span><span class="p">)</span> <span class="p">{</span>
 
-        <span class="k">return</span> <span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Game</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">this</span><span class="p">.</span><span class="na">gameRepository</span><span class="p">.</span><span class="na">findAll</span><span class="p">();</span>
-    <span class="p">}</span>
+<span class="hll">        <span class="k">return</span> <span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Game</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">this</span><span class="p">.</span><span class="na">gameRepository</span><span class="p">.</span><span class="na">findAll</span><span class="p">();</span>
+</span>    <span class="p">}</span>
 
     <span class="cm">/**</span>
 <span class="cm">     * {@inheritDoc}</span>
 <span class="cm">     */</span>
-<span class="hll">    <span class="nd">@Override</span>
-</span>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">save</span><span class="p">(</span><span class="n">Long</span> <span class="n">id</span><span class="p">,</span> <span class="n">GameDto</span> <span class="n">dto</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">save</span><span class="p">(</span><span class="n">Long</span> <span class="n">id</span><span class="p">,</span> <span class="n">GameDto</span> <span class="n">dto</span><span class="p">)</span> <span class="p">{</span>
 
         <span class="n">Game</span> <span class="n">game</span><span class="p">;</span>
 
@@ -1691,8 +1691,8 @@
             <span class="n">game</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="na">gameRepository</span><span class="p">.</span><span class="na">findById</span><span class="p">(</span><span class="n">id</span><span class="p">).</span><span class="na">orElse</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
         <span class="p">}</span>
 
-        <span class="n">BeanUtils</span><span class="p">.</span><span class="na">copyProperties</span><span class="p">(</span><span class="n">dto</span><span class="p">,</span> <span class="n">game</span><span class="p">,</span> <span class="s">&quot;id&quot;</span><span class="p">,</span> <span class="s">&quot;author&quot;</span><span class="p">,</span> <span class="s">&quot;category&quot;</span><span class="p">);</span>
-
+<span class="hll">        <span class="n">BeanUtils</span><span class="p">.</span><span class="na">copyProperties</span><span class="p">(</span><span class="n">dto</span><span class="p">,</span> <span class="n">game</span><span class="p">,</span> <span class="s">&quot;id&quot;</span><span class="p">,</span> <span class="s">&quot;author&quot;</span><span class="p">,</span> <span class="s">&quot;category&quot;</span><span class="p">);</span>
+</span>
         <span class="k">this</span><span class="p">.</span><span class="na">gameRepository</span><span class="p">.</span><span class="na">save</span><span class="p">(</span><span class="n">game</span><span class="p">);</span>
     <span class="p">}</span>
 

@@ -1,4 +1,4 @@
-# Entorno de desarrollo - Springboot
+# Entorno de desarrollo - Spring Boot
 
 ## Instalación de herramientas
 Las herramientas básicas que vamos a utilizar para esta tecnología son:

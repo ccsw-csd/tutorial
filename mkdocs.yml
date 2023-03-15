@@ -6,23 +6,23 @@ nav:
   - Contexto de la aplicación: usecases.md
   - Entorno de desarrollo:
     - 🔵 Angular: install/angular.md
-    - 🟢 Springboot: install/springboot.md
+    - 🟢 Spring Boot: install/springboot.md
     - 🟢 Nodejs: install/nodejs.md
   - Estructura y buenas prácticas:
     - 🔵 Angular: cleancode/angular.md
-    - 🟢 Springboot: cleancode/springboot.md
+    - 🟢 Spring Boot: cleancode/springboot.md
     - 🟢 Nodejs: cleancode/nodejs.md
   - "Code: Listado simple":
     - 🔵 Angular: develop/basic/angular.md
-    - 🟢 Springboot: develop/basic/springboot.md
+    - 🟢 Spring Boot: develop/basic/springboot.md
     - 🟢 Nodejs: develop/basic/nodejs.md
   - "Code: Listado paginado":
     - 🔵 Angular: develop/paginated/angular.md
-    - 🟢 Springboot: develop/paginated/springboot.md
+    - 🟢 Spring Boot: develop/paginated/springboot.md
     - 🟢 Nodejs: develop/paginated/nodejs.md
   - "Code: Listado filtrado":    
     - 🔵 Angular: develop/filtered/angular.md
-    - 🟢 Springboot: develop/filtered/springboot.md
+    - 🟢 Spring Boot: develop/filtered/springboot.md
     - 🟢 Nodejs: develop/filtered/nodejs.md
   - Ahora hazlo tu!: exercise.md
   - "Anexos": 

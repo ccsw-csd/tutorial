@@ -1,4 +1,4 @@
-# Estructura y Buenas prácticas - Springboot
+# Estructura y Buenas prácticas - Spring Boot
 
 ## Estructura y funcionamiento
 
