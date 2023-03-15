@@ -1,4 +1,4 @@
-# Listado filtrado - Springboot
+# Listado filtrado - Spring Boot
 
 En este punto ya tenemos dos listados, uno básico y otro paginado. Ahora vamos a implementar un listado un poco diferente, este listado va a tener filtros de búsqueda.
 
@@ -8,290 +8,253 @@ Como ya conocemos como se debe desarrollar, en este ejemplo vamos a ir más ráp
 
 Lo primero que vamos a hacer es crear los modelos para trabajar con BBDD y con peticiones hacia el front. Además, también tenemos que añadir datos al script de inicialización de BBDD.
 
-=== "schema.sql"
-    ``` SQL hl_lines="18 20-26 28 29"
-    DROP TABLE IF EXISTS CATEGORY;
-
-    CREATE TABLE CATEGORY (
-        id BIGINT IDENTITY NOT NULL PRIMARY KEY,
-        name VARCHAR(250) NOT NULL
-    );
-
-
-    DROP TABLE IF EXISTS AUTHOR;
-
-    CREATE TABLE AUTHOR (
-        id BIGINT IDENTITY NOT NULL PRIMARY KEY,
-        name VARCHAR(400) NOT NULL,
-        nationality VARCHAR(250) NOT NULL
-    );
-
-
-    DROP TABLE IF EXISTS GAME;
-
-    CREATE TABLE GAME (
-        id BIGINT IDENTITY NOT NULL PRIMARY KEY,
-        title VARCHAR(250) NOT NULL,
-        age VARCHAR(3) NOT NULL,
-        category_id BIGINT DEFAULT NULL,
-        author_id BIGINT DEFAULT NULL
-    );
-
-    ALTER TABLE GAME ADD FOREIGN KEY (category_id) REFERENCES CATEGORY(id);
-    ALTER TABLE GAME ADD FOREIGN KEY (author_id) REFERENCES AUTHOR(id);
-    ```
 === "data.sql"
     ``` SQL hl_lines="12 13 14 15 16 17 18"
-    INSERT INTO CATEGORY(id, name) VALUES (1, 'Eurogames');
-    INSERT INTO CATEGORY(id, name) VALUES (2, 'Ameritrash');
-    INSERT INTO CATEGORY(id, name) VALUES (3, 'Familiar');
-
-    INSERT INTO AUTHOR(id, name, nationality) VALUES (1, 'Alan R. Moon', 'US');
-    INSERT INTO AUTHOR(id, name, nationality) VALUES (2, 'Vital Lacerda', 'PT');
-    INSERT INTO AUTHOR(id, name, nationality) VALUES (3, 'Simone Luciani', 'IT');
-    INSERT INTO AUTHOR(id, name, nationality) VALUES (4, 'Perepau Llistosella', 'ES');
-    INSERT INTO AUTHOR(id, name, nationality) VALUES (5, 'Michael Kiesling', 'DE');
-    INSERT INTO AUTHOR(id, name, nationality) VALUES (6, 'Phil Walker-Harding', 'US');
-
-    INSERT INTO GAME(id, title, age, category_id, author_id) VALUES (1, 'On Mars', '14', 1, 2);
-    INSERT INTO GAME(id, title, age, category_id, author_id) VALUES (2, 'Aventureros al tren', '8', 3, 1);
-    INSERT INTO GAME(id, title, age, category_id, author_id) VALUES (3, '1920: Wall Street', '12', 1, 4);
-    INSERT INTO GAME(id, title, age, category_id, author_id) VALUES (4, 'Barrage', '14', 1, 3);
-    INSERT INTO GAME(id, title, age, category_id, author_id) VALUES (5, 'Los viajes de Marco Polo', '12', 1, 3);
-    INSERT INTO GAME(id, title, age, category_id, author_id) VALUES (6, 'Azul', '8', 3, 5);
+    INSERT INTO category(name) VALUES ('Eurogames');
+    INSERT INTO category(name) VALUES ('Ameritrash');
+    INSERT INTO category(name) VALUES ('Familiar');
+    
+    INSERT INTO author(name, nationality) VALUES ('Alan R. Moon', 'US');
+    INSERT INTO author(name, nationality) VALUES ('Vital Lacerda', 'PT');
+    INSERT INTO author(name, nationality) VALUES ('Simone Luciani', 'IT');
+    INSERT INTO author(name, nationality) VALUES ('Perepau Llistosella', 'ES');
+    INSERT INTO author(name, nationality) VALUES ('Michael Kiesling', 'DE');
+    INSERT INTO author(name, nationality) VALUES ('Phil Walker-Harding', 'US');
+    
+    INSERT INTO game(title, age, category_id, author_id) VALUES ('On Mars', '14', 1, 2);
+    INSERT INTO game(title, age, category_id, author_id) VALUES ('Aventureros al tren', '8', 3, 1);
+    INSERT INTO game(title, age, category_id, author_id) VALUES ('1920: Wall Street', '12', 1, 4);
+    INSERT INTO game(title, age, category_id, author_id) VALUES ('Barrage', '14', 1, 3);
+    INSERT INTO game(title, age, category_id, author_id) VALUES ('Los viajes de Marco Polo', '12', 1, 3);
+    INSERT INTO game(title, age, category_id, author_id) VALUES ('Azul', '8', 3, 5);
     ```
 === "Game.java"
     ``` Java
     package com.ccsw.tutorial.game.model;
-
-    import javax.persistence.Column;
-    import javax.persistence.Entity;
-    import javax.persistence.GeneratedValue;
-    import javax.persistence.GenerationType;
-    import javax.persistence.Id;
-    import javax.persistence.JoinColumn;
-    import javax.persistence.ManyToOne;
-    import javax.persistence.Table;
-
+    
     import com.ccsw.tutorial.author.model.Author;
     import com.ccsw.tutorial.category.model.Category;
-
+    
+    import jakarta.persistence.*;
+    
+    
     /**
-    * @author ccsw
-    */
+     * @author ccsw
+     *
+     */
     @Entity
-    @Table(name = "Game")
+    @Table(name = "game")
     public class Game {
-
+    
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Column(name = "id", nullable = false)
         private Long id;
-
+    
         @Column(name = "title", nullable = false)
         private String title;
-
+    
         @Column(name = "age", nullable = false)
         private String age;
-
+    
         @ManyToOne
         @JoinColumn(name = "category_id", nullable = false)
         private Category category;
-
+    
         @ManyToOne
         @JoinColumn(name = "author_id", nullable = false)
         private Author author;
-
+    
         /**
-        * @return id
-        */
+         * @return id
+         */
         public Long getId() {
-
+    
             return this.id;
         }
-
+    
         /**
-        * @param id new value of {@link #getId}.
-        */
+         * @param id new value of {@link #getId}.
+         */
         public void setId(Long id) {
-
+    
             this.id = id;
         }
-
+    
         /**
-        * @return title
-        */
+         * @return title
+         */
         public String getTitle() {
-
+    
             return this.title;
         }
-
+    
         /**
-        * @param title new value of {@link #getTitle}.
-        */
+         * @param title new value of {@link #getTitle}.
+         */
         public void setTitle(String title) {
-
+    
             this.title = title;
         }
-
+    
         /**
-        * @return age
-        */
+         * @return age
+         */
         public String getAge() {
-
+    
             return this.age;
         }
-
+    
         /**
-        * @param age new value of {@link #getAge}.
-        */
+         * @param age new value of {@link #getAge}.
+         */
         public void setAge(String age) {
-
+    
             this.age = age;
         }
-
+    
         /**
-        * @return category
-        */
+         * @return category
+         */
         public Category getCategory() {
-
+    
             return this.category;
         }
-
+    
         /**
-        * @param category new value of {@link #getCategory}.
-        */
+         * @param category new value of {@link #getCategory}.
+         */
         public void setCategory(Category category) {
-
+    
             this.category = category;
         }
-
+    
         /**
-        * @return author
-        */
+         * @return author
+         */
         public Author getAuthor() {
-
+    
             return this.author;
         }
-
+    
         /**
-        * @param author new value of {@link #getAuthor}.
-        */
+         * @param author new value of {@link #getAuthor}.
+         */
         public void setAuthor(Author author) {
-
+    
             this.author = author;
         }
-
+    
     }
     ```
 === "GameDto.java"
     ``` Java
     package com.ccsw.tutorial.game.model;
-
+    
     import com.ccsw.tutorial.author.model.AuthorDto;
     import com.ccsw.tutorial.category.model.CategoryDto;
-
+    
     /**
-    * @author ccsw
-    */
+     * @author ccsw
+     *
+     */
     public class GameDto {
-
+    
         private Long id;
-
+    
         private String title;
-
+    
         private String age;
-
+    
         private CategoryDto category;
-
+    
         private AuthorDto author;
-
+    
         /**
-        * @return id
-        */
+         * @return id
+         */
         public Long getId() {
-
+    
             return this.id;
         }
-
+    
         /**
-        * @param id new value of {@link #getId}.
-        */
+         * @param id new value of {@link #getId}.
+         */
         public void setId(Long id) {
-
+    
             this.id = id;
         }
-
+    
         /**
-        * @return title
-        */
+         * @return title
+         */
         public String getTitle() {
-
+    
             return this.title;
         }
-
+    
         /**
-        * @param title new value of {@link #getTitle}.
-        */
+         * @param title new value of {@link #getTitle}.
+         */
         public void setTitle(String title) {
-
+    
             this.title = title;
         }
-
+    
         /**
-        * @return age
-        */
+         * @return age
+         */
         public String getAge() {
-
+    
             return this.age;
         }
-
+    
         /**
-        * @param age new value of {@link #getAge}.
-        */
+         * @param age new value of {@link #getAge}.
+         */
         public void setAge(String age) {
-
+    
             this.age = age;
         }
-
+    
         /**
-        * @return category
-        */
+         * @return category
+         */
         public CategoryDto getCategory() {
-
+    
             return this.category;
         }
-
+    
         /**
-        * @param category new value of {@link #getCategory}.
-        */
+         * @param category new value of {@link #getCategory}.
+         */
         public void setCategory(CategoryDto category) {
-
+    
             this.category = category;
         }
-
+    
         /**
-        * @return author
-        */
+         * @return author
+         */
         public AuthorDto getAuthor() {
-
+    
             return this.author;
         }
-
+    
         /**
-        * @param author new value of {@link #getAuthor}.
-        */
+         * @param author new value of {@link #getAuthor}.
+         */
         public void setAuthor(AuthorDto author) {
-
+    
             this.author = author;
         }
-
+    
     }
     ```
 
 !!! note "Relaciones anidadas"
     Fíjate que tanto la `Entity` como el `Dto` tienen relaciones con `Author` y `Category`. Gracias a Spring JPA se pueden resolver de esta forma y tener toda la información de las relaciones hijas dentro del objeto padre. Muy importante recordar que *en el mundo entity* las relaciones serán con objetos `Entity` mientras que *en el mundo dto* las relaciones deben ser siempre con objetos `Dto`. La utilidad beanMapper ya hará las conversiones necesarias, siempre que tengan el mismo nombre de propiedades.
-
 
 
 ## TDD - Pruebas
@@ -325,24 +288,52 @@ También crearemos una clase `GameController` dentro del package de `com.ccsw.tu
 === "GameController.java"
     ``` Java
     package com.ccsw.tutorial.game;
-
-    import java.util.List;
-
-    import org.springframework.web.bind.annotation.RestController;
-
+    
+    import com.ccsw.tutorial.game.model.Game;
     import com.ccsw.tutorial.game.model.GameDto;
-
+    import io.swagger.v3.oas.annotations.Operation;
+    import io.swagger.v3.oas.annotations.tags.Tag;
+    import org.springframework.web.bind.annotation.*;
+    
+    import java.util.List;
+    
+    /**
+     * @author ccsw
+     *
+     */
+    @Tag(name = "Game", description = "API of Game")
+    @RequestMapping(value = "/game")
     @RestController
+    @CrossOrigin(origins = "*")
     public class GameController {
-
-        public List<GameDto> find(String title, Long idCategory) {
+    
+        /**
+         * Método para recuperar una lista de {@link Game}
+         *
+         * @param title título del juego
+         * @param idCategory PK de la categoría
+         * @return {@link List} de {@link GameDto}
+         */
+        @Operation(summary = "Find", description = "Method that return a filtered list of Games")
+        @RequestMapping(path = "", method = RequestMethod.GET)
+        public List<GameDto> find(@RequestParam(value = "title", required = false) String title,
+                                  @RequestParam(value = "idCategory", required = false) Long idCategory) {
+    
             return null;
         }
-
-        public void save(Long id, GameDto dto) {
+    
+        /**
+         * Método para crear o actualizar un {@link Game}
+         *
+         * @param id PK de la entidad
+         * @param dto datos de la entidad
+         */
+        @Operation(summary = "Save or Update", description = "Method that saves or updates a Game")
+        @RequestMapping(path = { "", "/{id}" }, method = RequestMethod.PUT)
+        public void save(@PathVariable(name = "id", required = false) Long id, @RequestBody GameDto dto) {
 
         }
-
+    
     }
     ```
 === "GameIT.java"
@@ -356,7 +347,7 @@ También crearemos una clase `GameController` dentro del package de `com.ccsw.tu
     import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.boot.test.context.SpringBootTest;
     import org.springframework.boot.test.web.client.TestRestTemplate;
-    import org.springframework.boot.web.server.LocalServerPort;
+    import org.springframework.boot.test.web.server.LocalServerPort;
     import org.springframework.core.ParameterizedTypeReference;
     import org.springframework.http.HttpEntity;
     import org.springframework.http.HttpMethod;
@@ -369,14 +360,15 @@ También crearemos una clase `GameController` dentro del package de `com.ccsw.tu
     import java.util.List;
     import java.util.Map;
     
-    import static org.junit.jupiter.api.Assertions.*;
+    import static org.junit.jupiter.api.Assertions.assertEquals;
+    import static org.junit.jupiter.api.Assertions.assertNotNull;
     
     @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
     @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
     public class GameIT {
     
         public static final String LOCALHOST = "http://localhost:";
-        public static final String SERVICE_PATH = "/game/";
+        public static final String SERVICE_PATH = "/game";
         
         public static final Long EXISTS_GAME_ID = 1L;
         public static final Long NOT_EXISTS_GAME_ID = 0L;
@@ -398,11 +390,11 @@ También crearemos una clase `GameController` dentro del package de `com.ccsw.tu
         ParameterizedTypeReference<List<GameDto>> responseType = new ParameterizedTypeReference<List<GameDto>>(){};
         
         private String getUrlWithParams(){
-            return UriComponentsBuilder.fromHttpUrl(LOCALHOST + port + SERVICE_PATH)
-            .queryParam(TITLE_PARAM, "{" + TITLE_PARAM +"}")
-            .queryParam(CATEGORY_ID_PARAM, "{" + CATEGORY_ID_PARAM +"}")
-            .encode()
-            .toUriString();
+        return UriComponentsBuilder.fromHttpUrl(LOCALHOST + port + SERVICE_PATH)
+        .queryParam(TITLE_PARAM, "{" + TITLE_PARAM +"}")
+        .queryParam(CATEGORY_ID_PARAM, "{" + CATEGORY_ID_PARAM +"}")
+        .encode()
+        .toUriString();
         }
         
         @Test
@@ -579,7 +571,7 @@ También crearemos una clase `GameController` dentro del package de `com.ccsw.tu
               assertNotNull(response);
               assertEquals(0, response.getBody().size());
         
-              restTemplate.exchange(LOCALHOST + port + SERVICE_PATH + EXISTS_GAME_ID, HttpMethod.PUT, new HttpEntity<>(dto), Void.class);
+              restTemplate.exchange(LOCALHOST + port + SERVICE_PATH + "/" + EXISTS_GAME_ID, HttpMethod.PUT, new HttpEntity<>(dto), Void.class);
         
               response = restTemplate.exchange(getUrlWithParams(), HttpMethod.GET, null, responseType, params);
         
@@ -594,7 +586,7 @@ También crearemos una clase `GameController` dentro del package de `com.ccsw.tu
               GameDto dto = new GameDto();
               dto.setTitle(NEW_TITLE);
         
-              ResponseEntity<?> response = restTemplate.exchange(LOCALHOST + port + SERVICE_PATH + NOT_EXISTS_GAME_ID, HttpMethod.PUT, new HttpEntity<>(dto), Void.class);
+              ResponseEntity<?> response = restTemplate.exchange(LOCALHOST + port + SERVICE_PATH + "/" + NOT_EXISTS_GAME_ID, HttpMethod.PUT, new HttpEntity<>(dto), Void.class);
         
               assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
         }
@@ -603,7 +595,7 @@ También crearemos una clase `GameController` dentro del package de `com.ccsw.tu
     ```
 
 !!! tip "Búsquedas en BBDD"
-    Siempre deberíamos buscar a los hijos por primary keys, nunca hay que hacerlo por una descripción libre ya que el usuario podría teclear el mismo nombre de diferentes formas y no habría manera de buscar correctamente el resultado. Así que siempre que haya un dropdown, se debe filtrar por su ID.
+    Siempre deberíamos buscar a los hijos por primary keys, nunca hay que hacerlo por una descripción libre, ya que el usuario podría teclear el mismo nombre de diferentes formas y no habría manera de buscar correctamente el resultado. Así que siempre que haya un dropdown, se debe filtrar por su ID.
 
 
 Si ahora ejecutas los jUnits, verás que en este caso hemos construido 10 pruebas, para cubrir los casos básicos del `Controller`, y todas ellas fallan la ejecución. Vamos a seguir implementando el resto de capas para hacer que los test funcionen.
@@ -615,82 +607,98 @@ De nuevo para poder compilar esta capa, nos hace falta delegar sus operaciones d
 === "GameService.java"
     ``` Java
     package com.ccsw.tutorial.game;
-
-    import java.util.List;
-
+    
     import com.ccsw.tutorial.game.model.Game;
     import com.ccsw.tutorial.game.model.GameDto;
-
+    
+    import java.util.List;
+    
     /**
-    * @author ccsw
-    */
+     * @author ccsw
+     *
+     */
     public interface GameService {
-
+    
         /**
-        * Recupera los juegos filtrando opcionalmente por título y/o categoría
-        * @param title
-        * @param idCategory
-        * @return
-        */
+         * Recupera los juegos filtrando opcionalmente por título y/o categoría
+         *
+         * @param title título del juego
+         * @param idCategory PK de la categoría
+         * @return {@link List} de {@link Game}
+         */
         List<Game> find(String title, Long idCategory);
-
+    
         /**
-        * Guarda o modifica un juego, dependiendo de si el id está o no informado
-        * @param id
-        * @param dto
-        */
+         * Guarda o modifica un juego, dependiendo de si el identificador está o no informado
+         *
+         * @param id PK de la entidad
+         * @param dto datos de la entidad
+         */
         void save(Long id, GameDto dto);
-
+    
     }
     ```
 === "GameController.java"
-    ``` Java hl_lines="21-23 26-27 29-30 32-39 41-45"
+    ``` Java hl_lines="24-25 27-28 42-44 57"
     package com.ccsw.tutorial.game;
-
-    import java.util.List;
-
-    import org.springframework.beans.factory.annotation.Autowired;
-    import org.springframework.web.bind.annotation.CrossOrigin;
-    import org.springframework.web.bind.annotation.PathVariable;
-    import org.springframework.web.bind.annotation.RequestBody;
-    import org.springframework.web.bind.annotation.RequestMapping;
-    import org.springframework.web.bind.annotation.RequestMethod;
-    import org.springframework.web.bind.annotation.RequestParam;
-    import org.springframework.web.bind.annotation.RestController;
-
+    
     import com.ccsw.tutorial.game.model.Game;
     import com.ccsw.tutorial.game.model.GameDto;
-    import com.devonfw.module.beanmapping.common.api.BeanMapper;
-
+    import io.swagger.v3.oas.annotations.Operation;
+    import io.swagger.v3.oas.annotations.tags.Tag;
+    import org.dozer.DozerBeanMapper;
+    import org.springframework.beans.factory.annotation.Autowired;
+    import org.springframework.web.bind.annotation.*;
+    
+    import java.util.List;
+    import java.util.stream.Collectors;
+    
     /**
-    * @author ccsw
-    */
+     * @author ccsw
+     *
+     */
+    @Tag(name = "Game", description = "API of Game")
     @RequestMapping(value = "/game")
     @RestController
     @CrossOrigin(origins = "*")
     public class GameController {
-
+    
         @Autowired
         GameService gameService;
-
+    
         @Autowired
-        BeanMapper beanMapper;
-
+        DozerBeanMapper mapper;
+    
+        /**
+         * Método para recuperar una lista de {@link Game}
+         *
+         * @param title título del juego
+         * @param idCategory PK de la categoría
+         * @return {@link List} de {@link GameDto}
+         */
+        @Operation(summary = "Find", description = "Method that return a filtered list of Games")
         @RequestMapping(path = "", method = RequestMethod.GET)
         public List<GameDto> find(@RequestParam(value = "title", required = false) String title,
-                @RequestParam(value = "idCategory", required = false) Long idCategory) {
-
+                                  @RequestParam(value = "idCategory", required = false) Long idCategory) {
+    
             List<Game> games = gameService.find(title, idCategory);
-
-            return beanMapper.mapList(games, GameDto.class);
+    
+            return games.stream().map(e -> mapper.map(e, GameDto.class)).collect(Collectors.toList());
         }
-
+    
+        /**
+         * Método para crear o actualizar un {@link Game}
+         *
+         * @param id PK de la entidad
+         * @param dto datos de la entidad
+         */
+        @Operation(summary = "Save or Update", description = "Method that saves or updates a Game")
         @RequestMapping(path = { "", "/{id}" }, method = RequestMethod.PUT)
         public void save(@PathVariable(name = "id", required = false) Long id, @RequestBody GameDto dto) {
-
+    
             gameService.save(id, dto);
         }
-
+    
     }
     ```
 
@@ -703,73 +711,73 @@ Siguiente paso, la capa de lógica de negocio, es decir el `Service`, que por ta
 
 
 === "GameServiceImpl.java"
-    ``` Java hl_lines="30 46"
+    ``` Java hl_lines="36 53"
     package com.ccsw.tutorial.game;
-
-    import java.util.List;
-
-    import javax.transaction.Transactional;
-
-    import org.springframework.beans.BeanUtils;
-    import org.springframework.beans.factory.annotation.Autowired;
-    import org.springframework.stereotype.Service;
 
     import com.ccsw.tutorial.game.model.Game;
     import com.ccsw.tutorial.game.model.GameDto;
-
+    import jakarta.transaction.Transactional;
+    import org.springframework.beans.BeanUtils;
+    import org.springframework.beans.factory.annotation.Autowired;
+    import org.springframework.stereotype.Service;
+    
+    
+    import java.util.List;
+    
     /**
-    * @author ccsw
-    */
+     * @author ccsw
+     *
+     */
     @Service
     @Transactional
     public class GameServiceImpl implements GameService {
-
+    
         @Autowired
         GameRepository gameRepository;
-
+    
         /**
-        * {@inheritDoc}
-        */
+         * {@inheritDoc}
+         */
         @Override
-        public List<Game> find(String title, Long category) {
-
-            return this.gameRepository.find(title, category);
+        public List<Game> find(String title, Long idCategory) {
+    
+            return (List<Game>) this.gameRepository.findAll();
         }
-
+    
         /**
-        * {@inheritDoc}
-        */
+         * {@inheritDoc}
+         */
         @Override
         public void save(Long id, GameDto dto) {
-
-            Game game = null;
-
-            if (id == null)
+    
+            Game game;
+    
+            if (id == null) {
                 game = new Game();
-            else
+            } else {
                 game = this.gameRepository.findById(id).orElse(null);
-
+            }
+    
             BeanUtils.copyProperties(dto, game, "id", "author", "category");
-
+    
             this.gameRepository.save(game);
         }
-
+    
     }
     ```
 === "GameRepository.java"
     ``` Java
     package com.ccsw.tutorial.game;
-
-    import java.util.List;
-
-    import org.springframework.data.repository.CrudRepository;
-
+    
     import com.ccsw.tutorial.game.model.Game;
-
+    import org.springframework.data.repository.CrudRepository;
+    
+    /**
+     * @author ccsw
+     *
+     */
     public interface GameRepository extends CrudRepository<Game, Long> {
-
-        List<Game> find(String title, Long category);
-
+    
     }
     ```
 
@@ -777,184 +785,192 @@ Este servicio tiene dos peculiaridades, remarcadas en amarillo en la clase anter
 
 La segunda peculiaridad es que de cliente nos está llegando un `GameDto`, que internamente tiene un `AuthorDto` y un `CategoryDto`, pero nosotros lo tenemos que traducir a entidades de BBDD. No sirve con copiar las propiedades tal cual, ya que entonces Spring lo que hará será crear un objeto nuevo y persistir ese objeto nuevo de `Author` y de `Category`. Además, de cliente generalmente tan solo nos llega el ID de esos objetos hijo, y no el resto de información de la entidad. Por esos motivos lo hemos *ignorado* del copyProperties.
 
-Pero de alguna forma tendremos que setearle esos valores a la entidad `Game`. Si conocemos sus ID que es lo que generalmente llega, podemos recuperar esos objetos de BBDD y setearlos en el objeto `Game`. Si recuerdas las reglas básicas, un `Repository` debe pertenecer a un solo `Service`, por lo que en lugar de llamar a métodos de los `AuthorRepository` y `CategoryRepository` desde nuestro `GameServiceImpl`, debemos llamar a métodos expuestos en `AuthorService` y `CategoryService`, que son los que gestionan sus repositorios. Para ello necesitaremos crear esos métodos get en los otros `Services`. 
+Pero de alguna forma tendremos que asignarle esos valores a la entidad `Game`. Si conocemos sus ID que es lo que generalmente llega, podemos recuperar esos objetos de BBDD y asignarlos en el objeto `Game`. Si recuerdas las reglas básicas, un `Repository` debe pertenecer a un solo `Service`, por lo que en lugar de llamar a métodos de los `AuthorRepository` y `CategoryRepository` desde nuestro `GameServiceImpl`, debemos llamar a métodos expuestos en `AuthorService` y `CategoryService`, que son los que gestionan sus repositorios. Para ello necesitaremos crear esos métodos get en los otros `Services`. 
 
 Y ya sabes, para implementar nuevos métodos, antes se deben hacer las pruebas jUnit, que en este caso, por variar, cubriremos con pruebas unitarias. Recuerda que los test van en `src/test/java`
 
 === "AuthorTest.java"
     ``` Java
     package com.ccsw.tutorial.author;
-
-    import static org.junit.jupiter.api.Assertions.assertEquals;
-    import static org.junit.jupiter.api.Assertions.assertNotNull;
-    import static org.junit.jupiter.api.Assertions.assertNull;
-    import static org.mockito.Mockito.mock;
-    import static org.mockito.Mockito.when;
     
+    import com.ccsw.tutorial.author.model.Author;
     import org.junit.jupiter.api.Test;
     import org.junit.jupiter.api.extension.ExtendWith;
     import org.mockito.InjectMocks;
     import org.mockito.Mock;
     import org.mockito.junit.jupiter.MockitoExtension;
     
-    import com.ccsw.tutorial.author.model.Author;
-    
     import java.util.Optional;
+    
+    import static org.junit.jupiter.api.Assertions.*;
+    import static org.mockito.Mockito.mock;
+    import static org.mockito.Mockito.when;
     
     @ExtendWith(MockitoExtension.class)
     public class AuthorTest {
     
-       public static final Long EXISTS_AUTHOR_ID = 1L;
-       public static final Long NOT_EXISTS_AUTHOR_ID = 0L;
-    
-       @Mock
-       private AuthorRepository authorRepository;
-    
-       @InjectMocks
-       private AuthorServiceImpl authorService;
-    
-       @Test
-       public void getExistsAuthorIdShouldReturnAuthor() {
-    
-          Author author = mock(Author.class);
-          when(author.getId()).thenReturn(EXISTS_AUTHOR_ID);
-          when(authorRepository.findById(EXISTS_AUTHOR_ID)).thenReturn(Optional.of(author));
-    
-          Author authorResponse = authorService.get(EXISTS_AUTHOR_ID);
-    
-          assertNotNull(authorResponse);
-    
-          assertEquals(EXISTS_AUTHOR_ID, authorResponse.getId());
-       }
-    
-       @Test
-       public void getNotExistsAuthorIdShouldReturnNull() {
-    
-          when(authorRepository.findById(NOT_EXISTS_AUTHOR_ID)).thenReturn(Optional.empty());
-    
-          Author author = authorService.get(NOT_EXISTS_AUTHOR_ID);
-    
-          assertNull(author);
-       }
+        public static final Long EXISTS_AUTHOR_ID = 1L;
+        public static final Long NOT_EXISTS_AUTHOR_ID = 0L;
+        
+        @Mock
+        private AuthorRepository authorRepository;
+        
+        @InjectMocks
+        private AuthorServiceImpl authorService;
+        
+        @Test
+        public void getExistsAuthorIdShouldReturnAuthor() {
+        
+              Author author = mock(Author.class);
+              when(author.getId()).thenReturn(EXISTS_AUTHOR_ID);
+              when(authorRepository.findById(EXISTS_AUTHOR_ID)).thenReturn(Optional.of(author));
+        
+              Author authorResponse = authorService.get(EXISTS_AUTHOR_ID);
+        
+              assertNotNull(authorResponse);
+        
+              assertEquals(EXISTS_AUTHOR_ID, authorResponse.getId());
+        }
+        
+        @Test
+        public void getNotExistsAuthorIdShouldReturnNull() {
+        
+              when(authorRepository.findById(NOT_EXISTS_AUTHOR_ID)).thenReturn(Optional.empty());
+        
+              Author author = authorService.get(NOT_EXISTS_AUTHOR_ID);
+        
+              assertNull(author);
+        }
     
     }
     ```
 === "AuthorService.java"
-    ``` Java hl_lines="14-19"
+    ``` Java hl_lines="16-22"
     package com.ccsw.tutorial.author;
-
-    import org.springframework.data.domain.Page;
-
+    
     import com.ccsw.tutorial.author.model.Author;
     import com.ccsw.tutorial.author.model.AuthorDto;
     import com.ccsw.tutorial.author.model.AuthorSearchDto;
-
+    import org.springframework.data.domain.Page;
+    
+    import java.util.List;
+    
     /**
-    * @author ccsw
-    */
+     * @author ccsw
+     *
+     */
     public interface AuthorService {
-
+    
         /**
-        * Recupera un {@link com.ccsw.tutorial.author.model.Author} a través de su ID
-        * @param id
-        * @return
-        */
+         * Recupera un {@link Author} a través de su ID
+         *
+         * @param id PK de la entidad
+         * @return {@link Author}
+         */
         Author get(Long id);
-
+    
         /**
-        * Método para recuperar un listado paginado de {@link com.ccsw.tutorial.author.model.Author}
-        * @param dto
-        * @return
-        */
+         * Método para recuperar un listado paginado de {@link Author}
+         *
+         * @param dto dto de búsqueda
+         * @return {@link Page} de {@link Author}
+         */
         Page<Author> findPage(AuthorSearchDto dto);
-
+    
         /**
-        * Método para crear o actualizar un {@link com.ccsw.tutorial.author.model.Author}
-        * @param id
-        * @param data
-        */
-        void save(Long id, AuthorDto data);
-
+         * Método para crear o actualizar un {@link Author}
+         *
+         * @param id PK de la entidad
+         * @param dto datos de la entidad
+         */
+        void save(Long id, AuthorDto dto);
+    
         /**
-        * Método para crear o actualizar un {@link com.ccsw.tutorial.author.model.Author}
-        * @param id
-        */
-        void delete(Long id);
-
+         * Método para crear o actualizar un {@link Author}
+         *
+         * @param id PK de la entidad
+         */
+        void delete(Long id) throws Exception;
+    
     }
-
     ```
 === "AuthorServiceImpl.java"
-    ``` Java hl_lines="24-31 50"
+    ``` Java hl_lines="25-32 54 68"
     package com.ccsw.tutorial.author;
-
-    import javax.transaction.Transactional;
-
+    
+    import com.ccsw.tutorial.author.model.Author;
+    import com.ccsw.tutorial.author.model.AuthorDto;
+    import com.ccsw.tutorial.author.model.AuthorSearchDto;
+    import jakarta.transaction.Transactional;
     import org.springframework.beans.BeanUtils;
     import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.data.domain.Page;
     import org.springframework.stereotype.Service;
-
-    import com.ccsw.tutorial.author.model.Author;
-    import com.ccsw.tutorial.author.model.AuthorDto;
-    import com.ccsw.tutorial.author.model.AuthorSearchDto;
-
+    
+    import java.util.List;
+    
     /**
-    * @author ccsw
-    */
+     * @author ccsw
+     *
+     */
     @Service
     @Transactional
     public class AuthorServiceImpl implements AuthorService {
-
+    
         @Autowired
         AuthorRepository authorRepository;
-
+    
         /**
-        * {@inheritDoc}
-        */
+         * {@inheritDoc}
+         */
         @Override
         public Author get(Long id) {
-
+    
             return this.authorRepository.findById(id).orElse(null);
         }
-
+    
         /**
-        * {@inheritDoc}
-        */
+         * {@inheritDoc}
+         */
         @Override
         public Page<Author> findPage(AuthorSearchDto dto) {
-
-            return this.authorRepository.findAll(dto.getPageable());
+    
+            return this.authorRepository.findAll(dto.getPageable().getPageable());
         }
-
+    
         /**
-        * {@inheritDoc}
-        */
+         * {@inheritDoc}
+         */
         @Override
         public void save(Long id, AuthorDto data) {
-
-            Author author = null;
-            if (id != null)
-                author = this.get(id);
-            else
+    
+            Author author;
+    
+            if (id == null) {
                 author = new Author();
-
+            } else {
+                author = this.get(id);
+            }
+    
             BeanUtils.copyProperties(data, author, "id");
-
+    
             this.authorRepository.save(author);
         }
-
+    
         /**
-        * {@inheritDoc}
-        */
+         * {@inheritDoc}
+         */
         @Override
-        public void delete(Long id) {
-
+        public void delete(Long id) throws Exception {
+    
+            if(this.get(id) == null){
+                throw new Exception("Not exists");
+            }
+    
             this.authorRepository.deleteById(id);
-
         }
-
-    }    
+    
+    }
     ```
 
 Y lo mismo para categorías.
@@ -988,114 +1004,125 @@ Y lo mismo para categorías.
     }
     ```
 === "CategoryService.java"
-    ``` Java hl_lines="14-19"
+    ``` Java hl_lines="14-20"
     package com.ccsw.tutorial.category;
-
-    import java.util.List;
-
+    
     import com.ccsw.tutorial.category.model.Category;
     import com.ccsw.tutorial.category.model.CategoryDto;
-
+    
+    import java.util.List;
+    
     /**
-    * @author ccsw
-    *
-    */
+     * @author ccsw
+     *
+     */
     public interface CategoryService {
-
+    
         /**
-        * Recupera una {@link com.ccsw.tutorial.category.model.Category} a partir de su ID
-        * @param id
-        * @return
-        */
+         * Recupera una {@link Category} a partir de su ID
+         *
+         * @param id PK de la entidad
+         * @return {@link Category}
+         */
         Category get(Long id);
-
+    
         /**
-        * Método para recuperar todas las {@link com.ccsw.tutorial.category.model.Category}
-        * @return
-        */
+         * Método para recuperar todas las {@link Category}
+         *
+         * @return {@link List} de {@link Category}
+         */
         List<Category> findAll();
-
+    
         /**
-        * Método para crear o actualizar una {@link com.ccsw.tutorial.category.model.Category}
-        * @param dto
-        * @return
-        */
+         * Método para crear o actualizar una {@link Category}
+         *
+         * @param id PK de la entidad
+         * @param dto datos de la entidad
+         */
         void save(Long id, CategoryDto dto);
-
+    
         /**
-        * Método para borrar una {@link com.ccsw.tutorial.category.model.Category}
-        * @param id
-        */
-        void delete(Long id);
+         * Método para borrar una {@link Category}
+         *
+         * @param id PK de la entidad
+         */
+        void delete(Long id) throws Exception;
+    
     }
     ```
 === "CategoryServiceImpl.java"
-    ``` Java hl_lines="21-28 50"
+    ``` Java hl_lines="22-29 51 65"
     package com.ccsw.tutorial.category;
-
-    import java.util.List;
-
-    import org.springframework.beans.factory.annotation.Autowired;
-    import org.springframework.stereotype.Service;
-
+    
     import com.ccsw.tutorial.category.model.Category;
     import com.ccsw.tutorial.category.model.CategoryDto;
-
+    import jakarta.transaction.Transactional;
+    import org.springframework.beans.factory.annotation.Autowired;
+    import org.springframework.stereotype.Service;
+    
+    import java.util.List;
+    
     /**
-    * @author ccsw
-    *
-    */
+     * @author ccsw
+     *
+     */
     @Service
+    @Transactional
     public class CategoryServiceImpl implements CategoryService {
-
+    
         @Autowired
         CategoryRepository categoryRepository;
-
+        
         /**
-        * {@inheritDoc}
-        */
+         * {@inheritDoc}
+         */
         @Override
         public Category get(Long id) {
-
-            return this.categoryRepository.findById(id).orElse(null);
+        
+              return this.categoryRepository.findById(id).orElse(null);
         }
 
         /**
-        * {@inheritDoc}
-        */
+         * {@inheritDoc}
+         */
         @Override
         public List<Category> findAll() {
-
-            return (List<Category>) this.categoryRepository.findAll();
+        
+              return (List<Category>) this.categoryRepository.findAll();
         }
-
+        
         /**
-        * {@inheritDoc}
-        */
+         * {@inheritDoc}
+         */
         @Override
         public void save(Long id, CategoryDto dto) {
-
-            Category categoria = null;
-
-            if (id == null)
-                categoria = new Category();
-            else
-                categoria = this.get(id);
-
-            categoria.setName(dto.getName());
-
-            this.categoryRepository.save(categoria);
+        
+              Category category;
+        
+              if (id == null) {
+                 category = new Category();
+              } else {
+                 category = this.get(id);
+              }
+        
+              category.setName(dto.getName());
+        
+              this.categoryRepository.save(category);
         }
-
+        
         /**
-        * {@inheritDoc}
-        */
+         * {@inheritDoc}
+         */
         @Override
-        public void delete(Long id) {
-
-            this.categoryRepository.deleteById(id);
-
+        public void delete(Long id) throws Exception {
+        
+              if(this.get(id) == null){
+                 throw new Exception("Not exists");
+              }
+        
+              this.categoryRepository.deleteById(id);
         }
+    
     }
     ```
 
@@ -1103,72 +1130,73 @@ Y lo mismo para categorías.
     A la hora de implementar métodos nuevos, ten siempre presente el `Clean Code`. ¡No dupliques código!, es muy importante de cara al futuro mantenimiento. Si en nuestro método `save` hacíamos uso de una operación `findById` y ahora hemos creado una nueva operación `get`, hagamos uso de esta nueva operación y no repitamos el código.
 
 
-Y ahora que ya tenemos los métodos necesarios ya podemos implementar correctamente nuestro `GameServiceImpl`.
+Y ahora que ya tenemos los métodos necesarios, ya podemos implementar correctamente nuestro `GameServiceImpl`.
 
 
 === "GameServiceImpl.java"
-    ``` Java hl_lines="26-27 29-30 56-57"
+    ``` Java hl_lines="26-27 29-30 57-58"
     package com.ccsw.tutorial.game;
-
-    import java.util.List;
-
-    import javax.transaction.Transactional;
-
-    import org.springframework.beans.BeanUtils;
-    import org.springframework.beans.factory.annotation.Autowired;
-    import org.springframework.stereotype.Service;
-
+    
     import com.ccsw.tutorial.author.AuthorService;
     import com.ccsw.tutorial.category.CategoryService;
     import com.ccsw.tutorial.game.model.Game;
     import com.ccsw.tutorial.game.model.GameDto;
-
+    import jakarta.transaction.Transactional;
+    import org.springframework.beans.BeanUtils;
+    import org.springframework.beans.factory.annotation.Autowired;
+    import org.springframework.stereotype.Service;
+    
+    
+    import java.util.List;
+    
     /**
-    * @author ccsw
-    */
+     * @author ccsw
+     *
+     */
     @Service
     @Transactional
     public class GameServiceImpl implements GameService {
-
+    
         @Autowired
         GameRepository gameRepository;
-
+    
         @Autowired
         AuthorService authorService;
-
+    
         @Autowired
         CategoryService categoryService;
-
+    
         /**
-        * {@inheritDoc}
-        */
+         * {@inheritDoc}
+         */
         @Override
-        public List<Game> find(String title, Long category) {
-
-            return this.gameRepository.find(title, category);
+        public List<Game> find(String title, Long idCategory) {
+    
+            return this.gameRepository.findAll();
         }
-
+    
         /**
-        * {@inheritDoc}
-        */
+         * {@inheritDoc}
+         */
         @Override
         public void save(Long id, GameDto dto) {
-
-            Game game = null;
-
-            if (id == null)
+    
+            Game game;
+    
+            if (id == null) {
                 game = new Game();
-            else
+            } else {
                 game = this.gameRepository.findById(id).orElse(null);
-
+            }
+    
             BeanUtils.copyProperties(dto, game, "id", "author", "category");
-
+    
             game.setAuthor(authorService.get(dto.getAuthor().getId()));
             game.setCategory(categoryService.get(dto.getCategory().getId()));
-
+    
             this.gameRepository.save(game);
         }
-
+    
     }
     ```
 
@@ -1177,60 +1205,275 @@ Ahora si que tenemos la capa de lógica de negocio terminada, podemos pasar a la
 
 ## Repository
 
-Y llegamos a la última capa donde, si recordamos, teníamos un método `find` que recibe dos parámetros. Algo así:
+Y llegamos a la última capa donde, si recordamos, teníamos un método que recibe dos parámetros. Necesitamos traducir esto en una consulta a la BBDD.
 
-
-=== "GameRepository.java"
-    ``` Java
-    package com.ccsw.tutorial.game;
-
-    import java.util.List;
-
-    import org.springframework.data.repository.CrudRepository;
-
-    import com.ccsw.tutorial.game.model.Game;
-
-    public interface GameRepository extends CrudRepository<Game, Long> {
-
-        List<Game> find(String title, Long category);
-
-    }
-    ```
-
-
-Para esta ocasión, vamos a necesitar un listado filtrado por título o por categoría, así que necesitaremos pasarle esos datos y filtrar la query. Para el título vamos a buscar por una cadena contenida, así que el parámetro será de tipo `String`, mientras que para la categoría vamos a buscar por su primary key, así que el parámetro será de tipo `Long`.
+Vamos a necesitar un listado filtrado por título o por categoría, así que necesitaremos pasarle esos datos y filtrar la query. Para el título vamos a buscar por una cadena contenida, así que el parámetro será de tipo `String`, mientras que para la categoría vamos a buscar por su primary key, así que el parámetro será de tipo `Long`.
 
 Existen varias estrategias para abordar esta implementación. Podríamos utilizar los [QueryMethods](https://www.baeldung.com/spring-data-derived-queries) para que Spring JPA haga su magia, pero en esta ocasión sería bastante complicado encontrar un predicado correcto.
 
-También podríamos hacer una implementación de la interface y hacer la consulta directamente con Criteria. Pero en esta ocasión vamos a utilizar otra *magia* que nos ofrece Spring JPA y es utilizar la [anotación @Query](https://www.baeldung.com/spring-data-jpa-query).
+También podríamos hacer una implementación de la interface y hacer la consulta directamente con Criteria. 
 
-Esta anotación nos permite definir una consulta en SQL nativo o en JPQL (Java Persistence Query Language) y Spring JPA se encargará de realizar todo el mapeo y conversión de los datos de entrada y salida. Veamos un ejemplo y luego lo explicamos en detalle:
+Por otro lado se podría hacer uso de la [anotación @Query](https://www.baeldung.com/spring-data-jpa-query). Esta anotación nos permite definir una consulta en SQL nativo o en JPQL (Java Persistence Query Language) y Spring JPA se encargará de realizar todo el mapeo y conversión de los datos de entrada y salida. Pero esta opción no es la más recomendable.
 
-=== "GameRepository.java"
-    ``` Java hl_lines="11-12"
-    package com.ccsw.tutorial.game;
+En este caso vamos a hacer uso de las [Specifications](https://www.baeldung.com/rest-api-search-language-spring-data-specifications) que es la opción más robusta y no presenta acoplamientos con el tipo de BBDD.
 
-    import java.util.List;
+Para ello en primer lugar vamos a definir la clase para asignar los criterios de filtrado. Esta clase es genérica y puede ser usada en toda la aplicación por lo que la vamos a crear en el paquete `com.ccsw.tutorial.common.criteria`
 
-    import org.springframework.data.repository.CrudRepository;
-
-    import com.ccsw.tutorial.game.model.Game;
-
-    public interface GameRepository extends CrudRepository<Game, Long> {
-
-        @Query("select g from Game g where (:title is null or g.title like '%'||:title||'%') and (:category is null or g.category.id = :category)")
-        List<Game> find(@Param("title") String title, @Param("category") Long category);
-
+=== "SearchCriteria.java"
+    ``` Java
+    package com.ccsw.tutorial.common.criteria;
+    
+    public class SearchCriteria {
+    
+        private String key;
+        private String operation;
+        private Object value;
+    
+        public SearchCriteria(String key, String operation, Object value) {
+    
+            this.key = key;
+            this.operation = operation;
+            this.value = value;
+        }
+    
+        public String getKey() {
+            return key;
+        }
+    
+        public void setKey(String key) {
+            this.key = key;
+        }
+    
+        public String getOperation() {
+            return operation;
+        }
+    
+        public void setOperation(String operation) {
+            this.operation = operation;
+        }
+    
+        public Object getValue() {
+            return value;
+        }
+    
+        public void setValue(Object value) {
+            this.value = value;
+        }
+    
     }
     ```
 
-Si te fijas en las dos líneas que hemos modificado, por un lado hemos puesto nombre a los parámetros de entrada con la anotación @Param. Esto solo nos sirve para poder utilizar los parametros dentro de la query.
+Hecho esto pasamos a definir el Specification de nuestra clase la cual contendrá la construcción de la consulta en función de los tipos de que se le proporcionan.
 
-Por otro lado, hemos creado una query en un lenguaje similar a SQL, pero en lugar de hacer uso de tablas y columnas, hacemos uso de objetos entity y propiedades. Dentro del where hemos puesto las dos condiciones, o bien que el parámetro título sea nulo o bien si no es nulo, que la propiedad contenga el texto del parámetro título. Para categoría hemos hecho lo mismo. 
-Con esta quuery, Spring JPA generará el SQL correcto y mapeará los resultados a un listado de `Game` que es lo que queremos obtener.
+=== "GameSpecification.java"
+    ``` Java hl_lines="25 27 33"
+    package com.ccsw.tutorial.game;
+    
+    import com.ccsw.tutorial.common.criteria.SearchCriteria;
+    import com.ccsw.tutorial.game.model.Game;
+    import jakarta.persistence.criteria.*;
+    import org.springframework.data.jpa.domain.Specification;
+    
+    
+    public class GameSpecification implements Specification<Game> {
+    
+        private static final long serialVersionUID = 1L;
+    
+        private final SearchCriteria criteria;
+    
+        public GameSpecification(SearchCriteria criteria) {
+    
+            this.criteria = criteria;
+        }
+    
+        @Override
+        public Predicate toPredicate(Root<Game> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
+            if (criteria.getOperation().equalsIgnoreCase(":") && criteria.getValue() != null) {
+                Path<String> path = getPath(root);
+                if (path.getJavaType() == String.class) {
+                    return builder.like(path, "%" + criteria.getValue() + "%");
+                } else {
+                    return builder.equal(path, criteria.getValue());
+                }
+            }
+            return null;
+        }
+    
+        private Path<String> getPath(Root<Game> root) {
+            String key = criteria.getKey();
+            String[] split = key.split("[.]", 0);
+    
+            Path<String> expression = root.get(split[0]);
+            for (int i = 1; i < split.length; i++) {
+                expression = expression.get(split[i]);
+            }
+    
+            return expression;
+        }
+    
+    }
+    ```
+Como podemos observar en las líneas marcadas, lo que hacemos es aplicar el criterio de `like` para los tipos string y el criterio `equal` para los demás para cumplir asi con los requisitos.
 
-Es otra forma, bastante sencilla de implementar consultas a BBDD.
+En cuanto al método `getPath` es una función que nos permite explorar las sub entidades para realizar consultas sobre los atributos de estas.
 
+Añadidas estas clases ya podemos modificar nuestro código para añadir las opciones de filtrado.
+
+=== "GameServiceImpl.java"
+    ``` Java hl_lines="40 41 43 45"
+    package com.ccsw.tutorial.game;
+    
+    import com.ccsw.tutorial.author.AuthorService;
+    import com.ccsw.tutorial.category.CategoryService;
+    import com.ccsw.tutorial.common.criteria.SearchCriteria;
+    import com.ccsw.tutorial.game.model.Game;
+    import com.ccsw.tutorial.game.model.GameDto;
+    import jakarta.transaction.Transactional;
+    import org.springframework.beans.BeanUtils;
+    import org.springframework.beans.factory.annotation.Autowired;
+    import org.springframework.data.jpa.domain.Specification;
+    import org.springframework.stereotype.Service;
+    
+    
+    import java.util.List;
+    
+    /**
+     * @author ccsw
+     *
+     */
+    @Service
+    @Transactional
+    public class GameServiceImpl implements GameService {
+    
+        @Autowired
+        GameRepository gameRepository;
+    
+        @Autowired
+        AuthorService authorService;
+    
+        @Autowired
+        CategoryService categoryService;
+    
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public List<Game> find(String title, Long idCategory) {
+    
+            GameSpecification titleSpec = new GameSpecification(new SearchCriteria("title", ":", title));
+            GameSpecification categorySpec = new GameSpecification(new SearchCriteria("category.id", ":", idCategory));
+    
+            Specification<Game> spec = Specification.where(titleSpec).and(categorySpec);
+    
+            return this.gameRepository.findAll(spec);
+        }
+    
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public void save(Long id, GameDto dto) {
+    
+            Game game;
+    
+            if (id == null) {
+                game = new Game();
+            } else {
+                game = this.gameRepository.findById(id).orElse(null);
+            }
+    
+            BeanUtils.copyProperties(dto, game, "id", "author", "category");
+    
+            game.setAuthor(authorService.get(dto.getAuthor().getId()));
+            game.setCategory(categoryService.get(dto.getCategory().getId()));
+    
+            this.gameRepository.save(game);
+        }
+    
+    }
+    ```
+=== "GameRepository.java"
+    ``` Java hl_lines="15"
+    package com.ccsw.tutorial.game;
+
+    import com.ccsw.tutorial.game.model.Game;
+    import org.springframework.data.jpa.domain.Specification;
+    import org.springframework.data.jpa.repository.EntityGraph;
+    import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+    import org.springframework.data.repository.CrudRepository;
+    
+    import java.util.List;
+    
+    /**
+     * @author ccsw
+     *
+     */
+    public interface GameRepository extends CrudRepository<Game, Long>, JpaSpecificationExecutor<Game> {
+    
+    }
+    ```
+    
+Lo que hemos hecho es crear los dos criterios de filtrado que necesitábamos. En nuestro caso eran `title`, que es un atributo de la entidad `Game` y por otro lado el identificador de categoría, que en este caso, ya no es un atributo directo de la entidad, si no, de la categoría asociada, por lo que debemos navegar hasta el atributo `id` a través del atributo `category`.
+
+A partir de los criterios podemos generar los Specifications que posteriormente anidamos con el operador `and`.
+
+Una vez construido el Specification ya podemos usar el método por defecto que nos proporciona Spring Data para dicho fin.
+
+## Mejoras rendimiento
+
+Finalmente, cara a mejorar el rendimiento de nuestros servicios vamos a hacer foco en la generación de transacciones con la base de datos. Si ejecutáramos esta petición tal cual lo tenemos implementado, en la consola veríamos lo siguiente:
+
+``` 
+Hibernate: select g1_0.id,g1_0.age,g1_0.author_id,g1_0.category_id,g1_0.title from game g1_0
+Hibernate: select a1_0.id,a1_0.name,a1_0.nationality from author a1_0 where a1_0.id=?
+Hibernate: select c1_0.id,c1_0.name from category c1_0 where c1_0.id=?
+Hibernate: select a1_0.id,a1_0.name,a1_0.nationality from author a1_0 where a1_0.id=?
+Hibernate: select c1_0.id,c1_0.name from category c1_0 where c1_0.id=?
+Hibernate: select a1_0.id,a1_0.name,a1_0.nationality from author a1_0 where a1_0.id=?
+Hibernate: select a1_0.id,a1_0.name,a1_0.nationality from author a1_0 where a1_0.id=?
+Hibernate: select a1_0.id,a1_0.name,a1_0.nationality from author a1_0 where a1_0.id=?
+```
+
+Esto es debido a que no le hemos dado indicaciones a Spring Data de como queremos que genere las consultas y por defecto está configurado para realizar sub consultas cuando tenemos tablas relacionadas.
+
+En nuestro caso la tabla `Game` está relacionada con `Author` y `Category`. Al realizar la consulta a `Game` realiza las sub consultas con los registros relacionados con los resultados de esta.
+
+Para realizar esto de una forma mucho más óptima para nuestro caso, podemos indicar a Spring Data el comportamiento deseado, que es, que haga una única consulta y haga las sub consultas mediante los `join` correspondientes.
+
+Para ello añadimos una sobre escritura del método findAll de Spring Data con la anotación `@EntityGraph` con los atributos que queremos que se incluyan dentro de la consulta principal:
+
+=== "GameRepository.java"
+    ``` Java hl_lines="17 18 19"
+    package com.ccsw.tutorial.game;
+    
+    import com.ccsw.tutorial.game.model.Game;
+    import org.springframework.data.jpa.domain.Specification;
+    import org.springframework.data.jpa.repository.EntityGraph;
+    import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+    import org.springframework.data.repository.CrudRepository;
+    
+    import java.util.List;
+    
+    /**
+     * @author ccsw
+     *
+     */
+    public interface GameRepository extends CrudRepository<Game, Long>, JpaSpecificationExecutor<Game> {
+    
+        @Override
+        @EntityGraph(attributePaths = {"category", "author"})
+        List<Game> findAll(Specification<Game> spec);
+    
+    }
+    ```
+
+Tras realizar este cambio, podemos observar que la nueva consulta generada es la siguiente:
+
+``` 
+Hibernate: select g1_0.id,g1_0.age,a1_0.id,a1_0.name,a1_0.nationality,c1_0.id,c1_0.name,g1_0.title from game g1_0 join author a1_0 on a1_0.id=g1_0.author_id join category c1_0 on c1_0.id=g1_0.category_id
+```
+
+Como podemos observar, ahora se realiza una única consulta con la correspondiente transacción con la BBDD.
 
 ## Prueba de las operaciones
 
@@ -1309,15 +1552,17 @@ Así que necesitamos implementar esa funcionalidad, y como siempre vamos de la c
     ...
 
     /**
-    * Recupera un listado de autores
-    * @return
-    */
+     * Recupera un listado de autores {@link Author}
+     *
+     * @return {@link List} de {@link AuthorDto}
+     */
+    @Operation(summary = "Find", description = "Method that return a list of Authors")
     @RequestMapping(path = "", method = RequestMethod.GET)
     public List<AuthorDto> findAll() {
 
         List<Author> authors = this.authorService.findAll();
 
-        return this.beanMapper.mapList(authors, AuthorDto.class);
+        return authors.stream().map(e -> mapper.map(e, AuthorDto.class)).collect(Collectors.toList());
     }
 
     ...
@@ -1327,9 +1572,10 @@ Así que necesitamos implementar esa funcionalidad, y como siempre vamos de la c
     ...
 
     /**
-    * Recupera un listado de autores
-    * @return
-    */
+     * Recupera un listado de autores {@link Author}
+     *
+     * @return {@link List} de {@link Author}
+     */
     List<Author> findAll();
 
     ...
@@ -1339,8 +1585,8 @@ Así que necesitamos implementar esa funcionalidad, y como siempre vamos de la c
     ...
 
     /**
-    * {@inheritDoc}
-    */
+     * {@inheritDoc}
+     */
     @Override
     public List<Author> findAll() {
 

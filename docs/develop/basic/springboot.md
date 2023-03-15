@@ -1,14 +1,14 @@
-# Listado simple - Springboot
+# Listado simple - Spring Boot
 
-Ahora que ya tenemos listo el proyecto backend de SpringBoot (en el puerto 8080) ya podemos empezar a codificar la solución.
+Ahora que ya tenemos listo el proyecto backend de Spring Boot (en el puerto 8080) ya podemos empezar a codificar la solución.
 
 
 ## Primeros pasos
 
 !!! success "Antes de empezar"
-    Quiero hacer hincapié en Springboot tiene una documentación muy extensa y completa, así que te recomiendo que hagas uso de ella cuando tengas cualquier duda. Tanto la propia web de [Spring](https://spring.io/projects/spring-boot) como en el portal de tutoriales de [Baeldung](https://www.baeldung.com/spring-tutorial) puedes buscar casi cualquier ejemplo que necesites.
+    Quiero hacer hincapié en Spring Boot tiene una documentación muy extensa y completa, así que te recomiendo que hagas uso de ella cuando tengas cualquier duda. Tanto la propia web de [Spring](https://spring.io/projects/spring-boot) como en el portal de tutoriales de [Baeldung](https://www.baeldung.com/spring-tutorial) puedes buscar casi cualquier ejemplo que necesites.
 
-Si has seguido el tutorial, en la creación del proyecto tenías la posibilidad de crear un proyecto Springboot simple o descargarte una plantilla ya creada. De cualquiera de las dos maneras, tendrás la misma estructura que veremos a continuación.
+Si has seguido el tutorial, en la creación del proyecto tenías la posibilidad de crear un proyecto Spring Boot simple o descargarte una plantilla ya creada. De cualquiera de las dos maneras, tendrás la misma estructura que veremos a continuación.
 
 
 ## Estructurar el código
@@ -49,23 +49,27 @@ Vamos a crear una clase `CategoryController.java` dentro del package `com.ccsw.t
     import org.springframework.web.bind.annotation.RequestMethod;
     import org.springframework.web.bind.annotation.RestController;
 
+    import io.swagger.v3.oas.annotations.tags.Tag;
+
     /**
-    * @author ccsw
-    */
+     * @author ccsw
+     * 
+     */
+    @Tag(name = "Category", description = "API of Category")
     @RequestMapping(value = "/category")
     @RestController
     @CrossOrigin(origins = "*")
     public class CategoryController {
 
-      /**
-      * Método para recuperar todas las Category
-      * @return
-      */
-      @RequestMapping(path = "", method = RequestMethod.GET)
-      public String prueba() {
+        /**
+         * Método para probar el servicio
+         * 
+         */
+        @RequestMapping(path = "", method = RequestMethod.GET)
+        public String prueba() {
 
-        return "Probando el Controller";
-      }
+            return "Probando el Controller";
+        }
 
     }
     ```
@@ -73,10 +77,9 @@ Vamos a crear una clase `CategoryController.java` dentro del package `com.ccsw.t
 Ahora si arrancamos la aplicación server, abrimos el [Postman](https://www.postman.com/) y creamos una petición GET a la url http://localhost:8080/category nos responderá con el mensaje que hemos programado.
 
 
-
 ### Implementar operaciones
 
-Ahora que ya tenemos un controlador y una operacion de negocio ficticia, vamos a borrarla y añadir las operaciones reales que consumirá nuestra pantalla. Deberemos añadir una operación para listar, una para actualizar, una para guardar y una para borrar. Aunque para hacerlo más cómodo, utilizaremos la misma operación para guardar y para actualizar. Además, no vamos a trabajar directamente con datos simples, sino que usaremos objetos para recibir información y para enviar información.
+Ahora que ya tenemos un controlador y una operación de negocio ficticia, vamos a borrarla y añadir las operaciones reales que consumirá nuestra pantalla. Deberemos añadir una operación para listar, una para actualizar, una para guardar y una para borrar. Aunque para hacerlo más cómodo, utilizaremos la misma operación para guardar y para actualizar. Además, no vamos a trabajar directamente con datos simples, sino que usaremos objetos para recibir información y para enviar información.
 
 Estos objetos típicamente se denominan DTO (Data Transfer Object) y nos sirven justamente para encapsular información que queremos transportar. En realidad no son más que clases *pojo* sencillas con propiedades, getters y setters. 
 
@@ -87,123 +90,134 @@ Para nuestro ejemplo crearemos una clase `CategoryDto` dentro del package `com.c
     package com.ccsw.tutorial.category.model;
 
     /**
-    * @author ccsw
-    */
+     * @author ccsw
+     * 
+     */
     public class CategoryDto {
-      private Long id;
-
-      private String name;
-
-      /**
-      * @return id
-      */
-      public Long getId() {
-
-        return this.id;
-      }
-
-      /**
-      * @param id new value of {@link #getId}.
-      */
-      public void setId(Long id) {
-
-        this.id = id;
-      }
-
-      /**
-      * @return name
-      */
-      public String getName() {
-
-        return this.name;
-      }
-
-      /**
-      * @param name new value of {@link #getName}.
-      */
-      public void setName(String name) {
-
-        this.name = name;
-      }
-
+    
+        private Long id;
+    
+        private String name;
+    
+        /**
+         * @return id
+         */
+        public Long getId() {
+    
+            return this.id;
+        }
+    
+        /**
+         * @param id new value of {@link #getId}.
+         */
+        public void setId(Long id) {
+    
+            this.id = id;
+        }
+    
+        /**
+         * @return name
+         */
+        public String getName() {
+    
+            return this.name;
+        }
+    
+        /**
+         * @param name new value of {@link #getName}.
+         */
+        public void setName(String name) {
+    
+            this.name = name;
+        }
+    
     }
     ```
 
 A continuación utilizaremos esta clase en nuestro Controller para implementar las tres operaciones de negocio.
 
 === "CategoryController.java"
-  ``` Java
-  package com.ccsw.tutorial.category;
-
-  import java.util.ArrayList;
-  import java.util.HashMap;
-  import java.util.List;
-  import java.util.Map;
-
-  import org.springframework.web.bind.annotation.CrossOrigin;
-  import org.springframework.web.bind.annotation.PathVariable;
-  import org.springframework.web.bind.annotation.RequestBody;
-  import org.springframework.web.bind.annotation.RequestMapping;
-  import org.springframework.web.bind.annotation.RequestMethod;
-  import org.springframework.web.bind.annotation.RestController;
-
-  import com.ccsw.tutorial.category.model.CategoryDto;
-
-  /**
-  * @author ccsw
-  */
-  @RequestMapping(value = "/category")
-  @RestController
-  @CrossOrigin(origins = "*")
-  public class CategoryController {
-
-    private long SEQUENCE = 1;
-    private Map<Long, CategoryDto> categories = new HashMap<Long, CategoryDto>();
+    ``` Java
+    package com.ccsw.tutorial.category;
+    
+    import java.util.ArrayList;
+    import java.util.HashMap;
+    import java.util.List;
+    import java.util.Map;
+    
+    import org.springframework.web.bind.annotation.CrossOrigin;
+    import org.springframework.web.bind.annotation.PathVariable;
+    import org.springframework.web.bind.annotation.RequestBody;
+    import org.springframework.web.bind.annotation.RequestMapping;
+    import org.springframework.web.bind.annotation.RequestMethod;
+    import org.springframework.web.bind.annotation.RestController;
+    
+    import com.ccsw.tutorial.category.model.CategoryDto;
+    
+    import io.swagger.v3.oas.annotations.Operation;
+    import io.swagger.v3.oas.annotations.tags.Tag;
 
     /**
-    * Método para recuperar todas las Category
-    * @return
-    */
-    @RequestMapping(path = "", method = RequestMethod.GET)
-    public List<CategoryDto> findAll() {
-
-        return new ArrayList(this.categories.values());
-    }
-
-    /**
-    * Método para crear o actualizar una Category
-    * @param id
-    * @param dto
-    * @return
-    */
-    @RequestMapping(path = { "", "/{id}" }, method = RequestMethod.PUT)
-    public void save(@PathVariable(name = "id", required = false) Long id, @RequestBody CategoryDto dto) {
-
-        CategoryDto category;
-
-        if (id == null) {
-          category = new CategoryDto();
-          category.setId(this.SEQUENCE++);
-          this.categories.put(category.getId(), category);
-        } 
-        else {
-          category = this.categories.get(id);
+     * @author ccsw
+     * 
+     */
+    @Tag(name = "Category", description = "API of Category")
+    @RequestMapping(value = "/category")
+    @RestController
+    @CrossOrigin(origins = "*")
+    public class CategoryController {
+    
+        private long SEQUENCE = 1;
+        private Map<Long, CategoryDto> categories = new HashMap<Long, CategoryDto>();
+    
+        /**
+         * Método para recuperar todas las categorias
+         *
+         * @return {@link List} de {@link CategoryDto}
+         */
+        @Operation(summary = "Find", description = "Method that return a list of Categories")
+        @RequestMapping(path = "", method = RequestMethod.GET)
+        public List<CategoryDto> findAll() {
+    
+            return new ArrayList<CategoryDto>(this.categories.values());
         }
-
-        category.setName(dto.getName());
+    
+        /**
+         * Método para crear o actualizar una categoria
+         *
+         * @param id PK de la entidad
+         * @param dto datos de la entidad
+         */
+        @Operation(summary = "Save or Update", description = "Method that saves or updates a Category")
+        @RequestMapping(path = { "", "/{id}" }, method = RequestMethod.PUT)
+        public void save(@PathVariable(name = "id", required = false) Long id, @RequestBody CategoryDto dto) {
+    
+            CategoryDto category;
+    
+            if (id == null) {
+                category = new CategoryDto();
+                category.setId(this.SEQUENCE++);
+                this.categories.put(category.getId(), category);
+            } else {
+                category = this.categories.get(id);
+            }
+    
+            category.setName(dto.getName());
+        }
+    
+        /**
+         * Método para borrar una categoria
+         *
+         * @param id PK de la entidad
+         */
+        @Operation(summary = "Delete", description = "Method that deletes a Category")
+        @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
+        public void delete(@PathVariable("id") Long id) {
+    
+            this.categories.remove(id);
+        }
     }
-
-    /**
-    * Método para borrar una Category
-    * @param id
-    */
-    @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("id") Long id) {
-
-        this.categories.remove(id);
-    }
-  }
-  ```
+    ```
 
 Como todavía no tenemos acceso a BD, hemos creado una variable tipo HashMap y una variable Long, que simularán una BD y una secuencia. También hemos implementado tres operaciones GET, PUT y DELETE que realizan las acciones necesarias por nuestra pantalla. Ahora podríamos probarlo desde el Postman con cuatro ejemplo sencillos.
 
@@ -233,12 +247,21 @@ Como no tenemos ningún dato dado de alta, podemos probar en primer lugar a real
 
 Prueba a jugar borrando categorías que no existen o modificando categorías que no existen. Tal y como está programado, el borrado no dará error, pero la modificación debería dar un NullPointerException al no existir el dato a modificar.
 
+### Documentación (OpenAPI)
+
+Adicionalmente, como vimos en la configuración, añadimos el módulo de OpenAPI a nuestro proyecto y hemos anotado tanto la clase como los métodos con sus correspondientes etiquetas `@Tag` y `@Operation`. 
+
+Esto nos va a ayudar a generar documentación automática de nuestras APIs haciendo que nuestro codio sea más mantenible.
+
+Para ver el resultado, con el proyecto arrancado nos dirigimos a la ruta por defecto de OpenAPI: http://localhost:8080/swagger-ui/index.html
+
+Aquí podemos observar el catálogo de endpoints generados e incluso realizar peticiones a los mismos.
 
 ### Aspectos importantes
 
 Los aspectos importantes de la capa `Controller` son:
 
-* La clase debe estar anotada con `@Controller` o `@RestController`. Mejor usar la última anotación ya que estás diciendo que las operaciones son de tipo Rest y no hará falta configurar nada
+* La clase debe estar anotada con `@Controller` o `@RestController`. Mejor usar la última anotación, ya que estás diciendo que las operaciones son de tipo Rest y no hará falta configurar nada
 * La ruta general al controlador se define con el `@RequestMapping` global de la clase, aunque también se puede obviar esta anotación y añadir a cada una de las operaciones la ruta raíz.
 * Los métodos que queramos exponer como operaciones deben ir anotados también con `@RequestMapping` con la info:
     * `path` → Que nos permite definir un path para la operación, siempre sumándole el path de la clase (si es que tuviera)
@@ -260,34 +283,38 @@ Pues vamos a arreglarlo. Vamos a crear un servicio y vamos a mover la lógica de
     ``` Java
     package com.ccsw.tutorial.category;
 
+    import com.ccsw.tutorial.category.model.CategoryDto;
+    
     import java.util.List;
 
-    import com.ccsw.tutorial.category.model.CategoryDto;
-
     /**
-    * @author ccsw
-    *
-    */
+     * @author ccsw
+     * 
+     */
     public interface CategoryService {
-
-      /**
-      * Método para recuperar todas las Category
-      * @return
-      */
-      List<CategoryDto> findAll();
-
-      /**
-      * Método para crear o actualizar una Category
-      * @param dto
-      * @return
-      */
-      void save(Long id, CategoryDto dto);
-
-      /**
-      * Método para borrar una Category
-      * @param id
-      */
-      void delete(Long id);
+    
+        /**
+         * Método para recuperar todas las categorías
+         *
+         * @return {@link List} de {@link Category}
+         */
+        List<CategoryDto> findAll();
+    
+        /**
+         * Método para crear o actualizar una categoría
+         *
+         * @param id PK de la entidad
+         * @param dto datos de la entidad
+         */
+        void save(Long id, CategoryDto dto);
+    
+        /**
+         * Método para borrar una categoría
+         *
+         * @param id PK de la entidad
+         */
+        void delete(Long id);
+    
     }
     ```
 === "CategoryServiceImpl.java"
@@ -304,52 +331,49 @@ Pues vamos a arreglarlo. Vamos a crear un servicio y vamos a mover la lógica de
     import com.ccsw.tutorial.category.model.CategoryDto;
 
     /**
-    * @author ccsw
-    *
-    */
+     * @author ccsw
+     *
+     */
     @Service
     public class CategoryServiceImpl implements CategoryService {
-      private long SEQUENCE = 1;
 
-      private Map<Long, CategoryDto> categories = new HashMap<Long, CategoryDto>();
+        private long SEQUENCE = 1;
+        private Map<Long, CategoryDto> categories = new HashMap<Long, CategoryDto>();
 
-      /**
-      * Método para recuperar todas las Category
-      * @return
-      */
-      public List<CategoryDto> findAll() {
-
-        return new ArrayList(this.categories.values());
-      }
-
-      /**
-      * Método para crear o actualizar una Category
-      * @param dto
-      * @return
-      */
-      public void save(Long id, CategoryDto dto) {
-
-        CategoryDto category;
-
-        if (id == null) {
-          category = new CategoryDto();
-          category.setId(this.SEQUENCE++);
-          this.categories.put(category.getId(), category);
-        } else {
-          category = this.categories.get(id);
+        /**
+         * {@inheritDoc}
+         */
+        public List<CategoryDto> findAll() {
+    
+            return new ArrayList<CategoryDto>(this.categories.values());
+        }
+    
+        /**
+         * {@inheritDoc}
+         */
+        public void save(Long id, CategoryDto dto) {
+    
+            CategoryDto category;
+    
+            if (id == null) {
+                category = new CategoryDto();
+                category.setId(this.SEQUENCE++);
+                this.categories.put(category.getId(), category);
+            } else {
+                category = this.categories.get(id);
+            }
+    
+            category.setName(dto.getName());
+        }
+    
+        /**
+         * {@inheritDoc}
+         */
+        public void delete(Long id) {
+    
+            this.categories.remove(id);
         }
 
-        category.setName(dto.getName());
-      }
-
-      /**
-      * Método para borrar una Category
-      * @param id
-      */
-      public void delete(Long id) {
-
-        this.categories.remove(id);
-      }
     }
     ```
 === "CategoryController.java"
@@ -358,57 +382,68 @@ Pues vamos a arreglarlo. Vamos a crear un servicio y vamos a mover la lógica de
 
     import java.util.List;
 
-    import org.springframework.web.bind.annotation.CrossOrigin;
     import org.springframework.beans.factory.annotation.Autowired;
+    import org.springframework.web.bind.annotation.CrossOrigin;
     import org.springframework.web.bind.annotation.PathVariable;
     import org.springframework.web.bind.annotation.RequestBody;
     import org.springframework.web.bind.annotation.RequestMapping;
     import org.springframework.web.bind.annotation.RequestMethod;
     import org.springframework.web.bind.annotation.RestController;
-
+    
     import com.ccsw.tutorial.category.model.CategoryDto;
+    
+    import io.swagger.v3.oas.annotations.Operation;
+    import io.swagger.v3.oas.annotations.tags.Tag;
 
     /**
-    * @author ccsw
-    */
+     * @author ccsw
+     * 
+     */
+    @Tag(name = "Category", description = "API of Category")
     @RequestMapping(value = "/category")
     @RestController
     @CrossOrigin(origins = "*")
     public class CategoryController {
 
-      @Autowired
-      private CategoryService categoryService;
+        @Autowired
+        private CategoryService categoryService;
+    
+        /**
+         * Método para recuperar todas las categorias
+         *
+         * @return {@link List} de {@link CategoryDto}
+         */
+        @Operation(summary = "Find", description = "Method that return a list of Categories")
+        @RequestMapping(path = "", method = RequestMethod.GET)
+        public List<CategoryDto> findAll() {
+    
+            return this.categoryService.findAll();
+        }
+    
+        /**
+         * Método para crear o actualizar una categoria
+         *
+         * @param id PK de la entidad
+         * @param dto datos de la entidad
+         */
+        @Operation(summary = "Save or Update", description = "Method that saves or updates a Category")
+        @RequestMapping(path = { "", "/{id}" }, method = RequestMethod.PUT)
+        public void save(@PathVariable(name = "id", required = false) Long id, @RequestBody CategoryDto dto) {
 
-      /**
-      * Método para recuperar todas las Category
-      * @return
-      */
-      @RequestMapping(path = "", method = RequestMethod.GET)
-      public List<CategoryDto> findAll() {
-
-        return this.categoryService.findAll();
-      }
-
-      /**
-      * Método para crear o actualizar una Category
-      * @param dto
-      * @return
-      */
-      @RequestMapping(path = { "", "/{id}" }, method = RequestMethod.PUT)
-      public void save(@PathVariable(name = "id", required = false) Long id, @RequestBody CategoryDto dto) {
-
-        this.categoryService.save(id, dto);
-      }
-
-      /**
-      * Método para borrar una Category
-      * @param id
-      */
-      @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
-      public void delete(@PathVariable("id") Long id) {
-
-        this.categoryService.delete(id);
-      }
+            this.categoryService.save(id, dto);
+        }
+    
+        /**
+         * Método para borrar una categoria
+         *
+         * @param id PK de la entidad
+         */
+        @Operation(summary = "Delete", description = "Method that deletes a Category")
+        @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
+        public void delete(@PathVariable("id") Long id) {
+    
+            this.categoryService.delete(id);
+        }
     }
     ```
 
@@ -420,10 +455,10 @@ Ahora ya tenemos bien estructurado nuestro proyecto. Ya tenemos las dos capas ne
 Los aspectos importantes de la capa `Service` son:
 
 * Toda la lógica de negocio, operaciones y demás debe estar implementada en los servicios. Los controladores simplemente invocan servicios y transforman ciertos datos.
-* Es buena práctica que la capa de servicios se implemente usando el patrón fachada, esto quiere decir que necesitamos tener una Interface y al menos una implementación de esa Interface. Y siempre siempre debemos interactuar con la Interface. Esto nos permitirá a futuro poder sustituir la implementación por otra diferente sin que el resto del código se vea afectado. Especialmente útil cuando queremos mockear comportamientos en tests.
+* Es buena práctica que la capa de servicios se implemente usando el patrón fachada, esto quiere decir que necesitamos tener una Interface y al menos una implementación de esa Interface. Y siempre debemos interactuar con la Interface. Esto nos permitirá a futuro poder sustituir la implementación por otra diferente sin que el resto del código se vea afectado. Especialmente útil cuando queremos mockear comportamientos en tests.
 * La capa de servicio puede invocar a otros servicios en sus operaciones, pero **nunca** debe invocar a un controlador.
 * Para crear un servicio se debe anotar mediante `@Service` y además debe implementar la Interface del servicio. Un error muy común al arrancar un proyecto y ver que no funcionan las llamadas, es porqué no existe la anotación `@Service` o porqué no se ha implementado la Interface.
-* La forma de `inyectar` y utilizar componentes manejados por Springboot es mediante la anotación `@Autowired`. **NO** intentes crear un objeto de CategoryServiceImpl, ni hacer un `new`, ya que no estará manejado por Springboot y dará fallos de NullPointer. Lo mejor es dejar que Springboot lo gestione y utilizar las inyecciones de dependencias.
+* La forma de `inyectar` y utilizar componentes manejados por Spring Boot es mediante la anotación `@Autowired`. **NO** intentes crear un objeto de CategoryServiceImpl, ni hacer un `new`, ya que no estará manejado por Springboot y dará fallos de NullPointer. Lo mejor es dejar que Spring Boot lo gestione y utilizar las inyecciones de dependencias.
 
 
 ## Capa de Datos: Repository
@@ -437,20 +472,11 @@ Para el tutorial no necesitamos configurar una BBDD externa ni complicarnos dema
 
 Para esto, si te acuerdas de cuando creamos la aplicación, existen unos ficheros que se encuentran dentro de la carpeta `src/main/resources/` y que nos permiten ir depositando scripts versionados para que se ejecuten en orden una vez se levante la aplicación. Vamos a crear los nuestros:
 
-=== "schema.sql"
-    ``` SQL
-    DROP TABLE IF EXISTS CATEGORY;
-
-    CREATE TABLE CATEGORY (
-      id BIGINT IDENTITY NOT NULL PRIMARY KEY,
-      name VARCHAR(250) NOT NULL
-    );
-    ```
 === "data.sql"
     ``` SQL
-    INSERT INTO CATEGORY(id, name) VALUES (1, 'Eurogames');
-    INSERT INTO CATEGORY(id, name) VALUES (2, 'Ameritrash');
-    INSERT INTO CATEGORY(id, name) VALUES (3, 'Familiar');
+    INSERT INTO category(name) VALUES ('Eurogames');
+    INSERT INTO category(name) VALUES ('Ameritrash');
+    INSERT INTO category(name) VALUES ('Familiar');
     ```
 
 
@@ -461,61 +487,57 @@ Una vez creada la BBDD el siguiente paso es crear la entidad con la que vamos a 
 === "Category.java"
     ``` Java
     package com.ccsw.tutorial.category.model;
-
-    import javax.persistence.Column;
-    import javax.persistence.Entity;
-    import javax.persistence.GeneratedValue;
-    import javax.persistence.GenerationType;
-    import javax.persistence.Id;
-    import javax.persistence.Table;
+    
+    import jakarta.persistence.*;
 
     /**
-    * @author ccsw
-    */
+     * @author ccsw
+     * 
+     */
     @Entity
-    @Table(name = "Category")
+    @Table(name = "category")
     public class Category {
-
-      @Id
-      @GeneratedValue(strategy = GenerationType.IDENTITY)
-      @Column(name = "id", nullable = false)
-      private Long id;
-
-      @Column(name = "name", nullable = false)
-      private String name;
-
-      /**
-      * @return id
-      */
-      public Long getId() {
-
-        return this.id;
-      }
-
-      /**
-      * @param id new value of {@link #getId}.
-      */
-      public void setId(Long id) {
-
-        this.id = id;
-      }
-
-      /**
-      * @return name
-      */
-      public String getName() {
-
-        return this.name;
-      }
-
-      /**
-      * @param name new value of {@link #getName}.
-      */
-      public void setName(String name) {
-
-        this.name = name;
-      }
-
+    
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @Column(name = "id", nullable = false)
+        private Long id;
+    
+        @Column(name = "name", nullable = false)
+        private String name;
+    
+        /**
+         * @return id
+         */
+        public Long getId() {
+    
+            return this.id;
+        }
+    
+        /**
+         * @param id new value of {@link #getId}.
+         */
+        public void setId(Long id) {
+    
+            this.id = id;
+        }
+    
+        /**
+         * @return name
+         */
+        public String getName() {
+    
+            return this.name;
+        }
+    
+        /**
+         * @param name new value of {@link #getName}.
+         */
+        public void setName(String name) {
+    
+            this.name = name;
+        }
+    
     }
     ```
 
@@ -545,23 +567,23 @@ Como ya se dijo en puntos anteriores, el acceso a datos se debe hacer siempre a 
     ``` Java
     package com.ccsw.tutorial.category;
 
-    import org.springframework.data.repository.CrudRepository;
-
     import com.ccsw.tutorial.category.model.Category;
-
+    import org.springframework.data.repository.CrudRepository;
+    
     /**
-    * @author ccsw
-    */
+     * @author ccsw
+     *
+     */
     public interface CategoryRepository extends CrudRepository<Category, Long> {
-
+    
     }
     ```
 
-¿Que te parece?, sencillo, ¿no?. Spring ya tiene una implementación por defecto de un CrudRepository, tan solo tenemos que crear una interface que extienda de la interface `CrudRepository` pasandole como tipos la `Entity` y el tipo de la Primary Key. Con eso Spring construye el resto y nos provee de los métodos típicos y necesarios para un CRUD.
+¿Qué te parece?, sencillo, ¿no?. Spring ya tiene una implementación por defecto de un CrudRepository, tan solo tenemos que crear una interface que extienda de la interface `CrudRepository` pasándole como tipos la `Entity` y el tipo de la Primary Key. Con eso Spring construye el resto y nos provee de los métodos típicos y necesarios para un CRUD.
 
-Ahora vamos a utilizarla en el `Service`, pero hay un problema. El `Repository` devuelve un objeto tipo `Category` y el `Service` y `Controller` devuelven un objeto tipo `CategoryDto`. Esto es porque en cada capa se debe con un ámbito de modelos diferente. Podríamos hacer que todo el back trabajara con `Category` que son entidades de persistencia, pero no es lo correcto y nos podría llevar a cometer errores, o modificar el objeto y que sin que nosotros lo ordenásemos se persistiera ese cambio en BBDD.
+Ahora vamos a utilizarla en él `Service`, pero hay un problema. Él `Repository` devuelve un objeto tipo `Category` y él `Service` y `Controller` devuelven un objeto tipo `CategoryDto`. Esto es porque en cada capa se debe con un ámbito de modelos diferente. Podríamos hacer que todo el back trabajara con `Category` que son entidades de persistencia, pero no es lo correcto y nos podría llevar a cometer errores, o modificar el objeto y que sin que nosotros lo ordenásemos se persistiera ese cambio en BBDD.
 
-El ámbito de trabajo  de las capas con el que solemos trabajar y está más extendido es el siguiente:
+El ámbito de trabajo de las capas con el que solemos trabajar y está más extendido es el siguiente:
 
 ![step2-java5](../../assets/images/step2-java5.png)
 
@@ -570,183 +592,208 @@ El ámbito de trabajo  de las capas con el que solemos trabajar y está más ext
 * Cuando un `Controller` ejecuta una llamada a un `Service`, generalmente le pasa sus datos en DTO, y el `Service` se encarga de transformar esto a una `Entity`. A la inversa, cuando un `Service` responde a un `Controller`, él responde con una `Entity` y el `Controller` ya se encargará de transformarlo a DTO.
 * Por último, para los `Repository`, siempre se trabaja de entrada y salida con objetos tipo `Entity`
 
-Parece un lio, pero ya verás como es muy sencillo ahora que veremos el ejemplo. Una última cosa, para hacer esas transformaciones, las podemos hacer a mano usando getters y setters o bien utilizar el objeto `BeanMapper` que hemos configurado al principio como utilidad de Devonfw.
+Parece un lío, pero ya verás como es muy sencillo ahora que veremos el ejemplo. Una última cosa, para hacer esas transformaciones, las podemos hacer a mano usando getters y setters o bien utilizar el objeto `DozerBeanMapper` que hemos configurado al principio.
 
 El código debería quedar así:
 
 === "CategoryServiceImpl.java"
     ``` Java
     package com.ccsw.tutorial.category;
-
-    import java.util.List;
-
-    import org.springframework.beans.BeanUtils;
-    import org.springframework.beans.factory.annotation.Autowired;
-    import org.springframework.stereotype.Service;
-
+    
     import com.ccsw.tutorial.category.model.Category;
     import com.ccsw.tutorial.category.model.CategoryDto;
-
+    import jakarta.transaction.Transactional;
+    import org.springframework.beans.factory.annotation.Autowired;
+    import org.springframework.stereotype.Service;
+    
+    import java.util.List;
+    
     /**
-    * @author ccsw
-    *
-    */
+     * @author ccsw
+     *
+     */
     @Service
+    @Transactional
     public class CategoryServiceImpl implements CategoryService {
+    
+        @Autowired
+        CategoryRepository categoryRepository;
 
-      @Autowired
-      CategoryRepository categoryRepository;
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public List<Category> findAll() {
+        
+              return (List<Category>) this.categoryRepository.findAll();
+        }
 
-      /**
-      * {@inheritDoc}
-      */
-      @Override
-      public List<Category> findAll() {
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public void save(Long id, CategoryDto dto) {
+        
+              Category category;
+        
+              if (id == null) {
+                 category = new Category();
+              } else {
+                 category = this.categoryRepository.findById(id).orElse(null);
+              }
+        
+              category.setName(dto.getName());
+        
+              this.categoryRepository.save(category);
+        }
+        
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public void delete(Long id) throws Exception {
+        
+              if(this.categoryRepository.findById(id).orElse(null) == null){
+                 throw new Exception("Not exists");
+              }
+        
+              this.categoryRepository.deleteById(id);
+        }
 
-        return (List<Category>) this.categoryRepository.findAll();
-      }
-
-      /**
-      * {@inheritDoc}
-      */
-      @Override
-      public void save(Long id, CategoryDto dto) {
-
-        Category categoria = null;
-
-        if (id == null)
-          categoria = new Category();
-        else
-          categoria = this.categoryRepository.findById(id).orElse(null);
-
-        categoria.setName(dto.getName());
-
-        this.categoryRepository.save(categoria);
-      }
-
-      /**
-      * {@inheritDoc}
-      */
-      @Override
-      public void delete(Long id) {
-
-        this.categoryRepository.deleteById(id);
-
-      }
     }
     ```
 === "CategoryService.java"
     ``` Java
     package com.ccsw.tutorial.category;
-
-    import java.util.List;
-
+    
     import com.ccsw.tutorial.category.model.Category;
     import com.ccsw.tutorial.category.model.CategoryDto;
+    
+    import java.util.List;
 
     /**
-    * @author ccsw
-    *
-    */
+     * @author ccsw
+     * 
+     */
     public interface CategoryService {
-
-      /**
-      * Método para recuperar todas las {@link com.ccsw.tutorial.category.model.Category}
-      * @return
-      */
-      List<Category> findAll();
-
-      /**
-      * Método para crear o actualizar una {@link com.ccsw.tutorial.category.model.Category}
-      * @param dto
-      * @return
-      */
-      void save(Long id, CategoryDto dto);
-
-      /**
-      * Método para borrar una {@link com.ccsw.tutorial.category.model.Category}
-      * @param id
-      */
-      void delete(Long id);
+    
+        /**
+         * Método para recuperar todas las {@link Category}
+         *
+         * @return {@link List} de {@link Category}
+         */
+        List<Category> findAll();
+    
+        /**
+         * Método para crear o actualizar una {@link Category}
+         *
+         * @param id PK de la entidad
+         * @param dto datos de la entidad
+         */
+        void save(Long id, CategoryDto dto);
+    
+        /**
+         * Método para borrar una {@link Category}
+         *
+         * @param id PK de la entidad
+         */
+        void delete(Long id) throws Exception;
+    
     }
     ```
 === "CategoryController.java"
-    ``` Java hl_lines="28 37"
+    ``` Java hl_lines="28 42"
     package com.ccsw.tutorial.category;
-
-    import java.util.List;
-
-    import org.springframework.web.bind.annotation.CrossOrigin;
-    import org.springframework.beans.factory.annotation.Autowired;
-    import org.springframework.web.bind.annotation.PathVariable;
-    import org.springframework.web.bind.annotation.RequestBody;
-    import org.springframework.web.bind.annotation.RequestMapping;
-    import org.springframework.web.bind.annotation.RequestMethod;
-    import org.springframework.web.bind.annotation.RestController;
-
+    
+    import com.ccsw.tutorial.category.model.Category;
     import com.ccsw.tutorial.category.model.CategoryDto;
-    import com.devonfw.module.beanmapping.common.api.BeanMapper;
-
+    import io.swagger.v3.oas.annotations.Operation;
+    import io.swagger.v3.oas.annotations.tags.Tag;
+    import org.dozer.DozerBeanMapper;
+    import org.springframework.beans.factory.annotation.Autowired;
+    import org.springframework.web.bind.annotation.*;
+    
+    import java.util.List;
+    import java.util.stream.Collectors;
+    
     /**
-    * @author ccsw
-    */
+     * @author ccsw
+     *
+     */
+    @Tag(name = "Category", description = "API of Category")
     @RequestMapping(value = "/category")
     @RestController
     @CrossOrigin(origins = "*")
     public class CategoryController {
-
-      @Autowired
-      CategoryService categoryService;
-
-      @Autowired
-      BeanMapper beanMapper;
-
-      /**
-      * Método para recuperar todas las {@link com.ccsw.tutorial.category.model.Category}
-      * @return
-      */
-      @RequestMapping(path = "", method = RequestMethod.GET)
-      public List<CategoryDto> findAll() {
-
-        return this.beanMapper.mapList(this.categoryService.findAll(), CategoryDto.class);
-      }
-
-      /**
-      * Método para crear o actualizar una {@link com.ccsw.tutorial.category.model.Category}
-      * @param dto
-      * @return
-      */
-      @RequestMapping(path = { "", "/{id}" }, method = RequestMethod.PUT)
-      public void save(@PathVariable(name = "id", required = false) Long id, @RequestBody CategoryDto dto) {
-
-        this.categoryService.save(id, dto);
-      }
-
-      /**
-      * Método para borrar una {@link com.ccsw.tutorial.category.model.Category}
-      * @param id
-      */
-      @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
-      public void delete(@PathVariable("id") Long id) {
-
-        this.categoryService.delete(id);
-
-      }
+    
+        @Autowired
+        CategoryService categoryService;
+    
+        @Autowired
+        DozerBeanMapper mapper;
+    
+        /**
+         * Método para recuperar todas las {@link Category}
+         *
+         * @return {@link List} de {@link CategoryDto}
+         */
+        @Operation(summary = "Find", description = "Method that return a list of Categories"
+        )
+        @RequestMapping(path = "", method = RequestMethod.GET)
+        public List<CategoryDto> findAll() {
+    
+            List<Category> categories = this.categoryService.findAll();
+    
+            return categories.stream().map(e -> mapper.map(e, CategoryDto.class)).collect(Collectors.toList());
+        }
+    
+        /**
+         * Método para crear o actualizar una {@link Category}
+         *
+         * @param id PK de la entidad
+         * @param dto datos de la entidad
+         */
+        @Operation(summary = "Save or Update", description = "Method that saves or updates a Category"
+        )
+        @RequestMapping(path = { "", "/{id}" }, method = RequestMethod.PUT)
+        public void save(@PathVariable(name = "id", required = false) Long id, @RequestBody CategoryDto dto) {
+    
+            this.categoryService.save(id, dto);
+        }
+    
+        /**
+         * Método para borrar una {@link Category}
+         *
+         * @param id PK de la entidad
+         */
+        @Operation(summary = "Delete", description = "Method that deletes a Category")
+        @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
+        public void delete(@PathVariable("id") Long id) throws Exception {
+    
+            this.categoryService.delete(id);
+        }
+    
     }
     ```
 
-El `Service` no tiene nada raro, simplemente accede al `Repository` (siempre anotado como `@Autowired`) y recupera datos o los guarda. Fíjate en el caso especial del save que la única diferencia es que en un caso tendrá id != null y por tanto internamente hará un update, y en otro caso tendrá id == null y por tanto internamente hará un save.
+El `Service` no tiene nada raro, simplemente accede al `Repository` (siempre anotado como `@Autowired`) y recupera datos o los guarda. Fíjate en el caso especial del save que la única diferencia es que en un caso tendrá `id != null` y por tanto internamente hará un update, y en otro caso tendrá `id == null` y por tanto internamente hará un save.
 
 En cuanto a la interface, lo único que cambiamos fue los objetos de respuesta, que ahora pasan a ser de tipo `Category`. Los de entrada se mantienen como `CategoryDto`.
 
-Por último, en el `Controller` se puede ver como se utiliza el conversor de `BeanMapper` (siempre anotado como `@Autowired`), que permite traducir una lista a un tipo concreto, o un objeto único a un tipo concreto. La forma de hacer estas conversiones siempre es por nombre de propiedad. Las propiedades del objeto destino se deben llamar igual que las propiedades del objeto origen. En caso contrario se quedarán a null.
+Por último, en él `Controller` se puede ver como se utiliza el conversor de `DozerBeanMapper` (siempre anotado como `@Autowired`), que permite traducir una lista a un tipo concreto, o un objeto único a un tipo concreto. La forma de hacer estas conversiones siempre es por nombre de propiedad. Las propiedades del objeto destino se deben llamar igual que las propiedades del objeto origen. En caso contrario se quedarán a null.
+
+Finalmente, para realizar el mapeo masivo de los diferentes registros hemos utilizado la API Stream de Java que nos proporciona una forma sencilla de realizar estas operativas mediante el método intermedio `map` y el reductor por defecto para listas.
+
+!!! info "BBDD"
+    Si quires ver el contenido de la base de datos puedes acceder a un IDE web autopublicado por H2 en la ruta `http://localhost:8080/h2-console`
+
 
 ### Aspectos importantes
 
 Los aspectos importantes de la capa `Repository` son:
 
 * Al igual que los `Service`, se debe utilizar el patrón fachada, por lo que tendremos una Interface y posiblemente una implementación.
-* A menudo la implementación la hace internamente Springboot, pero hay veces que podemos hacer una implementación manual. Lo veremos en siguientes puntos.
+* A menudo la implementación la hace internamente Spring Boot, pero hay veces que podemos hacer una implementación manual. Lo veremos en siguientes puntos.
 * Los `Repository` trabajan siempre con `Entity` que no son más que mapeos de una tabla o de una vista que existe en BBDD.
 * Los `Repository` no contienen lógica de negocio, ni transformaciones, simplemente acceder a datos, persisten o devuelven información.
 * Los `Repository` **JAMÁS** deben llamar a otros `Repository` ni `Service`.
@@ -755,7 +802,7 @@ Los aspectos importantes de la capa `Repository` son:
 ## Capa de Testing: TDD
 
 Por último y aunque no debería ser lo último que se desarrolla sino todo lo contrario, debería ser lo primero en desarrollar, tenemos la batería de pruebas.
-Con fines didáctivos, he querido enseñarte un ciclo de desarrollo para ir recorriendo las diferentes capas de una aplicación pero, en realidad, para realizar el desarrollo debería aplicar [TDD (Test Driven Development)](../../appendix/tdd.md). Si quieres aprender las reglas básicas de como aplicar TDD al desarrollo diario, te recomiendo que leas el [Anexo. TDD](../../appendix/tdd.md).
+Con fines didácticos, he querido enseñarte un ciclo de desarrollo para ir recorriendo las diferentes capas de una aplicación, pero en realidad, para realizar el desarrollo debería aplicar [TDD (Test Driven Development)](../../appendix/tdd.md). Si quieres aprender las reglas básicas de como aplicar TDD al desarrollo diario, te recomiendo que leas el [Anexo. TDD](../../appendix/tdd.md).
 
 En este caso, y sin que sirva de precedente, ya tenemos implementados los métodos de la aplicación, y ahora vamos a testearlos. Existen muchas formas de testing en función del componente o la capa que se quiera testear. En realidad, a medida que vayas programando irás aprendiendo todas ellas, de momento realizaremos dos tipos de test simples que prueben las casuísticas de los métodos.
 
@@ -794,7 +841,7 @@ Pues vamos a ello.
 
 Vamos a empezar haciendo una clase de test dentro de la carpeta `src/test/java`. No queremos que los test formen parte del código productivo de la aplicación, por eso utilizamos esa ruta que queda fuera del package general de la aplicación.
 
-Crearemos las clases:
+Crearemos las clases (en la package `category`):
 
 * Test unitarios: `com.ccsw.tutorial.category.CategoryTest`
 * Test de integración: `com.ccsw.tutorial.category.CategoryIT` 
@@ -806,9 +853,6 @@ Crearemos las clases:
     import org.junit.jupiter.api.extension.ExtendWith;
     import org.mockito.junit.jupiter.MockitoExtension;
 
-    /**
-    * @author ccsw
-    */
     @ExtendWith(MockitoExtension.class)
     public class CategoryTest {
 
@@ -823,9 +867,6 @@ Crearemos las clases:
     import org.springframework.boot.web.server.LocalServerPort;
     import org.springframework.test.annotation.DirtiesContext;
 
-    /**
-    * @author ccsw
-    */
     @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
     @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
     public class CategoryIT {
@@ -839,7 +880,7 @@ Crearemos las clases:
     }
     ```
 
-Estas clases son sencillas y tan solo tienen anotaciones específicas de Springboot para cada tipo de test:
+Estas clases son sencillas y tan solo tienen anotaciones específicas de Spring Boot para cada tipo de test:
 
 * `@SpringBootTest`. Esta anotación lo que hace es inicializar el contexto de Spring cada vez que se inician los test de jUnit. Aunque el contexto tarda unos segundos en arrancar, lo bueno que tiene es que solo se inicializa una vez y se lanzan todos los jUnits en batería con el mismo contexto.
 * `@DirtiesContext`. Esta anotación le indica a Spring que los test van a ser transaccionales, y por tanto cuando termine la ejecución de cada uno de los test, automáticamente por la anotación de arriba, Spring hará un rearranque parcial del contexto y dejará el estado de la BBDD como estaba inicialmente.
@@ -850,12 +891,13 @@ Para las pruebas de integración nos faltará configurar la aplicación de test,
 === "application.properties"
     ``` properties
     #Database
-    spring.jpa.hibernate.ddl-auto=none
-    spring.datasource.driver-class-name=org.h2.Driver
-    spring.datasource.url=jdbc:h2:mem:test;mode=mysql
+    spring.datasource.url=jdbc:h2:mem:testdb
     spring.datasource.username=sa
     spring.datasource.password=sa
+    spring.datasource.driver-class-name=org.h2.Driver
+    
     spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
+    spring.jpa.defer-datasource-initialization=true
     ```
 
 Con todo esto ya podemos crear nuestro primer test. Iremos a las clases `CategoryIT` y `CategoryTest` donde añadiremos un método público. Los test siempre tienen que ser métodos públicos que devuelvan el tipo `void`.
@@ -927,7 +969,7 @@ Con todo esto ya podemos crear nuestro primer test. Iremos a las clases `Categor
     public class CategoryIT {
     
         public static final String LOCALHOST = "http://localhost:";
-        public static final String SERVICE_PATH = "/category/";
+        public static final String SERVICE_PATH = "/category";
         
         @LocalServerPort
         private int port;
@@ -952,7 +994,7 @@ Es muy importante marcar cada método de prueba con la anotación `@Test`, en ca
 
 En los ejemplos anteriores `(CategoryTest)`, por un lado hemos comprobado el método `findAll()` el cual por debajo invoca una llamada al repository de categoría, la cual hemos simulado con una respuesta ficticia limitándonos únicamente a la lógica contenida en la operación de negocio.
 
-Mientras que por otro lado `(CategoryIT)`, hemos probado la llamando al método `GET` del endpoint `http://localhost:XXXX/category/` comprobando que realmente nos devuelve 3 resultados, que son los que hay en BBDD inicialmente.
+Mientras que por otro lado `(CategoryIT)`, hemos probado la llamando al método `GET` del endpoint `http://localhost:XXXX/category` comprobando que realmente nos devuelve 3 resultados, que son los que hay en BBDD inicialmente.
 
 
 !!! tip "Muy importante: Nomenclatura de los tests"
@@ -1056,7 +1098,7 @@ Empezamos con el sencillo, un test que pruebe una modificación existente.
           CategoryDto dto = new CategoryDto();
           dto.setName(NEW_CATEGORY_NAME);
     
-          restTemplate.exchange(LOCALHOST + port + SERVICE_PATH + MODIFY_CATEGORY_ID, HttpMethod.PUT, new HttpEntity<>(dto), Void.class);
+          restTemplate.exchange(LOCALHOST + port + SERVICE_PATH + "/" + MODIFY_CATEGORY_ID, HttpMethod.PUT, new HttpEntity<>(dto), Void.class);
     
           ResponseEntity<List<CategoryDto>> response = restTemplate.exchange(LOCALHOST + port + SERVICE_PATH, HttpMethod.GET, null, responseType);
           assertNotNull(response);
@@ -1084,7 +1126,7 @@ En el siguiente test, probaremos un resultado erróneo.
           CategoryDto dto = new CategoryDto();
           dto.setName(NEW_CATEGORY_NAME);
     
-          ResponseEntity<?> response = restTemplate.exchange(LOCALHOST + port + SERVICE_PATH + NEW_CATEGORY_ID, HttpMethod.PUT, new HttpEntity<>(dto), Void.class);
+          ResponseEntity<?> response = restTemplate.exchange(LOCALHOST + port + SERVICE_PATH + "/" + NEW_CATEGORY_ID, HttpMethod.PUT, new HttpEntity<>(dto), Void.class);
     
           assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
     }
@@ -1101,7 +1143,10 @@ Ya por último implementamos las pruebas de borrado.
     ``` Java
 
     @Test
-    public void deleteExistsCategoryIdShouldDelete() {
+    public void deleteExistsCategoryIdShouldDelete() throws Exception {
+    
+          Category category = mock(Category.class);
+          when(categoryRepository.findById(EXISTS_CATEGORY_ID)).thenReturn(Optional.of(category));
     
           categoryService.delete(EXISTS_CATEGORY_ID);
     
@@ -1116,7 +1161,7 @@ Ya por último implementamos las pruebas de borrado.
     @Test
     public void deleteWithExistsIdShouldDeleteCategory() {
     
-          restTemplate.exchange(LOCALHOST + port + SERVICE_PATH + DELETE_CATEGORY_ID, HttpMethod.DELETE, null, Void.class);
+          restTemplate.exchange(LOCALHOST + port + SERVICE_PATH + "/" + DELETE_CATEGORY_ID, HttpMethod.DELETE, null, Void.class);
     
           ResponseEntity<List<CategoryDto>> response = restTemplate.exchange(LOCALHOST + port + SERVICE_PATH, HttpMethod.GET, null, responseType);
           assertNotNull(response);
@@ -1126,7 +1171,7 @@ Ya por último implementamos las pruebas de borrado.
     @Test
     public void deleteWithNotExistsIdShouldInternalError() {
     
-          ResponseEntity<?> response = restTemplate.exchange(LOCALHOST + port + SERVICE_PATH + NEW_CATEGORY_ID, HttpMethod.DELETE, null, Void.class);
+          ResponseEntity<?> response = restTemplate.exchange(LOCALHOST + port + SERVICE_PATH + "/" + NEW_CATEGORY_ID, HttpMethod.DELETE, null, Void.class);
     
           assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
     }
@@ -1139,7 +1184,7 @@ En lo relativo a las pruebas de integración, en el primer test, se invoca el m�
 Con esto tendríamos más o menos probados los casos básicos de nuestra aplicación y tendríamos una pequeña red de seguridad que nos ayudaría por si a futuro necesitamos hacer algún cambio o evolutivo.
 
 
-## ¿Que hemos aprendido?
+## ¿Qúe hemos aprendido?
 
 Resumiendo un poco los pasos que hemos seguido:
 

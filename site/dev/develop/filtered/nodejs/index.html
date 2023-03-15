@@ -1,0 +1,1421 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.2.5">
+    
+    
+      
+        <title>🟢 Nodejs - Tutorial Frontend - Backend</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.2d9f7617.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.e6a45f82.min.css">
+        
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/style.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#listado-simple-nodejs" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../../.." title="Tutorial Frontend - Backend" class="md-header__button md-logo" aria-label="Tutorial Frontend - Backend" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Tutorial Frontend - Backend
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              🟢 Nodejs
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Limpiar" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Tutorial Frontend - Backend" class="md-nav__button md-logo" aria-label="Tutorial Frontend - Backend" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Tutorial Frontend - Backend
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        Bienvenido!
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../thanks/" class="md-nav__link">
+        Agradecimientos!
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../usecases/" class="md-nav__link">
+        Contexto de la aplicación
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          Entorno de desarrollo
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Entorno de desarrollo" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Entorno de desarrollo
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../install/angular/" class="md-nav__link">
+        🔵 Angular
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../install/springboot/" class="md-nav__link">
+        🟢 Springboot
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../install/nodejs/" class="md-nav__link">
+        🟢 Nodejs
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          Estructura y buenas prácticas
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Estructura y buenas prácticas" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Estructura y buenas prácticas
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cleancode/angular/" class="md-nav__link">
+        🔵 Angular
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cleancode/springboot/" class="md-nav__link">
+        🟢 Springboot
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cleancode/nodejs/" class="md-nav__link">
+        🟢 Nodejs
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_6">
+          Code: Listado simple
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Code: Listado simple" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Code: Listado simple
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basic/angular/" class="md-nav__link">
+        🔵 Angular
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basic/springboot/" class="md-nav__link">
+        🟢 Springboot
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basic/nodejs/" class="md-nav__link">
+        🟢 Nodejs
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_7">
+          Code: Listado paginado
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Code: Listado paginado" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          Code: Listado paginado
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../paginated/angular/" class="md-nav__link">
+        🔵 Angular
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../paginated/springboot/" class="md-nav__link">
+        🟢 Springboot
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../paginated/nodejs/" class="md-nav__link">
+        🟢 Nodejs
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8" type="checkbox" id="__nav_8" checked>
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_8">
+          Code: Listado filtrado
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Code: Listado filtrado" data-md-level="1">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          Code: Listado filtrado
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../angular/" class="md-nav__link">
+        🔵 Angular
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../springboot/" class="md-nav__link">
+        🟢 Springboot
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          🟢 Nodejs
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        🟢 Nodejs
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#crear-modelos" class="md-nav__link">
+    Crear Modelos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementar-el-service" class="md-nav__link">
+    Implementar el Service
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementar-el-controller" class="md-nav__link">
+    Implementar el Controller
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementar-las-rutas" class="md-nav__link">
+    Implementar las Rutas
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#probar-las-operaciones" class="md-nav__link">
+    Probar las operaciones
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementar-validaciones" class="md-nav__link">
+    Implementar validaciones
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementar validaciones">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#validacion-en-borrado" class="md-nav__link">
+    Validación en borrado
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validacion-en-creacion" class="md-nav__link">
+    Validación en creación
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exercise/" class="md-nav__link">
+        Ahora hazlo tu!
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10" type="checkbox" id="__nav_10" >
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_10">
+          Anexos
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Anexos" data-md-level="1">
+        <label class="md-nav__title" for="__nav_10">
+          <span class="md-nav__icon md-icon"></span>
+          Anexos
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appendix/git/" class="md-nav__link">
+        GIT: Tutorial básico
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appendix/rest/" class="md-nav__link">
+        API Rest
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appendix/tdd/" class="md-nav__link">
+        TDD
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appendix/jpa/" class="md-nav__link">
+        Spring Data: JPA
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#crear-modelos" class="md-nav__link">
+    Crear Modelos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementar-el-service" class="md-nav__link">
+    Implementar el Service
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementar-el-controller" class="md-nav__link">
+    Implementar el Controller
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementar-las-rutas" class="md-nav__link">
+    Implementar las Rutas
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#probar-las-operaciones" class="md-nav__link">
+    Probar las operaciones
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementar-validaciones" class="md-nav__link">
+    Implementar validaciones
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementar validaciones">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#validacion-en-borrado" class="md-nav__link">
+    Validación en borrado
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validacion-en-creacion" class="md-nav__link">
+    Validación en creación
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+
+
+<h1 id="listado-simple-nodejs">Listado simple - Nodejs</h1>
+<p>En este punto ya tenemos dos listados, uno básico y otro paginado. Ahora vamos a implementar un listado un poco diferente, este listado va a tener filtros de búsqueda.</p>
+<p>Como ya conocemos como se debe desarrollar, en este ejemplo vamos a ir más rápidos y nos vamos a centrar únicamente en las novedades.</p>
+<h2 id="crear-modelos">Crear Modelos</h2>
+<p>Lo primero que vamos a hacer es crear el modelo de author para trabajar con BBDD. En la carpeta schemas creamos el archivo <code>game.schema.js</code>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">game.schema.js</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">mongoose</span> <span class="kr">from</span> <span class="s2">&quot;mongoose&quot;</span><span class="p">;</span>
+<span class="kd">const</span> <span class="p">{</span> <span class="nx">Schema</span><span class="p">,</span> <span class="nx">model</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">mongoose</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">normalize</span> <span class="kr">from</span> <span class="s1">&#39;normalize-mongoose&#39;</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">gameSchema</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Schema</span><span class="p">({</span>
+    <span class="nx">title</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">type</span><span class="o">:</span> <span class="nb">String</span><span class="p">,</span>
+        <span class="nx">require</span><span class="o">:</span> <span class="kc">true</span>
+    <span class="p">},</span>
+    <span class="nx">age</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">type</span><span class="o">:</span> <span class="nb">Number</span><span class="p">,</span>
+        <span class="nx">require</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nx">max</span><span class="o">:</span> <span class="mf">99</span><span class="p">,</span>
+        <span class="nx">min</span><span class="o">:</span> <span class="mf">0</span>
+    <span class="p">},</span>
+    <span class="nx">category</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">type</span><span class="o">:</span> <span class="nx">Schema</span><span class="p">.</span><span class="nx">Types</span><span class="p">.</span><span class="nx">ObjectId</span><span class="p">,</span>
+        <span class="nx">ref</span><span class="o">:</span> <span class="s1">&#39;Category&#39;</span><span class="p">,</span>
+        <span class="nx">required</span><span class="o">:</span> <span class="kc">true</span>
+    <span class="p">},</span>
+    <span class="nx">author</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">type</span><span class="o">:</span> <span class="nx">Schema</span><span class="p">.</span><span class="nx">Types</span><span class="p">.</span><span class="nx">ObjectId</span><span class="p">,</span>
+        <span class="nx">ref</span><span class="o">:</span> <span class="s1">&#39;Author&#39;</span><span class="p">,</span>
+        <span class="nx">required</span><span class="o">:</span> <span class="kc">true</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="nx">gameSchema</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="nx">normalize</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">GameModel</span> <span class="o">=</span> <span class="nx">model</span><span class="p">(</span><span class="s1">&#39;Game&#39;</span><span class="p">,</span> <span class="nx">gameSchema</span><span class="p">);</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">GameModel</span><span class="p">;</span>
+</code></pre></div>
+<p>Lo más novedoso aquí es que ahora cada juego va a tener una categoría y un autor asociados. Para ello simplemente en el tipo del dato <code>Category</code> y <code>Author</code> tenemos que hacer referencia al id del esquema deseado.</p>
+<h2 id="implementar-el-service">Implementar el Service</h2>
+<p>Creamos el service correspondiente <code>game.service.js</code>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">game.service.js</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">GameModel</span> <span class="kr">from</span> <span class="s1">&#39;../schemas/game.schema.js&#39;</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">getGames</span> <span class="o">=</span> <span class="k">async</span> <span class="p">(</span><span class="nx">title</span><span class="p">,</span> <span class="nx">category</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">regexTitle</span> <span class="o">=</span> <span class="ow">new</span> <span class="nb">RegExp</span><span class="p">(</span><span class="nx">title</span><span class="p">,</span> <span class="s1">&#39;i&#39;</span><span class="p">);</span>
+        <span class="kd">const</span> <span class="nx">find</span> <span class="o">=</span> <span class="nx">category</span><span class="o">?</span> <span class="p">{</span> <span class="nx">$and</span><span class="o">:</span> <span class="p">[{</span> <span class="nx">title</span><span class="o">:</span> <span class="nx">regexTitle</span> <span class="p">},</span> <span class="p">{</span> <span class="nx">category</span><span class="o">:</span> <span class="nx">category</span> <span class="p">}]</span> <span class="p">}</span> <span class="o">:</span> <span class="p">{</span> <span class="nx">title</span><span class="o">:</span> <span class="nx">regexTitle</span> <span class="p">};</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="nx">GameModel</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="nx">find</span><span class="p">).</span><span class="nx">sort</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">).</span><span class="nx">populate</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">).</span><span class="nx">populate</span><span class="p">(</span><span class="s1">&#39;author&#39;</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">catch</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="ne">Error</span><span class="p">(</span><span class="s1">&#39;Error fetching games&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">createGame</span> <span class="o">=</span> <span class="k">async</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">game</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">GameModel</span><span class="p">({</span>
+            <span class="p">...</span><span class="nx">data</span><span class="p">,</span>
+            <span class="nx">category</span><span class="o">:</span> <span class="nx">data</span><span class="p">.</span><span class="nx">category</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span>
+            <span class="nx">author</span><span class="o">:</span> <span class="nx">data</span><span class="p">.</span><span class="nx">author</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span>
+        <span class="p">});</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="nx">game</span><span class="p">.</span><span class="nx">save</span><span class="p">();</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="ne">Error</span><span class="p">(</span><span class="s1">&#39;Error creating game&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">updateGame</span> <span class="o">=</span> <span class="k">async</span> <span class="p">(</span><span class="nx">id</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">GameModel</span><span class="p">.</span><span class="nx">findById</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">game</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="ne">Error</span><span class="p">(</span><span class="s1">&#39;There is no game with that Id&#39;</span><span class="p">);</span>
+        <span class="p">}</span>    
+        <span class="kd">const</span> <span class="nx">gameToUpdate</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="p">...</span><span class="nx">data</span><span class="p">,</span>
+            <span class="nx">category</span><span class="o">:</span> <span class="nx">data</span><span class="p">.</span><span class="nx">category</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span>
+            <span class="nx">author</span><span class="o">:</span> <span class="nx">data</span><span class="p">.</span><span class="nx">author</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span>
+        <span class="p">};</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="nx">GameModel</span><span class="p">.</span><span class="nx">findByIdAndUpdate</span><span class="p">(</span><span class="nx">id</span><span class="p">,</span> <span class="nx">gameToUpdate</span><span class="p">,</span> <span class="p">{</span> <span class="ow">new</span><span class="o">:</span> <span class="kc">false</span> <span class="p">});</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="ne">Error</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>En este caso recibimos en el método para recuperar juegos dos parámetros, el titulo del juego y la categoría. Aquí vamos a utilizar una expresión regular para que podamos encontrar cualquier juego que contenga el titulo que pasemos en su nombre. Con la categoría tiene que ser el valor exacto de su id. El método populate lo que hace es traernos toda la información de la categoría y del autor. Sino lo usásemos solo nos recuperaría el id.</p>
+<h2 id="implementar-el-controller">Implementar el Controller</h2>
+<p>Creamos el controlador <code>game.controller.js</code>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">game.controller.js</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="o">*</span> <span class="kr">as</span> <span class="nx">GameService</span> <span class="kr">from</span> <span class="s1">&#39;../services/game.service.js&#39;</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">getGames</span> <span class="o">=</span> <span class="k">async</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">titleToFind</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">query</span><span class="o">?</span><span class="p">.</span><span class="nx">title</span> <span class="o">||</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+        <span class="kd">const</span> <span class="nx">categoryToFind</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">query</span><span class="o">?</span><span class="p">.</span><span class="nx">idCategory</span> <span class="o">||</span> <span class="kc">null</span><span class="p">;</span>
+        <span class="kd">const</span> <span class="nx">games</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">GameService</span><span class="p">.</span><span class="nx">getGames</span><span class="p">(</span><span class="nx">titleToFind</span><span class="p">,</span> <span class="nx">categoryToFind</span><span class="p">);</span>
+        <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">200</span><span class="p">).</span><span class="nx">json</span><span class="p">(</span><span class="nx">games</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">catch</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">400</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span>
+            <span class="nx">msg</span><span class="o">:</span> <span class="nx">err</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">createGame</span> <span class="o">=</span> <span class="k">async</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">GameService</span><span class="p">.</span><span class="nx">createGame</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">);</span>
+        <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">200</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span>
+            <span class="nx">game</span>
+        <span class="p">});</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">400</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span>
+            <span class="nx">msg</span><span class="o">:</span> <span class="nx">err</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">updateGame</span> <span class="o">=</span> <span class="k">async</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">gameId</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
+    <span class="k">try</span> <span class="p">{</span>
+        <span class="k">await</span> <span class="nx">GameService</span><span class="p">.</span><span class="nx">updateGame</span><span class="p">(</span><span class="nx">gameId</span><span class="p">,</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">);</span>
+        <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">200</span><span class="p">).</span><span class="nx">json</span><span class="p">(</span><span class="mf">1</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">400</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span>
+            <span class="nx">msg</span><span class="o">:</span> <span class="nx">err</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Los métodos son muy parecidos al resto de los controllers. En este caso para recuperar los datos del filtro tendremos que hacerlo con <code>req.query</code> para leer los datos que nos lleguen como query params en la url. Por ejemplo: <code>http://localhost:8080/game?title=trivial&amp;category=1</code></p>
+<h2 id="implementar-las-rutas">Implementar las Rutas</h2>
+<p>Y por último creamos nuestro archivo de rutas <code>game.routes.js</code>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:1"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">game.routes.js</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Router</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;express&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">check</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;express-validator&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">validateFields</span> <span class="kr">from</span> <span class="s1">&#39;../middlewares/validateFields.js&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">createGame</span><span class="p">,</span> <span class="nx">getGames</span><span class="p">,</span> <span class="nx">updateGame</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;../controllers/game.controller.js&#39;</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">gameRouter</span> <span class="o">=</span> <span class="nx">Router</span><span class="p">();</span>
+
+<span class="nx">gameRouter</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="s1">&#39;/:id&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="nx">check</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">).</span><span class="nx">not</span><span class="p">().</span><span class="nx">isEmpty</span><span class="p">(),</span>
+    <span class="nx">check</span><span class="p">(</span><span class="s1">&#39;age&#39;</span><span class="p">).</span><span class="nx">not</span><span class="p">().</span><span class="nx">isEmpty</span><span class="p">(),</span>
+    <span class="nx">check</span><span class="p">(</span><span class="s1">&#39;age&#39;</span><span class="p">).</span><span class="nx">isNumeric</span><span class="p">(),</span>
+    <span class="nx">check</span><span class="p">(</span><span class="s1">&#39;category.id&#39;</span><span class="p">).</span><span class="nx">not</span><span class="p">().</span><span class="nx">isEmpty</span><span class="p">(),</span>
+    <span class="nx">check</span><span class="p">(</span><span class="s1">&#39;author.id&#39;</span><span class="p">).</span><span class="nx">not</span><span class="p">().</span><span class="nx">isEmpty</span><span class="p">(),</span>
+    <span class="nx">validateFields</span>
+<span class="p">],</span> <span class="nx">updateGame</span><span class="p">);</span>
+
+<span class="nx">gameRouter</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="nx">check</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">).</span><span class="nx">not</span><span class="p">().</span><span class="nx">isEmpty</span><span class="p">(),</span>
+    <span class="nx">check</span><span class="p">(</span><span class="s1">&#39;age&#39;</span><span class="p">).</span><span class="nx">not</span><span class="p">().</span><span class="nx">isEmpty</span><span class="p">(),</span>
+    <span class="nx">check</span><span class="p">(</span><span class="s1">&#39;age&#39;</span><span class="p">).</span><span class="nx">isNumeric</span><span class="p">(),</span>
+    <span class="nx">check</span><span class="p">(</span><span class="s1">&#39;category.id&#39;</span><span class="p">).</span><span class="nx">not</span><span class="p">().</span><span class="nx">isEmpty</span><span class="p">(),</span>
+    <span class="nx">check</span><span class="p">(</span><span class="s1">&#39;author.id&#39;</span><span class="p">).</span><span class="nx">not</span><span class="p">().</span><span class="nx">isEmpty</span><span class="p">(),</span>
+    <span class="nx">validateFields</span>
+<span class="p">],</span> <span class="nx">createGame</span><span class="p">);</span>
+
+<span class="nx">gameRouter</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="nx">getGames</span><span class="p">);</span>
+<span class="nx">gameRouter</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/:query&#39;</span><span class="p">,</span> <span class="nx">getGames</span><span class="p">);</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">gameRouter</span><span class="p">;</span>
+</code></pre></div>
+<p>En este caso hemos tenido que meter dos rutas para <code>get</code>, una para cuando se informen los filtros y otra para cuando no vayan informados. Si lo hiciéramos con una única ruta nos fallaría en el otro caso.</p>
+<p>Finalmente en nuestro archivo <code>index.js</code> vamos a añadir el nuevo router:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:1"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">index.js</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="p">...</span>
+
+<span class="k">import</span> <span class="nx">gameRouter</span> <span class="kr">from</span> <span class="s1">&#39;./src/routes/game.routes.js&#39;</span><span class="p">;</span>
+
+<span class="p">...</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="s1">&#39;/game&#39;</span><span class="p">,</span> <span class="nx">gameRouter</span><span class="p">);</span>
+
+<span class="p">...</span>
+</code></pre></div>
+<h2 id="probar-las-operaciones">Probar las operaciones</h2>
+<p>Y ahora que tenemos todo creado, ya podemos probarlo con Postman:</p>
+<p>Por un lado creamos juegos con:</p>
+<p><strong> PUT /game </strong></p>
+<p><strong> PUT /game/{id} </strong></p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Nuevo juego&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;age&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;18&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;category&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;63e8b795f7dae4b980b63202&quot;</span><span class="w"></span>
+<span class="w"> </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;author&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;63e8bda064c208e065667bfa&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<p><img alt="Postman" src="../../../assets/images/step3-nodejs1.png" /></p>
+<p>También podemos filtrar y recuperar información:</p>
+<p><strong> GET /game </strong></p>
+<p><strong> GET /game?title=xxx </strong></p>
+<p><strong> GET /game?idCategory=xxx </strong></p>
+<p><img alt="Postman" src="../../../assets/images/step3-nodejs2.png" /></p>
+<p><img alt="Postman" src="../../../assets/images/step3-nodejs3.png" /></p>
+<h2 id="implementar-validaciones">Implementar validaciones</h2>
+<p>Ahora que ya tenemos todos nuestros CRUDs creados vamos a introducir unas pequeñas validaciones.</p>
+<h3 id="validacion-en-borrado">Validación en borrado</h3>
+<p>La primera validación sera para que no podamos borrar categorías ni autores que tengan un juego asociado. Para ello primero tendremos que crear un método en el servicio de juegos para buscar los juegos que correspondan con un campo dado. En <code>game.service.js</code> añadimos:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:1"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">game.service.js</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="p">...</span>
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">getGame</span> <span class="o">=</span> <span class="k">async</span> <span class="p">(</span><span class="nx">field</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="nx">GameModel</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="nx">field</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="ne">Error</span><span class="p">(</span><span class="s1">&#39;Error fetching games&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="p">...</span>
+</code></pre></div>
+<p>Y ahora en <code>category.service.js</code> importamos el método creado y modificamos el método para borrar categorías:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:1"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">category.service.js</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="p">...</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">getGame</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;./game.service.js&#39;</span><span class="p">;</span>
+<span class="p">...</span>
+
+<span class="p">...</span>
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">deleteCategory</span> <span class="o">=</span> <span class="k">async</span> <span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">category</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">CategoryModel</span><span class="p">.</span><span class="nx">findById</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">category</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="s1">&#39;There is no category with that Id&#39;</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="kd">const</span> <span class="nx">games</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">getGame</span><span class="p">({</span><span class="nx">category</span><span class="p">});</span>
+        <span class="k">if</span><span class="p">(</span><span class="nx">games</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mf">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="s1">&#39;There are games related to this category&#39;</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="nx">CategoryModel</span><span class="p">.</span><span class="nx">findByIdAndDelete</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="ne">Error</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="p">...</span>
+</code></pre></div>
+<p>De este modo si encontramos algún juego con esta categoría no nos dejará borrarla.</p>
+<p>Por último, hacemos lo mismo en <code>author.service.js</code>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="8:1"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">author.service.js</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="p">...</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">getGame</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;./game.service.js&#39;</span><span class="p">;</span>
+<span class="p">...</span>
+
+<span class="p">...</span>
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">deleteAuthor</span> <span class="o">=</span> <span class="k">async</span> <span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">author</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">AuthorModel</span><span class="p">.</span><span class="nx">findById</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">author</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="s1">&#39;There is no author with that Id&#39;</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="kd">const</span> <span class="nx">games</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">getGame</span><span class="p">({</span><span class="nx">author</span><span class="p">});</span>
+        <span class="k">if</span><span class="p">(</span><span class="nx">games</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mf">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="s1">&#39;There are games related to this author&#39;</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="nx">AuthorModel</span><span class="p">.</span><span class="nx">findByIdAndDelete</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="ne">Error</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="p">...</span>
+</code></pre></div>
+<h3 id="validacion-en-creacion">Validación en creación</h3>
+<p>En las creaciones es conveniente validad la existencia de las entidades relacionadas para garantizar la integridad de la BBDD.</p>
+<p>Para esto vamos a introducir una validación en la creación y edición de los juegos para garantizar que la categoría y el autor proporcionados existen.</p>
+<p>En primer lugar vamos a crear los servicios de consulta de categoría y autor:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="9:1"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">category.service.js</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="p">...</span>
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">getCategory</span> <span class="o">=</span> <span class="k">async</span> <span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="nx">CategoryModel</span><span class="p">.</span><span class="nx">findById</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="ne">Error</span><span class="p">(</span><span class="s1">&#39;There is no category with that Id&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="p">...</span>
+</code></pre></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="10:1"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">author.service.js</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="p">...</span>
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">getAuthor</span> <span class="o">=</span> <span class="k">async</span> <span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="nx">AuthorModel</span><span class="p">.</span><span class="nx">findById</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="ne">Error</span><span class="p">(</span><span class="s1">&#39;There is no author with that Id&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="p">...</span>
+</code></pre></div>
+<p>Teniendo los servicios ya disponibles, vamos a añadir las validaciones a los servicios de creación y edición:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="11:1"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><div class="tabbed-labels"><label for="__tabbed_11_1">game.service.js</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="p">...</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">getCategory</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;./category.service.js&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">getAuthor</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;./author.service.js&#39;</span><span class="p">;</span>
+<span class="p">...</span>
+
+<span class="p">...</span>
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">createGame</span> <span class="o">=</span> <span class="k">async</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">category</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">getCategory</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">category</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">category</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="ne">Error</span><span class="p">(</span><span class="s1">&#39;There is no category with that Id&#39;</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="kd">const</span> <span class="nx">author</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">getAuthor</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">author</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">author</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="ne">Error</span><span class="p">(</span><span class="s1">&#39;There is no author with that Id&#39;</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="kd">const</span> <span class="nx">game</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">GameModel</span><span class="p">({</span>
+            <span class="p">...</span><span class="nx">data</span><span class="p">,</span>
+            <span class="nx">category</span><span class="o">:</span> <span class="nx">data</span><span class="p">.</span><span class="nx">category</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span>
+            <span class="nx">author</span><span class="o">:</span> <span class="nx">data</span><span class="p">.</span><span class="nx">author</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span>
+        <span class="p">});</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="nx">game</span><span class="p">.</span><span class="nx">save</span><span class="p">();</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="ne">Error</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="p">...</span>
+
+<span class="p">...</span>
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">updateGame</span> <span class="o">=</span> <span class="k">async</span> <span class="p">(</span><span class="nx">id</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">GameModel</span><span class="p">.</span><span class="nx">findById</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">game</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="ne">Error</span><span class="p">(</span><span class="s1">&#39;There is no game with that Id&#39;</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="kd">const</span> <span class="nx">category</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">getCategory</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">category</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">category</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="ne">Error</span><span class="p">(</span><span class="s1">&#39;There is no category with that Id&#39;</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="kd">const</span> <span class="nx">author</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">getAuthor</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">author</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">author</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="ne">Error</span><span class="p">(</span><span class="s1">&#39;There is no author with that Id&#39;</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="kd">const</span> <span class="nx">gameToUpdate</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="p">...</span><span class="nx">data</span><span class="p">,</span>
+            <span class="nx">category</span><span class="o">:</span> <span class="nx">data</span><span class="p">.</span><span class="nx">category</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span>
+            <span class="nx">author</span><span class="o">:</span> <span class="nx">data</span><span class="p">.</span><span class="nx">author</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span>
+        <span class="p">};</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="nx">GameModel</span><span class="p">.</span><span class="nx">findByIdAndUpdate</span><span class="p">(</span><span class="nx">id</span><span class="p">,</span> <span class="nx">gameToUpdate</span><span class="p">,</span> <span class="p">{</span> <span class="ow">new</span><span class="o">:</span> <span class="kc">false</span> <span class="p">});</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="ne">Error</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="p">...</span>
+</code></pre></div>
+<p>Con esto ya tendríamos acabado nuestro CRUD.</p>
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Pie">
+      
+        
+        <a href="../springboot/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: 🟢 Springboot" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              🟢 Springboot
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../../../exercise/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Ahora hazlo tu!" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Siguiente
+              </span>
+              Ahora hazlo tu!
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.path", "navigation.indexes"], "translations": {"clipboard.copy": "Copiar al portapapeles", "clipboard.copied": "Copiado al portapapeles", "search.config.lang": "es", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "B\u00fasqueda", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.term.missing": "Falta", "select.version.title": "Seleccionar versi\u00f3n"}, "search": "../../../assets/javascripts/workers/search.bd0b6b67.min.js"}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.467223ff.min.js"></script>
+      
+    
+  </body>
+</html>
