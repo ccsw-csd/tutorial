@@ -5,7 +5,8 @@ Ahora que ya tenemos listo el proyecto frontend de Angular (en el puerto 4200), 
 ## Primeros pasos
 
 !!! success "Antes de empezar"
-    Antes de empezar esta parte te recomendamos encarecidamente que hagas el tutorial que viene en la propia página de Angular, donde explican algunos de los conceptos básicos y generales de las aplicaciones. Te servirá mucho para conocer algunos de los aspectos y componentes que utilizamos durante este tutorial. Lo puedes visitar desde su web [Tour of Heroes](https://angular.io/tutorial)
+    Quiero hacer hincapié que Angular tiene una documentación muy extensa y completa, así que te recomiendo que hagas uso de ella cuando tengas cualquier duda. Tanto en la propia web de documentación de [Angular](https://angular.io/docs) como en la web de componentes [Angular Material](https://material.angular.io/components/categories) puedes buscar casi cualquier ejemplo que necesites.
+
 
 Si abrimos el proyecto con el IDE que tengamos (Visual Studio Code en el caso del tutorial) podemos ver que en la carpeta `src/app` existen unos ficheros ya creados por defecto. Estos ficheros son:
 
@@ -814,8 +815,8 @@ Vamos a implementar funcionalidad sobre el icono `editar`, tendremos que modific
             <ng-container matColumnDef="action">
                 <mat-header-cell *matHeaderCellDef></mat-header-cell>
                 <mat-cell *matCellDef="let element">
-                    <button mat-icon-button color="primary">
-                        <mat-icon (click)="editCategory(element)">edit</mat-icon>
+                    <button mat-icon-button color="primary" (click)="editCategory(element)">
+                        <mat-icon>edit</mat-icon>
                     </button>
                     <button mat-icon-button color="accent"><mat-icon>clear</mat-icon></button>
                 </mat-cell>
@@ -1058,11 +1059,11 @@ Ya por último, una vez tenemos el componente genérico de dialogo, vamos a util
         <ng-container matColumnDef="action">
             <mat-header-cell *matHeaderCellDef></mat-header-cell>
             <mat-cell *matCellDef="let element">
-                <button mat-icon-button color="primary">
-                    <mat-icon (click)="editCategory(element)">edit</mat-icon>
+                <button mat-icon-button color="primary" (click)="editCategory(element)">
+                    <mat-icon>edit</mat-icon>
                 </button>
-                <button mat-icon-button color="accent">
-                    <mat-icon (click)="deleteCategory(element)">clear</mat-icon>
+                <button mat-icon-button color="accent" (click)="deleteCategory(element)">
+                    <mat-icon>clear</mat-icon>
                 </button>
             </mat-cell>
         </ng-container>

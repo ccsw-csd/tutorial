@@ -25,7 +25,7 @@ Un formulario de edición / alta, cuyo único dato editable sea el nombre. Adem�
 Para empezar te daré unos consejos:
 
 - Recuerda crear la tabla de la BBDD y sus datos
-- Intenta primero hacer el listado completo, en el orden que más te guste: Angular o Springboot.
+- Intenta primero hacer el listado completo, en el orden que más te guste: frontend o backend.
 - Completa el listado conectando ambas capas.
 - Termina el caso de uso haciendo las funcionalidades de edición, nuevo y borrado. Presta atención a la validación a la hora de guardar un cliente, **NO** se puede guardar si el nombre ya existe.
 
@@ -76,10 +76,11 @@ Las validaciones son sencillas aunque laboriosas:
 Para empezar te daré unos consejos:
 
 - Recuerda crear la tabla de la BBDD y sus datos
-- Intenta primero hacer el listado paginado sin filtros, en el orden que más te guste: Angular o Springboot. Recuerda que se trata de un listado paginado, así que deberás utilizar el obtejo `Page`.
+- Intenta primero hacer el listado paginado sin filtros, en el orden que más te guste: frontend o backend. Recuerda que se trata de un listado paginado, así que deberás utilizar el obtejo `Page`.
 - Completa el listado conectando ambas capas.
 - Ahora implementa los filtros, presta atención al filtro de fecha, es el más complejo.
-- Para la paginación filtrada solo tienes que mezclar los conceptos que hemos visto en los puntos del tutorial anteriores y revisar [Baeldung](https://www.baeldung.com/spring-data-jpa-query) por si tienes dudas
+- Para la paginación filtrada solo tienes que mezclar los conceptos que hemos visto en los puntos del tutorial anteriores. 
+	- Si hiciste el backend en Springboot recuerda revisar [Baeldung](https://www.baeldung.com/spring-data-jpa-query) por si tienes dudas sobre las queries y recuerda que las `Specifications` son muy útiles, pero en este caso deberás implementar otro tipo de operaciones, no te sirve solo con la operación de igualdad `:`, que ya vimos en el tutorial.
 - Implementa la pantalla de alta de préstamo, sin ninguna validación.
 - Cuando ya te funcione, intenta ir añadiendo una a una las validaciones. Algunas de ellas pueden hacerse en frontend, mientras que otras deberán validarse en backend
 

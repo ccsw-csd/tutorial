@@ -3,7 +3,7 @@
 ## Instalación de herramientas
 Las herramientas básicas que vamos a utilizar para esta tecnología son:
 
-* [Eclide IDE](https://www.eclipse.org/downloads/)
+* [Eclipse IDE](https://www.eclipse.org/downloads/)
 * Maven *(viene por defecto con Eclipse IDE)*
 * [Java 19](https://www.oracle.com/java/technologies/downloads/#jdk19-windows)
 * [Postman](https://www.postman.com/)
@@ -14,9 +14,12 @@ Las herramientas básicas que vamos a utilizar para esta tecnología son:
 
 Necesitamos instalar un IDE de desarrollo, en nuestro caso será Eclipse IDE y la máquina virtual de java necesaria para ejecutar el código. Recomendamos Java 19, que es la versión con la que está desarrollado y probado el tutorial. 
 
-Para instalar el IDE deberás acceder a [Eclide IDE](https://www.eclipse.org/downloads/) y descargarte la última versión del instalador. Una vez lo ejecutes te pedirá el tipo de instalación que deseas instalar. Por lo general con la de "Eclipse IDE for Java Developers" es suficiente. Con esta versión ya tiene integrado los plugins de Maven y Git.
+Para instalar el IDE deberás acceder a la web de [Eclipse IDE](https://www.eclipse.org/downloads/) y descargarte la última versión del instalador. Una vez lo ejecutes te pedirá el tipo de instalación que deseas instalar. Por lo general con la de "Eclipse IDE for Java Developers" es suficiente. Con esta versión ya tiene integrado los plugins de Maven y Git.
 
-Una vez instalado eclipse, debes asegurarte que está usando por defecto la versión de Java 19 y para ello deberás instalarla. Descárgala del siguiente [enlace](https://www.oracle.com/java/technologies/downloads/#jdk19-windows). Es posible que te pida un registro de correo, utiliza el email que quieras. Revisa bien el enlace para buscar y descargar la versión 19 para Windows: 
+
+### Instalación de Java
+
+Una vez instalado eclipse, debes asegurarte que está usando por defecto la versión de Java 19 y para ello deberás instalarla. Descárgala del siguiente [enlace](https://www.oracle.com/java/technologies/downloads/#jdk19-windows). Es posible que te pida un registro de correo, utiliza el email que quieras (corporativo o personal). Revisa bien el enlace para buscar y descargar la versión 19 para Windows: 
 
 ![Installed JREs](../assets/images/install-java.png)
 
@@ -25,7 +28,7 @@ Ya solo queda añadir Java al Eclipse. Para ello, abre el menú `Window -> Prefe
 
 ![Formatting](../assets/images/install-eclipse-format_1.png)
 
-y dentro de la sección `Java - Installed JREs` añade la versión que acabas de descargar, buscando el directorio `home` de la instalación de Java. Además, la debes marcar como `default`.
+y dentro de la sección `Java - Installed JREs` añade la versión que acabas de descargar, siempre pulsando el botón `Add...` y buscando el directorio `home` de la instalación de Java. Además, la debes marcar como `default`.
 
 ![Installed JREs](../assets/images/install-eclipse.png)
 
@@ -78,7 +81,7 @@ Esta página está disponible desde [Spring Initializr](https://start.spring.io/
 
 * Tipo de proyecto: Maven
 * Lenguage: Java
-* Versión Spring boot: 3.0.4
+* Versión Spring boot: 3.0.4 (o alguna similar)
 * Group: com.ccsw
 * ArtifactId: tutorial
 * Versión Java: 19
@@ -173,11 +176,11 @@ Lo primero que vamos a hacer es añadir las dependencias a algunas librerías qu
     </project>
     ```
 
-Hemos añadido las dependencias de que nos permite utilizar Open API para documentar nuestras APIs. Además de esa dependencia, hemos añadido una utilidad para hacer mapeos entre objetos y para configurar los servicios Rest.
+Hemos añadido las dependencias de que nos permite utilizar Open API para documentar nuestras APIs. Además de esa dependencia, hemos añadido una utilidad para hacer mapeos entre objetos y para configurar los servicios Rest. Más adelante veremos como se utilizan.
 
 #### Configurar librerías
 
-El siguiente punto es crear las clases de configuración para las librerías que hemos añadido. Para ello vamos a crear un package de configuración general de la aplicación `com.ccsw.tutorial.config` donde crearemos la clase para crear el bean de Dozer.
+El siguiente punto es crear las clases de configuración para las librerías que hemos añadido. Para ello vamos a crear un package de configuración general de la aplicación `com.ccsw.tutorial.config` donde crearemos una clase que llamaremos `BeanDozerConfig` y usaremos para configurar el bean de Dozer.
 
 === "BeanDozerConfig.java"
     ``` Java
@@ -203,6 +206,7 @@ El siguiente punto es crear las clases de configuración para las librerías que
     }
     ```
 
+Esta configuración nos permitirá luego hacer transformaciones entre objetos de forma muy sencilla. Ya lo iremos viendo más adelante.
 Listo, ya podemos empezar a desarrollar nuestros servicios.
 
 #### Configurar la BBDD
@@ -235,4 +239,6 @@ Y ahora le vamos a decir a Spring Boot que la BBDD será en memoria, que use un 
 
 ### Arrancar el proyecto
 
-Por último ya solo nos queda arrancar el proyecto creado. Para ello buscaremos la clase `TutorialApplication.java` (o la clase principal del proyecto) y con el botón derecho seleccionaremos Run As → Java Application. La aplicación al estar basada en Spring Boot arrancará internamente un Tomcat embebido donde se despliega el proyecto. Si habéis seguido el tutorial la aplicación estará disponible en [http://localhost:8080](http://localhost:8080), aunque de momento aún no tenemos nada accesible.
+Por último ya solo nos queda arrancar el proyecto creado. Para ello buscaremos la clase `TutorialApplication.java` (o la clase principal del proyecto) y con el botón derecho seleccionaremos Run As → Java Application. La aplicación al estar basada en Spring Boot arrancará internamente un Tomcat embebido donde se despliega el proyecto. 
+
+Si habéis seguido el tutorial la aplicación estará disponible en [http://localhost:8080](http://localhost:8080), aunque de momento aún no tenemos nada accesible y nos dará una página de error `Whitelabel Error Page`, error 404. Eso significa que el Tomcat embedido nos ha contestado pero no sabe que devolvernos porque no hemos implementado todavía nada.

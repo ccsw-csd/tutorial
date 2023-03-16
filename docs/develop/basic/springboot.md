@@ -8,8 +8,6 @@ Ahora que ya tenemos listo el proyecto backend de Spring Boot (en el puerto 8080
 !!! success "Antes de empezar"
     Quiero hacer hincapié en Spring Boot tiene una documentación muy extensa y completa, así que te recomiendo que hagas uso de ella cuando tengas cualquier duda. Tanto la propia web de [Spring](https://spring.io/projects/spring-boot) como en el portal de tutoriales de [Baeldung](https://www.baeldung.com/spring-tutorial) puedes buscar casi cualquier ejemplo que necesites.
 
-Si has seguido el tutorial, en la creación del proyecto tenías la posibilidad de crear un proyecto Spring Boot simple o descargarte una plantilla ya creada. De cualquiera de las dos maneras, tendrás la misma estructura que veremos a continuación.
-
 
 ## Estructurar el código
 
@@ -249,13 +247,13 @@ Prueba a jugar borrando categorías que no existen o modificando categorías que
 
 ### Documentación (OpenAPI)
 
-Adicionalmente, como vimos en la configuración, añadimos el módulo de OpenAPI a nuestro proyecto y hemos anotado tanto la clase como los métodos con sus correspondientes etiquetas `@Tag` y `@Operation`. 
+Si te acuerdas, en el punto de `Entorno de desarrollo`, añadimos el módulo de OpenAPI a nuestro proyecto, y en el desarrollo de nuestro `Controller` hemos anotado tanto la clase como los métodos con sus correspondientes etiquetas `@Tag` y `@Operation`. 
 
-Esto nos va a ayudar a generar documentación automática de nuestras APIs haciendo que nuestro codio sea más mantenible.
+Esto nos va a ayudar a generar documentación automática de nuestras APIs haciendo que nuestro código sea más mantenible y nuestra documentación mucho más fiable.
 
-Para ver el resultado, con el proyecto arrancado nos dirigimos a la ruta por defecto de OpenAPI: http://localhost:8080/swagger-ui/index.html
+Para ver el resultado, con el proyecto arrancado nos dirigimos a la ruta por defecto de OpenAPI: [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
 
-Aquí podemos observar el catálogo de endpoints generados e incluso realizar peticiones a los mismos.
+Aquí podemos observar el catálogo de endpoints generados, ver los tipos de entrada y salida e incluso realizar peticiones a los mismos. Este será el contrato de nuestros endpoints, que nos ayudará a integrarnos con el equipo frontend (en el caso del tutorial seguramente seremos nosotros mismos).
 
 ### Aspectos importantes
 
@@ -466,23 +464,11 @@ Los aspectos importantes de la capa `Service` son:
 Pero no siempre vamos a acceder a los datos mediante un HasMap en memoria. En algunas ocasiones queremos que nuestro proyecto acceda a un servicio de datos como puede ser una BBDD, un servicio externo, un acceso a disco, etc.
 Estos accesos se deben hacer desde la capa de acceso a datos, y en concreto para nuestro ejemplo, lo haremos a través de un Repository para que acceda a una BBDD.
 
-### Creación de BBDD
-
-Para el tutorial no necesitamos configurar una BBDD externa ni complicarnos demasiado. Vamos a utilizar una librería muy útil llamada `H2` que nos permite levantar una BBDD en memoria persistiendo los datos en memoria o en disco.
-
-Para esto, si te acuerdas de cuando creamos la aplicación, existen unos ficheros que se encuentran dentro de la carpeta `src/main/resources/` y que nos permiten ir depositando scripts versionados para que se ejecuten en orden una vez se levante la aplicación. Vamos a crear los nuestros:
-
-=== "data.sql"
-    ``` SQL
-    INSERT INTO category(name) VALUES ('Eurogames');
-    INSERT INTO category(name) VALUES ('Ameritrash');
-    INSERT INTO category(name) VALUES ('Familiar');
-    ```
-
+Para el tutorial no necesitamos configurar una BBDD externa ni complicarnos demasiado. Vamos a utilizar una librería muy útil llamada `H2` que nos permite levantar una BBDD en memoria persistiendo los datos en memoria o en disco, de hecho ya la configuramos en el apartado de `Entorno de desarrollo`.
 
 ### Implementar Entity
 
-Una vez creada la BBDD el siguiente paso es crear la entidad con la que vamos a persistir y recuperar información. Las entidades igual que los DTOs deberían estar agrupados dentro del package `model` de cada funcionalidad, así que vamos a crear una nueva clase java.
+Lo primero que haremos será crear nuestra entity con la que vamos a persistir y recuperar información. Las entidades igual que los DTOs deberían estar agrupados dentro del package `model` de cada funcionalidad, así que vamos a crear una nueva clase java.
 
 === "Category.java"
     ``` Java
@@ -557,9 +543,25 @@ Hay muchas otras anotaciones, pero estas son las básicas, ya irás aprendiendo 
 !!! tip "Consejo"
     Para definir las PK de las tablas, intenta evitar una PK compuesta de más de una columna. La programación se hace muy compleja y las magias que hace JPA en la oscuridad se complican mucho. Mi recomendación es que siempre utilices una PK númerica, en la medida de lo posible, y si es necesario, crees índices compuestos de búsqueda o checks compuestos para evitar duplicidades.
 
+
+### Juego de datos de BBDD
+
+Springboot automáticamente cuando arranque el proyecto escanerá todas las `@Entity` y creará las estructuras de las tablas en la BBDD en memoria, gracias a las anotaciones que hemos puesto. 
+Además de esto, lanzará los scripts de construcción de BBDD que tenemos en la carpeta `src/main/resources/`. Así que, teniendo clara la estructura de la `Entity` podemos configurar los ficheros con los juegos de datos que queramos, y para ello vamos a utilizar el fichero `data.sql` que creamos en su momento. 
+
+Sabemos que la tabla se llamará `category` y que tendrá dos columnas, una columna `id`, que será la PK automática, y una columna `name`. Podemos escribir el siguiente script para rellenar datos:
+
+=== "data.sql"
+    ``` SQL
+    INSERT INTO category(name) VALUES ('Eurogames');
+    INSERT INTO category(name) VALUES ('Ameritrash');
+    INSERT INTO category(name) VALUES ('Familiar');
+    ```
+
+
 ### Implementar Repository
 
-Ahora que ya tenemos la entidad implementada, vamos a utilizarla para acceder a BBDD, y esto lo haremos con un `Repository`. Existen varias formas de utilizar los repositories, desde el todo automático y magia de JPA hasta el repositorio manual en el que hay que codificar todo. En el tutorial voy a explicar varias formas de implementarlo para este CRUD y los siguientes CRUDs.
+Ahora que ya tenemos el juego de datos y la entidad implementada, vamos a ver como acceder a BBDD desde Java. Esto lo haremos con un `Repository`. Existen varias formas de utilizar los repositories, desde el todo automático y magia de JPA hasta el repositorio manual en el que hay que codificar todo. En el tutorial voy a explicar varias formas de implementarlo para este CRUD y los siguientes CRUDs.
 
 Como ya se dijo en puntos anteriores, el acceso a datos se debe hacer siempre a través de un `Repository`, así que vamos a implementar uno. En esta capa, al igual que pasaba con los services, es recomendable utilizar el patrón fachada, para poder sustituir implementaciones sin afectar al código.
 
@@ -782,7 +784,11 @@ En cuanto a la interface, lo único que cambiamos fue los objetos de respuesta, 
 
 Por último, en él `Controller` se puede ver como se utiliza el conversor de `DozerBeanMapper` (siempre anotado como `@Autowired`), que permite traducir una lista a un tipo concreto, o un objeto único a un tipo concreto. La forma de hacer estas conversiones siempre es por nombre de propiedad. Las propiedades del objeto destino se deben llamar igual que las propiedades del objeto origen. En caso contrario se quedarán a null.
 
-Finalmente, para realizar el mapeo masivo de los diferentes registros hemos utilizado la API Stream de Java que nos proporciona una forma sencilla de realizar estas operativas mediante el método intermedio `map` y el reductor por defecto para listas.
+!!! warning "Ojo con el mapeo"
+    Ojo a esta última frase, debe quedar meridianamente claro. La forma de mapear de un objeto origen a un objeto destino siempre es a través del nombre. Los getters del origen deben ser iguales a los getters del destino. Si hay una letra diferente o unas mayúsculas o minúsculas diferentes NO realizará el mapeo y se quedará la propiedad a null.
+
+
+Para terminar, cuando queramos realizar un mapeo masivo de los diferentes registros, tenemos que itulizar la API Stream de Java, que nos proporciona una forma sencilla de realizar estas operativas, sobre colecciones de elementos, mediante el uso del método intermedio `map` y el reductor por defecto para listas. Te recomiendo echarle un ojo a la teoría de [Introducción a API Java Streams](https://www.baeldung.com/java-8-streams-introduction).
 
 !!! info "BBDD"
     Si quires ver el contenido de la base de datos puedes acceder a un IDE web autopublicado por H2 en la ruta `http://localhost:8080/h2-console`

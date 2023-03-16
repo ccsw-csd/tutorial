@@ -8,26 +8,6 @@ Como ya conocemos como se debe desarrollar, en este ejemplo vamos a ir más ráp
 
 Lo primero que vamos a hacer es crear los modelos para trabajar con BBDD y con peticiones hacia el front. Además, también tenemos que añadir datos al script de inicialización de BBDD.
 
-=== "data.sql"
-    ``` SQL hl_lines="12 13 14 15 16 17 18"
-    INSERT INTO category(name) VALUES ('Eurogames');
-    INSERT INTO category(name) VALUES ('Ameritrash');
-    INSERT INTO category(name) VALUES ('Familiar');
-    
-    INSERT INTO author(name, nationality) VALUES ('Alan R. Moon', 'US');
-    INSERT INTO author(name, nationality) VALUES ('Vital Lacerda', 'PT');
-    INSERT INTO author(name, nationality) VALUES ('Simone Luciani', 'IT');
-    INSERT INTO author(name, nationality) VALUES ('Perepau Llistosella', 'ES');
-    INSERT INTO author(name, nationality) VALUES ('Michael Kiesling', 'DE');
-    INSERT INTO author(name, nationality) VALUES ('Phil Walker-Harding', 'US');
-    
-    INSERT INTO game(title, age, category_id, author_id) VALUES ('On Mars', '14', 1, 2);
-    INSERT INTO game(title, age, category_id, author_id) VALUES ('Aventureros al tren', '8', 3, 1);
-    INSERT INTO game(title, age, category_id, author_id) VALUES ('1920: Wall Street', '12', 1, 4);
-    INSERT INTO game(title, age, category_id, author_id) VALUES ('Barrage', '14', 1, 3);
-    INSERT INTO game(title, age, category_id, author_id) VALUES ('Los viajes de Marco Polo', '12', 1, 3);
-    INSERT INTO game(title, age, category_id, author_id) VALUES ('Azul', '8', 3, 5);
-    ```
 === "Game.java"
     ``` Java
     package com.ccsw.tutorial.game.model;
@@ -252,7 +232,27 @@ Lo primero que vamos a hacer es crear los modelos para trabajar con BBDD y con p
     
     }
     ```
-
+=== "data.sql"
+    ``` SQL hl_lines="12 13 14 15 16 17 18"
+    INSERT INTO category(name) VALUES ('Eurogames');
+    INSERT INTO category(name) VALUES ('Ameritrash');
+    INSERT INTO category(name) VALUES ('Familiar');
+    
+    INSERT INTO author(name, nationality) VALUES ('Alan R. Moon', 'US');
+    INSERT INTO author(name, nationality) VALUES ('Vital Lacerda', 'PT');
+    INSERT INTO author(name, nationality) VALUES ('Simone Luciani', 'IT');
+    INSERT INTO author(name, nationality) VALUES ('Perepau Llistosella', 'ES');
+    INSERT INTO author(name, nationality) VALUES ('Michael Kiesling', 'DE');
+    INSERT INTO author(name, nationality) VALUES ('Phil Walker-Harding', 'US');
+    
+    INSERT INTO game(title, age, category_id, author_id) VALUES ('On Mars', '14', 1, 2);
+    INSERT INTO game(title, age, category_id, author_id) VALUES ('Aventureros al tren', '8', 3, 1);
+    INSERT INTO game(title, age, category_id, author_id) VALUES ('1920: Wall Street', '12', 1, 4);
+    INSERT INTO game(title, age, category_id, author_id) VALUES ('Barrage', '14', 1, 3);
+    INSERT INTO game(title, age, category_id, author_id) VALUES ('Los viajes de Marco Polo', '12', 1, 3);
+    INSERT INTO game(title, age, category_id, author_id) VALUES ('Azul', '8', 3, 5);
+    ```
+    
 !!! note "Relaciones anidadas"
     Fíjate que tanto la `Entity` como el `Dto` tienen relaciones con `Author` y `Category`. Gracias a Spring JPA se pueden resolver de esta forma y tener toda la información de las relaciones hijas dentro del objeto padre. Muy importante recordar que *en el mundo entity* las relaciones serán con objetos `Entity` mientras que *en el mundo dto* las relaciones deben ser siempre con objetos `Dto`. La utilidad beanMapper ya hará las conversiones necesarias, siempre que tengan el mismo nombre de propiedades.
 
@@ -1215,9 +1215,27 @@ También podríamos hacer una implementación de la interface y hacer la consult
 
 Por otro lado se podría hacer uso de la [anotación @Query](https://www.baeldung.com/spring-data-jpa-query). Esta anotación nos permite definir una consulta en SQL nativo o en JPQL (Java Persistence Query Language) y Spring JPA se encargará de realizar todo el mapeo y conversión de los datos de entrada y salida. Pero esta opción no es la más recomendable.
 
+### Specifications
+
 En este caso vamos a hacer uso de las [Specifications](https://www.baeldung.com/rest-api-search-language-spring-data-specifications) que es la opción más robusta y no presenta acoplamientos con el tipo de BBDD.
 
-Para ello en primer lugar vamos a definir la clase para asignar los criterios de filtrado. Esta clase es genérica y puede ser usada en toda la aplicación por lo que la vamos a crear en el paquete `com.ccsw.tutorial.common.criteria`
+Haciendo un resumen muy rápido y con poco detalle, las `Specifications` sirven para generar de forma robusta las clausulas `where` de una consulta SQL. Estas clausulas se generarán mediante `Predicate` (predicados) que realizarán operaciones de comparación entre un campo y un valor. 
+
+En el siguiente ejemplo podemos verlo más claro: en la sentencia `select * from `*`Table`*` where`*`name = 'búsqueda'`* tenemos un solo predicado que es `name = 'búsqueda'`. En ese predicado diferenciamos tres etiquetas:
+
+* `name` → será el campo sobre el que hacemos el predicado
+* `=` → será la operación que realizamos
+* `'búsqueda'` → es el valor con el que realizamos la operación
+
+Lo que trata de hacer `Specifications` es agregar varios predicados con `AND` o con `OR` de forma tipada en código. Y ¿qué intentamos conseguir con esta forma de programar?, pues fácil, intentamos hacer que si cambiamos algún tipo o el nombre de alguna propiedad involucrada en la query, nos salte un fallo en tiempo de compilación y nos demos cuenta de donde está el error. 
+Si utilizaramos queries construidas directamente con `String`, al cambiar algún tipo o el nombre de alguna propiedad involucrada, no nos daríamos ni cuenta hasta que saltara un fallo en tiempo de ejecución.
+
+Por este motivo hay que programar con `Specifications`, porque son robustas ante cambios de código y tenemos que tratar de evitar las construcciones a través de cadenas de texto.
+
+Dicho esto, ¡vamos a implementar!
+
+Lo primero que necesitaremos será una clase que nos permita guardar la información de un `Predicate` para luego generar facilmente la construcción. 
+Para ello vamos a crear una clase que guarde información de los criterios de filtrado (campo, operación y valor), por suerte esta clase será genérica y la podremos usar en toda la aplicación, así que la vamos a crear en el paquete `com.ccsw.tutorial.common.criteria`
 
 === "SearchCriteria.java"
     ``` Java
@@ -1263,10 +1281,12 @@ Para ello en primer lugar vamos a definir la clase para asignar los criterios de
     }
     ```
 
-Hecho esto pasamos a definir el Specification de nuestra clase la cual contendrá la construcción de la consulta en función de los tipos de que se le proporcionan.
+Hecho esto pasamos a definir el `Specification` de nuestra clase la cual contendrá la construcción de la consulta en función de los criterios que se le proporcionan. No queremos construir los predicados directamente en nuestro `Service` ya que duplicariamos mucho código, mucho mejor si hacemos una clase para centralizar la construcción de predicados.
+
+De esta forma vamos a crear una clase `Specification` por cada una de las `Entity` que queramos consultar. En nuestro caso solo vamos a generar `queries` para `Game`, así que solo crearemos un `GameSpecification` donde construirmos los predicados.
 
 === "GameSpecification.java"
-    ``` Java hl_lines="25 27 33"
+    ``` Java hl_lines="13 17 22 25 27 33"
     package com.ccsw.tutorial.game;
     
     import com.ccsw.tutorial.common.criteria.SearchCriteria;
@@ -1313,11 +1333,19 @@ Hecho esto pasamos a definir el Specification de nuestra clase la cual contendr�
     
     }
     ```
-Como podemos observar en las líneas marcadas, lo que hacemos es aplicar el criterio de `like` para los tipos string y el criterio `equal` para los demás para cumplir asi con los requisitos.
 
-En cuanto al método `getPath` es una función que nos permite explorar las sub entidades para realizar consultas sobre los atributos de estas.
+Voy a tratar de explicar con calma cada una de las líneas marcadas, ya que son conceptos dificiles de entender hasta que no se utilizan.
 
-Añadidas estas clases ya podemos modificar nuestro código para añadir las opciones de filtrado.
+* Las dos primeras líneas marcadas hacen referencia a que cuando se crea un `Specification`, esta debe generar un predicado, con lo que necesita unos criterios de filtrado para poder generarlo. En el constructor le estamos pasando esos criterios de filtrado que luego utilizaremos.
+
+* La tercera línea marcada está seleccionando el tipo de operación. En nuestro caso solo vamos a utilizar operaciones de comparación. Por convenio las operaciones de comparación se marcan como ":" ya que el símbolo = está reservado. Aquí es donde podríamos añadir otro tipo de operaciones como ">" o "<>" o cualquiera que queramos implementar. Guárdate esa información que te servirá en el ejercicio final :wink:.
+
+* Las dos siguientes líneas, las de `return` están construyendo un `Predicate` al ser de tipo comparación, si es un texto hará un `like` y si no es texto (que es un número o fecha) hará un `equals`.
+
+* Por último, tenemos un método `getPath` que invocamos dentro la generación del predicado y que implementamos más abajo. Esta función nos permite explorar las sub-entidades para realizar consultas sobre los atributos de estas. Por ejemplo, si queremos navegar hasta `game.author.name`, lo que hará la exploración será recuperar el atributo `name` del objeto `author` de la entidad `game`.
+
+
+Una vez implementada nuestra clase de `Specification`, que lo único que hace es recoger un criterio de filtrado y construir un predicado, y que en principio solo permite generar comparaciones de igualdad, vamos a utilizarlo dentro de nuestro `Service`:
 
 === "GameServiceImpl.java"
     ``` Java hl_lines="40 41 43 45"
@@ -1413,15 +1441,15 @@ Añadidas estas clases ya podemos modificar nuestro código para añadir las opc
     }
     ```
     
-Lo que hemos hecho es crear los dos criterios de filtrado que necesitábamos. En nuestro caso eran `title`, que es un atributo de la entidad `Game` y por otro lado el identificador de categoría, que en este caso, ya no es un atributo directo de la entidad, si no, de la categoría asociada, por lo que debemos navegar hasta el atributo `id` a través del atributo `category`.
+Lo que hemos hecho es crear los dos criterios de filtrado que necesitábamos. En nuestro caso eran `title`, que es un atributo de la entidad `Game` y por otro lado el identificador de categoría, que en este caso, ya no es un atributo directo de la entidad, si no, de la categoría asociada, por lo que debemos navegar hasta el atributo `id` a través del atributo `category` (para esto utilizamos el `getPath` que hemos visto anteriormente).
 
-A partir de los criterios podemos generar los Specifications que posteriormente anidamos con el operador `and`.
+A partir de estos dos predicados, podemos generar el `Specification` global para la consulta, uniendo los dos predicados mediante el operador `AND`.
 
-Una vez construido el Specification ya podemos usar el método por defecto que nos proporciona Spring Data para dicho fin.
+Una vez construido el `Specification` ya podemos usar el método por defecto que nos proporciona Spring Data para dicho fin, tan solo tenemos que decirle a nuestro `GameRepository` que además extender de `CrudRepository` debe extender de `JpaSpecificationExecutor`, para que pueda ejecutarlas.
 
 ## Mejoras rendimiento
 
-Finalmente, cara a mejorar el rendimiento de nuestros servicios vamos a hacer foco en la generación de transacciones con la base de datos. Si ejecutáramos esta petición tal cual lo tenemos implementado, en la consola veríamos lo siguiente:
+Finalmente, de cara a mejorar el rendimiento de nuestros servicios vamos a hacer foco en la generación de transacciones con la base de datos. Si ejecutáramos esta petición tal cual lo tenemos implementado ahora mismo, en la consola veríamos lo siguiente:
 
 ``` 
 Hibernate: select g1_0.id,g1_0.age,g1_0.author_id,g1_0.category_id,g1_0.title from game g1_0
@@ -1434,13 +1462,13 @@ Hibernate: select a1_0.id,a1_0.name,a1_0.nationality from author a1_0 where a1_0
 Hibernate: select a1_0.id,a1_0.name,a1_0.nationality from author a1_0 where a1_0.id=?
 ```
 
-Esto es debido a que no le hemos dado indicaciones a Spring Data de como queremos que genere las consultas y por defecto está configurado para realizar sub consultas cuando tenemos tablas relacionadas.
+Esto es debido a que no le hemos dado indicaciones a Spring Data de como queremos que construya las consultas con relaciones y por defecto está configurado para generar sub-consultas cuando tenemos tablas relacionadas.
 
-En nuestro caso la tabla `Game` está relacionada con `Author` y `Category`. Al realizar la consulta a `Game` realiza las sub consultas con los registros relacionados con los resultados de esta.
+En nuestro caso la tabla `Game` está relacionada con `Author` y `Category`. Al realizar la consulta a `Game` realiza las sub-consultas por cada uno de los registros relacionados con los resultados `Game`.
 
-Para realizar esto de una forma mucho más óptima para nuestro caso, podemos indicar a Spring Data el comportamiento deseado, que es, que haga una única consulta y haga las sub consultas mediante los `join` correspondientes.
+Para evitar tantas consultas contra la BBDD y realizar esto de una forma mucho más óptima, podemos decirle a Spring Data el comportamiento que queremos, que en nuestro caso será que haga una única consulta y haga las sub-consultas mediante los `join` correspondientes.
 
-Para ello añadimos una sobre escritura del método findAll de Spring Data con la anotación `@EntityGraph` con los atributos que queremos que se incluyan dentro de la consulta principal:
+Para ello añadimos una sobre-escritura del método `findAll`, que ya teníamos implementado en `JpaSpecificationExecutor` y que utlizamos de forma heredada, pero en este caso le añadimos la anotación `@EntityGraph` con los atributos que queremos que se incluyan dentro de la consulta principal mediante `join`:
 
 === "GameRepository.java"
     ``` Java hl_lines="17 18 19"
@@ -1473,7 +1501,7 @@ Tras realizar este cambio, podemos observar que la nueva consulta generada es la
 Hibernate: select g1_0.id,g1_0.age,a1_0.id,a1_0.name,a1_0.nationality,c1_0.id,c1_0.name,g1_0.title from game g1_0 join author a1_0 on a1_0.id=g1_0.author_id join category c1_0 on c1_0.id=g1_0.category_id
 ```
 
-Como podemos observar, ahora se realiza una única consulta con la correspondiente transacción con la BBDD.
+Como podemos observar, ahora se realiza una única consulta con la correspondiente transacción con la BBDD, y se trae todos los datos necesarios de `Game`, `Author` y `Category` sin lanzar múltiples queries.
 
 ## Prueba de las operaciones
 

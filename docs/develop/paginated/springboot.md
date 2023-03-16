@@ -8,21 +8,8 @@ Como ya conocemos como se debe desarrollar, en este ejemplo vamos a ir más ráp
 
 ## Crear modelos
 
-Lo primero que vamos a hacer es crear los modelos para trabajar con BBDD y con peticiones hacia el front. Además, también tenemos que añadir datos al script de inicialización de BBDD.
+Lo primero que vamos a hacer es crear los modelos para trabajar con BBDD y con peticiones hacia el front. Además, también tenemos que añadir datos al script de inicialización de BBDD, siempre respetando la nomenclatura que le hemos dado a la tabla y columnas de BBDD.
 
-=== "data.sql"
-    ``` SQL hl_lines="5 6 7 8 9 10"
-    INSERT INTO category(name) VALUES ('Eurogames');
-    INSERT INTO category(name) VALUES ('Ameritrash');
-    INSERT INTO category(name) VALUES ('Familiar');
-
-    INSERT INTO author(name, nationality) VALUES ('Alan R. Moon', 'US');
-    INSERT INTO author(name, nationality) VALUES ('Vital Lacerda', 'PT');
-    INSERT INTO author(name, nationality) VALUES ('Simone Luciani', 'IT');
-    INSERT INTO author(name, nationality) VALUES ('Perepau Llistosella', 'ES');
-    INSERT INTO author(name, nationality) VALUES ('Michael Kiesling', 'DE');
-    INSERT INTO author(name, nationality) VALUES ('Phil Walker-Harding', 'US');
-    ```
 === "Author.java"
     ``` Java
     package com.ccsw.tutorial.author.model;
@@ -164,6 +151,19 @@ Lo primero que vamos a hacer es crear los modelos para trabajar con BBDD y con p
     
     }
     ```
+=== "data.sql"
+    ``` SQL hl_lines="5 6 7 8 9 10"
+    INSERT INTO category(name) VALUES ('Eurogames');
+    INSERT INTO category(name) VALUES ('Ameritrash');
+    INSERT INTO category(name) VALUES ('Familiar');
+
+    INSERT INTO author(name, nationality) VALUES ('Alan R. Moon', 'US');
+    INSERT INTO author(name, nationality) VALUES ('Vital Lacerda', 'PT');
+    INSERT INTO author(name, nationality) VALUES ('Simone Luciani', 'IT');
+    INSERT INTO author(name, nationality) VALUES ('Perepau Llistosella', 'ES');
+    INSERT INTO author(name, nationality) VALUES ('Michael Kiesling', 'DE');
+    INSERT INTO author(name, nationality) VALUES ('Phil Walker-Harding', 'US');
+    ```
 
 ## Implementar TDD - Pruebas
 
@@ -175,9 +175,9 @@ Vamos a pararnos a pensar un poco que necesitamos en la pantalla. Ahora mismo no
 * Una operación de guardado y modificación
 * Una operación de borrado
 
-Para la primera prueba necesitaremos que hemos descrito (consulta paginada) se necesita un objeto que contenga los datos de la página a consultar. Así que crearemos una clase `AuthorSearchDto` para utilizarlo como 'paginador'.
+Para la primera prueba que hemos descrito (consulta paginada) se necesita un objeto que contenga los datos de la página a consultar. Así que crearemos una clase `AuthorSearchDto` para utilizarlo como 'paginador'.
 
-Para ello, en primer lugar, deberemos añadir una clase que vamos a utilizar como envoltorio para la paginación de Springframework. Hacemos esto para desacoplar la interface de spring de nuestro contrato de entrada. Crearemos esta clase en el paquete `com.ccsw.tutorial.common.pagination`.
+Para ello, en primer lugar, deberemos añadir una clase que vamos a utilizar como envoltorio para las peticiones de paginación en el proyecto. Hacemos esto para desacoplar la interface de Springboot de nuestro contrato de entrada. Crearemos esta clase en el paquete `com.ccsw.tutorial.common.pagination`.
 
 === "PageableRequest.java"
     ``` Java
@@ -279,9 +279,9 @@ Para ello, en primer lugar, deberemos añadir una clase que vamos a utilizar com
     }
     ```
 
-Adicionalmente necesitaremos una clase para deserializar las respuestas de Page recibidas en los test que vamos a implementar. Para ello creamos la clase necesaria dentro de la fuente de la carpeta de los `test` en el paquete `com.ccsw.tutorial.config`.
+Adicionalmente necesitaremos una clase para deserializar las respuestas de Page recibidas en los test que vamos a implementar. Para ello creamos la clase necesaria dentro de la fuente de la carpeta de los `test` en el paquete `com.ccsw.tutorial.config`. Esto solo hace falta porque necesitamos leer la respuesta paginada en el test, si no hicieramos test, no haría falta.
 
-=== "PageableRequest.java"
+=== "ResponsePage.java"
     ``` Java
     package com.ccsw.tutorial.config;
     

@@ -230,11 +230,11 @@ Ya tenemos el servicio con los datos, ahora vamos a por el listado paginado.
             <ng-container matColumnDef="action">
                 <mat-header-cell *matHeaderCellDef></mat-header-cell>
                 <mat-cell *matCellDef="let element">
-                    <button mat-icon-button color="primary">
-                        <mat-icon (click)="editAuthor(element)">edit</mat-icon>
+                    <button mat-icon-button color="primary" (click)="editAuthor(element)">
+                        <mat-icon>edit</mat-icon>
                     </button>
-                    <button mat-icon-button color="accent">
-                        <mat-icon (click)="deleteAuthor(element)">clear</mat-icon>
+                    <button mat-icon-button color="accent" (click)="deleteAuthor(element)">
+                        <mat-icon>clear</mat-icon>
                     </button>
                 </mat-cell>
             </ng-container>
