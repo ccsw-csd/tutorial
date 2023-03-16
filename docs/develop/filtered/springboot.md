@@ -1223,12 +1223,12 @@ Haciendo un resumen muy rápido y con poco detalle, las `Specifications` sirven 
 
 En el siguiente ejemplo podemos verlo más claro: en la sentencia `select * from `*`Table`*` where`*`name = 'búsqueda'`* tenemos un solo predicado que es `name = 'búsqueda'`. En ese predicado diferenciamos tres etiquetas:
 
-* `name` → será el campo sobre el que hacemos el predicado
-* `=` → será la operación que realizamos
+* `name` → es el campo sobre el que hacemos el predicado
+* `=` → es la operación que realizamos
 * `'búsqueda'` → es el valor con el que realizamos la operación
 
 Lo que trata de hacer `Specifications` es agregar varios predicados con `AND` o con `OR` de forma tipada en código. Y ¿qué intentamos conseguir con esta forma de programar?, pues fácil, intentamos hacer que si cambiamos algún tipo o el nombre de alguna propiedad involucrada en la query, nos salte un fallo en tiempo de compilación y nos demos cuenta de donde está el error. 
-Si utilizaramos queries construidas directamente con `String`, al cambiar algún tipo o el nombre de alguna propiedad involucrada, no nos daríamos ni cuenta hasta que saltara un fallo en tiempo de ejecución.
+Si utilizáramos queries construidas directamente con `String`, al cambiar algún tipo o el nombre de alguna propiedad involucrada, no nos daríamos cuenta hasta que saltara un fallo en tiempo de ejecución.
 
 Por este motivo hay que programar con `Specifications`, porque son robustas ante cambios de código y tenemos que tratar de evitar las construcciones a través de cadenas de texto.
 

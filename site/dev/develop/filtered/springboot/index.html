@@ -2190,12 +2190,12 @@
 <p>Haciendo un resumen muy rápido y con poco detalle, las <code>Specifications</code> sirven para generar de forma robusta las clausulas <code>where</code> de una consulta SQL. Estas clausulas se generarán mediante <code>Predicate</code> (predicados) que realizarán operaciones de comparación entre un campo y un valor. </p>
 <p>En el siguiente ejemplo podemos verlo más claro: en la sentencia <code>select * from</code><em><code>Table</code></em><code>where</code><em><code>name = 'búsqueda'</code></em> tenemos un solo predicado que es <code>name = 'búsqueda'</code>. En ese predicado diferenciamos tres etiquetas:</p>
 <ul>
-<li><code>name</code> → será el campo sobre el que hacemos el predicado</li>
-<li><code>=</code> → será la operación que realizamos</li>
+<li><code>name</code> → es el campo sobre el que hacemos el predicado</li>
+<li><code>=</code> → es la operación que realizamos</li>
 <li><code>'búsqueda'</code> → es el valor con el que realizamos la operación</li>
 </ul>
 <p>Lo que trata de hacer <code>Specifications</code> es agregar varios predicados con <code>AND</code> o con <code>OR</code> de forma tipada en código. Y ¿qué intentamos conseguir con esta forma de programar?, pues fácil, intentamos hacer que si cambiamos algún tipo o el nombre de alguna propiedad involucrada en la query, nos salte un fallo en tiempo de compilación y nos demos cuenta de donde está el error. 
-Si utilizaramos queries construidas directamente con <code>String</code>, al cambiar algún tipo o el nombre de alguna propiedad involucrada, no nos daríamos ni cuenta hasta que saltara un fallo en tiempo de ejecución.</p>
+Si utilizáramos queries construidas directamente con <code>String</code>, al cambiar algún tipo o el nombre de alguna propiedad involucrada, no nos daríamos cuenta hasta que saltara un fallo en tiempo de ejecución.</p>
 <p>Por este motivo hay que programar con <code>Specifications</code>, porque son robustas ante cambios de código y tenemos que tratar de evitar las construcciones a través de cadenas de texto.</p>
 <p>Dicho esto, ¡vamos a implementar!</p>
 <p>Lo primero que necesitaremos será una clase que nos permita guardar la información de un <code>Predicate</code> para luego generar facilmente la construcción. 
