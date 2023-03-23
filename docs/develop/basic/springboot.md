@@ -546,7 +546,7 @@ Hay muchas otras anotaciones, pero estas son las básicas, ya irás aprendiendo 
 
 ### Juego de datos de BBDD
 
-Springboot automáticamente cuando arranque el proyecto escanerá todas las `@Entity` y creará las estructuras de las tablas en la BBDD en memoria, gracias a las anotaciones que hemos puesto. 
+Spring Boot automáticamente cuando arranque el proyecto escanerá todas las `@Entity` y creará las estructuras de las tablas en la BBDD en memoria, gracias a las anotaciones que hemos puesto. 
 Además de esto, lanzará los scripts de construcción de BBDD que tenemos en la carpeta `src/main/resources/`. Así que, teniendo clara la estructura de la `Entity` podemos configurar los ficheros con los juegos de datos que queramos, y para ello vamos a utilizar el fichero `data.sql` que creamos en su momento. 
 
 Sabemos que la tabla se llamará `category` y que tendrá dos columnas, una columna `id`, que será la PK automática, y una columna `name`. Podemos escribir el siguiente script para rellenar datos:

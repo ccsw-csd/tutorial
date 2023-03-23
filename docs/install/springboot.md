@@ -67,7 +67,7 @@ Con esta herramienta se puede generar peticiones GET, POST, PUT, DELETE contra e
 
 ## Creación de proyecto
 
-La mayoría de los proyectos SpringBoot en los que trabajamos normalmente, suelen ser proyectos web sencillos con pocas dependencias de terceros o incluso proyectos basados en micro-servicios que ejecutan pocas acciones. Ahora tienes que preparar el proyecto SpringBoot,
+La mayoría de los proyectos Spring Boot en los que trabajamos normalmente, suelen ser proyectos web sencillos con pocas dependencias de terceros o incluso proyectos basados en micro-servicios que ejecutan pocas acciones. Ahora tienes que preparar el proyecto SpringBoot,
 
 ### Crear con Initilizr
 
@@ -90,7 +90,7 @@ Esta página está disponible desde [Spring Initializr](https://start.spring.io/
 
 ![initializr](../assets/images/initializr.png)
 
-Esto nos generará un proyecto que ya vendrá configurado con Spring Web, JPA y H2 para crear una BBDD en memoria de ejemplo con la que trabajaremos durante el tutorial
+Esto nos generará un proyecto que ya vendrá configurado con Spring Web, JPA y H2 para crear una BBDD en memoria de ejemplo con la que trabajaremos durante el tutorial.
 
 #### Importar en eclipse
 

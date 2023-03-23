@@ -177,7 +177,7 @@ Vamos a pararnos a pensar un poco que necesitamos en la pantalla. Ahora mismo no
 
 Para la primera prueba que hemos descrito (consulta paginada) se necesita un objeto que contenga los datos de la página a consultar. Así que crearemos una clase `AuthorSearchDto` para utilizarlo como 'paginador'.
 
-Para ello, en primer lugar, deberemos añadir una clase que vamos a utilizar como envoltorio para las peticiones de paginación en el proyecto. Hacemos esto para desacoplar la interface de Springboot de nuestro contrato de entrada. Crearemos esta clase en el paquete `com.ccsw.tutorial.common.pagination`.
+Para ello, en primer lugar, deberemos añadir una clase que vamos a utilizar como envoltorio para las peticiones de paginación en el proyecto. Hacemos esto para desacoplar la interface de Spring Boot de nuestro contrato de entrada. Crearemos esta clase en el paquete `com.ccsw.tutorial.common.pagination`.
 
 === "PageableRequest.java"
     ``` Java
