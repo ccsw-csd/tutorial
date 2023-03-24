@@ -31,7 +31,7 @@ nav:
     - TDD: appendix/tdd.md
     - "Spring Data: JPA": appendix/jpa.md
     - Spring Cloud:
-        - Introducicón: appendix/springcloud/intro.md
+        - Introducción: appendix/springcloud/intro.md
         - Listado simple: appendix/springcloud/basic.md
         - Listado paginado: appendix/springcloud/paginated.md
         - Listado filtrado: appendix/springcloud/filtered.md
