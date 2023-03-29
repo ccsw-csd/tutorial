@@ -261,6 +261,8 @@ Con esto nos queda la siguiente configuración:
 
 Hechas esto y arrancado el proyecto, volvemos a dirigirnos a Eureka en `http://localhost/8761` donde podemos ver que el Gateway se ha registrado correctamente junto al resto de clientes.
 
+![Eureka](../../assets/images/eureka.png)
+
 
 ## Feign Client
 
@@ -293,7 +295,7 @@ En primer lugar debemos añadir la dependencia necesaria dentro de nuestro pom.x
 
 El siguiente paso es habilitar el uso de los `Feign Clients`.
 
-=== "TutorialEurekaApplication.java"
+=== "TutorialGameApplication.java"
     ``` Java hl_lines="8"
     package com.ccsw.tutorialgame;
     
