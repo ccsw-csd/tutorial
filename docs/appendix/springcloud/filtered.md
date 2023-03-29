@@ -1,6 +1,6 @@
 # Listado filtrado - Spring Boot
 
-Al igual que en el caso anterior vamos a crear un nuevo proyecto que contendrá un nuevo micro servicio.
+Al igual que en los caos anteriores vamos a crear un nuevo proyecto que contendrá un nuevo micro servicio.
 
 Para la creación de proyecto nos remitimos a la guía de instalación donde se detalla el proceso de creación de nuevo proyecto [Entorno de desarrollo](../../install/springboot.md)
 
@@ -10,6 +10,8 @@ Todos los pasos son exactamente iguales, lo único que va a variar, es el nombre
 ## Código
 
 Dado de vamos a implementar el micro servicio Spring Boot de `Juegos`, vamos a respetar la misma estructura del [Listado filtrado](../../develop/filtered/springboot.md) de la version monolítica.
+
+### Criteria
 
 En primer lugar, vamos a añadir la clase que necesitamos para realizar el filtrado y vimos en la version monolítica del tutorial en el package `com.ccsw.tutorialgame.common.criteria`.
 
@@ -57,127 +59,11 @@ En primer lugar, vamos a añadir la clase que necesitamos para realizar el filtr
     }
     ```
 
-Ahora vamos a crear los DTOs de las entidades relacionadas que usaremos más adelante dentro de los packages:
+### Entity y Dto
 
-* `com.ccsw.tutorialgame.category.model`
-* `com.ccsw.tutorialgame.author.model`
+Seguimos con la entidad y el DTO dentro del package `com.ccsw.tutorialgame.game.model`. En este punto, fíjate que nuestro modelo de `Entity` no tiene relación con la tabla `Author` ni `Category` ya que estos dos objetos no pertenecen a nuestro dominio y se gestionan desde otro micro servicio. Lo que tendremos ahora será el identificador del registro que hace referencia a esos objetos. Ya no usaremos `@JoinColumn` porque en nuestro modelo no existen esas tablas relacionadas.
 
-=== "CategoryDto.java"
-    ``` Java
-    package com.ccsw.tutorialgame.category.model;
-
-    /**
-     * @author ccsw
-     *
-     */
-    public class CategoryDto {
-    
-        private Long id;
-    
-        private String name;
-    
-        /**
-         * @return id
-         */
-        public Long getId() {
-    
-            return this.id;
-        }
-    
-        /**
-         * @param id new value of {@link #getId}.
-         */
-        public void setId(Long id) {
-    
-            this.id = id;
-        }
-    
-        /**
-         * @return name
-         */
-        public String getName() {
-    
-            return this.name;
-        }
-    
-        /**
-         * @param name new value of {@link #getName}.
-         */
-        public void setName(String name) {
-    
-            this.name = name;
-        }
-    
-    }
-    ```
-=== "AuthorDto.java"
-    ``` Java
-    package com.ccsw.tutorialgame.author.model;
-
-    /**
-     * @author ccsw
-     *
-     */
-    public class AuthorDto {
-    
-        private Long id;
-    
-        private String name;
-    
-        private String nationality;
-    
-        /**
-         * @return id
-         */
-        public Long getId() {
-    
-            return this.id;
-        }
-    
-        /**
-         * @param id new value of {@link #getId}.
-         */
-        public void setId(Long id) {
-    
-            this.id = id;
-        }
-    
-        /**
-         * @return name
-         */
-        public String getName() {
-    
-            return this.name;
-        }
-    
-        /**
-         * @param name new value of {@link #getName}.
-         */
-        public void setName(String name) {
-    
-            this.name = name;
-        }
-    
-        /**
-         * @return nationality
-         */
-        public String getNationality() {
-    
-            return this.nationality;
-        }
-    
-        /**
-         * @param nationality new value of {@link #getNationality}.
-         */
-        public void setNationality(String nationality) {
-    
-            this.nationality = nationality;
-        }
-    
-    }
-    ```
-
-Seguimos con la entidad y el DTO dentro del package `com.ccsw.tutorialgame.game.model`.
+Sin embargo el Dto si que utiliza relaciones, ya que son relaciones de negocio (en el `Service`) y no son relaciones de dominio (en BBDD o `Repository`)
 
 === "Game.java"
     ``` Java
@@ -313,9 +199,9 @@ Seguimos con la entidad y el DTO dentro del package `com.ccsw.tutorialgame.game.
     
         private String age;
     
-        private CategoryDto category;
+        private Long idCategory;
     
-        private AuthorDto author;
+        private Long idAuthor;
     
         /**
          * @return id
@@ -366,39 +252,41 @@ Seguimos con la entidad y el DTO dentro del package `com.ccsw.tutorialgame.game.
         }
     
         /**
-         * @return category
+         * @return idCategory
          */
-        public CategoryDto getCategory() {
+        public Long getIdCategory() {
     
-            return this.category;
+            return this.idCategory;
         }
     
         /**
-         * @param category new value of {@link #getCategory}.
+         * @param idCategory new value of {@link #getIdCategory}.
          */
-        public void setCategory(CategoryDto category) {
+        public void setIdCategory(Long idCategory) {
     
-            this.category = category;
+            this.idCategory = idCategory;
         }
     
         /**
-         * @return author
+         * @return idAuthor
          */
-        public AuthorDto getAuthor() {
+        public Long getIdAuthor() {
     
-            return this.author;
+            return this.idAuthor;
         }
     
         /**
-         * @param author new value of {@link #getAuthor}.
+         * @param idAuthor new value of {@link #getIdAuthor}.
          */
-        public void setAuthor(AuthorDto author) {
+        public void setIdAuthor(Long idAuthor) {
     
-            this.author = author;
+            this.idAuthor = idAuthor;
         }
     
     }
     ```
+
+### Repository, Service, Controller
 
 Posteriormente, emplazamos el resto de clases dentro del package `com.ccsw.tutorialgame.game`.
 
@@ -628,7 +516,9 @@ Posteriormente, emplazamos el resto de clases dentro del package `com.ccsw.tutor
     }
     ```
 
-Finalmente, debemos crear el script de inicialización de base de datos con solo los datos de autores y modificar ligeramente la configuración inicial para añadir un puerto manualmente para poder tener multiples micro servicios funcionando simultáneamente.
+### SQL y Configuración
+
+Finalmente, debemos crear el script de inicialización de base de datos con solo los datos de juegos y modificar ligeramente la configuración inicial para añadir un puerto manualmente para poder tener multiples micro servicios funcionando simultáneamente.
 
 === "data.sql"
     ``` SQL
@@ -656,6 +546,21 @@ Finalmente, debemos crear el script de inicialización de base de datos con solo
     spring.h2.console.enabled=true
     ```
 
+### Pruebas
+
 Ahora si arrancamos la aplicación server y abrimos el [Postman](https://www.postman.com/) podemos realizar las mismas pruebas del apartado de [Listado filtrado](../../develop/filtered/springboot.md) pero esta vez apuntado al puerto `8093`.
 
-Cuando realicemos las pruebas veremos que tanto la categoría como autor llegaran nulos, esto es debido a que aún no hemos implementado la comunicación entre los diferentes micro servicios que haremos en el paso siguiente.
+Fíjate que cuando probemos el listado de juegos, devolverá identificadores en `idAuthor` y `idCategory`, y no objetos como funcionaba hasta ahora en la aplicación monolítica.
+
+
+## Siguientes pasos
+
+En este punto ya tenemos un micro servicio de categorías en el puerto `8091`, un micro servicio de autores en el puerto `8092` y un último micro servicio de juegos en el puerto `8093`. 
+
+Si ahora fueramos a conectarlo con el frontend tendríamos dos problemas:
+
+* Por un lado, el frontend debe recordar la IP y el puerto en el que se encuentra cada servicio. Además, este podría cambiar si lo desplegamos en nube o lo movemos de servidor, y el frontend debería ser capaz de refrescarse para actualizar la información.
+* Por otro lado, como hemos comentado, se ha cambiado el contrato del endpoint de juegos. Ahora ya no devuelve la información de `author` y `category` sino que devuelve su ID. Esto obliga al frontend a tener que hacer dos llamadas extra para completar la información. Estaríamos llevando lógica de negocio al frontend y esto no nos convence.
+
+Para poder solverntar ambos problemas, necesitamos conectar todos nuestros micro servicios con una infraestructura que nos ayudará a gestionar todo el ecosistema de micro servicios. Vamos allá con el último punto.
+

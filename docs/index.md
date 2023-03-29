@@ -22,18 +22,19 @@ Durante todo el tutorial intentaré dar unas pautas y consejos de buenas prácti
 Además para cada uno de los capítulos que lo requieran, voy a desdoblar el tutorial por cada una de las tecnologías disponibles para que vayas construyendo con la que más cómodo te sientas. 
 
 Así que antes de empezar debes elegir bien con que tecnologías vas a comenzar de las que tengo disponibles. Puedes volver a este tutorial más adelante por si he ido añadiendo nuevas tecnologías. 
+Elige **UNA** tecnología de backend y **UNA** tecnología de frontend y completa el tutorial con esas dos tecnologías. No mezcles ni hagas todas las tecnologías a la vez ya que si no, te vas a volver loco.
 
 
 ## ¿Hay pre-requisitos?
 
-No es obligado tener ningún conocimiento previo, pero es altamente recomendable que al menos conozcas lo básico de las tecnologías que vamos a ver en el tutorial. Te sugiero que visites los itinerarios formativos de aquellas tecnologías que quieras aprender y al menos hacer los cursos de nivel "Esencial".
-De momento tengo estas:
+No es obligado tener ningún conocimiento previo, pero es altamente recomendable que al menos conozcas lo básico de las tecnologías que vamos a ver en el tutorial. Si no tienes ni idea, ni has oido hablar de las tecnologías que has seleccionado para el tutorial, te sugiero que visites los itinerarios formativos y realices los cursos de nivel `Esencial`.
+De momento tenemos estos itinerarios:
 
 * 🔵 [Frontend - Angular](https://degreed.com/pathway/3pmxr0jg9n/pathway)
 * 🟢 [Backend - Springboot](https://degreed.com/pathway/08gxl0e7pw/pathway)
 * 🟢 [Backend - Nodejs](https://degreed.com/pathway/e9kx16qypo/pathway)
 
-Una vez hayas hecho los cursos esenciales, ya puedes volver y continuar con este tutorial. Repito que no es obligado, si ya tienes conocimientos previos de las tecnologías no es necesario que hagas los cursos.
+Una vez hayas hecho los cursos esenciales, ya puedes volver y continuar con este tutorial. Repito que no es obligado, si ya tienes conocimientos previos de las tecnologías no es necesario que hagas los cursos. Cuando termines el tutorial, ya puedes realizar el resto de cursos de otros niveles.
 
 
 ## ¿Y luego qué?

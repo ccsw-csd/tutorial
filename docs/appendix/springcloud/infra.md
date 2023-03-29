@@ -2,9 +2,11 @@
 
 Creados los tres micro servicios que compondrán nuestro aplicativo, ya podemos empezar con la creación de las piezas de infraestructura que serán las encargadas de realizar la orquestación.
 
-## Discovery Service - Eureka
+## Service Discovery - Eureka
 
-Para esta pieza debemos crear un nuevo proyecto de una forma similar a la que estamos acostumbrados.
+Para esta pieza hay muchas aplicaciones de mercado, incluso los propios proveedores de cloud tiene la suya propia, pero en este caso, vamos a utilizar la que ofrece Spring Cloud, así que vamos a crear un proyecto de una forma similar a la que estamos acostumbrados.
+
+### Crear el servicio
 
 Volviendo una vez más a [Spring Initializr](https://start.spring.io/) seleccionaremos los siguientes datos:
 
@@ -14,12 +16,16 @@ Volviendo una vez más a [Spring Initializr](https://start.spring.io/) seleccion
 * Group: com.ccsw
 * ArtifactId: tutorial-eureka
 * Versión Java: 19
-* Dependencias: Eureka Server
+* **Dependencias: Eureka Server**
 
 
 ![initializr](../../assets/images/initializr-eureka.png)
 
-Esto nos generará un proyecto que ya vendrá con la dependencia de Eureka Server, solo deberemos habilitarlo y darle la configuración deseada.
+Es importante que añadamos la dependencia de `Eureka Server` para que sea capaz de ejecutar el proyecto como si fuera un servidor Eureka.
+
+### Configurar el servicio
+
+Importamos el proyecto dentro del IDE y ya solo nos queda activar el servidor y configurarlo.
 
 En primer lugar, añadimos la anotación que habilita el servidor de Eureka.
 
@@ -55,12 +61,16 @@ Hecho esto, añadimos la configuración de puerto que ya conocemos y añadimos d
         fetchRegistry: false
     ```
     
+### Probar el servicio
+
 Hechas estas sencillas configuraciones y arrancando el proyecto, nos dirigimos a la `http://localhost/8761` donde podemos ver la interfaz de Eureka y si miramos con detenimiento, vemos que el catálogo de servicios aparece vacío, ya que aún no se ha registrado ninguno de ellos.
 
 
 ## Micro servicios
 
-Ahora ya tenemos disponible Eureka y podemos proceder a registrar nuestros micro servicios dentro del catálogo, vamos a realizar las mismas modificaciones sobre los tres micro servicios.
+Ahora que ya tenemos disponible Eureka, ya podemos proceder a registrar nuestros micro servicios dentro del catálogo. Para ello vamos a realizar las mismas modificaciones sobre los tres micro servicios. Recuerda que hay que realizarlo sobre los tres para que se registren todos.
+
+### Configurar micro servicios
 
 Para este fin debemos añadir una nueva dependencia dentro del `pom.xml` y modificar la configuración del proyecto.
 
@@ -185,12 +195,16 @@ Para poder diferenciar cada micro servicio, estos tienen su configuración de no
 !!! tip "Nombres en vez de rutas"
     Estos nombres serán por los que vamos a identificar cada micro servicio dentro de Eureka que será quien conozca las rutas de los mismos, asi cuando queramos realizar redirecciones a estos no necesitaremos conocerlas rutas ni los puertos de los mismos, con proporcionar los nombres tendremos la información completa de como llegar a ellos.
 
+### Probar micro servicios
+
 Hechas esto y arrancados los micro servicios, volvemos a dirigirnos a Eureka en `http://localhost/8761` donde podemos ver que estos aparecen en el listado de servicios registrados.
 
 
 ## Gateway
 
-Para esta pieza debemos crear un nuevo proyecto de una forma similar a la de Eureka.
+Para esta pieza, de nuevo, hay muchas implementaciones y aplicaciones de mercado, pero nosotros vamos a utilizar la de Spring Cloud, así que vamos a crear un nuevo proyecto de una forma similar a la de Eureka.
+
+### Crear el servicio
 
 Volviendo una vez más a [Spring Initializr](https://start.spring.io/) seleccionaremos los siguientes datos:
 
@@ -200,12 +214,16 @@ Volviendo una vez más a [Spring Initializr](https://start.spring.io/) seleccion
 * Group: com.ccsw
 * ArtifactId: tutorial-gateway
 * Versión Java: 19
-* Dependencias: Gateway, Eureka Client
+* **Dependencias: Gateway, Eureka Client**
 
 
 ![initializr](../../assets/images/initializr-gateway.png)
 
-Esto nos generará un proyecto que ya vendrá con las dependencias de Gateway y Eureka Client, solo deberemos añadir las configuraciones pertinentes.
+Ojo con las dependencias de `Gateway` y de `Eureka Client` que debemos añadir.
+
+### Configurar el servicio
+
+De nuevo lo importamos en nuestro IDE y pasamos a añadir las configuraciones pertinentes.
 
 Al igual que en el caso de Eureka vamos a renombrar nuestro fichero `application.properties` a `application.yml`.
 
@@ -245,7 +263,7 @@ Al igual que en el caso de Eureka vamos a renombrar nuestro fichero `application
                 - Path=/game/**
     ```
 
-Lo que hemos hecho aquí es configurar el puerto como `8080` ya que el Gateway va a ser nuestro punto de acceso y el encargado de redirigir cada petición al micro servicio correcto.
+Lo que hemos hecho aquí es configurar el puerto como `8080` ya que el `Gateway` va a ser nuestro punto de acceso y el encargado de redirigir cada petición al micro servicio correcto.
 
 Posteriormente hemos configurado el cliente de Eureka para que el Gateway establezca comunicación con Eureka que hemos configurado previamente para, en primer lugar, registrarse como un cliente y seguidamente obtener información del catálogo de servicios existentes.
 
@@ -255,20 +273,24 @@ Finalmente añadimos las directrices de redirección al Gateway indicándole los
 
 Con esto nos queda la siguiente configuración:
 
-* Las rutas que incluyan `category` redirigirán al micro servicio de `Categorias`
-* Las rutas que incluyan `author` redirigirán al micro servicio de `Autores`
-* Las rutas que incluyan `game` redirigirán al micro servicio de `Juegos`
+* Las rutas que incluyan en su path `category` redirigirán al micro servicio de `Categorias`
+* Las rutas que incluyan en su path `author` redirigirán al micro servicio de `Autores`
+* Las rutas que incluyan en su path `game` redirigirán al micro servicio de `Juegos`
+
+### Probar el servicio
 
 Hechas esto y arrancado el proyecto, volvemos a dirigirnos a Eureka en `http://localhost/8761` donde podemos ver que el Gateway se ha registrado correctamente junto al resto de clientes.
 
 
 ## Feign Client
 
-El último paso es la implementación de la comunicación entre los micro servicios, en este caso necesitamos que nuestro micro servicio de `Juegos` obtenga datos de `Categorías` y `Autores` para poder servir información completa de los `Juegos` ya que en su modelo solo posee los identificadores.
+El último paso es la implementación de la comunicación entre los micro servicios, en este caso necesitamos que nuestro micro servicio de `Game` obtenga datos de `Category` y `Author` para poder servir información completa de los `Game` ya que en su modelo solo posee los identificadores. Si recordáis, estábamos respondiendo solamente con los `id`.
 
-Para la comunicación entre los distintos servicios, Spring Cloud nos prove de `Feign Clients` que ofrecen una interfaz muy sencilla de comunicación a través de la infraestructura construida.
+### Configurar el servicio
 
-En primer lugar debemos añadir la dependencia necesaria dentro de nuestro pom.xml del micro servicio de `Juegos`.
+Para la comunicación entre los distintos servicios, Spring Cloud nos prove de `Feign Clients` que ofrecen una interfaz muy sencilla de comunicación y que utiliza a la perfección la infraestructura que ya hemos construido.
+
+En primer lugar debemos añadir la dependencia necesaria dentro de nuestro pom.xml del micro servicio de `Game`.
 
 === "pom.xml"
     ``` xml hl_lines="7-10"
@@ -291,9 +313,9 @@ En primer lugar debemos añadir la dependencia necesaria dentro de nuestro pom.x
     ...
     ```
 
-El siguiente paso es habilitar el uso de los `Feign Clients`.
+El siguiente paso es habilitar el uso de los `Feign Clients` mediante la anotación de SpringCloud.
 
-=== "TutorialEurekaApplication.java"
+=== "TutorialGameApplication.java"
     ``` Java hl_lines="8"
     package com.ccsw.tutorialgame;
     
@@ -311,6 +333,8 @@ El siguiente paso es habilitar el uso de los `Feign Clients`.
     
     }
     ```
+
+### Configurar los clientes
 
 Realizadas las configuraciones ya podemos realizar los cambios necesarios en nuestro código para implementar la comunicación. En primer lugar vamos a crear los clientes de `Categorías` y `Autores`.
 
@@ -351,9 +375,244 @@ Realizadas las configuraciones ya podemos realizar los cambios necesarios en nue
 
 Lo que hacemos aquí es crear una simple interfaz donde añadimos la configuración del `Feign Client` con la url del Gateway a través del cual vamos a realizar todas las comunicaciones y creamos un método abstracto con la anotación pertinente para hacer referencia al endpoint de obtención del listado.
 
-Con esto ya podemos inyectas estas interfaces dentro de nuestro controlador para obtener todos los datos necesarios que completaran la información de la `Categoría` y `Autor` de cada `Juego`.
+### Invocar los clientes 
 
-=== "AuthorClient.java"
+Con esto ya podemos inyectar estas interfaces dentro de nuestro controlador para obtener todos los datos necesarios que completaran la información de la `Category` y `Author` de cada `Game`.
+
+Además, vamos a cambiar el Dto de respuesta, para que en vez de devolver ids, devuelva los objetos correspondientes, que son los que está esperando nuestro frontend. Para ello, primero crearemos los Dtos que necesitamos. Los crearemos en:
+
+* `com.ccsw.tutorialgame.category.model`
+* `com.ccsw.tutorialgame.author.model`
+
+
+=== "CategoryDto.java"
+    ``` Java
+    package com.ccsw.tutorialgame.category.model;
+
+    /**
+     * @author ccsw
+     *
+     */
+    public class CategoryDto {
+    
+        private Long id;
+    
+        private String name;
+    
+        /**
+         * @return id
+         */
+        public Long getId() {
+    
+            return this.id;
+        }
+    
+        /**
+         * @param id new value of {@link #getId}.
+         */
+        public void setId(Long id) {
+    
+            this.id = id;
+        }
+    
+        /**
+         * @return name
+         */
+        public String getName() {
+    
+            return this.name;
+        }
+    
+        /**
+         * @param name new value of {@link #getName}.
+         */
+        public void setName(String name) {
+    
+            this.name = name;
+        }
+    
+    }
+    ```
+=== "AuthorDto.java"
+    ``` Java
+    package com.ccsw.tutorialgame.author.model;
+
+    /**
+     * @author ccsw
+     *
+     */
+    public class AuthorDto {
+    
+        private Long id;
+    
+        private String name;
+    
+        private String nationality;
+    
+        /**
+         * @return id
+         */
+        public Long getId() {
+    
+            return this.id;
+        }
+    
+        /**
+         * @param id new value of {@link #getId}.
+         */
+        public void setId(Long id) {
+    
+            this.id = id;
+        }
+    
+        /**
+         * @return name
+         */
+        public String getName() {
+    
+            return this.name;
+        }
+    
+        /**
+         * @param name new value of {@link #getName}.
+         */
+        public void setName(String name) {
+    
+            this.name = name;
+        }
+    
+        /**
+         * @return nationality
+         */
+        public String getNationality() {
+    
+            return this.nationality;
+        }
+    
+        /**
+         * @param nationality new value of {@link #getNationality}.
+         */
+        public void setNationality(String nationality) {
+    
+            this.nationality = nationality;
+        }
+    
+    }
+    ```
+
+Además, modificaremos nuestro `GameDto` para hacer uso de esos objetos.
+
+=== "GameDto.java"
+    ``` Java
+    package com.ccsw.tutorialgame.game.model;
+    
+    
+    import com.ccsw.tutorialgame.author.model.AuthorDto;
+    import com.ccsw.tutorialgame.category.model.CategoryDto;
+    
+    /**
+     * @author ccsw
+     *
+     */
+    public class GameDto {
+    
+        private Long id;
+    
+        private String title;
+    
+        private String age;
+    
+        private CategoryDto category;
+    
+        private AuthorDto author;
+    
+        /**
+         * @return id
+         */
+        public Long getId() {
+    
+            return this.id;
+        }
+    
+        /**
+         * @param id new value of {@link #getId}.
+         */
+        public void setId(Long id) {
+    
+            this.id = id;
+        }
+    
+        /**
+         * @return title
+         */
+        public String getTitle() {
+    
+            return this.title;
+        }
+    
+        /**
+         * @param title new value of {@link #getTitle}.
+         */
+        public void setTitle(String title) {
+    
+            this.title = title;
+        }
+    
+        /**
+         * @return age
+         */
+        public String getAge() {
+    
+            return this.age;
+        }
+    
+        /**
+         * @param age new value of {@link #getAge}.
+         */
+        public void setAge(String age) {
+    
+            this.age = age;
+        }
+    
+        /**
+         * @return category
+         */
+        public CategoryDto getCategory() {
+    
+            return this.category;
+        }
+    
+        /**
+         * @param category new value of {@link #getCategory}.
+         */
+        public void setCategory(CategoryDto category) {
+    
+            this.category = category;
+        }
+    
+        /**
+         * @return author
+         */
+        public AuthorDto getAuthor() {
+    
+            return this.author;
+        }
+    
+        /**
+         * @param author new value of {@link #getAuthor}.
+         */
+        public void setAuthor(AuthorDto author) {
+    
+            this.author = author;
+        }
+    
+    }
+    ```
+
+Y por último implementaremos el código necesario para transformar los `ids` en objetos dto. 
+Aquí lo que haremos será recuperar todos los autores y categorías, haciendo uso de los `Feign Client`, y cuando ejecutemos el mapeo de los juegos, ir sustituyendo sus valores por los dtos correspondientes.
+
+=== "GameController.java"
     ``` Java hl_lines="30-31 33-34 48-61"
     package com.ccsw.tutorialgame.game;
     
@@ -435,7 +694,6 @@ Con esto ya podemos inyectas estas interfaces dentro de nuestro controlador para
     ```
 
 Con todo esto, ya tenemos construido nuestro aplicativo de micro servicios con la arquitectura Spring Cloud. Podemos proceder a realizar las mismas pruebas tanto manuales como a través de los frontales.
-
 
 !!! tip "Escalado"
     Una de las principales ventajas de las arquitecturas de micro servicios, es la posibilidad de escalar partes de los aplicativos sin tener que escalar el sistema completo. Para confirmar que esto es asi, podemos levantar multiples instancias de cada servicio en puertos diferentes y veremos que esto se refleja en Eureka y el Gateway balanceará automáticamente entre las distintas instancias.

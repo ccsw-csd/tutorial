@@ -11,11 +11,13 @@ Todos los pasos son exactamente iguales, lo único que va a variar, es el nombre
 
 Dado de vamos a implementar el micro servicio Spring Boot de `Autores`, vamos a respetar la misma estructura del [Listado paginado](../../develop/paginated/springboot.md) de la version monolítica.
 
-En primer lugar, vamos a añadir la clase que necesitamos para realizar la paginación y vimos en la version monolítica del tutorial en el package `com.ccsw.tutorialauthor.common.pagination`.
+### Paginación
+
+En primer lugar, vamos a añadir la clase que necesitamos para realizar la paginación y vimos en la version monolítica del tutorial en el package `com.ccsw.tutorialauthor.common.pagination`. Ojo al package que lo hemos renombrado con respecto al listado monolítico.
 
 === "PageableRequest.java"
     ``` Java
-    package com.ccsw.tutorial.common.pagination;
+    package com.ccsw.tutorialauthor.common.pagination;
 
     import com.fasterxml.jackson.annotation.JsonIgnore;
     import org.springframework.data.domain.*;
@@ -112,6 +114,8 @@ En primer lugar, vamos a añadir la clase que necesitamos para realizar la pagin
     
     }
     ```
+
+### Entity y Dto
 
 Seguimos con la entidad y los DTOs dentro del package `com.ccsw.tutorialauthor.author.model`.
 
@@ -279,6 +283,8 @@ Seguimos con la entidad y los DTOs dentro del package `com.ccsw.tutorialauthor.a
         }
     }
     ```
+
+### Repository, Service y Controller
 
 Posteriormente, emplazamos el resto de clases dentro del package `com.ccsw.tutorialauthor.author`.
 
@@ -543,7 +549,9 @@ Posteriormente, emplazamos el resto de clases dentro del package `com.ccsw.tutor
     }
     ```
 
-Finalmente, debemos crear el script de inicialización de base de datos con solo los datos de juegos y modificar ligeramente la configuración inicial para añadir un puerto manualmente para poder tener multiples micro servicios funcionando simultáneamente.
+### SQL y Configuración    
+
+Finalmente, debemos crear el script de inicialización de base de datos con solo los datos de author y modificar ligeramente la configuración inicial para añadir un puerto manualmente para poder tener multiples micro servicios funcionando simultáneamente.
 
 === "data.sql"
     ``` SQL
@@ -571,4 +579,13 @@ Finalmente, debemos crear el script de inicialización de base de datos con solo
     spring.h2.console.enabled=true
     ```
 
+### Pruebas
+
 Ahora si arrancamos la aplicación server y abrimos el [Postman](https://www.postman.com/) podemos realizar las mismas pruebas del apartado de [Listado paginado](../../develop/paginated/springboot.md) pero esta vez apuntado al puerto `8092`.
+
+
+## Siguientes pasos
+
+En este punto ya tenemos un micro servicio de categorías en el puerto `8091` y un micro servicio de autores en el puerto `8092`. Al igual que antes, con estos datos ya podríamos conectar el frontend a estos servicios, pero vamos a esperar un poquito más a tener toda la infraestructura, para que sea más sencillo.
+
+Vamos a convertir en micro servicio el último listado.

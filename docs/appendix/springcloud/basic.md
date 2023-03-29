@@ -4,12 +4,12 @@ A diferencia del tutorial básico de Spring Boot, donde construíamos una aplica
 
 Para la creación de proyecto nos remitimos a la guía de instalación donde se detalla el proceso de creación de nuevo proyecto [Entorno de desarrollo](../../install/springboot.md)
 
-Todos los pasos son exactamente iguales, lo único que va a variar, es el nombre de nuestro proyecto, que en este caso se va a llamar `tutorial-category`. El campo que debemos modificar es `artifact` en Spring Initilizr, el resto de campos se cambiaran automáticamente.
+Todos los pasos son exactamente iguales, lo único que va a variar es el nombre de nuestro proyecto, que en este caso se va a llamar `tutorial-category`. El campo que debemos modificar es `artifact` en Spring Initilizr, el resto de campos se cambiaran automáticamente.
 
 
 ## Estructurar el código y buenas prácticas
 
-Esta parte de tutorial es una ampliación de la parte de backend con Spring Boot, por tanto no se ve a enfocar en las partes básicas aprendidas previamente, si no, se va a explicar el funcionamiento de los micro servicios aplicados al mismo caso de uso. 
+Esta parte de tutorial es una ampliación de la parte de backend con Spring Boot, por tanto no se ve a enfocar en las partes básicas aprendidas previamente, si no que se va a explicar el funcionamiento de los micro servicios aplicados al mismo caso de uso. 
 
 Para cualquier duda sobre la estructura del código y buenas prácticas, consultar el apartado de [Estructura y buenas prácticas](../../cleancode/springboot.md), ya que aplican a este caso en el mismo modo.
 
@@ -18,7 +18,9 @@ Para cualquier duda sobre la estructura del código y buenas prácticas, consult
 
 Dado de vamos a implementar el micro servicio Spring Boot de `Categorías`, vamos a respetar la misma estructura del [Listado simple](../../develop/basic/springboot.md) de la version monolítica.
 
-En primer lugar, vamos a crear la entidad y el DTO dentro del package `com.ccsw.tutorialcategory.category.model`.
+### Entity y Dto
+
+En primer lugar, vamos a crear la entidad y el DTO dentro del package `com.ccsw.tutorialcategory.category.model`. Ojo al package que lo hemos renombrado con respecto al listado monolítico.
 
 === "Category.java"
     ``` Java
@@ -125,6 +127,7 @@ En primer lugar, vamos a crear la entidad y el DTO dentro del package `com.ccsw.
     }
     ```
 
+### Repository, Service y Controller
 
 Posteriormente, emplazamos el resto de clases dentro del package `com.ccsw.tutorialcategory.category`.
 
@@ -341,7 +344,9 @@ Posteriormente, emplazamos el resto de clases dentro del package `com.ccsw.tutor
     }
     ```
 
-Finalmente, debemos crear el mismo de inicialización de base de datos con solo los datos de categorías y modificar ligeramente la configuración inicial para añadir un puerto manualmente para poder tener multiples micro servicios funcionando simultáneamente.
+### SQL y Configuración
+
+Finalmente, debemos crear el mismo fichero de inicialización de base de datos con solo los datos de categorías y modificar ligeramente la configuración inicial para añadir un puerto manualmente. Esto es necesario ya que vamos a levantar varios servicios simultáneamente y necesitaremos levantarlos en puertos diferentes para que no colisionen entre ellos.
 
 === "data.sql"
     ``` SQL
@@ -366,4 +371,13 @@ Finalmente, debemos crear el mismo de inicialización de base de datos con solo 
     spring.h2.console.enabled=true
     ```
 
+### Pruebas
+
 Ahora si arrancamos la aplicación server y abrimos el [Postman](https://www.postman.com/) podemos realizar las mismas pruebas del apartado de [Listado simple](../../develop/basic/springboot.md) pero esta vez apuntado al puerto `8091`.
+
+
+## Siguientes pasos
+
+Con esto ya tendríamos nuestro primer servicio separado. Podríamos conectar el frontend a este servicio, pero a medida que nuestra aplicación creciera en número de servicios sería un poco engorroso todo, así que todavía no lo vamos a conectar hasta que no tengamos toda la infraestructura.
+
+Vamos a convertir en micro servicio el siguiente listado.
