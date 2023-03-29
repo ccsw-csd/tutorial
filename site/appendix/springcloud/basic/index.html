@@ -791,6 +791,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_10_5" id="__nav_10_5_label" tabindex="0">
@@ -870,6 +872,47 @@
     Código
   </a>
   
+    <nav class="md-nav" aria-label="Código">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#entity-y-dto" class="md-nav__link">
+    Entity y Dto
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#repository-service-y-controller" class="md-nav__link">
+    Repository, Service y Controller
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sql-y-configuracion" class="md-nav__link">
+    SQL y Configuración
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pruebas" class="md-nav__link">
+    Pruebas
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#siguientes-pasos" class="md-nav__link">
+    Siguientes pasos
+  </a>
+  
 </li>
       
     </ul>
@@ -917,6 +960,20 @@
     <li class="md-nav__item">
       <a href="../infra/" class="md-nav__link">
         Infraestructura
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../summary/" class="md-nav__link">
+        Resumen
       </a>
     </li>
   
@@ -974,6 +1031,47 @@
     Código
   </a>
   
+    <nav class="md-nav" aria-label="Código">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#entity-y-dto" class="md-nav__link">
+    Entity y Dto
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#repository-service-y-controller" class="md-nav__link">
+    Repository, Service y Controller
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sql-y-configuracion" class="md-nav__link">
+    SQL y Configuración
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pruebas" class="md-nav__link">
+    Pruebas
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#siguientes-pasos" class="md-nav__link">
+    Siguientes pasos
+  </a>
+  
 </li>
       
     </ul>
@@ -995,13 +1093,14 @@
 <h1 id="listado-simple-spring-boot">Listado simple - Spring Boot</h1>
 <p>A diferencia del tutorial básico de Spring Boot, donde construíamos una aplicación monolítica, ahora vamos a construir multiples servicios por lo que necesitamos crear proyectos separados.</p>
 <p>Para la creación de proyecto nos remitimos a la guía de instalación donde se detalla el proceso de creación de nuevo proyecto <a href="../../../install/springboot/">Entorno de desarrollo</a></p>
-<p>Todos los pasos son exactamente iguales, lo único que va a variar, es el nombre de nuestro proyecto, que en este caso se va a llamar <code>tutorial-category</code>. El campo que debemos modificar es <code>artifact</code> en Spring Initilizr, el resto de campos se cambiaran automáticamente.</p>
+<p>Todos los pasos son exactamente iguales, lo único que va a variar es el nombre de nuestro proyecto, que en este caso se va a llamar <code>tutorial-category</code>. El campo que debemos modificar es <code>artifact</code> en Spring Initilizr, el resto de campos se cambiaran automáticamente.</p>
 <h2 id="estructurar-el-codigo-y-buenas-practicas">Estructurar el código y buenas prácticas</h2>
-<p>Esta parte de tutorial es una ampliación de la parte de backend con Spring Boot, por tanto no se ve a enfocar en las partes básicas aprendidas previamente, si no, se va a explicar el funcionamiento de los micro servicios aplicados al mismo caso de uso. </p>
+<p>Esta parte de tutorial es una ampliación de la parte de backend con Spring Boot, por tanto no se ve a enfocar en las partes básicas aprendidas previamente, si no que se va a explicar el funcionamiento de los micro servicios aplicados al mismo caso de uso. </p>
 <p>Para cualquier duda sobre la estructura del código y buenas prácticas, consultar el apartado de <a href="../../../cleancode/springboot/">Estructura y buenas prácticas</a>, ya que aplican a este caso en el mismo modo.</p>
 <h2 id="codigo">Código</h2>
 <p>Dado de vamos a implementar el micro servicio Spring Boot de <code>Categorías</code>, vamos a respetar la misma estructura del <a href="../../../develop/basic/springboot/">Listado simple</a> de la version monolítica.</p>
-<p>En primer lugar, vamos a crear la entidad y el DTO dentro del package <code>com.ccsw.tutorialcategory.category.model</code>.</p>
+<h3 id="entity-y-dto">Entity y Dto</h3>
+<p>En primer lugar, vamos a crear la entidad y el DTO dentro del package <code>com.ccsw.tutorialcategory.category.model</code>. Ojo al package que lo hemos renombrado con respecto al listado monolítico.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Category.java</label><label for="__tabbed_1_2">CategoryDto.java</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -1110,6 +1209,7 @@
 </div>
 </div>
 </div>
+<h3 id="repository-service-y-controller">Repository, Service y Controller</h3>
 <p>Posteriormente, emplazamos el resto de clases dentro del package <code>com.ccsw.tutorialcategory.category</code>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:4"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">CategoryRepository.java</label><label for="__tabbed_2_2">CategoryService.java</label><label for="__tabbed_2_3">CategoryServiceImpl.java</label><label for="__tabbed_2_4">CategoryController.java</label></div>
 <div class="tabbed-content">
@@ -1327,7 +1427,8 @@
 </div>
 </div>
 </div>
-<p>Finalmente, debemos crear el mismo de inicialización de base de datos con solo los datos de categorías y modificar ligeramente la configuración inicial para añadir un puerto manualmente para poder tener multiples micro servicios funcionando simultáneamente.</p>
+<h3 id="sql-y-configuracion">SQL y Configuración</h3>
+<p>Finalmente, debemos crear el mismo fichero de inicialización de base de datos con solo los datos de categorías y modificar ligeramente la configuración inicial para añadir un puerto manualmente. Esto es necesario ya que vamos a levantar varios servicios simultáneamente y necesitaremos levantarlos en puertos diferentes para que no colisionen entre ellos.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">data.sql</label><label for="__tabbed_3_2">application.properties</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -1354,7 +1455,11 @@
 </div>
 </div>
 </div>
+<h3 id="pruebas">Pruebas</h3>
 <p>Ahora si arrancamos la aplicación server y abrimos el <a href="https://www.postman.com/">Postman</a> podemos realizar las mismas pruebas del apartado de <a href="../../../develop/basic/springboot/">Listado simple</a> pero esta vez apuntado al puerto <code>8091</code>.</p>
+<h2 id="siguientes-pasos">Siguientes pasos</h2>
+<p>Con esto ya tendríamos nuestro primer servicio separado. Podríamos conectar el frontend a este servicio, pero a medida que nuestra aplicación creciera en número de servicios sería un poco engorroso todo, así que todavía no lo vamos a conectar hasta que no tengamos toda la infraestructura.</p>
+<p>Vamos a convertir en micro servicio el siguiente listado.</p>
 
 
 

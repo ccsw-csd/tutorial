@@ -791,6 +791,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_10_5" id="__nav_10_5_label" tabindex="0">
@@ -856,19 +858,32 @@
     Spring Cloud
   </a>
   
+    <nav class="md-nav" aria-label="Spring Cloud">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#contexto-de-la-aplicacion" class="md-nav__link">
+    Contexto de la aplicación
+  </a>
+  
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#infraestructura" class="md-nav__link">
     Infraestructura
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#contexto-de-la-aplicacion" class="md-nav__link">
-    Contexto de la aplicación
+        
+          <li class="md-nav__item">
+  <a href="#diagrama-de-la-arquitectura" class="md-nav__link">
+    Diagrama de la arquitectura
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -937,6 +952,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../summary/" class="md-nav__link">
+        Resumen
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -988,19 +1017,32 @@
     Spring Cloud
   </a>
   
+    <nav class="md-nav" aria-label="Spring Cloud">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#contexto-de-la-aplicacion" class="md-nav__link">
+    Contexto de la aplicación
+  </a>
+  
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#infraestructura" class="md-nav__link">
     Infraestructura
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#contexto-de-la-aplicacion" class="md-nav__link">
-    Contexto de la aplicación
+        
+          <li class="md-nav__item">
+  <a href="#diagrama-de-la-arquitectura" class="md-nav__link">
+    Diagrama de la arquitectura
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1022,28 +1064,31 @@
 
 <h1 id="introduccion-micro-servicios-spring-cloud">Introducción Micro Servicios - Spring Cloud</h1>
 <h2 id="que-son-los-micro-servicios">Que son los micro servicios?</h2>
-<p>Pues como su nombre indica, son servicios pequeñitos :)</p>
-<p>Y ahora la descripción de ChatGPT:</p>
+<p>Pues como su nombre indica, son servicios pequeñitos <img alt="😄" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/svg/1f604.svg" title=":smile:" /></p>
+<p>Aunque si nos vamos a una definición más técnica (según ChatGPT):</p>
 <p>Los micro servicios son una arquitectura de software en la que una aplicación está compuesta por pequeños servicios independientes que se comunican entre sí a través de interfaces bien definidas. Cada servicio se enfoca en realizar una tarea específica dentro de la aplicación y se ejecuta de manera autónoma.</p>
 <p>Cada micro servicio es responsable de un dominio del negocio y puede ser desarrollado, probado, implementado y escalado de manera independiente. Esto permite una mayor flexibilidad y agilidad en el desarrollo y la implementación de aplicaciones, ya que los cambios en un servicio no afectan a otros servicios.</p>
 <p>Además, los micro servicios son escalables y resistentes a fallos, ya que si un servicio falla, los demás servicios pueden seguir funcionando. También permiten la utilización de diferentes tecnologías para cada servicio, lo que ayuda a optimizar el rendimiento y la eficiencia en la aplicación en general.</p>
 <h2 id="spring-cloud">Spring Cloud</h2>
-<p>Existente multiples soluciones de micro servicios, en nuestro caso vamos a utilizar la solución que nos ofrece Spring que está incluido dentro del módulo <a href="https://spring.io/projects/spring-cloud">Spring Cloud</a>. </p>
-<p>Esta solución nace en Netflix para dar solución a sus propias necesidades, que con el tiempo, se ha incluido dentro de Spring y se ha evolucionado en paralelo para nutrirla con un amplio catálogo de funcionalidades.</p>
-<h2 id="infraestructura">Infraestructura</h2>
-<p>A diferencia de una aplicación monolítica, en un enfoque de micro servicios, ya no basta únicamente con la aplicación, serán necesarios varios actores que se responsabilizarán de darle consistencia al sistema.</p>
-<p>Las piezas que vamos a utilizar para la implementación de nuestra infraestructura, serán:</p>
+<p>Existente multiples soluciones para implementar micro servicios, en nuestro caso vamos a utilizar la solución que nos ofrece Spring Framework y que está incluido dentro del módulo <a href="https://spring.io/projects/spring-cloud">Spring Cloud</a>. </p>
+<p>Esta solución nace hace ya varios años como parte de la infraestructura de Netflix para dar solución a sus propias necesidades. Con el tiempo este código opensource ha sido adquirido por Spring Framework y se ha incluido dentro de su ecosistema, evolucionandolo con nuevas funcionalidades. Todo ello ha sido publicado bajo el módulo de Spring Cloud.</p>
+<h3 id="contexto-de-la-aplicacion">Contexto de la aplicación</h3>
+<p>Llegados a este punto, ¿qué es lo que vamos a hacer en los siguientes puntos?. 
+Pues vamos a coger nuestra aplicación monolítica que ya tenemos implementada durante todo el tutorial, y vamos a proceder a trocearla e implementarla con una metodología de micro servicios.</p>
+<p>Pero, además de trocear la aplicación en pequeños servicios, nos va a hacer falta una serie de servicios / utilidades para conectar todo el ecosistema. Nos hará falta una infraestructura.</p>
+<h3 id="infraestructura">Infraestructura</h3>
+<p>A diferencia de una aplicación monolítica, en un enfoque de micro servicios, ya no basta únicamente con la aplicación desplegada en su servidor, sino que serán necesarios varios actores que se responsabilizarán de darle consistencia al sistema, permitir la comunicación entre ellos, y ayudarán a solventar ciertos problemas que nos surgirán al trocear nuestras aplicaciones.</p>
+<p>Las principales piezas que vamos a utilizar para la implementación de nuestra infraestructura, serán:</p>
 <ul>
-<li><strong>Discovery Service / Eureka Server</strong>: Se trata del catálogo de todos los servicios que componen el sistema al cual cada servicio debe informar de su localización y disponibilidad.</li>
-<li><strong>Gateway</strong>: Se trata de un servicio de redirección y balanceado que obtendrá de Eureka todos los servicios disponibles, su estado, número de instancias y en función de la configuración que le demos, gestionará las redirecciones a cada uno de ellos.</li>
-<li><strong>Micro Servicios / Eureka Client</strong>: Son los micro servicios en sí, que ofrecen la funcionalidad del aplicativo. Estos Micro servicios informan periódicamente a Eureka de su estado para que en caso de perdida de servicio, el Gateway no redireccione a una determinada instancia que no se encuentra operativa.</li>
-<li><strong>Feign Client</strong>: Mecanismo que utilizamos para la intercomunicación de los distintos micro servicios entre sí.</li>
+<li><strong>Service Discovery / Eureka Server</strong>: Como vamos a tener varios servicios distribuidos por nuestra red, necesitaremos conocer donde está funcionando cada uno de ellos, su IP, su puerto e incluso sus métricas de acceso (localización, zona, estado de carga, etc.). Vamos a necesitar un <code>Service Discovery</code> que no es más que un catálogo de todos los servicios que componen el ecosistema al cual cada servicio debe informar de forma proactiva, de su localización y disponibilidad.</li>
+<li><strong>Client-side Service Discovery / Eureka Client</strong>: Como hemos mencionado en el punto anterior, todos los servicios del ecosistema (incluidos nuestros micro servicios) deben conectarse con el <code>Service Discovery</code> e informar periódicamente a este catálogo de su estado y sus métricas para que en caso de perdida de servicio, el resto de elementos lo sepan y puedan tomar decisiones al respecto. También nos servirá para que cada elemento pueda guardar en local una caché del catálogo publicado, que se irá refrescando cada vez que lance un <code>health check</code>.</li>
+<li><strong>Edge Server / Gateway / Proxy</strong>: Se trata de un servicio que hará de intermediario entre el mundo exterior y el mundo de microservicios. Además permitirá hacer redirección y balanceo entre todos los elementos registrados en el <code>Service Discovery</code>. Es altamente configurable (rutas, redirecciones, carga, etc.) y es una pieza fundamental para unificar todas las llamadas en un único punto del ecosistema.</li>
+<li><strong>Feign Client</strong>: Esta utilidad que provee directamente Spring Cloud nos permite comunicarnos entre los diferentes micro servicios de Spring, de una forma muy sencilla y sin tener que estar gestionando llamadas API Rest.</li>
 </ul>
-<h2 id="contexto-de-la-aplicacion">Contexto de la aplicación</h2>
-<p>Vamos a proceder a realizar la misma aplicación que hemos implementado en la parte de Spring Boot pero esta vez aplicado un enfoque de micro servicios.</p>
-<p>Con las piezas identificadas anteriormente y con el <a href="../../../usecases/">Contexto de la aplicación</a> en mente, podemos obtener el siguiente diagrama:</p>
+<h3 id="diagrama-de-la-arquitectura">Diagrama de la arquitectura</h3>
+<p>Con las piezas identificadas anteriormente y con el <a href="../../../usecases/">Contexto de la aplicación</a> en mente, lo que vamos a hacer en los siguientes puntos es trocear el sistema y generar la siguiente arquitectura:</p>
 <p><img alt="Micro servicios" src="../../../assets/images/microservices.png" /></p>
-<p>Ya deberíamos tener claros los conceptos y los actores que compondrán nuestro sistema. podemos empezar!!!</p>
+<p>Ya deberíamos tener claros los conceptos y los actores que compondrán nuestro sistema, así que, allá vamos!!!</p>
 
 
 

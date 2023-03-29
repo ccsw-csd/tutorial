@@ -36,6 +36,7 @@ nav:
         - Listado paginado: appendix/springcloud/paginated.md
         - Listado filtrado: appendix/springcloud/filtered.md
         - Infraestructura: appendix/springcloud/infra.md
+        - Resumen: appendix/springcloud/summary.md
 theme:
     name: material
     language: es

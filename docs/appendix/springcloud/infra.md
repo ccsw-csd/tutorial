@@ -197,7 +197,7 @@ Para poder diferenciar cada micro servicio, estos tienen su configuración de no
 
 ### Probar micro servicios
 
-Hechas esto y arrancados los micro servicios, volvemos a dirigirnos a Eureka en `http://localhost/8761` donde podemos ver que estos aparecen en el listado de servicios registrados.
+Hechas estas configuraciones y arrancados los micro servicios, volvemos a dirigirnos a Eureka en `http://localhost/8761` donde podemos ver que estos aparecen en el listado de servicios registrados.
 
 
 ## Gateway
