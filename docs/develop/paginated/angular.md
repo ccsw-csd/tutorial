@@ -73,7 +73,7 @@ Creamos el modelo en `author/model/Author.ts` con las propiedades necesarias par
 Añadimos la ruta al menú para que podamos acceder a la pantalla:
 
 === "app-routing.module.ts" 
-    ``` Typescript hl_lines="8"
+    ``` Typescript hl_lines="4 8"
     import { NgModule } from '@angular/core';
     import { Routes, RouterModule } from '@angular/router';
     import { CategoryListComponent } from './category/category-list/category-list.component';
