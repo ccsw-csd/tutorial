@@ -1,6 +1,6 @@
 # Bienvenido!
 
-Si estás leyendo esto es porque tienes mucha fuerza de voluntad y unas enormes ganas de aprender a desarrollar con el stack tecnológico de CCA (Java Spring Boot, Nodejs, Angular) o porque te han mandando hacer este tutorial en tu etapa de formación.
+Si estás leyendo esto es porque tienes mucha fuerza de voluntad y unas enormes ganas de aprender a desarrollar con el stack tecnológico de CCA (Java Spring Boot, Nodejs, Angular, Vue.js) o porque te han mandando hacer este tutorial en tu etapa de formación.
 En cualquier caso, te agradecemos el esfuerzo que estás haciendo y te deseamos suerte :smile:.
 
 Por favor, si detectas que hay algo incorrecto en el tutorial, que no funciona o que está mal escrito, contacta con nosotros para que podamos solventarlo para futuras lecturas. Escríbenos un issue [aquí](https://github.com/ccsw-csd/tutorial/issues).
@@ -8,7 +8,7 @@ Por favor, si detectas que hay algo incorrecto en el tutorial, que no funciona o
 
 ## ¿Que vamos a hacer?
 
-Durante este tutorial, vamos a crear una aplicación web paso a paso con Spring Boot o Nodejs para la parte servidora y con Angular para la parte frontal. Intentaré comentar todo lo más detallado posible, pero si echas en falta alguna explicación por favor, escríbenos un issue [aquí](https://github.com/ccsw-csd/tutorial/issues) para que podamos añadirla.
+Durante este tutorial, vamos a crear una aplicación web paso a paso con Spring Boot o Nodejs para la parte servidora y con Angular o Vue.js para la parte frontal. Intentaré comentar todo lo más detallado posible, pero si echas en falta alguna explicación por favor, escríbenos un issue [aquí](https://github.com/ccsw-csd/tutorial/issues) para que podamos añadirla.
 
 
 ## ¿Como lo vamos a hacer?
@@ -22,6 +22,7 @@ Durante todo el tutorial intentaré dar unas pautas y consejos de buenas prácti
 Además para cada uno de los capítulos que lo requieran, voy a desdoblar el tutorial por cada una de las tecnologías disponibles para que vayas construyendo con la que más cómodo te sientas. 
 
 Así que antes de empezar debes elegir bien con que tecnologías vas a comenzar de las que tengo disponibles. Puedes volver a este tutorial más adelante por si he ido añadiendo nuevas tecnologías. 
+
 Elige **UNA** tecnología de backend y **UNA** tecnología de frontend y completa el tutorial con esas dos tecnologías. No mezcles ni hagas todas las tecnologías a la vez ya que si no, te vas a volver loco.
 
 
@@ -31,6 +32,7 @@ No es obligado tener ningún conocimiento previo, pero es altamente recomendable
 De momento tenemos estos itinerarios:
 
 * 🔵 [Frontend - Angular](https://degreed.com/pathway/3pmxr0jg9n/pathway)
+* 🔵 [Frontend - Vue.js](https://degreed.com/pathway/v83v2wq3px/pathway)
 * 🟢 [Backend - Springboot](https://degreed.com/pathway/08gxl0e7pw/pathway)
 * 🟢 [Backend - Nodejs](https://degreed.com/pathway/e9kx16qypo/pathway)
 

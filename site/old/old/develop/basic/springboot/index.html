@@ -1,0 +1,2352 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.2.5">
+    
+    
+      
+        <title>🟢 Springboot - Tutorial Frontend - Backend</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.2d9f7617.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.e6a45f82.min.css">
+        
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/style.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#listado-simple-springboot" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../../.." title="Tutorial Frontend - Backend" class="md-header__button md-logo" aria-label="Tutorial Frontend - Backend" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Tutorial Frontend - Backend
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              🟢 Springboot
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Limpiar" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Tutorial Frontend - Backend" class="md-nav__button md-logo" aria-label="Tutorial Frontend - Backend" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Tutorial Frontend - Backend
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        Bienvenido!
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../thanks/" class="md-nav__link">
+        Agradecimientos!
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../usecases/" class="md-nav__link">
+        Contexto de la aplicación
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          Entorno de desarrollo
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Entorno de desarrollo" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Entorno de desarrollo
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../install/angular/" class="md-nav__link">
+        🔵 Angular
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../install/springboot/" class="md-nav__link">
+        🟢 Springboot
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../install/nodejs/" class="md-nav__link">
+        🟢 Nodejs
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          Estructura y buenas prácticas
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Estructura y buenas prácticas" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Estructura y buenas prácticas
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cleancode/angular/" class="md-nav__link">
+        🔵 Angular
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cleancode/springboot/" class="md-nav__link">
+        🟢 Springboot
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cleancode/nodejs/" class="md-nav__link">
+        🟢 Nodejs
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" checked>
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_6">
+          Code: Listado simple
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Code: Listado simple" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Code: Listado simple
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../angular/" class="md-nav__link">
+        🔵 Angular
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          🟢 Springboot
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        🟢 Springboot
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#primeros-pasos" class="md-nav__link">
+    Primeros pasos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estructurar-el-codigo" class="md-nav__link">
+    Estructurar el código
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#capa-de-operaciones-controller" class="md-nav__link">
+    Capa de operaciones: Controller
+  </a>
+  
+    <nav class="md-nav" aria-label="Capa de operaciones: Controller">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#controller-de-ejemplo" class="md-nav__link">
+    Controller de ejemplo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementar-operaciones" class="md-nav__link">
+    Implementar operaciones
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aspectos-importantes" class="md-nav__link">
+    Aspectos importantes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#capa-de-servicio-service" class="md-nav__link">
+    Capa de Servicio: Service
+  </a>
+  
+    <nav class="md-nav" aria-label="Capa de Servicio: Service">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#implementar-servicios" class="md-nav__link">
+    Implementar servicios
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aspectos-importantes_1" class="md-nav__link">
+    Aspectos importantes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#capa-de-datos-repository" class="md-nav__link">
+    Capa de Datos: Repository
+  </a>
+  
+    <nav class="md-nav" aria-label="Capa de Datos: Repository">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creacion-de-bbdd" class="md-nav__link">
+    Creación de BBDD
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementar-entity" class="md-nav__link">
+    Implementar Entity
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementar-repository" class="md-nav__link">
+    Implementar Repository
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aspectos-importantes_2" class="md-nav__link">
+    Aspectos importantes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#capa-de-testing-tdd" class="md-nav__link">
+    Capa de Testing: TDD
+  </a>
+  
+    <nav class="md-nav" aria-label="Capa de Testing: TDD">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pruebas-de-listado" class="md-nav__link">
+    Pruebas de listado
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pruebas-de-creacion" class="md-nav__link">
+    Pruebas de creación
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pruebas-de-modificacion" class="md-nav__link">
+    Pruebas de modificación
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pruebas-de-borrado" class="md-nav__link">
+    Pruebas de borrado
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-hemos-aprendido" class="md-nav__link">
+    ¿Que hemos aprendido?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#depuracion" class="md-nav__link">
+    Depuración
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nodejs/" class="md-nav__link">
+        🟢 Nodejs
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_7">
+          Code: Listado paginado
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Code: Listado paginado" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          Code: Listado paginado
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../paginated/angular/" class="md-nav__link">
+        🔵 Angular
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../paginated/springboot/" class="md-nav__link">
+        🟢 Springboot
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../paginated/nodejs/" class="md-nav__link">
+        🟢 Nodejs
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8" type="checkbox" id="__nav_8" >
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_8">
+          Code: Listado filtrado
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Code: Listado filtrado" data-md-level="1">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          Code: Listado filtrado
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../filtered/angular/" class="md-nav__link">
+        🔵 Angular
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../filtered/springboot/" class="md-nav__link">
+        🟢 Springboot
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../filtered/nodejs/" class="md-nav__link">
+        🟢 Nodejs
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exercise/" class="md-nav__link">
+        Ahora hazlo tu!
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10" type="checkbox" id="__nav_10" >
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_10">
+          Anexos
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Anexos" data-md-level="1">
+        <label class="md-nav__title" for="__nav_10">
+          <span class="md-nav__icon md-icon"></span>
+          Anexos
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appendix/git/" class="md-nav__link">
+        GIT: Tutorial básico
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appendix/rest/" class="md-nav__link">
+        API Rest
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appendix/tdd/" class="md-nav__link">
+        TDD
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appendix/jpa/" class="md-nav__link">
+        Spring Data: JPA
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#primeros-pasos" class="md-nav__link">
+    Primeros pasos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estructurar-el-codigo" class="md-nav__link">
+    Estructurar el código
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#capa-de-operaciones-controller" class="md-nav__link">
+    Capa de operaciones: Controller
+  </a>
+  
+    <nav class="md-nav" aria-label="Capa de operaciones: Controller">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#controller-de-ejemplo" class="md-nav__link">
+    Controller de ejemplo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementar-operaciones" class="md-nav__link">
+    Implementar operaciones
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aspectos-importantes" class="md-nav__link">
+    Aspectos importantes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#capa-de-servicio-service" class="md-nav__link">
+    Capa de Servicio: Service
+  </a>
+  
+    <nav class="md-nav" aria-label="Capa de Servicio: Service">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#implementar-servicios" class="md-nav__link">
+    Implementar servicios
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aspectos-importantes_1" class="md-nav__link">
+    Aspectos importantes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#capa-de-datos-repository" class="md-nav__link">
+    Capa de Datos: Repository
+  </a>
+  
+    <nav class="md-nav" aria-label="Capa de Datos: Repository">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creacion-de-bbdd" class="md-nav__link">
+    Creación de BBDD
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementar-entity" class="md-nav__link">
+    Implementar Entity
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementar-repository" class="md-nav__link">
+    Implementar Repository
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aspectos-importantes_2" class="md-nav__link">
+    Aspectos importantes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#capa-de-testing-tdd" class="md-nav__link">
+    Capa de Testing: TDD
+  </a>
+  
+    <nav class="md-nav" aria-label="Capa de Testing: TDD">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pruebas-de-listado" class="md-nav__link">
+    Pruebas de listado
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pruebas-de-creacion" class="md-nav__link">
+    Pruebas de creación
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pruebas-de-modificacion" class="md-nav__link">
+    Pruebas de modificación
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pruebas-de-borrado" class="md-nav__link">
+    Pruebas de borrado
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-hemos-aprendido" class="md-nav__link">
+    ¿Que hemos aprendido?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#depuracion" class="md-nav__link">
+    Depuración
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+
+
+<h1 id="listado-simple-springboot">Listado simple - Springboot</h1>
+<p>Ahora que ya tenemos listo el proyecto backend de SpringBoot (en el puerto 8080) ya podemos empezar a codificar la solución.</p>
+<h2 id="primeros-pasos">Primeros pasos</h2>
+<div class="admonition success">
+<p class="admonition-title">Antes de empezar</p>
+<p>Quiero hacer hincapié en Springboot tiene una documentación muy extensa y completa, así que te recomiendo que hagas uso de ella cuando tengas cualquier duda. Tanto la propia web de <a href="https://spring.io/projects/spring-boot">Spring</a> como en el portal de tutoriales de <a href="https://www.baeldung.com/spring-tutorial">Baeldung</a> puedes buscar casi cualquier ejemplo que necesites.</p>
+</div>
+<p>Si has seguido el tutorial, en la creación del proyecto tenías la posibilidad de crear un proyecto Springboot simple o descargarte una plantilla ya creada. De cualquiera de las dos maneras, tendrás la misma estructura que veremos a continuación.</p>
+<h2 id="estructurar-el-codigo">Estructurar el código</h2>
+<p>Vamos a hacer un breve refresco de la estructura del código que ya se ha visto en puntos anteriores.</p>
+<p>Las clases deben estar agrupadas por ámbito funcional, en nuestro caso como vamos a hacer la funcionalidad de <code>Categorías</code> pues debería estar todo dentro de un package del tipo <code>com.ccsw.tutorial.category</code>.</p>
+<p>Además, deberíamos aplicar la separación por capas como ya se vió en el esquema:</p>
+<p><img alt="estructura-capas" src="../../../assets/images/estructura-capas.png" /></p>
+<p>La primera capa, la de <code>Controlador</code>, se encargará de procesar las peticiones y transformar datos. Esta capa llamará a la capa de <code>Lógica</code> de negocio que ejecutará las operaciones, ayudándose de otros objetos de esa misma capa de <code>Lógica</code> o bien de llamadas a datos a través de la capa de <code>Acceso a Datos</code></p>
+<p>Ahora sí, vamos a programar!.</p>
+<h2 id="capa-de-operaciones-controller">Capa de operaciones: Controller</h2>
+<p>En esta capa es donde se definen las operaciones que pueden ser consumidas por los clientes. Se caracterizan por estar anotadas con las anotaciones @Controller o @RestController y por las anotaciones @RequestMapping que nos permiten definir las rutas de acceso.</p>
+<div class="admonition tip">
+<p class="admonition-title">Recomendación: Breve detalle REST</p>
+<p>Antes de continuar te recomiendo encarecidamente que leas el <a href="../../../appendix/rest/">Anexo: Detalle REST</a> donde se explica brevemente como estructurar los servicios REST que veremos a continuación.</p>
+</div>
+<h3 id="controller-de-ejemplo">Controller de ejemplo</h3>
+<p>Vamos a crear una clase <code>CategoryController.java</code> dentro del package <code>com.ccsw.tutorial.category</code> para definir las rutas de las operaciones.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">CategoryController.java</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.ccsw.tutorial.category</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.CrossOrigin</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RequestMapping</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RequestMethod</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="p">;</span>
+
+<span class="cm">/**</span>
+<span class="cm">* @author ccsw</span>
+<span class="cm">*/</span>
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">&quot;/category&quot;</span><span class="p">)</span>
+<span class="nd">@RestController</span>
+<span class="nd">@CrossOrigin</span><span class="p">(</span><span class="n">origins</span> <span class="o">=</span> <span class="s">&quot;*&quot;</span><span class="p">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CategoryController</span> <span class="p">{</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * Método para recuperar todas las Category</span>
+<span class="cm">  * @return</span>
+<span class="cm">  */</span>
+  <span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">path</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="n">RequestMethod</span><span class="p">.</span><span class="na">GET</span><span class="p">)</span>
+  <span class="kd">public</span> <span class="n">String</span> <span class="nf">prueba</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="k">return</span> <span class="s">&quot;Probando el Controller&quot;</span><span class="p">;</span>
+  <span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Ahora si arrancamos la aplicación server, abrimos el <a href="https://www.postman.com/">Postman</a> y creamos una petición GET a la url http://localhost:8080/category nos responderá con el mensaje que hemos programado.</p>
+<h3 id="implementar-operaciones">Implementar operaciones</h3>
+<p>Ahora que ya tenemos un controlador y una operacion de negocio ficticia, vamos a borrarla y añadir las operaciones reales que consumirá nuestra pantalla. Deberemos añadir una operación para listar, una para actualizar, una para guardar y una para borrar. Aunque para hacerlo más cómodo, utilizaremos la misma operación para guardar y para actualizar. Además, no vamos a trabajar directamente con datos simples, sino que usaremos objetos para recibir información y para enviar información.</p>
+<p>Estos objetos típicamente se denominan DTO (Data Transfer Object) y nos sirven justamente para encapsular información que queremos transportar. En realidad no son más que clases <em>pojo</em> sencillas con propiedades, getters y setters. </p>
+<p>Para nuestro ejemplo crearemos una clase <code>CategoryDto</code> dentro del package <code>com.ccsw.tutorial.category.model</code> con el siguiente contenido:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">CategoryDto.java</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.ccsw.tutorial.category.model</span><span class="p">;</span>
+
+<span class="cm">/**</span>
+<span class="cm">* @author ccsw</span>
+<span class="cm">*/</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CategoryDto</span> <span class="p">{</span>
+  <span class="kd">private</span> <span class="n">Long</span> <span class="n">id</span><span class="p">;</span>
+
+  <span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="p">;</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * @return id</span>
+<span class="cm">  */</span>
+  <span class="kd">public</span> <span class="n">Long</span> <span class="nf">getId</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="na">id</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * @param id new value of {@link #getId}.</span>
+<span class="cm">  */</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setId</span><span class="p">(</span><span class="n">Long</span> <span class="n">id</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="na">id</span> <span class="o">=</span> <span class="n">id</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * @return name</span>
+<span class="cm">  */</span>
+  <span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="na">name</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * @param name new value of {@link #getName}.</span>
+<span class="cm">  */</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="p">(</span><span class="n">String</span> <span class="n">name</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="p">;</span>
+  <span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>A continuación utilizaremos esta clase en nuestro Controller para implementar las tres operaciones de negocio.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">CategoryController.java</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.ccsw.tutorial.category</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.util.HashMap</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Map</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.CrossOrigin</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.PathVariable</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RequestBody</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RequestMapping</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RequestMethod</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">com.ccsw.tutorial.category.model.CategoryDto</span><span class="p">;</span>
+
+<span class="cm">/**</span>
+<span class="cm">* @author ccsw</span>
+<span class="cm">*/</span>
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">&quot;/category&quot;</span><span class="p">)</span>
+<span class="nd">@RestController</span>
+<span class="nd">@CrossOrigin</span><span class="p">(</span><span class="n">origins</span> <span class="o">=</span> <span class="s">&quot;*&quot;</span><span class="p">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CategoryController</span> <span class="p">{</span>
+
+  <span class="kd">private</span> <span class="kt">long</span> <span class="n">SEQUENCE</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="kd">private</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">Long</span><span class="p">,</span> <span class="n">CategoryDto</span><span class="o">&gt;</span> <span class="n">categories</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Long</span><span class="p">,</span> <span class="n">CategoryDto</span><span class="o">&gt;</span><span class="p">();</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * Método para recuperar todas las Category</span>
+<span class="cm">  * @return</span>
+<span class="cm">  */</span>
+  <span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">path</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="n">RequestMethod</span><span class="p">.</span><span class="na">GET</span><span class="p">)</span>
+  <span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">CategoryDto</span><span class="o">&gt;</span> <span class="nf">findAll</span><span class="p">()</span> <span class="p">{</span>
+
+      <span class="k">return</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">categories</span><span class="p">.</span><span class="na">values</span><span class="p">());</span>
+  <span class="p">}</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * Método para crear o actualizar una Category</span>
+<span class="cm">  * @param id</span>
+<span class="cm">  * @param dto</span>
+<span class="cm">  * @return</span>
+<span class="cm">  */</span>
+  <span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">path</span> <span class="o">=</span> <span class="p">{</span> <span class="s">&quot;&quot;</span><span class="p">,</span> <span class="s">&quot;/{id}&quot;</span> <span class="p">},</span> <span class="n">method</span> <span class="o">=</span> <span class="n">RequestMethod</span><span class="p">.</span><span class="na">PUT</span><span class="p">)</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">save</span><span class="p">(</span><span class="nd">@PathVariable</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;id&quot;</span><span class="p">,</span> <span class="n">required</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span> <span class="n">Long</span> <span class="n">id</span><span class="p">,</span> <span class="nd">@RequestBody</span> <span class="n">CategoryDto</span> <span class="n">dto</span><span class="p">)</span> <span class="p">{</span>
+
+      <span class="n">CategoryDto</span> <span class="n">category</span><span class="p">;</span>
+
+      <span class="k">if</span> <span class="p">(</span><span class="n">id</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">category</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CategoryDto</span><span class="p">();</span>
+        <span class="n">category</span><span class="p">.</span><span class="na">setId</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">SEQUENCE</span><span class="o">++</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">categories</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">category</span><span class="p">.</span><span class="na">getId</span><span class="p">(),</span> <span class="n">category</span><span class="p">);</span>
+      <span class="p">}</span> 
+      <span class="k">else</span> <span class="p">{</span>
+        <span class="n">category</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="na">categories</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
+      <span class="p">}</span>
+
+      <span class="n">category</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="n">dto</span><span class="p">.</span><span class="na">getName</span><span class="p">());</span>
+  <span class="p">}</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * Método para borrar una Category</span>
+<span class="cm">  * @param id</span>
+<span class="cm">  */</span>
+  <span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">path</span> <span class="o">=</span> <span class="s">&quot;/{id}&quot;</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="n">RequestMethod</span><span class="p">.</span><span class="na">DELETE</span><span class="p">)</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">delete</span><span class="p">(</span><span class="nd">@PathVariable</span><span class="p">(</span><span class="s">&quot;id&quot;</span><span class="p">)</span> <span class="n">Long</span> <span class="n">id</span><span class="p">)</span> <span class="p">{</span>
+
+      <span class="k">this</span><span class="p">.</span><span class="na">categories</span><span class="p">.</span><span class="na">remove</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Como todavía no tenemos acceso a BD, hemos creado una variable tipo HashMap y una variable Long, que simularán una BD y una secuencia. También hemos implementado tres operaciones GET, PUT y DELETE que realizan las acciones necesarias por nuestra pantalla. Ahora podríamos probarlo desde el Postman con cuatro ejemplo sencillos.</p>
+<p>Fíjate que el método <code>save</code> tiene dos rutas. La ruta normal <code>category/</code> y la ruta informada <code>category/3</code>. Esto es porque hemos juntado la acción create y update en un mismo método para facilitar el desarrollo. Es totalmente válido y funcional.</p>
+<div class="admonition tip">
+<p class="admonition-title">Atención</p>
+<p>Los datos que se reciben pueden venir informados como un parámetro en la URL Get, como una variable en el propio path o dentro del body de la petición. Cada uno de ellos se recupera con una anotación especial: <code>@RequestParam</code>, <code>@PathVariable</code> y <code>@RequestBody</code> respectivamente.</p>
+</div>
+<p>Como no tenemos ningún dato dado de alta, podemos probar en primer lugar a realizar una inserción de datos con el método PUT.</p>
+<p><strong>PUT /category</strong> nos sirve para insertar <code>Categorías</code> nuevas (si no tienen el id informado) o para actualizar <code>Categorías</code> (si tienen el id informado). Fíjate que los datos que se envían están en el body como formato JSON (parte izquierda de la imagen). Si no envías datos, te dará un error.</p>
+<p><img alt="step2-java2" src="../../../assets/images/step2-java2.png" />
+<img alt="step2-java3" src="../../../assets/images/step2-java3.png" /></p>
+<p><strong>GET /category</strong> nos devuelve un listado de <code>Categorías</code>, siempre que hayamos insertado algo antes.</p>
+<p><img alt="step2-java1" src="../../../assets/images/step2-java1.png" /></p>
+<p><strong>DELETE /category</strong> nos sirve eliminar <code>Categorías</code>. Fíjate que el dato del ID que se envía está en el path.</p>
+<p><img alt="step2-java4" src="../../../assets/images/step2-java4.png" /></p>
+<p>Prueba a jugar borrando categorías que no existen o modificando categorías que no existen. Tal y como está programado, el borrado no dará error, pero la modificación debería dar un NullPointerException al no existir el dato a modificar.</p>
+<h3 id="aspectos-importantes">Aspectos importantes</h3>
+<p>Los aspectos importantes de la capa <code>Controller</code> son:</p>
+<ul>
+<li>La clase debe estar anotada con <code>@Controller</code> o <code>@RestController</code>. Mejor usar la última anotación ya que estás diciendo que las operaciones son de tipo Rest y no hará falta configurar nada</li>
+<li>La ruta general al controlador se define con el <code>@RequestMapping</code> global de la clase, aunque también se puede obviar esta anotación y añadir a cada una de las operaciones la ruta raíz.</li>
+<li>Los métodos que queramos exponer como operaciones deben ir anotados también con <code>@RequestMapping</code> con la info:<ul>
+<li><code>path</code> → Que nos permite definir un path para la operación, siempre sumándole el path de la clase (si es que tuviera)</li>
+<li><code>method</code> → Que nos permite definir el verbo de http que vamos a atender. Podemos tener el mismo path con diferente method, sin problema. Por lo general utilizaremos:<ul>
+<li><em>GET</em> → Generalmente se usa para recuperar información</li>
+<li><em>POST</em> → Se utiliza para hacer update y filtrados complejos de información</li>
+<li><em>PUT</em> → Se utiliza para hacer save de información</li>
+<li><em>DELETE</em> → Se utiliza para hacer borrados de información</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="capa-de-servicio-service">Capa de Servicio: Service</h2>
+<p>Pero en realidad la cosa no funciona así. Hemos implementado parte de la lógica de negocio (las operaciones/acciones de guardado, borrado y listado) dentro de lo que sería la capa de operaciones o servicios al cliente. Esta capa no debe ejecutar lógica de negocio, tan solo debe hacer transformaciones de datos y enrutar peticiones, toda la lógica debería ir en la capa de servicio.</p>
+<h3 id="implementar-servicios">Implementar servicios</h3>
+<p>Pues vamos a arreglarlo. Vamos a crear un servicio y vamos a mover la lógica de negocio al servicio.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:3"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><input id="__tabbed_4_3" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">CategoryService.java</label><label for="__tabbed_4_2">CategoryServiceImpl.java</label><label for="__tabbed_4_3">CategoryController.java</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.ccsw.tutorial.category</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">com.ccsw.tutorial.category.model.CategoryDto</span><span class="p">;</span>
+
+<span class="cm">/**</span>
+<span class="cm">* @author ccsw</span>
+<span class="cm">*</span>
+<span class="cm">*/</span>
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">CategoryService</span> <span class="p">{</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * Método para recuperar todas las Category</span>
+<span class="cm">  * @return</span>
+<span class="cm">  */</span>
+  <span class="n">List</span><span class="o">&lt;</span><span class="n">CategoryDto</span><span class="o">&gt;</span> <span class="nf">findAll</span><span class="p">();</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * Método para crear o actualizar una Category</span>
+<span class="cm">  * @param dto</span>
+<span class="cm">  * @return</span>
+<span class="cm">  */</span>
+  <span class="kt">void</span> <span class="nf">save</span><span class="p">(</span><span class="n">Long</span> <span class="n">id</span><span class="p">,</span> <span class="n">CategoryDto</span> <span class="n">dto</span><span class="p">);</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * Método para borrar una Category</span>
+<span class="cm">  * @param id</span>
+<span class="cm">  */</span>
+  <span class="kt">void</span> <span class="nf">delete</span><span class="p">(</span><span class="n">Long</span> <span class="n">id</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.ccsw.tutorial.category</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.util.HashMap</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Map</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">org.springframework.stereotype.Service</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">com.ccsw.tutorial.category.model.CategoryDto</span><span class="p">;</span>
+
+<span class="cm">/**</span>
+<span class="cm">* @author ccsw</span>
+<span class="cm">*</span>
+<span class="cm">*/</span>
+<span class="nd">@Service</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CategoryServiceImpl</span> <span class="kd">implements</span> <span class="n">CategoryService</span> <span class="p">{</span>
+  <span class="kd">private</span> <span class="kt">long</span> <span class="n">SEQUENCE</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+  <span class="kd">private</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">Long</span><span class="p">,</span> <span class="n">CategoryDto</span><span class="o">&gt;</span> <span class="n">categories</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Long</span><span class="p">,</span> <span class="n">CategoryDto</span><span class="o">&gt;</span><span class="p">();</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * Método para recuperar todas las Category</span>
+<span class="cm">  * @return</span>
+<span class="cm">  */</span>
+  <span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">CategoryDto</span><span class="o">&gt;</span> <span class="nf">findAll</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="k">return</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">categories</span><span class="p">.</span><span class="na">values</span><span class="p">());</span>
+  <span class="p">}</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * Método para crear o actualizar una Category</span>
+<span class="cm">  * @param dto</span>
+<span class="cm">  * @return</span>
+<span class="cm">  */</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">save</span><span class="p">(</span><span class="n">Long</span> <span class="n">id</span><span class="p">,</span> <span class="n">CategoryDto</span> <span class="n">dto</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="n">CategoryDto</span> <span class="n">category</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">id</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">category</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CategoryDto</span><span class="p">();</span>
+      <span class="n">category</span><span class="p">.</span><span class="na">setId</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">SEQUENCE</span><span class="o">++</span><span class="p">);</span>
+      <span class="k">this</span><span class="p">.</span><span class="na">categories</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">category</span><span class="p">.</span><span class="na">getId</span><span class="p">(),</span> <span class="n">category</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="n">category</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="na">categories</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">category</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="n">dto</span><span class="p">.</span><span class="na">getName</span><span class="p">());</span>
+  <span class="p">}</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * Método para borrar una Category</span>
+<span class="cm">  * @param id</span>
+<span class="cm">  */</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">delete</span><span class="p">(</span><span class="n">Long</span> <span class="n">id</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="na">categories</span><span class="p">.</span><span class="na">remove</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.ccsw.tutorial.category</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.CrossOrigin</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.PathVariable</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RequestBody</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RequestMapping</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RequestMethod</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">com.ccsw.tutorial.category.model.CategoryDto</span><span class="p">;</span>
+
+<span class="cm">/**</span>
+<span class="cm">* @author ccsw</span>
+<span class="cm">*/</span>
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">&quot;/category&quot;</span><span class="p">)</span>
+<span class="nd">@RestController</span>
+<span class="nd">@CrossOrigin</span><span class="p">(</span><span class="n">origins</span> <span class="o">=</span> <span class="s">&quot;*&quot;</span><span class="p">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CategoryController</span> <span class="p">{</span>
+
+  <span class="nd">@Autowired</span>
+  <span class="kd">private</span> <span class="n">CategoryService</span> <span class="n">categoryService</span><span class="p">;</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * Método para recuperar todas las Category</span>
+<span class="cm">  * @return</span>
+<span class="cm">  */</span>
+  <span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">path</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="n">RequestMethod</span><span class="p">.</span><span class="na">GET</span><span class="p">)</span>
+  <span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">CategoryDto</span><span class="o">&gt;</span> <span class="nf">findAll</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="na">categoryService</span><span class="p">.</span><span class="na">findAll</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * Método para crear o actualizar una Category</span>
+<span class="cm">  * @param dto</span>
+<span class="cm">  * @return</span>
+<span class="cm">  */</span>
+  <span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">path</span> <span class="o">=</span> <span class="p">{</span> <span class="s">&quot;&quot;</span><span class="p">,</span> <span class="s">&quot;/{id}&quot;</span> <span class="p">},</span> <span class="n">method</span> <span class="o">=</span> <span class="n">RequestMethod</span><span class="p">.</span><span class="na">PUT</span><span class="p">)</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">save</span><span class="p">(</span><span class="nd">@PathVariable</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;id&quot;</span><span class="p">,</span> <span class="n">required</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span> <span class="n">Long</span> <span class="n">id</span><span class="p">,</span> <span class="nd">@RequestBody</span> <span class="n">CategoryDto</span> <span class="n">dto</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="na">categoryService</span><span class="p">.</span><span class="na">save</span><span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">dto</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * Método para borrar una Category</span>
+<span class="cm">  * @param id</span>
+<span class="cm">  */</span>
+  <span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">path</span> <span class="o">=</span> <span class="s">&quot;/{id}&quot;</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="n">RequestMethod</span><span class="p">.</span><span class="na">DELETE</span><span class="p">)</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">delete</span><span class="p">(</span><span class="nd">@PathVariable</span><span class="p">(</span><span class="s">&quot;id&quot;</span><span class="p">)</span> <span class="n">Long</span> <span class="n">id</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="na">categoryService</span><span class="p">.</span><span class="na">delete</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Ahora ya tenemos bien estructurado nuestro proyecto. Ya tenemos las dos capas necesarias Controladores y Servicios y cada uno se encarga de llevar a cabo su cometido de forma correcta.</p>
+<h3 id="aspectos-importantes_1">Aspectos importantes</h3>
+<p>Los aspectos importantes de la capa <code>Service</code> son:</p>
+<ul>
+<li>Toda la lógica de negocio, operaciones y demás debe estar implementada en los servicios. Los controladores simplemente invocan servicios y transforman ciertos datos.</li>
+<li>Es buena práctica que la capa de servicios se implemente usando el patrón fachada, esto quiere decir que necesitamos tener una Interface y al menos una implementación de esa Interface. Y siempre siempre debemos interactuar con la Interface. Esto nos permitirá a futuro poder sustituir la implementación por otra diferente sin que el resto del código se vea afectado. Especialmente útil cuando queremos mockear comportamientos en tests.</li>
+<li>La capa de servicio puede invocar a otros servicios en sus operaciones, pero <strong>nunca</strong> debe invocar a un controlador.</li>
+<li>Para crear un servicio se debe anotar mediante <code>@Service</code> y además debe implementar la Interface del servicio. Un error muy común al arrancar un proyecto y ver que no funcionan las llamadas, es porqué no existe la anotación <code>@Service</code> o porqué no se ha implementado la Interface.</li>
+<li>La forma de <code>inyectar</code> y utilizar componentes manejados por Springboot es mediante la anotación <code>@Autowired</code>. <strong>NO</strong> intentes crear un objeto de CategoryServiceImpl, ni hacer un <code>new</code>, ya que no estará manejado por Springboot y dará fallos de NullPointer. Lo mejor es dejar que Springboot lo gestione y utilizar las inyecciones de dependencias.</li>
+</ul>
+<h2 id="capa-de-datos-repository">Capa de Datos: Repository</h2>
+<p>Pero no siempre vamos a acceder a los datos mediante un HasMap en memoria. En algunas ocasiones queremos que nuestro proyecto acceda a un servicio de datos como puede ser una BBDD, un servicio externo, un acceso a disco, etc.
+Estos accesos se deben hacer desde la capa de acceso a datos, y en concreto para nuestro ejemplo, lo haremos a través de un Repository para que acceda a una BBDD.</p>
+<h3 id="creacion-de-bbdd">Creación de BBDD</h3>
+<p>Para el tutorial no necesitamos configurar una BBDD externa ni complicarnos demasiado. Vamos a utilizar una librería muy útil llamada <code>H2</code> que nos permite levantar una BBDD en memoria persistiendo los datos en memoria o en disco.</p>
+<p>Para esto, si te acuerdas de cuando creamos la aplicación, existen unos ficheros que se encuentran dentro de la carpeta <code>src/main/resources/</code> y que nos permiten ir depositando scripts versionados para que se ejecuten en orden una vez se levante la aplicación. Vamos a crear los nuestros:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">schema.sql</label><label for="__tabbed_5_2">data.sql</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="k">DROP</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="n">CATEGORY</span><span class="p">;</span><span class="w"></span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">CATEGORY</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
+<span class="w">  </span><span class="n">id</span><span class="w"> </span><span class="nb">BIGINT</span><span class="w"> </span><span class="k">IDENTITY</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="n">name</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">250</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"></span>
+<span class="p">);</span><span class="w"></span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">CATEGORY</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Eurogames&#39;</span><span class="p">);</span><span class="w"></span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">CATEGORY</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Ameritrash&#39;</span><span class="p">);</span><span class="w"></span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">CATEGORY</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Familiar&#39;</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<h3 id="implementar-entity">Implementar Entity</h3>
+<p>Una vez creada la BBDD el siguiente paso es crear la entidad con la que vamos a persistir y recuperar información. Las entidades igual que los DTOs deberían estar agrupados dentro del package <code>model</code> de cada funcionalidad, así que vamos a crear una nueva clase java.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:1"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">Category.java</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.ccsw.tutorial.category.model</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">javax.persistence.Column</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.Entity</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.GeneratedValue</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.GenerationType</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.Id</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.Table</span><span class="p">;</span>
+
+<span class="cm">/**</span>
+<span class="cm">* @author ccsw</span>
+<span class="cm">*/</span>
+<span class="nd">@Entity</span>
+<span class="nd">@Table</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;Category&quot;</span><span class="p">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Category</span> <span class="p">{</span>
+
+  <span class="nd">@Id</span>
+  <span class="nd">@GeneratedValue</span><span class="p">(</span><span class="n">strategy</span> <span class="o">=</span> <span class="n">GenerationType</span><span class="p">.</span><span class="na">IDENTITY</span><span class="p">)</span>
+  <span class="nd">@Column</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;id&quot;</span><span class="p">,</span> <span class="n">nullable</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span>
+  <span class="kd">private</span> <span class="n">Long</span> <span class="n">id</span><span class="p">;</span>
+
+  <span class="nd">@Column</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;name&quot;</span><span class="p">,</span> <span class="n">nullable</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span>
+  <span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="p">;</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * @return id</span>
+<span class="cm">  */</span>
+  <span class="kd">public</span> <span class="n">Long</span> <span class="nf">getId</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="na">id</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * @param id new value of {@link #getId}.</span>
+<span class="cm">  */</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setId</span><span class="p">(</span><span class="n">Long</span> <span class="n">id</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="na">id</span> <span class="o">=</span> <span class="n">id</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * @return name</span>
+<span class="cm">  */</span>
+  <span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="na">name</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * @param name new value of {@link #getName}.</span>
+<span class="cm">  */</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="p">(</span><span class="n">String</span> <span class="n">name</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="p">;</span>
+  <span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Si te fijas, la Entity suele ser muy similar a un DTO, tiene unas propiedades y sus getters y setters. Pero a diferencia de los DTOs, esta clase tiene una serie de anotaciones que permiten a JPA hacer su magia y generar consultas SQL a la BBDD. En este ejemplo vemos 4 anotaciones importantes:</p>
+<ul>
+<li><code>@Entity</code> → Le indica a Springboot que se trata de una clase que implementa una Entidad de BBDD. Sin esta anotación no es posible hacer queries.</li>
+<li><code>@Table</code> → Le indica a JPA el nombre y el schema de la tabla que representa esta clase. Por claridad se debería poner siempre, aunque si el nombre de la tabla es igual al nombre de la clase no es necesaria la anotación.</li>
+<li><code>@Id</code> y <code>@GeneratedValue</code> → Le indica a JPA que esta propiedad es la que mapea una Primary Key y además que esta PK se genera con la estrategia que se le indique en la anotación <code>@GeneratedValue</code>, que puede ser:<ul>
+<li>Generación de PK por <code>Secuence</code>, la que utiliza Oracle, en este caso habrá que indicarle un nombre de secuencia.</li>
+<li>Generación de PK por <code>Indentity</code>, la que utiliza MySql o SQLServer, el auto-incremental. </li>
+<li>Generación de PK por <code>Table</code>, en algunas BBDD se permite tener una tabla donde se almacenan como registros todas las secuencias.</li>
+<li>Generación de PK <code>Auto</code>, elige la mejor estrategia en función de la BBDD que hemos seleccionado.</li>
+</ul>
+</li>
+<li><code>@Column</code> → Le indica a JPA que esta propiedad mapea una columna de la tabla y le especifica el nombre de la columna. Al igual que la anotaciónd de <code>Table</code>, esta anotación no es necesaria aunque si es muy recomendable. Por claridad se debería poner siempre, aunque si el nombre de la columna es igual al nombre de la propiedad no es necesaria la anotación.</li>
+</ul>
+<p>Hay muchas otras anotaciones, pero estas son las básicas, ya irás aprendiendo otras.</p>
+<div class="admonition tip">
+<p class="admonition-title">Consejo</p>
+<p>Para definir las PK de las tablas, intenta evitar una PK compuesta de más de una columna. La programación se hace muy compleja y las magias que hace JPA en la oscuridad se complican mucho. Mi recomendación es que siempre utilices una PK númerica, en la medida de lo posible, y si es necesario, crees índices compuestos de búsqueda o checks compuestos para evitar duplicidades.</p>
+</div>
+<h3 id="implementar-repository">Implementar Repository</h3>
+<p>Ahora que ya tenemos la entidad implementada, vamos a utilizarla para acceder a BBDD, y esto lo haremos con un <code>Repository</code>. Existen varias formas de utilizar los repositories, desde el todo automático y magia de JPA hasta el repositorio manual en el que hay que codificar todo. En el tutorial voy a explicar varias formas de implementarlo para este CRUD y los siguientes CRUDs.</p>
+<p>Como ya se dijo en puntos anteriores, el acceso a datos se debe hacer siempre a través de un <code>Repository</code>, así que vamos a implementar uno. En esta capa, al igual que pasaba con los services, es recomendable utilizar el patrón fachada, para poder sustituir implementaciones sin afectar al código.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:1"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">CategoryRepository.java</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.ccsw.tutorial.category</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">org.springframework.data.repository.CrudRepository</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">com.ccsw.tutorial.category.model.Category</span><span class="p">;</span>
+
+<span class="cm">/**</span>
+<span class="cm">* @author ccsw</span>
+<span class="cm">*/</span>
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">CategoryRepository</span> <span class="kd">extends</span> <span class="n">CrudRepository</span><span class="o">&lt;</span><span class="n">Category</span><span class="p">,</span> <span class="n">Long</span><span class="o">&gt;</span> <span class="p">{</span>
+
+<span class="p">}</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>¿Que te parece?, sencillo, ¿no?. Spring ya tiene una implementación por defecto de un CrudRepository, tan solo tenemos que crear una interface que extienda de la interface <code>CrudRepository</code> pasandole como tipos la <code>Entity</code> y el tipo de la Primary Key. Con eso Spring construye el resto y nos provee de los métodos típicos y necesarios para un CRUD.</p>
+<p>Ahora vamos a utilizarla en el <code>Service</code>, pero hay un problema. El <code>Repository</code> devuelve un objeto tipo <code>Category</code> y el <code>Service</code> y <code>Controller</code> devuelven un objeto tipo <code>CategoryDto</code>. Esto es porque en cada capa se debe con un ámbito de modelos diferente. Podríamos hacer que todo el back trabajara con <code>Category</code> que son entidades de persistencia, pero no es lo correcto y nos podría llevar a cometer errores, o modificar el objeto y que sin que nosotros lo ordenásemos se persistiera ese cambio en BBDD.</p>
+<p>El ámbito de trabajo  de las capas con el que solemos trabajar y está más extendido es el siguiente:</p>
+<p><img alt="step2-java5" src="../../../assets/images/step2-java5.png" /></p>
+<ul>
+<li>Los datos que vienen y van al cliente, deberían ser en la mayoría de los casos datos en formato json</li>
+<li>Al entrar en un <code>Controller</code> esos datos json se transforman en un DTO. Al salir del <code>Controller</code> hacia el cliente, esos DTOs se transforman en formato json. Estas conversiones son automáticas, las hace Springboot (en realidad las hace la librería de jackson codehaus).</li>
+<li>Cuando un <code>Controller</code> ejecuta una llamada a un <code>Service</code>, generalmente le pasa sus datos en DTO, y el <code>Service</code> se encarga de transformar esto a una <code>Entity</code>. A la inversa, cuando un <code>Service</code> responde a un <code>Controller</code>, él responde con una <code>Entity</code> y el <code>Controller</code> ya se encargará de transformarlo a DTO.</li>
+<li>Por último, para los <code>Repository</code>, siempre se trabaja de entrada y salida con objetos tipo <code>Entity</code></li>
+</ul>
+<p>Parece un lio, pero ya verás como es muy sencillo ahora que veremos el ejemplo. Una última cosa, para hacer esas transformaciones, las podemos hacer a mano usando getters y setters o bien utilizar el objeto <code>BeanMapper</code> que hemos configurado al principio como utilidad de Devonfw.</p>
+<p>El código debería quedar así:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="8:3"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><input id="__tabbed_8_3" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">CategoryServiceImpl.java</label><label for="__tabbed_8_2">CategoryService.java</label><label for="__tabbed_8_3">CategoryController.java</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.ccsw.tutorial.category</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">org.springframework.beans.BeanUtils</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.stereotype.Service</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">com.ccsw.tutorial.category.model.Category</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.ccsw.tutorial.category.model.CategoryDto</span><span class="p">;</span>
+
+<span class="cm">/**</span>
+<span class="cm">* @author ccsw</span>
+<span class="cm">*</span>
+<span class="cm">*/</span>
+<span class="nd">@Service</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CategoryServiceImpl</span> <span class="kd">implements</span> <span class="n">CategoryService</span> <span class="p">{</span>
+
+  <span class="nd">@Autowired</span>
+  <span class="n">CategoryRepository</span> <span class="n">categoryRepository</span><span class="p">;</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * {@inheritDoc}</span>
+<span class="cm">  */</span>
+  <span class="nd">@Override</span>
+  <span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Category</span><span class="o">&gt;</span> <span class="nf">findAll</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Category</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">this</span><span class="p">.</span><span class="na">categoryRepository</span><span class="p">.</span><span class="na">findAll</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * {@inheritDoc}</span>
+<span class="cm">  */</span>
+  <span class="nd">@Override</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">save</span><span class="p">(</span><span class="n">Long</span> <span class="n">id</span><span class="p">,</span> <span class="n">CategoryDto</span> <span class="n">dto</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="n">Category</span> <span class="n">categoria</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">id</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span>
+      <span class="n">categoria</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Category</span><span class="p">();</span>
+    <span class="k">else</span>
+      <span class="n">categoria</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="na">categoryRepository</span><span class="p">.</span><span class="na">findById</span><span class="p">(</span><span class="n">id</span><span class="p">).</span><span class="na">orElse</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+
+    <span class="n">categoria</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="n">dto</span><span class="p">.</span><span class="na">getName</span><span class="p">());</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="na">categoryRepository</span><span class="p">.</span><span class="na">save</span><span class="p">(</span><span class="n">categoria</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * {@inheritDoc}</span>
+<span class="cm">  */</span>
+  <span class="nd">@Override</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">delete</span><span class="p">(</span><span class="n">Long</span> <span class="n">id</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="na">categoryRepository</span><span class="p">.</span><span class="na">deleteById</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
+
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.ccsw.tutorial.category</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">com.ccsw.tutorial.category.model.Category</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.ccsw.tutorial.category.model.CategoryDto</span><span class="p">;</span>
+
+<span class="cm">/**</span>
+<span class="cm">* @author ccsw</span>
+<span class="cm">*</span>
+<span class="cm">*/</span>
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">CategoryService</span> <span class="p">{</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * Método para recuperar todas las {@link com.ccsw.tutorial.category.model.Category}</span>
+<span class="cm">  * @return</span>
+<span class="cm">  */</span>
+  <span class="n">List</span><span class="o">&lt;</span><span class="n">Category</span><span class="o">&gt;</span> <span class="nf">findAll</span><span class="p">();</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * Método para crear o actualizar una {@link com.ccsw.tutorial.category.model.Category}</span>
+<span class="cm">  * @param dto</span>
+<span class="cm">  * @return</span>
+<span class="cm">  */</span>
+  <span class="kt">void</span> <span class="nf">save</span><span class="p">(</span><span class="n">Long</span> <span class="n">id</span><span class="p">,</span> <span class="n">CategoryDto</span> <span class="n">dto</span><span class="p">);</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * Método para borrar una {@link com.ccsw.tutorial.category.model.Category}</span>
+<span class="cm">  * @param id</span>
+<span class="cm">  */</span>
+  <span class="kt">void</span> <span class="nf">delete</span><span class="p">(</span><span class="n">Long</span> <span class="n">id</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.ccsw.tutorial.category</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.CrossOrigin</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.PathVariable</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RequestBody</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RequestMapping</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RequestMethod</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">com.ccsw.tutorial.category.model.CategoryDto</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">com.devonfw.module.beanmapping.common.api.BeanMapper</span><span class="p">;</span>
+
+<span class="cm">/**</span>
+<span class="cm">* @author ccsw</span>
+<span class="cm">*/</span>
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">&quot;/category&quot;</span><span class="p">)</span>
+<span class="nd">@RestController</span>
+<span class="nd">@CrossOrigin</span><span class="p">(</span><span class="n">origins</span> <span class="o">=</span> <span class="s">&quot;*&quot;</span><span class="p">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CategoryController</span> <span class="p">{</span>
+
+  <span class="nd">@Autowired</span>
+  <span class="n">CategoryService</span> <span class="n">categoryService</span><span class="p">;</span>
+
+  <span class="nd">@Autowired</span>
+<span class="hll">  <span class="n">BeanMapper</span> <span class="n">beanMapper</span><span class="p">;</span>
+</span>
+  <span class="cm">/**</span>
+<span class="cm">  * Método para recuperar todas las {@link com.ccsw.tutorial.category.model.Category}</span>
+<span class="cm">  * @return</span>
+<span class="cm">  */</span>
+  <span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">path</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="n">RequestMethod</span><span class="p">.</span><span class="na">GET</span><span class="p">)</span>
+  <span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">CategoryDto</span><span class="o">&gt;</span> <span class="nf">findAll</span><span class="p">()</span> <span class="p">{</span>
+
+<span class="hll">    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="na">beanMapper</span><span class="p">.</span><span class="na">mapList</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">categoryService</span><span class="p">.</span><span class="na">findAll</span><span class="p">(),</span> <span class="n">CategoryDto</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+</span>  <span class="p">}</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * Método para crear o actualizar una {@link com.ccsw.tutorial.category.model.Category}</span>
+<span class="cm">  * @param dto</span>
+<span class="cm">  * @return</span>
+<span class="cm">  */</span>
+  <span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">path</span> <span class="o">=</span> <span class="p">{</span> <span class="s">&quot;&quot;</span><span class="p">,</span> <span class="s">&quot;/{id}&quot;</span> <span class="p">},</span> <span class="n">method</span> <span class="o">=</span> <span class="n">RequestMethod</span><span class="p">.</span><span class="na">PUT</span><span class="p">)</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">save</span><span class="p">(</span><span class="nd">@PathVariable</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;id&quot;</span><span class="p">,</span> <span class="n">required</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span> <span class="n">Long</span> <span class="n">id</span><span class="p">,</span> <span class="nd">@RequestBody</span> <span class="n">CategoryDto</span> <span class="n">dto</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="na">categoryService</span><span class="p">.</span><span class="na">save</span><span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">dto</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * Método para borrar una {@link com.ccsw.tutorial.category.model.Category}</span>
+<span class="cm">  * @param id</span>
+<span class="cm">  */</span>
+  <span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">path</span> <span class="o">=</span> <span class="s">&quot;/{id}&quot;</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="n">RequestMethod</span><span class="p">.</span><span class="na">DELETE</span><span class="p">)</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">delete</span><span class="p">(</span><span class="nd">@PathVariable</span><span class="p">(</span><span class="s">&quot;id&quot;</span><span class="p">)</span> <span class="n">Long</span> <span class="n">id</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="na">categoryService</span><span class="p">.</span><span class="na">delete</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
+
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>El <code>Service</code> no tiene nada raro, simplemente accede al <code>Repository</code> (siempre anotado como <code>@Autowired</code>) y recupera datos o los guarda. Fíjate en el caso especial del save que la única diferencia es que en un caso tendrá id != null y por tanto internamente hará un update, y en otro caso tendrá id == null y por tanto internamente hará un save.</p>
+<p>En cuanto a la interface, lo único que cambiamos fue los objetos de respuesta, que ahora pasan a ser de tipo <code>Category</code>. Los de entrada se mantienen como <code>CategoryDto</code>.</p>
+<p>Por último, en el <code>Controller</code> se puede ver como se utiliza el conversor de <code>BeanMapper</code> (siempre anotado como <code>@Autowired</code>), que permite traducir una lista a un tipo concreto, o un objeto único a un tipo concreto. La forma de hacer estas conversiones siempre es por nombre de propiedad. Las propiedades del objeto destino se deben llamar igual que las propiedades del objeto origen. En caso contrario se quedarán a null.</p>
+<h3 id="aspectos-importantes_2">Aspectos importantes</h3>
+<p>Los aspectos importantes de la capa <code>Repository</code> son:</p>
+<ul>
+<li>Al igual que los <code>Service</code>, se debe utilizar el patrón fachada, por lo que tendremos una Interface y posiblemente una implementación.</li>
+<li>A menudo la implementación la hace internamente Springboot, pero hay veces que podemos hacer una implementación manual. Lo veremos en siguientes puntos.</li>
+<li>Los <code>Repository</code> trabajan siempre con <code>Entity</code> que no son más que mapeos de una tabla o de una vista que existe en BBDD.</li>
+<li>Los <code>Repository</code> no contienen lógica de negocio, ni transformaciones, simplemente acceder a datos, persisten o devuelven información.</li>
+<li>Los <code>Repository</code> <strong>JAMÁS</strong> deben llamar a otros <code>Repository</code> ni <code>Service</code>.</li>
+<li>Intenta que tus clases <code>Entity</code> sean lo más sencillas posible, sobre todo en cuanto a Primary Keys, se simplificará mucho el desarrollo.</li>
+</ul>
+<h2 id="capa-de-testing-tdd">Capa de Testing: TDD</h2>
+<p>Por último y aunque no debería ser lo último que se desarrolla sino todo lo contrario, debería ser lo primero en desarrollar, tenemos la batería de pruebas.
+Con fines didáctivos, he querido enseñarte un ciclo de desarrollo para ir recorriendo las diferentes capas de una aplicación pero, en realidad, para realizar el desarrollo debería aplicar <a href="../../../appendix/tdd/">TDD (Test Driven Development)</a>. Si quieres aprender las reglas básicas de como aplicar TDD al desarrollo diario, te recomiendo que leas el <a href="../../../appendix/tdd/">Anexo. TDD</a>.</p>
+<p>En este caso, y sin que sirva de precedente, ya tenemos implementados los métodos de la aplicación, y ahora vamos a testearlos. Existen muchas formas de testing en función del componente o la capa que se quiera testear. En realidad, a medida que vayas programando irás aprendiendo todas ellas, de momento realizaremos dos tipos de test simples que prueben las casuísticas de los métodos.</p>
+<p>El enfoque que seguiremos en este tutorial será realizar las pruebas mediante test unitarios y test de integración.</p>
+<ul>
+<li><strong>Test unitarios</strong>: Se trata de pruebas estrictamente relativas a la calidad estática del código de una determinada operación de la capa de la lógica de negocio (Service). Estas pruebas no inicializan el contexto de Spring y deben simular todas las piezas ajenas a la funcionalidad testeada.</li>
+<li><strong>Test de integración</strong>: Se tratan de pruebas completas de un determinado endpoint que conlleva inicializar el contexto de Spring (base de datos incluida) y realizar una llama REST para comprobar el flujo completo de la API.</li>
+</ul>
+<p>Lo primero será conocer que queremos probar y para ello nos vamos a hacer una lista:</p>
+<p>Test unitarios:</p>
+<ul>
+<li>Prueba de listado, debe probar la lógica dentro de la operación de negocio de consulta de <code>Categoría</code></li>
+<li>Prueba de creación, debe probar la lógica dentro de la operación de negocio de creación una nueva <code>Categoría</code></li>
+<li>Prueba de modificación, debe probar la lógica dentro de la operación de negocio de modificación una <code>Categoría</code> existente</li>
+<li>Prueba de borrado, debe probar la lógica dentro de la operación de negocio de borrado de una <code>Categoría</code> existente</li>
+</ul>
+<p>Test de integración:</p>
+<ul>
+<li>Prueba de listado, debe recuperar los elementos de la tabla <code>Categoría</code></li>
+<li>Prueba de creación, debe crear una nueva <code>Categoría</code></li>
+<li>Prueba de modificación correcta, debe modificar una <code>Categoría</code> existente</li>
+<li>Prueba de modificación incorrecta, debe dar error al modificar una <code>Categoría</code> que no existe</li>
+<li>Prueba de borrado correcta, debe borrar una <code>Categoría</code> existente</li>
+<li>Prueba de borrado incorrecta, debe dar error al borrar una <code>Categoría</code> que no existe</li>
+</ul>
+<p>Se podrían hacer muchos más tests, pero creo que con esos son suficientes para que entiendas como se comporta esta capa. Si te fijas, hay que probar tanto los resultados correctos como los resultados incorrectos. El usuario no siempre se va a comportar como nosotros pensamos.</p>
+<p>Pues vamos a ello.</p>
+<h3 id="pruebas-de-listado">Pruebas de listado</h3>
+<p>Vamos a empezar haciendo una clase de test dentro de la carpeta <code>src/test/java</code>. No queremos que los test formen parte del código productivo de la aplicación, por eso utilizamos esa ruta que queda fuera del package general de la aplicación.</p>
+<p>Crearemos las clases:</p>
+<ul>
+<li>Test unitarios: <code>com.ccsw.tutorial.category.CategoryTest</code></li>
+<li>Test de integración: <code>com.ccsw.tutorial.category.CategoryIT</code> </li>
+</ul>
+<div class="tabbed-set tabbed-alternate" data-tabs="9:2"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">CategoryTest.java</label><label for="__tabbed_9_2">CategoryIT.java</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.ccsw.tutorial.category</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">org.junit.jupiter.api.extension.ExtendWith</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.mockito.junit.jupiter.MockitoExtension</span><span class="p">;</span>
+
+<span class="cm">/**</span>
+<span class="cm">* @author ccsw</span>
+<span class="cm">*/</span>
+<span class="nd">@ExtendWith</span><span class="p">(</span><span class="n">MockitoExtension</span><span class="p">.</span><span class="na">class</span><span class="p">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CategoryTest</span> <span class="p">{</span>
+
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.ccsw.tutorial.category</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">org.springframework.boot.test.context.SpringBootTest</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.boot.test.web.client.TestRestTemplate</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.boot.web.server.LocalServerPort</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.test.annotation.DirtiesContext</span><span class="p">;</span>
+
+<span class="cm">/**</span>
+<span class="cm">* @author ccsw</span>
+<span class="cm">*/</span>
+<span class="nd">@SpringBootTest</span><span class="p">(</span><span class="n">webEnvironment</span> <span class="o">=</span> <span class="n">SpringBootTest</span><span class="p">.</span><span class="na">WebEnvironment</span><span class="p">.</span><span class="na">RANDOM_PORT</span><span class="p">)</span>
+<span class="nd">@DirtiesContext</span><span class="p">(</span><span class="n">classMode</span> <span class="o">=</span> <span class="n">DirtiesContext</span><span class="p">.</span><span class="na">ClassMode</span><span class="p">.</span><span class="na">BEFORE_EACH_TEST_METHOD</span><span class="p">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CategoryIT</span> <span class="p">{</span>
+
+    <span class="nd">@LocalServerPort</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">port</span><span class="p">;</span>
+
+    <span class="nd">@Autowired</span>
+    <span class="kd">private</span> <span class="n">TestRestTemplate</span> <span class="n">restTemplate</span><span class="p">;</span>
+
+<span class="p">}</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Estas clases son sencillas y tan solo tienen anotaciones específicas de Springboot para cada tipo de test:</p>
+<ul>
+<li><code>@SpringBootTest</code>. Esta anotación lo que hace es inicializar el contexto de Spring cada vez que se inician los test de jUnit. Aunque el contexto tarda unos segundos en arrancar, lo bueno que tiene es que solo se inicializa una vez y se lanzan todos los jUnits en batería con el mismo contexto.</li>
+<li><code>@DirtiesContext</code>. Esta anotación le indica a Spring que los test van a ser transaccionales, y por tanto cuando termine la ejecución de cada uno de los test, automáticamente por la anotación de arriba, Spring hará un rearranque parcial del contexto y dejará el estado de la BBDD como estaba inicialmente.</li>
+<li><code>@ExtendWith</code>. Esta anotación le indica a Spring que no debe inicializar el contexto, ya que se trata de test estáticos que no lo requieren.</li>
+</ul>
+<p>Para las pruebas de integración nos faltará configurar la aplicación de test, al igual que hicimos con la aplicación 'productiva'. Deberemos abrir el fichero <code>src/test/resources/application.properties</code> y añadir la configuración de la BBDD. Para este tutorial vamos a utilizar la misma BBDD que la aplicación productiva, pero de normal la aplicación se conectará a una BBDD, generalmente física, mientras que los test jUnit se conectarán a otra BBDD, generalmente en memoria.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="10:1"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">application.properties</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="c">#Database</span><span class="w"></span>
+<span class="na">spring.jpa.hibernate.ddl-auto</span><span class="o">=</span><span class="s">none</span><span class="w"></span>
+<span class="na">spring.datasource.driver-class-name</span><span class="o">=</span><span class="s">org.h2.Driver</span><span class="w"></span>
+<span class="na">spring.datasource.url</span><span class="o">=</span><span class="s">jdbc:h2:mem:test;mode=mysql</span><span class="w"></span>
+<span class="na">spring.datasource.username</span><span class="o">=</span><span class="s">sa</span><span class="w"></span>
+<span class="na">spring.datasource.password</span><span class="o">=</span><span class="s">sa</span><span class="w"></span>
+<span class="na">spring.jpa.database-platform</span><span class="o">=</span><span class="s">org.hibernate.dialect.H2Dialect</span><span class="w"></span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Con todo esto ya podemos crear nuestro primer test. Iremos a las clases <code>CategoryIT</code> y <code>CategoryTest</code> donde añadiremos un método público. Los test siempre tienen que ser métodos públicos que devuelvan el tipo <code>void</code>.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="11:2"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><input id="__tabbed_11_2" name="__tabbed_11" type="radio" /><div class="tabbed-labels"><label for="__tabbed_11_1">CategoryTest.java</label><label for="__tabbed_11_2">CategoryIT.java</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.ccsw.tutorial.category</span><span class="p">;</span>
+
+<span class="hll"><span class="kn">import</span> <span class="nn">com.ccsw.tutorial.category.model.Category</span><span class="p">;</span>
+</span><span class="hll"><span class="kn">import</span> <span class="nn">com.ccsw.tutorial.category.model.CategoryDto</span><span class="p">;</span>
+</span><span class="hll"><span class="kn">import</span> <span class="nn">org.junit.jupiter.api.Test</span><span class="p">;</span>
+</span><span class="kn">import</span> <span class="nn">org.junit.jupiter.api.extension.ExtendWith</span><span class="p">;</span>
+<span class="hll"><span class="kn">import</span> <span class="nn">org.mockito.InjectMocks</span><span class="p">;</span>
+</span><span class="hll"><span class="kn">import</span> <span class="nn">org.mockito.Mock</span><span class="p">;</span>
+</span><span class="kn">import</span> <span class="nn">org.mockito.junit.jupiter.MockitoExtension</span><span class="p">;</span>
+
+<span class="hll"><span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="p">;</span>
+</span><span class="hll"><span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
+</span>
+<span class="hll"><span class="kn">import static</span> <span class="nn">org.junit.jupiter.api.Assertions.*</span><span class="p">;</span>
+</span><span class="hll"><span class="kn">import static</span> <span class="nn">org.mockito.Mockito.*</span><span class="p">;</span>
+</span>
+<span class="nd">@ExtendWith</span><span class="p">(</span><span class="n">MockitoExtension</span><span class="p">.</span><span class="na">class</span><span class="p">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CategoryTest</span> <span class="p">{</span>
+
+<span class="hll">    <span class="nd">@Mock</span>
+</span><span class="hll">    <span class="kd">private</span> <span class="n">CategoryRepository</span> <span class="n">categoryRepository</span><span class="p">;</span>
+</span>
+<span class="hll">    <span class="nd">@InjectMocks</span>
+</span><span class="hll">    <span class="kd">private</span> <span class="n">CategoryServiceImpl</span> <span class="n">categoryService</span><span class="p">;</span>
+</span>
+<span class="hll">    <span class="nd">@Test</span>
+</span><span class="hll">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">findAllShouldReturnAllCategories</span><span class="p">()</span> <span class="p">{</span>
+</span><span class="hll">
+</span><span class="hll">          <span class="n">List</span><span class="o">&lt;</span><span class="n">Category</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+</span><span class="hll">          <span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">mock</span><span class="p">(</span><span class="n">Category</span><span class="p">.</span><span class="na">class</span><span class="p">));</span>
+</span><span class="hll">
+</span><span class="hll">          <span class="n">when</span><span class="p">(</span><span class="n">categoryRepository</span><span class="p">.</span><span class="na">findAll</span><span class="p">()).</span><span class="na">thenReturn</span><span class="p">(</span><span class="n">list</span><span class="p">);</span>
+</span><span class="hll">
+</span><span class="hll">          <span class="n">List</span><span class="o">&lt;</span><span class="n">Category</span><span class="o">&gt;</span> <span class="n">categories</span> <span class="o">=</span> <span class="n">categoryService</span><span class="p">.</span><span class="na">findAll</span><span class="p">();</span>
+</span><span class="hll">
+</span><span class="hll">          <span class="n">assertNotNull</span><span class="p">(</span><span class="n">categories</span><span class="p">);</span>
+</span><span class="hll">          <span class="n">assertEquals</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">categories</span><span class="p">.</span><span class="na">size</span><span class="p">());</span>
+</span><span class="hll">    <span class="p">}</span>
+</span><span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.ccsw.tutorial.category</span><span class="p">;</span>
+
+<span class="hll"><span class="kn">import</span> <span class="nn">com.ccsw.tutorial.category.model.CategoryDto</span><span class="p">;</span>
+</span><span class="hll"><span class="kn">import</span> <span class="nn">org.junit.jupiter.api.Test</span><span class="p">;</span>
+</span><span class="hll"><span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="p">;</span>
+</span><span class="hll"><span class="kn">import</span> <span class="nn">org.springframework.boot.test.context.SpringBootTest</span><span class="p">;</span>    
+</span><span class="hll"><span class="kn">import</span> <span class="nn">org.springframework.boot.test.web.client.TestRestTemplate</span><span class="p">;</span>
+</span><span class="hll"><span class="kn">import</span> <span class="nn">org.springframework.boot.web.server.LocalServerPort</span><span class="p">;</span>
+</span><span class="hll"><span class="kn">import</span> <span class="nn">org.springframework.core.ParameterizedTypeReference</span><span class="p">;</span>
+</span><span class="hll"><span class="kn">import</span> <span class="nn">org.springframework.http.HttpMethod</span><span class="p">;</span>
+</span><span class="hll"><span class="kn">import</span> <span class="nn">org.springframework.http.ResponseEntity</span><span class="p">;</span>
+</span><span class="hll"><span class="kn">import</span> <span class="nn">org.springframework.test.annotation.DirtiesContext</span><span class="p">;</span>
+</span><span class="hll">
+</span><span class="hll"><span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
+</span><span class="hll">
+</span><span class="hll"><span class="kn">import static</span> <span class="nn">org.junit.jupiter.api.Assertions.*</span><span class="p">;</span>
+</span>
+<span class="nd">@SpringBootTest</span><span class="p">(</span><span class="n">webEnvironment</span> <span class="o">=</span> <span class="n">SpringBootTest</span><span class="p">.</span><span class="na">WebEnvironment</span><span class="p">.</span><span class="na">RANDOM_PORT</span><span class="p">)</span>
+<span class="nd">@DirtiesContext</span><span class="p">(</span><span class="n">classMode</span> <span class="o">=</span> <span class="n">DirtiesContext</span><span class="p">.</span><span class="na">ClassMode</span><span class="p">.</span><span class="na">BEFORE_EACH_TEST_METHOD</span><span class="p">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CategoryIT</span> <span class="p">{</span>
+
+<span class="hll">    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">LOCALHOST</span> <span class="o">=</span> <span class="s">&quot;http://localhost:&quot;</span><span class="p">;</span>
+</span><span class="hll">    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">SERVICE_PATH</span> <span class="o">=</span> <span class="s">&quot;/category/&quot;</span><span class="p">;</span>
+</span>
+    <span class="nd">@LocalServerPort</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">port</span><span class="p">;</span>
+
+    <span class="nd">@Autowired</span>
+    <span class="kd">private</span> <span class="n">TestRestTemplate</span> <span class="n">restTemplate</span><span class="p">;</span>
+
+<span class="hll">    <span class="n">ParameterizedTypeReference</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">CategoryDto</span><span class="o">&gt;&gt;</span> <span class="n">responseType</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ParameterizedTypeReference</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">CategoryDto</span><span class="o">&gt;&gt;</span><span class="p">(){};</span>
+</span>
+<span class="hll">    <span class="nd">@Test</span>
+</span><span class="hll">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">findAllShouldReturnAllCategories</span><span class="p">()</span> <span class="p">{</span>
+</span><span class="hll">
+</span><span class="hll">          <span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">CategoryDto</span><span class="o">&gt;&gt;</span> <span class="n">response</span> <span class="o">=</span> <span class="n">restTemplate</span><span class="p">.</span><span class="na">exchange</span><span class="p">(</span><span class="n">LOCALHOST</span> <span class="o">+</span> <span class="n">port</span> <span class="o">+</span> <span class="n">SERVICE_PATH</span><span class="p">,</span> <span class="n">HttpMethod</span><span class="p">.</span><span class="na">GET</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="n">responseType</span><span class="p">);</span>
+</span><span class="hll">
+</span><span class="hll">          <span class="n">assertNotNull</span><span class="p">(</span><span class="n">response</span><span class="p">);</span>
+</span><span class="hll">          <span class="n">assertEquals</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">response</span><span class="p">.</span><span class="na">getBody</span><span class="p">().</span><span class="na">size</span><span class="p">());</span>
+</span><span class="hll">    <span class="p">}</span>
+</span><span class="p">}</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Es muy importante marcar cada método de prueba con la anotación <code>@Test</code>, en caso contrario no se ejecutará. Lo que se debe hacer en cada método que implementemos es probar <strong>una y solo una</strong> acción. </p>
+<p>En los ejemplos anteriores <code>(CategoryTest)</code>, por un lado hemos comprobado el método <code>findAll()</code> el cual por debajo invoca una llamada al repository de categoría, la cual hemos simulado con una respuesta ficticia limitándonos únicamente a la lógica contenida en la operación de negocio.</p>
+<p>Mientras que por otro lado <code>(CategoryIT)</code>, hemos probado la llamando al método <code>GET</code> del endpoint <code>http://localhost:XXXX/category/</code> comprobando que realmente nos devuelve 3 resultados, que son los que hay en BBDD inicialmente.</p>
+<div class="admonition tip">
+<p class="admonition-title">Muy importante: Nomenclatura de los tests</p>
+<p>La nomenclatura de los métodos de test debe sigue una estructura determinada. Hay muchas formas de nombrar a los métodos, pero nosotros solemos utilizar la estructura 'should', para indicar lo que va a hacer. En el ejemplo anterior el método 'findAll' debe devolver 'AllCategories'. De esta forma sabemos cuál es la intención del test, y si por cualquier motivo diera un fallo, sabemos que es lo que NO está funcionando de nuestra aplicación.</p>
+</div>
+<p>Para comprobar que el test funciona, podemos darle botón derecho sobre la clase de <code>CategoryIT</code> y pulsar en <code>Run as</code> -&gt; <code>JUnit Test</code>. Si todo funciona correctamente, deberá aparecer una pantalla de ejecución y todos nuestros tests (en este caso solo uno) corriendo correctamente (en verde). El proceso es el mismo para la clase <code>CategoryTest</code>.</p>
+<p><img alt="step2-java6" src="../../../assets/images/step2-java6.png" /></p>
+<h3 id="pruebas-de-creacion">Pruebas de creación</h3>
+<p>Vamos con los siguientes test, los que probarán una creación de una nueva <code>Categoría</code>. Añadimos el siguiente método a la clase de test:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="12:2"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><input id="__tabbed_12_2" name="__tabbed_12" type="radio" /><div class="tabbed-labels"><label for="__tabbed_12_1">CategoryTest.java</label><label for="__tabbed_12_2">CategoryIT.java</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">CATEGORY_NAME</span> <span class="o">=</span> <span class="s">&quot;CAT1&quot;</span><span class="p">;</span>
+
+<span class="nd">@Test</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">saveNotExistsCategoryIdShouldInsert</span><span class="p">()</span> <span class="p">{</span>
+
+      <span class="n">CategoryDto</span> <span class="n">categoryDto</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CategoryDto</span><span class="p">();</span>
+      <span class="n">categoryDto</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="n">CATEGORY_NAME</span><span class="p">);</span>
+
+      <span class="n">ArgumentCaptor</span><span class="o">&lt;</span><span class="n">Category</span><span class="o">&gt;</span> <span class="n">category</span> <span class="o">=</span> <span class="n">ArgumentCaptor</span><span class="p">.</span><span class="na">forClass</span><span class="p">(</span><span class="n">Category</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+
+      <span class="n">categoryService</span><span class="p">.</span><span class="na">save</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="n">categoryDto</span><span class="p">);</span>
+
+      <span class="n">verify</span><span class="p">(</span><span class="n">categoryRepository</span><span class="p">).</span><span class="na">save</span><span class="p">(</span><span class="n">category</span><span class="p">.</span><span class="na">capture</span><span class="p">());</span>
+
+      <span class="n">assertEquals</span><span class="p">(</span><span class="n">CATEGORY_NAME</span><span class="p">,</span> <span class="n">category</span><span class="p">.</span><span class="na">getValue</span><span class="p">().</span><span class="na">getName</span><span class="p">());</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Long</span> <span class="n">NEW_CATEGORY_ID</span> <span class="o">=</span> <span class="mi">4L</span><span class="p">;</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">NEW_CATEGORY_NAME</span> <span class="o">=</span> <span class="s">&quot;CAT4&quot;</span><span class="p">;</span>
+
+<span class="nd">@Test</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">saveWithoutIdShouldCreateNewCategory</span><span class="p">()</span> <span class="p">{</span>
+
+      <span class="n">CategoryDto</span> <span class="n">dto</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CategoryDto</span><span class="p">();</span>
+      <span class="n">dto</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="n">NEW_CATEGORY_NAME</span><span class="p">);</span>
+
+      <span class="n">restTemplate</span><span class="p">.</span><span class="na">exchange</span><span class="p">(</span><span class="n">LOCALHOST</span> <span class="o">+</span> <span class="n">port</span> <span class="o">+</span> <span class="n">SERVICE_PATH</span><span class="p">,</span> <span class="n">HttpMethod</span><span class="p">.</span><span class="na">PUT</span><span class="p">,</span> <span class="k">new</span> <span class="n">HttpEntity</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">dto</span><span class="p">),</span> <span class="n">Void</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+
+      <span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">CategoryDto</span><span class="o">&gt;&gt;</span> <span class="n">response</span> <span class="o">=</span> <span class="n">restTemplate</span><span class="p">.</span><span class="na">exchange</span><span class="p">(</span><span class="n">LOCALHOST</span> <span class="o">+</span> <span class="n">port</span> <span class="o">+</span> <span class="n">SERVICE_PATH</span><span class="p">,</span> <span class="n">HttpMethod</span><span class="p">.</span><span class="na">GET</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="n">responseType</span><span class="p">);</span>
+      <span class="n">assertNotNull</span><span class="p">(</span><span class="n">response</span><span class="p">);</span>
+      <span class="n">assertEquals</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">response</span><span class="p">.</span><span class="na">getBody</span><span class="p">().</span><span class="na">size</span><span class="p">());</span>
+
+      <span class="n">CategoryDto</span> <span class="n">categorySearch</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="na">getBody</span><span class="p">().</span><span class="na">stream</span><span class="p">().</span><span class="na">filter</span><span class="p">(</span><span class="n">item</span> <span class="o">-&gt;</span> <span class="n">item</span><span class="p">.</span><span class="na">getId</span><span class="p">().</span><span class="na">equals</span><span class="p">(</span><span class="n">NEW_CATEGORY_ID</span><span class="p">)).</span><span class="na">findFirst</span><span class="p">().</span><span class="na">orElse</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+      <span class="n">assertNotNull</span><span class="p">(</span><span class="n">categorySearch</span><span class="p">);</span>
+      <span class="n">assertEquals</span><span class="p">(</span><span class="n">NEW_CATEGORY_NAME</span><span class="p">,</span> <span class="n">categorySearch</span><span class="p">.</span><span class="na">getName</span><span class="p">());</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>En el primer caso, estamos construyendo un objeto <code>CategoryDto</code> para darle un nombre a la <code>Categoría</code> e invocamos a la operación <code>save</code> pasandole un ID a nulo. Para identificar que el funcionamiento es el esperado, capturamos la categoría que se proporciona al repository al intentar realizar la acción ficticia de guardado y comprobamos que el valor es el que se proporciona en la invocación.</p>
+<p>De forma similar en el segundo caso, estamos construyendo un objeto <code>CategoryDto</code> para darle un nombre a la <code>Categoría</code> e invocamos al método <code>PUT</code> sin añadir en la ruta referencia al identificador.
+Seguidamente, recuperamos de nuevo la lista de categorías y en este caso debería tener 4 resultados. Hacemos un filtrado buscando la nueva <code>Categoría</code> que debería tener un ID = 4 y debería ser la que acabamos de crear. </p>
+<p>Si ejecutamos, veremos que ambos test ahora aparecen en verde.</p>
+<h3 id="pruebas-de-modificacion">Pruebas de modificación</h3>
+<p>Para este caso de prueba, vamos a realizar varios test, como hemos comentado anteriormente. Tenemos que probar que es lo que pasa cuando intentamos modificar un elemento que existe, pero también debemos probar que es lo que pasa cuando intentamos modificar un elemento que <strong>no</strong> existe.</p>
+<p>Empezamos con el sencillo, un test que pruebe una modificación existente.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="13:2"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><input id="__tabbed_13_2" name="__tabbed_13" type="radio" /><div class="tabbed-labels"><label for="__tabbed_13_1">CategoryTest.java</label><label for="__tabbed_13_2">CategoryIT.java</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Long</span> <span class="n">EXISTS_CATEGORY_ID</span> <span class="o">=</span> <span class="mi">1L</span><span class="p">;</span>
+
+<span class="nd">@Test</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">saveExistsCategoryIdShouldUpdate</span><span class="p">()</span> <span class="p">{</span>
+
+  <span class="n">CategoryDto</span> <span class="n">categoryDto</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CategoryDto</span><span class="p">();</span>
+  <span class="n">categoryDto</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="n">CATEGORY_NAME</span><span class="p">);</span>
+
+  <span class="n">Category</span> <span class="n">category</span> <span class="o">=</span> <span class="n">mock</span><span class="p">(</span><span class="n">Category</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+  <span class="n">when</span><span class="p">(</span><span class="n">categoryRepository</span><span class="p">.</span><span class="na">findById</span><span class="p">(</span><span class="n">EXISTS_CATEGORY_ID</span><span class="p">)).</span><span class="na">thenReturn</span><span class="p">(</span><span class="n">Optional</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">category</span><span class="p">));</span>
+
+  <span class="n">categoryService</span><span class="p">.</span><span class="na">save</span><span class="p">(</span><span class="n">EXISTS_CATEGORY_ID</span><span class="p">,</span> <span class="n">categoryDto</span><span class="p">);</span>
+
+  <span class="n">verify</span><span class="p">(</span><span class="n">categoryRepository</span><span class="p">).</span><span class="na">save</span><span class="p">(</span><span class="n">category</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Long</span> <span class="n">MODIFY_CATEGORY_ID</span> <span class="o">=</span> <span class="mi">3L</span><span class="p">;</span>
+
+<span class="nd">@Test</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">modifyWithExistIdShouldModifyCategory</span><span class="p">()</span> <span class="p">{</span>
+
+      <span class="n">CategoryDto</span> <span class="n">dto</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CategoryDto</span><span class="p">();</span>
+      <span class="n">dto</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="n">NEW_CATEGORY_NAME</span><span class="p">);</span>
+
+      <span class="n">restTemplate</span><span class="p">.</span><span class="na">exchange</span><span class="p">(</span><span class="n">LOCALHOST</span> <span class="o">+</span> <span class="n">port</span> <span class="o">+</span> <span class="n">SERVICE_PATH</span> <span class="o">+</span> <span class="n">MODIFY_CATEGORY_ID</span><span class="p">,</span> <span class="n">HttpMethod</span><span class="p">.</span><span class="na">PUT</span><span class="p">,</span> <span class="k">new</span> <span class="n">HttpEntity</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">dto</span><span class="p">),</span> <span class="n">Void</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+
+      <span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">CategoryDto</span><span class="o">&gt;&gt;</span> <span class="n">response</span> <span class="o">=</span> <span class="n">restTemplate</span><span class="p">.</span><span class="na">exchange</span><span class="p">(</span><span class="n">LOCALHOST</span> <span class="o">+</span> <span class="n">port</span> <span class="o">+</span> <span class="n">SERVICE_PATH</span><span class="p">,</span> <span class="n">HttpMethod</span><span class="p">.</span><span class="na">GET</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="n">responseType</span><span class="p">);</span>
+      <span class="n">assertNotNull</span><span class="p">(</span><span class="n">response</span><span class="p">);</span>
+      <span class="n">assertEquals</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">response</span><span class="p">.</span><span class="na">getBody</span><span class="p">().</span><span class="na">size</span><span class="p">());</span>
+
+      <span class="n">CategoryDto</span> <span class="n">categorySearch</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="na">getBody</span><span class="p">().</span><span class="na">stream</span><span class="p">().</span><span class="na">filter</span><span class="p">(</span><span class="n">item</span> <span class="o">-&gt;</span> <span class="n">item</span><span class="p">.</span><span class="na">getId</span><span class="p">().</span><span class="na">equals</span><span class="p">(</span><span class="n">MODIFY_CATEGORY_ID</span><span class="p">)).</span><span class="na">findFirst</span><span class="p">().</span><span class="na">orElse</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+      <span class="n">assertNotNull</span><span class="p">(</span><span class="n">categorySearch</span><span class="p">);</span>
+      <span class="n">assertEquals</span><span class="p">(</span><span class="n">NEW_CATEGORY_NAME</span><span class="p">,</span> <span class="n">categorySearch</span><span class="p">.</span><span class="na">getName</span><span class="p">());</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>En el caso de los test unitarios, comprobamos la lógica de la modificación simulando que el repository nos devuelve una categoría que modificar y verificado que se invoca el guardado sobre la misma.</p>
+<p>En el caso de los test de integración, la misma filosofía que en el test anterior, pero esta vez modificamos la <code>Categoría</code> de ID = 3. Luego la filtramos y vemos que realmente se ha modificado. Además comprobamos que el listado de todas los registros sigue siendo 3 y no se ha creado un nuevo registro.</p>
+<p>En el siguiente test, probaremos un resultado erróneo.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="14:1"><input checked="checked" id="__tabbed_14_1" name="__tabbed_14" type="radio" /><div class="tabbed-labels"><label for="__tabbed_14_1">CategoryIT.java</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="nd">@Test</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">modifyWithNotExistIdShouldInternalError</span><span class="p">()</span> <span class="p">{</span>
+
+      <span class="n">CategoryDto</span> <span class="n">dto</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CategoryDto</span><span class="p">();</span>
+      <span class="n">dto</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="n">NEW_CATEGORY_NAME</span><span class="p">);</span>
+
+      <span class="n">ResponseEntity</span><span class="o">&lt;?&gt;</span> <span class="n">response</span> <span class="o">=</span> <span class="n">restTemplate</span><span class="p">.</span><span class="na">exchange</span><span class="p">(</span><span class="n">LOCALHOST</span> <span class="o">+</span> <span class="n">port</span> <span class="o">+</span> <span class="n">SERVICE_PATH</span> <span class="o">+</span> <span class="n">NEW_CATEGORY_ID</span><span class="p">,</span> <span class="n">HttpMethod</span><span class="p">.</span><span class="na">PUT</span><span class="p">,</span> <span class="k">new</span> <span class="n">HttpEntity</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">dto</span><span class="p">),</span> <span class="n">Void</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+
+      <span class="n">assertEquals</span><span class="p">(</span><span class="n">HttpStatus</span><span class="p">.</span><span class="na">INTERNAL_SERVER_ERROR</span><span class="p">,</span> <span class="n">response</span><span class="p">.</span><span class="na">getStatusCode</span><span class="p">());</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Intentamos modificar el ID = 4, que no debería existir en BBDD y por tanto lo que se espera en el test es que lance un <code>500 Internal Server Error</code> al llamar al método <code>PUT</code>.</p>
+<h3 id="pruebas-de-borrado">Pruebas de borrado</h3>
+<p>Ya por último implementamos las pruebas de borrado.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="15:2"><input checked="checked" id="__tabbed_15_1" name="__tabbed_15" type="radio" /><input id="__tabbed_15_2" name="__tabbed_15" type="radio" /><div class="tabbed-labels"><label for="__tabbed_15_1">CategoryTest.java</label><label for="__tabbed_15_2">CategoryIT.java</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="nd">@Test</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">deleteExistsCategoryIdShouldDelete</span><span class="p">()</span> <span class="p">{</span>
+
+      <span class="n">categoryService</span><span class="p">.</span><span class="na">delete</span><span class="p">(</span><span class="n">EXISTS_CATEGORY_ID</span><span class="p">);</span>
+
+      <span class="n">verify</span><span class="p">(</span><span class="n">categoryRepository</span><span class="p">).</span><span class="na">deleteById</span><span class="p">(</span><span class="n">EXISTS_CATEGORY_ID</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Long</span> <span class="n">DELETE_CATEGORY_ID</span> <span class="o">=</span> <span class="mi">2L</span><span class="p">;</span>
+
+<span class="nd">@Test</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">deleteWithExistsIdShouldDeleteCategory</span><span class="p">()</span> <span class="p">{</span>
+
+      <span class="n">restTemplate</span><span class="p">.</span><span class="na">exchange</span><span class="p">(</span><span class="n">LOCALHOST</span> <span class="o">+</span> <span class="n">port</span> <span class="o">+</span> <span class="n">SERVICE_PATH</span> <span class="o">+</span> <span class="n">DELETE_CATEGORY_ID</span><span class="p">,</span> <span class="n">HttpMethod</span><span class="p">.</span><span class="na">DELETE</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="n">Void</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+
+      <span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">CategoryDto</span><span class="o">&gt;&gt;</span> <span class="n">response</span> <span class="o">=</span> <span class="n">restTemplate</span><span class="p">.</span><span class="na">exchange</span><span class="p">(</span><span class="n">LOCALHOST</span> <span class="o">+</span> <span class="n">port</span> <span class="o">+</span> <span class="n">SERVICE_PATH</span><span class="p">,</span> <span class="n">HttpMethod</span><span class="p">.</span><span class="na">GET</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="n">responseType</span><span class="p">);</span>
+      <span class="n">assertNotNull</span><span class="p">(</span><span class="n">response</span><span class="p">);</span>
+      <span class="n">assertEquals</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">response</span><span class="p">.</span><span class="na">getBody</span><span class="p">().</span><span class="na">size</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="nd">@Test</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">deleteWithNotExistsIdShouldInternalError</span><span class="p">()</span> <span class="p">{</span>
+
+      <span class="n">ResponseEntity</span><span class="o">&lt;?&gt;</span> <span class="n">response</span> <span class="o">=</span> <span class="n">restTemplate</span><span class="p">.</span><span class="na">exchange</span><span class="p">(</span><span class="n">LOCALHOST</span> <span class="o">+</span> <span class="n">port</span> <span class="o">+</span> <span class="n">SERVICE_PATH</span> <span class="o">+</span> <span class="n">NEW_CATEGORY_ID</span><span class="p">,</span> <span class="n">HttpMethod</span><span class="p">.</span><span class="na">DELETE</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="n">Void</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+
+      <span class="n">assertEquals</span><span class="p">(</span><span class="n">HttpStatus</span><span class="p">.</span><span class="na">INTERNAL_SERVER_ERROR</span><span class="p">,</span> <span class="n">response</span><span class="p">.</span><span class="na">getStatusCode</span><span class="p">());</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>En cuanto al test unitario, se invoca a la operación <code>delete</code> y se verifica que la operación requerida del repository es invocado con el atributo correcto.    </p>
+<p>En lo relativo a las pruebas de integración, en el primer test, se invoca el método <code>DELETE</code> y posteriormente se comprueba que el listado tiene un tamaño de 2 (uno menos que el original). Mientras que en el segundo test, se comprueba que con ID no válido, devuelve un <code>500 Internal Server Error</code>.</p>
+<p>Con esto tendríamos más o menos probados los casos básicos de nuestra aplicación y tendríamos una pequeña red de seguridad que nos ayudaría por si a futuro necesitamos hacer algún cambio o evolutivo.</p>
+<h2 id="que-hemos-aprendido">¿Que hemos aprendido?</h2>
+<p>Resumiendo un poco los pasos que hemos seguido:</p>
+<ul>
+<li>Hay que definir y agrupar por ámbito funcional, hemos creado el package <code>com.ccsw.tutorial.category</code> para aglutinar todas las clases.</li>
+<li>Lo primero que debemos empezar a construir <strong>siempre</strong> son los test, aunque en este capítulo del tutorial lo hemos hecho al revés solo con fines didácticos. En los siguientes capítulos lo haremos de forma correcta, y esto nos ayudará a pensar y diseñar que es lo que queremos implementar realmente.</li>
+<li>La implementación de la aplicación se debería separar por capas:<ul>
+<li><code>Controller</code> → Maneja las peticiones de entrada del cliente y realiza transformaciones. No ejecuta directamente lógica de negocio, para eso utiliza llamadas a la siguiente capa.</li>
+<li><code>Service</code> → Ejecuta la lógica de negocio en sus métodos o llamando a otros objetos de la misma capa. No ejecuta directamente accesos a datos, para eso utiliza la siguiente capa.</li>
+<li><code>Repository</code> → Realiza los accesos a datos de lectura y escritura. <strong>NUNCA</strong> debe llamar a otros objetos de la misma capa ni de capas anteriores.</li>
+</ul>
+</li>
+<li>Hay que tener en cuenta los objetos modelo que se mueven en cada capa. Generalmente son:<ul>
+<li><code>Json</code> → Los datos que vienen y van del cliente al <code>Controller</code>.</li>
+<li><code>DTO</code> → Los datos se mueven dentro del <code>Controller</code> y sirven para invocar llamadas. También son los datos que devuelve un <code>Controller</code>.</li>
+<li><code>Entity</code> → Los datos que sirven para persistir y leer datos de una BBDD y que <strong>NUNCA</strong> deberían ir más allá del <code>Controller</code>.</li>
+</ul>
+</li>
+</ul>
+<h2 id="depuracion">Depuración</h2>
+<p>Una parte muy importante del desarrollo es tener la capacidad de depurar nuestro código, en este apartado vamos a explicar como se realiza <code>debug</code> en Backend.</p>
+<p>Esta parte se realiza con las herramientas incluidas dentro de nuestro IDE favorito, en este caso vamos a utilizar el Eclipse.</p>
+<p>Lo primero que debemos hacer es arrancar la aplicación en modo <code>Debug</code>:</p>
+<p><img alt="back1-debug1" src="../../../assets/images/back1-debug1.png" /></p>
+<p>Arrancada la aplicación en este modo, vamos a depurar la operación de crear categoría.</p>
+<p>Para ello vamos a abrir nuestro fichero donde tenemos la implementación del servicio de creación de la capa de la lógica de negocio <code>CategoryServiceImpl</code>.</p>
+<p>Dentro del fichero ya podemos añadir puntos de ruptura (breakpoint), en nuestro caso queremos comprobar que el nombre introducido se recibe correctamente.</p>
+<p>Colocamos el breakpoint en la primera línea del método (click sobre el número de la línea) y desde la interfaz/postman creamos una nueva categoría.</p>
+<p>Hecho esto, podemos observar que a nivel de interfaz/postman, la petición se queda esperando y el IDE pasa modo <code>Debug</code> (la primera vez nos preguntará si queremos hacerlo, le decimos que si):</p>
+<p><img alt="back1-debug1" src="../../../assets/images/back1-debug2.png" /></p>
+<p>El IDE nos lleva al punto exacto donde hemos añadido el breakpoint y se para en este punto ofreciéndonos la posibilidad de explorar el contenido de las variables del código:</p>
+<p><img alt="back1-debug1" src="../../../assets/images/back1-debug3.png" /></p>
+<p>Aquí podemos comprobar que efectivamente el atributo <code>name</code> de la variable <code>dto</code> tiene el valor que hemos introducido por pantalla/postman.</p>
+<p>Para continuar con la ejecución basta con darle al botón de <code>play</code> de la barra de herramientas superior.</p>
+<p>Nota: para volver al modo <code>Java</code> de Eclipse, presionamos el botón que se sitúa a la izquierda del modo <code>Debug</code> en el que ha entrado el IDE automáticamente.</p>
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Pie">
+      
+        
+        <a href="../angular/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: 🔵 Angular" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              🔵 Angular
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../nodejs/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: 🟢 Nodejs" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Siguiente
+              </span>
+              🟢 Nodejs
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.path", "navigation.indexes"], "translations": {"clipboard.copy": "Copiar al portapapeles", "clipboard.copied": "Copiado al portapapeles", "search.config.lang": "es", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "B\u00fasqueda", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.term.missing": "Falta", "select.version.title": "Seleccionar versi\u00f3n"}, "search": "../../../assets/javascripts/workers/search.bd0b6b67.min.js"}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.467223ff.min.js"></script>
+      
+    
+  </body>
+</html>
