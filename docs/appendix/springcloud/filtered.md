@@ -444,8 +444,8 @@ Posteriormente, emplazamos el resto de clases dentro del package `com.ccsw.tutor
     
             BeanUtils.copyProperties(dto, game, "id");
     
-            game.setIdAuthor(dto.getAuthor().getId());
-            game.setIdCategory(dto.getCategory().getId());
+            game.setIdAuthor(dto.getIdAuthor());
+            game.setIdCategory(dto.getIdCategory());
     
             this.gameRepository.save(game);
         }
@@ -550,7 +550,7 @@ Finalmente, debemos crear el script de inicialización de base de datos con solo
 
 Ahora si arrancamos la aplicación server y abrimos el [Postman](https://www.postman.com/) podemos realizar las mismas pruebas del apartado de [Listado filtrado](../../develop/filtered/springboot.md) pero esta vez apuntado al puerto `8093`.
 
-Fíjate que cuando probemos el listado de juegos, devolverá identificadores en `idAuthor` y `idCategory`, y no objetos como funcionaba hasta ahora en la aplicación monolítica.
+Fíjate que cuando probemos el listado de juegos, devolverá identificadores en `idAuthor` y `idCategory`, y no objetos como funcionaba hasta ahora en la aplicación monolítica. Así que las pruebas que realices para insertar también deben utilizar esas propiedades y NO objetos.
 
 
 ## Siguientes pasos

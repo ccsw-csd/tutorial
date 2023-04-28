@@ -1561,8 +1561,8 @@
 
 <span class="w">        </span><span class="n">BeanUtils</span><span class="p">.</span><span class="na">copyProperties</span><span class="p">(</span><span class="n">dto</span><span class="p">,</span><span class="w"> </span><span class="n">game</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;id&quot;</span><span class="p">);</span>
 
-<span class="w">        </span><span class="n">game</span><span class="p">.</span><span class="na">setIdAuthor</span><span class="p">(</span><span class="n">dto</span><span class="p">.</span><span class="na">getAuthor</span><span class="p">().</span><span class="na">getId</span><span class="p">());</span>
-<span class="w">        </span><span class="n">game</span><span class="p">.</span><span class="na">setIdCategory</span><span class="p">(</span><span class="n">dto</span><span class="p">.</span><span class="na">getCategory</span><span class="p">().</span><span class="na">getId</span><span class="p">());</span>
+<span class="w">        </span><span class="n">game</span><span class="p">.</span><span class="na">setIdAuthor</span><span class="p">(</span><span class="n">dto</span><span class="p">.</span><span class="na">getIdAuthor</span><span class="p">());</span>
+<span class="w">        </span><span class="n">game</span><span class="p">.</span><span class="na">setIdCategory</span><span class="p">(</span><span class="n">dto</span><span class="p">.</span><span class="na">getIdCategory</span><span class="p">());</span>
 
 <span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">gameRepository</span><span class="p">.</span><span class="na">save</span><span class="p">(</span><span class="n">game</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
@@ -1668,7 +1668,7 @@
 </div>
 <h3 id="pruebas">Pruebas</h3>
 <p>Ahora si arrancamos la aplicación server y abrimos el <a href="https://www.postman.com/">Postman</a> podemos realizar las mismas pruebas del apartado de <a href="../../../develop/filtered/springboot/">Listado filtrado</a> pero esta vez apuntado al puerto <code>8093</code>.</p>
-<p>Fíjate que cuando probemos el listado de juegos, devolverá identificadores en <code>idAuthor</code> y <code>idCategory</code>, y no objetos como funcionaba hasta ahora en la aplicación monolítica.</p>
+<p>Fíjate que cuando probemos el listado de juegos, devolverá identificadores en <code>idAuthor</code> y <code>idCategory</code>, y no objetos como funcionaba hasta ahora en la aplicación monolítica. Así que las pruebas que realices para insertar también deben utilizar esas propiedades y NO objetos.</p>
 <h2 id="siguientes-pasos">Siguientes pasos</h2>
 <p>En este punto ya tenemos un micro servicio de categorías en el puerto <code>8091</code>, un micro servicio de autores en el puerto <code>8092</code> y un último micro servicio de juegos en el puerto <code>8093</code>. </p>
 <p>Si ahora fueramos a conectarlo con el frontend tendríamos dos problemas:</p>
