@@ -616,7 +616,7 @@ Ahora sí que tenemos todo listo para implementar el cuadro de dialogo para dar 
     .container {
         min-width: 350px;
         max-width: 500px;
-        width: 100%;
+        padding: 20px;
     
         form {
             display: flex;

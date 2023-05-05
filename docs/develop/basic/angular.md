@@ -702,7 +702,7 @@ Ahora vamos a darle forma al formulario de editar y crear. Para ello vamos al ht
     .container {
         min-width: 350px;
         max-width: 500px;
-        width: 100%;
+        padding: 20px;
       
         form {
             display: flex;
@@ -982,7 +982,7 @@ E implementamos el código que queremos que tenga el componente. Al ser un compo
     .container {
         min-width: 350px;
         max-width: 500px;
-        width: 100%;
+        padding: 20px;
       
         .description {
           margin-bottom: 20px;

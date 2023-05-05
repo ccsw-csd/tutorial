@@ -478,7 +478,7 @@ El último paso, es definir la pantalla de dialogo que realizará el alta y modi
     .container {
         min-width: 350px;
         max-width: 500px;
-        width: 100%;
+        padding: 20px;
     
         form {
             display: flex;
