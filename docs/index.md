@@ -33,7 +33,7 @@ De momento tenemos estos itinerarios:
 
 * 🔵 [Frontend - Angular](https://degreed.com/pathway/3pmxr0jg9n/pathway)
 * 🔵 [Frontend - Vue.js](https://degreed.com/pathway/v83v2wq3px/pathway)
-* 🟢 [Backend - Springboot](https://degreed.com/pathway/08gxl0e7pw/pathway)
+* 🟢 [Backend - SpringBoot](https://degreed.com/pathway/08gxl0e7pw/pathway)
 * 🟢 [Backend - Nodejs](https://degreed.com/pathway/e9kx16qypo/pathway)
 
 Una vez hayas hecho los cursos esenciales, ya puedes volver y continuar con este tutorial. Repito que no es obligado, si ya tienes conocimientos previos de las tecnologías no es necesario que hagas los cursos. Cuando termines el tutorial, ya puedes realizar el resto de cursos de otros niveles.

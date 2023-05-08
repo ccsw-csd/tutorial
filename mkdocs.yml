@@ -16,6 +16,7 @@ nav:
     - 🟢 Nodejs: cleancode/nodejs.md
   - "Code: Listado simple":
     - 🔵 Angular: develop/basic/angular.md
+    - 🔵 Vue.js: develop/basic/vuejs.md
     - 🟢 Spring Boot: develop/basic/springboot.md
     - 🟢 Nodejs: develop/basic/nodejs.md
   - "Code: Listado paginado":
