@@ -845,7 +845,7 @@ Pues vamos a ello.
 
 ### Pruebas de listado
 
-Vamos a empezar haciendo una clase de test dentro de la carpeta `src/test/java`. No queremos que los test formen parte del código productivo de la aplicación, por eso utilizamos esa ruta que queda fuera del package general de la aplicación.
+Vamos a empezar haciendo una clase de test dentro de la carpeta `src/test/java`. No queremos que los test formen parte del código productivo de la aplicación, por eso utilizamos esa ruta que queda fuera del scope general de la aplicación (main).
 
 Crearemos las clases (en la package `category`):
 
@@ -870,7 +870,7 @@ Crearemos las clases (en la package `category`):
 
     import org.springframework.boot.test.context.SpringBootTest;
     import org.springframework.boot.test.web.client.TestRestTemplate;
-    import org.springframework.boot.web.server.LocalServerPort;
+    import org.springframework.boot.test.web.server.LocalServerPort;
     import org.springframework.test.annotation.DirtiesContext;
 
     @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -960,7 +960,7 @@ Con todo esto ya podemos crear nuestro primer test. Iremos a las clases `Categor
     import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.boot.test.context.SpringBootTest;    
     import org.springframework.boot.test.web.client.TestRestTemplate;
-    import org.springframework.boot.web.server.LocalServerPort;
+    import org.springframework.boot.test.web.server.LocalServerPort;
     import org.springframework.core.ParameterizedTypeReference;
     import org.springframework.http.HttpMethod;
     import org.springframework.http.ResponseEntity;
