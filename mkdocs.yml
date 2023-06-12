@@ -6,17 +6,17 @@ nav:
   - Contexto de la aplicación: usecases.md
   - Entorno de desarrollo:
     - 🔵 Angular: install/angular.md
-    - 🔵 Vue.js: install/vuejs.md
+    #- 🔵 Vue.js: install/vuejs.md
     - 🟢 Spring Boot: install/springboot.md
     - 🟢 Nodejs: install/nodejs.md
   - Estructura y buenas prácticas:
     - 🔵 Angular: cleancode/angular.md
-    - 🔵 Vue.js: cleancode/vuejs.md
+    #- 🔵 Vue.js: cleancode/vuejs.md
     - 🟢 Spring Boot: cleancode/springboot.md
     - 🟢 Nodejs: cleancode/nodejs.md
   - "Code: Listado simple":
     - 🔵 Angular: develop/basic/angular.md
-    - 🔵 Vue.js: develop/basic/vuejs.md
+    #- 🔵 Vue.js: develop/basic/vuejs.md
     - 🟢 Spring Boot: develop/basic/springboot.md
     - 🟢 Nodejs: develop/basic/nodejs.md
   - "Code: Listado paginado":
@@ -63,3 +63,4 @@ extra_css:
   - assets/style.css  
 #site_dir: 'site/dev'
 
+#* 🔵 [Frontend - Vue.js](https://degreed.com/pathway/v83v2wq3px/pathway)
