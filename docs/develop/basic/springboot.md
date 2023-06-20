@@ -711,7 +711,7 @@ El código debería quedar así:
     import com.ccsw.tutorial.category.model.CategoryDto;
     import io.swagger.v3.oas.annotations.Operation;
     import io.swagger.v3.oas.annotations.tags.Tag;
-    import org.dozer.DozerBeanMapper;
+    import org.modelmapper.ModelMapper;
     import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.web.bind.annotation.*;
     
@@ -732,7 +732,7 @@ El código debería quedar así:
         CategoryService categoryService;
     
         @Autowired
-        DozerBeanMapper mapper;
+        ModelMapper mapper;
     
         /**
          * Método para recuperar todas las {@link Category}

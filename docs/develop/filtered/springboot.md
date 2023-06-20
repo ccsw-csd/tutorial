@@ -646,7 +646,7 @@ De nuevo para poder compilar esta capa, nos hace falta delegar sus operaciones d
     import com.ccsw.tutorial.game.model.GameDto;
     import io.swagger.v3.oas.annotations.Operation;
     import io.swagger.v3.oas.annotations.tags.Tag;
-    import org.dozer.DozerBeanMapper;
+    import org.modelmapper.ModelMapper;
     import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.web.bind.annotation.*;
     
@@ -667,7 +667,7 @@ De nuevo para poder compilar esta capa, nos hace falta delegar sus operaciones d
         GameService gameService;
     
         @Autowired
-        DozerBeanMapper mapper;
+        ModelMapper mapper;
     
         /**
          * Método para recuperar una lista de {@link Game}

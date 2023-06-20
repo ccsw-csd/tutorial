@@ -277,7 +277,7 @@ Posteriormente, emplazamos el resto de clases dentro del package `com.ccsw.tutor
     import com.ccsw.tutorialcategory.category.model.CategoryDto;
     import io.swagger.v3.oas.annotations.Operation;
     import io.swagger.v3.oas.annotations.tags.Tag;
-    import org.dozer.DozerBeanMapper;
+    import org.modelmapper.ModelMapper;
     import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.web.bind.annotation.*;
     
@@ -298,7 +298,7 @@ Posteriormente, emplazamos el resto de clases dentro del package `com.ccsw.tutor
         CategoryService categoryService;
     
         @Autowired
-        DozerBeanMapper mapper;
+        ModelMapper mapper;
     
         /**
          * Método para recuperar todas las {@link Category}

@@ -147,9 +147,9 @@ Lo primero que vamos a hacer es añadir las dependencias a algunas librerías qu
             </dependency>
     
             <dependency>
-                <groupId>net.sf.dozer</groupId>
-                <artifactId>dozer</artifactId>
-                <version>5.5.1</version>
+                <groupId>org.modelmapper</groupId>
+                <artifactId>modelmapper</artifactId>
+                <version>3.1.1</version>
             </dependency>
     
             <dependency>
@@ -180,27 +180,27 @@ Hemos añadido las dependencias de que nos permite utilizar Open API para docume
 
 #### Configurar librerías
 
-El siguiente punto es crear las clases de configuración para las librerías que hemos añadido. Para ello vamos a crear un package de configuración general de la aplicación `com.ccsw.tutorial.config` donde crearemos una clase que llamaremos `BeanDozerConfig` y usaremos para configurar el bean de Dozer.
+El siguiente punto es crear las clases de configuración para las librerías que hemos añadido. Para ello vamos a crear un package de configuración general de la aplicación `com.ccsw.tutorial.config` donde crearemos una clase que llamaremos `ModelMapperConfig` y usaremos para configurar el bean de ModelMapper.
 
-=== "BeanDozerConfig.java"
+=== "ModelMapperConfig.java"
     ``` Java
     package com.ccsw.tutorial.config;
-
-    import org.dozer.DozerBeanMapper;
+    
+    import org.modelmapper.ModelMapper;
     import org.springframework.context.annotation.Bean;
     import org.springframework.context.annotation.Configuration;
-
+    
     /**
      * @author ccsw
-     * 
-    */
+     *
+     */
     @Configuration
-    public class BeanDozerConfig {
+    public class ModelMapperConfig {
     
         @Bean
-        public DozerBeanMapper getDozerBeanMapper() {
+        public ModelMapper getModelMapper() {
     
-            return new DozerBeanMapper();
+            return new ModelMapper();
         }
     
     }

@@ -460,7 +460,7 @@ Posteriormente, emplazamos el resto de clases dentro del package `com.ccsw.tutor
     import com.ccsw.tutorialgame.game.model.GameDto;
     import io.swagger.v3.oas.annotations.Operation;
     import io.swagger.v3.oas.annotations.tags.Tag;
-    import org.dozer.DozerBeanMapper;
+    import org.modelmapper.ModelMapper;
     import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.web.bind.annotation.*;
     
@@ -481,7 +481,7 @@ Posteriormente, emplazamos el resto de clases dentro del package `com.ccsw.tutor
         GameService gameService;
     
         @Autowired
-        DozerBeanMapper mapper;
+        ModelMapper mapper;
     
         /**
          * Método para recuperar una lista de {@link Game}

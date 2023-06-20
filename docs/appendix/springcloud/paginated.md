@@ -467,7 +467,7 @@ Posteriormente, emplazamos el resto de clases dentro del package `com.ccsw.tutor
     import com.ccsw.tutorialauthor.author.model.AuthorSearchDto;
     import io.swagger.v3.oas.annotations.Operation;
     import io.swagger.v3.oas.annotations.tags.Tag;
-    import org.dozer.DozerBeanMapper;
+    import org.modelmapper.ModelMapper;
     import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.data.domain.Page;
     import org.springframework.data.domain.PageImpl;
@@ -490,7 +490,7 @@ Posteriormente, emplazamos el resto de clases dentro del package `com.ccsw.tutor
         AuthorService authorService;
     
         @Autowired
-        DozerBeanMapper mapper;
+        ModelMapper mapper;
     
         /**
          * Método para recuperar un listado paginado de {@link Author}
