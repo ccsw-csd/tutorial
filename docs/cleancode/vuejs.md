@@ -7,25 +7,12 @@ En esta parte vamos a explicar los fundamentos de un proyecto en Vue.js y las re
 
 ## Estructura y funcionamiento
 
-### Instancia de la Aplicación
 
-Cada aplicación de Vue.js se comienza creando una nueva **Instancia de Vue** con la función **createApp()**
+### Ciclos de vida de un componente
 
-![clean_vue1](../assets/images/clean_vue1.png)
+Vue.js cuenta con un conjunto de ciclos de vida que permiten a los desarrolladores controlar y personalizar el comportamiento de sus componentes en diferentes momentos. Estos ciclos de vida se pueden agrupar en tres fases principales: creación, actualización y eliminación.
 
-### Componente raíz
-
-El componente raíz es el objeto que pasamos a la función createApp. Toda aplicación requiere un "componente raíz" que pueda contener otros componentes como sus hijos.
-Si estás usando Single-File Components, normalmente importamos el componente raíz desde otro archivo.
-
-![clean_vue2](../assets/images/clean_vue2.png)
-
-
-### Ciclos de vida de Vue.js
-
-Vue.js 3 cuenta con un conjunto de ciclos de vida que permiten a los desarrolladores controlar y personalizar el comportamiento de sus componentes en diferentes momentos. Estos ciclos de vida se pueden agrupar en tres fases principales: creación, actualización y eliminación.
-
-A continuación, te explicaré cada uno de los ciclos de vida disponibles en Vue.js 3 junto con la Options API:
+A continuación, te explicaré cada uno de los ciclos de vida disponibles en Vue.js junto con la Options API:
 
 1.	beforeCreate: Este ciclo de vida se ejecuta inmediatamente después de que se haya creado una instancia de componente, pero antes de que se haya creado su DOM. En este punto, aún no es posible acceder a las propiedades del componente y aún no se han establecido las observaciones reactivas.
 
@@ -64,30 +51,29 @@ Os dejo un pequeño esquema de los ciclos de vida mas importantes y en que momen
 
 Es importante tenerlo claro para saber que métodos podemos utilizar para realizar operaciones con el componente.
 
+
+
 ### Carpetas creadas por Vue.js
 
-- node_modules: *Todos los módulos de librarías usado por el proyecto.*
+- node_modules: *Todos los módulos de librerías usado por el proyecto.*
+- public: *Contiene iconos y archivos accesibles por todos los usuarios.*
+- .quasar: *Contiene configuración propia de Quasar.*
 -	\src: *Contiene todo el código asociado al proyecto.*
     -	\src\assets: *Normalmente la carpeta usada para los recursos.*
     -	\src\components: *Aquí irán los diferentes componentes que iremos creando para la aplicación.*
     -	\src\router: *Es la carpeta donde el scafolding nos mete el router con sus diferentes rutas.*
-    -	\src\views: *Aquí iran las diferentes vistas de la aplicación.*
+    -	\src\layouts: *Aquí iran las diferentes vistas de la aplicación.*
 
 
 **Otros ficheros importantes de un proyecto de Vue.js**
 
 Otros archivos que debemos tener en cuenta dentro del proyecto son:
 
--	main.ts: Es la puerta de entrada a la aplicación
+-	quasar.d.ts: Configurador de la conexión entre la librería y Vue
 - package.json: Dependencias de librerías y scripts
+- quasar.config.js: Configurador del CLI de Quasar
+- \src\App.vue: Punto de entrada a nuestra aplicación
 
-
-### Estructura de módulos
-
-Existe múltiples consensos al respecto de como estructurar un proyecto en VUE, pero al final, depende de los requisitos del proyecto y de la gente que este trabajando en el. Lo que si seria muy importante es que todos usemos la misma estructura, por internet podemos encontrar diferentes sugerencias y quedarnos con la que nos guste mas, nosotros siempre recomendamos intentar desacoplar todo al máximo y a medida de lo posible seguir los principios de la Clean Architecture del `TIO BOB`.
-
-!!! tip "ATENCIÓN: Componentes genéricos"
-    Debemos tener en cuenta que a la hora de programar un componente `core`, lo ideal es pensar que sea un componente plug & play, es decir que si lo copias y lo llevas a otro proyecto funcione sin la necesidad de adaptarlo.
 
 ## Buenas prácticas
 
@@ -97,65 +83,29 @@ A continuación veremos un listado de buenas prácticas de Vue.js y de código l
 Antes de empezar con un proyecto lo ideal, es pararse y pensar en los requerimientos de una buena estructura, en un futuro lo agradecerás.
 
 ### Nombres claros
-Utilizar la S de los principios S.O.L.I.D para los nombres de variables, métodos y demás código.
 
-El efecto que produce este principio son clases con nombres muy descriptivos y por tanto largos.
+Determinar una manera de nombrar a los componentes (*UpperCamelCase*, *lowerCamelCase*, *kebab-case*, *snake_case*, ...) y continuarla para todos los archivos, nombres descriptivos de los componentes y en una ruta acorde (si es un componente que forma parte de una pantalla, se ubicará dentro de la carpeta de esa pantalla pero si se usa en más de una pantalla, se ubicará en una carpeta externa a cualquier pantalla llamada *common*), componentes de máximo 350 líneas y componentes con finalidad única (recibe los datos necesarios para realizar las tareas básicas de ese componente).
+
 
 ### Organiza tu código
 
-Intenta organizar tu código fuente:
+El código debe estar ordenado dentro de los componente siguiendo un orden de importancia similar a este:
 
--   Lo más importante debe ir arriba.
--   Primero propiedades, después métodos.
--   **Un Item para un archivo**: cada archivo debería contener solamente un componente, al igual que los servicios.
--   **Solo una responsabilidad**: Cada clase o modulo debería tener solamente una responsabilidad.
--   **El nombre correcto**: las propiedades y métodos deberían usar el sistema de camel case *(ej: getUserByName)*, al contrario, las clases (componentes, servicios, etc) deben usar upper camel case *(ej: UserComponent)*.
--   Los componentes y servicios deben tener su respectivo sufijo: UserComponent, UserService.
--   **Imports**: los archivos externos van primero.
+1.	**Importaciones** de las diferentes **librerías** o componentes usados.
+2.	**Importaciones de funciones** de otros archivos (como *utils*).
+3.	**Variables o constantes** usadas para almacenar la información necesaria en este componente.
+4.	**Funciones** necesarias para el resto del código.
+5.	**Variables computadas**, watchers, etc.
+6.	**Código HTML** del componente.
 
+### Consejos varios
 
-### Usar linters Prettier & ESLint
-Un linter es una herramienta que nos ayuda a seguir las buenas prácticas o guías de estilo de nuestro código fuente. En este caso, para JavaScript, proveeremos de unos muy famosos. Una de las más famosas es la combinación de **ESLint with Prettier**. Recordad que añadir este tipo de configuración es opcional, pero necesaria para tener un buen código de calidad.
+!!! tip "Modificaciones entre componentes"
+    A la hora de crear un componente básico (como un input propio) que necesite modificar su propio valor (algo que un componente hijo no debe hacer, ya que la variable estará en el padre), saber diferenciar entre v-model y modelValue (esta última sí que permite modificar el valor en el padre mediante el evento update:modelValue sin tener que hacer nada más en el padre que pasarle el valor).
 
-### Git Hooks
-Los Git Hooks son scripts de shell que se ejecutan automáticamente antes o después de que Git ejecute un comando importante como Commit o Push.
-Para hacer uso de el es tan sencillo como:
+!!! tip "Utiliza formateo y corrección de código"
+    Si has seguido nuestro tutorial se habrá instalado ESLint y Prettier. Si no, deberías instalarlo para generar código de buena calidad. Además de instalar alguna extensión en Visual Studio Code que te ayude a gestionar esas herramientas.
 
-npm install husky --save-dev
+!!! tip "Nomenclatura de funciones y variables"
+    El nombre de las funciones, al igual que los path de una API, deberían ser autoexplicativos y no tener que seguir la traza del código para saber qué hace. Con un buen nombre para cada función o variables de estado, evitas tener que añadir comentarios para explicar qué hace o qué almacena cada una de ellas.       
 
-Y añadir en el fichero lo siguiente:
-
-```js
-// package.json
-{
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm test",
-      "pre-push": "npm test",
-      "...": "..."
-    }
-  }
-}
-```
-
-!!! tip "Usar husky para el preformateo de código antes de subirlo"
-    Es una buena práctica que todo el equipo use el mismo estándar de formateo de codigo, con husky se puede solucionar.
-
-
-### Lazy Load
-Lazy Load es un patrón de diseño que consiste en retrasar la carga o inicialización.
-
-Desde el router añadiremos un codigo parecido a este para hacer que la carga de rutas sea lazy:
-
-```js
-{
-  path: '/about',
-  name: 'about',
-  // route level code-splitting
-  // this generates a separate chunk (About.[hash].js) for this route
-  // which is lazy-loaded when the route is visited.
-  component: () => import('../views/AboutView.vue')
-},
-```
-
-Con esto veremos que el módulo se cargará según se necesite.
