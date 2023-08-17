@@ -55,7 +55,7 @@ Es importante tenerlo claro para saber que métodos podemos utilizar para realiz
 
 ### Carpetas creadas por Vue.js
 
-- node_modules: *Todos los módulos de librerías usado por el proyecto.*
+- node_modules: *Todos los módulos de librerías usadas por el proyecto.*
 - public: *Contiene iconos y archivos accesibles por todos los usuarios.*
 - .quasar: *Contiene configuración propia de Quasar.*
 -	\src: *Contiene todo el código asociado al proyecto.*
