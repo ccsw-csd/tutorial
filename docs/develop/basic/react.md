@@ -7,7 +7,6 @@ Ahora que ya tenemos listo el proyecto frontend de React (en el puerto 5173), ya
 !!! success "Antes de empezar"
     Quiero hacer hincapié que React tiene una documentación muy extensa y completa, así que te recomiendo que hagas uso de ella cuando tengas cualquier duda. Tanto en la propia web de documentación de [React](https://es.react.dev/) como en la web de componentes [Mui](https://mui.com/) puedes buscar casi cualquier ejemplo que necesites.
 
-
 Si abrimos el proyecto con el IDE que tengamos (Visual Studio Code en el caso del tutorial) podemos ver que en la carpeta `src` existen unos ficheros ya creados por defecto. Estos ficheros son:
 
 * `main.tsx` → contiene el componente principal del proyecto.
@@ -43,7 +42,7 @@ function App() {
 export default App
 ```
 
-Si ahora abrimos nuestro navegador veremos en pantalla el valor de la variable probando que hemos introducido mediante una expresión en un tag p de html y un botón que si pulsamos incrementara el valor de la cuenta en uno. Si refrescamos la pantalla el valor de la cuenta volverá automáticamente a 0. Es hora de explicar como funciona un componente React y el hook useState.
+Si ahora abrimos nuestro navegador veremos en pantalla el valor de la variable "probando" que hemos introducido mediante una expresión en un tag p de html y un botón que si pulsamos incrementará el valor de la cuenta en uno. Si refrescamos la pantalla el valor de la cuenta volverá automáticamente a 0. Es hora de explicar como funciona un componente React y el hook useState.
 
 ## JSX
 
@@ -88,7 +87,7 @@ En la primera se pasa una función por referencia y Button es el responsable de 
 
 Todo componente en React tiene una serie de variables. Algunas de estas son propiedades de entrada como podrían serlo disabled en un botón y que se trasmiten de componentes padres a hijos. 
 
-Luego tenemos variables y constantes declaradas dentro del componente como por ejemplo la constante probando de nuestro ejemplo y finalmente tenemos unas variables especiales dentro de nuestro componente que corresponden al estado de este.
+Luego tenemos variables y constantes declaradas dentro del componente como por ejemplo la constante probando de nuestro ejemplo. Y finalmente tenemos unas variables especiales dentro de nuestro componente que corresponden al estado de este.
 
 Si modificamos el estado de un componente este automáticamente se volverá a renderizar y producirá una nueva representación en pantalla.
 
@@ -99,7 +98,8 @@ Más tarde veremos otras, pero de momento vamos a ver useState.
 ```
 const [count, setCount] = useState(0)
 ```
-En nuestro ejemplo tenemos una variable count que va mostrando su valor en el interior de un botón. Si pulsamos el botón ejecutara la función `setCount` que actualiza el valor de nuestro contador. A esta función se le puede pasar o bien el nuevo valor que tomará esta variable de estado o bien una función cuyo primer parámetro es el valor actual de la variable. Siempre que se actualice la variable del estado de producirá un nuevo renderizado del componente, eso lo podéis comprobar escribiendo un `console.log` antes del return. En nuestro caso hemos inicializado nuestra variable de estado con el valor 0, pero puede inicializarse con cualquier tipo javascript. No existe limite en el número de variables de estado por componente.
+
+En nuestro ejemplo tenemos una variable count que va mostrando su valor en el interior de un botón. Si pulsamos el botón ejecutara la función `setCount` que actualiza el valor de nuestro contador. A esta función se le puede pasar o bien el nuevo valor que tomará esta variable de estado o bien una función cuyo primer parámetro es el valor actual de la variable. Siempre que se actualice la variable del estado de producirá un nuevo renderizado del componente, eso lo podéis comprobar escribiendo un `console.log` antes del return. En nuestro caso hemos inicializado nuestra variable de estado con el valor 0, pero puede inicializarse con un valor de cualquier tipo javascript. No existe limite en el número de variables de estado por componente.
 
 Debemos tener en cuenta que si modificamos el estado de un componente que renderiza otros componentes, estos también se volverán a renderizar al cambiar el estado del componente padre. Es por esto por lo que debemos tener cuidado a la hora de modificar estados y renderizar los hijos correctamente. 
 
@@ -122,7 +122,6 @@ Como librería de componentes vamos a utilizar Mui, anteriormente conocido como 
 Vamos a utilizar la librería react router dom que nos permitirá definir y usar rutas de navegación en nuestra aplicación.
 
 Vamos a instalar también react redux y redux toolkit para gestionar el estado global de nuestra aplicación.
-
 
 ## Layout general
 ### Crear componente
@@ -363,7 +362,6 @@ De esta manera definimos cada una de nuestras rutas y las asociamos a una págin
 Vamos a arrancar el proyecto de nuevo con npm run dev y navegamos a http://localhost:5173/.
 
 Ahora podemos ver como automáticamente nos lleva a http://localhost:5173/games debido al último route en el que redirigimos cualquier path que no coincida con los anteriores a `/games`. Si pulsamos sobre las distintas opciones del menú podemos ver cómo va cambiando el outlet de nuestra aplicación con los distintos div creados para cada uno de los componentes página.
-
 
 ## Creando un listado simple
 ### Página categorías
@@ -746,7 +744,7 @@ Y añadimos el código necesario en nuestro return para incluir el nuevo compone
 
 ## Recuperando datos
 
-Ya estamos preparados para llamar a nuestro back. Hay muchas maneras de recuperar datos del back en React. Si no queremos usar ninguna librería externa podemos hacer uso del método fetch, pero tendríamos que repetir mucho código o bien construir interceptores, para el manejo de errores, construcción de middlewares,…  además, no es lo mas utilizado hoy en día ya que se opta por librerías como Axios que facilitan el uso de este método.
+Ya estamos preparados para llamar a nuestro back. Hay muchas maneras de recuperar datos del back en React. Si no queremos usar ninguna librería externa podemos hacer uso del método fetch, pero tendríamos que repetir mucho código o bien construir interceptores, para el manejo de errores, construcción de middlewares,… además, no es lo mas utilizado. Hoy en día se opta por librerías como `Axios` o `Redux Toolkit query` que facilitan el uso de este método.
 
 Nosotros vamos a utilizar una herramienta de redux llamada `Redux Toolkit Query`, pero primero vamos a explicar que es redux.
 
@@ -838,7 +836,7 @@ export type AppDispatch = typeof store.dispatch;
 
 Aquí básicamente creamos el store con nuestro `reducer`. Cabe destacar que podemos crear tantos `reducers` como queramos siempre que les demos distintos nombres.
 
-Ahora ya podríamos hacer uso de los hooks que vienen con redux llamados `useDispatch` para llamar a nuestras actions y `useSelect` para suscribirnos a los cambios en el estado, pero como estamos usando typescript tendríamos que tipar todos estos métodos y variables que usamos en todos nuestros componentes resultando un código un tanto sucio y repetitivo.  También podemos simplemente ignorar a typescript y deshabilitar las reglas para estos ficheros, pero vamos a hacerlo bien.
+Ahora ya podríamos hacer uso de los hooks que vienen con redux llamados `useDispatch` para llamar a nuestras actions y `useSelect` para suscribirnos a los cambios en el estado, pero como estamos usando typescript tendríamos que tipar todos estos métodos y variables que usamos en todos nuestros componentes resultando un código un tanto sucio y repetitivo. También podemos simplemente ignorar a typescript y deshabilitar las reglas para estos ficheros, pero vamos a hacerlo bien.
 
 Vamos a crear un fichero llamado `hooks.ts` dentro de la carpeta de redux y su contenido será el siguiente:
 
@@ -916,7 +914,7 @@ Tenemos que modificar el código que recorre data ya que este valor ahora puede 
               data.map((category: CategoryModel) => (
 ```
 
-Y ahora si tenemos datos en la base de datos y ahora vamos a nuestro navegador podemos ver que ya se están representando estos datos en la tabla de categorías. 
+Y ahora si tenemos datos en la base de datos y vamos a nuestro navegador podemos ver que ya se están representando estos datos en la tabla de categorías.
 
 Modificamos el método `createCategory`:
 

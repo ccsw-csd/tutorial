@@ -289,7 +289,7 @@ export default function CreateGame(props: Props) {
 }
 ```
 
-Ahora en esa misma carpeta crearemos el componente `GameCard.tsx`:
+Ahora en esa misma carpeta crearemos el componente `GameCard.tsx` para mostrar nuestros juegos con un diseño de carta:
 
 === "CreateGame.tsx"
 ``` Typescript
@@ -573,6 +573,8 @@ export const Game = () => {
 
 Y por último descargamos la siguiente imagen y la guardamos en la carpeta `src/assets`.
 
+En este listado realizamos el filtro de manera dinámica, en el momento en que cambiamos el valor de la categoría o el título a filtrar, como estas variables están asociadas al estado de nuestro componente, se vuelve a renderizar y por lo tanto se actualiza el valor de "data" modificando así los resultados.
 
+El resto es muy parecido a lo que ya hemos realizado antes. Aquí no tenemos una tabla, sino que mostramos nuestros juegos como Cards y si pulsamos sobre cualquier Card se mostrará el formulario de edición del juego.
 
 Si ahora arrancamos el proyecto y nos vamos a la pagina de juegos podremos crear y ver nuestros juegos.
