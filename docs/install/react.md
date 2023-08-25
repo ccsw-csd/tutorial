@@ -52,7 +52,7 @@ Para arrancar el proyecto, tan solo necesitamos ejecutar en consola el siguiente
 
     npm run dev
 
-Vite compilará el código fuente, levantará un servidor local al que podremos acceder por defecto mediante la URL: [http://localhost:4200/](http://localhost:4200/)
+Vite compilará el código fuente, levantará un servidor local al que podremos acceder por defecto mediante la URL: [http://localhost:5173/](http://localhost:5173/)
 
 Y ya podemos empezar a trabajar en nuestro proyecto React.
 

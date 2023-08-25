@@ -15,6 +15,9 @@ React es una herramienta para crear interfaces de usuario de una manera ágil y 
 Estas interfaces de usuario denominadas componentes pueden definirse como clases o funciones independiente y reutilizables con unos parámetros de entrada que devuelven elementos de react.
 En ese tutorial solo utilizaremos componentes de tipo función.
 
+Por si no te suena, un componente web es una forma de crear un bloque de código encapsulado y de responsabilidad única que puede reutilizarse en cualquier pagina mediante nuevas etiquetas html. 
+
+
 !!! info "Nota"
     Desde la versión 16.8 se introdujo en React el concepto de hooks. Esto permitió usar el estado y otras características de React sin necesidad de escribir una clase.
 

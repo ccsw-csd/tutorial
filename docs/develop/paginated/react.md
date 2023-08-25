@@ -147,7 +147,7 @@ Vamos a añadir los métodos necesarios para el crud de autores en el fichero `s
     ``` Typescript hl_lines="9 20"
         getAllAuthors: builder.query<Author[], null>({
       query: () => "author",
-      providesTags: ["Author"],
+      providesTags: ["Author" ],
     }),
     getAuthors: builder.query<
       AuthorResponse,
@@ -194,6 +194,24 @@ Vamos a añadir los métodos necesarios para el crud de autores en el fichero `s
       invalidatesTags: ["Author", "Game"],
     }),
     ```
+Añadimos también los imports, tags y exports necesarios y guardamos.
+``` Typescript
+import { Author, AuthorResponse } from "../../types/Author";
+
+tagTypes: ["Category", "Author", "Game"],
+
+export const {
+  useGetCategoriesQuery,
+  useCreateCategoryMutation,
+  useDeleteCategoryMutation,
+  useUpdateCategoryMutation,
+  useCreateAuthorMutation,
+  useDeleteAuthorMutation,
+  useGetAllAuthorsQuery,
+  useGetAuthorsQuery,
+  useUpdateAuthorMutation,
+} = ludotecaAPI;
+```
 
 Y por último el contenido de nuestro fichero `Author.tsx` quedaría así:
 

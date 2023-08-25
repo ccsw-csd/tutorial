@@ -24,49 +24,21 @@ export interface Game {
 }
     ```
 
-Modificamos nuestra api de `Toolkit` para añadir los `endpoints` de juegos y aparte creamos un `endpoint` para recuperar los autores que necesitaremos para crear un nuevo juego:
+Modificamos nuestra api de `Toolkit` para añadir los `endpoints` de juegos y aparte creamos un `endpoint` para recuperar los autores que necesitaremos para crear un nuevo juego, el fichero completo quedaría de esta manera:
 
 ``` TypeScript
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { Game } from "../../types/Game";
 import { Category } from "../../types/Category";
-import { Author } from "../../types/Author";
+import { Author, AuthorResponse } from "../../types/Author";
 
 export const ludotecaAPI = createApi({
   reducerPath: "ludotecaApi",
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:8080",
   }),
-  tagTypes: ["Game", "Category", "Author"],
+  tagTypes: ["Category", "Author", "Game"],
   endpoints: (builder) => ({
-    getGames: builder.query<Game[], { title: string; idCategory: string }>({
-      query: ({ title, idCategory }) => {
-        return {
-          url: "game/",
-          params: { title, idCategory },
-        };
-      },
-      providesTags: ["Game"],
-    }),
-    createGame: builder.mutation({
-      query: (payload: Game) => ({
-        url: "/game",
-        method: "PUT",
-        body: { ...payload },
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-        },
-      }),
-      invalidatesTags: ["Game"],
-    }),
-    updateGame: builder.mutation({
-      query: (payload: Game) => ({
-        url: `game/${payload.id}`,
-        method: "PUT",
-        body: { ...payload },
-      }),
-      invalidatesTags: ["Game"],
-    }),
     getCategories: builder.query<Category[], null>({
       query: () => "category",
       providesTags: ["Category"],
@@ -95,25 +67,103 @@ export const ludotecaAPI = createApi({
         method: "PUT",
         body: payload,
       }),
-      invalidatesTags: ["Category", "Game"],
+      invalidatesTags: ["Category"],
     }),
     getAllAuthors: builder.query<Author[], null>({
       query: () => "author",
       providesTags: ["Author"],
     }),
+    getAuthors: builder.query<
+      AuthorResponse,
+      { pageNumber: number; pageSize: number }
+    >({
+      query: ({ pageNumber, pageSize }) => {
+        return {
+          url: "author/",
+          method: "POST",
+          body: {
+            pageable: {
+              pageNumber,
+              pageSize,
+            },
+          },
+        };
+      },
+      providesTags: ["Author"],
+    }),
+    createAuthor: builder.mutation({
+      query: (payload) => ({
+        url: "/author",
+        method: "PUT",
+        body: payload,
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      }),
+      invalidatesTags: ["Author"],
+    }),
+    deleteAuthor: builder.mutation({
+      query: (id: string) => ({
+        url: `/author/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Author"],
+    }),
+    updateAuthor: builder.mutation({
+      query: (payload: Author) => ({
+        url: `author/${payload.id}`,
+        method: "PUT",
+        body: payload,
+      }),
+      invalidatesTags: ["Author", "Game"],
+    }),
+    getGames: builder.query<Game[], { title: string; idCategory: string }>({
+      query: ({ title, idCategory }) => {
+        return {
+          url: "game/",
+          params: { title, idCategory },
+        };
+      },
+      providesTags: ["Game"],
+    }),
+    createGame: builder.mutation({
+      query: (payload: Game) => ({
+        url: "/game",
+        method: "PUT",
+        body: { ...payload },
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      }),
+      invalidatesTags: ["Game"],
+    }),
+    updateGame: builder.mutation({
+      query: (payload: Game) => ({
+        url: `game/${payload.id}`,
+        method: "PUT",
+        body: { ...payload },
+      }),
+      invalidatesTags: ["Game"],
+    }),
+
   }),
 });
 
 export const {
-  useGetGamesQuery,
-  useCreateGameMutation,
-  useUpdateGameMutation,
   useGetCategoriesQuery,
   useCreateCategoryMutation,
-  useUpdateCategoryMutation,
   useDeleteCategoryMutation,
+  useUpdateCategoryMutation,
+  useCreateAuthorMutation,
+  useDeleteAuthorMutation,
   useGetAllAuthorsQuery,
+  useGetAuthorsQuery,
+  useUpdateAuthorMutation,
+  useCreateGameMutation,
+  useGetGamesQuery,
+  useUpdateGameMutation
 } = ludotecaAPI;
+
 ```
 
 Creamos una nueva carpeta `components` dentro de `src/pages/Game` y dentro creamos un archivo llamado `CreateGame.tsx` con el siguiente contenido:
@@ -161,7 +211,9 @@ export default function CreateGame(props: Props) {
 
   useEffect(() => {
     setForm({
-      ...form,
+      id: props.game?.id || "",
+      title: props.game?.title || "",
+      age: props.game?.age || 0,
       category: props.game?.category,
       author: props.game?.author,
     });
@@ -291,7 +343,7 @@ export default function CreateGame(props: Props) {
 
 Ahora en esa misma carpeta crearemos el componente `GameCard.tsx` para mostrar nuestros juegos con un diseño de carta:
 
-=== "CreateGame.tsx"
+=== "GameCard.tsx"
 ``` Typescript
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";

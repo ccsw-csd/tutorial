@@ -17,6 +17,8 @@ Si abrimos el proyecto con el IDE que tengamos (Visual Studio Code en el caso de
 
 Aunque `main.tsx` y `App.tsx` puedan parecer lo mismo `main.tsx` se suele dejar tal y como esta ya que lo único que hace es asociar el div con id “root” del archivo `index.html` de la raíz de nuestro proyecto para que sea el nodo principal de React. En el archivo `App.tsx` es donde realmente empezamos a desarrollar código.
 
+Si abrimos `main.tsx` podemos ver que se esta usando `<App />` como una etiqueta html. El nombre con que exportemos nuestros componentes será el nombre de la etiqueta html utilizado para renderizar los componentes.
+
 Vamos a modificar este código inicial para ver cómo funciona. Abrimos el fichero `App.tsx` y vamos a dejarlo de esta manera:
 
 ``` Typescript
@@ -41,6 +43,7 @@ function App() {
 
 export default App
 ```
+En los componentes React siempre se suele seguir el mismo orden, primero introduciremos los imports necesarios, luego podemos declarar variables y funciones que no se vayan a modificar, después creamos nuestra función principal con el nombre del componente y dentro de esta lo primero que se suelen declarar son todas las variables, después añadiremos métodos del componente y por último tenemos que llamar a return para devolver lo que queramos renderizar.
 
 Si ahora abrimos nuestro navegador veremos en pantalla el valor de la variable "probando" que hemos introducido mediante una expresión en un tag p de html y un botón que si pulsamos incrementará el valor de la cuenta en uno. Si refrescamos la pantalla el valor de la cuenta volverá automáticamente a 0. Es hora de explicar como funciona un componente React y el hook useState.
 
@@ -805,6 +808,13 @@ export const ludotecaAPI = createApi({
     }),
   }),
 });
+
+export const {
+    useGetCategoriesQuery,
+    useCreateCategoryMutation,
+    useDeleteCategoryMutation,
+    useUpdateCategoryMutation
+} = ludotecaAPI;
 ```
 
 Con esto ya habríamos creado las acciones que llaman al back y almacenan el resultado en nuestro estado. Para configurar nuestra api le tenemos que dar un nombre, una url base, una series de tags y nuestros endpoints que pueden ser de tipo query para realizar consultas o `mutation`. También exportamos los hooks que nos van a permitir hacer uso de estos endpoints. Si los endpoints los creamos de tipo `query`, cuando hacemos uso de estos hooks se realizará una consulta al back y recibiremos los datos de la consulta en nuestros parámetros del hook entre otras cosas. Si los creamos de tipo `mutation` lo que nos devolverá el hook será la acción que tenemos que llamar para realizar esta llamada.
@@ -1018,6 +1028,7 @@ Con esto ya podemos hacer uso de esta funcionalidad. Vamos a modificar el compon
 ``` Typescript
 import Alert from "@mui/material/Alert";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { deleteMessage } from "../redux/features/messageSlice";
 
   const dispatch = useAppDispatch();
   const { text, type } = useAppSelector((state) => state.messageReducer);
