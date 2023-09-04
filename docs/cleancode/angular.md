@@ -20,7 +20,7 @@ Es importante tenerlo claro para saber que métodos podemos utilizar para realiz
 
 Al crear una aplicación Angular, tendremos los siguientes directorios:
 
-- node_modules: *Todos los módulos de librarías usado por el proyecto.*
+- node_modules: *Todos los módulos de librerías usadas por el proyecto.*
 -	\src\app: *Contiene todo el código asociado al proyecto.*
     -	\src\assets: *Normalmente la carpeta usada para los recursos.*
 	-	\src\environments: *Aquí irán los ficheros relacionados con los entornos de desarrollos.*
