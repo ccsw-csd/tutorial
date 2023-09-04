@@ -6,22 +6,24 @@ Como ya conocemos como se debe desarrollar, en este ejemplo vamos a ir más ráp
 
 Vamos a desarrollar el listado de `Juegos`. Este listado es un tanto peculiar, porque no tiene una tabla como tal, sino que vamos a mostrar los juegos como cards. Ya tenemos creado nuestro componentes pagina pero vamos a necesitar un componente para mostrar cada uno de los juegos  y otro para crear y editar los juegos.
 
+## Crear componente game
+
 Manos a la obra:
 
 Creamos el fichero `Game.ts` dentro de la carpeta `types`:
 
 === "Game.ts"
     ``` TypeScript
-import { Category } from "./Category";
-import { Author } from "./Author";
+    import { Category } from "./Category";
+    import { Author } from "./Author";
 
-export interface Game {
-  id: string;
-  title: string;
-  age: number;
-  category?: Category;
-  author?: Author;
-}
+    export interface Game {
+      id: string;
+      title: string;
+      age: number;
+      category?: Category;
+      author?: Author;
+    }
     ```
 
 Modificamos nuestra api de `Toolkit` para añadir los `endpoints` de juegos y aparte creamos un `endpoint` para recuperar los autores que necesitaremos para crear un nuevo juego, el fichero completo quedaría de esta manera:

@@ -7,13 +7,13 @@ nav:
   - Entorno de desarrollo:
     - 🔵 Angular: install/angular.md
     - 🔵 React: install/react.md
-    - 🔵 Vue.js: install/vuejs.md
+    #- 🔵 Vue.js: install/vuejs.md
     - 🟢 Spring Boot: install/springboot.md
     - 🟢 Nodejs: install/nodejs.md
   - Estructura y buenas prácticas:
     - 🔵 Angular: cleancode/angular.md
     - 🔵 React: cleancode/react.md
-    - 🔵 Vue.js: cleancode/vuejs.md
+    #- 🔵 Vue.js: cleancode/vuejs.md
     - 🟢 Spring Boot: cleancode/springboot.md
     - 🟢 Nodejs: cleancode/nodejs.md
   - "Code: Listado simple":

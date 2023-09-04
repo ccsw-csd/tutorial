@@ -1,0 +1,1582 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../angular/">
+      
+      
+        <link rel="next" href="../springboot/">
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.12">
+    
+    
+      
+        <title>🔵 React - Tutorial Frontend - Backend</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.0d440cfe.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.2505c338.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/style.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#listado-paginado-react" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../../.." title="Tutorial Frontend - Backend" class="md-header__button md-logo" aria-label="Tutorial Frontend - Backend" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Tutorial Frontend - Backend
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              🔵 React
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Tutorial Frontend - Backend" class="md-nav__button md-logo" aria-label="Tutorial Frontend - Backend" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Tutorial Frontend - Backend
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        Bienvenido!
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../thanks/" class="md-nav__link">
+        Agradecimientos!
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../usecases/" class="md-nav__link">
+        Contexto de la aplicación
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          Entorno de desarrollo
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Entorno de desarrollo
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../install/angular/" class="md-nav__link">
+        🔵 Angular
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../install/react/" class="md-nav__link">
+        🔵 React
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../install/springboot/" class="md-nav__link">
+        🟢 Spring Boot
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../install/nodejs/" class="md-nav__link">
+        🟢 Nodejs
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          Estructura y buenas prácticas
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Estructura y buenas prácticas
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cleancode/angular/" class="md-nav__link">
+        🔵 Angular
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cleancode/react/" class="md-nav__link">
+        🔵 React
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cleancode/springboot/" class="md-nav__link">
+        🟢 Spring Boot
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cleancode/nodejs/" class="md-nav__link">
+        🟢 Nodejs
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+          Code: Listado simple
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Code: Listado simple
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basic/angular/" class="md-nav__link">
+        🔵 Angular
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basic/react/" class="md-nav__link">
+        🔵 React
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basic/springboot/" class="md-nav__link">
+        🟢 Spring Boot
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basic/nodejs/" class="md-nav__link">
+        🟢 Nodejs
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+          Code: Listado paginado
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          Code: Listado paginado
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../angular/" class="md-nav__link">
+        🔵 Angular
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          🔵 React
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        🔵 React
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#crear-componente-author" class="md-nav__link">
+    Crear componente author
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../springboot/" class="md-nav__link">
+        🟢 Spring Boot
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nodejs/" class="md-nav__link">
+        🟢 Nodejs
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+          Code: Listado filtrado
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          Code: Listado filtrado
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../filtered/angular/" class="md-nav__link">
+        🔵 Angular
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../filtered/react/" class="md-nav__link">
+        🔵 React
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../filtered/springboot/" class="md-nav__link">
+        🟢 Spring Boot
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../filtered/nodejs/" class="md-nav__link">
+        🟢 Nodejs
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exercise/" class="md-nav__link">
+        Ahora hazlo tu!
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+          Anexos
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_10">
+          <span class="md-nav__icon md-icon"></span>
+          Anexos
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appendix/git/" class="md-nav__link">
+        GIT: Tutorial básico
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appendix/rest/" class="md-nav__link">
+        API Rest
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appendix/tdd/" class="md-nav__link">
+        TDD
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appendix/jpa/" class="md-nav__link">
+        Spring Data: JPA
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10_5" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_10_5" id="__nav_10_5_label" tabindex="0">
+          Spring Cloud
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_10_5">
+          <span class="md-nav__icon md-icon"></span>
+          Spring Cloud
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appendix/springcloud/intro/" class="md-nav__link">
+        Introducción
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appendix/springcloud/basic/" class="md-nav__link">
+        Listado simple
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appendix/springcloud/paginated/" class="md-nav__link">
+        Listado paginado
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appendix/springcloud/filtered/" class="md-nav__link">
+        Listado filtrado
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appendix/springcloud/infra/" class="md-nav__link">
+        Infraestructura
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appendix/springcloud/summary/" class="md-nav__link">
+        Resumen
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#crear-componente-author" class="md-nav__link">
+    Crear componente author
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="listado-paginado-react">Listado paginado - React</h1>
+<p>Ya tienes tu primer CRUD desarrollado. ¿Ha sido sencillo, verdad?.</p>
+<p>Ahora vamos a implementar un CRUD un poco más complejo, este tiene datos paginados en servidor, esto quiere decir que no nos sirve un array de datos como en el anterior ejemplo. 
+Para que un listado paginado en servidor funcione, el cliente debe enviar en cada petición que página está solicitando y cual es el tamaño de la página, para que el servidor devuelva solamente un subconjunto de datos, en lugar de devolver el listado completo.</p>
+<p>Como ya conocemos como se debe desarrollar, en este ejemplo vamos a ir más rápidos y nos vamos a centrar únicamente en las novedades.</p>
+<h2 id="crear-componente-author">Crear componente author</h2>
+<p>Lo primero que vamos a hacer es crear una carpeta llamada types dentro de <code>src</code>. Aquí crearemos los tipos de typescript. Creamos un nuevo fichero llamado <code>Author.ts</code> cuyo contenido será el siguiente:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Author.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="k">export</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="nx">Author</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">nationality</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span>
+<span class="p">}</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="nx">AuthorResponse</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">content</span><span class="o">:</span><span class="w"> </span><span class="kt">Author</span><span class="p">[];</span>
+<span class="hll"><span class="w">    </span><span class="nx">totalElements</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+</span><span class="p">}</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Ahora vamos a crear un archivo de estilos que será solo utilizado por la página de author. Para ello dentro de la carpeta <code>Author</code> creamos un archivo llamado <code>Author.module.css</code>. Al llamar al archivo de esta manera React reconoce este archivo como un archivo único para un componente y hace que sus reglas css sean más prioritarias, aunque por ejemplo exista una clase con el mismo nombre en el archivo <code>index.css</code>.</p>
+<p>El contenido de nuestro archivo css será el siguiente:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">index.css</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="p">.</span><span class="nc">tableActions</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">margin-right</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">    </span><span class="k">display</span><span class="p">:</span><span class="w"> </span><span class="kc">flex</span><span class="p">;</span>
+<span class="w">    </span><span class="k">justify-content</span><span class="p">:</span><span class="w"> </span><span class="kc">flex-end</span><span class="p">;</span>
+<span class="w">    </span><span class="k">align-content</span><span class="p">:</span><span class="w"> </span><span class="kc">flex-start</span><span class="p">;</span>
+<span class="w">    </span><span class="k">gap</span><span class="p">:</span><span class="w"> </span><span class="mi">19</span><span class="kt">px</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Al igual que hicimos con categorías vamos a crear un nuevo componente para el formulario de alta y edición, para ello creamos una nueva carpeta llamada components en <code>src/pages/Author</code> y dentro de esta carpeta crearemos un fichero llamado <code>CreateAuthor.tsx</code>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">CreateAuthor.tsx</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">ChangeEvent</span><span class="p">,</span><span class="w"> </span><span class="nx">useEffect</span><span class="p">,</span><span class="w"> </span><span class="nx">useState</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;react&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">Button</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;@mui/material/Button&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">TextField</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;@mui/material/TextField&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">Dialog</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;@mui/material/Dialog&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">DialogActions</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;@mui/material/DialogActions&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">DialogContent</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;@mui/material/DialogContent&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">DialogTitle</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;@mui/material/DialogTitle&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Author</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;../../../types/Author&quot;</span><span class="p">;</span>
+
+<span class="kd">interface</span><span class="w"> </span><span class="nx">Props</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">author</span><span class="o">:</span><span class="w"> </span><span class="kt">Author</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">closeModal</span><span class="o">:</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="ow">void</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">create</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="nx">author</span><span class="o">:</span><span class="w"> </span><span class="kt">Author</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="ow">void</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">initialState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">nationality</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">CreateAuthor</span><span class="p">(</span><span class="nx">props</span><span class="o">:</span><span class="w"> </span><span class="kt">Props</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">form</span><span class="p">,</span><span class="w"> </span><span class="nx">setForm</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">(</span><span class="nx">initialState</span><span class="p">);</span>
+
+<span class="w">  </span><span class="nx">useEffect</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">setForm</span><span class="p">(</span><span class="nx">props</span><span class="o">?</span><span class="p">.</span><span class="nx">author</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">initialState</span><span class="p">);</span>
+<span class="w">  </span><span class="p">},</span><span class="w"> </span><span class="p">[</span><span class="nx">props</span><span class="o">?</span><span class="p">.</span><span class="nx">author</span><span class="p">]);</span>
+
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">handleChangeForm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="nx">event</span><span class="o">:</span><span class="w"> </span><span class="kt">ChangeEvent</span><span class="o">&lt;</span><span class="nx">HTMLInputElement</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nx">HTMLTextAreaElement</span><span class="o">&gt;</span>
+<span class="w">  </span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">setForm</span><span class="p">({</span>
+<span class="w">      </span><span class="p">...</span><span class="nx">form</span><span class="p">,</span>
+<span class="w">      </span><span class="p">[</span><span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">id</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">value</span><span class="p">,</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="w">  </span><span class="p">};</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span>
+<span class="w">      </span><span class="o">&lt;</span><span class="nx">Dialog</span><span class="w"> </span><span class="nx">open</span><span class="o">=</span><span class="p">{</span><span class="kc">true</span><span class="p">}</span><span class="w"> </span><span class="nx">onClose</span><span class="o">=</span><span class="p">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">closeModal</span><span class="p">}</span><span class="o">&gt;</span>
+<span class="w">        </span><span class="o">&lt;</span><span class="nx">DialogTitle</span><span class="o">&gt;</span>
+<span class="w">          </span><span class="p">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">author</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s2">&quot;Actualizar Autor&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Crear Autor&quot;</span><span class="p">}</span>
+<span class="w">        </span><span class="o">&lt;</span><span class="err">/DialogTitle&gt;</span>
+<span class="w">        </span><span class="o">&lt;</span><span class="nx">DialogContent</span><span class="o">&gt;</span>
+<span class="w">          </span><span class="p">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">author</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">(</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="nx">TextField</span>
+<span class="w">              </span><span class="nx">margin</span><span class="o">=</span><span class="s2">&quot;dense&quot;</span>
+<span class="w">              </span><span class="nx">disabled</span>
+<span class="w">              </span><span class="nx">id</span><span class="o">=</span><span class="s2">&quot;id&quot;</span>
+<span class="w">              </span><span class="nx">label</span><span class="o">=</span><span class="s2">&quot;Id&quot;</span>
+<span class="w">              </span><span class="nx">fullWidth</span>
+<span class="w">              </span><span class="nx">value</span><span class="o">=</span><span class="p">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">author</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span>
+<span class="w">              </span><span class="nx">variant</span><span class="o">=</span><span class="s2">&quot;standard&quot;</span>
+<span class="w">            </span><span class="o">/&gt;</span>
+<span class="w">          </span><span class="p">)}</span>
+<span class="w">          </span><span class="o">&lt;</span><span class="nx">TextField</span>
+<span class="w">            </span><span class="nx">margin</span><span class="o">=</span><span class="s2">&quot;dense&quot;</span>
+<span class="w">            </span><span class="nx">id</span><span class="o">=</span><span class="s2">&quot;name&quot;</span>
+<span class="w">            </span><span class="nx">label</span><span class="o">=</span><span class="s2">&quot;Nombre&quot;</span>
+<span class="w">            </span><span class="nx">fullWidth</span>
+<span class="w">            </span><span class="nx">variant</span><span class="o">=</span><span class="s2">&quot;standard&quot;</span>
+<span class="w">            </span><span class="nx">onChange</span><span class="o">=</span><span class="p">{</span><span class="nx">handleChangeForm</span><span class="p">}</span>
+<span class="w">            </span><span class="nx">value</span><span class="o">=</span><span class="p">{</span><span class="nx">form</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span>
+<span class="w">          </span><span class="o">/&gt;</span>
+<span class="w">          </span><span class="o">&lt;</span><span class="nx">TextField</span>
+<span class="w">            </span><span class="nx">margin</span><span class="o">=</span><span class="s2">&quot;dense&quot;</span>
+<span class="w">            </span><span class="nx">id</span><span class="o">=</span><span class="s2">&quot;nationality&quot;</span>
+<span class="w">            </span><span class="nx">label</span><span class="o">=</span><span class="s2">&quot;Nacionalidad&quot;</span>
+<span class="w">            </span><span class="nx">fullWidth</span>
+<span class="w">            </span><span class="nx">variant</span><span class="o">=</span><span class="s2">&quot;standard&quot;</span>
+<span class="w">            </span><span class="nx">onChange</span><span class="o">=</span><span class="p">{</span><span class="nx">handleChangeForm</span><span class="p">}</span>
+<span class="w">            </span><span class="nx">value</span><span class="o">=</span><span class="p">{</span><span class="nx">form</span><span class="p">.</span><span class="nx">nationality</span><span class="p">}</span>
+<span class="w">          </span><span class="o">/&gt;</span>
+<span class="w">        </span><span class="o">&lt;</span><span class="err">/DialogContent&gt;</span>
+<span class="w">        </span><span class="o">&lt;</span><span class="nx">DialogActions</span><span class="o">&gt;</span>
+<span class="w">          </span><span class="o">&lt;</span><span class="nx">Button</span><span class="w"> </span><span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">closeModal</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Cancelar</span><span class="o">&lt;</span><span class="err">/Button&gt;</span>
+<span class="w">          </span><span class="o">&lt;</span><span class="nx">Button</span>
+<span class="w">            </span><span class="nx">onClick</span><span class="o">=</span><span class="p">{()</span><span class="w"> </span><span class="p">=&gt;</span>
+<span class="w">              </span><span class="nx">props</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
+<span class="w">                </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">props.author</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">props</span><span class="p">.</span><span class="nx">author</span><span class="p">.</span><span class="nx">id</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">form.name</span><span class="p">,</span>
+<span class="w">                </span><span class="nx">nationality</span><span class="o">:</span><span class="w"> </span><span class="kt">form.nationality</span><span class="p">,</span>
+<span class="w">              </span><span class="p">})</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="nx">disabled</span><span class="o">=</span><span class="p">{</span><span class="o">!</span><span class="nx">form</span><span class="p">.</span><span class="nx">name</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">!</span><span class="nx">form</span><span class="p">.</span><span class="nx">nationality</span><span class="p">}</span>
+<span class="w">          </span><span class="o">&gt;</span>
+<span class="w">            </span><span class="p">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">author</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s2">&quot;Actualizar&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Crear&quot;</span><span class="p">}</span>
+<span class="w">          </span><span class="o">&lt;</span><span class="err">/Button&gt;</span>
+<span class="w">        </span><span class="o">&lt;</span><span class="err">/DialogActions&gt;</span>
+<span class="w">      </span><span class="o">&lt;</span><span class="err">/Dialog&gt;</span>
+<span class="w">    </span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+<span class="w">  </span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Como los autores tienen más campos hemos añadido un poco de funcionalidad extra que no teníamos en el formulario de categorías, pero no es demasiado complicada.</p>
+<p>Vamos a añadir los métodos necesarios para el crud de autores en el fichero <code>src/redux/services/ludotecaApi.ts</code>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:1"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">ludotecaApi.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="nx">getAllAuthors</span><span class="o">:</span><span class="w"> </span><span class="kt">builder.query</span><span class="o">&lt;</span><span class="nx">Author</span><span class="p">[],</span><span class="w"> </span><span class="kc">null</span><span class="o">&gt;</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">query</span><span class="o">:</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s2">&quot;author&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">providesTags</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;Author&quot;</span><span class="w"> </span><span class="p">],</span>
+<span class="p">}),</span>
+<span class="nx">getAuthors</span><span class="o">:</span><span class="w"> </span><span class="kt">builder.query</span><span class="o">&lt;</span>
+<span class="w">  </span><span class="nx">AuthorResponse</span><span class="p">,</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">pageNumber</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span><span class="w"> </span><span class="nx">pageSize</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="w"> </span><span class="p">}</span>
+<span class="o">&gt;</span><span class="p">({</span>
+<span class="hll"><span class="w">  </span><span class="nx">query</span><span class="o">:</span><span class="w"> </span><span class="p">({</span><span class="w"> </span><span class="nx">pageNumber</span><span class="p">,</span><span class="w"> </span><span class="nx">pageSize</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">url</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;author/&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">method</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;POST&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">pageable</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nx">pageNumber</span><span class="p">,</span>
+<span class="w">          </span><span class="nx">pageSize</span><span class="p">,</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="hll"><span class="w">  </span><span class="p">},</span>
+</span><span class="w">  </span><span class="nx">providesTags</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;Author&quot;</span><span class="p">],</span>
+<span class="p">}),</span>
+<span class="nx">createAuthor</span><span class="o">:</span><span class="w"> </span><span class="kt">builder.mutation</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">query</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="nx">payload</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">({</span>
+<span class="w">    </span><span class="nx">url</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;/author&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">method</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;PUT&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="kt">payload</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">headers</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="s2">&quot;Content-type&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;application/json; charset=UTF-8&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">  </span><span class="p">}),</span>
+<span class="w">  </span><span class="nx">invalidatesTags</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;Author&quot;</span><span class="p">],</span>
+<span class="p">}),</span>
+<span class="nx">deleteAuthor</span><span class="o">:</span><span class="w"> </span><span class="kt">builder.mutation</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">query</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">({</span>
+<span class="w">    </span><span class="nx">url</span><span class="o">:</span><span class="w"> </span><span class="sb">`/author/</span><span class="si">${</span><span class="nx">id</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">method</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;DELETE&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="p">}),</span>
+<span class="w">  </span><span class="nx">invalidatesTags</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;Author&quot;</span><span class="p">],</span>
+<span class="p">}),</span>
+<span class="nx">updateAuthor</span><span class="o">:</span><span class="w"> </span><span class="kt">builder.mutation</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">query</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="nx">payload</span><span class="o">:</span><span class="w"> </span><span class="kt">Author</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">({</span>
+<span class="w">    </span><span class="nx">url</span><span class="o">:</span><span class="w"> </span><span class="sb">`author/</span><span class="si">${</span><span class="nx">payload</span><span class="p">.</span><span class="nx">id</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">method</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;PUT&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="kt">payload</span><span class="p">,</span>
+<span class="w">  </span><span class="p">}),</span>
+<span class="w">  </span><span class="nx">invalidatesTags</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;Author&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Game&quot;</span><span class="p">],</span>
+<span class="p">}),</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Añadimos también los imports, tags y exports necesarios y guardamos.
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Author</span><span class="p">,</span><span class="w"> </span><span class="nx">AuthorResponse</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;../../types/Author&quot;</span><span class="p">;</span>
+
+<span class="nx">tagTypes</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;Category&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Author&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Game&quot;</span><span class="p">],</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">useGetCategoriesQuery</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">useCreateCategoryMutation</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">useDeleteCategoryMutation</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">useUpdateCategoryMutation</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">useCreateAuthorMutation</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">useDeleteAuthorMutation</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">useGetAllAuthorsQuery</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">useGetAuthorsQuery</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">useUpdateAuthorMutation</span><span class="p">,</span>
+<span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ludotecaAPI</span><span class="p">;</span>
+</code></pre></div></p>
+<p>Y por último el contenido de nuestro fichero <code>Author.tsx</code> quedaría así:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:1"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">Author.tsx</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useEffect</span><span class="p">,</span><span class="w"> </span><span class="nx">useState</span><span class="p">,</span><span class="w"> </span><span class="nx">useContext</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;react&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">Button</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;@mui/material/Button&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">TableHead</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;@mui/material/TableHead&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">Table</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;@mui/material/Table&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">TableBody</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;@mui/material/TableBody&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">TableCell</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;@mui/material/TableCell&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">TableContainer</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;@mui/material/TableContainer&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">TableFooter</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;@mui/material/TableFooter&quot;</span><span class="p">;</span>
+<span class="hll"><span class="k">import</span><span class="w"> </span><span class="nx">TablePagination</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;@mui/material/TablePagination&quot;</span><span class="p">;</span>
+</span><span class="k">import</span><span class="w"> </span><span class="nx">TableRow</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;@mui/material/TableRow&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">Paper</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;@mui/material/Paper&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">IconButton</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;@mui/material/IconButton&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">EditIcon</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;@mui/icons-material/Edit&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">ClearIcon</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;@mui/icons-material/Clear&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">styles</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./Author.module.css&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">CreateAuthor</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./components/CreateAuthor&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">ConfirmDialog</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;../../components/ConfirmDialog&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useAppDispatch</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;../../redux/hooks&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">setMessage</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;../../redux/features/messageSlice&quot;</span><span class="p">;</span>
+<span class="hll"><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">BackError</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;../../types/appTypes&quot;</span><span class="p">;</span>
+</span><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Author</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="nx">AuthorModel</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;../../types/Author&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">useDeleteAuthorMutation</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">useGetAuthorsQuery</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">useCreateAuthorMutation</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">useUpdateAuthorMutation</span><span class="p">,</span>
+<span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;../../redux/services/ludotecaApi&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">LoaderContext</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;../../context/LoaderProvider&quot;</span><span class="p">;</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">Author</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">pageNumber</span><span class="p">,</span><span class="w"> </span><span class="nx">setPageNumber</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">(</span><span class="mf">0</span><span class="p">);</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">pageSize</span><span class="p">,</span><span class="w"> </span><span class="nx">setPageSize</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">(</span><span class="mf">5</span><span class="p">);</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">total</span><span class="p">,</span><span class="w"> </span><span class="nx">setTotal</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">(</span><span class="mf">0</span><span class="p">);</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">authors</span><span class="p">,</span><span class="w"> </span><span class="nx">setAuthors</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="o">&lt;</span><span class="nx">AuthorModel</span><span class="p">[]</span><span class="o">&gt;</span><span class="p">([]);</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">openCreate</span><span class="p">,</span><span class="w"> </span><span class="nx">setOpenCreate</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">idToDelete</span><span class="p">,</span><span class="w"> </span><span class="nx">setIdToDelete</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">authorToUpdate</span><span class="p">,</span><span class="w"> </span><span class="nx">setAuthorToUpdate</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="o">&lt;</span><span class="nx">AuthorModel</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kc">null</span><span class="o">&gt;</span><span class="p">(</span>
+<span class="w">    </span><span class="kc">null</span>
+<span class="w">  </span><span class="p">);</span>
+
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">dispatch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useAppDispatch</span><span class="p">();</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">loader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useContext</span><span class="p">(</span><span class="nx">LoaderContext</span><span class="p">);</span>
+
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">handleChangePage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="nx">_event</span><span class="o">:</span><span class="w"> </span><span class="kt">React.MouseEvent</span><span class="o">&lt;</span><span class="nx">HTMLButtonElement</span><span class="o">&gt;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">newPage</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span>
+<span class="w">  </span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">setPageNumber</span><span class="p">(</span><span class="nx">newPage</span><span class="p">);</span>
+<span class="w">  </span><span class="p">};</span>
+
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">handleChangeRowsPerPage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="nx">event</span><span class="o">:</span><span class="w"> </span><span class="kt">React.ChangeEvent</span><span class="o">&lt;</span><span class="nx">HTMLInputElement</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nx">HTMLTextAreaElement</span><span class="o">&gt;</span>
+<span class="w">  </span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">setPageNumber</span><span class="p">(</span><span class="mf">0</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">setPageSize</span><span class="p">(</span><span class="nb">parseInt</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="mf">10</span><span class="p">));</span>
+<span class="w">  </span><span class="p">};</span>
+
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">data</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">,</span><span class="w"> </span><span class="nx">isLoading</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useGetAuthorsQuery</span><span class="p">({</span>
+<span class="w">    </span><span class="nx">pageNumber</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">pageSize</span><span class="p">,</span>
+<span class="w">  </span><span class="p">});</span>
+
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">deleteAuthorApi</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">isLoading</span><span class="o">:</span><span class="w"> </span><span class="kt">isLoadingDelete</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="o">:</span><span class="w"> </span><span class="kt">errorDelete</span><span class="w"> </span><span class="p">}]</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="nx">useDeleteAuthorMutation</span><span class="p">();</span>
+
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">createAuthorApi</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">isLoading</span><span class="o">:</span><span class="w"> </span><span class="kt">isLoadingCreate</span><span class="w"> </span><span class="p">}]</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="nx">useCreateAuthorMutation</span><span class="p">();</span>
+
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">updateAuthorApi</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">isLoading</span><span class="o">:</span><span class="w"> </span><span class="kt">isLoadingUpdate</span><span class="w"> </span><span class="p">}]</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="nx">useUpdateAuthorMutation</span><span class="p">();</span>
+
+<span class="w">  </span><span class="nx">useEffect</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">loader</span><span class="p">.</span><span class="nx">showLoading</span><span class="p">(</span>
+<span class="w">      </span><span class="nx">isLoadingCreate</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">isLoading</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">isLoadingDelete</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">isLoadingUpdate</span>
+<span class="w">    </span><span class="p">);</span>
+<span class="w">  </span><span class="p">},</span><span class="w"> </span><span class="p">[</span><span class="nx">isLoadingCreate</span><span class="p">,</span><span class="w"> </span><span class="nx">isLoading</span><span class="p">,</span><span class="w"> </span><span class="nx">isLoadingDelete</span><span class="p">,</span><span class="w"> </span><span class="nx">isLoadingUpdate</span><span class="p">]);</span>
+
+<span class="w">  </span><span class="nx">useEffect</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">data</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">setAuthors</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">content</span><span class="p">);</span>
+<span class="w">      </span><span class="nx">setTotal</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">totalElements</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span><span class="w"> </span><span class="p">[</span><span class="nx">data</span><span class="p">]);</span>
+
+<span class="w">  </span><span class="nx">useEffect</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">errorDelete</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="s2">&quot;status&quot;</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nx">errorDelete</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">dispatch</span><span class="p">(</span>
+<span class="w">          </span><span class="nx">setMessage</span><span class="p">({</span>
+<span class="w">            </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="nx">errorDelete</span><span class="o">?</span><span class="p">.</span><span class="nx">data</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="nx">BackError</span><span class="p">).</span><span class="nx">msg</span><span class="p">,</span>
+<span class="w">            </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;error&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="p">})</span>
+<span class="w">        </span><span class="p">);</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span><span class="w"> </span><span class="p">[</span><span class="nx">errorDelete</span><span class="p">,</span><span class="w"> </span><span class="nx">dispatch</span><span class="p">]);</span>
+
+<span class="w">  </span><span class="nx">useEffect</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">dispatch</span><span class="p">(</span><span class="nx">setMessage</span><span class="p">({</span><span class="w"> </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Se ha producido un error&quot;</span><span class="p">,</span><span class="w"> </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;error&quot;</span><span class="w"> </span><span class="p">}));</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span><span class="w"> </span><span class="p">[</span><span class="nx">error</span><span class="p">]);</span>
+
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">createAuthor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">author</span><span class="o">:</span><span class="w"> </span><span class="kt">AuthorModel</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">setOpenCreate</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">author</span><span class="p">.</span><span class="nx">id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">updateAuthorApi</span><span class="p">(</span><span class="nx">author</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">then</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nx">dispatch</span><span class="p">(</span>
+<span class="w">            </span><span class="nx">setMessage</span><span class="p">({</span>
+<span class="w">              </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Autor actualizado correctamente&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;ok&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="p">})</span>
+<span class="w">          </span><span class="p">);</span>
+<span class="w">          </span><span class="nx">setAuthorToUpdate</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+<span class="w">        </span><span class="p">})</span>
+<span class="w">        </span><span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">createAuthorApi</span><span class="p">(</span><span class="nx">author</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">then</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nx">dispatch</span><span class="p">(</span>
+<span class="w">            </span><span class="nx">setMessage</span><span class="p">({</span><span class="w"> </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Autor creado correctamente&quot;</span><span class="p">,</span><span class="w"> </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;ok&quot;</span><span class="w"> </span><span class="p">})</span>
+<span class="w">          </span><span class="p">);</span>
+<span class="w">          </span><span class="nx">setAuthorToUpdate</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+<span class="w">        </span><span class="p">})</span>
+<span class="w">        </span><span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">};</span>
+
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">deleteAuthor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">deleteAuthorApi</span><span class="p">(</span><span class="nx">idToDelete</span><span class="p">)</span>
+<span class="w">      </span><span class="p">.</span><span class="nx">then</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">setIdToDelete</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">);</span>
+<span class="w">      </span><span class="p">})</span>
+<span class="w">      </span><span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">));</span>
+<span class="w">  </span><span class="p">};</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;container&quot;</span><span class="o">&gt;</span>
+<span class="w">      </span><span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="nx">Listado</span><span class="w"> </span><span class="nx">de</span><span class="w"> </span><span class="nx">Autores</span><span class="o">&lt;</span><span class="err">/h1&gt;</span>
+<span class="w">      </span><span class="o">&lt;</span><span class="nx">TableContainer</span><span class="w"> </span><span class="nx">component</span><span class="o">=</span><span class="p">{</span><span class="nx">Paper</span><span class="p">}</span><span class="o">&gt;</span>
+<span class="w">        </span><span class="o">&lt;</span><span class="nx">Table</span><span class="w"> </span><span class="nx">sx</span><span class="o">=</span><span class="p">{{</span><span class="w"> </span><span class="nx">minWidth</span><span class="o">:</span><span class="w"> </span><span class="kt">500</span><span class="w"> </span><span class="p">}}</span><span class="w"> </span><span class="nx">aria</span><span class="o">-</span><span class="nx">label</span><span class="o">=</span><span class="s2">&quot;custom pagination table&quot;</span><span class="o">&gt;</span>
+<span class="w">          </span><span class="o">&lt;</span><span class="nx">TableHead</span>
+<span class="w">            </span><span class="nx">sx</span><span class="o">=</span><span class="p">{{</span>
+<span class="w">              </span><span class="s2">&quot;&amp; th&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">backgroundColor</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;lightgrey&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="p">},</span>
+<span class="w">            </span><span class="p">}}</span>
+<span class="w">          </span><span class="o">&gt;</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="nx">TableRow</span><span class="o">&gt;</span>
+<span class="w">              </span><span class="o">&lt;</span><span class="nx">TableCell</span><span class="o">&gt;</span><span class="nx">Identificador</span><span class="o">&lt;</span><span class="err">/TableCell&gt;</span>
+<span class="w">              </span><span class="o">&lt;</span><span class="nx">TableCell</span><span class="o">&gt;</span><span class="nx">Nombre</span><span class="w"> </span><span class="nx">Autor</span><span class="o">&lt;</span><span class="err">/TableCell&gt;</span>
+<span class="w">              </span><span class="o">&lt;</span><span class="nx">TableCell</span><span class="o">&gt;</span><span class="nx">Nacionalidad</span><span class="o">&lt;</span><span class="err">/TableCell&gt;</span>
+<span class="w">              </span><span class="o">&lt;</span><span class="nx">TableCell</span><span class="w"> </span><span class="nx">align</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="o">&gt;&lt;</span><span class="err">/TableCell&gt;</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="err">/TableRow&gt;</span>
+<span class="w">          </span><span class="o">&lt;</span><span class="err">/TableHead&gt;</span>
+<span class="w">          </span><span class="o">&lt;</span><span class="nx">TableBody</span><span class="o">&gt;</span>
+<span class="w">            </span><span class="p">{</span><span class="nx">authors</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">author</span><span class="o">:</span><span class="w"> </span><span class="kt">AuthorModel</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">(</span>
+<span class="w">              </span><span class="o">&lt;</span><span class="nx">TableRow</span><span class="w"> </span><span class="nx">key</span><span class="o">=</span><span class="p">{</span><span class="nx">author</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="o">&gt;</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="nx">TableCell</span><span class="w"> </span><span class="nx">component</span><span class="o">=</span><span class="s2">&quot;th&quot;</span><span class="w"> </span><span class="nx">scope</span><span class="o">=</span><span class="s2">&quot;row&quot;</span><span class="o">&gt;</span>
+<span class="w">                  </span><span class="p">{</span><span class="nx">author</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="err">/TableCell&gt;</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="nx">TableCell</span><span class="w"> </span><span class="nx">style</span><span class="o">=</span><span class="p">{{</span><span class="w"> </span><span class="nx">width</span><span class="o">:</span><span class="w"> </span><span class="kt">160</span><span class="w"> </span><span class="p">}}</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">author</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="o">&lt;</span><span class="err">/TableCell&gt;</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="nx">TableCell</span><span class="w"> </span><span class="nx">style</span><span class="o">=</span><span class="p">{{</span><span class="w"> </span><span class="nx">width</span><span class="o">:</span><span class="w"> </span><span class="kt">160</span><span class="w"> </span><span class="p">}}</span><span class="o">&gt;</span>
+<span class="w">                  </span><span class="p">{</span><span class="nx">author</span><span class="p">.</span><span class="nx">nationality</span><span class="p">}</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="err">/TableCell&gt;</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="nx">TableCell</span><span class="w"> </span><span class="nx">align</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="o">&gt;</span>
+<span class="w">                  </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">tableActions</span><span class="p">}</span><span class="o">&gt;</span>
+<span class="w">                    </span><span class="o">&lt;</span><span class="nx">IconButton</span>
+<span class="w">                      </span><span class="nx">aria</span><span class="o">-</span><span class="nx">label</span><span class="o">=</span><span class="s2">&quot;update&quot;</span>
+<span class="w">                      </span><span class="nx">color</span><span class="o">=</span><span class="s2">&quot;primary&quot;</span>
+<span class="w">                      </span><span class="nx">onClick</span><span class="o">=</span><span class="p">{()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="nx">setAuthorToUpdate</span><span class="p">(</span><span class="nx">author</span><span class="p">);</span>
+<span class="w">                        </span><span class="nx">setOpenCreate</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+<span class="w">                      </span><span class="p">}}</span>
+<span class="w">                    </span><span class="o">&gt;</span>
+<span class="w">                      </span><span class="o">&lt;</span><span class="nx">EditIcon</span><span class="w"> </span><span class="o">/&gt;</span>
+<span class="w">                    </span><span class="o">&lt;</span><span class="err">/IconButton&gt;</span>
+<span class="w">                    </span><span class="o">&lt;</span><span class="nx">IconButton</span>
+<span class="w">                      </span><span class="nx">aria</span><span class="o">-</span><span class="nx">label</span><span class="o">=</span><span class="s2">&quot;delete&quot;</span>
+<span class="w">                      </span><span class="nx">color</span><span class="o">=</span><span class="s2">&quot;error&quot;</span>
+<span class="w">                      </span><span class="nx">onClick</span><span class="o">=</span><span class="p">{()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="nx">setIdToDelete</span><span class="p">(</span><span class="nx">author</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span>
+<span class="w">                      </span><span class="p">}}</span>
+<span class="w">                    </span><span class="o">&gt;</span>
+<span class="w">                      </span><span class="o">&lt;</span><span class="nx">ClearIcon</span><span class="w"> </span><span class="o">/&gt;</span>
+<span class="w">                    </span><span class="o">&lt;</span><span class="err">/IconButton&gt;</span>
+<span class="w">                  </span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="err">/TableCell&gt;</span>
+<span class="w">              </span><span class="o">&lt;</span><span class="err">/TableRow&gt;</span>
+<span class="w">            </span><span class="p">))}</span>
+<span class="w">          </span><span class="o">&lt;</span><span class="err">/TableBody&gt;</span>
+<span class="w">          </span><span class="o">&lt;</span><span class="nx">TableFooter</span><span class="o">&gt;</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="nx">TableRow</span><span class="o">&gt;</span>
+<span class="w">              </span><span class="o">&lt;</span><span class="nx">TablePagination</span>
+<span class="w">                </span><span class="nx">rowsPerPageOptions</span><span class="o">=</span><span class="p">{[</span><span class="mf">5</span><span class="p">,</span><span class="w"> </span><span class="mf">10</span><span class="p">,</span><span class="w"> </span><span class="mf">25</span><span class="p">]}</span>
+<span class="w">                </span><span class="nx">colSpan</span><span class="o">=</span><span class="p">{</span><span class="mf">4</span><span class="p">}</span>
+<span class="w">                </span><span class="nx">count</span><span class="o">=</span><span class="p">{</span><span class="nx">total</span><span class="p">}</span>
+<span class="w">                </span><span class="nx">rowsPerPage</span><span class="o">=</span><span class="p">{</span><span class="nx">pageSize</span><span class="p">}</span>
+<span class="w">                </span><span class="nx">page</span><span class="o">=</span><span class="p">{</span><span class="nx">pageNumber</span><span class="p">}</span>
+<span class="w">                </span><span class="nx">SelectProps</span><span class="o">=</span><span class="p">{{</span>
+<span class="w">                  </span><span class="nx">inputProps</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="s2">&quot;aria-label&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;rows per page&quot;</span><span class="p">,</span>
+<span class="w">                  </span><span class="p">},</span>
+<span class="w">                  </span><span class="nx">native</span><span class="o">:</span><span class="w"> </span><span class="kt">true</span><span class="p">,</span>
+<span class="w">                </span><span class="p">}}</span>
+<span class="w">                </span><span class="nx">onPageChange</span><span class="o">=</span><span class="p">{</span><span class="nx">handleChangePage</span><span class="p">}</span>
+<span class="w">                </span><span class="nx">onRowsPerPageChange</span><span class="o">=</span><span class="p">{</span><span class="nx">handleChangeRowsPerPage</span><span class="p">}</span>
+<span class="w">              </span><span class="o">/&gt;</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="err">/TableRow&gt;</span>
+<span class="w">          </span><span class="o">&lt;</span><span class="err">/TableFooter&gt;</span>
+<span class="w">        </span><span class="o">&lt;</span><span class="err">/Table&gt;</span>
+<span class="w">      </span><span class="o">&lt;</span><span class="err">/TableContainer&gt;</span>
+<span class="w">      </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;newButton&quot;</span><span class="o">&gt;</span>
+<span class="w">        </span><span class="o">&lt;</span><span class="nx">Button</span><span class="w"> </span><span class="nx">variant</span><span class="o">=</span><span class="s2">&quot;contained&quot;</span><span class="w"> </span><span class="nx">onClick</span><span class="o">=</span><span class="p">{()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">setOpenCreate</span><span class="p">(</span><span class="kc">true</span><span class="p">)}</span><span class="o">&gt;</span>
+<span class="w">          </span><span class="nx">Nuevo</span><span class="w"> </span><span class="nx">autor</span>
+<span class="w">        </span><span class="o">&lt;</span><span class="err">/Button&gt;</span>
+<span class="w">      </span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+<span class="w">      </span><span class="p">{</span><span class="nx">openCreate</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">(</span>
+<span class="w">        </span><span class="o">&lt;</span><span class="nx">CreateAuthor</span>
+<span class="w">          </span><span class="nx">create</span><span class="o">=</span><span class="p">{</span><span class="nx">createAuthor</span><span class="p">}</span>
+<span class="w">          </span><span class="nx">author</span><span class="o">=</span><span class="p">{</span><span class="nx">authorToUpdate</span><span class="p">}</span>
+<span class="w">          </span><span class="nx">closeModal</span><span class="o">=</span><span class="p">{()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">setAuthorToUpdate</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+<span class="w">            </span><span class="nx">setOpenCreate</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+<span class="w">          </span><span class="p">}}</span>
+<span class="w">        </span><span class="o">/&gt;</span>
+<span class="w">      </span><span class="p">)}</span>
+<span class="w">      </span><span class="p">{</span><span class="o">!!</span><span class="nx">idToDelete</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">(</span>
+<span class="w">        </span><span class="o">&lt;</span><span class="nx">ConfirmDialog</span>
+<span class="w">          </span><span class="nx">title</span><span class="o">=</span><span class="s2">&quot;Eliminar Autor&quot;</span>
+<span class="w">          </span><span class="nx">text</span><span class="o">=</span><span class="s2">&quot;Atención si borra el autor se perderán sus datos. ¿Desea eliminar el autor?&quot;</span>
+<span class="w">          </span><span class="nx">confirm</span><span class="o">=</span><span class="p">{</span><span class="nx">deleteAuthor</span><span class="p">}</span>
+<span class="w">          </span><span class="nx">closeModal</span><span class="o">=</span><span class="p">{()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">setIdToDelete</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)}</span>
+<span class="w">        </span><span class="o">/&gt;</span>
+<span class="w">      </span><span class="p">)}</span>
+<span class="w">    </span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+<span class="w">  </span><span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Al tratarse de un listado paginado hemos creado dos nuevas variables en nuestro estado para almacenar la página y el número de registros a mostrar en la página. Cuando cambiamos estos valores en el navegador como estas variables van como parámetro en nuestro <code>hook</code> para recuperar datos automáticamente el listado se va a modificar.</p>
+<p>El resto de funcionalidad es muy parecida a la de categorías. </p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.path", "navigation.indexes"], "search": "../../../assets/javascripts/workers/search.db81ec45.min.js", "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.4b2c34cd.min.js"></script>
+      
+    
+  </body>
+</html>
