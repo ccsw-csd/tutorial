@@ -1,0 +1,2676 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.1">
+    
+    
+      
+        <title>Listado simple - VUE - Tutorial Frontend - Backend</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.72749a73.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/style.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#listado-simple-vue" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../../.." title="Tutorial Frontend - Backend" class="md-header__button md-logo" aria-label="Tutorial Frontend - Backend" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Tutorial Frontend - Backend
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Listado simple - VUE
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Tutorial Frontend - Backend" class="md-nav__button md-logo" aria-label="Tutorial Frontend - Backend" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Tutorial Frontend - Backend
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bienvenido!
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../thanks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Agradecimientos!
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../usecases/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contexto de la aplicación
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Entorno de desarrollo
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Entorno de desarrollo
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../install/angular/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🔵 Angular
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../install/react/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🔵 React
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../install/vuejs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🔵 Vue.js
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../install/springboot/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🟢 Spring Boot
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../install/nodejs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🟢 Nodejs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Estructura y buenas prácticas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Estructura y buenas prácticas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cleancode/angular/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🔵 Angular
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cleancode/react/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🔵 React
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cleancode/vuejs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🔵 Vue.js
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cleancode/springboot/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🟢 Spring Boot
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cleancode/nodejs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🟢 Nodejs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Code: Listado simple
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Code: Listado simple
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../angular/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🔵 Angular
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../react/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🔵 React
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vuejs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🔵 Vue.js
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../springboot/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🟢 Spring Boot
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nodejs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🟢 Nodejs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Code: Listado paginado
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Code: Listado paginado
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../paginated/angular/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🔵 Angular
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../paginated/react/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🔵 React
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../paginated/vuejs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🔵 Vue.js
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../paginated/springboot/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🟢 Spring Boot
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../paginated/nodejs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🟢 Nodejs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Code: Listado filtrado
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Code: Listado filtrado
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../filtered/angular/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🔵 Angular
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../filtered/react/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🔵 React
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../filtered/vuejs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🔵 Vue.js
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../filtered/springboot/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🟢 Spring Boot
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../filtered/nodejs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🟢 Nodejs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exercise/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ahora hazlo tu!
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Anexos
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            Anexos
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appendix/git/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GIT: Tutorial básico
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appendix/rest/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    API Rest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appendix/tdd/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TDD
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appendix/jpa/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Spring Data: JPA
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10_5" >
+        
+          <label class="md-nav__link" for="__nav_10_5" id="__nav_10_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Spring Cloud
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10_5">
+            <span class="md-nav__icon md-icon"></span>
+            Spring Cloud
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appendix/springcloud/intro/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appendix/springcloud/basic/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Listado simple
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appendix/springcloud/paginated/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Listado paginado
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appendix/springcloud/filtered/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Listado filtrado
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appendix/springcloud/infra/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Infraestructura
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appendix/springcloud/summary/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Resumen
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#primeros-pasos" class="md-nav__link">
+    Primeros pasos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#layout-general" class="md-nav__link">
+    Layout general
+  </a>
+  
+    <nav class="md-nav" aria-label="Layout general">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#crear-componente" class="md-nav__link">
+    Crear componente
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creando-un-listado-basico" class="md-nav__link">
+    Creando un listado básico
+  </a>
+  
+    <nav class="md-nav" aria-label="Creando un listado básico">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#crear-componente_1" class="md-nav__link">
+    Crear componente
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#codigo-de-la-pantalla" class="md-nav__link">
+    Código de la pantalla
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#anadiendo-datos" class="md-nav__link">
+    Añadiendo datos
+  </a>
+  
+    <nav class="md-nav" aria-label="Añadiendo datos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mockeando-datos" class="md-nav__link">
+    Mockeando datos
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simulando-las-otras-peticiones" class="md-nav__link">
+    Simulando las otras peticiones
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="listado-simple-vue">Listado simple - VUE</h1>
+<p>Ahora que ya tenemos listo el proyecto frontend de VUE, ya podemos empezar a codificar la solución.</p>
+<h2 id="primeros-pasos">Primeros pasos</h2>
+<div class="admonition success">
+<p class="admonition-title">Antes de empezar</p>
+<p>Quiero hacer hincapié que VUE tiene una documentación muy extensa y completa, así que te recomiendo que hagas uso de ella cuando tengas cualquier duda. En la propia web de documentación de <a href="https://vuejs.org/guide/introduction.html">VUE</a> puedes buscar casi cualquier ejemplo que necesites.</p>
+</div>
+<p>Si abrimos el proyecto con el IDE que tengamos (Visual Studio Code en el caso del tutorial) podemos ver que en la carpeta <code>src/</code> existen unos ficheros ya creados por defecto. Estos ficheros son:</p>
+<ul>
+<li><code>App.vue</code> → contiene el código inicial del proyecto.</li>
+<li><code>main.ts</code> → es el punto de entrada a la aplicación.</li>
+</ul>
+<p>Lo primero que vamos a hacer es instalar SASS para poder trabajar con este preprocesador CSS, para ello tendremos que irnos a la terminal, en la misma carpeta donde tenemos el proyecto y ejecutar el siguiente comando:</p>
+<div class="highlight"><pre><span></span><code>npm install -D sass
+</code></pre></div>
+<p>Con esto ya lo tendremos instalado y para usarlo es tan fácil como poner la etiqueta style de esta manera:</p>
+<div class="highlight"><pre><span></span><code>&lt;style lang=&quot;scss&quot;&gt;&lt;/style&gt;  &lt;---&gt;  con Sass activado
+&lt;style&gt;&lt;/style&gt;  &lt;---&gt;  sin Sass, css normal
+</code></pre></div>
+<p>En los estilos también veremos la propiedad <strong>scoped</strong> en VUE, el atributo scoped se utiliza para limitar el ámbito de los estilos de un componente a los elementos del propio componente y no a los elementos hijos o padres, lo que ayuda a evitar conflictos de estilo entre los diferentes componentes de una aplicación.</p>
+<p>Esto significa que los estilos definidos en una etiqueta <code>&lt;style scoped&gt;</code> solo se aplicarán a los elementos dentro del componente actual, y no se propagarán a otros componentes en la jerarquía del DOM. De esta manera, se puede evitar que los estilos de un componente afecten a otros componentes en la aplicación.</p>
+<div class="highlight"><pre><span></span><code>&lt;style scoped&gt;&lt;/style&gt;  &lt;---&gt;  Estos estilos solo afectarán al componente donde se aplican
+&lt;style&gt;&lt;/style&gt;  &lt;---&gt;  Estos estilos son generales y afectan a toda la aplicación.
+</code></pre></div>
+<p>Con estas cositas sobre los estilos en cabeza vamos lo primero a limpiar la aplicación para poder empezar a trabajar desde cero.</p>
+<ul>
+<li>Entraremos en la carpeta <code>assets</code> y borraremos todos los archivos excepto <code>base.css</code>.</li>
+<li>Entraremos en la carpeta <code>components</code> y borraremos todos los archivos dejando solo la carpeta que usaremos más adelante.</li>
+<li>La carpeta <code>router</code> la dejaremos tal cual esta, sin tocar nada.</li>
+<li>Entraremos en la carpeta <code>views</code> y borraremos todos los archivos dejando solo la carpeta que usaremos más adelante.</li>
+</ul>
+<p>Con esto tenemos nuestra estructura preparada y quedaría tal que asi:</p>
+<p><img alt="step1-vuejs1" src="../../../assets/images/step1-vuejs1.png" /></p>
+<p>Vamos a añadir unas líneas al <code>tsconfig.json</code> para que el typescript deje de marcarnos lo como error, lo dejaremos asi:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">tsconfig.json</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;extends&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;@vue/tsconfig/tsconfig.web.json&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;include&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;env.d.ts&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;src/**/*&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;src/**/*.vue&quot;</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;compilerOptions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;preserveValueImports&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;importsNotUsedAsValues&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;remove&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;verbatimModuleSyntax&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;baseUrl&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;.&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;paths&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;@/*&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;./src/*&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span>
+
+<span class="w">  </span><span class="nt">&quot;references&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;./tsconfig.node.json&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Para que la aplicación funcione de nuevo y poder empezar a trabajar faltaría hacer un par de cositas que os explico:</p>
+<ul>
+<li>En él <code>base.css</code> no hace falta cambiar nada para que funcione, pero tenemos muchas cosas que seguramente no vamos a usar, este archivo lo conservamos solamente para trabajar en variables css todo el tema de los colores de nuestra web o algunas otras cositas como el ancho del menu o del header, etc…
+Lo primero vamos a eliminar todas las variables CSS y crearnos las nuestras propias con nuestro color primario y secundario tanto para botones y demás como para texto y también para el background principal. Tenemos que dejar nuestro archivo de esta manera:</li>
+</ul>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">base.css</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="p">:</span><span class="nd">root</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nv">--primary</span><span class="p">:</span><span class="w"> </span><span class="mh">#2a6fa8</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--secondary</span><span class="p">:</span><span class="w"> </span><span class="mh">#12abdb</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--text-ligth</span><span class="p">:</span><span class="w"> </span><span class="mh">#2c3e50</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--text-dark</span><span class="p">:</span><span class="w"> </span><span class="mh">#fff</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--background-color</span><span class="p">:</span><span class="w"> </span><span class="mh">#fff</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="o">*,</span>
+<span class="o">*</span><span class="p">::</span><span class="nd">before</span><span class="o">,</span>
+<span class="o">*</span><span class="p">::</span><span class="nd">after</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">box-sizing</span><span class="p">:</span><span class="w"> </span><span class="kc">border-box</span><span class="p">;</span>
+<span class="w">  </span><span class="k">margin</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">  </span><span class="k">position</span><span class="p">:</span><span class="w"> </span><span class="kc">relative</span><span class="p">;</span>
+<span class="w">  </span><span class="k">font-weight</span><span class="p">:</span><span class="w"> </span><span class="kc">normal</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">body</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">min-height</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="kt">vh</span><span class="p">;</span>
+<span class="w">  </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--text-ligth</span><span class="p">);</span>
+<span class="w">  </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--background-color</span><span class="p">);</span>
+<span class="w">  </span><span class="k">line-height</span><span class="p">:</span><span class="w"> </span><span class="mf">1.6</span><span class="p">;</span>
+<span class="w">  </span><span class="k">font-family</span><span class="p">:</span><span class="w"> </span><span class="n">Inter</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="n">apple-system</span><span class="p">,</span><span class="w"> </span><span class="n">BlinkMacSystemFont</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Segoe UI&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">Roboto</span><span class="p">,</span><span class="w"> </span><span class="n">Oxygen</span><span class="p">,</span><span class="w"> </span><span class="n">Ubuntu</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Cantarell</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Fira Sans&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Droid Sans&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Helvetica Neue&#39;</span><span class="p">,</span><span class="w"> </span><span class="kc">sans-serif</span><span class="p">;</span>
+<span class="w">  </span><span class="k">font-size</span><span class="p">:</span><span class="w"> </span><span class="mi">16</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">  </span><span class="n">text-rendering</span><span class="p">:</span><span class="w"> </span><span class="kc">optimizeLegibility</span><span class="p">;</span>
+<span class="w">  </span><span class="kp">-webkit-</span><span class="n">font-smoothing</span><span class="p">:</span><span class="w"> </span><span class="n">antialiased</span><span class="p">;</span>
+<span class="w">  </span><span class="kp">-moz-</span><span class="n">osx-font-smoothing</span><span class="p">:</span><span class="w"> </span><span class="n">grayscale</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<ul>
+<li>Después vamos a abrir el archivo <code>main.ts</code> y cambiaremos el import que hace del CSS por el base que es el que estamos usando, quedaría de esta manera:</li>
+</ul>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">main.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">createApp</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;vue&#39;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">App</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;./App.vue&#39;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">router</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;./router&#39;</span>
+
+<span class="k">import</span><span class="w"> </span><span class="s1">&#39;./assets/base.css&#39;</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">app</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">createApp</span><span class="p">(</span><span class="nx">App</span><span class="p">)</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">router</span><span class="p">)</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">mount</span><span class="p">(</span><span class="s1">&#39;#app&#39;</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<ul>
+<li>Luego abriremos el archivo <code>App.vue</code> y lo dejaremos solo como la entrada a la aplicación, esto ya son maneras de trabajar de cada uno, pero a mí me gusta hacerlo asi para tener si hiciera falta diferentes layouts, uno con header y menú, otro sin header y menú, otro de la parte de admin, etc… Lo dejaremos exactamente asi:</li>
+</ul>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:1"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">App.vue</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">script</span> <span class="na">setup</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;ts&quot;</span><span class="p">&gt;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">RouterView</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;vue-router&#39;</span>
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">template</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">RouterView</span> <span class="p">/&gt;</span>
+<span class="p">&lt;/</span><span class="nt">template</span><span class="p">&gt;</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<ul>
+<li>Por último crearemos nuestro layout principal al que iremos añadiendo luego toda nuestra aplicación. Lo primero nos pondremos en <code>src</code> y crearemos una nueva carpeta llamada <code>layouts</code>, dentro de esta carpeta crearemos otra que se llamara <code>main-layout</code> (esto lo hacemos por si luego tenemos más de un layout que cada uno tenga su carpeta para tener sus propias cosas) y dentro de la carpeta <code>main-layout</code> crearemos el archivo <code>MainLayout.vue</code>, nos debería de quedar asi:</li>
+</ul>
+<p><img alt="step1-vuejs2" src="../../../assets/images/step1-vuejs2.png" /></p>
+<p>Una vez tenemos el archivo <code>MainLayout.vue</code> creado lo abriremos y escribiremos el siguiente código:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:1"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">MainLayout.vue</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">script</span> <span class="na">setup</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;ts&quot;</span><span class="p">&gt;</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">helloWorld</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Hola Mundo&#39;</span><span class="p">;</span>
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">template</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>{{ helloWorld }}<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">template</span><span class="p">&gt;</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Vamos a intentar explicar este código un poco:</p>
+<ul>
+<li>Dentro de las etiquetas <code>script</code> metemos todo el código Javascript, en este caso como vamos a trabajar con Typescript le ponemos la etiqueta <code>Lang=”ts”</code> para que el compilador sepa que estamos trabajando con Typescript.</li>
+<li>Ponemos la palabra <code>setup</code> porque estamos trabajando con la <code>composition api</code>, en VUE podemos trabajar con la <code>options api</code> y con la <code>composition api</code>, nosotros vamos a usar la <code>composition api</code> que aunque al principio cuesta un poco más, luego nos va a hacer la vida muchísimo más fácil, sobre todo en aplicaciones "reales".</li>
+<li>Dentro de las etiquetas <code>template</code> va el HTML y como estamos usando el método <code>setup</code> no necesitamos retornar nada para poder acceder a ello desde la plantilla.</li>
+</ul>
+<p>Las llaves dobles permiten hacen un binding entre el código del componente y la plantilla. Es decir, en este caso irá al código TypeScript y buscará el valor de la variable helloWorld.</p>
+<div class="admonition tip">
+<p class="admonition-title">Consejo</p>
+<p>El binding también nos sirve para ejecutar los métodos de TypeScript desde el código HTML. Además, si el valor que contiene la variable se modificará durante la ejecución de algún método, automáticamente el código HTML refrescaría el nuevo valor de la variable <code>helloWorld</code>.</p>
+</div>
+<p>Ponemos en marcha la aplicación con <code>npm run dev</code>.</p>
+<p>Si abrimos el navegador y accedemos a <code>http://localhost:5173/</code> podremos ver el resultado del código.</p>
+<h2 id="layout-general">Layout general</h2>
+<h3 id="crear-componente">Crear componente</h3>
+<p>Lo primero que vamos a hacer es escoger un tema y una paleta de componentes para trabajar. VUE no tiene una librería de componentes oficial al igual que, por ejemplo, Angular tiene Material, por lo que podremos elegir entre las diferentes opciones y ver la que más se ajusta a las necesidades del proyecto o crearnos la nuestra propia, si entramos en proyectos ya comenzados, seguramente este paso ya habrá sido abordado y ya sabrás con qué librería de componentes trabajar, para este proyecto vamos a optar por <a href="https://primevue.org/">PrimeVue</a>, no tenemos ningún motivo especial para decidir esa en especial, pero la hemos usado en un curso anterior y optamos por seguir con la misma librería.</p>
+<p>Para instalarla bastará con seguir los pasos de su <a href="https://primevue.org/installation">documentación</a>.</p>
+<p>Vamos a hacerlo y la instalamos en nuestro proyecto:</p>
+<ul>
+<li>Lo primero ejecutaremos el comando npm o yarn para instalarla, en mi caso lo hare con npm:</li>
+<li>
+<div class="highlight"><pre><span></span><code>npm install primevue
+</code></pre></div>
+</li>
+<li>
+<p>Después instalaremos PrimeVue con la función <code>use</code> en el <code>main.ts</code> que es donde tenemos nuestra configuración, quedando asi nuestro <code>main.ts</code>:</p>
+</li>
+</ul>
+<p><img alt="step1-vuejs3" src="../../../assets/images/step1-vuejs3.png" /></p>
+<ul>
+<li>Después añadiremos los estilos necesarios a nuestro <code>main.ts</code>:</li>
+</ul>
+<p><img alt="step1-vuejs4" src="../../../assets/images/step1-vuejs4.png" /></p>
+<ul>
+<li>Por último en nuestro <code>base.css</code> cambiaremos la fuente del proyecto por la que trae el tema de PrimeVue, cambiando en el <code>body</code> la línea:</li>
+</ul>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:1"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">base.css</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="o">...</span>
+<span class="w"> </span><span class="nt">font-family</span><span class="o">:</span><span class="w"> </span><span class="nt">Inter</span><span class="o">,</span><span class="w"> </span><span class="nt">-apple-system</span><span class="o">,</span><span class="w"> </span><span class="nt">BlinkMacSystemFont</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;Segoe UI&#39;</span><span class="o">,</span><span class="w"> </span><span class="nt">Roboto</span><span class="o">,</span><span class="w"> </span><span class="nt">Oxygen</span><span class="o">,</span><span class="w"> </span><span class="nt">Ubuntu</span><span class="o">,</span>
+<span class="w"> </span><span class="nt">Cantarell</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;Fira Sans&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;Droid Sans&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;Helvetica Neue&#39;</span><span class="o">,</span><span class="w"> </span><span class="nt">sans-serif</span><span class="o">;</span>
+<span class="o">...</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Por:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:1"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">base.css</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="o">...</span>
+<span class="nt">font-family</span><span class="o">:</span><span class="w"> </span><span class="o">(</span><span class="nt">--font-family</span><span class="o">);</span>
+<span class="o">...</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Recuerda</p>
+<p>Al añadir una nueva librería tenemos que parar el servidor y volver a arrancarlo para que compile y pre-cargue las nuevas dependencias.</p>
+</div>
+<p>Una vez añadida la dependencia, lo que queremos es crear una primera estructura inicial a la página. Si te acuerdas cual era la estructura (y si no te acuerdas, vuelve a la sección Contexto de la aplicación y lo revisas), teníamos una cabecera superior con un logo y título y unas opciones de menú.</p>
+<p>Antes de empezar a crear y programar vamos a instalar unas extensiones en Visual Studio Code que nos harán la vida mucho mas fácil, en cada una de ellas podeis ver una descripción de que hacen y para que sirven, tu ya dices si la quieres instalar o no, nosotros vamos a trabajar con ellas y por eso te las recomendamos:</p>
+<ul>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=MisterJ.vue-volar-extention-pack">Vue Volar extension Pack</a></li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=Maantje.vue-discovery">Vue Discovery</a></li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=VisualStudioExptTeam.vscodeintellicode">IntelliCode</a></li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=christian-kohler.npm-intellisense">npm Intellisense</a></li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=sdras.vue-vscode-snippets">Vue VSCode Snippets</a></li>
+</ul>
+<p>Para poder seguir trabajando con comodidad vamos a añadir una fuente de iconos para todos los iconitos que usemos en la aplicación, nosotros vamos a usar Material porque es la que estamos acostumbrados, para añadirla tenemos una <a href="https://developers.google.com/fonts/docs/material_symbols?hl=es-419#getting_material_symbols">guía</a>.</p>
+<p>Lo haremos paso a paso:</p>
+<ul>
+<li>Lo primero añadimos al <code>index.html</code> la fuente a través de Google fonts, hay muchas otras maneras de hacerlo, como bajarla y servirla desde local, pero para este tutorial vamos a usar esta por ser la más fácil, para añadirla pegaremos en el <code>index.html</code> esta línea:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>&lt;link href=&quot;https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&quot; rel=&quot;stylesheet&quot; /&gt;
+</code></pre></div>
+<p>Quedando de esta manera:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="8:1"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">index.html</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;en&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;icon&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/favicon.ico&quot;</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;width=device-width, initial-scale=1.0&quot;</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;</span><span class="nt">link</span>
+      <span class="na">href</span><span class="o">=</span><span class="s">&quot;https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&quot;</span>
+      <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span>
+    <span class="p">/&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Vite App<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;app&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;module&quot;</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;/src/main.ts&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Para que no nos salga el error de comments, añadiremos al <code>eslintrc.js</code> estas líneas:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="9:1"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">eslintrc.js</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="p">...</span>
+<span class="nx">rules</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s1">&#39;vue/comment-directive&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;off&#39;</span>
+<span class="p">}</span>
+<span class="p">...</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Después nos iremos al fichero <code>base.css</code> y añadiremos esto al final del archivo:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="10:1"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">base.css</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="o">...</span>
+<span class="p">.</span><span class="nc">material-symbols-outlined</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">font-family</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Material Symbols Outlined&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">sans-serif</span><span class="p">;</span>
+<span class="w">  </span><span class="k">font-weight</span><span class="p">:</span><span class="w"> </span><span class="kc">normal</span><span class="p">;</span>
+<span class="w">  </span><span class="k">font-style</span><span class="p">:</span><span class="w"> </span><span class="kc">normal</span><span class="p">;</span>
+<span class="w">  </span><span class="k">font-size</span><span class="p">:</span><span class="w"> </span><span class="mi">24</span><span class="kt">px</span><span class="p">;</span><span class="w">  </span><span class="c">/* Preferred icon size */</span>
+<span class="w">  </span><span class="k">display</span><span class="p">:</span><span class="w"> </span><span class="kc">inline-block</span><span class="p">;</span>
+<span class="w">  </span><span class="k">line-height</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">  </span><span class="k">text-transform</span><span class="p">:</span><span class="w"> </span><span class="kc">none</span><span class="p">;</span>
+<span class="w">  </span><span class="k">letter-spacing</span><span class="p">:</span><span class="w"> </span><span class="kc">normal</span><span class="p">;</span>
+<span class="w">  </span><span class="k">word-wrap</span><span class="p">:</span><span class="w"> </span><span class="kc">normal</span><span class="p">;</span>
+<span class="w">  </span><span class="k">white-space</span><span class="p">:</span><span class="w"> </span><span class="kc">nowrap</span><span class="p">;</span>
+<span class="w">  </span><span class="k">direction</span><span class="p">:</span><span class="w"> </span><span class="kc">ltr</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Con esto ya tendremos añadida la fuente material-symbols y podremos usar todos los iconos <a href="https://fonts.google.com/icons">disponibles</a>.</p>
+<ul>
+<li>Después instalaremos también los iconos de PrimeVue para poder usarlos fácilmente en los componentes, lo primero pondremos:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>npm install primeicons
+</code></pre></div>
+<p>Una vez instalados, importaremos los iconos en el <code>main.ts</code> poniendo este import debajo de todos los de css:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="11:1"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><div class="tabbed-labels"><label for="__tabbed_11_1">main.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="p">...</span>
+<span class="k">import</span><span class="w"> </span><span class="s1">&#39;primeicons/primeicons.css&#39;</span><span class="p">;</span>
+<span class="p">...</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Con esto ya lo tendríamos todo.</p>
+<p>Pues vamos a ello, con las extensiones ya instaladas y la fuente para los iconos añadida crearemos esa estructura común para toda la aplicación.</p>
+<p>Lo primero crearemos el componente header, dentro de la carpeta components al ser un módulo de la aplicación y no especifico de una vista o página. Para eso crearemos una nueva carpeta dentro de components que llamaremos header, nos situaremos encima de la carpeta header y crearemos el archivo <code>HeaderComponent.vue</code>, con el archivo vacío escribiremos, <code>vbase-3-ts-setup</code> y conforme lo escribimos nos aparecerá esto:</p>
+<p><img alt="step1-vuejs5" src="../../../assets/images/step1-vuejs5.png" /></p>
+<div class="admonition tip">
+<p class="admonition-title">Consejo</p>
+<p>Esto nos aparece gracias a las extensiones que hemos instalado, asegúrate de instalarlas para que aparezca o si no las quieres instalar lo puedes crear a mano. Si no te aparece y has instalado las extensiones, cierra vscode y vuélvelo a abrir.</p>
+</div>
+<p>Podemos seleccionar <code>vbase-3-ts-setup</code>, esto es un snippet que lo que hará es generarnos todo el código de un componente vacío y lo dejara asi:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="12:1"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><div class="tabbed-labels"><label for="__tabbed_12_1">HeaderComponent.vue</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">template</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">template</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">setup</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;ts&quot;</span><span class="p">&gt;</span>
+
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">style</span> <span class="na">scoped</span><span class="p">&gt;</span>
+
+<span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Con esto solo nos faltaría agregar a la etiqueta style que vamos a trabajar con Sass y la dejaríamos asi:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="13:1"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><div class="tabbed-labels"><label for="__tabbed_13_1">HeaderComponent.vue</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>...
+<span class="p">&lt;</span><span class="nt">style</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;scss&quot;</span> <span class="na">scoped</span><span class="p">&gt;</span>
+
+<span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+...
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Si os dais cuenta hemos añadido <code>Lang=”scss”</code> y con esto ya estamos preparados para crear nuestro componente.</p>
+<p>Para continuar cambiaremos el código del <code>HeaderComponent.vue</code> por este:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="14:1"><input checked="checked" id="__tabbed_14_1" name="__tabbed_14" type="radio" /><div class="tabbed-labels"><label for="__tabbed_14_1">HeaderComponent.vue</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">template</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;card relative z-2&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">Menubar</span> <span class="na">:model</span><span class="o">=</span><span class="s">&quot;items&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">template</span> <span class="err">#</span><span class="na">start</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;material-symbols-outlined&quot;</span><span class="p">&gt;</span>storefront<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;title&quot;</span><span class="p">&gt;</span>LUDOTECA TAN<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">template</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">template</span> <span class="err">#</span><span class="na">end</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">Avatar</span> <span class="na">icon</span><span class="o">=</span><span class="s">&quot;pi pi-user&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mr-2 avatar-image&quot;</span> <span class="na">size</span><span class="o">=</span><span class="s">&quot;large&quot;</span> <span class="na">shape</span><span class="o">=</span><span class="s">&quot;circle&quot;</span> <span class="p">/&gt;</span>
+        <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;sign-text&quot;</span><span class="p">&gt;</span>Sign in<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">template</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">Menubar</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">template</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">setup</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;ts&quot;</span><span class="p">&gt;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">ref</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;vue&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">Menubar</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;primevue/menubar&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">Avatar</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;primevue/avatar&quot;</span><span class="p">;</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">items</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ref</span><span class="p">([</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">label</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Catálogo&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">label</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Categorías&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">label</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Autores&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="p">]);</span>
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">style</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;scss&quot;</span> <span class="na">scoped</span><span class="p">&gt;</span>
+<span class="p">.</span><span class="nc">p-menubar</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">padding</span><span class="p">:</span><span class="w"> </span><span class="mf">0.5</span><span class="kt">rem</span><span class="p">;</span>
+<span class="w">  </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--primary</span><span class="p">);</span>
+<span class="w">  </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--text-dark</span><span class="p">);</span>
+<span class="w">  </span><span class="k">border</span><span class="p">:</span><span class="w"> </span><span class="kc">none</span><span class="p">;</span>
+<span class="w">  </span><span class="k">border-radius</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="kt">px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">title</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">margin-left</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="kt">rem</span><span class="p">;</span>
+<span class="w">  </span><span class="k">font-weight</span><span class="p">:</span><span class="w"> </span><span class="mi">600</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">avatar-image</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">background-color</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--secondary</span><span class="p">);</span>
+<span class="w">  </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--text-dark</span><span class="p">);</span>
+<span class="w">  </span><span class="k">border</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="kt">px</span><span class="w"> </span><span class="kc">solid</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--text-dark</span><span class="p">);</span>
+<span class="w">  </span><span class="k">cursor</span><span class="p">:</span><span class="w"> </span><span class="kc">pointer</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">sign-text</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--text-dark</span><span class="p">);</span>
+<span class="w">  </span><span class="k">margin-left</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="kt">rem</span><span class="p">;</span>
+<span class="w">  </span><span class="k">cursor</span><span class="p">:</span><span class="w"> </span><span class="kc">pointer</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">:</span><span class="nd">deep</span><span class="o">(</span><span class="p">.</span><span class="nc">p-menubar-start</span><span class="o">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">display</span><span class="p">:</span><span class="w"> </span><span class="kc">flex</span><span class="p">;</span>
+<span class="w">  </span><span class="k">flex-direction</span><span class="p">:</span><span class="w"> </span><span class="kc">row</span><span class="p">;</span>
+<span class="w">  </span><span class="k">align-items</span><span class="p">:</span><span class="w"> </span><span class="kc">center</span><span class="p">;</span>
+<span class="w">  </span><span class="k">justify-content</span><span class="p">:</span><span class="w"> </span><span class="kc">center</span><span class="p">;</span>
+<span class="w">  </span><span class="k">margin-right</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="kt">rem</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">:</span><span class="nd">deep</span><span class="o">(</span><span class="p">.</span><span class="nc">p-menubar-end</span><span class="o">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">display</span><span class="p">:</span><span class="w"> </span><span class="kc">flex</span><span class="p">;</span>
+<span class="w">  </span><span class="k">flex-direction</span><span class="p">:</span><span class="w"> </span><span class="kc">row</span><span class="p">;</span>
+<span class="w">  </span><span class="k">align-items</span><span class="p">:</span><span class="w"> </span><span class="kc">center</span><span class="p">;</span>
+<span class="w">  </span><span class="k">justify-content</span><span class="p">:</span><span class="w"> </span><span class="kc">center</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">:</span><span class="nd">deep</span><span class="o">(</span><span class="p">.</span><span class="nc">p-menuitem-text</span><span class="o">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--text-dark</span><span class="p">)</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">:</span><span class="nd">deep</span><span class="o">(</span><span class="p">.</span><span class="nc">p-menuitem-content</span><span class="p">:</span><span class="nd">hover</span><span class="o">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--secondary</span><span class="p">)</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">material-symbols-outlined</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">font-size</span><span class="p">:</span><span class="w"> </span><span class="mi">36</span><span class="kt">px</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Intentaremos explicarlo un poco:</p>
+<p>En el template estamos añadiendo el <code>Menubar</code> de la librería de componentes que estamos utilizando, si queremos saber como se añade podemos verlo en este <a href="https://primevue.org/menubar/">link</a>.</p>
+<p>Veremos que lo primero que hacemos es el <code>import</code> dentro de las etiquetas <code>&lt;script&gt;</code> para poder tener el componente disponible y poder usarlo.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="15:1"><input checked="checked" id="__tabbed_15_1" name="__tabbed_15" type="radio" /><div class="tabbed-labels"><label for="__tabbed_15_1">HeaderComponent.vue</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>...
+import Menubar from &quot;primevue/menubar&quot;;
+...
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Luego, con el <code>import</code> ya hecho, podemos copiar el HTML que nos dan y ponerlo en nuestro componente:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="16:1"><input checked="checked" id="__tabbed_16_1" name="__tabbed_16" type="radio" /><div class="tabbed-labels"><label for="__tabbed_16_1">HeaderComponent.vue</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>...
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;card relative z-2&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">Menubar</span> <span class="na">:model</span><span class="o">=</span><span class="s">&quot;items&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">template</span> <span class="err">#</span><span class="na">start</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;material-symbols-outlined&quot;</span><span class="p">&gt;</span>storefront<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;title&quot;</span><span class="p">&gt;</span>LUDOTECA TAN<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">template</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">template</span> <span class="err">#</span><span class="na">end</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">Avatar</span> <span class="na">icon</span><span class="o">=</span><span class="s">&quot;pi pi-user&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mr-2 avatar-image&quot;</span> <span class="na">size</span><span class="o">=</span><span class="s">&quot;large&quot;</span> <span class="na">shape</span><span class="o">=</span><span class="s">&quot;circle&quot;</span> <span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;sign-text&quot;</span><span class="p">&gt;</span>Sign in<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">template</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">Menubar</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+...
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Si os dais cuenta es el código que ellos nos dan retocado para cubrir nuestras necesidades, primero hemos metido un icono de material dentro del template <code>#start</code> que es lo que se situara al principio pegado a la izquierda del <code>Menubar</code> y tras el icono metemos el título.</p>
+<p>El template <code>#end</code> se situará al final pegado a la derecha y alli estamos metiendo otro componente de la librería de componentes, podéis ver la info de como usarlo en este <a href="https://primevue.org/avatar/">link</a>.</p>
+<p>Este simplemente lo pegamos como esta y le añadimos detrás la frase <code>Sign in</code>.</p>
+<p>En la parte del script metemos todo nuestro Javascript/Typescript:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="17:1"><input checked="checked" id="__tabbed_17_1" name="__tabbed_17" type="radio" /><div class="tabbed-labels"><label for="__tabbed_17_1">HeaderComponent.vue</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>...
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">setup</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;ts&quot;</span><span class="p">&gt;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">ref</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;vue&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">Menubar</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;primevue/menubar&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">Avatar</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;primevue/avatar&quot;</span><span class="p">;</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">items</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ref</span><span class="p">([</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">label</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Catálogo&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">label</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Categorías&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">label</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Autores&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="p">]);</span>
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+...
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Si os dais cuenta, lo único que estamos haciendo son los imports necesarios para que todo funcione y creando una variable <code>ítems</code> que es la que luego estamos usando en el menú para pintar los diferentes menus. Si os dais cuenta envolvemos el valor de la variable dentro de <code>ref()</code>. En Vue 3, la función <code>ref()</code> se utiliza para crear una referencia reactiva a un valor. Una referencia reactiva es un objeto que puede ser pasado como prop, utilizado en una plantilla, y observado para detectar cambios en su valor.</p>
+<p>La función <code>ref()</code> toma un valor como argumento y devuelve un objeto con una propiedad value que contiene el valor proporcionado. Por ejemplo, si queremos crear una referencia a un número entero, podemos hacer lo siguiente:</p>
+<div class="highlight"><pre><span></span><code>import { ref } from &#39;vue&#39;
+const myNumber = ref(42)
+console.log(myNumber.value) // 42
+</code></pre></div>
+<p>La referencia <code>myNumber</code> es ahora un objeto con una propiedad value que contiene el valor <code>42</code>. Si cambiamos el valor de la propiedad <code>value</code>, la referencia notificará a cualquier componente que esté observando el valor que ha cambiado. Por ejemplo:</p>
+<div class="highlight"><pre><span></span><code>myNumber.value = 21
+console.log(myNumber.value) // 21
+</code></pre></div>
+<p>Cualquier componente que esté utilizando myNumber se actualizará automáticamente para reflejar el nuevo valor. La función <code>ref()</code> es muy útil en Vue 3 para crear referencias reactivas a valores que pueden cambiar con el tiempo.</p>
+<p>En los styles tenemos poco que explicar, simplemente estamos haciendo que se vea como nosotros queremos, que todos los colores y demás los traemos de las variables que hemos creado antes en el <code>base.css</code> y además me gustaría mencionar una cosa:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="18:1"><input checked="checked" id="__tabbed_18_1" name="__tabbed_18" type="radio" /><div class="tabbed-labels"><label for="__tabbed_18_1">HeaderComponent.vue</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>...
+:deep(.p-menubar-start) {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+}
+...
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Si os dais cuenta algunos estilos llevan el :Deep delante, como seguro ya sabes, puedes utilizar el atributo <code>scoped</code> dentro de la etiqueta <code>&lt;style&gt;</code> para escribir CSS y así impedir que tus estilos afecten a posibles sub-componentes. Pero, ¿qué ocurre si necesitas que al menos una regla sí afecte a tu componente hijo?. Para ello puedes usar la pseudo-clase <code>:deep</code> de Vue 3.</p>
+<p>En este ejemplo lo hemos creado asi para que sepas de su existencia y busques un poco de información sobre ella y las otras que existen, este CSS lo podríamos poner en el <code>styles.scss</code> principal y no tendríamos que poner el <code>:deep</code> que seria lo mas recomendado. Es importante tener en cuenta que la directiva <code>:deep</code> puede tener un impacto en el rendimiento, ya que Vue necesita buscar en todo el árbol de elementos para aplicar los estilos. Por lo tanto, se recomienda utilizar esta directiva con moderación y solo en casos en los que sea necesario seleccionar elementos anidados de forma dinámica. Tenerlo en cuenta y solo usarla cuando de verdad sea necesario.</p>
+<p>Ya por último nos iremos a nuestro <code>MainLayout.vue</code> y añadiremos el header que acabamos de crearnos:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="19:1"><input checked="checked" id="__tabbed_19_1" name="__tabbed_19" type="radio" /><div class="tabbed-labels"><label for="__tabbed_19_1">MainLayout.vue</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">script</span> <span class="na">setup</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;ts&quot;</span><span class="p">&gt;</span>
+<span class="w">    </span><span class="k">import</span><span class="w"> </span><span class="nx">HeaderComponent</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@/components/header/HeaderComponent.vue&#39;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">helloWorld</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Hola Mundo&#39;</span><span class="p">;</span>
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">template</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">HeaderComponent</span><span class="p">&gt;&lt;/</span><span class="nt">HeaderComponent</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>{{ helloWorld }}<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">template</span><span class="p">&gt;</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Como antes, lo único que hacemos es importar el componente en el <code>script</code> y usarlo en el HTML.</p>
+<p>Lo siguiente iremos a la carpeta <code>router</code>, al archivo <code>index.ts</code> y lo dejaremos asi:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="20:1"><input checked="checked" id="__tabbed_20_1" name="__tabbed_20" type="radio" /><div class="tabbed-labels"><label for="__tabbed_20_1">index.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">createRouter</span><span class="p">,</span><span class="w"> </span><span class="nx">createWebHistory</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;vue-router&#39;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">MainLayout</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@/layouts/main-layout/MainLayout.vue&#39;</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">router</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">createRouter</span><span class="p">({</span>
+<span class="w">    </span><span class="nx">history</span><span class="o">:</span><span class="w"> </span><span class="kt">createWebHistory</span><span class="p">(</span><span class="k">import</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">BASE_URL</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">routes</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;/&#39;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;home&#39;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">component</span><span class="o">:</span><span class="w"> </span><span class="kt">MainLayout</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="p">})</span>
+
+<span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">router</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Hemos cambiado la ruta principal para que apunte a nuestro <code>layout</code> y nada más entrar en la aplicación lo carguemos gracias al router de VUE.</p>
+<p>Si guardamos todo y ponemos en marcha el proyecto ya veremos algo como esto:</p>
+<p><img alt="step1-vuejs6" src="../../../assets/images/step1-vuejs6.png" /></p>
+<h2 id="creando-un-listado-basico">Creando un listado básico</h2>
+<h3 id="crear-componente_1">Crear componente</h3>
+<p>Ya tenemos la estructura principal, ahora vamos a crear nuestra primera pantalla. Vamos a empezar por la de Categorías que es la más sencilla, ya que se trata de un listado, que muestra datos sin filtrar ni paginar.</p>
+<p>Como categorías es un dominio funcional de la aplicación, vamos a crear una nueva carpeta dentro de la carpeta <code>views</code> llamada categories, todas las pantallas, componentes y servicios que creemos, referidos a este dominio funcional, deberán ir dentro del módulo categories. Dentro de esa carpeta crearemos un fichero que se llamara <code>CategoriesView.vue</code> y dentro nos crearemos el esqueleto de la misma manera que hicimos anteriormente.</p>
+<p>Escribiremos <code>vbase-3-ts-setup</code>, le daremos al enter y nos generara toda la estructura a la que solo faltara agregar a la etiqueta <code>&lt;style&gt; Lang=”scss”</code> para decirle que vamos a trabajar con SASS. Con esto tenemos nuestra vista preparada para empezar a trabajar.</p>
+<p>Lo primero vamos a conectar nuestro componente al <code>router</code> para que cuando hagamos click en el menú correspondiente podamos llegar hasta él y también para poder ver lo que vamos trabajando. Para ello lo primero que vamos a hacer en el template de nuestro componente es añadir cualquier cosa para saber que estamos donde toca, por ejemplo:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="21:1"><input checked="checked" id="__tabbed_21_1" name="__tabbed_21" type="radio" /><div class="tabbed-labels"><label for="__tabbed_21_1">CategoriesView.vue</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">template</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>SOY CATEGORIAS<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">template</span><span class="p">&gt;</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Con esto cuando entremos en la ruta de categorías deberíamos ver <code>SOY CATEGORIAS</code>.</p>
+<p>Lo siguiente crearemos en el <code>layout</code> un sitio para cargar todas nuestras rutas que van a ir dentro de ese layout, para ello iremos al archivo <code>MainLayout.vue</code> y añadiremos un <code>&lt;RouterView /&gt;</code> que será el segundo de nuestra aplicación, el primero lo tenemos en el <code>App.vue</code> que servirá para cargar nuestras rutas principales (diferentes layouts, pagina 404, etc) y el segundo es este que acabamos de crear, podemos tener tantos como queramos en una aplicación y cada uno tendrá su cometido. Este que acabamos de crear será donde se cargaran todas las rutas que quieran estar dentro del <code>layout</code> principal.</p>
+<p>Para crearlo importaremos él <code>RouterView</code> dentro de los <code>&lt;script&gt;</code> desde <code>vue-router</code>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="22:1"><input checked="checked" id="__tabbed_22_1" name="__tabbed_22" type="radio" /><div class="tabbed-labels"><label for="__tabbed_22_1">MainLayout.vue</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>import { RouterView } from &#39;vue-router&#39;;
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Lo añadiremos dentro de los <code>&lt;template&gt;</code> exactamente donde queramos cargar las rutas y si puede ser con un <code>div</code> padre que haga de contenedor asi podremos darle los estilos sin sufrir demasiado.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="23:1"><input checked="checked" id="__tabbed_23_1" name="__tabbed_23" type="radio" /><div class="tabbed-labels"><label for="__tabbed_23_1">MainLayout.vue</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;outlet-container&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">RouterView</span> <span class="p">/&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Y luego dentro de <code>&lt;style&gt;</code> le daremos estilo al contenedor padre de acuerdo a lo que necesitemos (grid, flex, etc…) en este ejemplo para hacerlo fácil lo haremos con flex, con todo esto quedaría asi:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="24:1"><input checked="checked" id="__tabbed_24_1" name="__tabbed_24" type="radio" /><div class="tabbed-labels"><label for="__tabbed_24_1">MainLayout.vue</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">script</span> <span class="na">setup</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;ts&quot;</span><span class="p">&gt;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">RouterView</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;vue-router&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">HeaderComponent</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;@/components/header/HeaderComponent.vue&quot;</span><span class="p">;</span>
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">template</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">HeaderComponent</span><span class="p">&gt;&lt;/</span><span class="nt">HeaderComponent</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;outlet-container&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">RouterView</span> <span class="p">/&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">template</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">style</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;scss&quot;</span> <span class="na">scoped</span><span class="p">&gt;</span>
+<span class="p">.</span><span class="nc">outlet-container</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">display</span><span class="p">:</span><span class="w"> </span><span class="kc">flex</span><span class="p">;</span>
+<span class="w">  </span><span class="k">flex-direction</span><span class="p">:</span><span class="w"> </span><span class="kc">column</span><span class="p">;</span>
+<span class="w">  </span><span class="k">flex-grow</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">  </span><span class="k">width</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="kt">%</span><span class="p">;</span>
+<span class="w">  </span><span class="k">min-height</span><span class="p">:</span><span class="w"> </span><span class="nb">calc</span><span class="p">(</span><span class="mi">100</span><span class="kt">vh</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">65</span><span class="kt">px</span><span class="p">);</span>
+<span class="w">  </span><span class="k">padding</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="kt">rem</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Ahora vamos a añadirlo a nuestras rutas, para ello nos vamos a la carpeta <code>router</code> y dentro tendremos el <code>index.ts</code> con nuestras rutas actuales, vamos a añadir la nueva ruta como hija de <code>layout</code> para que siempre se muestre dentro del <code>layout</code> que hemos creado con él <code>header</code>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="25:1"><input checked="checked" id="__tabbed_25_1" name="__tabbed_25" type="radio" /><div class="tabbed-labels"><label for="__tabbed_25_1">index.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">createRouter</span><span class="p">,</span><span class="w"> </span><span class="nx">createWebHistory</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;vue-router&#39;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">MainLayout</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@/layouts/main-layout/MainLayout.vue&#39;</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">router</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">createRouter</span><span class="p">({</span>
+<span class="w">    </span><span class="nx">history</span><span class="o">:</span><span class="w"> </span><span class="kt">createWebHistory</span><span class="p">(</span><span class="k">import</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">BASE_URL</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">routes</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;/&#39;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;home&#39;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">component</span><span class="o">:</span><span class="w"> </span><span class="kt">MainLayout</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">children</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                </span><span class="p">{</span>
+<span class="w">                    </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;/categories&#39;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;categories&#39;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">component</span><span class="o">:</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">import</span><span class="p">(</span><span class="s1">&#39;../views/categories/CategoriesView.vue&#39;</span><span class="p">)</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">]</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="p">})</span>
+
+<span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">router</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Si os dais cuenta lo hemos añadido como hijo de <code>layout</code> y además lo hemos hecho con <code>lazy loading</code>, es decir, este componente solo se cargara cuando el usuario navegue a esa ruta, asi evitamos cargas muchísimo más grandes al inicio de la aplicación.</p>
+<p>Posteriormente nos iremos al <code>HeaderComponent.vue</code> y añadiremos la ruta a los ítems del menú de esta manera:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="26:1"><input checked="checked" id="__tabbed_26_1" name="__tabbed_26" type="radio" /><div class="tabbed-labels"><label for="__tabbed_26_1">HeaderComponent.vue</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>const items = ref([
+    {
+        label: &quot;Catálogo&quot;,
+    },
+    {
+        label: &quot;Categorías&quot;,
+        to: { name: &#39;categories&#39;}
+    },
+    {
+        label: &quot;Autores&quot;,
+    },
+]);
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Si nos fijamos hemos añadido la navegación por el nombre de ruta en el menú categorías para que sepa cuando apretemos ese menú donde nos tiene que llevar.</p>
+<p>Con todo esto si ponemos en marcha nuestra aplicación, ya podremos navegar haciendo click en el menú Categorías a esta nueva ruta que hemos creado y ya veríamos el <code>SOY CATEGORIAS</code> pero tenemos un problemilla en los menus, cuando apretamos un menú se pone el fondo gris, lo cual no nos gusta y además aunque estemos en categorías si apretamos en otro menú se pone el otro gris y se quita el categorías lo cual tampoco es lo deseado ya que queremos que se quede marcado el menú donde estamos actualmente para información del usuario. Para ello nos iremos al <code>base.css</code> y añadiremos al final estas líneas:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="27:1"><input checked="checked" id="__tabbed_27_1" name="__tabbed_27" type="radio" /><div class="tabbed-labels"><label for="__tabbed_27_1">base.css</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="o">...</span>
+<span class="p">.</span><span class="nc">router-link-active</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--secondary</span><span class="p">);</span>
+<span class="w">    </span><span class="k">border-radius</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="kt">px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">p-menuitem</span><span class="p">.</span><span class="nc">p-focus</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="p">.</span><span class="nc">p-menuitem-content</span><span class="p">:</span><span class="nd">not</span><span class="o">(</span><span class="p">:</span><span class="nd">hover</span><span class="o">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="kc">transparent</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>En Vue 3, la directiva <code>router-link-active</code> se utiliza para establecer una clase CSS en un enlace de router activo, con esto ya tendremos resuelto el problema y todo estará funcionando como toca y poniendo en marcha la aplicación y haciendo click en el menú Categorías ya deberíamos ver esto:</p>
+<p><img alt="step1-vuejs7" src="../../../assets/images/step1-vuejs7.png" /></p>
+<h3 id="codigo-de-la-pantalla">Código de la pantalla</h3>
+<p>Ahora vamos a construir la pantalla. Para manejar la información del listado, necesitamos tipar los datos para que Typescript no se queje. Para ello crearemos un fichero en <code>categories\models\category-interface.ts</code> donde implementaremos la interface necesaria. Esta interface será la que utilizaremos para tipar el código de nuestro componente.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="28:1"><input checked="checked" id="__tabbed_28_1" name="__tabbed_28" type="radio" /><div class="tabbed-labels"><label for="__tabbed_28_1">category-interface.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="k">export</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="nx">Category</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span>
+<span class="w">    </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>También, escribiremos el código de <code>CategoriesView.vue</code>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="29:1"><input checked="checked" id="__tabbed_29_1" name="__tabbed_29" type="radio" /><div class="tabbed-labels"><label for="__tabbed_29_1">CategoriesView.vue</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">template</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;card&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">DataTable</span>
+      <span class="na">v-model:editingRows</span><span class="o">=</span><span class="s">&quot;editingRows&quot;</span>
+      <span class="na">:value</span><span class="o">=</span><span class="s">&quot;categories&quot;</span>
+      <span class="na">tableStyle</span><span class="o">=</span><span class="s">&quot;min-width: 50rem&quot;</span>
+      <span class="na">editMode</span><span class="o">=</span><span class="s">&quot;row&quot;</span>
+      <span class="na">dataKey</span><span class="o">=</span><span class="s">&quot;id&quot;</span>
+      <span class="err">@</span><span class="na">row-edit-save</span><span class="o">=</span><span class="s">&quot;onRowEditSave&quot;</span>
+    <span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">Column</span> <span class="na">field</span><span class="o">=</span><span class="s">&quot;id&quot;</span> <span class="na">header</span><span class="o">=</span><span class="s">&quot;IDENTIFICADOR&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">template</span> <span class="err">#</span><span class="na">editor</span><span class="o">=</span><span class="s">&quot;{ data, field }&quot;</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">InputText</span> <span class="na">v-model</span><span class="o">=</span><span class="s">&quot;data[field]&quot;</span> <span class="p">/&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">template</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">Column</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">Column</span> <span class="na">field</span><span class="o">=</span><span class="s">&quot;name&quot;</span> <span class="na">header</span><span class="o">=</span><span class="s">&quot;NOMBRE CATEGORÍA&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">template</span> <span class="err">#</span><span class="na">editor</span><span class="o">=</span><span class="s">&quot;{ data, field }&quot;</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">InputText</span> <span class="na">v-model</span><span class="o">=</span><span class="s">&quot;data[field]&quot;</span> <span class="p">/&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">template</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">Column</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">Column</span>
+        <span class="na">:rowEditor</span><span class="o">=</span><span class="s">&quot;true&quot;</span>
+        <span class="na">style</span><span class="o">=</span><span class="s">&quot;width: 110px&quot;</span>
+        <span class="na">bodyStyle</span><span class="o">=</span><span class="s">&quot;text-align:center&quot;</span>
+      <span class="p">&gt;&lt;/</span><span class="nt">Column</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">Column</span>
+        <span class="na">style</span><span class="o">=</span><span class="s">&quot;width: 30px; padding: 0px 2rem 0px 0px; color: red&quot;</span>
+        <span class="na">bodyStyle</span><span class="o">=</span><span class="s">&quot;text-align:center&quot;</span>
+      <span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">template</span> <span class="err">#</span><span class="na">body</span><span class="o">=</span><span class="s">&quot;{ data }&quot;</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">i</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;pi pi-times&quot;</span> <span class="err">@</span><span class="na">click</span><span class="o">=</span><span class="s">&quot;onRowDelete(data)&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">i</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">template</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">Column</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">DataTable</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;actions&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">Button</span> <span class="na">label</span><span class="o">=</span><span class="s">&quot;Nueva categoría&quot;</span> <span class="p">/&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">template</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">setup</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;ts&quot;</span><span class="p">&gt;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">ref</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;vue&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">DataTable</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">type</span><span class="w"> </span><span class="nx">DataTableRowEditSaveEvent</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;primevue/datatable&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">Column</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;primevue/column&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">InputText</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;primevue/inputtext&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">Button</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;primevue/button&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">type</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">CategoryInterface</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./model/category.interface&quot;</span><span class="p">;</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">categories</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ref</span><span class="p">([]);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">editingRows</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ref</span><span class="p">([]);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">onRowEditSave</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">event</span><span class="o">:</span><span class="w"> </span><span class="nx">DataTableRowEditSaveEvent</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">event</span><span class="p">);</span>
+<span class="p">};</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">onRowDelete</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">data</span><span class="o">:</span><span class="w"> </span><span class="nx">CategoryInterface</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">style</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;scss&quot;</span> <span class="na">scoped</span><span class="p">&gt;</span>
+<span class="p">.</span><span class="nc">actions</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">display</span><span class="p">:</span><span class="w"> </span><span class="kc">flex</span><span class="p">;</span>
+<span class="w">  </span><span class="k">flex-direction</span><span class="p">:</span><span class="w"> </span><span class="kc">row</span><span class="p">;</span>
+<span class="w">  </span><span class="k">margin-top</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="kt">rem</span><span class="p">;</span>
+<span class="w">  </span><span class="k">justify-content</span><span class="p">:</span><span class="w"> </span><span class="kc">flex-end</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">p-button</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--primary</span><span class="p">);</span>
+<span class="w">  </span><span class="k">border</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="kt">px</span><span class="w"> </span><span class="kc">solid</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--primary</span><span class="p">);</span>
+
+<span class="w">  </span><span class="err">&amp;:enabled</span><span class="w"> </span><span class="err">{</span>
+<span class="w">    </span><span class="err">&amp;:hover</span><span class="w"> </span><span class="err">{</span>
+<span class="w">      </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--secondary</span><span class="p">);</span>
+<span class="w">      </span><span class="k">border-color</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--secondary</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="err">}</span>
+<span class="err">}</span>
+<span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Intentaremos explicar un poco el código:</p>
+<p>Lo primero vamos a importar el componente DataTable desde la librería de componentes que estamos usando, para ello podemos ver algunos ejemplos de como hacerlo en la <a href="https://primevue.org/datatable">documentación</a> oficial</p>
+<p>Nosotros hemos puesto las importaciones que necesitamos en el <code>&lt;script&gt;</code>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="30:1"><input checked="checked" id="__tabbed_30_1" name="__tabbed_30" type="radio" /><div class="tabbed-labels"><label for="__tabbed_30_1">CategoriesView.vue</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>import DataTable, { type DataTableRowEditSaveEvent } from &quot;primevue/datatable&quot;;
+import Column from &quot;primevue/column&quot;;
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Hemos creado nuestra tabla con las exigencias de la aplicación, hemos puesto dos columnas, la columna identificador donde en él <code>header=””</code> le ponemos que nombre se muestra en la cabecera y le hemos dicho que debe mostrar en ella el dato id poniéndolo en él <code>field=””</code>.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="31:1"><input checked="checked" id="__tabbed_31_1" name="__tabbed_31" type="radio" /><div class="tabbed-labels"><label for="__tabbed_31_1">CategoriesView.vue</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">Column</span> <span class="na">field</span><span class="o">=</span><span class="s">&quot;id&quot;</span> <span class="na">header</span><span class="o">=</span><span class="s">&quot;IDENTIFICADOR&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">Column</span><span class="p">&gt;</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Como a la tabla le hemos dicho que debe ser editable con:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="32:1"><input checked="checked" id="__tabbed_32_1" name="__tabbed_32" type="radio" /><div class="tabbed-labels"><label for="__tabbed_32_1">CategoriesView.vue</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>editMode=&quot;row&quot;
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Le decimos a esta columna que debe hacer cuando entremos en modo de edición, con el template le decimos que mostrara un <code>InputText</code> que es otro componente de la librería de componentes que viene a ser un input de toda la vida donde podemos escribir texto para editar el valor, quedando al final asi:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="33:1"><input checked="checked" id="__tabbed_33_1" name="__tabbed_33" type="radio" /><div class="tabbed-labels"><label for="__tabbed_33_1">CategoriesView.vue</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">Column</span> <span class="na">field</span><span class="o">=</span><span class="s">&quot;id&quot;</span> <span class="na">header</span><span class="o">=</span><span class="s">&quot;IDENTIFICADOR&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">template</span> <span class="err">#</span><span class="na">editor</span><span class="o">=</span><span class="s">&quot;{ data, field }&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">InputText</span> <span class="na">v-model</span><span class="o">=</span><span class="s">&quot;data[field]&quot;</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">template</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">Column</span><span class="p">&gt;</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Luego hemos creado dos columnas, una que tiene el lápiz y activa el modo edición:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="34:1"><input checked="checked" id="__tabbed_34_1" name="__tabbed_34" type="radio" /><div class="tabbed-labels"><label for="__tabbed_34_1">CategoriesView.vue</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">Column</span>
+    <span class="na">:rowEditor</span><span class="o">=</span><span class="s">&quot;true&quot;</span>
+    <span class="na">style</span><span class="o">=</span><span class="s">&quot;width: 110px&quot;</span>
+    <span class="na">bodyStyle</span><span class="o">=</span><span class="s">&quot;text-align:center&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">Column</span><span class="p">&gt;</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Y otra que tiene la X y lo que hará será borrar la fila:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="35:1"><input checked="checked" id="__tabbed_35_1" name="__tabbed_35" type="radio" /><div class="tabbed-labels"><label for="__tabbed_35_1">CategoriesView.vue</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">Column</span>
+    <span class="na">style</span><span class="o">=</span><span class="s">&quot;width: 30px; padding: 0px 2rem 0px 0px; color: red&quot;</span>
+    <span class="na">bodyStyle</span><span class="o">=</span><span class="s">&quot;text-align:center&quot;</span>
+<span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">template</span> <span class="err">#</span><span class="na">body</span><span class="o">=</span><span class="s">&quot;{ data }&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">i</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;pi pi-times&quot;</span> <span class="err">@</span><span class="na">click</span><span class="o">=</span><span class="s">&quot;onRowDelete(data)&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">i</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">template</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">Column</span><span class="p">&gt;</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Al final añadimos otro contenedor que vale para alojar los botones como en nuestro caso el de crear nueva categoría, el botón es también un componente de la librería por lo que tendremos que hacer su import en la etiqueta <code>&lt;script&gt;</code>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="36:1"><input checked="checked" id="__tabbed_36_1" name="__tabbed_36" type="radio" /><div class="tabbed-labels"><label for="__tabbed_36_1">CategoriesView.vue</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;actions&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">Button</span> <span class="na">label</span><span class="o">=</span><span class="s">&quot;Nueva categoría&quot;</span> <span class="p">/&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Si abrimos el navegador y accedemos a <code>http://localhost:5173/</code> y pulsamos en el menú de Categorías obtendremos una pantalla con un listado vacío (solo con cabeceras) y un botón de crear <code>Nueva Categoría</code> que aún no hace nada.</p>
+<h2 id="anadiendo-datos">Añadiendo datos</h2>
+<p>En este punto y para ver como responde el listado, vamos a añadir datos. Si tuviéramos el backend implementado podríamos consultar los datos directamente de una operación de negocio de backend, pero ahora mismo no lo tenemos implementado así que para no bloquear el desarrollo vamos a mockear los datos.</p>
+<p>En Vue para conectar a APIS externas solemos usar una librería llamada Axios, lo primero que haremos será descargarla e instalarla como indica en su <a href="https://axios-http.com/es/docs/intro">documentación</a> oficial.</p>
+<p>Para instalarla simplemente nos iremos a la terminal dentro de la carpeta donde tenemos el proyecto y pondremos:</p>
+<div class="highlight"><pre><span></span><code>npm install axios
+</code></pre></div>
+<p>Con esto ya podremos ver que se ha añadido a nuestro <code>package.json</code>, luego crearemos una carpeta <code>api</code> dentro de la carpeta <code>src</code> y dentro de la carpeta <code>api</code> crearemos el archivo <code>app-api.ts</code>. Dentro de este archivo vamos a inicializar nuestra config de la API y guardaremos todos los parámetros iniciales conforme nos vayan haciendo falta, de momento pondremos solo este código:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="37:1"><input checked="checked" id="__tabbed_37_1" name="__tabbed_37" type="radio" /><div class="tabbed-labels"><label for="__tabbed_37_1">app-api.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">axios</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;axios&#39;</span><span class="p">;</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">appApi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">axios</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
+<span class="w">    </span><span class="nx">baseURL</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;http://localhost:8080&#39;</span><span class="p">,</span>
+<span class="p">});</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Si os dais cuenta lo único que hacemos es importar <code>axios</code> que acabamos de instalarlo y definir nuestra url base del api para no tener que escribirla cada vez y para sí algún día cambia, tener que cambiarla solo en un sitio y no en todos los servicios que la usen.</p>
+<p>Para mockear los datos con <code>axios</code> usaremos una librería que se llama <code>axios-mock-adapter</code> y la podéis encontrar en este <a href="https://github.com/ctimmerm/axios-mock-adapter">link</a>.</p>
+<p>Para instalarla lo haremos con npm como siempre, pondremos esta orden en el terminal y enter:</p>
+<div class="highlight"><pre><span></span><code>npm install axios-mock-adapter --save-dev
+</code></pre></div>
+<p>Si nos vamos al <code>package.json</code> veremos que ya la tenemos en las <code>devDependencies</code>, la diferencia entre estas y las dependencias es que las dependencias las necesitamos en el proyecto y estarán en nuestro <code>bundle</code> final que serviremos a la gente, las <code>devDependencies</code> se usan solo mientras programamos y no entraran en el <code>bundle</code> final. Los mocks los usaremos solo en el desarrollo y hasta que podamos conectar con la API real por eso los metemos en las devDependencies.</p>
+<h3 id="mockeando-datos">Mockeando datos</h3>
+<p>Como hemos comentado anteriormente, el backend todavía no está implementado así que vamos a mockear datos. Nos crearemos un fichero <code>mock-categories.ts</code> dentro de <code>views/categories/mocks</code>, con datos ficticios y crearemos una llamada a la API que nos devuelva estos datos. De esta forma, cuando tengamos implementada la operación de negocio en backend, tan solo tenemos que sustituir el código que devuelve datos estáticos por una llamada HTTP.</p>
+<p>Dentro de la carpeta <code>mocks</code> crearemos el archivo <code>mock-categories.ts</code> con el siguiente código:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="38:1"><input checked="checked" id="__tabbed_38_1" name="__tabbed_38" type="radio" /><div class="tabbed-labels"><label for="__tabbed_38_1">mock-categories.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="kr">type</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Category</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;@/views/categories/models/category-interface&quot;</span><span class="p">;</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">CATEGORY_DATA_MOCK</span><span class="o">:</span><span class="w"> </span><span class="kt">Category</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">1</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Dados&#39;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">2</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Fichas&#39;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">3</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Cartas&#39;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">4</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Rol&#39;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">5</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Tableros&#39;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">6</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Temáticos&#39;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">7</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Europeos&#39;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">8</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Guerra&#39;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">9</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Abstractos&#39;</span><span class="w"> </span><span class="p">},</span>
+<span class="p">]</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Después nos crearemos un <code>composable</code> que usaremos para llamar a la API y poder reutilizarlo en otros componentes si hiciera falta. Dentro de la carpeta <code>categories</code> crearemos otra carpeta llamada <code>composables</code> y dentro crearemos un archivo llamado <code>categories-composable.ts</code>, en ese archivo escribiremos este código:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="39:1"><input checked="checked" id="__tabbed_39_1" name="__tabbed_39" type="radio" /><div class="tabbed-labels"><label for="__tabbed_39_1">categories-composable.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">appApi</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@/api/app-api&#39;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">MockAdapter</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;axios-mock-adapter&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">CATEGORY_DATA_MOCK</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@/views/categories/mocks/mock-categories&#39;</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">mock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">MockAdapter</span><span class="p">(</span><span class="nx">appApi</span><span class="p">);</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">useCategoriesApiComposable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="nx">mock</span><span class="p">.</span><span class="nx">onGet</span><span class="p">(</span><span class="s2">&quot;/category&quot;</span><span class="p">).</span><span class="nx">reply</span><span class="p">(</span><span class="mf">200</span><span class="p">,</span><span class="w"> </span><span class="nx">CATEGORY_DATA_MOCK</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">getCategories</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">categories</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">appApi</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;/category&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">categories</span><span class="p">.</span><span class="nx">data</span><span class="p">;</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">getCategories</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">useCategoriesApiComposable</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Añadiremos él <code>composable</code> a nuestro <code>CategoriesView.vue</code> dentro de las etiquetas <code>&lt;script&gt;</code>, lo primero en el <code>import</code> que ya tenemos desde Vue añadiremos el método <code>onMounted</code> dejándolo asi:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="40:1"><input checked="checked" id="__tabbed_40_1" name="__tabbed_40" type="radio" /><div class="tabbed-labels"><label for="__tabbed_40_1">CategoriesView.vue</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>import { onMounted, ref } from &#39;vue&#39;
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>El método <code>onMounted</code> es un ciclo de vida que se dispara nada más montarse el componente, después añadiremos al final el <code>import</code> del <code>composable</code> para poder usarlo:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="41:1"><input checked="checked" id="__tabbed_41_1" name="__tabbed_41" type="radio" /><div class="tabbed-labels"><label for="__tabbed_41_1">CategoriesView.vue</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>import useCategoriesApiComposable from &#39;@/views/categories/composables/categories-composable&#39;
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Nos traeremos el método del <code>composable</code> con la desestructuración del objeto:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="42:1"><input checked="checked" id="__tabbed_42_1" name="__tabbed_42" type="radio" /><div class="tabbed-labels"><label for="__tabbed_42_1">CategoriesView.vue</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>const { getCategories } = useCategoriesApiComposable()
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Crearemos una función asíncrona para llamar al <code>composable</code> y llamaremos al <code>composable</code> en el <code>onMounted</code>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="43:1"><input checked="checked" id="__tabbed_43_1" name="__tabbed_43" type="radio" /><div class="tabbed-labels"><label for="__tabbed_43_1">CategoriesView.vue</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>async function getInitCategories() {
+    categories.value = await getCategories()
+}
+
+onMounted(() =&gt; {
+    getInitCategories()
+})
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>El <code>CategoriesView.vue</code> quedaría asi:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="44:1"><input checked="checked" id="__tabbed_44_1" name="__tabbed_44" type="radio" /><div class="tabbed-labels"><label for="__tabbed_44_1">CategoriesView.vue</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">template</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;card&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">DataTable</span>
+      <span class="na">v-model:editingRows</span><span class="o">=</span><span class="s">&quot;editingRows&quot;</span>
+      <span class="na">:value</span><span class="o">=</span><span class="s">&quot;categories&quot;</span>
+      <span class="na">tableStyle</span><span class="o">=</span><span class="s">&quot;min-width: 50rem&quot;</span>
+      <span class="na">editMode</span><span class="o">=</span><span class="s">&quot;row&quot;</span>
+      <span class="na">dataKey</span><span class="o">=</span><span class="s">&quot;id&quot;</span>
+      <span class="err">@</span><span class="na">row-edit-save</span><span class="o">=</span><span class="s">&quot;onRowEditSave&quot;</span>
+    <span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">Column</span> <span class="na">field</span><span class="o">=</span><span class="s">&quot;id&quot;</span> <span class="na">header</span><span class="o">=</span><span class="s">&quot;IDENTIFICADOR&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">template</span> <span class="err">#</span><span class="na">editor</span><span class="o">=</span><span class="s">&quot;{ data, field }&quot;</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">InputText</span> <span class="na">v-model</span><span class="o">=</span><span class="s">&quot;data[field]&quot;</span> <span class="p">/&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">template</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">Column</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">Column</span> <span class="na">field</span><span class="o">=</span><span class="s">&quot;name&quot;</span> <span class="na">header</span><span class="o">=</span><span class="s">&quot;NOMBRE CATEGORÍA&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">template</span> <span class="err">#</span><span class="na">editor</span><span class="o">=</span><span class="s">&quot;{ data, field }&quot;</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">InputText</span> <span class="na">v-model</span><span class="o">=</span><span class="s">&quot;data[field]&quot;</span> <span class="p">/&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">template</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">Column</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">Column</span> <span class="na">:rowEditor</span><span class="o">=</span><span class="s">&quot;true&quot;</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;width: 110px&quot;</span> <span class="na">bodyStyle</span><span class="o">=</span><span class="s">&quot;text-align:center&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">Column</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">Column</span>
+        <span class="na">style</span><span class="o">=</span><span class="s">&quot;width: 30px; padding: 0px 2rem 0px 0px; color: red&quot;</span>
+        <span class="na">bodyStyle</span><span class="o">=</span><span class="s">&quot;text-align:center&quot;</span>
+      <span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">template</span> <span class="err">#</span><span class="na">body</span><span class="o">=</span><span class="s">&quot;{ data }&quot;</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">i</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;pi pi-times&quot;</span> <span class="err">@</span><span class="na">click</span><span class="o">=</span><span class="s">&quot;onRowDelete(data)&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">i</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">template</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">Column</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">DataTable</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;actions&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">Button</span> <span class="na">label</span><span class="o">=</span><span class="s">&quot;Nueva categoría&quot;</span> <span class="p">/&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">template</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">setup</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;ts&quot;</span><span class="p">&gt;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">onMounted</span><span class="p">,</span><span class="w"> </span><span class="nx">ref</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;vue&#39;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">DataTable</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">type</span><span class="w"> </span><span class="nx">DataTableRowEditSaveEvent</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;primevue/datatable&#39;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">Column</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;primevue/column&#39;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">InputText</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;primevue/inputtext&#39;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">Button</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;primevue/button&#39;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">type</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">CategoryInterface</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;./model/category.interface&#39;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">useCategoriesApiComposable</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@/views/categories/composables/categories-composable&#39;</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">categories</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ref</span><span class="p">([])</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">editingRows</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ref</span><span class="p">([])</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">getCategories</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useCategoriesApiComposable</span><span class="p">()</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">onRowEditSave</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">event</span><span class="o">:</span><span class="w"> </span><span class="nx">DataTableRowEditSaveEvent</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">onRowDelete</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">data</span><span class="o">:</span><span class="w"> </span><span class="nx">CategoryInterface</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">getInitCategories</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">categories</span><span class="p">.</span><span class="nx">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">getCategories</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="nx">onMounted</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">getInitCategories</span><span class="p">()</span>
+<span class="p">})</span>
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">style</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;scss&quot;</span> <span class="na">scoped</span><span class="p">&gt;</span>
+<span class="p">.</span><span class="nc">actions</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">display</span><span class="p">:</span><span class="w"> </span><span class="kc">flex</span><span class="p">;</span>
+<span class="w">  </span><span class="k">flex-direction</span><span class="p">:</span><span class="w"> </span><span class="kc">row</span><span class="p">;</span>
+<span class="w">  </span><span class="k">margin-top</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="kt">rem</span><span class="p">;</span>
+<span class="w">  </span><span class="k">justify-content</span><span class="p">:</span><span class="w"> </span><span class="kc">flex-end</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">p-button</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--primary</span><span class="p">);</span>
+<span class="w">  </span><span class="k">border</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="kt">px</span><span class="w"> </span><span class="kc">solid</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--primary</span><span class="p">);</span>
+
+<span class="w">  </span><span class="err">&amp;:enabled</span><span class="w"> </span><span class="err">{</span>
+<span class="w">    </span><span class="err">&amp;:hover</span><span class="w"> </span><span class="err">{</span>
+<span class="w">      </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--secondary</span><span class="p">);</span>
+<span class="w">      </span><span class="k">border-color</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--secondary</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="err">}</span>
+<span class="err">}</span>
+<span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Si ahora refrescamos la página web, veremos que el listado ya tiene datos con los que vamos a interactuar.</p>
+<p><img alt="step1-vuejs8" src="../../../assets/images/step1-vuejs8.png" /></p>
+<h3 id="simulando-las-otras-peticiones">Simulando las otras peticiones</h3>
+<p>Para terminar, vamos a simular las otras dos peticiones, la de editar y la de borrar para cuando tengamos que utilizarlas. Él <code>composable</code> debe quedar más o menos así:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="45:1"><input checked="checked" id="__tabbed_45_1" name="__tabbed_45" type="radio" /><div class="tabbed-labels"><label for="__tabbed_45_1">categories-composable.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">appApi</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@/api/app-api&#39;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">MockAdapter</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;axios-mock-adapter&#39;</span>
+<span class="k">import</span><span class="w"> </span><span class="kr">type</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Category</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@/views/categories/models/category-interface&#39;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">CATEGORY_DATA_MOCK</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@/views/categories/mocks/mock-categories&#39;</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">mock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">MockAdapter</span><span class="p">(</span><span class="nx">appApi</span><span class="p">)</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">useCategoriesApiComposable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">mock</span><span class="p">.</span><span class="nx">onAny</span><span class="p">(</span><span class="s1">&#39;/category&#39;</span><span class="p">).</span><span class="nx">reply</span><span class="p">(</span><span class="mf">200</span><span class="p">,</span><span class="w"> </span><span class="nx">CATEGORY_DATA_MOCK</span><span class="p">)</span>
+
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">getCategories</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">categories</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">appApi</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/category&#39;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">categories</span><span class="p">.</span><span class="nx">data</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">saveCategory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">category</span><span class="o">:</span><span class="w"> </span><span class="kt">Category</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">categoryEdit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">appApi</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">&#39;/category&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">category</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">categoryEdit</span><span class="p">.</span><span class="nx">data</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">editCategory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">category</span><span class="o">:</span><span class="w"> </span><span class="kt">Category</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">categoryEdit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">appApi</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="s1">&#39;/category&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">category</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">categoryEdit</span><span class="p">.</span><span class="nx">data</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">deleteCategory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">categoryId</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">categoryEdit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">appApi</span><span class="p">.</span><span class="ow">delete</span><span class="p">(</span><span class="sb">`/category/</span><span class="si">${</span><span class="nx">categoryId</span><span class="si">}</span><span class="sb">`</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">categoryEdit</span><span class="p">.</span><span class="nx">data</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">getCategories</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">saveCategory</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">editCategory</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">deleteCategory</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">useCategoriesApiComposable</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.path", "navigation.indexes"], "search": "../../../assets/javascripts/workers/search.a264c092.min.js", "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.4e0fa4ba.min.js"></script>
+      
+    
+  </body>
+</html>
