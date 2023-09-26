@@ -7,29 +7,31 @@ nav:
   - Entorno de desarrollo:
     - 🔵 Angular: install/angular.md
     - 🔵 React: install/react.md
-    #- 🔵 Vue.js: install/vuejs.md
+    - 🔵 Vue.js: install/vuejs.md
     - 🟢 Spring Boot: install/springboot.md
     - 🟢 Nodejs: install/nodejs.md
   - Estructura y buenas prácticas:
     - 🔵 Angular: cleancode/angular.md
     - 🔵 React: cleancode/react.md
-    #- 🔵 Vue.js: cleancode/vuejs.md
+    - 🔵 Vue.js: cleancode/vuejs.md
     - 🟢 Spring Boot: cleancode/springboot.md
     - 🟢 Nodejs: cleancode/nodejs.md
   - "Code: Listado simple":
     - 🔵 Angular: develop/basic/angular.md
     - 🔵 React: develop/basic/react.md
-    #- 🔵 Vue.js: develop/basic/vuejs.md
+    - 🔵 Vue.js: develop/basic/vuejs.md
     - 🟢 Spring Boot: develop/basic/springboot.md
     - 🟢 Nodejs: develop/basic/nodejs.md
   - "Code: Listado paginado":
     - 🔵 Angular: develop/paginated/angular.md
     - 🔵 React: develop/paginated/react.md
+    - 🔵 Vue.js: develop/paginated/vuejs.md
     - 🟢 Spring Boot: develop/paginated/springboot.md
     - 🟢 Nodejs: develop/paginated/nodejs.md
   - "Code: Listado filtrado":    
     - 🔵 Angular: develop/filtered/angular.md
     - 🔵 React: develop/filtered/react.md
+    - 🔵 Vue.js: develop/filtered/vuejs.md
     - 🟢 Spring Boot: develop/filtered/springboot.md
     - 🟢 Nodejs: develop/filtered/nodejs.md
   - Ahora hazlo tu!: exercise.md
