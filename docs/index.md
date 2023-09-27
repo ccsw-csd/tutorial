@@ -33,6 +33,7 @@ De momento tenemos estos itinerarios:
 
 * 🔵 [Frontend - Angular](https://degreed.com/pathway/3pmxr0jg9n/pathway)
 * 🔵 [Frontend - React](https://degreed.com/pathway/o97qz2dy8n/pathway)
+* 🔵 [Frontend - Vue](https://degreed.com/pathway/v83v2wq3px/pathway)
 * 🟢 [Backend - SpringBoot](https://degreed.com/pathway/08gxl0e7pw/pathway)
 * 🟢 [Backend - Nodejs](https://degreed.com/pathway/e9kx16qypo/pathway)
 
