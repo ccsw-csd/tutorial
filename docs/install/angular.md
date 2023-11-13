@@ -22,10 +22,10 @@ El siguiente paso será instalar el motor de [Nodejs](https://nodejs.org/es/). E
 
 ### Angular CLI
 
-Por último vamos a instalar una capa de gestión por encima de Nodejs que nos ayudará en concreto con la funcionalida de Angular. En concreto instalaremos el CLI de Angular. Para poder instalarlo, tan solo hay que abrir una consola de msdos y ejecutar el comando y Nodejs ya hará el resto:
+Por último vamos a instalar una capa de gestión por encima de Nodejs que nos ayudará en concreto con la funcionalida de Angular. En concreto instalaremos el CLI de Angular para la versión 16. Para poder instalarlo, tan solo hay que abrir una consola de msdos y ejecutar el comando y Nodejs ya hará el resto:
 
 ```
-npm install -g @angular/cli
+npm install -g @angular/cli@16
 ```
 
 Y con esto ya tendremos todo instalado, listo para empezar a crear los proyectos.
