@@ -9,7 +9,7 @@ Todos los pasos son exactamente iguales, lo único que va a variar es el nombre 
 
 ## Estructurar el código y buenas prácticas
 
-Esta parte de tutorial es una ampliación de la parte de backend con Spring Boot, por tanto no se ve a enfocar en las partes básicas aprendidas previamente, si no que se va a explicar el funcionamiento de los micro servicios aplicados al mismo caso de uso. 
+Esta parte de tutorial es una ampliación de la parte de backend con Spring Boot, por tanto, no se ve a enfocar en las partes básicas aprendidas previamente, sino que se va a explicar el funcionamiento de los micro servicios aplicados al mismo caso de uso. 
 
 Para cualquier duda sobre la estructura del código y buenas prácticas, consultar el apartado de [Estructura y buenas prácticas](../../cleancode/springboot.md), ya que aplican a este caso en el mismo modo.
 

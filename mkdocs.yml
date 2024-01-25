@@ -34,7 +34,7 @@ nav:
     - 🔵 Vue.js: develop/filtered/vuejs.md
     - 🟢 Spring Boot: develop/filtered/springboot.md
     - 🟢 Nodejs: develop/filtered/nodejs.md
-  - Ahora hazlo tu!: exercise.md
+  - Ahora hazlo tú!: exercise.md
   - "Anexos": 
     - "GIT: Tutorial básico": appendix/git.md
     - API Rest: appendix/rest.md
@@ -47,6 +47,13 @@ nav:
         - Listado filtrado: appendix/springcloud/filtered.md
         - Infraestructura: appendix/springcloud/infra.md
         - Resumen: appendix/springcloud/summary.md
+    - Spring Batch:
+        - Introducción: appendix/springbatch/intro.md
+        - Fichero a BBDD: appendix/springbatch/filetodb.md
+        - Fichero a Fichero: appendix/springbatch/filetofile.md
+        - Limpieza: appendix/springbatch/clean.md
+        - Resumen: appendix/springbatch/summary.md
+        - Ahora hazlo tú!: appendix/springbatch/exercise.md
 theme:
     name: material
     language: es
