@@ -3,9 +3,29 @@
 Ya tenemos todo configurado del paso anterior asi que proseguimos con el siguiente ejemplo.
 
 
-## Código
+## Caso de Uso
 
-Vamos a implementar un batch para leer un fichero de `Autores` trasformar la nacionalidad del autor a código de region y general un fichero con los datos trasformados. 
+En este caso también debemos plantear requisitos diferentes para la parte de Autores.
+
+### ¿Qué vamos a hacer?
+
+Vamos a implementar un batch para leer un fichero de `Autores` trasformar la nacionalidad del autor a código de region y general un fichero con los datos trasformados.
+
+
+### ¿Cómo lo vamos a hacer?
+
+Al igual que en el caso anterior seguiremos el esquema de funcionamiento habitual de un proceso batch que hemos visto en la parte de introducción:
+
+![filetofile](../../assets/images/filetofile.png)
+
+* **ItemReader**: Se va a leer de un fichero y convertir los registros leídos al modelo de `Author`.
+* **ItemProcessor**: Va a procesar todos los registros convirtiendo el código de nacionalidad al formato xx_XX.
+* **ItemWriter**: Va a escribir los registros en un fichero.
+* **Step**: El paso que contiene los elementos que van a realizar la funcionalidad.
+* **Job**: La tarea que contiene los pasos definidos.
+
+
+## Código
 
 ### Modelo
 
@@ -52,6 +72,37 @@ En primer lugar, vamos a crear el modelo dentro del package `com.ccsw.tutorialba
     }
     ```
 
+
+### Reader
+
+Ahora, como en el caso anterior, emplazamos él `Reader` en la clase donde posteriormente añadiremos la configuración junto al resto de beans, dentro del package `com.ccsw.tutorialbatch.config`.
+
+=== "AuthorBatchConfiguration.java"
+    ``` Java
+    package com.ccsw.tutorialbatch.config;
+
+    ...
+    
+    @Configuration
+    public class AuthorBatchConfiguration {
+    
+        @Bean
+        public ItemReader<Author> readerAuthor() {
+            return new FlatFileItemReaderBuilder<Author>().name("authorItemReader")
+                    .resource(new ClassPathResource("author-list.csv"))
+                    .delimited()
+                    .names(new String[] { "name", "nationality" })
+                    .fieldSetMapper(new BeanWrapperFieldSetMapper<>() {{
+                        setTargetType(Author.class);
+                    }})
+                    .build();
+        }
+
+    ```
+
+Para la ingesta de datos vamos a hacer uso de este `FlatFileItemReader` que nos proporciona Spring Batch. Como se puede observar se le proporciona el fichero a leer y el mapeo a la clase que deseamos. [Aquí](https://docs.spring.io/spring-batch/reference/readers-and-writers/item-reader-writer-implementations.html) el catálogo de Readers que proporciona `Spring Batch`.
+
+
 ### Processor
 
 Posteriormente, emplazamos él `Processor` dentro del package `com.ccsw.tutorialbatch.processor`.
@@ -89,11 +140,40 @@ De la misma forma que en el caso anterior hemos implementado un `Processor` pers
 En nuestro caso, va a ser de `Author` a `Author` donde vamos a implementar la lógica requerida para este caso de uso.
 
 
-### Reader, Writer, Step y Job
+### Writer
 
-Posteriormente, como en el caso anterior, emplazamos la configuración junto al resto de beans dentro del package `com.ccsw.tutorialbatch.config`.
+Posteriormente, añadimos el writer a la clase de configuración `AuthorBatchConfiguration` donde ya habíamos añadido `Reader`.
 
-=== "CategoryBatchConfiguration.java"
+=== "AuthorBatchConfiguration.java"
+    ``` Java
+    package com.ccsw.tutorialbatch.config;
+
+    ...
+    
+    @Configuration
+    public class AuthorBatchConfiguration {
+
+        ...
+    
+        @Bean
+        public ItemWriter<Author> writerAuthor() {
+            return  new FlatFileItemWriterBuilder<Author>().name("writerAuthor")
+                    .resource(new FileSystemResource("target/test-outputs/author-output.txt"))
+                    .lineAggregator(new PassThroughLineAggregator<>())
+                    .build();
+        }
+    
+    }
+    ```
+
+A diferencia del ejemplo anterior utilizamos `FlatFileItemWriter` diferente que en este caso nos ayuda a crear un fichero con los datos deseados. [Aquí](https://docs.spring.io/spring-batch/reference/readers-and-writers/item-reader-writer-implementations.html) el catálogo de Writers que proporciona `Spring Batch`.
+
+
+### Step y Job
+
+Ahora ya podemos añadir la configuración del `Step` y del `Job` dentro de la clase de configuración. La clase completa debería quedar de esta forma:
+
+=== "AuthorBatchConfiguration.java"
     ``` Java
     package com.ccsw.tutorialbatch.config;
     
@@ -106,6 +186,9 @@ Posteriormente, como en el caso anterior, emplazamos la configuración junto al 
     import org.springframework.batch.core.launch.support.RunIdIncrementer;
     import org.springframework.batch.core.repository.JobRepository;
     import org.springframework.batch.core.step.builder.StepBuilder;
+    import org.springframework.batch.item.ItemProcessor;
+    import org.springframework.batch.item.ItemReader;
+    import org.springframework.batch.item.ItemWriter;
     import org.springframework.batch.item.file.FlatFileItemReader;
     import org.springframework.batch.item.file.FlatFileItemWriter;
     import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder;
@@ -122,7 +205,7 @@ Posteriormente, como en el caso anterior, emplazamos la configuración junto al 
     public class AuthorBatchConfiguration {
     
         @Bean
-        public FlatFileItemReader<Author> readerAuthor() {
+        public ItemReader<Author> readerAuthor() {
             return new FlatFileItemReaderBuilder<Author>().name("authorItemReader")
                     .resource(new ClassPathResource("author-list.csv"))
                     .delimited()
@@ -134,13 +217,13 @@ Posteriormente, como en el caso anterior, emplazamos la configuración junto al 
         }
     
         @Bean
-        public AuthorItemProcessor processorAuthor() {
+        public ItemProcessor<Author, Author> processorAuthor() {
     
             return new AuthorItemProcessor();
         }
     
         @Bean
-        public FlatFileItemWriter<Author> writerAuthor() {
+        public ItemWriter<Author> writerAuthor() {
             return  new FlatFileItemWriterBuilder<Author>().name("writerAuthor")
                     .resource(new FileSystemResource("target/test-outputs/author-output.txt"))
                     .lineAggregator(new PassThroughLineAggregator<>())
@@ -148,12 +231,12 @@ Posteriormente, como en el caso anterior, emplazamos la configuración junto al 
         }
     
         @Bean
-        public Step step1Author(JobRepository jobRepository, PlatformTransactionManager transactionManager) {
+        public Step step1Author(JobRepository jobRepository, PlatformTransactionManager transactionManager, ItemReader<Author> readerAuthor, ItemProcessor<Author, Author> processorAuthor, ItemWriter<Author> writerAuthor) {
             return new StepBuilder("step1Author", jobRepository)
                     .<Author, Author> chunk(10, transactionManager)
-                    .reader(readerAuthor())
-                    .processor(processorAuthor())
-                    .writer(writerAuthor())
+                    .reader(readerAuthor)
+                    .processor(processorAuthor)
+                    .writer(writerAuthor)
                     .build();
         }
     
@@ -169,9 +252,9 @@ Posteriormente, como en el caso anterior, emplazamos la configuración junto al 
     }
     ```
 
-* **FlatFileItemReader**: Para la ingesta de datos vamos a hacer uso de este `Reader` que nos proporciona Spring Batch. Como se puede observar se le proporciona el fichero a leer y el mapeo a la clase que deseamos. [Aquí](https://docs.spring.io/spring-batch/reference/readers-and-writers/item-reader-writer-implementations.html) el catálogo de Readers que proporciona `Spring Batch`.
-* **CategoryItemProcessor**: El bean del `Processor` que hemos creado anteriormente.
-* **FlatFileItemWriter**: A diferencia del ejemplo anterior utilizamos `Writer` diferente que en este caso nos ayuda a crear un fichero con los datos deseados. [Aquí](https://docs.spring.io/spring-batch/reference/readers-and-writers/item-reader-writer-implementations.html) el catálogo de Writers que proporciona `Spring Batch`.
+* **ItemReader**: El bean del `Reader` que hemos creado anteriormente.
+* **ItemProcessor**: El bean del `Processor` que hemos creado anteriormente.
+* **ItemWriter**: El bean del `Writer` que hemos creado anteriormente.
 * **Step**: La creación del `Step` se realiza mediante él `StepBuilder` al que le definimos el tamaño del `chunk` que es el número de elementos procesados por lote y le asignamos los tres beans creados previamente. En este caso solo vamos a tener un único `Step` pero podríamos tener todos los que quisiéramos.
 * **Job**: Finalmente, debemos definir él `Job` que será lo que se ejecute al lanzar nuestro proceso. La creación se hace mediante el builder correspondiente como en el caso anterior. Se asigna el identificador de `Job`, el conjunto de steps, en este caso solo tenemos uno. En este caso no necesitamos un listener, ya que para verificar el resultado podemos ver el archivo generado.
 
@@ -205,6 +288,19 @@ Esto se realiza pasando una `VM option` en el arranque de la aplicación:
 ```
 
 Hecho esto y ejecutado el batch, podremos ver la traza de la ejecución en nuestro `log` y el fichero generado en el `target` del proyecto:
+
+```
+Job: [FlowJob: [name=jobAuthor]] launched with the following parameters: [{'run.id':'{value=1, type=class java.lang.Long, identifying=true}'}]
+Executing step: [step1Author]
+Converting ( Author [name=Alan R. Moon, nationality=US] ) into ( Author [name=Alan R. Moon, nationality=us_US] )
+Converting ( Author [name=Vital Lacerda, nationality=PT] ) into ( Author [name=Vital Lacerda, nationality=pt_PT] )
+Converting ( Author [name=Simone Luciani, nationality=IT] ) into ( Author [name=Simone Luciani, nationality=it_IT] )
+Converting ( Author [name=Perepau Llistosella, nationality=ES] ) into ( Author [name=Perepau Llistosella, nationality=es_ES] )
+Converting ( Author [name=Michael Kiesling, nationality=DE] ) into ( Author [name=Michael Kiesling, nationality=de_DE] )
+Converting ( Author [name=Phil Walker-Harding, nationality=US] ) into ( Author [name=Phil Walker-Harding, nationality=us_US] )
+Step: [step1Author] executed in 50ms
+Job: [FlowJob: [name=jobAuthor]] completed with the following parameters: [{'run.id':'{value=1, type=class java.lang.Long, identifying=true}'}] and the following status: [COMPLETED] in 67ms
+```
 
 === "author-output.txt"
     ``` txt

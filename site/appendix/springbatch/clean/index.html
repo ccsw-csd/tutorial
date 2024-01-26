@@ -1167,6 +1167,33 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#caso-de-uso" class="md-nav__link">
+    Caso de Uso
+  </a>
+  
+    <nav class="md-nav" aria-label="Caso de Uso">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#que-vamos-a-hacer" class="md-nav__link">
+    ¿Qué vamos a hacer?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#como-lo-vamos-a-hacer" class="md-nav__link">
+    ¿Cómo lo vamos a hacer?
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#codigo" class="md-nav__link">
     Código
   </a>
@@ -1277,6 +1304,33 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#caso-de-uso" class="md-nav__link">
+    Caso de Uso
+  </a>
+  
+    <nav class="md-nav" aria-label="Caso de Uso">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#que-vamos-a-hacer" class="md-nav__link">
+    ¿Qué vamos a hacer?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#como-lo-vamos-a-hacer" class="md-nav__link">
+    ¿Cómo lo vamos a hacer?
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#codigo" class="md-nav__link">
     Código
   </a>
@@ -1326,8 +1380,19 @@
 
 <h1 id="categoria-spring-batch">Categoría - Spring Batch</h1>
 <p>Ya tenemos todo configurado de los pasos anteriores asi que proseguimos con el último ejemplo.</p>
+<h2 id="caso-de-uso">Caso de Uso</h2>
+<p>Este es un caso de uso nuevo para poner en práctica el uso de <code>Tasklet</code>.</p>
+<h3 id="que-vamos-a-hacer">¿Qué vamos a hacer?</h3>
+<p>Vamos a implementar un batch que limpie de ficheros un determinado directorio. Esta vez y dado que no necesitamos realizar ningún tipo de lectura ni trasformación ni escritura y queremos hacerlo todo al mismo tiempo, es buen momento para utilizar un <code>Tasklet</code>.</p>
+<h3 id="como-lo-vamos-a-hacer">¿Cómo lo vamos a hacer?</h3>
+<p>A diferencia de los casos anteriores seguiremos el esquema de funcionamiento de tasklet de un proceso batch que hemos visto en la parte de introducción:</p>
+<p><img alt="clean" src="../../../assets/images/clean.png" /></p>
+<ul>
+<li><strong>Tasklet</strong>: Eliminará todos los ficheros del directorio.</li>
+<li><strong>Step</strong>: El paso que contiene el tasklet que van a realizar la funcionalidad.</li>
+<li><strong>Job</strong>: La tarea que contiene los pasos definidos.</li>
+</ul>
 <h2 id="codigo">Código</h2>
-<p>Vamos a implementar un batch que limpie de ficheros un determinado directorio. Esta vez y dado que no necesitamos realizar ningún tipo de lectura ni trasformación ni escritura y queremos hacerlo todo al mismo tiempo, es buen momento para utilizar un <code>Tasklet</code>. </p>
 <h3 id="tasklet">Tasklet</h3>
 <p>En primer lugar, vamos a crear <code>CleanTasklet</code> dentro del package <code>com.ccsw.tutorialbatch.tasklet</code>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">CleanTasklet.java</label></div>
@@ -1381,8 +1446,10 @@
 <span class="kn">import</span> <span class="nn">org.springframework.batch.core.Job</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">org.springframework.batch.core.Step</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">org.springframework.batch.core.job.builder.JobBuilder</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.batch.core.launch.support.RunIdIncrementer</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">org.springframework.batch.core.repository.JobRepository</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">org.springframework.batch.core.step.builder.StepBuilder</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.batch.core.step.tasklet.Tasklet</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Bean</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Configuration</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">org.springframework.core.io.FileSystemResource</span><span class="p">;</span>
@@ -1392,7 +1459,7 @@
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">CleanBatchConfiguration</span> <span class="p">{</span>
 
     <span class="nd">@Bean</span>
-    <span class="kd">public</span> <span class="n">CleanTasklet</span> <span class="nf">cleanTasklet</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">public</span> <span class="n">Tasklet</span> <span class="nf">taskletClean</span><span class="p">()</span> <span class="p">{</span>
         <span class="n">CleanTasklet</span> <span class="n">tasklet</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CleanTasklet</span><span class="p">();</span>
 
         <span class="n">tasklet</span><span class="p">.</span><span class="na">setDirectoryResource</span><span class="p">(</span><span class="k">new</span> <span class="n">FileSystemResource</span><span class="p">(</span><span class="s">&quot;target/test-outputs&quot;</span><span class="p">));</span>
@@ -1401,15 +1468,16 @@
     <span class="p">}</span>
 
     <span class="nd">@Bean</span>
-    <span class="kd">public</span> <span class="n">Step</span> <span class="nf">step1Clean</span><span class="p">(</span><span class="n">JobRepository</span> <span class="n">jobRepository</span><span class="p">,</span> <span class="n">PlatformTransactionManager</span> <span class="n">transactionManager</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">public</span> <span class="n">Step</span> <span class="nf">step1Clean</span><span class="p">(</span><span class="n">JobRepository</span> <span class="n">jobRepository</span><span class="p">,</span> <span class="n">PlatformTransactionManager</span> <span class="n">transactionManager</span><span class="p">,</span> <span class="n">Tasklet</span> <span class="n">taskletClean</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">return</span> <span class="k">new</span> <span class="n">StepBuilder</span><span class="p">(</span><span class="s">&quot;step1Clean&quot;</span><span class="p">,</span> <span class="n">jobRepository</span><span class="p">)</span>
-                <span class="p">.</span><span class="na">tasklet</span><span class="p">(</span><span class="n">cleanTasklet</span><span class="p">(),</span> <span class="n">transactionManager</span><span class="p">)</span>
+                <span class="p">.</span><span class="na">tasklet</span><span class="p">(</span><span class="n">taskletClean</span><span class="p">,</span> <span class="n">transactionManager</span><span class="p">)</span>
                 <span class="p">.</span><span class="na">build</span><span class="p">();</span>
     <span class="p">}</span>
 
     <span class="nd">@Bean</span>
     <span class="kd">public</span> <span class="n">Job</span> <span class="nf">jobClean</span><span class="p">(</span><span class="n">JobRepository</span> <span class="n">jobRepository</span><span class="p">,</span> <span class="n">Step</span> <span class="n">step1Clean</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">return</span> <span class="k">new</span> <span class="n">JobBuilder</span><span class="p">(</span><span class="s">&quot;jobClean&quot;</span><span class="p">,</span> <span class="n">jobRepository</span><span class="p">)</span>
+                <span class="p">.</span><span class="na">incrementer</span><span class="p">(</span><span class="k">new</span> <span class="n">RunIdIncrementer</span><span class="p">())</span>
                 <span class="p">.</span><span class="na">start</span><span class="p">(</span><span class="n">step1Clean</span><span class="p">)</span>
                 <span class="p">.</span><span class="na">build</span><span class="p">();</span>
     <span class="p">}</span>
@@ -1420,7 +1488,7 @@
 </div>
 </div>
 <ul>
-<li><strong>CleanTasklet</strong>: El bean del <code>Tasklet</code> que hemos creado anteriormente.</li>
+<li><strong>Tasklet</strong>: El bean del <code>Tasklet</code> que hemos creado anteriormente.</li>
 <li><strong>Step</strong>: La creación del <code>Step</code> se realiza mediante él <code>StepBuilder</code> al que únicamente le añadimos el <code>Tasklet</code> que se va a ejecutar de forma atómica.</li>
 <li><strong>Job</strong>: Finalmente, debemos definir él <code>Job</code> que será lo que se ejecute al lanzar nuestro proceso. La creación se hace mediante el builder correspondiente como en los casos anteriores.</li>
 </ul>
@@ -1430,6 +1498,11 @@
 <div class="highlight"><pre><span></span><code>-Dspring.batch.job.name=jobClean
 </code></pre></div></p>
 <p>Hecho esto y ejecutado el batch, podremos ver la traza de la ejecución en nuestro <code>log</code> y que el fichero generado en el <code>target</code> del proyecto de la ejecución del batch de autores ya no está.</p>
+<div class="highlight"><pre><span></span><code>Job: [SimpleJob: [name=jobClean]] launched with the following parameters: [{&#39;run.id&#39;:&#39;{value=1, type=class java.lang.Long, identifying=true}&#39;}]
+Executing step: [step1Clean]
+Step: [step1Clean] executed in 9ms
+Job: [SimpleJob: [name=jobClean]] completed with the following parameters: [{&#39;run.id&#39;:&#39;{value=1, type=class java.lang.Long, identifying=true}&#39;}] and the following status: [COMPLETED] in 23ms
+</code></pre></div>
 
               
             </article>

@@ -1153,6 +1153,33 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#caso-de-uso" class="md-nav__link">
+    Caso de Uso
+  </a>
+  
+    <nav class="md-nav" aria-label="Caso de Uso">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#que-vamos-a-hacer" class="md-nav__link">
+    ¿Qué vamos a hacer?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#como-lo-vamos-a-hacer" class="md-nav__link">
+    ¿Cómo lo vamos a hacer?
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#codigo" class="md-nav__link">
     Código
   </a>
@@ -1168,6 +1195,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#reader" class="md-nav__link">
+    Reader
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#processor" class="md-nav__link">
     Processor
   </a>
@@ -1175,8 +1209,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#reader-writer-step-y-job" class="md-nav__link">
-    Reader, Writer, Step y Job
+  <a href="#writer" class="md-nav__link">
+    Writer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-y-job" class="md-nav__link">
+    Step y Job
   </a>
   
 </li>
@@ -1291,6 +1332,33 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#caso-de-uso" class="md-nav__link">
+    Caso de Uso
+  </a>
+  
+    <nav class="md-nav" aria-label="Caso de Uso">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#que-vamos-a-hacer" class="md-nav__link">
+    ¿Qué vamos a hacer?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#como-lo-vamos-a-hacer" class="md-nav__link">
+    ¿Cómo lo vamos a hacer?
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#codigo" class="md-nav__link">
     Código
   </a>
@@ -1306,6 +1374,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#reader" class="md-nav__link">
+    Reader
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#processor" class="md-nav__link">
     Processor
   </a>
@@ -1313,8 +1388,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#reader-writer-step-y-job" class="md-nav__link">
-    Reader, Writer, Step y Job
+  <a href="#writer" class="md-nav__link">
+    Writer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-y-job" class="md-nav__link">
+    Step y Job
   </a>
   
 </li>
@@ -1354,8 +1436,21 @@
 
 <h1 id="autor-spring-batch">Autor - Spring Batch</h1>
 <p>Ya tenemos todo configurado del paso anterior asi que proseguimos con el siguiente ejemplo.</p>
+<h2 id="caso-de-uso">Caso de Uso</h2>
+<p>En este caso también debemos plantear requisitos diferentes para la parte de Autores.</p>
+<h3 id="que-vamos-a-hacer">¿Qué vamos a hacer?</h3>
+<p>Vamos a implementar un batch para leer un fichero de <code>Autores</code> trasformar la nacionalidad del autor a código de region y general un fichero con los datos trasformados.</p>
+<h3 id="como-lo-vamos-a-hacer">¿Cómo lo vamos a hacer?</h3>
+<p>Al igual que en el caso anterior seguiremos el esquema de funcionamiento habitual de un proceso batch que hemos visto en la parte de introducción:</p>
+<p><img alt="filetofile" src="../../../assets/images/filetofile.png" /></p>
+<ul>
+<li><strong>ItemReader</strong>: Se va a leer de un fichero y convertir los registros leídos al modelo de <code>Author</code>.</li>
+<li><strong>ItemProcessor</strong>: Va a procesar todos los registros convirtiendo el código de nacionalidad al formato xx_XX.</li>
+<li><strong>ItemWriter</strong>: Va a escribir los registros en un fichero.</li>
+<li><strong>Step</strong>: El paso que contiene los elementos que van a realizar la funcionalidad.</li>
+<li><strong>Job</strong>: La tarea que contiene los pasos definidos.</li>
+</ul>
 <h2 id="codigo">Código</h2>
-<p>Vamos a implementar un batch para leer un fichero de <code>Autores</code> trasformar la nacionalidad del autor a código de region y general un fichero con los datos trasformados. </p>
 <h3 id="modelo">Modelo</h3>
 <p>En primer lugar, vamos a crear el modelo dentro del package <code>com.ccsw.tutorialbatch.model</code> de la misma forma que en el ejemplo anterior.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Author.java</label></div>
@@ -1402,9 +1497,37 @@
 </div>
 </div>
 </div>
+<h3 id="reader">Reader</h3>
+<p>Ahora, como en el caso anterior, emplazamos él <code>Reader</code> en la clase donde posteriormente añadiremos la configuración junto al resto de beans, dentro del package <code>com.ccsw.tutorialbatch.config</code>.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">AuthorBatchConfiguration.java</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.ccsw.tutorialbatch.config</span><span class="p">;</span>
+
+<span class="p">...</span>
+
+<span class="nd">@Configuration</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">AuthorBatchConfiguration</span> <span class="p">{</span>
+
+    <span class="nd">@Bean</span>
+    <span class="kd">public</span> <span class="n">ItemReader</span><span class="o">&lt;</span><span class="n">Author</span><span class="o">&gt;</span> <span class="nf">readerAuthor</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="n">FlatFileItemReaderBuilder</span><span class="o">&lt;</span><span class="n">Author</span><span class="o">&gt;</span><span class="p">().</span><span class="na">name</span><span class="p">(</span><span class="s">&quot;authorItemReader&quot;</span><span class="p">)</span>
+                <span class="p">.</span><span class="na">resource</span><span class="p">(</span><span class="k">new</span> <span class="n">ClassPathResource</span><span class="p">(</span><span class="s">&quot;author-list.csv&quot;</span><span class="p">))</span>
+                <span class="p">.</span><span class="na">delimited</span><span class="p">()</span>
+                <span class="p">.</span><span class="na">names</span><span class="p">(</span><span class="k">new</span> <span class="n">String</span><span class="o">[]</span> <span class="p">{</span> <span class="s">&quot;name&quot;</span><span class="p">,</span> <span class="s">&quot;nationality&quot;</span> <span class="p">})</span>
+                <span class="p">.</span><span class="na">fieldSetMapper</span><span class="p">(</span><span class="k">new</span> <span class="n">BeanWrapperFieldSetMapper</span><span class="o">&lt;&gt;</span><span class="p">()</span> <span class="p">{{</span>
+                    <span class="n">setTargetType</span><span class="p">(</span><span class="n">Author</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+                <span class="p">}})</span>
+                <span class="p">.</span><span class="na">build</span><span class="p">();</span>
+    <span class="p">}</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Para la ingesta de datos vamos a hacer uso de este <code>FlatFileItemReader</code> que nos proporciona Spring Batch. Como se puede observar se le proporciona el fichero a leer y el mapeo a la clase que deseamos. <a href="https://docs.spring.io/spring-batch/reference/readers-and-writers/item-reader-writer-implementations.html">Aquí</a> el catálogo de Readers que proporciona <code>Spring Batch</code>.</p>
 <h3 id="processor">Processor</h3>
 <p>Posteriormente, emplazamos él <code>Processor</code> dentro del package <code>com.ccsw.tutorialbatch.processor</code>.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">AuthorItemProcessor.java</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">AuthorItemProcessor.java</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.ccsw.tutorialbatch.processor</span><span class="p">;</span>
@@ -1437,9 +1560,37 @@
 </div>
 <p>De la misma forma que en el caso anterior hemos implementado un <code>Processor</code> personalizado, esta clase implementa <code>ItemProcessor</code> donde especificamos de qué clase a qué clase se va a realizar la trasformación. </p>
 <p>En nuestro caso, va a ser de <code>Author</code> a <code>Author</code> donde vamos a implementar la lógica requerida para este caso de uso.</p>
-<h3 id="reader-writer-step-y-job">Reader, Writer, Step y Job</h3>
-<p>Posteriormente, como en el caso anterior, emplazamos la configuración junto al resto de beans dentro del package <code>com.ccsw.tutorialbatch.config</code>.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">CategoryBatchConfiguration.java</label></div>
+<h3 id="writer">Writer</h3>
+<p>Posteriormente, añadimos el writer a la clase de configuración <code>AuthorBatchConfiguration</code> donde ya habíamos añadido <code>Reader</code>.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:1"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">AuthorBatchConfiguration.java</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.ccsw.tutorialbatch.config</span><span class="p">;</span>
+
+<span class="p">...</span>
+
+<span class="nd">@Configuration</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">AuthorBatchConfiguration</span> <span class="p">{</span>
+
+    <span class="p">...</span>
+
+    <span class="nd">@Bean</span>
+    <span class="kd">public</span> <span class="n">ItemWriter</span><span class="o">&lt;</span><span class="n">Author</span><span class="o">&gt;</span> <span class="nf">writerAuthor</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span>  <span class="k">new</span> <span class="n">FlatFileItemWriterBuilder</span><span class="o">&lt;</span><span class="n">Author</span><span class="o">&gt;</span><span class="p">().</span><span class="na">name</span><span class="p">(</span><span class="s">&quot;writerAuthor&quot;</span><span class="p">)</span>
+                <span class="p">.</span><span class="na">resource</span><span class="p">(</span><span class="k">new</span> <span class="n">FileSystemResource</span><span class="p">(</span><span class="s">&quot;target/test-outputs/author-output.txt&quot;</span><span class="p">))</span>
+                <span class="p">.</span><span class="na">lineAggregator</span><span class="p">(</span><span class="k">new</span> <span class="n">PassThroughLineAggregator</span><span class="o">&lt;&gt;</span><span class="p">())</span>
+                <span class="p">.</span><span class="na">build</span><span class="p">();</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>A diferencia del ejemplo anterior utilizamos <code>FlatFileItemWriter</code> diferente que en este caso nos ayuda a crear un fichero con los datos deseados. <a href="https://docs.spring.io/spring-batch/reference/readers-and-writers/item-reader-writer-implementations.html">Aquí</a> el catálogo de Writers que proporciona <code>Spring Batch</code>.</p>
+<h3 id="step-y-job">Step y Job</h3>
+<p>Ahora ya podemos añadir la configuración del <code>Step</code> y del <code>Job</code> dentro de la clase de configuración. La clase completa debería quedar de esta forma:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:1"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">AuthorBatchConfiguration.java</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.ccsw.tutorialbatch.config</span><span class="p">;</span>
@@ -1453,6 +1604,9 @@
 <span class="kn">import</span> <span class="nn">org.springframework.batch.core.launch.support.RunIdIncrementer</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">org.springframework.batch.core.repository.JobRepository</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">org.springframework.batch.core.step.builder.StepBuilder</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.batch.item.ItemProcessor</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.batch.item.ItemReader</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.batch.item.ItemWriter</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">org.springframework.batch.item.file.FlatFileItemReader</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">org.springframework.batch.item.file.FlatFileItemWriter</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder</span><span class="p">;</span>
@@ -1469,7 +1623,7 @@
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">AuthorBatchConfiguration</span> <span class="p">{</span>
 
     <span class="nd">@Bean</span>
-    <span class="kd">public</span> <span class="n">FlatFileItemReader</span><span class="o">&lt;</span><span class="n">Author</span><span class="o">&gt;</span> <span class="nf">readerAuthor</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">public</span> <span class="n">ItemReader</span><span class="o">&lt;</span><span class="n">Author</span><span class="o">&gt;</span> <span class="nf">readerAuthor</span><span class="p">()</span> <span class="p">{</span>
         <span class="k">return</span> <span class="k">new</span> <span class="n">FlatFileItemReaderBuilder</span><span class="o">&lt;</span><span class="n">Author</span><span class="o">&gt;</span><span class="p">().</span><span class="na">name</span><span class="p">(</span><span class="s">&quot;authorItemReader&quot;</span><span class="p">)</span>
                 <span class="p">.</span><span class="na">resource</span><span class="p">(</span><span class="k">new</span> <span class="n">ClassPathResource</span><span class="p">(</span><span class="s">&quot;author-list.csv&quot;</span><span class="p">))</span>
                 <span class="p">.</span><span class="na">delimited</span><span class="p">()</span>
@@ -1481,13 +1635,13 @@
     <span class="p">}</span>
 
     <span class="nd">@Bean</span>
-    <span class="kd">public</span> <span class="n">AuthorItemProcessor</span> <span class="nf">processorAuthor</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">public</span> <span class="n">ItemProcessor</span><span class="o">&lt;</span><span class="n">Author</span><span class="p">,</span> <span class="n">Author</span><span class="o">&gt;</span> <span class="nf">processorAuthor</span><span class="p">()</span> <span class="p">{</span>
 
         <span class="k">return</span> <span class="k">new</span> <span class="n">AuthorItemProcessor</span><span class="p">();</span>
     <span class="p">}</span>
 
     <span class="nd">@Bean</span>
-    <span class="kd">public</span> <span class="n">FlatFileItemWriter</span><span class="o">&lt;</span><span class="n">Author</span><span class="o">&gt;</span> <span class="nf">writerAuthor</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">public</span> <span class="n">ItemWriter</span><span class="o">&lt;</span><span class="n">Author</span><span class="o">&gt;</span> <span class="nf">writerAuthor</span><span class="p">()</span> <span class="p">{</span>
         <span class="k">return</span>  <span class="k">new</span> <span class="n">FlatFileItemWriterBuilder</span><span class="o">&lt;</span><span class="n">Author</span><span class="o">&gt;</span><span class="p">().</span><span class="na">name</span><span class="p">(</span><span class="s">&quot;writerAuthor&quot;</span><span class="p">)</span>
                 <span class="p">.</span><span class="na">resource</span><span class="p">(</span><span class="k">new</span> <span class="n">FileSystemResource</span><span class="p">(</span><span class="s">&quot;target/test-outputs/author-output.txt&quot;</span><span class="p">))</span>
                 <span class="p">.</span><span class="na">lineAggregator</span><span class="p">(</span><span class="k">new</span> <span class="n">PassThroughLineAggregator</span><span class="o">&lt;&gt;</span><span class="p">())</span>
@@ -1495,12 +1649,12 @@
     <span class="p">}</span>
 
     <span class="nd">@Bean</span>
-    <span class="kd">public</span> <span class="n">Step</span> <span class="nf">step1Author</span><span class="p">(</span><span class="n">JobRepository</span> <span class="n">jobRepository</span><span class="p">,</span> <span class="n">PlatformTransactionManager</span> <span class="n">transactionManager</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">public</span> <span class="n">Step</span> <span class="nf">step1Author</span><span class="p">(</span><span class="n">JobRepository</span> <span class="n">jobRepository</span><span class="p">,</span> <span class="n">PlatformTransactionManager</span> <span class="n">transactionManager</span><span class="p">,</span> <span class="n">ItemReader</span><span class="o">&lt;</span><span class="n">Author</span><span class="o">&gt;</span> <span class="n">readerAuthor</span><span class="p">,</span> <span class="n">ItemProcessor</span><span class="o">&lt;</span><span class="n">Author</span><span class="p">,</span> <span class="n">Author</span><span class="o">&gt;</span> <span class="n">processorAuthor</span><span class="p">,</span> <span class="n">ItemWriter</span><span class="o">&lt;</span><span class="n">Author</span><span class="o">&gt;</span> <span class="n">writerAuthor</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">return</span> <span class="k">new</span> <span class="n">StepBuilder</span><span class="p">(</span><span class="s">&quot;step1Author&quot;</span><span class="p">,</span> <span class="n">jobRepository</span><span class="p">)</span>
                 <span class="p">.</span><span class="o">&lt;</span><span class="n">Author</span><span class="p">,</span> <span class="n">Author</span><span class="o">&gt;</span> <span class="nf">chunk</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">transactionManager</span><span class="p">)</span>
-                <span class="p">.</span><span class="na">reader</span><span class="p">(</span><span class="n">readerAuthor</span><span class="p">())</span>
-                <span class="p">.</span><span class="na">processor</span><span class="p">(</span><span class="n">processorAuthor</span><span class="p">())</span>
-                <span class="p">.</span><span class="na">writer</span><span class="p">(</span><span class="n">writerAuthor</span><span class="p">())</span>
+                <span class="p">.</span><span class="na">reader</span><span class="p">(</span><span class="n">readerAuthor</span><span class="p">)</span>
+                <span class="p">.</span><span class="na">processor</span><span class="p">(</span><span class="n">processorAuthor</span><span class="p">)</span>
+                <span class="p">.</span><span class="na">writer</span><span class="p">(</span><span class="n">writerAuthor</span><span class="p">)</span>
                 <span class="p">.</span><span class="na">build</span><span class="p">();</span>
     <span class="p">}</span>
 
@@ -1519,15 +1673,15 @@
 </div>
 </div>
 <ul>
-<li><strong>FlatFileItemReader</strong>: Para la ingesta de datos vamos a hacer uso de este <code>Reader</code> que nos proporciona Spring Batch. Como se puede observar se le proporciona el fichero a leer y el mapeo a la clase que deseamos. <a href="https://docs.spring.io/spring-batch/reference/readers-and-writers/item-reader-writer-implementations.html">Aquí</a> el catálogo de Readers que proporciona <code>Spring Batch</code>.</li>
-<li><strong>CategoryItemProcessor</strong>: El bean del <code>Processor</code> que hemos creado anteriormente.</li>
-<li><strong>FlatFileItemWriter</strong>: A diferencia del ejemplo anterior utilizamos <code>Writer</code> diferente que en este caso nos ayuda a crear un fichero con los datos deseados. <a href="https://docs.spring.io/spring-batch/reference/readers-and-writers/item-reader-writer-implementations.html">Aquí</a> el catálogo de Writers que proporciona <code>Spring Batch</code>.</li>
+<li><strong>ItemReader</strong>: El bean del <code>Reader</code> que hemos creado anteriormente.</li>
+<li><strong>ItemProcessor</strong>: El bean del <code>Processor</code> que hemos creado anteriormente.</li>
+<li><strong>ItemWriter</strong>: El bean del <code>Writer</code> que hemos creado anteriormente.</li>
 <li><strong>Step</strong>: La creación del <code>Step</code> se realiza mediante él <code>StepBuilder</code> al que le definimos el tamaño del <code>chunk</code> que es el número de elementos procesados por lote y le asignamos los tres beans creados previamente. En este caso solo vamos a tener un único <code>Step</code> pero podríamos tener todos los que quisiéramos.</li>
 <li><strong>Job</strong>: Finalmente, debemos definir él <code>Job</code> que será lo que se ejecute al lanzar nuestro proceso. La creación se hace mediante el builder correspondiente como en el caso anterior. Se asigna el identificador de <code>Job</code>, el conjunto de steps, en este caso solo tenemos uno. En este caso no necesitamos un listener, ya que para verificar el resultado podemos ver el archivo generado.</li>
 </ul>
 <h3 id="fichero-carga">Fichero Carga</h3>
 <p>Finalmente, debemos crear el fichero que leeremos con los datos de los autores que deseamos procesar.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="4:1"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">author-list.csv</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:1"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">author-list.csv</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code>Alan R. Moon,US
@@ -1549,7 +1703,18 @@ Phil Walker-Harding,US
 <div class="highlight"><pre><span></span><code>-Dspring.batch.job.name=jobCtegory
 </code></pre></div></p>
 <p>Hecho esto y ejecutado el batch, podremos ver la traza de la ejecución en nuestro <code>log</code> y el fichero generado en el <code>target</code> del proyecto:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="5:1"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">author-output.txt</label></div>
+<div class="highlight"><pre><span></span><code>Job: [FlowJob: [name=jobAuthor]] launched with the following parameters: [{&#39;run.id&#39;:&#39;{value=1, type=class java.lang.Long, identifying=true}&#39;}]
+Executing step: [step1Author]
+Converting ( Author [name=Alan R. Moon, nationality=US] ) into ( Author [name=Alan R. Moon, nationality=us_US] )
+Converting ( Author [name=Vital Lacerda, nationality=PT] ) into ( Author [name=Vital Lacerda, nationality=pt_PT] )
+Converting ( Author [name=Simone Luciani, nationality=IT] ) into ( Author [name=Simone Luciani, nationality=it_IT] )
+Converting ( Author [name=Perepau Llistosella, nationality=ES] ) into ( Author [name=Perepau Llistosella, nationality=es_ES] )
+Converting ( Author [name=Michael Kiesling, nationality=DE] ) into ( Author [name=Michael Kiesling, nationality=de_DE] )
+Converting ( Author [name=Phil Walker-Harding, nationality=US] ) into ( Author [name=Phil Walker-Harding, nationality=us_US] )
+Step: [step1Author] executed in 50ms
+Job: [FlowJob: [name=jobAuthor]] completed with the following parameters: [{&#39;run.id&#39;:&#39;{value=1, type=class java.lang.Long, identifying=true}&#39;}] and the following status: [COMPLETED] in 67ms
+</code></pre></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:1"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">author-output.txt</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code>Author [name=Alan R. Moon, nationality=us_US]
