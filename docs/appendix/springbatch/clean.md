@@ -1,4 +1,4 @@
-# Categoría - Spring Batch
+# Limpieza - Spring Batch
 
 Ya tenemos todo configurado de los pasos anteriores asi que proseguimos con el último ejemplo.
 
