@@ -4,7 +4,7 @@
 Las herramientas básicas que vamos a utilizar para esta tecnología son:
 
 * [Visual Studio Code](https://code.visualstudio.com/)
-* [Nodejs](https://nodejs.org/es/)
+* [Nodejs](https://nodejs.org/en/)
 * [MongoDB Atlas](https://www.mongodb.com/atlas/database)
 * [Postman](https://www.postman.com/)
 

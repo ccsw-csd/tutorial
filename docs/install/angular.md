@@ -17,7 +17,7 @@ Te recomiendo utilizar [Visual Studio Code](https://code.visualstudio.com/), en 
 
 ### Nodejs
 
-El siguiente paso será instalar el motor de [Nodejs](https://nodejs.org/es/). Entrando en la página de descargas e instalando la última versión estable. Con esta herramienta podremos compilar y ejecutar aplicaciones basadas en Javascript y Typescript, e instalar y gestionar las dependencias de las aplicaciones.
+El siguiente paso será instalar el motor de [Nodejs](https://nodejs.org/en). Entrando en la página de descargas e instalando la última versión estable. Con esta herramienta podremos compilar y ejecutar aplicaciones basadas en Javascript y Typescript, e instalar y gestionar las dependencias de las aplicaciones.
 
 
 ### Angular CLI

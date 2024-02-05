@@ -4,7 +4,7 @@
 Las herramientas básicas que vamos a utilizar para esta tecnología son:
 
 * [Visual Studio Code](https://code.visualstudio.com/)
-* [Nodejs](https://nodejs.org/es/)
+* [Nodejs](https://nodejs.org/en)
 * [Quasar CLI](https://quasar.dev/start/quick-start)
 
 
