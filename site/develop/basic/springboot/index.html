@@ -948,6 +948,30 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Depuración">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#intellij" class="md-nav__link">
+    <span class="md-ellipsis">
+      IntelliJ
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#eclipse" class="md-nav__link">
+    <span class="md-ellipsis">
+      Eclipse
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -2076,6 +2100,30 @@
       Depuración
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Depuración">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#intellij" class="md-nav__link">
+    <span class="md-ellipsis">
+      IntelliJ
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#eclipse" class="md-nav__link">
+    <span class="md-ellipsis">
+      Eclipse
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -3234,8 +3282,27 @@ Seguidamente, recuperamos de nuevo la lista de categorías y en este caso deber�
 </ul>
 <h2 id="depuracion">Depuración</h2>
 <p>Una parte muy importante del desarrollo es tener la capacidad de depurar nuestro código, en este apartado vamos a explicar como se realiza <code>debug</code> en Backend.</p>
-<p>Esta parte se realiza con las herramientas incluidas dentro de nuestro IDE favorito, en este caso vamos a utilizar el Eclipse.</p>
-<p>Lo primero que debemos hacer es arrancar la aplicación en modo <code>Debug</code>:</p>
+<p>Esta parte se realiza con las herramientas incluidas dentro de nuestro IDE favorito, dependerá del que tengas instalado, se hace de una forma u otra.</p>
+<h3 id="intellij">IntelliJ</h3>
+<p>En caso de que hayas elegido instalar IntelliJ, lo primero que debemos hacer es arrancar la aplicación en modo <code>Debug</code>:</p>
+<p><img alt="back1-debug1" src="../../../assets/images/back1-intellij-debug1.png" /> </p>
+<p>o bien</p>
+<p><img alt="back1-debug1" src="../../../assets/images/back1-intellij-debug2.png" /> </p>
+<p>Arrancada la aplicación en este modo, vamos a depurar la operación de crear categoría.</p>
+<p>Para ello vamos a abrir nuestro fichero donde tenemos la implementación del servicio de creación de la capa de la lógica de negocio <code>CategoryServiceImpl</code>.</p>
+<p>Dentro del fichero ya podemos añadir puntos de ruptura (breakpoint), en nuestro caso queremos comprobar en el método <code>save</code> que el nombre introducido se recibe correctamente.</p>
+<p>Colocamos el breakpoint en la primera línea del método <code>save</code> (click al lado del número de la línea):</p>
+<p><img alt="back1-debug1" src="../../../assets/images/back1-intellij-debug3.png" /> </p>
+<p>y desde la interfaz/postman creamos una nueva categoría para lanzar la petición y que se detenga la ejecución en debug.</p>
+<p>Hecho esto, podemos observar que a nivel de interfaz/postman, la petición se queda esperando y el IDE pasa modo <code>Debug</code>. En la parte inferior del IDE podemos ver la pila de llamadas y las variables actuales en memoria:</p>
+<p><img alt="back1-debug1" src="../../../assets/images/back1-intellij-debug4.png" /> </p>
+<p>El IDE nos lleva al punto exacto donde hemos añadido el breakpoint y se para en este punto ofreciéndonos la posibilidad de explorar el contenido de las variables del código:</p>
+<p><img alt="back1-debug1" src="../../../assets/images/back1-intellij-debug5.png" /> </p>
+<p>Aquí podemos comprobar que efectivamente el atributo <code>name</code> de la variable <code>dto</code> tiene el valor que hemos introducido por pantalla/postman.</p>
+<p>Para continuar con la ejecución basta con darle al botón de <code>play</code> de la barra de herramientas inferior-izquierda, o incluso navegar por las siguientes líneas de código.</p>
+<p><img alt="back1-debug1" src="../../../assets/images/back1-intellij-debug6.png" /> </p>
+<h3 id="eclipse">Eclipse</h3>
+<p>En caso de que hayas elegido instalar Eclipse, lo primero que debemos hacer es arrancar la aplicación en modo <code>Debug</code>:</p>
 <p><img alt="back1-debug1" src="../../../assets/images/back1-debug1.png" /></p>
 <p>Arrancada la aplicación en este modo, vamos a depurar la operación de crear categoría.</p>
 <p>Para ello vamos a abrir nuestro fichero donde tenemos la implementación del servicio de creación de la capa de la lógica de negocio <code>CategoryServiceImpl</code>.</p>

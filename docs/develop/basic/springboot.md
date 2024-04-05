@@ -1209,9 +1209,50 @@ Resumiendo un poco los pasos que hemos seguido:
 
 Una parte muy importante del desarrollo es tener la capacidad de depurar nuestro código, en este apartado vamos a explicar como se realiza `debug` en Backend.
 
-Esta parte se realiza con las herramientas incluidas dentro de nuestro IDE favorito, en este caso vamos a utilizar el Eclipse.
+Esta parte se realiza con las herramientas incluidas dentro de nuestro IDE favorito, dependerá del que tengas instalado, se hace de una forma u otra.
 
-Lo primero que debemos hacer es arrancar la aplicación en modo `Debug`:
+
+### IntelliJ
+
+En caso de que hayas elegido instalar IntelliJ, lo primero que debemos hacer es arrancar la aplicación en modo `Debug`:
+
+![back1-debug1](../../assets/images/back1-intellij-debug1.png) 
+
+o bien
+
+![back1-debug1](../../assets/images/back1-intellij-debug2.png) 
+
+Arrancada la aplicación en este modo, vamos a depurar la operación de crear categoría.
+
+Para ello vamos a abrir nuestro fichero donde tenemos la implementación del servicio de creación de la capa de la lógica de negocio `CategoryServiceImpl`.
+
+Dentro del fichero ya podemos añadir puntos de ruptura (breakpoint), en nuestro caso queremos comprobar en el método `save` que el nombre introducido se recibe correctamente.
+
+Colocamos el breakpoint en la primera línea del método `save` (click al lado del número de la línea):
+
+
+![back1-debug1](../../assets/images/back1-intellij-debug3.png) 
+
+ y desde la interfaz/postman creamos una nueva categoría para lanzar la petición y que se detenga la ejecución en debug.
+
+Hecho esto, podemos observar que a nivel de interfaz/postman, la petición se queda esperando y el IDE pasa modo `Debug`. En la parte inferior del IDE podemos ver la pila de llamadas y las variables actuales en memoria:
+
+![back1-debug1](../../assets/images/back1-intellij-debug4.png) 
+
+El IDE nos lleva al punto exacto donde hemos añadido el breakpoint y se para en este punto ofreciéndonos la posibilidad de explorar el contenido de las variables del código:
+
+![back1-debug1](../../assets/images/back1-intellij-debug5.png) 
+
+Aquí podemos comprobar que efectivamente el atributo `name` de la variable `dto` tiene el valor que hemos introducido por pantalla/postman.
+
+Para continuar con la ejecución basta con darle al botón de `play` de la barra de herramientas inferior-izquierda, o incluso navegar por las siguientes líneas de código.
+
+![back1-debug1](../../assets/images/back1-intellij-debug6.png) 
+
+
+### Eclipse 
+
+En caso de que hayas elegido instalar Eclipse, lo primero que debemos hacer es arrancar la aplicación en modo `Debug`:
 
 ![back1-debug1](../../assets/images/back1-debug1.png)
 
