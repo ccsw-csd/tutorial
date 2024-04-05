@@ -4,7 +4,8 @@
 Las herramientas básicas que vamos a utilizar para esta tecnología son:
 
 * [Visual Studio Code](https://code.visualstudio.com/)
-* [Nodejs](https://nodejs.org/en)
+* [Scoop.sh](https://scoop.sh/)
+* Nodejs
 * Angular CLI
 
 
@@ -15,14 +16,40 @@ Lo primero de todo es instalar el IDE para el desarrollo front.
 Te recomiendo utilizar [Visual Studio Code](https://code.visualstudio.com/), en un IDE que a nosotros nos gusta mucho y tiene muchos plugins configurables. Puedes entrar en su página y descargarte la versión estable.
 
 
+### Scoop.sh
+
+Muchas de las herramientas que necesitarás a lo largo de tu estancia en los proyectos, no podrás instalarlas por temas de permisos de seguridad en nuestros portátiles. Una forma de evitar estos permisos de seguridad y poder instalar herramientas (sobre todo a nivel de consola), es utilizando a [Scoop.sh](https://scoop.sh/).
+
+Para instalar *scoop.sh* tan solo necesitas abrir un termina de PowerShell (**OJO que es PowerShell y no una consola de msdos**) y ejecutar los siguientes comandos:
+
+```
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
+```
+
+Esto nos instalará *scoop.sh* en nuestros portátiles. Además de la instalación, y debido a las restricciones de seguridad que tenemos, necesitaremos activar el *lessmsi* para que las aplicaciones que necesitemos instalar no intenten ejecutar los .exe de instalación, sino que descompriman el zip. Para ello deberemos ejecutar el comando:
+
+```
+scoop config use_lessmsi true
+```
+
+A partir de este punto, ya tenemos listo el portátil para instalar herramientas y aplicaciones.
+
+
 ### Nodejs
 
-El siguiente paso será instalar el motor de [Nodejs](https://nodejs.org/en). Entrando en la página de descargas e instalando la última versión estable. Con esta herramienta podremos compilar y ejecutar aplicaciones basadas en Javascript y Typescript, e instalar y gestionar las dependencias de las aplicaciones.
+El siguiente paso será instalar el motor de Nodejs. Para esto vamos a usar *scoop.sh* ya que lo tenemos instalado, y vamos a pedirle que nos instalé el motor de Nodejs. Abriremos una consola de msdos y ejecutaremos el comando:
+
+```
+scoop install main/nodejs
+```
+
+Con esto, scoop ya nos instalará todo lo necesario.
 
 
 ### Angular CLI
 
-Por último vamos a instalar una capa de gestión por encima de Nodejs que nos ayudará en concreto con la funcionalida de Angular. En concreto instalaremos el CLI de Angular para la versión 16. Para poder instalarlo, tan solo hay que abrir una consola de msdos y ejecutar el comando y Nodejs ya hará el resto:
+El siguiente pasó será instalar una capa de gestión por encima de Nodejs que nos ayudará en concreto con la funcionalidad de Angular. En concreto instalaremos el CLI de Angular para la versión 16. Para poder instalarlo, tan solo hay que abrir una consola de msdos y ejecutar el comando y Nodejs ya hará el resto:
 
 ```
 npm install -g @angular/cli@16

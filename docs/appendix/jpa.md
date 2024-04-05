@@ -18,7 +18,7 @@ Esto es muy útil, ya que convierte a la aplicación en agnósticos de la tecnol
 
 Esta es la opción más indicada en la mayoría de los casos, siempre que puedas deberías utilizar esta forma de realizar las consultas. Como parte negativa, en algunos casos en consultas más complejas la definición de los métodos puede extenderse demasiado dificultando la lectura del código.
 
-De esto tenemos algún ejemplo por el tutorial, en el repositorio de [GameRepository](../../develop/filtered/springboot/#repository).
+De esto tenemos algún ejemplo por el tutorial, en el repositorio de [GameRepository](../develop/filtered/springboot.md#repository).
 
 Siguiendo el ejemplo del tutorial, si tuvieramos que recuperar los `Game` por el nombre del juego, se podría crear un método en el `GameRepository` de esta forma:
 
@@ -37,7 +37,7 @@ Se pueden contruir muchos métodos diferentes, te recomiendo que leas un pequeñ
 
 Otra forma de realizar consultas, esta vez menos automática y más cercana a SQL, es la anotación @Query.
 
-Existen dos opciones a la hora de usar la anotación `@Query`. Esta anotación ya la hemos usado en el tutorial, dentro del [GameRepository](../../develop/filtered/springboot/#repository).
+Existen dos opciones a la hora de usar la anotación `@Query`. Esta anotación ya la hemos usado en el tutorial, dentro del [GameRepository](../develop/filtered/springboot.md#repository).
 
 En primer lugar tenemos las consultas JPQL. Estas guardan un parecido con el lenguaje SQL pero al igual que en el caso anterior, son traducidas por Spring Data a la consulta final nativa. Su uso no está recomendado ya que estamos añadiendo un nivel de concreción y por tanto estamos aumentando la complejidad del código. Aun así, es otra forma de generar consultas.
 

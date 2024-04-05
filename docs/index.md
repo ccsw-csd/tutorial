@@ -1,6 +1,6 @@
 # Bienvenido!
 
-Si estás leyendo esto es porque tienes mucha fuerza de voluntad y unas enormes ganas de aprender a desarrollar con el stack tecnológico de CCA (Java Spring Boot, Nodejs, Angular, React) o porque te han mandando hacer este tutorial en tu etapa de formación.
+Si estás leyendo esto es porque tienes mucha fuerza de voluntad y unas enormes ganas de aprender a desarrollar con el stack tecnológico de CCA (Java Spring Boot, Nodejs, Angular, React, Vue) o porque te han mandando hacer este tutorial en tu etapa de formación.
 En cualquier caso, te agradecemos el esfuerzo que estás haciendo y te deseamos suerte :smile:.
 
 Por favor, si detectas que hay algo incorrecto en el tutorial, que no funciona o que está mal escrito, contacta con nosotros para que podamos solventarlo para futuras lecturas. Escríbenos un issue [aquí](https://github.com/ccsw-csd/tutorial/issues).

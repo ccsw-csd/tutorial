@@ -1,6 +1,6 @@
 # Contexto de la aplicación
 
-## ** Introducción **
+## Introducción
 
 Nuestro amigo *Ernesto Esvida* es muy aficionado a los juegos de mesa y desde muy pequeño ha ido coleccionando muchos juegos. Hasta tal punto que ha decidido regentar una Ludoteca.
 
@@ -59,7 +59,7 @@ A partir de ahora, para que sea más sencillo acceder al tutorial, diferenciarem
     Durante todo el tutorial, voy a intentar separar la construcción del proyecto Frontend de la construcción del proyecto Backend. Elige una tecnología para cada una de las capas y utiliza siempre la misma en todos los apartados del tutorial.
 
 
-## ** Diseño de BD **
+## Diseño de BD
 
 Para el proyecto que vamos a crear vamos a modelizar y gestionar 3 entidades: `CATEGORY`, `AUTHOR` y `GAME`.
 
@@ -90,7 +90,7 @@ Modelando este contexto quedaría algo similar a esto:
 ![diagrama-bd](./assets/images/diagrama-bd.png)
 
 
-## ** Diseño de pantallas **
+## Diseño de pantallas
 
 Deberíamos construir tres pantallas de mantenimiento CRUD (Create, Read, Update, Delete) y una pantalla de Login general para activar las acciones de administrador. Más o menos las pantallas deberían quedar así:
 
@@ -113,7 +113,7 @@ Deberíamos construir tres pantallas de mantenimiento CRUD (Create, Read, Update
 ![edicion-juego](./assets/images/edicion-juego.png)
 
 
-## ** Diseño funcional **
+## Diseño funcional
 
 Por último vamos a definir un poco la funcionalidad básica que Ernesto necesita para iniciar su negocio.
 

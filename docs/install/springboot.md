@@ -3,25 +3,78 @@
 ## Instalación de herramientas
 Las herramientas básicas que vamos a utilizar para esta tecnología son:
 
-* [Eclipse IDE](https://www.eclipse.org/downloads/)
-* Maven *(viene por defecto con Eclipse IDE)*
-* [Java 19](https://www.oracle.com/java/technologies/downloads/#jdk19-windows)
+* [IntelliJ](https://www.jetbrains.com/es-es/idea/) o [Eclipse IDE](https://www.eclipse.org/downloads/) (el que más te guste)
+* [Java 17](https://www.oracle.com/java/technologies/downloads/#java17) o superior
 * [Postman](https://www.postman.com/)
 
 
+### Instalación de IntelliJ IDEA
 
-### Instalación de IDE - Eclipse
+Nuestra preferencia es utilizar IntelliJ ya que es un IDE más moderno que Eclise IDE, pero cualquiera de los dos es válido para hacer el tutorial. Debido a las restricciones que tenemos en nuestros portátiles no será posible descargarnos una versión de la web e instalarlo, aunque existe otra forma de hacerlo.
 
-Necesitamos instalar un IDE de desarrollo, en nuestro caso será Eclipse IDE y la máquina virtual de java necesaria para ejecutar el código. Recomendamos Java 19, que es la versión con la que está desarrollado y probado el tutorial. 
+Deberemos acceder al "Portal de Empresa" que tenemos instalado en nuestro portátil. Teclear en el buscador de Windows (o en el menú de inicio) el texto "Portal de empresa". Debería aparecerte una app instalada en tu ordenador y hacer click en ella:
+
+![IntelliJ1](../assets/images/install-intellij1.png)
+
+
+Una vez dentro del portal de empresa, verás una aplicación que se llama "Pre-Approved Catalogue". Deberás instalarla, de hecho cada vez que quieras acceder a ella, tendrás que instalarla para que se descargue el nuevo catálogo.
+
+![IntelliJ2](../assets/images/install-intellij2.png)
+
+
+Después de unos minutos de instalación, entrarás en un listado de las aplicaciones que están pre-aprobadas por la empresa. Solo tendrás que buscar "IntelliJ IDEA Community Edition" e instalarla.
+
+![IntelliJ3](../assets/images/install-intellij3.png)
+
+Pasados unos minutos, ya tendrás instalado el IDE en tu portátil.
+
+
+ 
+#### Configuración del IDE
+
+Como complemento al IntelliJ, con el fin de crear código homogéneo y mantenible, vamos a configurar el formateador de código automático.
+
+Para ello de nuevo abrimos el menú `Customize -> All Settings` o el menú `Settings` si estamos en un proyecto, nos vamos a la sección `Editor -> Code Style -> Java` y aparecerá una pantalla similar a esta:
+
+![Formatting](../assets/images/install-intellij4.png)
+
+En el botón de `opciones`, nos permitirá "Importar esquema" desde Intellij IDEA:
+
+![Formatting](../assets/images/install-intellij5.png)
+
+Nos descargamos el fichero de [Formmatter Profile IntelliJ](../assets/formatter-profile-intellij.xml) y lo importamos en IntelliJ.
+
+Una vez cofigurado el nuevo formateador debemos activar que se aplique en el guardado. Para ello volvemos acceder a las preferencias de IntelliJ y nos dirigimos a la sub sección `Tools -> Actions os Save`. Es posible que esta sección solo esté disponible cuando creemos o importemos un proyecto, así que volveremos más adelante aquí.
+
+![Formatting](../assets/images/install-intellij6.png)
+
+Hay que activar la opción `Reformat code` y `Optimize imports`.
+
+
+
+
+
+### (Obsoleto) Instalación de Eclipse IDE
+
+Si no te gusta IntelliJ, puedes utilizar Eclipse IDE y la máquina virtual de java necesaria para ejecutar el código. Recomendamos Java 17 o superior, que es la versión con la que está desarrollado y probado el tutorial. 
 
 Para instalar el IDE deberás acceder a la web de [Eclipse IDE](https://www.eclipse.org/downloads/) y descargarte la última versión del instalador. Una vez lo ejecutes te pedirá el tipo de instalación que deseas instalar. Por lo general con la de "Eclipse IDE for Java Developers" es suficiente. Con esta versión ya tiene integrado los plugins de Maven y Git.
 
+Pero recuerda que tendrás que instalar una versión acorde de Java ya que Eclipse viene con una versión vieja.
 
-### Instalación de Java
 
-Una vez instalado eclipse, debes asegurarte que está usando por defecto la versión de Java 19 y para ello deberás instalarla. Descárgala del siguiente [enlace](https://www.oracle.com/java/technologies/downloads/#jdk19-windows). Es posible que te pida un registro de correo, utiliza el email que quieras (corporativo o personal). Revisa bien el enlace para buscar y descargar la versión 19 para Windows: 
+
+#### Instalación de Java
+
+Si has instalado IntelliJ, te puedes saltar este punto.
+
+Si has instalado Eclise IDE, debes asegurarte que está usando por defecto la versión de Java 17 o superior y para ello deberás instalarla. Descárgala del siguiente [enlace](https://www.oracle.com/java/technologies/downloads/#jdk17). Es posible que te pida un registro de correo, utiliza el email que quieras (corporativo o personal). Revisa bien el enlace para buscar y descargar la versión 17 para Windows.
+
+**OJO no instales el ejecutable .exe** ya que no funcionará debido a nuestras medidas de seguridad. Debes descargarte el .zip y descomprimirlo en algún directorio local.
+
 
 ![Installed JREs](../assets/images/install-java.png)
+
 
 
 Ya solo queda añadir Java al Eclipse. Para ello, abre el menú `Window -> Preferences`:
@@ -33,7 +86,7 @@ y dentro de la sección `Java - Installed JREs` añade la versión que acabas de
 ![Installed JREs](../assets/images/install-eclipse.png)
 
 
-### Configuración de IDE - Eclipse
+#### Configuración de Eclipse
 
 Como complemento al Eclipse, con el fin de crear código homogéneo y mantenible, vamos a configurar el formateador de código automático.
 
@@ -81,10 +134,10 @@ Esta página está disponible desde [Spring Initializr](https://start.spring.io/
 
 * Tipo de proyecto: Maven
 * Lenguage: Java
-* Versión Spring boot: 3.0.4 (o alguna similar)
+* Versión Spring boot: 3.2.4 (o alguna similar que no sea SNAPSHOPT y que sea 3.x)
 * Group: com.ccsw
 * ArtifactId: tutorial
-* Versión Java: 19
+* Versión Java: 17 (o superior)
 * Dependencias: Spring Web, Spring Data JPA, H2 Database
 
 
@@ -92,7 +145,13 @@ Esta página está disponible desde [Spring Initializr](https://start.spring.io/
 
 Esto nos generará un proyecto que ya vendrá configurado con Spring Web, JPA y H2 para crear una BBDD en memoria de ejemplo con la que trabajaremos durante el tutorial.
 
-#### Importar en eclipse
+#### Importar en IntelliJ
+
+El siguiente paso, es descomprimir el proyecto generado e importarlo en el IDE. Abrimos IntelliJ, pulsamos en "Open" y buscamos la carpeta donde hemos descomprimido el proyecto.
+
+Una vez importado, recuerda darle al menú File → Settings y configurar las acciones de `Actions on save` que se explicarón en el punto `Configuración del IDE`.
+
+#### Importar en Eclipse
 
 El siguiente paso, es descomprimir el proyecto generado e importarlo como proyecto Maven. Abrimos el eclipse, pulsamos en File → Import y seleccionamos `Existing Maven Projects`. Buscamos el proyecto y le damos a importar.
 
@@ -110,7 +169,7 @@ Lo primero que vamos a hacer es añadir las dependencias a algunas librerías qu
         <parent>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-parent</artifactId>
-            <version>3.0.4</version>
+            <version>3.2.4</version>
             <relativePath/> <!-- lookup parent from repository -->
         </parent>
         
@@ -121,7 +180,7 @@ Lo primero que vamos a hacer es añadir las dependencias a algunas librerías qu
         <description>Tutorial project for Spring Boot</description>
         
         <properties>
-            <java.version>19</java.version>
+            <java.version>17</java.version>
         </properties>
         
         <dependencies>
