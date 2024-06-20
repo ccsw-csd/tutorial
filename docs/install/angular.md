@@ -15,6 +15,22 @@ Lo primero de todo es instalar el IDE para el desarrollo front.
 
 Te recomiendo utilizar [Visual Studio Code](https://code.visualstudio.com/), en un IDE que a nosotros nos gusta mucho y tiene muchos plugins configurables. Puedes entrar en su página y descargarte la versión estable.
 
+Si no tuvieras permisos para instalar la herramienta por restricciones en el portátil existe una alternativa para poder instalarlo, a través del "Portal de Empresa" que tenemos instalado en nuestro portátil. Para ello teclea en el buscador de Windows (o en el menú de inicio) el texto "Portal de empresa". Debería aparecerte una app instalada en tu ordenador, tan solo tendrás que hacer click en ella:
+
+![IntelliJ1](../assets/images/install-intellij1.png)
+
+
+Una vez dentro del portal de empresa, verás una aplicación que se llama "Pre-Approved Catalogue". Deberás instalarla, de hecho cada vez que quieras acceder a ella, tendrás que instalarla para que se descargue el nuevo catálogo.
+
+![IntelliJ2](../assets/images/install-intellij2.png)
+
+
+Después de unos minutos de instalación, entrarás en un listado de las aplicaciones que están pre-aprobadas por la empresa. Solo tendrás que buscar "Visual Studio Code" e instalarla.
+
+![IntelliJ3](../assets/images/install-intellij3.png)
+
+Pasados unos minutos, ya tendrás instalado el IDE en tu portátil.
+
 
 ### Scoop.sh
 
