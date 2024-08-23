@@ -2348,19 +2348,19 @@
 </div>
 </div>
 <p>Como todavía no tenemos acceso a BD, hemos creado una variable tipo HashMap y una variable Long, que simularán una BD y una secuencia. También hemos implementado tres operaciones GET, PUT y DELETE que realizan las acciones necesarias por nuestra pantalla. Ahora podríamos probarlo desde el Postman con cuatro ejemplo sencillos.</p>
-<p>Fíjate que el método <code>save</code> tiene dos rutas. La ruta normal <code>category/</code> y la ruta informada <code>category/3</code>. Esto es porque hemos juntado la acción create y update en un mismo método para facilitar el desarrollo. Es totalmente válido y funcional.</p>
+<p>Fíjate que el método <code>save</code> tiene dos rutas. La ruta normal <code>category/</code> y la ruta informada <code>category/1</code>. Esto es porque hemos juntado la acción create y update en un mismo método para facilitar el desarrollo. Es totalmente válido y funcional.</p>
 <div class="admonition tip">
 <p class="admonition-title">Atención</p>
 <p>Los datos que se reciben pueden venir informados como un parámetro en la URL Get, como una variable en el propio path o dentro del body de la petición. Cada uno de ellos se recupera con una anotación especial: <code>@RequestParam</code>, <code>@PathVariable</code> y <code>@RequestBody</code> respectivamente.</p>
 </div>
 <p>Como no tenemos ningún dato dado de alta, podemos probar en primer lugar a realizar una inserción de datos con el método PUT.</p>
 <p><strong>PUT /category</strong> nos sirve para insertar <code>Categorías</code> nuevas (si no tienen el id informado) o para actualizar <code>Categorías</code> (si tienen el id informado). Fíjate que los datos que se envían están en el body como formato JSON (parte izquierda de la imagen). Si no envías datos, te dará un error.</p>
-<p><img alt="step2-java2" src="../../../assets/images/step2-java2.png" />
-<img alt="step2-java3" src="../../../assets/images/step2-java3.png" /></p>
+<p><kbd><img alt="step2-java2" src="../../../assets/images/step2-java2.png" /></kbd></p>
+<p><kbd><img alt="step2-java3" src="../../../assets/images/step2-java3.png" /></kbd></p>
 <p><strong>GET /category</strong> nos devuelve un listado de <code>Categorías</code>, siempre que hayamos insertado algo antes.</p>
-<p><img alt="step2-java1" src="../../../assets/images/step2-java1.png" /></p>
+<p><kbd><img alt="step2-java1" src="../../../assets/images/step2-java1.png" /></kbd></p>
 <p><strong>DELETE /category</strong> nos sirve eliminar <code>Categorías</code>. Fíjate que el dato del ID que se envía está en el path.</p>
-<p><img alt="step2-java4" src="../../../assets/images/step2-java4.png" /></p>
+<p><kbd><img alt="step2-java4" src="../../../assets/images/step2-java4.png" /></kbd></p>
 <p>Prueba a jugar borrando categorías que no existen o modificando categorías que no existen. Tal y como está programado, el borrado no dará error, pero la modificación debería dar un NullPointerException al no existir el dato a modificar.</p>
 <h3 id="documentacion-openapi">Documentación (OpenAPI)</h3>
 <p>Si te acuerdas, en el punto de <code>Entorno de desarrollo</code>, añadimos el módulo de OpenAPI a nuestro proyecto, y en el desarrollo de nuestro <code>Controller</code> hemos anotado tanto la clase como los métodos con sus correspondientes etiquetas <code>@Tag</code> y <code>@Operation</code>. </p>

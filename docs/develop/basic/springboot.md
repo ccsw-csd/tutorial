@@ -219,7 +219,7 @@ A continuación utilizaremos esta clase en nuestro Controller para implementar l
 
 Como todavía no tenemos acceso a BD, hemos creado una variable tipo HashMap y una variable Long, que simularán una BD y una secuencia. También hemos implementado tres operaciones GET, PUT y DELETE que realizan las acciones necesarias por nuestra pantalla. Ahora podríamos probarlo desde el Postman con cuatro ejemplo sencillos.
 
-Fíjate que el método `save` tiene dos rutas. La ruta normal `category/` y la ruta informada `category/3`. Esto es porque hemos juntado la acción create y update en un mismo método para facilitar el desarrollo. Es totalmente válido y funcional.
+Fíjate que el método `save` tiene dos rutas. La ruta normal `category/` y la ruta informada `category/1`. Esto es porque hemos juntado la acción create y update en un mismo método para facilitar el desarrollo. Es totalmente válido y funcional.
 
 
 !!! tip "Atención"
@@ -229,18 +229,20 @@ Como no tenemos ningún dato dado de alta, podemos probar en primer lugar a real
 
 **PUT /category** nos sirve para insertar `Categorías` nuevas (si no tienen el id informado) o para actualizar `Categorías` (si tienen el id informado). Fíjate que los datos que se envían están en el body como formato JSON (parte izquierda de la imagen). Si no envías datos, te dará un error.
 
-![step2-java2](../../assets/images/step2-java2.png)
-![step2-java3](../../assets/images/step2-java3.png)
+<kbd>![step2-java2](../../assets/images/step2-java2.png)</kbd>
+
+
+<kbd>![step2-java3](../../assets/images/step2-java3.png)</kbd>
 
 
 **GET /category** nos devuelve un listado de `Categorías`, siempre que hayamos insertado algo antes.
 
-![step2-java1](../../assets/images/step2-java1.png)
+<kbd>![step2-java1](../../assets/images/step2-java1.png)</kbd>
 
 
 **DELETE /category** nos sirve eliminar `Categorías`. Fíjate que el dato del ID que se envía está en el path.
 
-![step2-java4](../../assets/images/step2-java4.png)
+<kbd>![step2-java4](../../assets/images/step2-java4.png)</kbd>
 
 
 Prueba a jugar borrando categorías que no existen o modificando categorías que no existen. Tal y como está programado, el borrado no dará error, pero la modificación debería dar un NullPointerException al no existir el dato a modificar.
