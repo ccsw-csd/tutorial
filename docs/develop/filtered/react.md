@@ -81,7 +81,7 @@ export const ludotecaAPI = createApi({
     >({
       query: ({ pageNumber, pageSize }) => {
         return {
-          url: "author/",
+          url: "author",
           method: "POST",
           body: {
             pageable: {

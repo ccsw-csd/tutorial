@@ -155,7 +155,7 @@ Vamos a añadir los métodos necesarios para el crud de autores en el fichero `s
     >({
       query: ({ pageNumber, pageSize }) => {
         return {
-          url: "author/",
+          url: "author",
           method: "POST",
           body: {
             pageable: {
