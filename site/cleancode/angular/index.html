@@ -754,6 +754,8 @@
       
         
       
+        
+      
     
     
     
@@ -794,6 +796,27 @@
   
   <span class="md-ellipsis">
     🔵 Angular
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/basic/angular17/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🔵 Angular 17+
   </span>
   
 
@@ -913,6 +936,8 @@
       
         
       
+        
+      
     
     
     
@@ -953,6 +978,27 @@
   
   <span class="md-ellipsis">
     🔵 Angular
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/paginated/angular17/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🔵 Angular 17+
   </span>
   
 
@@ -1072,6 +1118,8 @@
       
         
       
+        
+      
     
     
     
@@ -1112,6 +1160,27 @@
   
   <span class="md-ellipsis">
     🔵 Angular
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/filtered/angular17/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🔵 Angular 17+
   </span>
   
 
@@ -2028,14 +2097,21 @@ HTML:</p>
 </code></pre></div>
 <h3 id="lazy-load">Lazy Load</h3>
 <p>Lazy Load es un patrón de diseño que consiste en retrasar la carga o inicialización</p>
-<p>desde el <strong>app-routing.module.ts</strong></p>
+<p>desde el <strong>app-routing.module.ts</strong> o desde <strong>app.routes.ts</strong> si estamos en Angular 17+</p>
 <p>Añadiremos un codigo parecido a este
-<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="c1">// Para cargar modulos</span>
+<span class="w">  </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;customers&#39;</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">loadChildren</span><span class="o">:</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">import</span><span class="p">(</span><span class="s1">&#39;./customers/customers.module&#39;</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">m</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">m</span><span class="p">.</span><span class="nx">CustomersModule</span><span class="p">)</span>
 <span class="w">  </span><span class="p">},</span>
+
+<span class="w">  </span><span class="c1">// Para cargar standalone components</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;customers&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">loadComponent</span><span class="o">:</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">import</span><span class="p">(</span><span class="s1">&#39;./customers/customers.component&#39;</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">m</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">m</span><span class="p">.</span><span class="nx">CustomersComponent</span><span class="p">)</span>
+<span class="w">  </span><span class="p">},</span>
 </code></pre></div></p>
-<p>Con esto veremos que el módulo se cargará según se necesite.</p>
+<p>Con esto veremos que el módulo o componente se cargará según se necesite.</p>
 
 
 

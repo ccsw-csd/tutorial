@@ -65,9 +65,11 @@ Con esto, scoop ya nos instalará todo lo necesario.
 
 ### Angular CLI
 
-El siguiente pasó será instalar una capa de gestión por encima de Nodejs que nos ayudará en concreto con la funcionalidad de Angular. En concreto instalaremos el CLI de Angular para la versión 16. Para poder instalarlo, tan solo hay que abrir una consola de msdos y ejecutar el comando y Nodejs ya hará el resto:
+El siguiente pasó será instalar una capa de gestión por encima de Nodejs que nos ayudará en concreto con la funcionalidad de Angular. Si no indicamos nada se instalará la última versión del CLI, pero si queremos podemos elegir una versión en concreto añadiendo '@' y el número de la versión correspondiente. Para poder instalarlo, tan solo hay que abrir una consola de msdos y ejecutar el comando y Nodejs ya hará el resto:
 
 ```
+npm install -g @angular/cli
+
 npm install -g @angular/cli@16
 ```
 
@@ -84,7 +86,7 @@ Crear un proyecto de Angular es muy sencillo si tienes instalado el CLI de Angul
 ng new tutorial --strict=false
 ```
 
-El propio CLI nos irá realizando una serie de preguntas.
+El propio CLI nos irá realizando una serie de preguntas que pueden cambiar dependiendo de la versión.
 
 > Would you like to add Angular routing? (y/N)
 
@@ -93,6 +95,10 @@ El propio CLI nos irá realizando una serie de preguntas.
 > Which stylesheet format would you like to use?
 
 >  `Preferiblemente: SCSS`
+
+> Do you want to enable Server-Side Rendering (SSR)
+
+>  `Preferiblemente: N`
 
 En el caso del tutorial como vamos a tener dos proyectos para nuestra aplicación (front y back), para poder seguir correctamente las explicaciones, voy a renombrar la carpeta para poder diferenciarla del otro proyecto. A partir de ahora se llamará `client`.
 
@@ -117,3 +123,29 @@ Y ya podemos empezar a trabajar con Angular.
     Si necesitas más información sobre los comandos que ofrece Angular CLI para poder crear aplicaciones, componentes, servicios, etc. los tienes disponibles en:
     [https://angular.io/cli#command-overview](https://angular.io/cli#command-overview)
 
+
+## Angular 17+
+
+Con la llegada de Angular 17, se han introducido importantes novedades que impactan la manera en que se desarrollan aplicaciones web. A diferencia de las versiones anteriores, Angular 17 trae mejoras enfocadas en la simplicidad, el rendimiento y la flexibilidad del desarrollo. En este tutorial, te guiaremos a través de estas nuevas características, permitiéndote elegir si deseas enfocarte en las versiones más recientes o adaptarlo a versiones anteriores.
+
+Las principales diferencias entre Angular 17+ y sus versiones anteriores incluyen:
+
+### Componentes standalone por defecto
+
+Una de las novedades más importantes de Angular 17 es el uso de componentes standalone de forma predeterminada. En versiones anteriores, los módulos (NgModules) eran el núcleo de la estructura de una aplicación Angular. Ahora, con los componentes standalone, puedes crear y usar componentes sin necesidad de definir un módulo explícito, lo que simplifica significativamente la configuración inicial y mejora la modularidad. Esto facilita la creación de aplicaciones más ligeras y modulares.
+
+
+### Directivas Simplificadas
+
+En Angular 17, algunas de las directivas más utilizadas han sido actualizadas para simplificar su uso y mejorar la legibilidad del código. Una de las principales mejoras es la introducción de @if, que reemplaza la tradicional *ngIf. Esta nueva sintaxis hace que las condiciones sean más claras y fáciles de aplicar en las plantillas. Del mismo modo, la directiva *ngFor, utilizada para iterar sobre listas, también ha sido optimizada, ofreciendo una experiencia más fluida y mejor manejo de colecciones dinámicas.
+
+Además, se ha reducido la complejidad en el uso de otras directivas estructurales como ngSwitch y ngClass, haciendo más intuitivo el control del comportamiento y la apariencia de los elementos en las vistas. Con estas mejoras, Angular 17 ofrece una sintaxis más limpia y directa, permitiendo a los desarrolladores concentrarse en la lógica de su aplicación sin la sobrecarga de código innecesario.
+
+### Bloques de carga deferred
+
+Los bloques de carga deferred (carga diferida) son una de las características más esperadas en Angular 17. Esta funcionalidad permite retrasar la carga de ciertas partes de la aplicación hasta que realmente sean necesarias, lo que optimiza el rendimiento al reducir el tamaño inicial del paquete que se descarga al navegador. Con esta técnica, es posible mejorar el tiempo de respuesta inicial de las aplicaciones y cargar los módulos o componentes bajo demanda, favoreciendo una mejor experiencia de usuario.
+
+
+### ESBuild y Vite
+
+Otra de las mejoras clave de Angular 17 es la integración de ESBuild y Vite como opciones de construcción (build). Estos dos motores de compilación permiten una construcción mucho más rápida y eficiente de aplicaciones, mejorando significativamente los tiempos de desarrollo y compilación. ESBuild es un bundler de JavaScript que se enfoca en la velocidad, mientras que Vite proporciona una experiencia de desarrollo más ágil con recarga en caliente y un flujo de trabajo optimizado. Ambas herramientas ofrecen una alternativa moderna y rápida a Webpack, especialmente para proyectos grandes o aplicaciones en tiempo real.

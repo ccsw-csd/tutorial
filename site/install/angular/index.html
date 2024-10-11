@@ -416,6 +416,57 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#angular-17" class="md-nav__link">
+    <span class="md-ellipsis">
+      Angular 17+
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Angular 17+">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#componentes-standalone-por-defecto" class="md-nav__link">
+    <span class="md-ellipsis">
+      Componentes standalone por defecto
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#directivas-simplificadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Directivas Simplificadas
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bloques-de-carga-deferred" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bloques de carga deferred
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#esbuild-y-vite" class="md-nav__link">
+    <span class="md-ellipsis">
+      ESBuild y Vite
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -694,6 +745,8 @@
       
         
       
+        
+      
     
     
     
@@ -734,6 +787,27 @@
   
   <span class="md-ellipsis">
     🔵 Angular
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/basic/angular17/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🔵 Angular 17+
   </span>
   
 
@@ -853,6 +927,8 @@
       
         
       
+        
+      
     
     
     
@@ -893,6 +969,27 @@
   
   <span class="md-ellipsis">
     🔵 Angular
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/paginated/angular17/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🔵 Angular 17+
   </span>
   
 
@@ -1012,6 +1109,8 @@
       
         
       
+        
+      
     
     
     
@@ -1052,6 +1151,27 @@
   
   <span class="md-ellipsis">
     🔵 Angular
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/filtered/angular17/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🔵 Angular 17+
   </span>
   
 
@@ -1773,6 +1893,57 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#angular-17" class="md-nav__link">
+    <span class="md-ellipsis">
+      Angular 17+
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Angular 17+">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#componentes-standalone-por-defecto" class="md-nav__link">
+    <span class="md-ellipsis">
+      Componentes standalone por defecto
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#directivas-simplificadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Directivas Simplificadas
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bloques-de-carga-deferred" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bloques de carga deferred
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#esbuild-y-vite" class="md-nav__link">
+    <span class="md-ellipsis">
+      ESBuild y Vite
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1823,8 +1994,10 @@ Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
 </code></pre></div>
 <p>Con esto, scoop ya nos instalará todo lo necesario.</p>
 <h3 id="angular-cli">Angular CLI</h3>
-<p>El siguiente pasó será instalar una capa de gestión por encima de Nodejs que nos ayudará en concreto con la funcionalidad de Angular. En concreto instalaremos el CLI de Angular para la versión 16. Para poder instalarlo, tan solo hay que abrir una consola de msdos y ejecutar el comando y Nodejs ya hará el resto:</p>
-<div class="highlight"><pre><span></span><code>npm install -g @angular/cli@16
+<p>El siguiente pasó será instalar una capa de gestión por encima de Nodejs que nos ayudará en concreto con la funcionalidad de Angular. Si no indicamos nada se instalará la última versión del CLI, pero si queremos podemos elegir una versión en concreto añadiendo '@' y el número de la versión correspondiente. Para poder instalarlo, tan solo hay que abrir una consola de msdos y ejecutar el comando y Nodejs ya hará el resto:</p>
+<div class="highlight"><pre><span></span><code>npm install -g @angular/cli
+
+npm install -g @angular/cli@16
 </code></pre></div>
 <p>Y con esto ya tendremos todo instalado, listo para empezar a crear los proyectos.</p>
 <h2 id="creacion-de-proyecto">Creación de proyecto</h2>
@@ -1832,12 +2005,14 @@ Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
 <p>Crear un proyecto de Angular es muy sencillo si tienes instalado el CLI de Angular. Lo primero abrir una consola de msdos y posicionarte en el directorio raiz donde quieres crear tu proyecto Angular, y ejecutamos lo siguiente:</p>
 <div class="highlight"><pre><span></span><code>ng new tutorial --strict=false
 </code></pre></div>
-<p>El propio CLI nos irá realizando una serie de preguntas.</p>
+<p>El propio CLI nos irá realizando una serie de preguntas que pueden cambiar dependiendo de la versión.</p>
 <blockquote>
 <p>Would you like to add Angular routing? (y/N)</p>
 <p><code>Preferiblemente: y</code></p>
 <p>Which stylesheet format would you like to use?</p>
 <p><code>Preferiblemente: SCSS</code></p>
+<p>Do you want to enable Server-Side Rendering (SSR)</p>
+<p><code>Preferiblemente: N</code></p>
 </blockquote>
 <p>En el caso del tutorial como vamos a tener dos proyectos para nuestra aplicación (front y back), para poder seguir correctamente las explicaciones, voy a renombrar la carpeta para poder diferenciarla del otro proyecto. A partir de ahora se llamará <code>client</code>.</p>
 <div class="admonition info">
@@ -1860,6 +2035,18 @@ Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
 <p>Si necesitas más información sobre los comandos que ofrece Angular CLI para poder crear aplicaciones, componentes, servicios, etc. los tienes disponibles en:
 <a href="https://angular.io/cli#command-overview">https://angular.io/cli#command-overview</a></p>
 </div>
+<h2 id="angular-17">Angular 17+</h2>
+<p>Con la llegada de Angular 17, se han introducido importantes novedades que impactan la manera en que se desarrollan aplicaciones web. A diferencia de las versiones anteriores, Angular 17 trae mejoras enfocadas en la simplicidad, el rendimiento y la flexibilidad del desarrollo. En este tutorial, te guiaremos a través de estas nuevas características, permitiéndote elegir si deseas enfocarte en las versiones más recientes o adaptarlo a versiones anteriores.</p>
+<p>Las principales diferencias entre Angular 17+ y sus versiones anteriores incluyen:</p>
+<h3 id="componentes-standalone-por-defecto">Componentes standalone por defecto</h3>
+<p>Una de las novedades más importantes de Angular 17 es el uso de componentes standalone de forma predeterminada. En versiones anteriores, los módulos (NgModules) eran el núcleo de la estructura de una aplicación Angular. Ahora, con los componentes standalone, puedes crear y usar componentes sin necesidad de definir un módulo explícito, lo que simplifica significativamente la configuración inicial y mejora la modularidad. Esto facilita la creación de aplicaciones más ligeras y modulares.</p>
+<h3 id="directivas-simplificadas">Directivas Simplificadas</h3>
+<p>En Angular 17, algunas de las directivas más utilizadas han sido actualizadas para simplificar su uso y mejorar la legibilidad del código. Una de las principales mejoras es la introducción de @if, que reemplaza la tradicional <em>ngIf. Esta nueva sintaxis hace que las condiciones sean más claras y fáciles de aplicar en las plantillas. Del mismo modo, la directiva </em>ngFor, utilizada para iterar sobre listas, también ha sido optimizada, ofreciendo una experiencia más fluida y mejor manejo de colecciones dinámicas.</p>
+<p>Además, se ha reducido la complejidad en el uso de otras directivas estructurales como ngSwitch y ngClass, haciendo más intuitivo el control del comportamiento y la apariencia de los elementos en las vistas. Con estas mejoras, Angular 17 ofrece una sintaxis más limpia y directa, permitiendo a los desarrolladores concentrarse en la lógica de su aplicación sin la sobrecarga de código innecesario.</p>
+<h3 id="bloques-de-carga-deferred">Bloques de carga deferred</h3>
+<p>Los bloques de carga deferred (carga diferida) son una de las características más esperadas en Angular 17. Esta funcionalidad permite retrasar la carga de ciertas partes de la aplicación hasta que realmente sean necesarias, lo que optimiza el rendimiento al reducir el tamaño inicial del paquete que se descarga al navegador. Con esta técnica, es posible mejorar el tiempo de respuesta inicial de las aplicaciones y cargar los módulos o componentes bajo demanda, favoreciendo una mejor experiencia de usuario.</p>
+<h3 id="esbuild-y-vite">ESBuild y Vite</h3>
+<p>Otra de las mejoras clave de Angular 17 es la integración de ESBuild y Vite como opciones de construcción (build). Estos dos motores de compilación permiten una construcción mucho más rápida y eficiente de aplicaciones, mejorando significativamente los tiempos de desarrollo y compilación. ESBuild es un bundler de JavaScript que se enfoca en la velocidad, mientras que Vite proporciona una experiencia de desarrollo más ágil con recarga en caliente y un flujo de trabajo optimizado. Ambas herramientas ofrecen una alternativa moderna y rápida a Webpack, especialmente para proyectos grandes o aplicaciones en tiempo real.</p>
 
 
 

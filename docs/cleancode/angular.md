@@ -150,14 +150,21 @@ export class HeroService {
 ### Lazy Load
 Lazy Load es un patrón de diseño que consiste en retrasar la carga o inicialización
 
-desde el **app-routing.module.ts**
+desde el **app-routing.module.ts** o desde **app.routes.ts** si estamos en Angular 17+
 
 Añadiremos un codigo parecido a este
 ```js
+  // Para cargar modulos
   {
     path: 'customers',
     loadChildren: () => import('./customers/customers.module').then(m => m.CustomersModule)
   },
+
+  // Para cargar standalone components
+  {
+    path: 'customers',
+    loadComponent: () => import('./customers/customers.component').then(m => m.CustomersComponent)
+  },
 ```
 
-Con esto veremos que el módulo se cargará según se necesite.
+Con esto veremos que el módulo o componente se cargará según se necesite.

@@ -18,18 +18,21 @@ nav:
     - 🟢 Nodejs: cleancode/nodejs.md
   - "Code: Listado simple":
     - 🔵 Angular: develop/basic/angular.md
+    - 🔵 Angular 17+: develop/basic/angular17.md
     - 🔵 React: develop/basic/react.md
     - 🔵 Vue.js: develop/basic/vuejs.md
     - 🟢 Spring Boot: develop/basic/springboot.md
     - 🟢 Nodejs: develop/basic/nodejs.md
   - "Code: Listado paginado":
     - 🔵 Angular: develop/paginated/angular.md
+    - 🔵 Angular 17+: develop/paginated/angular17.md
     - 🔵 React: develop/paginated/react.md
     - 🔵 Vue.js: develop/paginated/vuejs.md
     - 🟢 Spring Boot: develop/paginated/springboot.md
     - 🟢 Nodejs: develop/paginated/nodejs.md
   - "Code: Listado filtrado":    
     - 🔵 Angular: develop/filtered/angular.md
+    - 🔵 Angular 17+: develop/filtered/angular17.md
     - 🔵 React: develop/filtered/react.md
     - 🔵 Vue.js: develop/filtered/vuejs.md
     - 🟢 Spring Boot: develop/filtered/springboot.md
