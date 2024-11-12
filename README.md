@@ -11,6 +11,7 @@ Este tutorial está desarrollado con MkDocs, descárguelo y siga las instruccion
 * Instalar Material con el comando `pip install mkdocs-material`
 
 
+
 ## Ejecutar en local
 
 Hay un comando dentro del repositorio que se encarga de ejecutar en local en el puerto 8000 el servidor de mkdocs. Solo debes ejecutar el fichero "run.bat"
