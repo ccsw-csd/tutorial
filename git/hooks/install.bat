@@ -1,7 +1,2 @@
-IF EXIST "C:\path\to\installed\file" (
-    ECHO Already installed.
-) ELSE (
-    ECHO Installing...
-    COPY "./git/hooks/pre-commit.sh" "./.git/hooks/pre-commit"
-    ECHO Installation successful.
-)
+FOR /F "usebackq delims=" %%G IN (`git rev-parse --show-toplevel`) DO SET "GIT_PATH=%%G"
+COPY "./pre-commit.sh" "%GIT_PATH%/hooks/pre-commit"

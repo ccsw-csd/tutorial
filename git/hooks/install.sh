@@ -1,9 +1,2 @@
-if [ -e ./git/hooks/installed ]
-then
-    echo "Hooks already installed!!"
-else
-    echo "Installing hooks..."
-    cp ./git/hooks/pre-commit.sh ./.git/hooks/pre-commit
-    touch ./git/hooks/installed
-    echo "Hooks installed!!"
-fi
+git_path=$(git rev-parse --show-toplevel)
+cp ./git/hooks/pre-commit.sh ${git_path}/hooks/pre-commit
