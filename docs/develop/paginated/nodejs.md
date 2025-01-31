@@ -87,7 +87,7 @@ export const deleteAuthor = async (id) => {
 
 export const getAuthorsPageable = async (page, limit, sort) => {
     const sortObj = {
-        [sort?.property || 'name']: sort?.direction === 'DESC' ? 'DESC' : 'ASC'
+        [sort?.property || 'name']: sort?.direction === 'desc' ? 'desc' : 'asc'
     };
     try {
        const options = {
@@ -289,11 +289,13 @@ Y por último listamos los autores paginados:
         "sort" : [
             {
                 "property": "name",
-                "direction": "ASC"
+                "direction": "asc"
             }
         ]
     }
 }
 ```
+
+_**Importante:** `direction` tiene que ir en minúsculas_
 
 ![Postman](../../assets/images/step2-nodejs5.png)
