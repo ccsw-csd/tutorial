@@ -22,7 +22,7 @@ Ejemplo de lo que os sale, se elige la primera opción
 ![wsl-version.png](images/wsl-version.png)  
 
 • Prueba `wsl --status`. Aquí debería indicar que "Windows subsystem for Linux has no installed distributions".  
-• Cuando abras Ubuntu, seguramente no funcione. De manera que tienes que reiniciar el PC y comprobar que ahora Ubuntu si funciona.  
+• Cuando abras Ubuntu, seguramente no funcione. De manera que tienes que reiniciar el PC y comprobar que ahora Ubuntu sí funciona.  
 
 5.	Introducir los siguientes comandos en Ubuntu.  
 Si pide un usuario y contraseña, poner la que sea.  
@@ -67,7 +67,7 @@ Docker opera en un modelo cliente-servidor, consistiendo en varios componentes c
 En el núcleo de Docker está el Motor de Docker, que incluye:  
 
 **Daemon de Docker**: El servicio de fondo que se ejecuta en el host y gestiona la construcción, ejecución y distribución de contenedores Docker.  
-**CLI de Docker**: La interfaz de línea de comandos utilizada para interactuar con el demonio de Docker.  
+**CLI de Docker**: La interfaz de línea de comandos utilizada para interactuar con el daemon de Docker.  
 **API REST**: Permite que aplicaciones remotas interactúen con el daemon de Docker.  
 
 ### Componentes de Docker
@@ -202,7 +202,7 @@ Los contenedores siguen un ciclo de vida sencillo que incluye su creación, inic
 
 Ahora vamos a construir imágenes de servicios y sobre estas imágenes lanzaremos contenedores en el entorno local del desarrollador.  
 
-Teniendo ya instalados WSL, Docker Community y Docker Compose nos centraremos en la parte práctica.  
+Teniendo ya instalados WSL, Docker Community y Docker Compose nos centramos en la parte práctica.  
 
 ### Construir imágenes con un Dockerfile
 
@@ -242,7 +242,7 @@ CMD ["java", "-jar", "target/tutorial-eureka-0.0.1-SNAPSHOT.jar"]
 ```
 Es un script básico para el service discovery de ejemplo, donde los comentarios de código nos dan las explicaciones debidas.  
 
-Para un módulo de reglas de negocio del mismo proyecto, su correspondiente Dockerfile básico podría ser tal que:  
+Para un módulo de reglas de negocio del mismo proyecto, su correspondiente Dockerfile básico podría ser:  
 
 ```
 # Use the official Ubuntu 22.04 LTS base image
@@ -316,13 +316,14 @@ docker start cca-c-tutorial-eureka
 docker rm cca-c-tutorial-eureka
 ```
 
-desde terminal situado en la raíz del módulo junto al Dockerfile del servicio, primero creamos la imagen `i-tutorial-eureka`, luego lanzamos la creación de su correspondiente contenedor de nombre `c-tutorial-eureka` y su ejecución detached.  
-
-Por último, damos unos comandos para inspeccionar su log, pararlo, arrancarlo, eliminarlo cuando dejemos de necesitarlo.  
+que hace lo siguiente:
+1. desde terminal situado en la raíz del módulo junto al Dockerfile del servicio, primero creamos la imagen `i-tutorial-eureka`,
+2. lanzamos la creación de su correspondiente contenedor de nombre `c-tutorial-eureka` y su ejecución detached.  
+3. Por último, damos unos comandos para inspeccionar su log, pararlo, arrancarlo, eliminarlo cuando dejemos de necesitarlo.  
 
 En el laptop corporativo, puede ocurrir que el build se detenga por timeout cuando descargue la imagen del SO. En tal caso revise el estado de su VPN.  
 
-Las imágenes, contenedores no son ligeros, elimine los recursos que no esté usando para no saturar su equipo.  
+Las imágenes y contenedores son ligeros para un servidor, pero no para un laptop corporativo, elimine los recursos que no esté usando para no saturar su equipo.  
 
 ### Desplegar un conjunto de contenedores que se comunican
 
