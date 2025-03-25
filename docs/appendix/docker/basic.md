@@ -325,7 +325,7 @@ En el laptop corporativo, puede ocurrir que el build se detenga por timeout cuan
 
 Las imágenes y contenedores son ligeros para un servidor, pero no para un laptop corporativo, elimine los recursos que no esté usando para no saturar su equipo.  
 
-![Eureka-all-UP_2025-03-25.png](images/Eureka-all-UP_2025-03-25.png)  
+![Eureka-all-UP.png](images/Eureka-all-UP.png)  
 
 ### Desplegar un conjunto de contenedores que se comunican
 
@@ -492,7 +492,7 @@ networks:
 ```
 Para lograr la orquestación/sincronización/comunicación deseada es mejor que todo esté en su sitio con el orden debido.  
 
-![Compose_network_UP_2025-03-25.png](images/Compose_network_UP_2025-03-25.png)  
+![Compose_network_UP.png](images/Compose_network_UP.png)  
 
 ### TODO y practicar
 
