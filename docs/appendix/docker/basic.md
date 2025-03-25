@@ -325,6 +325,8 @@ En el laptop corporativo, puede ocurrir que el build se detenga por timeout cuan
 
 Las imágenes y contenedores son ligeros para un servidor, pero no para un laptop corporativo, elimine los recursos que no esté usando para no saturar su equipo.  
 
+![Eureka-all-UP_2025-03-25.png](images/Eureka-all-UP_2025-03-25.png)  
+
 ### Desplegar un conjunto de contenedores que se comunican
 
 En lo sucesivo notar que en este tutorial estamos usando Version: 28.0.2 de Docker Community y Docker Compose version v2.34.0  
@@ -333,11 +335,11 @@ Básicamente, si solo utilizamos módulos de negocio, cada uno en su Dockerfile 
 
 Además de querer tener componentes separados que sean escalables, queremos asegurarnos de que los módulos puedan hablarse entre ellos, si deben hacerlo.  
 
-Otro requerimiento que tenemos en este proyecto, es la necesidad de arrancar unos servicios antes que otros, por ejemplo: el service discovery debe iniciar primero, segundo el gateway, y luego el resto de los módulos de negocio. Por último, si todos han arrancado bien y están perfectamente up, arrancamos el frontend.  
+Otro requerimiento que tenemos en este proyecto simple, es la necesidad de arrancar unos servicios antes que otros, por ejemplo: el service discovery debe iniciar primero, segundo el gateway, y luego el resto de los módulos con lógica de negocio. Por último, si todos han arrancado bien y están perfectamente up, arrancamos el frontend.  
 
 Para lograr estas necesidades, por otra parte, muy comunes en los proyectos basados en microservicios, tenemos disponible la herramienta docker-compose.  
 
-docker-compose permite lanzar en un solo script todos los servicios/contenedores estableciendo el orden deseado de arranque y ejecución, así como, la configuración de un network donde declarar qué módulos pueden hablarse entre sí.  
+docker-compose permite lanzar en un solo script todos los servicios/contenedores estableciendo el orden deseado de arranque y ejecución, así como, la configuración de un network donde declarar qué módulos pueden hablar entre sí.  
 
 Para el caso de nuestro proyecto:  
 ```
@@ -348,8 +350,8 @@ docker network ls
 docker compose ps
 docker compose down
 ```
-Primero creamos una red donde puedan comunicarse los contenedores que deben hablarse entre sí.  
-Luego, en un solo comando ordenamos la interpretación del script docker-compose.yml situado en la raíz del proyecto general, seguido del build de todas las imágenes declaradas, seguido del arranque en el orden dado, seguido del establecimiento de las comunicaciones declaradas, seguido del respaldo de los latidos solicitados.  
+Primero creamos una red donde puedan comunicarse los contenedores que deben comunicarse entre sí.  
+Luego, en un comando ordenamos la interpretación del script docker-compose.yml situado en la raíz del proyecto general, seguido del build de todas las imágenes declaradas, seguido del arranque en el orden dado, seguido del establecimiento de las comunicaciones declaradas, seguido del respaldo de los latidos solicitados.  
 El resto son sencillos comandos para ver el estado de la red, de los contenedores, y para desarmar todos los contenedores pertenecientes al compose cuando dejemos de necesitarlos.  
 
 A continuación damos un posible docker-compose.yml de ejemplo, sigue siendo básico (aunque ya no tanto):  
@@ -492,5 +494,16 @@ Para lograr la orquestación/sincronización/comunicación deseada es mejor que 
 
 ![Compose_network_UP_2025-03-25.png](images/Compose_network_UP_2025-03-25.png)  
 
+### TODO y practicar
+
+Como práctica, queremos duplicar nuestro frontend básico de manera que tengamos dos portales muy similares pero distintos.  
+
+Es decir, que el Front1 ejecute en un contenedor y el Front2 ejecute en otro contenedor.  
+
+Además, ambos frontales se comunican con el mismo backend, el nuestro.  
+
+Crea agentes "cliente" que solo accedan a uno de los frontales, crea un agente "admin" que acceda a la network que agrupa al resto de networks.  
+
+Sugerencia: crea tres networks, una para los frontales, otra para el backend, y una tercera que agrupe las dos anteriores.  
 
 
