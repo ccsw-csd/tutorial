@@ -316,16 +316,40 @@ docker start cca-c-tutorial-eureka
 docker rm cca-c-tutorial-eureka
 ```
 
-que hace lo siguiente:
+que hace lo siguiente:  
 1. desde terminal situado en la raíz del módulo junto al Dockerfile del servicio, primero creamos la imagen `i-tutorial-eureka`,
 2. lanzamos la creación de su correspondiente contenedor de nombre `c-tutorial-eureka` y su ejecución detached.  
 3. Por último, damos unos comandos para inspeccionar su log, pararlo, arrancarlo, eliminarlo cuando dejemos de necesitarlo.  
 
-En el laptop corporativo, puede ocurrir que el build se detenga por timeout cuando descargue la imagen del SO. En tal caso revise el estado de su VPN.  
+En el laptop corporativo, puede ocurrir que el build se detenga por timeout cuando descargue la imagen del SO. En tal caso, revise el estado de su VPN.  
 
 Las imágenes y contenedores son ligeros para un servidor, pero no para un laptop corporativo, elimine los recursos que no esté usando para no saturar su equipo.  
 
 ### Desplegar un conjunto de contenedores que se comunican
 
+En lo sucesivo notar que en este tutorial estamos usando Version: 28.0.2 de Docker Community y Docker Compose version v2.34.0  
 
+Básicamente, si solo utilizamos módulos de negocio, cada uno en su Dockerfile correspondiente, no tenemos garantizado que todos ellos puedan comunicarse entre sí en la forma deseada.  
+
+Además de querer tener componentes separados que sean escalables, queremos asegurarnos de que los módulos puedan hablarse entre ellos, si deben hacerlo.  
+
+Otro requerimiento que tenemos en este proyecto, es la necesidad de arrancar unos servicios antes que otros, por ejemplo: el service discovery debe iniciar primero, segundo el gateway, y luego el resto de los módulos de negocio. Por último, si todos han arrancado bien y están perfectamente up, arrancamos el frontend.  
+
+Para lograr estas necesidades, por otra parte, muy comunes en los proyectos basados en microservicios, tenemos disponible la herramienta docker-compose.  
+
+docker-compose permite lanzar en un solo script todos los servicios/contenedores estableciendo el orden deseado de arranque y ejecución, así como, la configuración de un network donde declarar qué módulos pueden hablarse entre sí.  
+
+Para el caso de nuestro proyecto:  
+```
+docker network create backend-network
+docker compose up --build
+
+docker network ls
+docker compose ps
+docker compose down
+```
+
+Primero creamos una red donde puedan comunicarse los contenedores que deben hablarse entre sí.  
+Luego en un solo comando ordenamos la interpretación del script docker-compose.yml situado en la raíz del proyecto general, seguido del build de todas las imágenes declaradas, seguido del arranque en el orden dado, seguido del establecimiento de las comunicaciones declaradas, seguido del respaldo de los latidos solicitados.  
+El resto son sencillos comandos para ver el estado de la red, de los contenedores, y para desarmar todos los contenedores pertenecientes al compose.  
 
