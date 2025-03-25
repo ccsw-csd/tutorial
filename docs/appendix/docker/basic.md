@@ -348,8 +348,149 @@ docker network ls
 docker compose ps
 docker compose down
 ```
-
 Primero creamos una red donde puedan comunicarse los contenedores que deben hablarse entre sí.  
-Luego en un solo comando ordenamos la interpretación del script docker-compose.yml situado en la raíz del proyecto general, seguido del build de todas las imágenes declaradas, seguido del arranque en el orden dado, seguido del establecimiento de las comunicaciones declaradas, seguido del respaldo de los latidos solicitados.  
-El resto son sencillos comandos para ver el estado de la red, de los contenedores, y para desarmar todos los contenedores pertenecientes al compose.  
+Luego, en un solo comando ordenamos la interpretación del script docker-compose.yml situado en la raíz del proyecto general, seguido del build de todas las imágenes declaradas, seguido del arranque en el orden dado, seguido del establecimiento de las comunicaciones declaradas, seguido del respaldo de los latidos solicitados.  
+El resto son sencillos comandos para ver el estado de la red, de los contenedores, y para desarmar todos los contenedores pertenecientes al compose cuando dejemos de necesitarlos.  
+
+A continuación damos un posible docker-compose.yml de ejemplo, sigue siendo básico (aunque ya no tanto):  
+```
+services:
+  tutorial-eureka:
+    build:
+      context: ./server-springboot-micros/server-springboot-eureka
+      dockerfile: Dockerfile
+    ports:
+      - "8761:8761"
+    networks:
+      - backend-network
+    environment:
+      eureka.client.serviceUrl.defaultZone: http://tutorial-eureka:8761/eureka/
+    healthcheck:
+      test: "curl -f http://tutorial-eureka:8761/actuator/health || exit 1"
+      interval: 40s
+      timeout: 10s
+      retries: 3
+
+  tutorial-gateway:
+    build:
+      context: ./server-springboot-micros/server-springbbot-gateway
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      - backend-network
+    depends_on:
+      tutorial-eureka:
+        condition: service_healthy
+    environment:
+      eureka.client.serviceUrl.defaultZone: http://tutorial-eureka:8761/eureka/
+    healthcheck:
+      test: "curl -f http://tutorial-gateway:8080/actuator/health || exit 1"
+      interval: 40s
+      timeout: 10s
+      retries: 3
+
+  tutorial-category:
+    build:
+      context: ./server-springboot-micros/server-springboot-category
+      dockerfile: Dockerfile
+    ports:
+      - "8091:8091"
+    networks:
+      - backend-network
+    depends_on:
+      tutorial-eureka:
+        condition: service_healthy
+      tutorial-gateway:
+        condition: service_healthy
+    environment:
+      eureka.client.serviceUrl.defaultZone: http://tutorial-eureka:8761/eureka/
+    healthcheck:
+      test: "curl -f http://tutorial-category:8091/actuator/health || exit 1"
+      interval: 40s
+      timeout: 10s
+      retries: 3
+
+  tutorial-author:
+    build:
+      context: ./server-springboot-micros/server-springboot-author
+      dockerfile: Dockerfile
+    ports:
+      - "8092:8092"
+    networks:
+      - backend-network
+    depends_on:
+      tutorial-eureka:
+        condition: service_healthy
+      tutorial-gateway:
+        condition: service_healthy
+    environment:
+      eureka.client.serviceUrl.defaultZone: http://tutorial-eureka:8761/eureka/
+    healthcheck:
+      test: "curl -f http://tutorial-author:8092/actuator/health || exit 1"
+      interval: 40s
+      timeout: 10s
+      retries: 3
+
+  tutorial-game:
+    build:
+      context: ./server-springboot-micros/server-springboot-game
+      dockerfile: Dockerfile
+    ports:
+      - "8093:8093"
+    networks:
+      - backend-network
+    depends_on:
+      tutorial-eureka:
+        condition: service_healthy
+      tutorial-gateway:
+        condition: service_healthy
+      tutorial-category:
+        condition: service_healthy
+      tutorial-author:
+        condition: service_healthy
+    environment:
+      eureka.client.serviceUrl.defaultZone: http://tutorial-eureka:8761/eureka/
+    healthcheck:
+      test: "curl -f http://tutorial-game:8093/actuator/health || exit 1"
+      interval: 40s
+      timeout: 10s
+      retries: 3
+
+  tutorial-front:
+    build:
+      context: ./client-angular17
+      dockerfile: Dockerfile
+    ports:
+      - "4200:4200"
+    networks:
+      - backend-network
+    depends_on:
+      tutorial-eureka:
+        condition: service_healthy
+      tutorial-gateway:
+        condition: service_healthy
+      tutorial-category:
+        condition: service_healthy
+      tutorial-author:
+        condition: service_healthy
+      tutorial-game:
+        condition: service_healthy
+    environment:
+      eureka.client.serviceUrl.defaultZone: http://tutorial-eureka:8761/eureka/
+    healthcheck:
+      test: "curl -f http://tutorial-front:4200/actuator/health || exit 1"
+      interval: 40s
+      timeout: 10s
+      retries: 3
+
+networks:
+  backend-network:
+    driver: bridge
+```
+Para lograr la orquestación/sincronización/comunicación deseada es mejor que todo esté en su sitio con el orden debido.  
+
+![Compose_network_UP_2025-03-25.png](images/Compose_network_UP_2025-03-25.png)  
+
+
 
