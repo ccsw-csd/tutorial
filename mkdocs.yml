@@ -57,6 +57,11 @@ nav:
         - Limpieza: appendix/springbatch/clean.md
         - Resumen: appendix/springbatch/summary.md
         - Ahora hazlo tú!: appendix/springbatch/exercise.md
+    - Dockerízate:
+      - Instalar docker: appendix/docker/installdocker.md
+      - ¿Qué es docker?: appendix/docker/docudocker.md
+      - Practiquémos: appendix/docker/traindocker.md
+      - Resumen: appendix/docker/summary.md
 theme:
     name: material
     language: es
@@ -78,6 +83,8 @@ markdown_extensions:
       emoji_generator: !!python/name:pymdownx.emoji.to_svg
 extra_css:
   - assets/style.css  
-#site_dir: 'site/dev'
 
-#* 🔵 [Frontend - Vue.js](https://degreed.com/pathway/v83v2wq3px/pathway)
+
+
+
+
