@@ -296,12 +296,10 @@ Para lograr la orquestación/sincronización/comunicación deseada es mejor que 
 
 ### TODO y practicar
 
-Como práctica, queremos duplicar nuestro frontend básico de manera que tengamos dos portales muy similares pero distintos.  
+1.  Como práctica, queremos duplicar nuestro frontend básico de manera que tengamos dos portales muy similares pero distintos.  
 
-Es decir, que el Front1 ejecute en un contenedor y el Front2 ejecute en otro contenedor.  
+* Es decir, que el Front1 ejecute en un contenedor y el Front2 ejecute en otro contenedor.  
+* Además, ambos frontales se comunican con el mismo backend, el nuestro.  
+* Crea agentes "cliente" que solo accedan a uno de los frontales, crea un agente "admin" que acceda a la network que agrupa al resto de networks.  
 
-Además, ambos frontales se comunican con el mismo backend, el nuestro.  
-
-Crea agentes "cliente" que solo accedan a uno de los frontales, crea un agente "admin" que acceda a la network que agrupa al resto de networks.  
-
-Sugerencia: crea tres networks, una para los frontales, otra para el backend, y una tercera que agrupe las dos anteriores.  
+1. [ ] **Sugerencia**: crea tres networks, una para los frontales, otra para el backend, y una tercera que agrupe las dos anteriores.  

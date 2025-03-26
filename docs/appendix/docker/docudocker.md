@@ -11,26 +11,26 @@ Docker opera en un modelo cliente-servidor, consistiendo en varios componentes c
 
 En el núcleo de Docker está el Motor de Docker, que incluye:  
 
-**Daemon de Docker**: El servicio de fondo que se ejecuta en el host y gestiona la construcción, ejecución y distribución de contenedores Docker.  
-**CLI de Docker**: La interfaz de línea de comandos utilizada para interactuar con el daemon de Docker.  
-**API REST**: Permite que aplicaciones remotas interactúen con el daemon de Docker.  
+* **Daemon de Docker**: El servicio de fondo que se ejecuta en el host y gestiona la construcción, ejecución y distribución de contenedores Docker.  
+* **CLI de Docker**: La interfaz de línea de comandos utilizada para interactuar con el daemon de Docker.  
+* **API REST**: Permite que aplicaciones remotas interactúen con el daemon de Docker.  
 
 ### Componentes de Docker
 
 Docker utiliza varios objetos para construir y ejecutar aplicaciones:  
 
-**Imágenes**: Plantillas de solo lectura utilizadas para crear contenedores.  
-**Contenedores**: Instancias ejecutables de imágenes.  
-**Networks**: Redes que facilitan la comunicación entre contenedores y el mundo exterior.  
-**Volúmenes**: Almacenamiento de datos persistente para contenedores.  
+* **Imágenes**: Plantillas de solo lectura utilizadas para crear contenedores.  
+* **Contenedores**: Instancias ejecutables de imágenes.  
+* **Networks**: Redes que facilitan la comunicación entre contenedores y el mundo exterior.  
+* **Volúmenes**: Almacenamiento de datos persistente para contenedores.  
 
 Entender esta arquitectura permite visualizar cómo interactúan los diferentes componentes y ayuda en la resolución de problemas potenciales.  
 
 ### Beneficios de la Arquitectura de Docker
 
-**Aislamiento**: Los contenedores se ejecutan en entornos aislados, asegurando consistencia en diferentes sistemas.  
-**Portabilidad**: Las imágenes de Docker pueden ejecutarse en cualquier sistema que soporte Docker, independientemente del SO subyacente.  
-**Eficiencia**: Los contenedores comparten el kernel del SO host, haciéndolos ligeros en comparación con las VMs tradicionales.  
+* **Aislamiento**: Los contenedores se ejecutan en entornos aislados, asegurando consistencia en diferentes sistemas.  
+* **Portabilidad**: Las imágenes de Docker pueden ejecutarse en cualquier sistema que soporte Docker, independientemente del SO subyacente.  
+* **Eficiencia**: Los contenedores comparten el kernel del SO host, haciéndolos ligeros en comparación con las VMs tradicionales.  
 
 ### Docker Hub
 
