@@ -110,10 +110,10 @@ Teniendo en local las instalaciones hechas, no representa problema alguno, por e
 docker build -t i-tutorial-eureka .
 docker run -d -p 8761:8761 --name c-tutorial-eureka i-tutorial-eureka
 
-docker logs cca-c-tutorial-eureka
-docker stop cca-c-tutorial-eureka
-docker start cca-c-tutorial-eureka
-docker rm cca-c-tutorial-eureka
+docker logs c-tutorial-eureka
+docker stop c-tutorial-eureka
+docker start c-tutorial-eureka
+docker rm c-tutorial-eureka
 ```
 
 que hace lo siguiente:  
