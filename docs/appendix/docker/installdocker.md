@@ -23,7 +23,7 @@ Ejemplo de lo que os sale, se elige la primera opción
 5.	Introducir los siguientes comandos en Ubuntu.  
 * Si pide un usuario y contraseña, poner la vuestra propia.  
 
-* Podéis continuar con estos comandos:
+* Podéis continuar con estos comandos:  
 `sudo apt-get update`  
 `sudo apt-get install apt-transport-https ca-certificates curl software-properties-common`  
 `curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add –`  
