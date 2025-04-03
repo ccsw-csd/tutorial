@@ -60,7 +60,7 @@ nav:
     - Dockerízate:
       - Instalar docker: appendix/docker/installdocker.md
       - ¿Qué es docker?: appendix/docker/docudocker.md
-      - Practiquémos: appendix/docker/traindocker.md
+      - Practiquemos: appendix/docker/traindocker.md
       - Resumen: appendix/docker/summary.md
 theme:
     name: material
