@@ -33,6 +33,7 @@ Ten en cuenta que `Cliente` no depende de nadie, pero `Préstamo` si que depende
 
 Pues ya estaría todo, ahora solo te puedo dar la enhorabuena y pasar algo de información extra / cursos / formaciones por si quieres seguir aprendiendo.
 
-Por un lado tienes el itinerario avanzado de [Springboot](https://degreed.com/pathway/08gxl0e7pw?orgsso=capgemini#section-4) donde se puede más detalle de micro servicios.
 
-Por otro lado también tienes los itinerarios de [Cloud](https://degreed.com/pathway/3pmxr00g9n/pathway?orgsso=capgemini#section-1) ya que no todo va a ser micro servicios con Spring Cloud, también existen micro servicios con otras tecnologías, aunque el concepto es muy similar.
+Por un lado tienes el itinerario avanzado de [Springboot](https://cca.%63%61%70%67%65%6D%69%6E%69.%63%6F%6D/accademy/#/course/9LapFG36nG) donde se puede más detalle de micro servicios.
+
+Por otro lado también tienes los itinerarios de [Cloud](https://cca.%63%61%70%67%65%6D%69%6E%69.%63%6F%6D/accademy/#/course/l3VRswcThO) ya que no todo va a ser micro servicios con Spring Cloud, también existen micro servicios con otras tecnologías, aunque el concepto es muy similar.
