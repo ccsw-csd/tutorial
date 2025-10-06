@@ -1841,7 +1841,7 @@ Ejemplo de lo que os sale, se elige la primera opción</li>
 <p>Verificar la instalación:  </p>
 </li>
 <li>
-<p>Para ver si está instalado, ejecuta <code>wsl –version</code><br />
+<p>Para ver si está instalado, ejecuta <code>wsl –version</code> (es posible que necesites reiniciar el ordenador)
 <img alt="wsl-version.png" src="../images/wsl-version.png" />  </p>
 </li>
 <li>
@@ -1858,12 +1858,17 @@ Ejemplo de lo que os sale, se elige la primera opción</li>
 </li>
 <li>
 <p>Podéis continuar con estos comandos:<br />
-<code>sudo apt-get update</code><br />
-<code>sudo apt-get install apt-transport-https ca-certificates curl software-properties-common</code><br />
-<code>curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add –</code><br />
-<code>sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable”</code><br />
-<code>sudo apt-get install docker-ce</code><br />
-<code>sudo gpasswd -a $USER docker</code>  </p>
+<div class="highlight"><pre><span></span><code>sudo apt update
+sudo apt install curl apt-transport-https ca-certificates software-properties-common
+sudo apt install docker.io -y
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+echo &quot;deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable&quot; | sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null
+sudo apt update
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+sudo systemctl start docker  
+##? gpasswd -a $USER docker  
+sudo docker run hello-world
+</code></pre></div></p>
 </li>
 <li>
 <p>En este o en el siguiente paso, te dará error por falta de permisos, no hay problema.  </p>
@@ -1871,8 +1876,8 @@ Ejemplo de lo que os sale, se elige la primera opción</li>
 <li>Abrir Ubuntu y darle a ejecutar como administrador.  </li>
 <li>
 <p>Después, tendréis que pedir una solicitud para los permisos.<br />
-<code>sudo service docker start</code><br />
-<code>docker run hello-world</code><br />
+<code>sudo systemctl start docker</code><br />
+<code>sudo docker run hello-world</code><br />
 <img alt="docker-run-hello.png" src="../images/docker-run-hello.png" /><br />
 <img alt="docker-run-hello-2.png" src="../images/docker-run-hello-2.png" /><br />
 <img alt="docker-run-hello-3.png" src="../images/docker-run-hello-3.png" />  </p>
