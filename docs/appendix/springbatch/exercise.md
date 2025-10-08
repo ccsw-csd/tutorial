@@ -37,3 +37,5 @@ Para empezar te daré unos consejos:
 ## ¿Ya has terminado?
 
 Si has llegado a este punto es porque ya tienes terminado el tutorial. Por favor no te olvides de subir los proyectos a algún repositorio Github propio (puedes revisar el anexo [Tutorial básico de Git](../../appendix/git.md)) y avísarnos para que podamos echarle un ojo y darte sugerencias y feedback :relaxed:.
+
+_Si es una formación ligada a proyecto, que tu responsable nos contacte para que podamos darle prioridad al feedback_
