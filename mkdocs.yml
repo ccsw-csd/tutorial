@@ -85,7 +85,8 @@ markdown_extensions:
 extra_css:
   - assets/style.css  
 
-
+not_in_nav: |
+  /develop/basic/vuejsold.md
 
 
 
