@@ -62,6 +62,7 @@ nav:
       - ¿Qué es docker?: appendix/docker/docudocker.md
       - Practiquemos: appendix/docker/traindocker.md
       - Resumen: appendix/docker/summary.md
+    - AWS CLI: appendix/aws.md
 theme:
     name: material
     language: es
