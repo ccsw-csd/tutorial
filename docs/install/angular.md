@@ -75,6 +75,8 @@ npm install -g @angular/cli@16
 
 Y con esto ya tendremos todo instalado, listo para empezar a crear los proyectos.
 
+!!! 
+
 
 ## Creación de proyecto
 
