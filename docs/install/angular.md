@@ -36,7 +36,7 @@ Pasados unos minutos, ya tendrás instalado el IDE en tu portátil.
 
 Muchas de las herramientas que necesitarás a lo largo de tu estancia en los proyectos, no podrás instalarlas por temas de permisos de seguridad en nuestros portátiles. Una forma de evitar estos permisos de seguridad y poder instalar herramientas (sobre todo a nivel de consola), es utilizando a [Scoop.sh](https://scoop.sh/).
 
-Para instalar *scoop.sh* tan solo necesitas abrir un termina de PowerShell (**OJO que es PowerShell y no una consola de msdos**) y ejecutar los siguientes comandos:
+Para instalar *scoop.sh* tan solo necesitas abrir un terminal de PowerShell (**OJO que es PowerShell y no una consola de msdos**) y ejecutar los siguientes comandos:
 
 ```
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
