@@ -2162,6 +2162,30 @@ Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
 npm install -g @angular/cli@16
 </code></pre></div>
 <p>Y con esto ya tendremos todo instalado, listo para empezar a crear los proyectos.</p>
+<div class="admonition note">
+<p class="admonition-title">Aviso para navegantes corporativos</p>
+<p>Si tienes algún problema para ejecutar el comando <code>ng ...</code> puede deberse a que no se ha podido añadir al PATH.</p>
+<p>Pero ¡¡no te preocupes!! te explicamos cómo puedes instalártelo paso a paso:</p>
+</div>
+<ol>
+<li>Asegúrate de que tienes instalado <code>Git Bash</code>, ¿cómo?<ol>
+<li>Clic derecho en una carpeta – la que sea</li>
+<li>"Más opciones" / "More options"</li>
+<li>Si no te aparece, deberás instalártelo desde el Portal de Empresa</li>
+</ol>
+</li>
+<li>Elige una carpeta sobre la que tengas permisos como destino de la instalación<ul>
+<li><code>npm install @angular/cli</code> &lt;- no ponemos <code>-g</code></li>
+</ul>
+</li>
+<li>Ahora viene lo confuso, pero te guiamos. Tienes que crear el siguiente alias<ul>
+<li><code>echo alias ng=\'node RUTA_EN_LA_QUE_ESTAS/node_modules/@angular/cli/bin/ng.js\' &gt;&gt; .bashrc</code> &lt;- esto creará el alias</li>
+<li><code>source ~/.bashrc</code> &lt;- esto actualizará el perfil (resetea el diccionario con los alias disponibles)</li>
+</ul>
+</li>
+<li>Ahora ya deberías poder ejecutar <code>ng</code> desde <code>Git bash</code></li>
+</ol>
+<p>¿Sigues teniendo algún problema en la instalación? Contáctanos y te ayudaremos en la medida de lo que podamos</p>
 <h2 id="creacion-de-proyecto">Creación de proyecto</h2>
 <p>La mayoría de los proyectos con Angular en los que trabajamos normalmente, suelen ser proyectos web usando las librerías mas comunes de angular, como Angular Material.</p>
 <p>Crear un proyecto de Angular es muy sencillo si tienes instalado el CLI de Angular. Lo primero abrir una consola de msdos y posicionarte en el directorio raiz donde quieres crear tu proyecto Angular, y ejecutamos lo siguiente:</p>
