@@ -80,13 +80,17 @@ Y con esto ya tendremos todo instalado, listo para empezar a crear los proyectos
     Si tienes algún problema para ejecutar el comando `ng ...` puede deberse a que no se ha podido añadir al PATH.
 
     Pero ¡¡no te preocupes!! te explicamos cómo puedes instalártelo paso a paso:
-    1. Asegurate de que tienes instalado `Git Bash`, ¿cómo? Clic derecho en una carpeta, "Más opciones" / "More options" y debería aparecerte
-    2. Elige una carpeta sobre la que tengas permisos como destino de la instalación
-        `npm install @angular/cli ` <- no ponemos `-g`
-    3. Ahora viene lo confuso, pero te guiamos. Tienes que crear el siguiente alias
-        - `echo alias ng=\'node RUTA_EN_LA_QUE_ESTAS/node_modules/@angular/cli/bin/ng.js\' >> .bashrc` <- esto creará el alias
-        - `source ~/.bashrc` <- esto actualizará el perfil (resetea el diccionario de alias)
-    4. Ahora ya deberías poder ejecutar `ng` desde `Git bash`
+
+1. Asegúrate de que tienes instalado `Git Bash`, ¿cómo?
+    1. Clic derecho en una carpeta – la que sea
+    2. "Más opciones" / "More options"
+    3. Si no te aparece, deberás instalártelo desde el Portal de Empresa
+3. Elige una carpeta sobre la que tengas permisos como destino de la instalación
+    - `npm install @angular/cli ` <- no ponemos `-g`
+4. Ahora viene lo confuso, pero te guiamos. Tienes que crear el siguiente alias
+    - `echo alias ng=\'node RUTA_EN_LA_QUE_ESTAS/node_modules/@angular/cli/bin/ng.js\' >> .bashrc` <- esto creará el alias
+    - `source ~/.bashrc` <- esto actualizará el perfil (resetea el diccionario con los alias disponibles)
+5. Ahora ya deberías poder ejecutar `ng` desde `Git bash`
 
 ¿Tienes algún problema en la instalación? Contáctanos y te ayudaremos en la medida de lo que podamos
 
