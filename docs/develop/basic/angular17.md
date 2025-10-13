@@ -250,9 +250,9 @@ Si abrimos el navegador y accedemos a `http://localhost:4200/` podremos navegar 
 
 ### Código de la pantalla
 
-Ahora vamos a construir la pantalla. Para manejar la información del listado, necesitamos almacenar los datos en un objeto de tipo `model`. Para ello crearemos un fichero en `category\model\Category.ts` donde implementaremos la clase necesaria. Esta clase será la que utilizaremos en el código html y ts de nuestro componente.
+Ahora vamos a construir la pantalla. Para manejar la información del listado, necesitamos almacenar los datos en un objeto de tipo `model`. Para ello crearemos un fichero en `category\model\category.ts` donde implementaremos la clase necesaria. Esta clase será la que utilizaremos en el código html y ts de nuestro componente.
 
-=== "Category.ts"
+=== "category.ts"
     ``` Typescript
     export class Category {
         id: number;
@@ -335,7 +335,7 @@ También, escribiremos el código de la pantalla de listado.
     ``` Typescript 
     import { Component, OnInit } from '@angular/core';
     import { MatTableDataSource } from '@angular/material/table';
-    import { Category } from '../model/Category';
+    import { Category } from '../model/category';
     import { CommonModule } from '@angular/common';
     import { MatTableModule } from '@angular/material/table';
     import { MatIconModule } from '@angular/material/icon';
@@ -398,7 +398,7 @@ Vamos a implementar una operación de negocio que recupere el listado de categor
     ``` TypeScript hl_lines="2 3 12 13 14"
     import { Injectable } from '@angular/core';
     import { Observable } from 'rxjs';
-    import { Category } from './model/Category';
+    import { Category } from './model/category';
 
     @Injectable({
       providedIn: 'root'
@@ -416,7 +416,7 @@ Vamos a implementar una operación de negocio que recupere el listado de categor
     ``` TypeScript hl_lines="8 27 31 32"
     import { Component, OnInit } from '@angular/core';
     import { MatTableDataSource } from '@angular/material/table';
-    import { Category } from '../model/Category';
+    import { Category } from '../model/category';
     import { CommonModule } from '@angular/common';
     import { MatTableModule } from '@angular/material/table';
     import { MatIconModule } from '@angular/material/icon';
@@ -457,7 +457,7 @@ Como hemos comentado anteriormente, el backend todavía no está implementado, a
 
 === "mock-categories.ts"
     ``` TypeScript
-    import { Category } from "./Category";
+    import { Category } from "./category";
 
     export const CATEGORY_DATA: Category[] = [
         { id: 1, name: 'Dados' },
@@ -475,7 +475,7 @@ Como hemos comentado anteriormente, el backend todavía no está implementado, a
     ``` TypeScript hl_lines="2 4 14"
     import { Injectable } from '@angular/core';
     import { Observable, of } from 'rxjs';
-    import { Category } from './model/Category';
+    import { Category } from './model/category';
     import { CATEGORY_DATA } from './model/mock-categories';
 
     @Injectable({
@@ -503,7 +503,7 @@ Para terminar, vamos a simular las otras dos peticiones, la de editar y la de bo
     ``` TypeScript hl_lines="17 18 19 21 22 23"
     import { Injectable } from '@angular/core';
     import { Observable, of } from 'rxjs';
-    import { Category } from './model/Category';
+    import { Category } from './model/category';
     import { CATEGORY_DATA } from './model/mock-categories';
 
     @Injectable({
@@ -642,7 +642,7 @@ Ahora vamos a darle forma al formulario de editar y crear. Para ello vamos al ht
     import { Component, OnInit, Inject } from '@angular/core';
     import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
     import { CategoryService } from '../category.service';
-    import { Category } from '../model/Category';
+    import { Category } from '../model/category';
     import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     import { MatFormFieldModule } from '@angular/material/form-field';
     import { MatInputModule } from '@angular/material/input';
@@ -786,7 +786,7 @@ Y los Dialog:
     import { Component, OnInit, Inject } from '@angular/core';
     import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
     import { CategoryService } from '../category.service';
-    import { Category } from '../model/Category';
+    import { Category } from '../model/category';
     import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     import { MatFormFieldModule } from '@angular/material/form-field';
     import { MatInputModule } from '@angular/material/input';
@@ -987,7 +987,7 @@ Abrimos el fichero y sustituimos la línea que antes devolvía los datos estáti
     import { HttpClient } from '@angular/common/http';
     import { Injectable } from '@angular/core';
     import { Observable, of } from 'rxjs';
-    import { Category } from './model/Category';
+    import { Category } from './model/category';
 
     @Injectable({
     providedIn: 'root'
@@ -1049,7 +1049,7 @@ Para la llamada de guardado haríamos lo mismo, pero invocando la operación de 
     import { HttpClient } from '@angular/common/http';
     import { Injectable } from '@angular/core';
     import { Observable, of } from 'rxjs';
-    import { Category } from './model/Category';
+    import { Category } from './model/category';
 
     @Injectable({
     providedIn: 'root'
@@ -1089,7 +1089,7 @@ Y ya por último, la llamada de borrado, deberíamos cambiarla e invocar a la op
     import { HttpClient } from '@angular/common/http';
     import { Injectable } from '@angular/core';
     import { Observable, of } from 'rxjs';
-    import { Category } from './model/Category';
+    import { Category } from './model/category';
 
     @Injectable({
     providedIn: 'root'
