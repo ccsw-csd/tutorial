@@ -424,6 +424,8 @@ Posteriormente, emplazamos el resto de clases dentro del package `com.ccsw.tutor
             GameSpecification categorySpec = new GameSpecification(new SearchCriteria("idCategory", ":", idCategory));
     
             Specification<Game> spec = Specification.where(titleSpec).and(categorySpec);
+            // Desde la versión 3.5.0 de Spring Boot, la nueva manera es
+            Specification<Game> spec = titleSpec.and(categorySpec);
     
             return this.gameRepository.findAll(spec);
         }
