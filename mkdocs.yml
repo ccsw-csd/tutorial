@@ -63,6 +63,8 @@ nav:
       - Practiquemos: appendix/docker/traindocker.md
       - Resumen: appendix/docker/summary.md
     - AWS CLI: appendix/aws.md
+    - Multidioma: appendix/multilanguage.md
+    - Fechas: appendix/dates.md
 theme:
     name: material
     language: es

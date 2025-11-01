@@ -55,9 +55,13 @@ Una vez añadida la dependencia, lo que queremos es crear una primera estructura
 
 Para agrupar los componentes comunes de nuestra aplicación vamos a crear una carpeta llamada "core" dentro de la carpeta "src", e iremos creando los componentes que necesitemos. Empecemos con el header. Desde la raíz de nuestro proyecto introducimos el siguiente comando:
 
+
 ```
 ng generate component core/header
 ```
+
+!!! info "Angular 19+"
+    A partir de Angular 19, los elementos se generan sin topología, es decir `*.component.html` -> `*.html`, `*.service.ts` -> `*.ts`, etc.
 
 ### Código de la pantalla
 
@@ -154,7 +158,10 @@ Esto nos creará una carpeta con los ficheros del componente, donde tendremos qu
     }
     ```
 
-Al utilizar etiquetas de material como `mat-toolbar` o `mat-icon` y `routerLink` necesitaremos importar las dependencias. Al tratarse de un standalone component lo tendremos que hacer directamente en el atributo "imports" de nuestro component en el fichero `header.component.ts`
+Al utilizar etiquetas de material como `mat-toolbar` o `mat-icon` y `routerLink` necesitaremos importar las dependencias. Al tratarse de un standalone component lo tendremos que hacer directamente en el atributo "imports" de nuestro component en el fichero `header.component.ts`.
+
+!!! info "Angular 19+"
+    A partir de Angular 19, los componentes se crean por defecto como `standalone`, para que este no sea el caso debemos indicárselo con `--standalone false`.
 
 === "header.component.ts"
     ``` Typescript hl_lines="3 4 5 12 13 14"
@@ -590,6 +597,9 @@ Si refrescamos el navegador y pulsamos el botón `Nueva categoría`, veremos com
 ### Código del diálogo
 
 Ahora vamos a darle forma al formulario de editar y crear. Para ello vamos al html, ts y css del componente y pegamos el siguiente contenido:
+
+!!!tip "Errores de validación"
+    Os recomendamos seguir el siguiente formato para los errores de validación en formularios (`ngModel`, `mat-error`)
 
 === "category-edit.component.html"
     ``` HTML
