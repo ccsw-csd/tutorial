@@ -9,7 +9,8 @@ Pero podemos afrontarlo de una manera más clara. Vamos a empezar con unas defin
 Antes de nada, vamos a definir unos conceptos básicos que nos ayudarán a entender mejor el problema.
 
 - **Fecha (Date)**: Una fecha es una representación de un día concreto en el calendario. Por ejemplo, "15 de junio de 2024".
-- **Hora (Time)**: La hora representa un momento específico dentro de un día. - **Zona horaria (Timezone)**: La zona horaria es una región geográfica que tiene la misma hora estándar. Por ejemplo, "CET" (Central European Time) o "GMT" (Greenwich Mean Time).
+- **Hora (Time)**: La hora representa un momento específico dentro de un día.
+- **Zona horaria (Timezone)**: La zona horaria es una región geográfica que tiene la misma hora estándar. Por ejemplo, "CET" (Central European Time) o "GMT" (Greenwich Mean Time).
 - **Fecha y hora (DateTime)**: La combinación de fecha y hora representa un momento específico en el tiempo, incluyendo la zona horaria. Por ejemplo, "15 de junio de 2024 a las 14:30 CET".
 - **Timestamp**: Un timestamp es una representación numérica de un momento específico en el tiempo, generalmente expresado en segundos o milisegundos desde una fecha de referencia (por ejemplo, el 1 de enero de 1970, conocido como la "época Unix").
 
