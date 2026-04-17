@@ -38,14 +38,14 @@ nav:
     - 🟢 Spring Boot: develop/filtered/springboot.md
     - 🟢 Nodejs: develop/filtered/nodejs.md
   - Ahora hazlo tú!: exercise.md
+  - Spec Driven Development:
+    - Introducción: specs/intro.md
+    - Entorno de desarrollo: specs/install.md
+    - 🆓 Gestión de clientes: specs/customers_free.md
+    - 🆓 Gestión de préstamos: specs/loans_free.md
+    - 💰 Gestión de clientes: specs/customers_paid.md
+    - 💰 Gestión de préstamos: specs/loans_paid.md
   - "Anexos": 
-    - Spec Driven Development:
-      - Introducción: appendix/specs/intro.md
-      - Entorno de desarrollo: appendix/specs/install.md
-      - 🆓 Gestión de clientes: appendix/specs/customers_free.md
-      - 🆓 Gestión de préstamos: appendix/specs/loans_free.md
-      - 💰 Gestión de clientes: appendix/specs/customers_paid.md
-      - 💰 Gestión de préstamos: appendix/specs/loans_paid.md
     - Spring Cloud:
         - Introducción: appendix/springcloud/intro.md
         - Listado simple: appendix/springcloud/basic.md
