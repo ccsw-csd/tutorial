@@ -40,7 +40,7 @@ nav:
   - Ahora hazlo tú!: exercise.md
   - Spec Driven Development:
     - Introducción: specs/intro.md
-    - Entorno de desarrollo: specs/install.md
+    - Instalación entorno: specs/install.md
     - 🆓 Gestión de clientes: specs/customers_free.md
     - 🆓 Gestión de préstamos: specs/loans_free.md
     - 💰 Gestión de clientes: specs/customers_paid.md

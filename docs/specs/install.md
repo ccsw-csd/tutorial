@@ -1,3 +1,9 @@
+# Instalación del entorno
+
+!!! warning Atención
+    Esta sección se encuentra en desarrollo. NO se recomienda realizarla a menos que te lo hayan dicho expresamente
+
+
 Explicar lo que tenemos que tener instalado
 
 VisualStudioCode
