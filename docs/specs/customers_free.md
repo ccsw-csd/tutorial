@@ -13,7 +13,22 @@ Recuerda que partiremos del tutorial en el punto inicial del ejercicio "Ahora ha
 Nosotros con fines didacticos partiremos del tutorial de "server-springboot" y "client-angular17".
 
 
-Crearemos un directorio general que contendrá las dos carpetas, por comodidad durante el tutorial las llamaremos 
+Crearemos un directorio general que contendrá las dos carpetas, por comodidad durante el tutorial las llamaremos **```backend```** y **```frontend```**. Debería quedar algo así:
+
+![workspace](../assets/images/specs-install_1.png)
+
+Desde consola o desde un terminal, nos situaremos en ese directorio raiz y lanzaremos el inicializador de open specs. Escribiremos el siguiente comando:
+
+```
+openspec init
+```
+
+Elegiremos de la lista que nos aparece ```GitHub Copilot```, pulsaremos **```Enter```** para añadirlo y luego **```Tab```** para validar la selección.
+
+![workspace](../assets/images/specs-install_2.png)
+
+
+Esto nos instalará las plantillas necesarias para usar open specs con GitHub Copilot.
 
 
 
