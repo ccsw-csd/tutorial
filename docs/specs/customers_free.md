@@ -146,7 +146,7 @@ Aspectos a revisar:
 
 Solo se analiza el **sistema actual**.
 
-#### 📜 Prompt
+**📜 Prompt**
 
 Lo que haremos será escribir en el chat de ``Visual Studio Code`` escribir el comando y las instrucciones que queramos darle. ``Recuerda haber elegido Claude Haiku``.
 
@@ -184,9 +184,9 @@ Escríbe el resultado del contexto dentro del fichero backend-explore.md en el d
 
 ```
 
-#### 📄 backend-explore.md
+**📄 backend-explore.md**
 
-Este comando realizará un análisis exhaustivo de tu sistema y lo dejará escrito dentro de la carpeta ```specs`` en un fichero llamado ``backend-explore.md``. Al final te mostrará un texto con el resumen del sistema y además escribirá el fichero de explore. 
+Este comando realizará un análisis exhaustivo de tu sistema y lo dejará escrito dentro de la carpeta ``specs`` en un fichero llamado ``backend-explore.md``. Al final te mostrará un texto con el resumen del sistema y además escribirá el fichero de explore. 
 
 !!! tip "Sobre los permisos"
     Es posible que durante el análisis te pida permiso para hacer ciertas tareas. Le puedes ir dando permiso una a una o darle permiso en todo el workspace, eso lo dejamos a tu elección.
@@ -250,7 +250,7 @@ Aquí dejamos claro:
 - **NO** se implementa código
 - **NO** se redefine el sistema
 
-#### 📜 Prompt
+**📜 Prompt**
 
 Para nuestro ejemplo, lo que haremos será escribir en el chat de ``Visual Studio Code`` el siguiente prompt:
 
@@ -322,7 +322,7 @@ Además en el chat también hará un pequeño resumen de lo que ha propuesto com
 Veamos lo que contiene cada uno de esos ficheros.
 
 
-#### 📄 proposal.md
+**📄 proposal.md**
 
 Define la funcionalidad a alto nivel.
 
@@ -335,7 +335,7 @@ Incluye:
 
 Responde a: ¿Qué se va a construir y por qué?
 
-#### 📄 design.md
+**📄 design.md**
 
 Describe el diseño técnico de la solución.
 
@@ -349,7 +349,7 @@ Incluye:
 
 Responde a: ¿Cómo se va a construir y por qué se ha elegido este enfoque?
 
-#### 📄 spec.md
+**📄 spec.md**
 
 Define el comportamiento funcional esperado.
 
@@ -362,7 +362,7 @@ Incluye:
 
 Responde a: ¿Qué debe hacer el sistema?
 
-#### 📄 tasks.md
+**📄 tasks.md**
 
 Descompone la implementación en tareas ejecutables. Quizá es el fichero más importante.
 
@@ -391,7 +391,7 @@ El objetivo de esta fase es transformar los artefactos generados (proposal.md, d
 - Se siguen las decisiones técnicas definidas en design.md
 - Se ejecutan las tareas en el orden establecido en tasks.md
 
-#### 📜 Prompt
+**📜 Prompt**
 
 Esto es tan fácil como escribir en el chat de ``Visual Studio Code`` el siguiente prompt:
 
@@ -426,6 +426,7 @@ Y llegamos a la última etapa que nos define open spec, el último paso es archi
 El objetivo de esta fase es marcar la funcionalidad como completada, consolidar todos los artefactos generados durante el proceso y dejar el sistema en un estado estable, coherente y preparado para nuevas evoluciones.
 
 En esta fase se asegura que:
+
 -	La funcionalidad ha sido correctamente implementada y validada
 -	No existen incidencias críticas pendientes 
 -	La documentación asociada al cambio está completa y actualizada
@@ -434,7 +435,7 @@ En esta fase se asegura que:
 Aunque parezca mentira, este paso es muy importante ya que nos servirá para actualizar el contexto del sistema y archivar todos los cambios para futuras consultas.
 
 
-#### 📜 Prompt
+**📜 Prompt**
 
 De nuevo nos vamos al chat de ``Visual Studio Code`` el siguiente prompt:
 
@@ -469,7 +470,7 @@ Esto puede provocar:
 - Dificultad para futuras evoluciones 
 - Desalineación entre código y documentación
 
-#### 📜 Actualización
+**📜 Actualización del contexto**
 
 
 Además, para forzar al ``modelo gratuito`` y dejarlo todo listo, es recomendable lanzar un último prompt que nos actualice el fichero de `backend-explore.md`
@@ -479,3 +480,187 @@ Además, para forzar al ``modelo gratuito`` y dejarlo todo listo, es recomendabl
 Actualiza el fichero de backend-explore con los nuevos datos implementados
 
 ```
+
+
+## Generación de frontend
+
+Bueno, pues ahora que ya tenemos el backend implementado, realizaremos de nuevo un ciclo completo de Open Specs pero está vez para frontend:
+
+```
+1. Explore
+2. Propose
+3. Apply
+4. Archive
+```
+
+### Explore
+
+De nuevo el objetivo de esta fase es analizar el sistema existente, sin modificar nada, pero esta vez nos centraremos en el frontend.
+
+**📜 Prompt**
+
+Vamos al chat de ``Visual Studio Code`` y escribimos el comando:
+
+```
+opsx:explore
+
+Analiza el proyecto actual que está en el directorio "frontend", es una aplicación Angular. Ojo no escanees la carpeta de "node_modules" no tiene sentido. Una vez analizado, responde:
+
+1. ¿Cómo están implementados los CRUD existentes?
+- Componentes
+- Servicios
+- Modelos
+
+2. ¿Qué estructura siguen los dominios?
+
+3. ¿Cómo se implementan las operaciones?
+- Listado
+- Creación/edición
+- Borrado
+- Cómo funcionan las ventanas de creación y edición (modales)
+
+4. ¿Como se comunican frontend con backend?
+- Servicios en Angular
+- Construcción de URLs
+
+5. ¿Qué patrones o estructuras comunes se repiten en los CRUD existentes?
+- Clases reutilizables
+- Lógica repetida
+- Estructuras comunes entre dominios
+
+
+Analiza únicamente la parte de frontend (Angular)
+NO propongas soluciones.
+NO diseñes nuevas funcionalidades.
+Solo analiza el sistema actual.
+Escríbe el resultado del contexto dentro del fichero frontend-explore.md en el directorio de las specs para poder utilizarlo en siguientes fases.
+
+```
+
+Este comando realizará un análisis exhaustivo de tu sistema y lo dejará escrito dentro de la carpeta ``specs`` en un fichero llamado ``frontend-explore.md``. Al final te mostrará un texto con el resumen del sistema y además escribirá el fichero de explore. Este análisis estará más centrado en el frontend y debes pedirle que compruebe como se comunica con el backend para que lo tenga en cuenta.
+
+
+### Propose
+
+Una vez definido el análisis inicial, lo siguiente es pedirle una propuesta de lo que queremos construir. 
+
+**📜 Prompt**
+
+De nuevo en el chat de ``Visual Studio Code`` escribimos el comando:
+
+```
+/opsx:propose manage-customers-frontend
+
+Define la funcionalidad de gestión de clientes basándote en el sistema actual y en los patrones identificados en la fase Explore, tienes el resultado en el fichero "frontend-explore.md". Además tendrás que ver el cambio realizado en la spec de "manage-customers-backend", sobre todo los endpoints generados que lo tienes definido en "FRONTEND_API_CONTRACT.md"
+
+Nos han pedido esta nueva funcionalidad.
+
+Por un lado necesita poder tener una base de datos de sus clientes. Para ello nos ha pedido que si podemos crearle una pantalla de CRUD sencilla, al igual que hicimos con las categorías donde él pueda dar de alta a sus clientes.
+
+Nos ha pasado un esquema muy sencillo de lo que quiere, tan solo quiere guardar un listado de los nombres de sus clientes para tenerlos fichados, y nos ha hecho un par de pantallas sencillas muy similares a Categorías.
+
+Un listado sin filtros de ningún tipo ni paginación.
+
+Un formulario de edición / alta, cuyo único dato editable sea el nombre. Además, la única restricción que nos ha pedido es que NO podamos dar de alta a un cliente con el mismo nombre que otro existente. Así que deberemos comprobar el nombre, antes de guardar el cliente.
+
+Para empezar te daré unos consejos:
+- Recuerda crear la tabla de la BBDD y sus datos
+- Intenta primero hacer el listado completo, en el orden que más te guste: frontend o backend.
+- Completa el listado conectando ambas capas.
+- Termina el caso de uso haciendo las funcionalidades de edición, nuevo y borrado. Presta atención a la validación a la hora de guardar un cliente, NO se puede guardar si el nombre ya existe.
+
+
+Te voy a dar otras directrices que pienso que te pueden servir:
+- Se necesita un CRUD de clientes
+- Un cliente solo tiene: id, name
+- El listado será simple, sin filtros ni paginación
+- Existirá un formulario de alta / edición en modal
+- El único campo editable será el nombre
+- No se puede crear un cliente con un nombre ya existente, será una validación obligatoria que deberemos cumplir en el guardado
+
+
+Necesito que definas:
+
+1. Descripción de la funcionalidad
+
+2. Reglas de negocio
+
+3. Diseño frontend:
+- Componentes necesarios
+- Flujos de interacción (listado, abrir modal, guardar borrar)
+
+4. Uso de endpoints para llamar a backend
+
+5. Decisiones técnicas:
+- Qué patrones del sistema actual se reutilizan
+
+
+NO implementes código.
+NO analices de nuevo el proyecto.
+Basa la propuesta en los patrones detectados en la fase Explore.
+Haz la propuesta únicamente de frontend.
+Olvídate de los test, en frontend no tenemos tests.
+Añade el nuevo punto de menú en el header para que se pueda acceder.
+No te inventes estilos, respeta los estilos de las pantallas (anchuras, alturas, colores, disposición de las tablas).
+Utiliza los alert dialog de Angular Material para las alertas, no uses la opción alert() del navegador.
+
+Tendrás que escribir los ficheros de proposal, design, spec y tasks en la propuesta correspondiente.
+```
+
+Puntos a destacar de este prompt:
+
+- Además del contexto inicial le hemos pedido que busque el fichero de `FRONTEND_API_CONTRACT.md` que es el fichero que generamos junto con el backend y que tiene las reglas de los endpoints del backend. Esto lo tenemos que hacer así ya que el modelo es gratuito y tiene limitaciones, no puede analizar frontend y backend a la vez en el mismo contexto.
+- También le hemos pedido que **NO** invente estilos y que se fije en las pantallas existentes, además de decirle que utilice componentes de Angular Material. A veces los modelos gratuitos tienden a inventar mucho, por falta de contexto. De nuevo cuanto más concretos y precisos seamos, mejor implementará.
+
+
+### Apply
+
+Cuando estemos de acuerdo con la propuesta que nos ha hecho la IA y sobre todo con las tasks que propone realizar, lanzamos la fase de implementación.
+
+**📜 Prompt**
+
+Esto es tan fácil como escribir en el chat de ``Visual Studio Code`` el siguiente prompt:
+
+```
+
+/opsx:apply
+
+```
+
+El agente empezará a realizar un montón de tareas y pedirnos permisos. Es posible que algunas de esas tareas fallen y él mismo lo reintente de otra forma. El resultado debería ser el código generado e implementado dentro de la carpeta de ``frontend`` y un resumen de todas las tareas realizadas y checkeadas por la IA.
+
+
+### Pruebas del frontend
+
+Ahora sí, prueba de 🔥 fuego 🔥. Es hora de levantar el sistema completo, ``frontend`` y ``backend``, navegar por la aplicación y comprobar que todo funciona.
+
+Si algo no encaja, es buen momento para conversarlo con la IA y que realice los cambios necesarios hasta conseguir que todo funcione perfectamente.
+
+
+### Archive
+
+Una vez tengamos todo funcionando y perfectamente implementado, pasamos a la última etapa para archivar y sincronizar nuestro cambio.
+
+**📜 Prompt**
+
+De nuevo nos vamos al chat de ``Visual Studio Code`` el siguiente prompt:
+
+```
+/opsx:archive
+```
+
+En ese caso, el sistema solicita confirmación para sincronizar los requisitos antes de archivar el cambio.
+
+
+**📜 Actualización del contexto**
+
+
+Y por último forzamos una actualización del contexto inicial.
+
+```
+Actualiza el fichero de frontend-explore con los nuevos datos implementados
+```
+
+
+
+
