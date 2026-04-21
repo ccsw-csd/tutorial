@@ -146,6 +146,8 @@ Aspectos a revisar:
 
 Solo se analiza el **sistema actual**.
 
+---
+
 **📜 Prompt**
 
 Lo que haremos será escribir en el chat de ``Visual Studio Code`` el comando y las instrucciones que queramos darle. ``Recuerda haber elegido Claude Haiku``.
@@ -249,6 +251,8 @@ Aquí dejamos claro:
 
 - **NO** se implementa código
 - **NO** se redefine el sistema
+
+---
 
 **📜 Prompt**
 
@@ -408,6 +412,8 @@ El objetivo de esta fase es transformar los artefactos generados
 - Se siguen las decisiones técnicas establecidas en `design.md`
 - Se ejecutan las tareas en el orden definido en `tasks.md`
 
+--- 
+
 **📜 Prompt**
 
 Esto es tan fácil como escribir en el chat de ``Visual Studio Code`` el siguiente prompt:
@@ -438,7 +444,8 @@ Si **NO** estás a gusto con la implementación o se ha dejado algo por hacer, e
 
 
 ### Archive
-Y llegamos a la última etapa que nos define Open Spec, el último paso es archivar el cambio.
+
+Y llegamos a la última etapa que nos define Open Spec, donde se archiva el cambio y se da por finalizada la funcionalidad.
 
 El objetivo de esta fase es marcar la funcionalidad como completada, consolidar todos los artefactos generados durante el proceso y dejar el sistema en un estado estable, coherente y preparado para nuevas evoluciones.
 
@@ -451,6 +458,7 @@ En esta fase se asegura que:
 
 Aunque parezca mentira, este paso es muy importante ya que nos servirá para actualizar el contexto del sistema y archivar todos los cambios para futuras consultas.
 
+---
 
 **📜 Prompt**
 
@@ -521,6 +529,8 @@ Bueno, pues ahora que ya tenemos el backend implementado, realizaremos de nuevo 
 
 De nuevo el objetivo de esta fase es analizar el sistema existente, sin modificar nada, pero esta vez nos centraremos en el frontend.
 
+--- 
+
 **📜 Prompt**
 
 Vamos al chat de ``Visual Studio Code`` y escribimos el comando:
@@ -567,6 +577,8 @@ Este comando realizará un análisis exhaustivo de tu sistema y lo dejará escri
 ### Propose
 
 Una vez definido el análisis inicial, lo siguiente es pedirle una propuesta de lo que queremos construir. 
+
+---
 
 **📜 Prompt**
 
@@ -641,6 +653,8 @@ Puntos a destacar de este prompt:
 
 Cuando estemos de acuerdo con la propuesta que nos ha hecho la IA y sobre todo con las tasks que propone realizar, lanzamos la fase de implementación.
 
+--- 
+
 **📜 Prompt**
 
 Esto es tan fácil como escribir en el chat de ``Visual Studio Code`` el siguiente prompt:
@@ -664,6 +678,8 @@ Si algo no encaja, es buen momento para conversarlo con la IA y que realice los 
 ### Archive
 
 Una vez tengamos todo funcionando y perfectamente implementado, pasamos a la última etapa para archivar y sincronizar nuestro cambio.
+
+---
 
 **📜 Prompt**
 

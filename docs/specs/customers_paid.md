@@ -253,6 +253,8 @@ Aquí dejamos claro:
 - **NO** se implementa código
 - **NO** se redefine el sistema
 
+---
+
 **📜 Prompt**
 
 Recuerda que seguimos trabajando en **modo Agent**, con las carpetas del proyecto **``frontend`` y ``backend`` añadidas al contexto**.
@@ -294,7 +296,8 @@ NO analices de nuevo el proyecto.
 Basa la propuesta en los patrones detectados en la fase Explore.
 ```
 
-Este comando debería generar un directorio dentro de ``changes`` con el nombre que le hayamos puesto a la propuesta y dentro los 4 ficheros solicitados:
+Este comando debería generar un directorio dentro de ``changes`` con el nombre que le hayamos puesto a la propuesta y dentro los siguientes ficheros:
+`proposal.md`, `design.md`, `spec.md`, `tasks.md`
 
 ![proposal](../assets/images/specs-customer-paid_4.png)
 
@@ -386,6 +389,8 @@ El objetivo de esta fase es transformar los artefactos generados
 - Se siguen las decisiones técnicas establecidas en `design.md`
 - Se ejecutan las tareas en el orden definido en `tasks.md`
 
+---
+
 **📜 Prompt**
 
 Esto es tan fácil como escribir en el chat de ``Visual Studio Code`` el siguiente prompt:
@@ -413,7 +418,8 @@ Si **NO** estás a gusto con la implementación o se ha dejado algo por hacer, e
 
 
 ### Archive
-Y llegamos a la última etapa que nos define Open Spec, el último paso es archivar el cambio.
+
+Y llegamos a la última etapa que nos define Open Spec, donde se archiva el cambio y se da por finalizada la funcionalidad.
 
 El objetivo de esta fase es marcar la funcionalidad como completada, consolidar todos los artefactos generados durante el proceso y dejar el sistema en un estado estable, coherente y preparado para nuevas evoluciones.
 
@@ -426,6 +432,7 @@ En esta fase se asegura que:
 
 Aunque parezca mentira, este paso es muy importante ya que nos servirá para actualizar el contexto del sistema y archivar todos los cambios para futuras consultas.
 
+---
 
 **📜 Prompt**
 
