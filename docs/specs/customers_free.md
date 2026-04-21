@@ -27,7 +27,7 @@ La estructura debería ser similar a esta:
 
 ![workspace](../assets/images/specs-install_1.png)
 
-Desde consola (o desde el terminal de tu IDE), nos situamos en el **directorio raíz** y lanzamos el inicializador de Open Specs.
+Desde consola (o desde el terminal de tu IDE), nos situamos en el **directorio raíz** y lanzamos el inicializador de Open Spec.
 
 ```
 openspec init
@@ -37,7 +37,7 @@ Seleccionamos **``GitHub Copilot``**, pulsamos **``Enter``** para añadirlo y de
 
 ![workspace](../assets/images/specs-install_2.png)
 
-Esto instalará las plantillas necesarias para poder trabajar con **Open Specs + GitHub Copilot**.
+Esto instalará las plantillas necesarias para poder trabajar con **Open Spec + GitHub Copilot**.
 
 ## Consejos antes de empezar
 
@@ -80,7 +80,7 @@ Además, recuerda que el comportamiento del modelo **no es determinista**. Si a 
 
 ## Generación de backend
 
-Seguiremos el ciclo completo de Open Specs:
+Seguiremos el ciclo completo de Open Spec:
 
 ```
 1. Explore
@@ -148,7 +148,7 @@ Solo se analiza el **sistema actual**.
 
 **📜 Prompt**
 
-Lo que haremos será escribir en el chat de ``Visual Studio Code`` escribir el comando y las instrucciones que queramos darle. ``Recuerda haber elegido Claude Haiku``.
+Lo que haremos será escribir en el chat de ``Visual Studio Code`` el comando y las instrucciones que queramos darle. ``Recuerda haber elegido Claude Haiku``.
 
 ```
 /opsx:explore
@@ -373,6 +373,22 @@ Incluye:
 
 Responde a: ¿Cómo se implementa paso a paso?
 
+**Relación entre los artefactos**
+
+Cada uno de los ficheros generados cumple un rol específico dentro del flujo de Open Spec:
+
+- **spec.md** → define el comportamiento esperado (*qué debe hacer el sistema*)
+- **design.md** → define la solución técnica (*cómo se va a construir*)
+- **proposal.md** → aporta contexto y alcance (*por qué se construye*)
+- **tasks.md** → guía la ejecución paso a paso (*cómo se implementa*)
+
+Esta separación de responsabilidades permite:
+
+- Evitar mezclar requisitos con implementación
+- Revisar cada nivel de forma independiente
+- Detectar errores e inconsistencias antes de escribir código
+
+Estos artefactos constituyen la base para la siguiente fase: **Apply**, donde se ejecutará la implementación siguiendo las tareas definidas.
 
 !!! tip "Responsabilidades como developer IA"
     En este punto la IA te ha hecho una propuesta que puede ser correcta o no, recordemos que se trata de un modelo matemático-probabilístico. Si hay algo de lo propuesto que no te encaja o es erróneo deberías comentarlo mediante el chat o corregirlo de forma manual en el fichero que corresponda. Por ejemplo si quieres añadir una tarea porqué se te ha olvidado incluirla en el prompt original, deberías decirle al modelo que te incluya la nueva tarea.
@@ -385,11 +401,12 @@ Una vez estemos de acuerdo con la propuesta que nos ha hecho la IA, podemos pasa
 
 Una vez validada la propuesta, ejecutamos la implementación:
 
-El objetivo de esta fase es transformar los artefactos generados (proposal.md, design.md, spec.md, tasks.md) en código funcional, asegurando que:
+El objetivo de esta fase es transformar los artefactos generados  
+(`proposal.md`, `design.md`, `spec.md`, `tasks.md`) en **código funcional**, asegurando que:
 
-- Se respetan los requisitos funcionales definidos en spec.md 
-- Se siguen las decisiones técnicas definidas en design.md
-- Se ejecutan las tareas en el orden establecido en tasks.md
+- Se respetan los requisitos funcionales definidos en `spec.md`
+- Se siguen las decisiones técnicas establecidas en `design.md`
+- Se ejecutan las tareas en el orden definido en `tasks.md`
 
 **📜 Prompt**
 
@@ -405,7 +422,7 @@ El agente empezará a realizar un montón de tareas y pedirnos permisos. Es posi
 
 ### Pruebas del backend
 
-Un paso que no pertenece a Open Specs pero que es altamente recomendable es probar los cambios realizados. 
+Un paso que no pertenece a Open Spec pero que es altamente recomendable es probar los cambios realizados. 
 Arranca el backend y verifica:
 
 - Que el servidor levanta
@@ -421,7 +438,7 @@ Si **NO** estás a gusto con la implementación o se ha dejado algo por hacer, e
 
 
 ### Archive
-Y llegamos a la última etapa que nos define open spec, el último paso es archivar el cambio.
+Y llegamos a la última etapa que nos define Open Spec, el último paso es archivar el cambio.
 
 El objetivo de esta fase es marcar la funcionalidad como completada, consolidar todos los artefactos generados durante el proceso y dejar el sistema en un estado estable, coherente y preparado para nuevas evoluciones.
 
@@ -470,6 +487,13 @@ Esto puede provocar:
 - Dificultad para futuras evoluciones 
 - Desalineación entre código y documentación
 
+**Tras completar el proceso de Archive:**
+
+- La funcionalidad queda documentada como completada
+- El cambio deja de formar parte de los cambios activos
+- Los requisitos quedan integrados definitivamente en el sistema (si se ha sincronizado)
+
+
 **📜 Actualización del contexto**
 
 
@@ -484,7 +508,7 @@ Actualiza el fichero de backend-explore con los nuevos datos implementados
 
 ## Generación de frontend
 
-Bueno, pues ahora que ya tenemos el backend implementado, realizaremos de nuevo un ciclo completo de Open Specs pero está vez para frontend:
+Bueno, pues ahora que ya tenemos el backend implementado, realizaremos de nuevo un ciclo completo de Open Spec pero está vez para frontend:
 
 ```
 1. Explore
