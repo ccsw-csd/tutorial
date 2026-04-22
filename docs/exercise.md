@@ -4,6 +4,9 @@ Ahora vamos a ver si has comprendido bien el tutorial. Voy a poner dos ejercicio
 
 Nuestro amigo *Ernesto Esvida* ya tiene disponible su web para gestionar su catálogo de juegos, autores y categorías, pero todavía le falta un poco más para poder hacer buen uso de su ludoteca. Así que nos ha pedido dos funcionalidades extra.
 
+!!!tip "Ten en cuenta"
+	Solo te pedimos que realices las funcionalidades que se indican en los requisitos. No es necesario que completes los anexos antes de que revisemos los resultados.
+
 ## Gestión de clientes
 
 ### Requisitos
@@ -39,6 +42,9 @@ Por otro lado, quiere hacer uso de su catálogo de juegos y de sus clientes, y q
 Nos ha pasado el siguiente boceto y requisitos:
 
 ![exercise_3](./assets/images/exercise_3.png)
+
+!!!warning "Atención"
+	Aunque no aparezca en el boceto, como en todas las listas que hemos visto, esperamos que puedan **editarse** los registros. El botón de "Filtrar" tendrá el mismo aspecto visual que el botón de "Nuevo préstamo".
 
 La pantalla tendrá dos zonas:
 
@@ -83,6 +89,8 @@ Para empezar te daré unos consejos:
 	- Si hiciste el backend en Springboot recuerda revisar [Baeldung](https://www.baeldung.com/spring-data-jpa-query) por si tienes dudas sobre las queries y recuerda que las `Specifications` son muy útiles, pero en este caso deberás implementar otro tipo de operaciones, no te sirve solo con la operación de igualdad `:`, que ya vimos en el tutorial.
 - Implementa la pantalla de alta de préstamo, sin ninguna validación.
 - Cuando ya te funcione, intenta ir añadiendo una a una las validaciones. Algunas de ellas pueden hacerse en frontend, mientras que otras deberán validarse en backend
+- Os recordamos que han de poder crearse y editarse préstamos según las reglas de validación indicadas anteriormente. Aplican las mismas reglas para ambas operaciones.
+- El Backend ha de validar siempre, independientemente de que el Frontend ya lo haya validado. Nunca confíes de manera exclusiva en terceras partes (Frontend o en otro Backend).
 
 
 

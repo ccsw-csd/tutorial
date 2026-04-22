@@ -141,7 +141,7 @@ Ya tenemos las operaciones del servicio con datos, así que ahora vamos a por el
         </div>
 
         <div class="game-list">
-            @for (game of games; trackBy game.id) {
+            @for (game of games; track game.id) {
                 <app-game-item (click)="editGame(game)" />
             }
         </div>

@@ -70,6 +70,8 @@ nav:
     - "GIT: Tutorial básico": appendix/git.md
     - API Rest: appendix/rest.md
     - TDD: appendix/tdd.md
+    - Multidioma: appendix/multilanguage.md
+    - Fechas: appendix/dates.md
 theme:
     name: material
     language: es
@@ -92,7 +94,8 @@ markdown_extensions:
 extra_css:
   - assets/style.css  
 
-
+not_in_nav: |
+  /develop/basic/vuejsold.md
 
 
 

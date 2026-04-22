@@ -36,7 +36,7 @@ Pasados unos minutos, ya tendrás instalado el IDE en tu portátil.
 
 Muchas de las herramientas que necesitarás a lo largo de tu estancia en los proyectos, no podrás instalarlas por temas de permisos de seguridad en nuestros portátiles. Una forma de evitar estos permisos de seguridad y poder instalar herramientas (sobre todo a nivel de consola), es utilizando a [Scoop.sh](https://scoop.sh/).
 
-Para instalar *scoop.sh* tan solo necesitas abrir un termina de PowerShell (**OJO que es PowerShell y no una consola de msdos**) y ejecutar los siguientes comandos:
+Para instalar *scoop.sh* tan solo necesitas abrir un terminal de PowerShell (**OJO que es PowerShell y no una consola de msdos**) y ejecutar los siguientes comandos:
 
 ```
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
@@ -74,6 +74,25 @@ npm install -g @angular/cli@16
 ```
 
 Y con esto ya tendremos todo instalado, listo para empezar a crear los proyectos.
+
+!!! note "Aviso para navegantes corporativos"
+    
+    Si tienes algún problema para ejecutar el comando `ng ...` puede deberse a que no se ha podido añadir al PATH.
+
+    Pero ¡¡no te preocupes!! te explicamos cómo puedes instalártelo paso a paso:
+
+1. Asegúrate de que tienes instalado `Git Bash`, ¿cómo?
+    1. Clic derecho en una carpeta – la que sea
+    2. "Más opciones" / "More options"
+    3. Si no te aparece, deberás instalártelo desde el Portal de Empresa
+3. Elige una carpeta sobre la que tengas permisos como destino de la instalación
+    - `npm install @angular/cli ` <- no ponemos `-g`
+4. Ahora viene lo confuso, pero te guiamos. Tienes que crear el siguiente alias
+    - `echo alias ng=\'node RUTA_EN_LA_QUE_ESTAS/node_modules/@angular/cli/bin/ng.js\' >> .bashrc` <- esto creará el alias
+    - `source ~/.bashrc` <- esto actualizará el perfil (resetea el diccionario con los alias disponibles)
+5. Ahora ya deberías poder ejecutar `ng` desde `Git bash`
+
+¿Tienes algún problema en la instalación? Contáctanos y te ayudaremos en la medida de lo que podamos
 
 
 ## Creación de proyecto
