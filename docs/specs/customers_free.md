@@ -27,7 +27,7 @@ La estructura debería ser similar a esta:
 
 ![workspace](../assets/images/specs-install_1.png)
 
-Desde consola (o desde el terminal de tu IDE), nos situamos en el **directorio raíz** y lanzamos el inicializador de Open Spec.
+Desde consola (o desde el terminal de tu IDE), nos situamos en el **directorio raíz** y lanzamos el inicializador de OpenSpec.
 
 ```
 openspec init
@@ -37,7 +37,7 @@ Seleccionamos **``GitHub Copilot``**, pulsamos **``Enter``** para añadirlo y de
 
 ![workspace](../assets/images/specs-install_2.png)
 
-Esto instalará las plantillas necesarias para poder trabajar con **Open Spec + GitHub Copilot**.
+Esto instalará las plantillas necesarias para poder trabajar con **OpenSpec + GitHub Copilot**.
 
 ## Consejos antes de empezar
 
@@ -80,7 +80,7 @@ Además, recuerda que el comportamiento del modelo **no es determinista**. Si a 
 
 ## Generación de backend
 
-Seguiremos el ciclo completo de Open Spec:
+Seguiremos el ciclo completo de OpenSpec:
 
 ```
 1. Explore
@@ -379,7 +379,7 @@ Responde a: ¿Cómo se implementa paso a paso?
 
 **Relación entre los artefactos**
 
-Cada uno de los ficheros generados cumple un rol específico dentro del flujo de Open Spec:
+Cada uno de los ficheros generados cumple un rol específico dentro del flujo de OpenSpec:
 
 - **spec.md** → define el comportamiento esperado (*qué debe hacer el sistema*)
 - **design.md** → define la solución técnica (*cómo se va a construir*)
@@ -428,7 +428,7 @@ El agente empezará a realizar un montón de tareas y pedirnos permisos. Es posi
 
 ### Pruebas del backend
 
-Un paso que no pertenece a Open Spec pero que es altamente recomendable es probar los cambios realizados. 
+Un paso que no pertenece a OpenSpec pero que es altamente recomendable es probar los cambios realizados. 
 Arranca el backend y verifica:
 
 - Que el servidor levanta
@@ -445,7 +445,7 @@ Si **NO** estás a gusto con la implementación o se ha dejado algo por hacer, e
 
 ### Archive
 
-Y llegamos a la última etapa que nos define Open Spec, donde se archiva el cambio y se da por finalizada la funcionalidad.
+Y llegamos a la última etapa que nos define OpenSpec, donde se archiva el cambio y se da por finalizada la funcionalidad.
 
 El objetivo de esta fase es marcar la funcionalidad como completada, consolidar todos los artefactos generados durante el proceso y dejar el sistema en un estado estable, coherente y preparado para nuevas evoluciones.
 
@@ -516,7 +516,7 @@ Actualiza el fichero de backend-explore con los nuevos datos implementados
 
 ## Generación de frontend
 
-Bueno, pues ahora que ya tenemos el backend implementado, realizaremos de nuevo un ciclo completo de Open Spec pero está vez para frontend:
+Bueno, pues ahora que ya tenemos el backend implementado, realizaremos de nuevo un ciclo completo de OpenSpec pero está vez para frontend:
 
 ```
 1. Explore
