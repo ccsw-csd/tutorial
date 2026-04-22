@@ -73,10 +73,12 @@ Además, recuerda que el comportamiento del modelo **no es determinista**. Si a 
 Seguiremos el ciclo completo de :
 
 ```
+
 1. Explore
 2. Propose
 3. Apply
 4. Archive
+
 ```
 
 ## Generación de backend
@@ -410,10 +412,12 @@ Actualiza el fichero de backend-explore con los nuevos datos implementados
 Bueno, pues ahora que ya tenemos el backend implementado, realizaremos de nuevo un ciclo completo de OpenSpec pero está vez para frontend:
 
 ```
+
 1. Explore
 2. Propose
 3. Apply
 4. Archive
+
 ```
 
 **Es muy importante** que cada nuevo cambio que hagamos, lo empecemos en un chat nuevo, para limpiar el contexto anterior y no arrastrar posibles errores o incoherencias.

@@ -68,10 +68,12 @@ Es **sumamente importante** que se defina de forma concreta y muy concisa los re
 El flujo de trabajo de OpenSpec se estructura en cuatro fases principales:
 
 ```
+
 1. Explore
 2. Propose
 3. Apply
 4. Archive
+
 ```
 
 Cada una de estas fases cumple un propósito específico y se apoya en la anterior, formando un ciclo completo de definición, implementación y cierre del cambio.

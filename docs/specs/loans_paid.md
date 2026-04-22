@@ -61,10 +61,12 @@ Además, recuerda que el comportamiento del modelo **no es determinista**. Si a 
 Seguiremos el ciclo completo de OpenSpec:
 
 ```
+
 1. Explore
 2. Propose
 3. Apply
 4. Archive
+
 ```
 
 ### Backend y frontend
