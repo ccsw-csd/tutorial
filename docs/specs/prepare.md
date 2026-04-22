@@ -1,10 +1,12 @@
-# Instalación del entorno
+# Preparación del entorno
 
 !!! warning Atención
     Esta sección se encuentra en desarrollo 🚧.  
     **NO se recomienda realizarla** a menos que te lo hayan indicado expresamente.
 
 En esta sección se asume que ya se ha completado el tutorial base y que el **Entorno de desarrollo** para Angular y Spring Boot está correctamente configurado.
+
+Además, sería de mucha ayuda si además has realizado el ejercicio **`Ahora hazlo tu!`** ya que así tendrás el conocimiento de lo que estamos intentando construir en este punto.
 
 Por tanto, partimos de un entorno en el que ya están instaladas las herramientas básicas necesarias para trabajar en el proyecto. 
 
@@ -83,20 +85,40 @@ Si el comando responde correctamente mostrando la versión instalada, el entorno
 
 
 
+## Preparación de entorno
+
+### Github Copilot 
+
+Llegados a este punto, y para poder seguir, necesitas una cuenta de GitHub con GitHub Copilot, da igual que sea con licencia premium o con versión gratuita. Además de tener cuenta, deberás acceder desde ``Visual Studio Code`` a esta cuenta para poder activar las características del chat.
 
 
+### Estructura inicial del proyecto
 
-Los proyectos base se deben descargar de aquí --> https://github.com/ccsw-csd/tutorial-proyectos
-
-
-para el ejemplo vamos a usar angular y springboot 
-
-
-Luego contar que hay modelos de pago y modelos gratuitos y por tanto deben elegir una de las opciones. Contar beneficios de uno y de otro
+A partir de aquí, necesitas los proyectos base (*sin el ejercicio hecho*) para poder seguir con los siguientes puntos de la guía.
+Si no los tienes, los puedes descargar de aquí [https://github.com/ccsw-csd/tutorial-proyectos](https://github.com/ccsw-csd/tutorial-proyectos).
 
 
-- 🆓 Gestión de clientes: specs/customers_free.md
-- 🆓 Gestión de préstamos: specs/loans_free.md
+En nuestro ejemplo vamos a utilizar los proyectos de ``server-springboot`` y ``client-angular17``. Los dos proyectos deberían estar en un mismo directorio raiz. Para simplificar los siguientes puntos, durante todo el documento, los llamaremos:
 
-- 💰 Gestión de clientes: specs/customers_paid.md
-- 💰 Gestión de préstamos: specs/loans_paid.md
+- **``backend``**
+- **``frontend``**
+
+La estructura debería ser similar a esta:
+
+![workspace](../assets/images/specs-install_1.png)
+
+
+### ¿Y ahora qué?
+
+Pues a partir de ahora debemos elegir que camino tomar... si tenemos GitHub Copilot premium con licencia, podemos hacer el tutorial versión 💰💰 que tendrá más contexto y será mucho más rápido y concreto.
+
+Si por el contrario tenemos la licencia gratuita de GitHub Copilot, podremos hacer la versión del tutorial 🆓🆓, pero será bastante más lento y deberemos abordarlo de otra forma. Además de armarnos de mucha paciencia.
+
+La versión gratuita tiene muchas limitaciones, de contexto, de peticiones por hora y por día que es posible que superes y tengas que esperar al día siguiente para continuar con el tutorial.
+
+Tu decides:
+
+- [🆓 Gestión de clientes](./customers_free.md)
+- [🆓 Gestión de préstamos](./loans_free.md)
+- [💰 Gestión de clientes](./customers_paid.md)
+- [💰 Gestión de préstamos](./loans_paid.md)

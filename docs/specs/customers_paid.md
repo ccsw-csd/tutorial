@@ -6,28 +6,9 @@
 
 ## Punto de partida
 
-Si has llegado hasta aquí, entiendo que ya has leído tanto la introducción como la instalación del entorno. A partir de ahora voy a dar por hecho que partimos todos desde el mismo punto.
+Si has llegado hasta aquí, entiendo que ya has leído tanto la introducción como la instalación del entorno. A partir de ahora voy a dar por hecho que partimos todos desde el mismo punto y que tenemos ya la estructura de directorios creada y los proyectos descargados.
 
-Recuerda que trabajaremos desde el estado inicial del ejercicio **“Ahora hazlo tú!”**. Si no tienes el código exactamente en ese punto, no pasa nada: puedes **descargarlo desde aquí**:
-[https://github.com/ccsw-csd/tutorial-proyectos](https://github.com/ccsw-csd/tutorial-proyectos)
-
-Una vez descargado, elige el **backend** y el **frontend** que prefieras. En este tutorial, por motivos didácticos, yo utilizaré:
-
-- ``server-springboot``
-- ``client-angular17``
-
-## Estructura inicial del proyecto
-
-Crearemos un directorio general que contendrá ambos proyectos. Para simplificar el tutorial, durante todo el documento los llamaremos:
-
-- **``backend``**
-- **``frontend``**
-
-La estructura debería ser similar a esta:
-
-![workspace](../assets/images/specs-install_1.png)
-
-Desde consola (o desde el terminal de tu IDE), nos situamos en el **directorio raíz** y lanzamos el inicializador de OpenSpec.
+Dicho esto, nos vamos a la consola (o desde el terminal de tu IDE), nos situamos en el **directorio raíz** y lanzamos el inicializador de OpenSpec.
 
 ```
 openspec init

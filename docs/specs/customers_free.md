@@ -6,28 +6,9 @@
 
 ## Punto de partida
 
-Si has llegado hasta aquí, entiendo que ya has leído tanto la introducción como la instalación del entorno. A partir de ahora voy a dar por hecho que partimos todos desde el mismo punto.
+Si has llegado hasta aquí, entiendo que ya has leído tanto la introducción como la instalación del entorno. A partir de ahora voy a dar por hecho que partimos todos desde el mismo punto y que tenemos ya la estructura de directorios creada y los proyectos descargados.
 
-Recuerda que trabajaremos desde el estado inicial del ejercicio **“Ahora hazlo tú!”**. Si no tienes el código exactamente en ese punto, no pasa nada: puedes **descargarlo desde aquí**:
-[https://github.com/ccsw-csd/tutorial-proyectos](https://github.com/ccsw-csd/tutorial-proyectos)
-
-Una vez descargado, elige el **backend** y el **frontend** que prefieras. En este tutorial, por motivos didácticos, yo utilizaré:
-
-- ``server-springboot``
-- ``client-angular17``
-
-## Estructura inicial del proyecto
-
-Crearemos un directorio general que contendrá ambos proyectos. Para simplificar el tutorial, durante todo el documento los llamaremos:
-
-- **``backend``**
-- **``frontend``**
-
-La estructura debería ser similar a esta:
-
-![workspace](../assets/images/specs-install_1.png)
-
-Desde consola (o desde el terminal de tu IDE), nos situamos en el **directorio raíz** y lanzamos el inicializador de OpenSpec.
+Dicho esto, nos vamos a la consola (o desde el terminal de tu IDE), nos situamos en el **directorio raíz** y lanzamos el inicializador de OpenSpec.
 
 ```
 openspec init
@@ -45,8 +26,12 @@ Vamos a trabajar con un **modelo gratuito**, así que es importante tener claras
 
 - El contexto es **muy limitado**
 - El número de operaciones mensuales también lo es
+- El número de operaciones por hora también
 
-Para compensar esto, vamos a:
+Así que, te pido paciencia ya que posiblemente no puedas hacer todo el tutorial completo en el mismo día, deberás trocearlo por exceso de límite de peticiones.
+
+
+Para intengar mitigar un poco esto, vamos a:
 
 - Dividir el trabajo en tareas pequeñas
 - Ser muy explícitos en los prompts

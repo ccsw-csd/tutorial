@@ -60,6 +60,9 @@ A lo largo de esta guía se utilizará OpenSpec como marco de trabajo para aplic
 
     OpenSpec traslada el foco a las especificaciones, que definen explícitamente el comportamiento esperado del sistema y sirven como contrato para la IA, reduciendo ambigüedades y asegurando trazabilidad entre lo definido y lo implementado.
 
+Es **sumamente importante** que se defina de forma concreta y muy concisa los requisitos y las reglas que debe seguir la IA a la hora de analizar y generar.
+
+
 ## Fases de OpenSpec
 
 El flujo de trabajo de OpenSpec se estructura en cuatro fases principales:
