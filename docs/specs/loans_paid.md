@@ -59,6 +59,9 @@ Seguiremos el ciclo completo de Open Spec:
 4. Archive
 ```
 
+Aunque no es obligatorio, es altamente recomendable volver a ejecutar la fase de **``Explore``**. El sistema ha podido cambiar desde tu último cambio, alguien ha podido hacer modificaciones, etc. En tu caso no sería necesario ya que estás trabajando tu solo y no has cambiado nada, pero es buena práctica hacerlo siempre.
+
+
 ### Explore
 
 El objetivo de esta fase es **analizar el sistema existente**, sin modificar nada.
@@ -359,7 +362,7 @@ Basa la propuesta en los patrones detectados en la fase Explore.
 
 ```
 
-Igual que en la gestión de clientes, este comando genera dentro del directorio ``changes`` la propuesta correspondiente, que incluye los siguientes ficheros: `proposal.md`, `design.md`, `spec.md`, `tasks.md`
+Igual que en la gestión de clientes, este comando genera dentro del directorio ``changes`` la propuesta correspondiente, que incluye los siguientes ficheros: `proposal.md`, `design.md`, `spec.md`, `tasks.md`.
 
 Estos artefactos están adaptados a la funcionalidad de **gestión de préstamos**, incorporando las reglas de negocio, filtros y validaciones específicas de este caso de uso.
 
@@ -393,7 +396,7 @@ Esto es tan fácil como escribir en el chat de ``Visual Studio Code`` el siguien
 
 El agente empezará a realizar un montón de tareas y pedirnos permisos. Es posible que algunas de esas tareas fallen y él mismo lo reintente de otra forma. El resultado debería ser el código generado e implementado tanto en la carpeta ``backend`` como en la carpeta ``frontend`` y un resumen de todas las tareas realizadas y checkeadas por la IA.
 
-## Pruebas
+### Pruebas
 
 Un paso que no pertenece a Open Spec pero que es altamente recomendable es probar los cambios realizados. 
 

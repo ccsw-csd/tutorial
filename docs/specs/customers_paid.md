@@ -401,7 +401,7 @@ Esto es tan fácil como escribir en el chat de ``Visual Studio Code`` el siguien
 
 El agente empezará a realizar un montón de tareas y pedirnos permisos. Es posible que algunas de esas tareas fallen y él mismo lo reintente de otra forma. El resultado debería ser el código generado e implementado tanto en la carpeta ``backend`` como en la carpeta ``frontend`` y un resumen de todas las tareas realizadas y checkeadas por la IA.
 
-## Pruebas
+### Pruebas
 
 Un paso que no pertenece a Open Spec pero que es altamente recomendable es probar los cambios realizados. 
 

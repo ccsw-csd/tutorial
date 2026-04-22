@@ -525,6 +525,8 @@ Bueno, pues ahora que ya tenemos el backend implementado, realizaremos de nuevo 
 4. Archive
 ```
 
+**Es muy importante** que cada nuevo cambio que hagamos, lo empecemos en un chat nuevo, para limpiar el contexto anterior y no arrastrar posibles errores o incoherencias.
+
 ### Explore
 
 De nuevo el objetivo de esta fase es analizar el sistema existente, sin modificar nada, pero esta vez nos centraremos en el frontend.
@@ -533,7 +535,7 @@ De nuevo el objetivo de esta fase es analizar el sistema existente, sin modifica
 
 **📜 Prompt**
 
-Vamos al chat de ``Visual Studio Code`` y escribimos el comando:
+Vamos **a un nuevo** chat de ``Visual Studio Code`` y escribimos el comando:
 
 ```
 opsx:explore
