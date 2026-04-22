@@ -38,11 +38,14 @@ nav:
     - 🟢 Spring Boot: develop/filtered/springboot.md
     - 🟢 Nodejs: develop/filtered/nodejs.md
   - Ahora hazlo tú!: exercise.md
+  - Spec Driven Development:
+    - Introducción: specs/intro.md
+    - Preparación entorno: specs/prepare.md
+    - 🆓 Gestión de clientes: specs/customers_free.md
+    - 🆓 Gestión de préstamos: specs/loans_free.md
+    - 💰 Gestión de clientes: specs/customers_paid.md
+    - 💰 Gestión de préstamos: specs/loans_paid.md
   - "Anexos": 
-    - "GIT: Tutorial básico": appendix/git.md
-    - API Rest: appendix/rest.md
-    - TDD: appendix/tdd.md
-    - "Spring Data: JPA": appendix/jpa.md
     - Spring Cloud:
         - Introducción: appendix/springcloud/intro.md
         - Listado simple: appendix/springcloud/basic.md
@@ -57,12 +60,16 @@ nav:
         - Limpieza: appendix/springbatch/clean.md
         - Resumen: appendix/springbatch/summary.md
         - Ahora hazlo tú!: appendix/springbatch/exercise.md
+    - "Spring Data: JPA": appendix/jpa.md
     - Dockerízate:
       - Instalar docker: appendix/docker/installdocker.md
       - ¿Qué es docker?: appendix/docker/docudocker.md
       - Practiquemos: appendix/docker/traindocker.md
       - Resumen: appendix/docker/summary.md
     - AWS CLI: appendix/aws.md
+    - "GIT: Tutorial básico": appendix/git.md
+    - API Rest: appendix/rest.md
+    - TDD: appendix/tdd.md
     - Multidioma: appendix/multilanguage.md
     - Fechas: appendix/dates.md
 theme:
