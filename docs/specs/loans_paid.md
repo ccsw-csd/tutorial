@@ -23,7 +23,17 @@ En este tutorial seguiremos trabajando sobre:
 - ``server-springboot`` como **``backend``**
 - ``client-angular17`` como **``frontend``**
 
-## Consejos antes de empezar
+## Requisitos funcionales
+
+- Gestión de préstamos entre clientes y juegos.
+- Listado paginado con filtros por juego, cliente y fecha.
+- Alta/edición en modal con campos obligatorios (salvo identificador).
+- Validaciones de fechas y restricciones de solapamiento.
+- Máximo 14 días por préstamo.
+- Un juego no puede estar prestado a dos clientes en el mismo día.
+- Un cliente no puede tener más de dos préstamos activos en el mismo día.
+
+## Estrategia del modo con licencia
 
 Continuaremos trabajando con un **modelo de pago**, utilizando **``Claude Sonnet 4.6``** y el mismo workspace que en la funcionalidad de **gestión de clientes**.
 
@@ -34,8 +44,6 @@ Antes de comenzar, ten en cuenta lo siguiente:
 Esto ayuda a mantener el contexto limpio y a que el modelo se centre exclusivamente en la funcionalidad que vamos a abordar.
 
 Recuerda que en cualquier momento puedes ver el consumo mensual de tu cuenta pulsando el icono de la rana 🐸 en la esquina inferior derecha. El contador **se reinicia cada mes**.
-
-## Estrategia de trabajo
 
 Vamos a abordar el ejercicio como un **único bloque de trabajo**, analizando y construyendo la funcionalidad de forma **simultánea en backend y frontend**.
 
@@ -48,7 +56,7 @@ Esto nos permite mantener una visión global del sistema durante todo el proceso
 
 Además, recuerda que el comportamiento del modelo **no es determinista**. Si a ti te genera algo diferente a lo que ves aquí, probablemente seguirá siendo válido. No te frustres y ajusta los prompts si es necesario.
 
-## Desarrollo de la funcionalidad
+## Flujo de trabajo OpenSpec
 
 Seguiremos el ciclo completo de OpenSpec:
 
@@ -58,6 +66,8 @@ Seguiremos el ciclo completo de OpenSpec:
 3. Apply
 4. Archive
 ```
+
+### Backend y frontend
 
 Aunque no es obligatorio, es altamente recomendable volver a ejecutar la fase de **``Explore``**. El sistema ha podido cambiar desde tu último cambio, alguien ha podido hacer modificaciones, etc. En tu caso no sería necesario ya que estás trabajando tu solo y no has cambiado nada, pero es buena práctica hacerlo siempre.
 
@@ -396,7 +406,7 @@ Esto es tan fácil como escribir en el chat de ``Visual Studio Code`` el siguien
 
 El agente empezará a realizar un montón de tareas y pedirnos permisos. Es posible que algunas de esas tareas fallen y él mismo lo reintente de otra forma. El resultado debería ser el código generado e implementado tanto en la carpeta ``backend`` como en la carpeta ``frontend`` y un resumen de todas las tareas realizadas y checkeadas por la IA.
 
-### Pruebas
+### Verificación
 
 Un paso que no pertenece a OpenSpec pero que es altamente recomendable es probar los cambios realizados. 
 

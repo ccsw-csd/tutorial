@@ -4,9 +4,9 @@
     Esta sección se encuentra en desarrollo 🚧.  
     **NO se recomienda realizarla** a menos que te lo hayan indicado expresamente.
 
-## Contexto de la implementación
+## Contexto
 
-En esta sección se describe la implementación de nuevas funcionalidades en la aplicación siguiendo un enfoque de **Spec-Driven Development (SDD)**.
+En este bloque del tutorial vamos a implementar nuevas funcionalidades usando **Spec-Driven Development (SDD)** con **OpenSpec**.
 
 El objetivo no es únicamente desarrollar nuevas funcionalidades, sino hacerlo siguiendo un proceso estructurado que permita separar claramente las distintas fases del desarrollo y garantizar **trazabilidad entre análisis, definición, implementación y validación**.
 
@@ -114,7 +114,77 @@ Fase orientada a la **definición de la solución** a implementar.
 
 **Resultado**
 
-Una propuesta clara, estructurada y alineada con el objetivo del cambio, que servirá como base para su implementación.
+Una propuesta clara, estructurada y alineada con el objetivo del cambio, que servirá como base para su implementación. En esta fase se deberían generar 4 ficheros.
+
+
+**📄 proposal.md**
+
+Define la funcionalidad a alto nivel.
+
+Incluye:
+
+- El problema que se quiere resolver (Why) 
+- Qué cambios se van a introducir (What Changes) 
+- El alcance funcional 
+- El impacto en la aplicación
+
+Responde a: ¿Qué se va a construir y por qué?
+
+**📄 design.md**
+
+Describe el diseño técnico de la solución.
+
+Incluye:
+
+- Contexto del sistema actual 
+- Objetivos (Goals / Non-Goals) 
+- Decisiones técnicas y su justificación 
+- Alternativas consideradas 
+- Riesgos y trade-offs 
+
+Responde a: ¿Cómo se va a construir y por qué se ha elegido este enfoque?
+
+**📄 spec.md**
+
+Define el comportamiento funcional esperado.
+
+Incluye:
+
+- Requisitos funcionales
+- Casos de uso expresados como escenarios (WHEN / THEN) 
+- Reglas de negocio 
+- Validaciones y restricciones 
+
+Responde a: ¿Qué debe hacer el sistema?
+
+**📄 tasks.md**
+
+Descompone la implementación en tareas ejecutables. Quizá es el fichero más importante.
+
+Incluye:
+
+- Lista ordenada de tareas 
+- Pasos concretos para implementar la funcionalidad 
+
+Responde a: ¿Cómo se implementa paso a paso?
+
+**Relación entre los artefactos**
+
+Cada uno de los ficheros generados cumple un rol específico dentro del flujo de OpenSpec:
+
+- **spec.md** → define el comportamiento esperado (*qué debe hacer el sistema*)
+- **design.md** → define la solución técnica (*cómo se va a construir*)
+- **proposal.md** → aporta contexto y alcance (*por qué se construye*)
+- **tasks.md** → guía la ejecución paso a paso (*cómo se implementa*)
+
+Esta separación de responsabilidades permite:
+
+- Evitar mezclar requisitos con implementación
+- Revisar cada nivel de forma independiente
+- Detectar errores e inconsistencias antes de escribir código
+
+Estos artefactos constituyen la base para la siguiente fase.
+
 
 ---
 
@@ -146,4 +216,48 @@ Fase final de **cierre y consolidación** del cambio.
 
 **Resultado**
 
-Un cambio finalizado, validado y correctamente documentado.
+Un cambio finalizado, validado y correctamente documentado. 
+En esta fase se pedirá sincronizar los requisitos antes de archivar y consolidar.
+
+**¿Qué significa sincronizar?**
+
+Al seleccionar la opción de sincronización:
+
+- Se integran los nuevos requisitos definidos en spec.md 
+- Se crea o actualiza el spec definitivo
+- Los requisitos pasan a formar parte oficial del sistema 
+
+Es decir, los requisitos pasan de ser un cambio temporal a formar parte permanente del sistema.
+
+**¿Qué ocurre si no se sincroniza?**
+
+Si se decide no sincronizar:
+
+- El código permanece implementado
+- Los requisitos no se registran en los specs principales
+
+Esto puede provocar:
+
+- Pérdida de trazabilidad 
+- Dificultad para futuras evoluciones 
+- Desalineación entre código y documentación
+
+**Tras completar el proceso de Archive:**
+
+- La funcionalidad queda documentada como completada
+- El cambio deja de formar parte de los cambios activos
+- Los requisitos quedan integrados definitivamente en el sistema (si se ha sincronizado)
+
+
+
+## Principios de calidad
+
+!!! tip "SDD y agentes de IA"
+    Con agentes de IA se genera código muy rápido, pero la responsabilidad técnica sigue siendo tuya.
+
+Durante todo el proceso:
+
+- revisa siempre la propuesta antes de aplicar,
+- valida funcionalmente lo implementado,
+- corrige tareas o requisitos cuando detectes desviaciones,
+- no asumas que la primera respuesta de la IA es correcta.

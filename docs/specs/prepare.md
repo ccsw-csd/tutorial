@@ -4,11 +4,11 @@
     Esta sección se encuentra en desarrollo 🚧.  
     **NO se recomienda realizarla** a menos que te lo hayan indicado expresamente.
 
-En esta sección se asume que ya se ha completado el tutorial base y que el **Entorno de desarrollo** para Angular y Spring Boot está correctamente configurado.
+En esta sección asumimos que ya completaste el tutorial base y que el entorno de Angular y Spring Boot está configurado.
 
-Además, sería de mucha ayuda si además has realizado el ejercicio **`Ahora hazlo tu!`** ya que así tendrás el conocimiento de lo que estamos intentando construir en este punto.
+También es recomendable haber hecho el ejercicio **`Ahora hazlo tu!`** para que el contexto funcional te resulte familiar.
 
-Por tanto, partimos de un entorno en el que ya están instaladas las herramientas básicas necesarias para trabajar en el proyecto. 
+Partimos, por tanto, de un entorno con las herramientas básicas ya instaladas.
 
 Daremos por hecho que ya dispones de:
 
@@ -17,7 +17,7 @@ Daremos por hecho que ya dispones de:
 - **Angular CLI**
 - **Java (17 o superior)**
 
-Estas herramientas se consideran **prerrequisitos** y no se describirá de nuevo su instalación detallada en este apartado.
+Estas herramientas son **prerrequisitos** y aquí no repetiremos su instalación en detalle.
 
 !!! info "Info"
     Si alguna de estas herramientas no está instalada o necesitas revisar el proceso completo de configuración, puedes consultar los siguientes apartados del tutorial:
@@ -27,11 +27,9 @@ Estas herramientas se consideran **prerrequisitos** y no se describirá de nuevo
 
 ---
 
-## Instalación de herramientas
+## Prerrequisitos técnicos
 
-En este apartado se describen las herramientas necesarias y la preparación del entorno para poder trabajar con **Spec-Driven Development** utilizando **OpenSpec**.
-
-Durante todo el proceso se trabajará desde **Visual Studio Code**, utilizando un único workspace que contendrá el frontend, el backend y las especificaciones.
+Vamos a preparar el entorno para trabajar con **Spec-Driven Development** usando **OpenSpec** desde **Visual Studio Code**, en un único workspace con frontend, backend y especificaciones.
 
 ---
 
@@ -58,12 +56,11 @@ Si tienes restricciones de permisos en el portátil, también es posible instala
 
 Una vez finalizada la instalación, vuelve a ejecutar el comando `node --version` para verificar que Node.js está correctamente instalado.
 
---- 
+---
 
 ### Instalación de OpenSpec
 
-
-OpenSpec se puede instalar de forma global utilizando cualquiera de los gestores de paquetes soportados por Node.js.  
+OpenSpec se puede instalar de forma global con cualquier gestor compatible con Node.js.
 
 Si utilizas **npm**, ejecuta el siguiente comando:
 
@@ -72,9 +69,7 @@ npm install -g @fission-ai/openspec@latest
 ```
 
 !!! info "Info"
-    OpenSpec también es compatible con otros gestores de paquetes como pnpm, yarn o bun.
-
-    En esta guía se utilizará npm por simplicidad y porque es el más común.
+    OpenSpec también es compatible con `pnpm`, `yarn` o `bun`. En esta guía usaremos `npm` por simplicidad.
 
 Una vez finalizada la instalación, verifica que OpenSpec está correctamente instalado ejecutando:
 ```
@@ -84,39 +79,47 @@ openspec --version
 Si el comando responde correctamente mostrando la versión instalada, el entorno ya está preparado para trabajar con Spec‑Driven Development utilizando OpenSpec.
 
 
+## Convenciones de trabajo (aplican a todos los ejercicios)
 
-## Preparación de entorno
+### GitHub Copilot
 
-### Github Copilot 
-
-Llegados a este punto, y para poder seguir, necesitas una cuenta de GitHub con GitHub Copilot, da igual que sea con licencia premium o con versión gratuita. Además de tener cuenta, deberás acceder desde ``Visual Studio Code`` a esta cuenta para poder activar las características del chat.
+Necesitas una cuenta de GitHub con Copilot (gratuita o premium) y haber iniciado sesión en `Visual Studio Code` para usar el chat.
 
 
 ### Estructura inicial del proyecto
 
-A partir de aquí, necesitas los proyectos base (*sin el ejercicio hecho*) para poder seguir con los siguientes puntos de la guía.
-Si no los tienes, los puedes descargar de aquí [https://github.com/ccsw-csd/tutorial-proyectos](https://github.com/ccsw-csd/tutorial-proyectos).
+A partir de aquí necesitas los proyectos base (*sin el ejercicio hecho*).
+Si no los tienes, puedes descargarlos en [https://github.com/ccsw-csd/tutorial-proyectos](https://github.com/ccsw-csd/tutorial-proyectos).
 
 
-En nuestro ejemplo vamos a utilizar los proyectos de ``server-springboot`` y ``client-angular17``. Los dos proyectos deberían estar en un mismo directorio raiz. Para simplificar los siguientes puntos, durante todo el documento, los llamaremos:
+En esta guía vamos a usar `server-springboot` y `client-angular17`. Ambos deben estar en el mismo directorio raíz. Para simplificar, durante todo el documento, los llamaremos:
 
-- **``backend``**
-- **``frontend``**
+- **`backend`**
+- **`frontend`**
 
 La estructura debería ser similar a esta:
 
 ![workspace](../assets/images/specs-install_1.png)
 
 
+### Reglas generales y de ejecución
+
+Durante todos los ejercicios:
+
+- Empieza cada cambio relevante en un chat nuevo para no arrastrar contexto innecesario.
+- Revisa siempre la propuesta antes de ejecutar la fase de `Apply`.
+- Valida manualmente los resultados funcionales después de aplicar.
+
 ### ¿Y ahora qué?
 
-Pues a partir de ahora debemos elegir que camino tomar... si tenemos GitHub Copilot premium con licencia, podemos hacer el tutorial versión 💰💰 que tendrá más contexto y será mucho más rápido y concreto.
+A partir de aquí eliges ruta:
 
-Si por el contrario tenemos la licencia gratuita de GitHub Copilot, podremos hacer la versión del tutorial 🆓🆓, pero será bastante más lento y deberemos abordarlo de otra forma. Además de armarnos de mucha paciencia.
+- Con licencia de pago 💰 tendrás más contexto y menos fragmentación.
+- Con licencia gratuita 🆓 tendrás menos contexto y más iteraciones. Además es posible que superes las limitaciones diarias o de hora y tengas que esperar al día siguiente para continuar con el tutorial.
 
-La versión gratuita tiene muchas limitaciones, de contexto, de peticiones por hora y por día que es posible que superes y tengas que esperar al día siguiente para continuar con el tutorial.
+El flujo funcional es el mismo en ambos casos.
 
-Tu decides:
+Elige tu camino:
 
 - [🆓 Gestión de clientes](./customers_free.md)
 - [🆓 Gestión de préstamos](./loans_free.md)

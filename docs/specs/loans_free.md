@@ -25,7 +25,17 @@ En este tutorial seguiremos trabajando sobre:
 - ``client-angular17`` como **``frontend``**
 
 
-## Consejos antes de empezar
+## Requisitos funcionales
+
+- Gestión de préstamos entre clientes y juegos.
+- Listado paginado con filtros por juego, cliente y fecha.
+- Alta/edición en modal con campos obligatorios (salvo identificador).
+- Validaciones de fechas y restricciones de solapamiento.
+- Máximo 14 días por préstamo.
+- Un juego no puede estar prestado a dos clientes en el mismo día.
+- Un cliente no puede tener más de dos préstamos activos en el mismo día.
+
+## Estrategia del modo gratuito
 
 Continuaremos trabajando con un **modelo gratuito**, utilizando **``Claude Haiku``** y el mismo workspace que en la funcionalidad de **gestión de clientes**.
 
@@ -37,8 +47,6 @@ Esto ayuda a mantener el contexto limpio y a que el modelo se centre exclusivame
 
 Recuerda que en cualquier momento puedes ver el consumo mensual de tu cuenta pulsando el icono de la rana 🐸 en la esquina inferior derecha. El contador **se reinicia cada mes**.
 
-## Estrategia de trabajo
-
 Al igual que el ejercicio anterior, vamos a dividir el ejercicio en **dos grandes bloques**:
 
 1. Primero trabajaremos únicamente con el **``backend``**
@@ -49,7 +57,7 @@ De esta forma limitamos el contexto a un solo proyecto y facilitamos el trabajo 
 
 Además, recuerda que el comportamiento del modelo **no es determinista**. Si a ti te genera algo diferente a lo que ves aquí, probablemente seguirá siendo válido. No te frustres y ajusta los prompts si es necesario.
 
-## Desarrollo de la funcionalidad
+## Flujo de trabajo OpenSpec
 
 Seguiremos el ciclo completo de :
 
@@ -367,7 +375,7 @@ Esto es tan fácil como escribir en el chat de ``Visual Studio Code`` el siguien
 
 El agente empezará a realizar un montón de tareas y pedirnos permisos. Es posible que algunas de esas tareas fallen y él mismo lo reintente de otra forma. El resultado debería ser el código generado e implementado dentro de la carpeta de ``backend`` y un resumen de todas las tareas realizadas y checkeadas por la IA.
 
-### Pruebas del backend
+### Verificación del backend
 
 Un paso que no pertenece a OpenSpec pero que es altamente recomendable es probar los cambios realizados. 
 Arranca el backend y verifica:
@@ -621,7 +629,7 @@ Esto es tan fácil como escribir en el chat de ``Visual Studio Code`` el siguien
 
 El agente empezará a realizar un montón de tareas y pedirnos permisos. Es posible que algunas de esas tareas fallen y él mismo lo reintente de otra forma. El resultado debería ser el código generado e implementado tanto en la carpeta ``backend`` como en la carpeta ``frontend`` y un resumen de todas las tareas realizadas y checkeadas por la IA.
 
-### Pruebas
+### Verificación del frontend
 
 Un paso que no pertenece a OpenSpec pero que es altamente recomendable es probar los cambios realizados. 
 

@@ -20,7 +20,16 @@ Seleccionamos **``GitHub Copilot``**, pulsamos **``Enter``** para añadirlo y de
 
 Esto instalará las plantillas necesarias para poder trabajar con **OpenSpec + GitHub Copilot**.
 
-## Consejos antes de empezar
+## Requisitos funcionales
+
+- CRUD de clientes.
+- Entidad cliente con `id` y `name`.
+- Listado simple sin filtros ni paginación.
+- Alta/edición en modal.
+- El nombre es el único campo editable.
+- No se permite guardar clientes con nombre duplicado.
+
+## Estrategia del modo con licencia
 
 Vamos a trabajar con un **modelo de pago**, por lo que es importante entender qué ventajas nos ofrece frente al modelo gratuito.
 
@@ -43,8 +52,6 @@ El modelo que utilizaremos será **``Claude Sonnet 4.6``**. Para ello debes:
 
 En cualquier momento puedes ver el consumo mensual de tu cuenta pulsando el icono de la rana 🐸 en la esquina inferior derecha. El contador **se reinicia cada mes**.
 
-## Estrategia de trabajo
-
 Vamos a abordar el ejercicio como un **único bloque de trabajo**, analizando y construyendo la funcionalidad de forma **simultánea en backend y frontend**.
 
 De esta manera aprovechamos el **mayor contexto** del modelo de pago, permitiendo:
@@ -56,7 +63,7 @@ Esto nos permite mantener una visión global del sistema durante todo el proceso
 
 Además, recuerda que el comportamiento del modelo **no es determinista**. Si a ti te genera algo diferente a lo que ves aquí, probablemente seguirá siendo válido. No te frustres y ajusta los prompts si es necesario.
 
-## Desarrollo de la funcionalidad
+## Flujo de trabajo OpenSpec
 
 Seguiremos el ciclo completo de OpenSpec:
 
@@ -277,82 +284,9 @@ NO analices de nuevo el proyecto.
 Basa la propuesta en los patrones detectados en la fase Explore.
 ```
 
-Este comando debería generar un directorio dentro de ``changes`` con el nombre que le hayamos puesto a la propuesta y dentro los siguientes ficheros:
-`proposal.md`, `design.md`, `spec.md`, `tasks.md`
+Este comando debe generar una propuesta en `changes` con los artefactos `proposal`, `design`, `spec` y `tasks`.
 
-![proposal](../assets/images/specs-customer-paid_4.png)
-
-Además en el chat también hará un pequeño resumen de lo que ha propuesto como cambios. 
-
-Veamos lo que contiene cada uno de esos ficheros.
-
-**📄 proposal.md**
-
-Define la funcionalidad a alto nivel.
-
-Incluye:
-
-- El problema que se quiere resolver (Why) 
-- Qué cambios se van a introducir (What Changes) 
-- El alcance funcional 
-- El impacto en la aplicación
-
-Responde a: ¿Qué se va a construir y por qué?
-
-**📄 design.md**
-
-Describe el diseño técnico de la solución.
-
-Incluye:
-
-- Contexto del sistema actual 
-- Objetivos (Goals / Non-Goals) 
-- Decisiones técnicas y su justificación 
-- Alternativas consideradas 
-- Riesgos y trade-offs 
-
-Responde a: ¿Cómo se va a construir y por qué se ha elegido este enfoque?
-
-**📄 spec.md**
-
-Define el comportamiento funcional esperado.
-
-Incluye:
-
-- Requisitos funcionales
-- Casos de uso expresados como escenarios (WHEN / THEN) 
-- Reglas de negocio 
-- Validaciones y restricciones 
-
-Responde a: ¿Qué debe hacer el sistema?
-
-**📄 tasks.md**
-
-Descompone la implementación en tareas ejecutables. Quizá es el fichero más importante.
-
-Incluye:
-
-- Lista ordenada de tareas 
-- Pasos concretos para implementar la funcionalidad 
-
-Responde a: ¿Cómo se implementa paso a paso?
-
-**Relación entre los artefactos**
-
-Cada uno de los ficheros generados cumple un rol específico dentro del flujo de OpenSpec:
-
-- **spec.md** → define el comportamiento esperado (*qué debe hacer el sistema*)
-- **design.md** → define la solución técnica (*cómo se va a construir*)
-- **proposal.md** → aporta contexto y alcance (*por qué se construye*)
-- **tasks.md** → guía la ejecución paso a paso (*cómo se implementa*)
-
-Esta separación de responsabilidades permite:
-
-- Evitar mezclar requisitos con implementación
-- Revisar cada nivel de forma independiente
-- Detectar errores e inconsistencias antes de escribir código
-
-Estos artefactos constituyen la base para la siguiente fase: **Apply**, donde se ejecutará la implementación siguiendo las tareas definidas.
+Si necesitas recordar el papel de cada artefacto, revisa la `introducción`.
 
 !!! tip "Responsabilidades como developer IA"
     En este punto la IA te ha hecho una propuesta que puede ser correcta o no, recordemos que se trata de un modelo matemático-probabilístico. Si hay algo de lo propuesto que no te encaja o es erróneo deberías comentarlo mediante el chat o corregirlo de forma manual en el fichero que corresponda. Por ejemplo si quieres añadir una tarea porqué se te ha olvidado incluirla en el prompt original, deberías decirle al modelo que te incluya la nueva tarea.
@@ -382,7 +316,7 @@ Esto es tan fácil como escribir en el chat de ``Visual Studio Code`` el siguien
 
 El agente empezará a realizar un montón de tareas y pedirnos permisos. Es posible que algunas de esas tareas fallen y él mismo lo reintente de otra forma. El resultado debería ser el código generado e implementado tanto en la carpeta ``backend`` como en la carpeta ``frontend`` y un resumen de todas las tareas realizadas y checkeadas por la IA.
 
-### Pruebas
+### Verificación
 
 Un paso que no pertenece a OpenSpec pero que es altamente recomendable es probar los cambios realizados. 
 
@@ -423,33 +357,6 @@ De nuevo nos vamos al chat de ``Visual Studio Code`` el siguiente prompt:
 /opsx:archive
 ```
 
-En ese caso, el sistema solicita confirmación para sincronizar los requisitos antes de archivar el cambio.
+En este punto el sistema pedirá confirmación para sincronizar requisitos antes de archivar.
 
-**¿Qué significa sincronizar?**
-
-Al seleccionar la opción de sincronización:
-
-- Se integran los nuevos requisitos definidos en spec.md 
-- Se crea o actualiza el spec definitivo
-- Los requisitos pasan a formar parte oficial del sistema 
-
-Es decir, los requisitos pasan de ser un cambio temporal a formar parte permanente del sistema.
-
-**¿Qué ocurre si no se sincroniza?**
-
-Si se decide no sincronizar:
-
-- El código permanece implementado
-- Los requisitos no se registran en los specs principales
-
-Esto puede provocar:
-
-- Pérdida de trazabilidad 
-- Dificultad para futuras evoluciones 
-- Desalineación entre código y documentación
-
-**Tras completar el proceso de Archive:**
-
-- La funcionalidad queda documentada como completada
-- El cambio deja de formar parte de los cambios activos
-- Los requisitos quedan integrados definitivamente en el sistema (si se ha sincronizado)
+Sincronizar es obligatorio si quieres mantener trazabilidad entre lo implementado y los specs oficiales.
