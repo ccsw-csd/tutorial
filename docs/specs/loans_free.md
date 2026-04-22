@@ -51,7 +51,7 @@ Además, recuerda que el comportamiento del modelo **no es determinista**. Si a 
 
 ## Desarrollo de la funcionalidad
 
-Seguiremos el ciclo completo de Open Spec:
+Seguiremos el ciclo completo de :
 
 ```
 1. Explore
@@ -369,7 +369,7 @@ El agente empezará a realizar un montón de tareas y pedirnos permisos. Es posi
 
 ### Pruebas del backend
 
-Un paso que no pertenece a Open Spec pero que es altamente recomendable es probar los cambios realizados. 
+Un paso que no pertenece a OpenSpec pero que es altamente recomendable es probar los cambios realizados. 
 Arranca el backend y verifica:
 
 - Que el servidor levanta
@@ -387,7 +387,7 @@ Si **NO** estás a gusto con la implementación o se ha dejado algo por hacer, e
 
 ### Archive
 
-Y llegamos a la última etapa que nos define Open Spec, donde se archiva el cambio y se da por finalizada la funcionalidad.
+Y llegamos a la última etapa que nos define OpenSpec, donde se archiva el cambio y se da por finalizada la funcionalidad.
 
 El objetivo de esta fase es marcar la funcionalidad como completada, consolidar todos los artefactos generados durante el proceso y dejar el sistema en un estado estable, coherente y preparado para nuevas evoluciones.
 
@@ -623,7 +623,7 @@ El agente empezará a realizar un montón de tareas y pedirnos permisos. Es posi
 
 ### Pruebas
 
-Un paso que no pertenece a Open Spec pero que es altamente recomendable es probar los cambios realizados. 
+Un paso que no pertenece a OpenSpec pero que es altamente recomendable es probar los cambios realizados. 
 
 Arranca el **backend** y el **frontend** y verifica:
 
@@ -638,7 +638,7 @@ Si **NO** estás a gusto con la implementación o se ha dejado algo por hacer, e
 
 ### Archive
 
-Y llegamos a la última etapa que nos define Open Spec, donde se archiva el cambio y se da por finalizada la funcionalidad.
+Y llegamos a la última etapa que nos define OpenSpec, donde se archiva el cambio y se da por finalizada la funcionalidad.
 
 El objetivo de esta fase es marcar la funcionalidad como completada, consolidar todos los artefactos generados durante el proceso y dejar el sistema en un estado estable, coherente y preparado para nuevas evoluciones.
 
