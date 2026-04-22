@@ -1,0 +1,2541 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../exercise/">
+      
+      
+        <link rel="next" href="../prepare/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.17">
+    
+    
+      
+        <title>Introducción - Tutorial Frontend - Backend</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.bcfcd587.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/style.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#introduccion-a-spec-driven-development" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Tutorial Frontend - Backend" class="md-header__button md-logo" aria-label="Tutorial Frontend - Backend" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Tutorial Frontend - Backend
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Introducción
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Tutorial Frontend - Backend" class="md-nav__button md-logo" aria-label="Tutorial Frontend - Backend" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Tutorial Frontend - Backend
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bienvenido!
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thanks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Agradecimientos!
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../usecases/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contexto de la aplicación
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Entorno de desarrollo
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Entorno de desarrollo
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../install/angular/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🔵 Angular
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../install/react/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🔵 React
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../install/vuejs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🔵 Vue.js
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../install/springboot/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🟢 Spring Boot
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../install/nodejs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🟢 Nodejs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Estructura y buenas prácticas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Estructura y buenas prácticas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cleancode/angular/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🔵 Angular
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cleancode/react/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🔵 React
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cleancode/vuejs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🔵 Vue.js
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cleancode/springboot/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🟢 Spring Boot
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cleancode/nodejs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🟢 Nodejs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Code: Listado simple
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Code: Listado simple
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/basic/angular/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🔵 Angular
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/basic/angular17/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🔵 Angular 17+
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/basic/react/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🔵 React
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/basic/vuejs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🔵 Vue.js
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/basic/springboot/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🟢 Spring Boot
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/basic/nodejs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🟢 Nodejs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Code: Listado paginado
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Code: Listado paginado
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/paginated/angular/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🔵 Angular
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/paginated/angular17/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🔵 Angular 17+
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/paginated/react/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🔵 React
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/paginated/vuejs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🔵 Vue.js
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/paginated/springboot/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🟢 Spring Boot
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/paginated/nodejs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🟢 Nodejs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Code: Listado filtrado
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Code: Listado filtrado
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/filtered/angular/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🔵 Angular
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/filtered/angular17/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🔵 Angular 17+
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/filtered/react/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🔵 React
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/filtered/vuejs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🔵 Vue.js
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/filtered/springboot/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🟢 Spring Boot
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/filtered/nodejs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🟢 Nodejs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exercise/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ahora hazlo tú!
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Spec Driven Development
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            Spec Driven Development
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#contexto" class="md-nav__link">
+    <span class="md-ellipsis">
+      Contexto
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-es-spec-driven-development" class="md-nav__link">
+    <span class="md-ellipsis">
+      ¿Qué es Spec-Driven Development?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#openspec-como-metodologia-de-trabajo" class="md-nav__link">
+    <span class="md-ellipsis">
+      OpenSpec como metodología de trabajo
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fases-de-openspec" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fases de OpenSpec
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Fases de OpenSpec">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#explore" class="md-nav__link">
+    <span class="md-ellipsis">
+      Explore
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#propose" class="md-nav__link">
+    <span class="md-ellipsis">
+      Propose
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apply" class="md-nav__link">
+    <span class="md-ellipsis">
+      Apply
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#archive" class="md-nav__link">
+    <span class="md-ellipsis">
+      Archive
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#principios-de-calidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      Principios de calidad
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../prepare/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Preparación entorno
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../customers_free/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🆓 Gestión de clientes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../loans_free/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🆓 Gestión de préstamos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../customers_paid/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    💰 Gestión de clientes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../loans_paid/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    💰 Gestión de préstamos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Anexos
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            Anexos
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_11_1" id="__nav_11_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Spring Cloud
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_11_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11_1">
+            <span class="md-nav__icon md-icon"></span>
+            Spring Cloud
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/springcloud/intro/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/springcloud/basic/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Listado simple
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/springcloud/paginated/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Listado paginado
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/springcloud/filtered/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Listado filtrado
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/springcloud/infra/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Infraestructura
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/springcloud/summary/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Resumen
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_11_2" id="__nav_11_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Spring Batch
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_11_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11_2">
+            <span class="md-nav__icon md-icon"></span>
+            Spring Batch
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/springbatch/intro/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/springbatch/filetodb/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fichero a BBDD
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/springbatch/filetofile/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fichero a Fichero
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/springbatch/clean/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Limpieza
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/springbatch/summary/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Resumen
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/springbatch/exercise/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ahora hazlo tú!
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/jpa/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Spring Data: JPA
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_11_4" id="__nav_11_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Dockerízate
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_11_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11_4">
+            <span class="md-nav__icon md-icon"></span>
+            Dockerízate
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/docker/installdocker/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Instalar docker
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/docker/docudocker/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ¿Qué es docker?
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/docker/traindocker/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Practiquemos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/docker/summary/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Resumen
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/aws/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AWS CLI
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/git/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GIT: Tutorial básico
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/rest/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    API Rest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/tdd/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TDD
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/multilanguage/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multidioma
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/dates/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fechas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#contexto" class="md-nav__link">
+    <span class="md-ellipsis">
+      Contexto
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-es-spec-driven-development" class="md-nav__link">
+    <span class="md-ellipsis">
+      ¿Qué es Spec-Driven Development?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#openspec-como-metodologia-de-trabajo" class="md-nav__link">
+    <span class="md-ellipsis">
+      OpenSpec como metodología de trabajo
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fases-de-openspec" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fases de OpenSpec
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Fases de OpenSpec">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#explore" class="md-nav__link">
+    <span class="md-ellipsis">
+      Explore
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#propose" class="md-nav__link">
+    <span class="md-ellipsis">
+      Propose
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apply" class="md-nav__link">
+    <span class="md-ellipsis">
+      Apply
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#archive" class="md-nav__link">
+    <span class="md-ellipsis">
+      Archive
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#principios-de-calidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      Principios de calidad
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="introduccion-a-spec-driven-development">Introducción a Spec-Driven Development</h1>
+<div class="admonition warning atención">
+<p class="admonition-title">Warning</p>
+<p>Esta sección se encuentra en desarrollo 🚧.<br />
+<strong>NO se recomienda realizarla</strong> a menos que te lo hayan indicado expresamente.</p>
+</div>
+<h2 id="contexto">Contexto</h2>
+<p>En este bloque del tutorial vamos a implementar nuevas funcionalidades usando <strong>Spec-Driven Development (SDD)</strong> con <strong>OpenSpec</strong>.</p>
+<p>El objetivo no es únicamente desarrollar nuevas funcionalidades, sino hacerlo siguiendo un proceso estructurado que permita separar claramente las distintas fases del desarrollo y garantizar <strong>trazabilidad entre análisis, definición, implementación y validación</strong>.</p>
+<p>Para llevar a cabo este enfoque de manera práctica, se utiliza la metodología <strong>OpenSpec</strong>, que proporciona un flujo de trabajo claro y repetible para definir, implementar y consolidar cambios en el sistema.</p>
+<p>Las funcionalidades abordadas se organizan en dos bloques principales:</p>
+<ul>
+<li><strong>Gestión de clientes</strong></li>
+<li><strong>Gestión de préstamos</strong></li>
+</ul>
+<p>Ambas se implementan siguiendo las fases definidas por <strong>OpenSpec</strong>, reutilizando los patrones existentes del sistema y manteniendo coherencia técnica y funcional con el resto de la aplicación.</p>
+<hr />
+<h2 id="que-es-spec-driven-development">¿Qué es Spec-Driven Development?</h2>
+<p><strong>Spec-Driven Development (SDD)</strong> es un enfoque de desarrollo en el que el comportamiento del sistema se define de forma explícita <strong>antes de escribir código</strong>.</p>
+<p>En lugar de comenzar directamente con la implementación, SDD propone describir primero:</p>
+<ul>
+<li>Qué debe hacer el sistema</li>
+<li>Qué reglas y restricciones deben cumplirse</li>
+<li>Qué comportamiento se espera en cada escenario</li>
+</ul>
+<p>Las especificaciones (<em>specs</em>) se convierten en el eje central del desarrollo y sirven como referencia común durante todo el proceso.</p>
+<p>Este enfoque permite:</p>
+<ul>
+<li>Reducir ambigüedades sobre el comportamiento esperado</li>
+<li>Detectar errores de diseño de forma temprana</li>
+<li>Mantener coherencia en sistemas que evolucionan con el tiempo</li>
+<li>Facilitar la comunicación entre personas y herramientas implicadas en el desarrollo</li>
+</ul>
+<hr />
+<h2 id="openspec-como-metodologia-de-trabajo">OpenSpec como metodología de trabajo</h2>
+<p><strong>OpenSpec</strong> es una metodología que materializa el enfoque de <strong>Spec-Driven Development</strong>, proporcionando un flujo de trabajo estructurado para implementar cambios de forma controlada y trazable.</p>
+<p>OpenSpec organiza el desarrollo en una serie de fases bien definidas que permiten:</p>
+<ul>
+<li>Analizar el contexto y el alcance del cambio</li>
+<li>Definir el comportamiento funcional esperado</li>
+<li>Implementar la solución de forma alineada con lo definido</li>
+<li>Cerrar y consolidar el cambio de manera ordenada</li>
+</ul>
+<p>A lo largo de esta guía se utilizará OpenSpec como marco de trabajo para aplicar SDD en la implementación de las funcionalidades de gestión de clientes y gestión de préstamos.</p>
+<div class="admonition tip">
+<p class="admonition-title">SDD y agentes de IA</p>
+<p>Al trabajar con agentes de IA, el código puede generarse rápidamente, pero sin una guía clara existe el riesgo de que la IA tome decisiones no deseadas para que “el código funcione”.  </p>
+<p>OpenSpec traslada el foco a las especificaciones, que definen explícitamente el comportamiento esperado del sistema y sirven como contrato para la IA, reduciendo ambigüedades y asegurando trazabilidad entre lo definido y lo implementado.</p>
+</div>
+<p>Es <strong>sumamente importante</strong> que se defina de forma concreta y muy concisa los requisitos y las reglas que debe seguir la IA a la hora de analizar y generar.</p>
+<h2 id="fases-de-openspec">Fases de OpenSpec</h2>
+<p>El flujo de trabajo de OpenSpec se estructura en cuatro fases principales:</p>
+<div class="highlight"><pre><span></span><code>1. Explore
+2. Propose
+3. Apply
+4. Archive
+</code></pre></div>
+<p>Cada una de estas fases cumple un propósito específico y se apoya en la anterior, formando un ciclo completo de definición, implementación y cierre del cambio.</p>
+<hr />
+<h3 id="explore">Explore</h3>
+<p>Fase inicial orientada a <strong>comprender el contexto</strong> en el que se va a trabajar.</p>
+<p><strong>Objetivo</strong></p>
+<ul>
+<li>Analizar la información disponible</li>
+<li>Entender la necesidad, iniciativa o cambio a abordar</li>
+<li>Identificar posibles limitaciones, dependencias y patrones existentes</li>
+</ul>
+<p>Esta fase no implica necesariamente la existencia de un sistema previo. </p>
+<p>Puede consistir en:</p>
+<ul>
+<li>Analizar un sistema existente</li>
+<li>Revisar documentación o requisitos</li>
+<li>Definir el contexto cuando se parte desde cero</li>
+</ul>
+<p><strong>Resultado</strong></p>
+<p>Una comprensión clara del punto de partida y del alcance del cambio a realizar.</p>
+<hr />
+<h3 id="propose">Propose</h3>
+<p>Fase orientada a la <strong>definición de la solución</strong> a implementar.</p>
+<p><strong>Objetivo</strong></p>
+<ul>
+<li>Definir qué se va a construir</li>
+<li>Delimitar el alcance del cambio (qué se incluye y qué queda fuera)</li>
+<li>Establecer el comportamiento funcional esperado</li>
+</ul>
+<p><strong>Resultado</strong></p>
+<p>Una propuesta clara, estructurada y alineada con el objetivo del cambio, que servirá como base para su implementación. En esta fase se deberían generar 4 ficheros.</p>
+<p><strong>📄 proposal.md</strong></p>
+<p>Define la funcionalidad a alto nivel.</p>
+<p>Incluye:</p>
+<ul>
+<li>El problema que se quiere resolver (Why) </li>
+<li>Qué cambios se van a introducir (What Changes) </li>
+<li>El alcance funcional </li>
+<li>El impacto en la aplicación</li>
+</ul>
+<p>Responde a: ¿Qué se va a construir y por qué?</p>
+<p><strong>📄 design.md</strong></p>
+<p>Describe el diseño técnico de la solución.</p>
+<p>Incluye:</p>
+<ul>
+<li>Contexto del sistema actual </li>
+<li>Objetivos (Goals / Non-Goals) </li>
+<li>Decisiones técnicas y su justificación </li>
+<li>Alternativas consideradas </li>
+<li>Riesgos y trade-offs </li>
+</ul>
+<p>Responde a: ¿Cómo se va a construir y por qué se ha elegido este enfoque?</p>
+<p><strong>📄 spec.md</strong></p>
+<p>Define el comportamiento funcional esperado.</p>
+<p>Incluye:</p>
+<ul>
+<li>Requisitos funcionales</li>
+<li>Casos de uso expresados como escenarios (WHEN / THEN) </li>
+<li>Reglas de negocio </li>
+<li>Validaciones y restricciones </li>
+</ul>
+<p>Responde a: ¿Qué debe hacer el sistema?</p>
+<p><strong>📄 tasks.md</strong></p>
+<p>Descompone la implementación en tareas ejecutables. Quizá es el fichero más importante.</p>
+<p>Incluye:</p>
+<ul>
+<li>Lista ordenada de tareas </li>
+<li>Pasos concretos para implementar la funcionalidad </li>
+</ul>
+<p>Responde a: ¿Cómo se implementa paso a paso?</p>
+<p><strong>Relación entre los artefactos</strong></p>
+<p>Cada uno de los ficheros generados cumple un rol específico dentro del flujo de OpenSpec:</p>
+<ul>
+<li><strong>spec.md</strong> → define el comportamiento esperado (<em>qué debe hacer el sistema</em>)</li>
+<li><strong>design.md</strong> → define la solución técnica (<em>cómo se va a construir</em>)</li>
+<li><strong>proposal.md</strong> → aporta contexto y alcance (<em>por qué se construye</em>)</li>
+<li><strong>tasks.md</strong> → guía la ejecución paso a paso (<em>cómo se implementa</em>)</li>
+</ul>
+<p>Esta separación de responsabilidades permite:</p>
+<ul>
+<li>Evitar mezclar requisitos con implementación</li>
+<li>Revisar cada nivel de forma independiente</li>
+<li>Detectar errores e inconsistencias antes de escribir código</li>
+</ul>
+<p>Estos artefactos constituyen la base para la siguiente fase.</p>
+<hr />
+<h3 id="apply">Apply</h3>
+<p>Fase en la que se lleva a cabo la <strong>implementación</strong> de la solución definida en la fase Propose.</p>
+<p><strong>Objetivo</strong></p>
+<ul>
+<li>Desarrollar la solución definida</li>
+<li>Asegurar la coherencia entre lo definido y lo implementado</li>
+<li>Integrar y validar funcionalmente el resultado</li>
+</ul>
+<p><strong>Resultado</strong></p>
+<p>Una solución implementada, coherente con la propuesta definida y preparada para su validación final.</p>
+<hr />
+<h3 id="archive">Archive</h3>
+<p>Fase final de <strong>cierre y consolidación</strong> del cambio.</p>
+<p><strong>Objetivo</strong></p>
+<ul>
+<li>Confirmar que el cambio está completo</li>
+<li>Consolidar la documentación generada durante el proceso</li>
+<li>Garantizar la trazabilidad para futuras evoluciones</li>
+</ul>
+<p><strong>Resultado</strong></p>
+<p>Un cambio finalizado, validado y correctamente documentado. 
+En esta fase se pedirá sincronizar los requisitos antes de archivar y consolidar.</p>
+<p><strong>¿Qué significa sincronizar?</strong></p>
+<p>Al seleccionar la opción de sincronización:</p>
+<ul>
+<li>Se integran los nuevos requisitos definidos en spec.md </li>
+<li>Se crea o actualiza el spec definitivo</li>
+<li>Los requisitos pasan a formar parte oficial del sistema </li>
+</ul>
+<p>Es decir, los requisitos pasan de ser un cambio temporal a formar parte permanente del sistema.</p>
+<p><strong>¿Qué ocurre si no se sincroniza?</strong></p>
+<p>Si se decide no sincronizar:</p>
+<ul>
+<li>El código permanece implementado</li>
+<li>Los requisitos no se registran en los specs principales</li>
+</ul>
+<p>Esto puede provocar:</p>
+<ul>
+<li>Pérdida de trazabilidad </li>
+<li>Dificultad para futuras evoluciones </li>
+<li>Desalineación entre código y documentación</li>
+</ul>
+<p><strong>Tras completar el proceso de Archive:</strong></p>
+<ul>
+<li>La funcionalidad queda documentada como completada</li>
+<li>El cambio deja de formar parte de los cambios activos</li>
+<li>Los requisitos quedan integrados definitivamente en el sistema (si se ha sincronizado)</li>
+</ul>
+<h2 id="principios-de-calidad">Principios de calidad</h2>
+<div class="admonition tip">
+<p class="admonition-title">SDD y agentes de IA</p>
+<p>Con agentes de IA se genera código muy rápido, pero la responsabilidad técnica sigue siendo tuya.</p>
+</div>
+<p>Durante todo el proceso:</p>
+<ul>
+<li>revisa siempre la propuesta antes de aplicar,</li>
+<li>valida funcionalmente lo implementado,</li>
+<li>corrige tareas o requisitos cuando detectes desviaciones,</li>
+<li>no asumas que la primera respuesta de la IA es correcta.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.path", "navigation.indexes"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.1e8ae164.min.js"></script>
+      
+    
+  </body>
+</html>

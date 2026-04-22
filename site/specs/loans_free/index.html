@@ -1,0 +1,3026 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../customers_free/">
+      
+      
+        <link rel="next" href="../customers_paid/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.17">
+    
+    
+      
+        <title>🆓 Gestión de préstamos - Tutorial Frontend - Backend</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.bcfcd587.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/style.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#gestion-de-prestamos-modelo-gratuito" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Tutorial Frontend - Backend" class="md-header__button md-logo" aria-label="Tutorial Frontend - Backend" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Tutorial Frontend - Backend
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              🆓 Gestión de préstamos
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Tutorial Frontend - Backend" class="md-nav__button md-logo" aria-label="Tutorial Frontend - Backend" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Tutorial Frontend - Backend
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bienvenido!
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thanks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Agradecimientos!
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../usecases/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contexto de la aplicación
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Entorno de desarrollo
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Entorno de desarrollo
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../install/angular/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🔵 Angular
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../install/react/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🔵 React
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../install/vuejs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🔵 Vue.js
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../install/springboot/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🟢 Spring Boot
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../install/nodejs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🟢 Nodejs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Estructura y buenas prácticas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Estructura y buenas prácticas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cleancode/angular/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🔵 Angular
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cleancode/react/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🔵 React
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cleancode/vuejs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🔵 Vue.js
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cleancode/springboot/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🟢 Spring Boot
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cleancode/nodejs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🟢 Nodejs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Code: Listado simple
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Code: Listado simple
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/basic/angular/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🔵 Angular
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/basic/angular17/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🔵 Angular 17+
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/basic/react/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🔵 React
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/basic/vuejs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🔵 Vue.js
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/basic/springboot/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🟢 Spring Boot
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/basic/nodejs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🟢 Nodejs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Code: Listado paginado
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Code: Listado paginado
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/paginated/angular/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🔵 Angular
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/paginated/angular17/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🔵 Angular 17+
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/paginated/react/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🔵 React
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/paginated/vuejs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🔵 Vue.js
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/paginated/springboot/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🟢 Spring Boot
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/paginated/nodejs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🟢 Nodejs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Code: Listado filtrado
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Code: Listado filtrado
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/filtered/angular/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🔵 Angular
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/filtered/angular17/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🔵 Angular 17+
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/filtered/react/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🔵 React
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/filtered/vuejs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🔵 Vue.js
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/filtered/springboot/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🟢 Spring Boot
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/filtered/nodejs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🟢 Nodejs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exercise/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ahora hazlo tú!
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Spec Driven Development
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            Spec Driven Development
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../intro/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../prepare/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Preparación entorno
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../customers_free/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🆓 Gestión de clientes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    🆓 Gestión de préstamos
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    🆓 Gestión de préstamos
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#punto-de-partida" class="md-nav__link">
+    <span class="md-ellipsis">
+      Punto de partida
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#requisitos-funcionales" class="md-nav__link">
+    <span class="md-ellipsis">
+      Requisitos funcionales
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estrategia-del-modo-gratuito" class="md-nav__link">
+    <span class="md-ellipsis">
+      Estrategia del modo gratuito
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#flujo-de-trabajo-openspec" class="md-nav__link">
+    <span class="md-ellipsis">
+      Flujo de trabajo OpenSpec
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generacion-de-backend" class="md-nav__link">
+    <span class="md-ellipsis">
+      Generación de backend
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Generación de backend">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#explore" class="md-nav__link">
+    <span class="md-ellipsis">
+      Explore
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#propose" class="md-nav__link">
+    <span class="md-ellipsis">
+      Propose
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apply" class="md-nav__link">
+    <span class="md-ellipsis">
+      Apply
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verificacion-del-backend" class="md-nav__link">
+    <span class="md-ellipsis">
+      Verificación del backend
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#archive" class="md-nav__link">
+    <span class="md-ellipsis">
+      Archive
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generacion-de-frontend" class="md-nav__link">
+    <span class="md-ellipsis">
+      Generación de frontend
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Generación de frontend">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#explore_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Explore
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#propose_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Propose
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apply_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Apply
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verificacion-del-frontend" class="md-nav__link">
+    <span class="md-ellipsis">
+      Verificación del frontend
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#archive_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Archive
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../customers_paid/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    💰 Gestión de clientes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../loans_paid/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    💰 Gestión de préstamos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Anexos
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            Anexos
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_11_1" id="__nav_11_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Spring Cloud
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_11_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11_1">
+            <span class="md-nav__icon md-icon"></span>
+            Spring Cloud
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/springcloud/intro/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/springcloud/basic/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Listado simple
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/springcloud/paginated/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Listado paginado
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/springcloud/filtered/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Listado filtrado
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/springcloud/infra/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Infraestructura
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/springcloud/summary/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Resumen
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_11_2" id="__nav_11_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Spring Batch
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_11_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11_2">
+            <span class="md-nav__icon md-icon"></span>
+            Spring Batch
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/springbatch/intro/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/springbatch/filetodb/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fichero a BBDD
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/springbatch/filetofile/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fichero a Fichero
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/springbatch/clean/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Limpieza
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/springbatch/summary/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Resumen
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/springbatch/exercise/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ahora hazlo tú!
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/jpa/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Spring Data: JPA
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_11_4" id="__nav_11_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Dockerízate
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_11_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11_4">
+            <span class="md-nav__icon md-icon"></span>
+            Dockerízate
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/docker/installdocker/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Instalar docker
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/docker/docudocker/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ¿Qué es docker?
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/docker/traindocker/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Practiquemos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/docker/summary/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Resumen
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/aws/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AWS CLI
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/git/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GIT: Tutorial básico
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/rest/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    API Rest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/tdd/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TDD
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/multilanguage/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multidioma
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/dates/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fechas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#punto-de-partida" class="md-nav__link">
+    <span class="md-ellipsis">
+      Punto de partida
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#requisitos-funcionales" class="md-nav__link">
+    <span class="md-ellipsis">
+      Requisitos funcionales
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estrategia-del-modo-gratuito" class="md-nav__link">
+    <span class="md-ellipsis">
+      Estrategia del modo gratuito
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#flujo-de-trabajo-openspec" class="md-nav__link">
+    <span class="md-ellipsis">
+      Flujo de trabajo OpenSpec
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generacion-de-backend" class="md-nav__link">
+    <span class="md-ellipsis">
+      Generación de backend
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Generación de backend">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#explore" class="md-nav__link">
+    <span class="md-ellipsis">
+      Explore
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#propose" class="md-nav__link">
+    <span class="md-ellipsis">
+      Propose
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apply" class="md-nav__link">
+    <span class="md-ellipsis">
+      Apply
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verificacion-del-backend" class="md-nav__link">
+    <span class="md-ellipsis">
+      Verificación del backend
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#archive" class="md-nav__link">
+    <span class="md-ellipsis">
+      Archive
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generacion-de-frontend" class="md-nav__link">
+    <span class="md-ellipsis">
+      Generación de frontend
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Generación de frontend">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#explore_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Explore
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#propose_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Propose
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apply_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Apply
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verificacion-del-frontend" class="md-nav__link">
+    <span class="md-ellipsis">
+      Verificación del frontend
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#archive_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Archive
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="gestion-de-prestamos-modelo-gratuito">Gestión de préstamos (modelo gratuito)</h1>
+<div class="admonition warning atención">
+<p class="admonition-title">Warning</p>
+<p>Esta sección se encuentra en desarrollo 🚧.<br />
+<strong>NO se recomienda realizarla</strong> a menos que te lo hayan indicado expresamente.</p>
+</div>
+<h2 id="punto-de-partida">Punto de partida</h2>
+<p>Si has llegado hasta aquí, entiendo que ya has completado la funcionalidad de <strong>gestión de clientes</strong> utilizando el modelo gratuito.</p>
+<p>A partir de ahora vamos a dar por hecho que partimos de ese estado del sistema, donde:</p>
+<ul>
+<li>Existe un CRUD funcional de clientes</li>
+<li>La funcionalidad está implementada, validada y archivada</li>
+<li>Los patrones de backend y frontend introducidos ya forman parte del sistema</li>
+</ul>
+<p>Una vez llegados a este punto, asumimos que el proyecto <strong>ya está descargado y configurado</strong>, y que hemos trabajado previamente sobre la funcionalidad de <strong>gestión de clientes</strong>.</p>
+<p>Por tanto, <strong>continuaremos utilizando los mismos proyectos y directorios</strong>, sin realizar ninguna instalación ni configuración adicional.</p>
+<p>En este tutorial seguiremos trabajando sobre:</p>
+<ul>
+<li><code>server-springboot</code> como <strong><code>backend</code></strong></li>
+<li><code>client-angular17</code> como <strong><code>frontend</code></strong></li>
+</ul>
+<h2 id="requisitos-funcionales">Requisitos funcionales</h2>
+<ul>
+<li>Gestión de préstamos entre clientes y juegos.</li>
+<li>Listado paginado con filtros por juego, cliente y fecha.</li>
+<li>Alta/edición en modal con campos obligatorios (salvo identificador).</li>
+<li>Validaciones de fechas y restricciones de solapamiento.</li>
+<li>Máximo 14 días por préstamo.</li>
+<li>Un juego no puede estar prestado a dos clientes en el mismo día.</li>
+<li>Un cliente no puede tener más de dos préstamos activos en el mismo día.</li>
+</ul>
+<h2 id="estrategia-del-modo-gratuito">Estrategia del modo gratuito</h2>
+<p>Continuaremos trabajando con un <strong>modelo gratuito</strong>, utilizando <strong><code>Claude Haiku</code></strong> y el mismo workspace que en la funcionalidad de <strong>gestión de clientes</strong>.</p>
+<p>Antes de comenzar, ten en cuenta lo siguiente:</p>
+<ul>
+<li>Para cada <strong>nueva funcionalidad</strong>, es recomendable iniciar una <strong>nueva conversación de chat</strong> dentro del mismo proyecto</li>
+</ul>
+<p>Esto ayuda a mantener el contexto limpio y a que el modelo se centre exclusivamente en la funcionalidad que vamos a abordar.</p>
+<p>Recuerda que en cualquier momento puedes ver el consumo mensual de tu cuenta pulsando el icono de la rana 🐸 en la esquina inferior derecha. El contador <strong>se reinicia cada mes</strong>.</p>
+<p>Al igual que el ejercicio anterior, vamos a dividir el ejercicio en <strong>dos grandes bloques</strong>:</p>
+<ol>
+<li>Primero trabajaremos únicamente con el <strong><code>backend</code></strong></li>
+<li>Después abordaremos el <strong><code>frontend</code></strong></li>
+</ol>
+<p>De esta forma limitamos el contexto a un solo proyecto y facilitamos el trabajo al modelo.</p>
+<p>Además, recuerda que el comportamiento del modelo <strong>no es determinista</strong>. Si a ti te genera algo diferente a lo que ves aquí, probablemente seguirá siendo válido. No te frustres y ajusta los prompts si es necesario.</p>
+<h2 id="flujo-de-trabajo-openspec">Flujo de trabajo OpenSpec</h2>
+<p>Seguiremos el ciclo completo de :</p>
+<div class="highlight"><pre><span></span><code>1. Explore
+2. Propose
+3. Apply
+4. Archive
+</code></pre></div>
+<h2 id="generacion-de-backend">Generación de backend</h2>
+<p>Aunque no es obligatorio, es altamente recomendable volver a ejecutar la fase de <strong><code>Explore</code></strong>. El sistema ha podido cambiar desde tu último cambio, alguien ha podido hacer modificaciones, etc. En tu caso no sería necesario ya que estás trabajando tu solo y no has cambiado nada, pero es buena práctica hacerlo siempre.</p>
+<h3 id="explore">Explore</h3>
+<p>El objetivo de esta fase es <strong>analizar el sistema existente</strong>, sin modificar nada.</p>
+<p>A diferencia de la gestión de clientes, este caso de uso introduce una mayor complejidad, principalmente por:</p>
+<ul>
+<li>Relaciones entre entidades (cliente, juego, préstamo)</li>
+<li>Uso de <strong>paginación</strong> en los listados</li>
+<li>Aplicación de <strong>filtros combinados</strong></li>
+<li>Necesidad de <strong>validaciones de negocio más complejas</strong></li>
+</ul>
+<p>En esta fase se analizará qué partes del sistema actual ya resuelven este tipo de problemas y pueden reutilizarse, y qué aspectos no están implementados y deberán abordarse en fases posteriores.</p>
+<p>Aspectos a revisar:</p>
+<p><strong>Paginación</strong></p>
+<ul>
+<li>Cómo se implementa en backend (uso de Page)</li>
+</ul>
+<p><strong>Filtros</strong></p>
+<ul>
+<li>Cómo se implementa en el catálogo de juegos</li>
+<li>Cómo se implementan filtros por rangos de fechas (si existen)</li>
+<li>DTOs de filtro utilizados</li>
+<li>Construcción de queries en backend</li>
+<li>Cómo se construyen queries con condiciones combinadas y operadores distintos de igualdad</li>
+</ul>
+<p><strong>Relaciones entre entidades</strong></p>
+<ul>
+<li>Cómo se modelan relaciones en JPA</li>
+<li>Ejemplos existentes en el proyecto</li>
+<li>Cómo se representan en DTOs</li>
+<li>Cómo se cargan y exponen los datos relacionados</li>
+</ul>
+<p><strong>Validaciones en backend</strong></p>
+<ul>
+<li>Dónde se implementan (Service)</li>
+<li>Cómo se gestionan errores</li>
+<li>Cómo se propagan al frontend</li>
+<li>Cómo se implementan validaciones sobre rangos de fechas </li>
+<li>Cómo se validan restricciones que dependen de registros existentes (solapamientos, límites por cliente, etc.)</li>
+</ul>
+<p>⚠️ En esta fase:</p>
+<ul>
+<li><strong>NO</strong> se escribe código</li>
+<li><strong>NO</strong> se diseña la solución</li>
+<li><strong>NO</strong> se inventan estructuras nuevas</li>
+</ul>
+<p>Solo se analiza el <strong>sistema actual</strong>.</p>
+<hr />
+<p><strong>📜 Prompt</strong></p>
+<p>Lo que haremos será escribir en el chat de <code>Visual Studio Code</code> el comando y las instrucciones que queramos darle. <code>Recuerda haber elegido Claude Haiku y estar trabajando en modo Agent</code>.</p>
+<div class="highlight"><pre><span></span><code>/opsx:explore
+
+Analiza el proyecto actual que está en el directorio &quot;backend&quot;, es una aplicación Spring Boot. Una vez analizado, responde:
+
+1. ¿Cómo están implementados los CRUD existentes?
+- Controller
+- Service
+- Repository
+- Paginación y respuestas paginadas
+
+2. ¿Qué estructura siguen los dominios?
+
+3. ¿Cómo se implementan las operaciones?
+- Listado
+- Creación/edición
+- Borrado
+- DTOs de filtro utilizados y construcción de queries en backend
+- Uso de condiciones combinadas (no solo igualdad)
+- Ejemplos de filtros por rango de fechas (si existen)
+- Ejemplos de consultas donde una fecha debe estar contenida dentro de un rango (si existen)
+
+4. ¿Cómo se gestionan relaciones entre entidades?
+- Modelado en JPA
+- Ejemplos en el proyecto
+- Cómo se representan en DTOs
+- Cómo se exponen los datos relacionados
+
+5. ¿Cómo se implementan validaciones en backend?
+- Dónde se ubican (Service)
+- Cómo se gestionan errores
+- Cómo se propagan al frontend
+- Si existen validaciones que dependan de múltiples registros o condiciones
+- Si existen validaciones relacionadas con fechas o rangos
+- Cómo se validan restricciones basadas en datos existentes
+
+6. ¿Qué formato tienen los endpoints y que relación tiene con los métodos HTTP?
+
+7. ¿Qué patrones o estructuras comunes se repiten en los CRUD existentes?
+- Clases reutilizables
+- Lógica repetida
+- Estructuras comunes entre dominios
+
+8. ¿Existen test unitarios y de integración? ¿Cómo están implementados? ¿Utiliza algo especial al arrancar o al mockear?
+
+
+Analiza únicamente la parte de backend (Spring Boot)
+NO propongas soluciones.
+NO diseñes nuevas funcionalidades.
+Solo analiza el sistema actual.
+Ya tienes un contexto previo en el fichero backend-explore.md en el directorio de las specs, utilizalo y lo actualizas con lo que analices y no esté.
+</code></pre></div>
+<p>Si te fijas, le hemos indicado que aproveche el contexto previo generado en el ejercicio anterior y le hemos pedido que lo actualice con los cambios que considere.</p>
+<p>Este comando realizará un análisis exhaustivo de tu sistema que servirá como base para definir la nueva funcionalidad en la siguiente fase.</p>
+<div class="admonition tip">
+<p class="admonition-title">Sobre los permisos</p>
+<p>Es posible que durante el análisis te pida permiso para hacer ciertas tareas. Le puedes ir dando permiso una a una o darle permiso en todo el workspace, eso lo dejamos a tu elección.</p>
+</div>
+<h3 id="propose">Propose</h3>
+<p>Una vez analizado el sistema en la fase Explore, el siguiente paso es definir de forma clara y estructurada <strong>la nueva funcionalidad a implementar</strong>.</p>
+<p>En esta fase establecemos <strong>qué vamos a construir</strong>, apoyándonos en el conocimiento ya consolidado del sistema y en el resultado del Explore.</p>
+<p>Esta fase actúa como puente entre el análisis y la implementación, permitiendo diseñar la solución antes de escribir código y reduciendo el riesgo de errores durante el desarrollo.</p>
+<p>Durante esta fase debes especificar:</p>
+<p><strong>Descripción funcional</strong></p>
+<ul>
+<li>Qué hace la funcionalidad</li>
+<li>Qué problema resuelve</li>
+</ul>
+<p><strong>Reglas de negocio</strong></p>
+<ul>
+<li>Validaciones sobre fechas:<ul>
+<li>La fecha de fin no podrá ser anterior a la fecha de inicio</li>
+</ul>
+</li>
+<li>Restricciones de duración del préstamo:<ul>
+<li>El período de préstamo máximo solo podrá ser de 14 días</li>
+</ul>
+</li>
+<li>Validaciones de solapamiento de préstamos:<ul>
+<li>El mismo juego no puede estar prestado a más de un cliente para ninguno de los días incluidos en el rango del préstamo</li>
+</ul>
+</li>
+<li>Límites de préstamos simultáneos por cliente:<ul>
+<li>Un mismo cliente no puede tener más de 2 préstamos activos para ninguno de los días incluidos en el rango del préstamo</li>
+</ul>
+</li>
+</ul>
+<p><strong>Diseño backend</strong></p>
+<ul>
+<li>Endpoints necesarios</li>
+<li>Estructura del dominio (Entity, DTO, Service, Repository)</li>
+<li>Tipo de operaciones (listado, creación, edición, borrado)</li>
+<li>Estrategia para filtros por fecha dentro de rangos</li>
+</ul>
+<p><strong>Decisiones técnicas</strong></p>
+<ul>
+<li>Qué patrones existentes se reutilizan</li>
+<li>Qué partes deben extenderse</li>
+<li>Cómo se gestionarán los filtros de fecha y condiciones combinadas</li>
+<li>Cómo se implementarán validaciones basadas en múltiples registros (solapamientos y límites)</li>
+</ul>
+<p><strong>Plan de implementación</strong></p>
+<ul>
+<li>Tareas ordenadas</li>
+<li>Separación backend / frontend</li>
+<li>Prioridad de desarrollo (listado → filtros → validaciones)</li>
+</ul>
+<p>Aquí dejamos claro:</p>
+<ul>
+<li>Qué funcionalidad se va a añadir</li>
+<li>Qué reglas de negocio existen</li>
+<li>Qué piezas del sistema se ven afectadas</li>
+<li>Qué tareas habrá que ejecutar</li>
+</ul>
+<p>⚠️ En esta fase:</p>
+<ul>
+<li><strong>NO</strong> se implementa código</li>
+<li><strong>NO</strong> se redefine el sistema</li>
+</ul>
+<hr />
+<p><strong>📜 Prompt</strong></p>
+<p>Para nuestro ejemplo, lo que haremos será escribir en el chat de <code>Visual Studio Code</code> el siguiente prompt:</p>
+<div class="highlight"><pre><span></span><code>/opsx:propose manage-loans-backend
+
+Define la funcionalidad de gestión de préstamos de juegos basándote en el sistema actual y en los patrones identificados en la fase Explore, tienes el resultado en el fichero &quot;backend-explore.md&quot;.
+
+Nos han pedido esta nueva funcionalidad.
+
+Se quiere hacer uso de su catálogo de juegos y de sus clientes, y quiere saber que juegos ha prestado a cada cliente. Para ello nos ha pedido una página bastante compleja donde se podrá consultar diferente información y se permitirá realizar el préstamo de los juegos.
+
+Nos ha pasado el siguiente boceto y requisitos.
+
+La pantalla tendrá dos zonas:
+
+- Una zona de filtrado donde se permitirá filtrar por:
+    - Título del juego, que deberá ser un combo seleccionable con los juegos del catálogo de la Ludoteca.
+    - Cliente, que deberá ser un combo seleccionable con los clientes dados de alta en la aplicación.
+    - Fecha, que deberá ser de tipo Datepicker y que permitirá elegir una fecha de búsqueda. Al elegir un día nos deberá mostrar que juegos están prestados para dicho día. OJO que los préstamos son con fecha de inicio y de fin, si elijo un día intermedio debería aparecer el elemento en la tabla.
+- Una zona de listado paginado que deberá mostrar
+    - El identificador del préstamo
+    - El nombre del juego prestado
+    - El nombre del cliente que lo solicitó
+    - La fecha de inicio del préstamo
+    - La fecha de fin del préstamo
+    - Un botón que permite eliminar el préstamo
+
+
+Al pulsar el botón de Nuevo préstamo se abrirá una pantalla donde se podrá ingresar la siguiente información, toda ella obligatoria:
+- Identificador, inicialmente vacío y en modo lectura
+- Nombre del cliente, mediante un combo seleccionable
+- Nombre del juego, mediante un combo seleccionable
+- Fechas del préstamo, donde se podrá introducir dos fechas, de inicio y fin del préstamo.
+
+Las validaciones son sencillas aunque laboriosas:
+- La fecha de fin NO podrá ser anterior a la fecha de inicio
+- El periodo de préstamo máximo solo podrá ser de 14 días. Si el usuario quiere un préstamo para más de 14 días la aplicación no debe permitirlo mostrando una alerta al intentar guardar.
+- El mismo juego no puede estar prestado a dos clientes distintos en un mismo día. OJO que los préstamos tienen fecha de inicio y fecha fin, el juego no puede estar prestado a más de un cliente para ninguno de los días que contemplan las fechas actuales del rango.
+- Un mismo cliente no puede tener prestados más de 2 juegos en un mismo día. OJO que los préstamos tienen fecha de inicio y fecha fin, el cliente no puede tener más de dos préstamos para ninguno de los días que contemplan las fechas actuales del rango.
+
+Para empezar te daré unos consejos:
+
+- Recuerda crear la tabla de la BBDD y sus datos
+- Intenta primero hacer el listado paginado sin filtros, en el orden que más te guste: frontend o backend. Recuerda que se trata de un listado paginado, así que deberás utilizar el objeto Page.
+- Completa el listado conectando ambas capas.
+- Ahora implementa los filtros, presta atención al filtro de fecha, es el más complejo.
+- Para la paginación filtrada solo tienes que mezclar los conceptos que hemos visto en los puntos del tutorial anteriores.
+- Si hiciste el backend en Springboot recuerda revisar Baeldung por si tienes dudas sobre las queries y recuerda que las Specifications son muy útiles, pero en este caso deberás implementar otro tipo de operaciones, no te sirve solo con la operación de igualdad :, que ya vimos en el tutorial.
+- Implementa la pantalla de alta de préstamo, sin ninguna validación.
+- Cuando ya te funcione, intenta ir añadiendo una a una las validaciones. Algunas de ellas pueden hacerse en frontend, mientras que otras deberán validarse en backend
+- Os recordamos que han de poder crearse y editarse préstamos según las reglas de validación indicadas anteriormente. Aplican las mismas reglas para ambas operaciones.
+- El Backend ha de validar siempre, independientemente de que el Frontend ya lo haya validado. Nunca confíes de manera exclusiva en terceras partes (Frontend o en otro Backend).
+
+
+
+
+Te voy a dar otras directrices que pienso que te pueden servir:
+- Se necesita un CRUD de prestamos
+- Debe tener una búsqueda y una paginación, todo en el mismo endpoint
+- Fíjate en como están relacionadas las entidades del modelo ya que aquí tendrás que relacionar juego y cliente
+- Tienes que implementar las validaciones dentro del método de guardado y creación y, siempre que se pueda, la validación se debe delegar en una query de BBDD.
+
+
+Necesito que definas:
+
+1. Descripción de la funcionalidad
+
+2. Reglas de negocio
+
+3. Diseño backend:
+- Endpoints necesarios
+- Estructura del dominio (Entity, DTO, Service, Repository)
+
+4. Decisiones técnicas:
+- Qué patrones del sistema actual se reutilizan
+
+
+NO implementes código.
+NO analices de nuevo el proyecto.
+Basa la propuesta en los patrones detectados en la fase Explore.
+Haz la propuesta únicamente de backend.
+Como última tarea añade al fichero de tasks generar un resumen del cambio realizado, con el contrato de los endpoints y la información necesaria para que luego el frontend pueda implementar sus llamadas de forma sencilla.
+
+Tendrás que escribir los ficheros de proposal, design, spec y tasks en la propuesta correspondiente.
+</code></pre></div>
+<p>Igual que en la gestión de clientes, este comando genera dentro del directorio <code>changes</code> la propuesta correspondiente, que incluye los siguientes ficheros: <code>proposal.md</code>, <code>design.md</code>, <code>spec.md</code>, <code>tasks.md</code>.</p>
+<p>Estos artefactos están adaptados a la funcionalidad de <strong>gestión de préstamos</strong>, incorporando las reglas de negocio, filtros y validaciones específicas de este caso de uso.</p>
+<p>Constituyen la base para la siguiente fase: <strong>Apply</strong>, donde se ejecutará la implementación siguiendo las tareas definidas.</p>
+<div class="admonition tip">
+<p class="admonition-title">Responsabilidades como developer IA</p>
+<p>En este punto la IA te ha hecho una propuesta que puede ser correcta o no, recordemos que se trata de un modelo matemático-probabilístico. Si hay algo de lo propuesto que no te encaja o es erróneo deberías comentarlo mediante el chat o corregirlo de forma manual en el fichero que corresponda. Por ejemplo si quieres añadir una tarea porqué se te ha olvidado incluirla en el prompt original, deberías decirle al modelo que te incluya la nueva tarea.</p>
+</div>
+<p>Una vez estemos de acuerdo con la propuesta que nos ha hecho la IA, podemos pasar al siguiente punto.</p>
+<h3 id="apply">Apply</h3>
+<p>Una vez validada la propuesta, ejecutamos la implementación:</p>
+<p>El objetivo de esta fase es transformar los artefactos generados<br />
+(<code>proposal.md</code>, <code>design.md</code>, <code>spec.md</code>, <code>tasks.md</code>) en <strong>código funcional</strong>, asegurando que:</p>
+<ul>
+<li>Se respetan los requisitos funcionales definidos en <code>spec.md</code></li>
+<li>Se siguen las decisiones técnicas establecidas en <code>design.md</code></li>
+<li>Se ejecutan las tareas en el orden definido en <code>tasks.md</code></li>
+</ul>
+<hr />
+<p><strong>📜 Prompt</strong></p>
+<p>Esto es tan fácil como escribir en el chat de <code>Visual Studio Code</code> el siguiente prompt:</p>
+<div class="highlight"><pre><span></span><code>/opsx:apply
+</code></pre></div>
+<p>El agente empezará a realizar un montón de tareas y pedirnos permisos. Es posible que algunas de esas tareas fallen y él mismo lo reintente de otra forma. El resultado debería ser el código generado e implementado dentro de la carpeta de <code>backend</code> y un resumen de todas las tareas realizadas y checkeadas por la IA.</p>
+<h3 id="verificacion-del-backend">Verificación del backend</h3>
+<p>Un paso que no pertenece a OpenSpec pero que es altamente recomendable es probar los cambios realizados. 
+Arranca el backend y verifica:</p>
+<ul>
+<li>Que el servidor levanta</li>
+<li>Que los endpoints existen y funcionan</li>
+<li>Que los tests pasan</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Ojo no te fies</p>
+<p>Ojo no te fies de todo lo que construya la IA. Tu estás al mando, tu debes decidir si el sistema está correctamente implementado o no. Es tu responsabilidad.</p>
+</div>
+<p>Si <strong>NO</strong> estás a gusto con la implementación o se ha dejado algo por hacer, es el momento de escribirlo por el chat indicándole exactamente que es lo que falta. Cuanto más preciso y conciso seas, mejor implementará la IA.</p>
+<h3 id="archive">Archive</h3>
+<p>Y llegamos a la última etapa que nos define OpenSpec, donde se archiva el cambio y se da por finalizada la funcionalidad.</p>
+<p>El objetivo de esta fase es marcar la funcionalidad como completada, consolidar todos los artefactos generados durante el proceso y dejar el sistema en un estado estable, coherente y preparado para nuevas evoluciones.</p>
+<hr />
+<p><strong>📜 Prompt</strong></p>
+<p>De nuevo nos vamos al chat de <code>Visual Studio Code</code> el siguiente prompt:</p>
+<div class="highlight"><pre><span></span><code>/opsx:archive
+</code></pre></div>
+<p>Durante el proceso de Archive, el sistema solicitará confirmación para sincronizar los requisitos antes de archivar el cambio.</p>
+<p>Recuerda que al sincronizar, los requisitos definidos en <code>spec.md</code> pasan de ser un cambio temporal a formar parte permanente del sistema.  </p>
+<p>Si no se sincroniza, el código queda implementado, pero los requisitos no se registran en los specs principales afectando a la trazabilidad y futuras evoluciones del sistema.</p>
+<p><strong>📜 Actualización del contexto</strong></p>
+<p>Además, para forzar al <code>modelo gratuito</code> y dejarlo todo listo, es recomendable lanzar un último prompt que nos actualice el fichero de <code>backend-explore.md</code></p>
+<div class="highlight"><pre><span></span><code>Actualiza el fichero de backend-explore con los nuevos datos implementados
+</code></pre></div>
+<h2 id="generacion-de-frontend">Generación de frontend</h2>
+<p>Una vez implementado el backend, nos ponemos a trabajar con el frontend. De nuevo recordar que <strong>es muy importante</strong> que cada nuevo cambio que hagamos, lo empecemos en un chat nuevo, para limpiar el contexto anterior y no arrastrar posibles errores o incoherencias.</p>
+<h3 id="explore_1">Explore</h3>
+<p>Al igual que en backend, aquí también lanzamos una exploración del sistema por si hubiera algún cambio con respecto a la anterior versión.</p>
+<hr />
+<p><strong>📜 Prompt</strong></p>
+<p>Vamos <strong>a un nuevo</strong> chat de <code>Visual Studio Code</code> y escribimos el comando:</p>
+<div class="highlight"><pre><span></span><code>/opsx:explore
+
+Analiza el proyecto actual que está en el directorio &quot;frontend&quot;, es una aplicación Angular. Ojo no escanees la carpeta de &quot;node_modules&quot; no tiene sentido. Una vez analizado, responde:
+
+1. ¿Cómo están implementados los CRUD existentes?
+- Componentes
+- Servicios
+- Modelos
+
+2. ¿Qué estructura siguen los dominios?
+
+3. ¿Cómo se implementan las operaciones?
+- Listado
+- Creación/edición
+- Borrado
+- Cómo funcionan las ventanas de creación y edición (modales)
+
+4. ¿Como se comunican frontend con backend?
+- Servicios en Angular
+- Construcción de URLs
+
+5. ¿Cómo se implementa la paginación?
+- Consumo de datos paginados
+- Integración en tablas
+
+
+6. ¿Cómo se implementan los filtros en los listados?
+- Especialmente en el catálogo de juegos
+- Cómo se envían los filtros desde Angular
+
+7. ¿Cómo se cargan datos en combos (selects) en frontend?
+- Servicios Angular utilizados
+- Cómo se obtienen los datos
+- Flujo de carga en componentes
+
+
+8. ¿Qué patrones o estructuras comunes se repiten en los CRUD existentes?
+- Clases reutilizables
+- Lógica repetida
+- Estructuras comunes entre dominios
+
+
+Analiza únicamente la parte de frontend (Angular)
+NO propongas soluciones.
+NO diseñes nuevas funcionalidades.
+Solo analiza el sistema actual.
+Ya tienes un contexto previo en el fichero frontend-explore.md en el directorio de las specs, utilizalo y lo actualizas con lo que analices y no esté.
+</code></pre></div>
+<p>Si te fijas en este explore hemos añadido tanto la paginación como los filtros. Al finalizar debería actualizar el fichero explore de frontend y además ofrecernos un resumen.</p>
+<h3 id="propose_1">Propose</h3>
+<p>Una vez analizado el sistema en la fase Explore, el siguiente paso es definir de forma clara y estructurada <strong>la nueva funcionalidad a implementar</strong>.</p>
+<p><strong>📜 Prompt</strong></p>
+<p>De nuevo en el chat de <code>Visual Studio Code</code> escribimos el siguiente prompt:</p>
+<div class="highlight"><pre><span></span><code>/opsx:propose manage-loans-frontend
+
+Define la funcionalidad de gestión de préstamos de juegos basándote en el sistema actual y en los patrones identificados en la fase Explore, tienes el resultado en el fichero &quot;frontend-explore.md&quot;. Además tendrás que ver el cambio realizado en la spec de &quot;manage-loans-backend&quot;, sobre todo los endpoints generados. Por si acaso también deberías tener en cuenta el fichero de &quot;backend-explore.md&quot;.
+
+
+Nos han pedido esta nueva funcionalidad.
+
+Se quiere hacer uso de su catálogo de juegos y de sus clientes, y quiere saber que juegos ha prestado a cada cliente. Para ello nos ha pedido una página bastante compleja donde se podrá consultar diferente información y se permitirá realizar el préstamo de los juegos.
+
+Nos ha pasado el siguiente boceto y requisitos.
+
+La pantalla tendrá dos zonas:
+
+- Una zona de filtrado donde se permitirá filtrar por:
+    - Título del juego, que deberá ser un combo seleccionable con los juegos del catálogo de la Ludoteca.
+    - Cliente, que deberá ser un combo seleccionable con los clientes dados de alta en la aplicación.
+    - Fecha, que deberá ser de tipo Datepicker y que permitirá elegir una fecha de búsqueda. Al elegir un día nos deberá mostrar que juegos están prestados para dicho día. OJO que los préstamos son con fecha de inicio y de fin, si elijo un día intermedio debería aparecer el elemento en la tabla.
+- Una zona de listado paginado que deberá mostrar
+    - El identificador del préstamo
+    - El nombre del juego prestado
+    - El nombre del cliente que lo solicitó
+    - La fecha de inicio del préstamo
+    - La fecha de fin del préstamo
+    - Un botón que permite eliminar el préstamo
+
+
+Al pulsar el botón de Nuevo préstamo se abrirá una pantalla donde se podrá ingresar la siguiente información, toda ella obligatoria:
+- Identificador, inicialmente vacío y en modo lectura
+- Nombre del cliente, mediante un combo seleccionable
+- Nombre del juego, mediante un combo seleccionable
+- Fechas del préstamo, donde se podrá introducir dos fechas, de inicio y fin del préstamo.
+
+Las validaciones son sencillas aunque laboriosas:
+- La fecha de fin NO podrá ser anterior a la fecha de inicio
+- El periodo de préstamo máximo solo podrá ser de 14 días. Si el usuario quiere un préstamo para más de 14 días la aplicación no debe permitirlo mostrando una alerta al intentar guardar.
+- El mismo juego no puede estar prestado a dos clientes distintos en un mismo día. OJO que los préstamos tienen fecha de inicio y fecha fin, el juego no puede estar prestado a más de un cliente para ninguno de los días que contemplan las fechas actuales del rango.
+- Un mismo cliente no puede tener prestados más de 2 juegos en un mismo día. OJO que los préstamos tienen fecha de inicio y fecha fin, el cliente no puede tener más de dos préstamos para ninguno de los días que contemplan las fechas actuales del rango.
+
+Para empezar te daré unos consejos:
+
+- Recuerda crear la tabla de la BBDD y sus datos
+- Intenta primero hacer el listado paginado sin filtros, en el orden que más te guste: frontend o backend. Recuerda que se trata de un listado paginado, así que deberás utilizar el objeto Page.
+- Completa el listado conectando ambas capas.
+- Ahora implementa los filtros, presta atención al filtro de fecha, es el más complejo.
+- Para la paginación filtrada solo tienes que mezclar los conceptos que hemos visto en los puntos del tutorial anteriores.
+- Si hiciste el backend en Springboot recuerda revisar Baeldung por si tienes dudas sobre las queries y recuerda que las Specifications son muy útiles, pero en este caso deberás implementar otro tipo de operaciones, no te sirve solo con la operación de igualdad :, que ya vimos en el tutorial.
+- Implementa la pantalla de alta de préstamo, sin ninguna validación.
+- Cuando ya te funcione, intenta ir añadiendo una a una las validaciones. Algunas de ellas pueden hacerse en frontend, mientras que otras deberán validarse en backend
+- Os recordamos que han de poder crearse y editarse préstamos según las reglas de validación indicadas anteriormente. Aplican las mismas reglas para ambas operaciones.
+- El Backend ha de validar siempre, independientemente de que el Frontend ya lo haya validado. Nunca confíes de manera exclusiva en terceras partes (Frontend o en otro Backend).
+
+
+
+
+Te voy a dar otras directrices que pienso que te pueden servir:
+- Se necesita un CRUD de prestamos
+- Debe tener una búsqueda y una paginación, así que fíjate en como está hecho en otras pantallas
+- Todo lo que se pueda tendrá que estar con componentes de tipo dropdown
+- Es posible que tengas que implementar algún nuevo endpoint para rellenar los componentes dropdown, diseña eso también para el backend.
+
+
+Necesito que definas:
+
+1. Descripción de la funcionalidad
+
+2. Reglas de negocio
+
+3. Diseño frontend:
+- Componentes necesarios
+- Flujos de interacción (listado, abrir modal, guardar borrar)
+
+4. Uso de endpoints para llamar a backend
+
+5. Decisiones técnicas:
+- Qué patrones del sistema actual se reutilizan
+
+
+NO implementes código.
+NO analices de nuevo el proyecto.
+Basa la propuesta en los patrones detectados en la fase Explore.
+Haz la propuesta únicamente de frontend.
+Olvídate de los test, en frontend no tenemos tests.
+Añade el nuevo punto de menú en el header para que se pueda acceder.
+No te inventes estilos, respeta los estilos de las pantallas (anchuras, alturas, colores, disposición de las tablas).
+Utiliza los componentes de Angular Material para todo lo que puedas, no componentes nativos del navegador.
+
+Tendrás que escribir los ficheros de proposal, design, spec y tasks en la propuesta correspondiente.
+</code></pre></div>
+<p>Aquí es importante destacar que debe tener en cuenta:</p>
+<ul>
+<li>debe coger el contexto generado anteriormente</li>
+<li>además, le debe sumar el contexto del último cambio de backend con los endpoints</li>
+<li>debe respetar estilos y componentes de Angular material y no inventar</li>
+<li>debe revisar como se rellenan los dropdown</li>
+</ul>
+<p>De nuevo este comando genera dentro del directorio <code>changes</code> la propuesta correspondiente, que incluye los siguientes ficheros: <code>proposal.md</code>, <code>design.md</code>, <code>spec.md</code>, <code>tasks.md</code>. Que deberemos revisar.</p>
+<div class="admonition tip">
+<p class="admonition-title">No nos cansaremos de decirlo</p>
+<p>Esta es la fase más importante, aquí es donde debes revisar toda la propuesta y si algo no te encaja o es erróneo deberías comentarlo mediante el chat o corregirlo de forma manual en el fichero que corresponda. Es tú responsabilidad.</p>
+</div>
+<p>Una vez estemos de acuerdo con la propuesta que nos ha hecho la IA, podemos pasar al siguiente punto.</p>
+<h3 id="apply_1">Apply</h3>
+<p>Una vez validado todo, pasamos a ejecutarlo.</p>
+<p><strong>📜 Prompt</strong></p>
+<p>Esto es tan fácil como escribir en el chat de <code>Visual Studio Code</code> el siguiente prompt:</p>
+<div class="highlight"><pre><span></span><code>/opsx:apply
+</code></pre></div>
+<p>El agente empezará a realizar un montón de tareas y pedirnos permisos. Es posible que algunas de esas tareas fallen y él mismo lo reintente de otra forma. El resultado debería ser el código generado e implementado tanto en la carpeta <code>backend</code> como en la carpeta <code>frontend</code> y un resumen de todas las tareas realizadas y checkeadas por la IA.</p>
+<h3 id="verificacion-del-frontend">Verificación del frontend</h3>
+<p>Un paso que no pertenece a OpenSpec pero que es altamente recomendable es probar los cambios realizados. </p>
+<p>Arranca el <strong>backend</strong> y el <strong>frontend</strong> y verifica:</p>
+<ul>
+<li>La aplicación levanta correctamente</li>
+<li>Las nuevas funcionalidades añadidas están accesibles</li>
+<li>Los flujos principales definidos en <code>spec.md</code> funcionan como se espera</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Ojo no te fies</p>
+<p>Ojo no te fies de todo lo que construya la IA. Tu estás al mando, tu debes decidir si el sistema está correctamente implementado o no. Es tu responsabilidad.</p>
+</div>
+<p>Si <strong>NO</strong> estás a gusto con la implementación o se ha dejado algo por hacer, es el momento de escribirlo por el chat indicándole exactamente que es lo que falta. Cuanto más preciso y conciso seas, mejor implementará la IA.</p>
+<h3 id="archive_1">Archive</h3>
+<p>Y llegamos a la última etapa que nos define OpenSpec, donde se archiva el cambio y se da por finalizada la funcionalidad.</p>
+<p>El objetivo de esta fase es marcar la funcionalidad como completada, consolidar todos los artefactos generados durante el proceso y dejar el sistema en un estado estable, coherente y preparado para nuevas evoluciones.</p>
+<hr />
+<p><strong>📜 Prompt</strong></p>
+<p>De nuevo nos vamos al chat de <code>Visual Studio Code</code> el siguiente prompt:</p>
+<div class="highlight"><pre><span></span><code>/opsx:archive
+</code></pre></div>
+<p>Durante el proceso de Archive, el sistema solicitará confirmación para sincronizar los requisitos antes de archivar el cambio.</p>
+<p>Recuerda que al sincronizar, los requisitos definidos en <code>spec.md</code> pasan de ser un cambio temporal a formar parte permanente del sistema.  </p>
+<p>Si no se sincroniza, el código queda implementado, pero los requisitos no se registran en los specs principales afectando a la trazabilidad y futuras evoluciones del sistema.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.path", "navigation.indexes"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.1e8ae164.min.js"></script>
+      
+    
+  </body>
+</html>
