@@ -672,8 +672,8 @@ Ahora vamos a darle forma al formulario de editar y crear. Para ello vamos al ht
         protected readonly dialogRef = inject(MatDialogRef<CategoryEditComponent>);
         protected readonly categoryService = inject(CategoryService);
 
-        id = signal<number | null>(null);
-        name = signal<string | null>(null);
+        protected readonly id = signal<number | null>(null);
+        protected readonly name = signal<string | null>(null);
 
         ngOnInit(): void {
             this.loadFormData();
@@ -754,16 +754,16 @@ Vamos a implementar funcionalidad sobre el icono `editar`, tendremos que modific
       protected readonly categoryService = inject(CategoryService);
       protected readonly dialog = inject(MatDialog);
 
-      ngOnInit(): void {
-        this.loadData();
-      }
-
       loadData(): void {
         this.categoryService.getCategories().subscribe(
           categories => this.dataSource.data = categories
         );
       }
     
+      ngOnInit(): void {
+        this.loadData();
+      }
+
       createCategory() {    
         const dialogRef = this.dialog.open(CategoryEditComponent, {
           data: {}
@@ -826,8 +826,8 @@ Y los Dialog:
         protected readonly data = inject(MAT_DIALOG_DATA) as { category: Category };
         protected readonly categoryService = inject(CategoryService);
 
-        id = signal<number | null>(null);
-        name = signal<string | null>(null);
+        protected readonly id = signal<number | null>(null);
+        protected readonly name = signal<string | null>(null);
 
         ngOnInit(): void {
             this.loadFormData(this.data.category ?? null);
@@ -927,8 +927,8 @@ E implementamos el código que queremos que tenga el componente. Al ser un compo
         styleUrl: './dialog-confirmation.component.scss',
     })
     export class DialogConfirmationComponent {
-        title = signal<string | null>(null);
-        description = signal<string | null>(null);
+        protected readonly title = signal<string | null>(null);
+        protected readonly description = signal<string | null>(null);
 
         protected readonly dialogRef = inject(MatDialogRef<DialogConfirmationComponent>);
         protected readonly data = inject(MAT_DIALOG_DATA);
