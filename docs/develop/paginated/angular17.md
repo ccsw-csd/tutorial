@@ -13,7 +13,7 @@ Como ya conocemos como se debe desarrollar, en este ejemplo vamos a ir más ráp
 Vamos a desarrollar el listado de `Autores` así que, debemos crear los componentes:
 
 ```
-ng generate component author/author-list
+ng generate component author/author-list --type=page
 ng generate component author/author-edit
 
 ng generate service author/author
@@ -41,8 +41,8 @@ Añadimos la ruta al menú para que podamos acceder a la pantalla:
     import { Routes } from '@angular/router';
 
     export const routes: Routes = [
-        { path: 'categories', loadComponent: () => import('../category/category-list/category-list.component').then(m => m.CategoryListComponent)},
-        { path: 'authors', loadComponent: () => import('../author/author-list/author-list.component').then(m => m.AuthorListComponent)},
+        { path: 'categories', loadComponent: () => import('../category/category-list/category-list.page').then(m => m.CategoryListPage)},
+        { path: 'authors', loadComponent: () => import('../author/author-list/author-list.page').then(m => m.AuthorListPage)},
     ];
     ```
 
@@ -70,7 +70,7 @@ Por defecto, el esquema de datos de Spring para la paginación es como el siguie
     }
     ```
 
-Así que necesitamos poder enviar y recuperar esa información desde Angular, nos hace falta crear esos objetos. Los objetos de paginación, al ser comunes a toda la aplicación, vamos a crearlos en `core/model/page`, mientras que la paginación de `AuthorPage.ts` la crearé en su propio model dentro de `author/model`.
+Así que necesitamos poder enviar y recuperar esa información desde Angular, nos hace falta crear esos objetos. Los objetos de paginación, al ser comunes a toda la aplicación, vamos a crearlos en `core/model/page`.
 
 === "SortPage.ts"
     ``` TypeScript
@@ -89,13 +89,12 @@ Así que necesitamos poder enviar y recuperar esa información desde Angular, no
         sort: SortPage[];
     }
     ```
-=== "AuthorPage.ts"
+=== "PaginatedData.ts"
     ``` TypeScript
     import { Pageable } from "src/app/core/model/page/Pageable";
-    import { Author } from "./Author";
 
-    export class AuthorPage {
-        content: Author[];
+    export class PaginatedData <TData>{
+        content: TData[];
         pageable: Pageable;
         totalElements: number;
     }
@@ -105,9 +104,10 @@ Con estos objetos creados ya podemos implementar el servicio y sus datos mockead
 
 === "mock-authors.ts"
     ``` TypeScript
-    import { AuthorPage } from './model/AuthorPage';
+    import { PaginatedData } from 'src/app/core/model/page/PaginatedData';
+    import { Author } from './Author';
 
-    export const AUTHOR_DATA: AuthorPage = {
+    export const AUTHOR_DATA: PaginatedData<Author> = {
         content: [
             { id: 1, name: 'Klaus Teuber', nationality: 'Alemania' },
             { id: 2, name: 'Matt Leacock', nationality: 'Estados Unidos' },
@@ -131,7 +131,7 @@ Con estos objetos creados ya podemos implementar el servicio y sus datos mockead
     import { Observable, of } from 'rxjs';
     import { Pageable } from '../core/model/page/Pageable';
     import { Author } from './model/Author';
-    import { AuthorPage } from './model/AuthorPage';
+    import { PaginatedData } from 'src/app/core/model/page/PaginatedData';
     import { AUTHOR_DATA } from './model/mock-authors';
 
     @Injectable({
@@ -140,7 +140,7 @@ Con estos objetos creados ya podemos implementar el servicio y sus datos mockead
     export class AuthorService {
         constructor() {}
 
-        getAuthors(pageable: Pageable): Observable<AuthorPage> {
+        getAuthors(pageable: Pageable): Observable<PaginatedData<Author>> {
             return of(AUTHOR_DATA);
         }
 
@@ -363,18 +363,18 @@ El último paso es definir la pantalla de diálogo que realizará el alta y modi
         <form>
             <mat-form-field>
                 <mat-label>Identificador</mat-label>
-                <input type="text" matInput placeholder="Identificador" [(ngModel)]="author.id" name="id" disabled>
+                <input type="text" matInput placeholder="Identificador" [(ngModel)]="id" name="id" disabled>
             </mat-form-field>
 
             <mat-form-field>
                 <mat-label>Nombre</mat-label>
-                <input type="text" matInput placeholder="Nombre del autor" [(ngModel)]="author.name" name="name" required>
+                <input type="text" matInput placeholder="Nombre del autor" [(ngModel)]="name" name="name" required>
                 <mat-error>El nombre no puede estar vacío</mat-error>
             </mat-form-field>
 
             <mat-form-field>
                 <mat-label>Nacionalidad</mat-label>
-                <input type="text" matInput placeholder="Nacionalidad del autor" [(ngModel)]="author.nationality" name="nationality" required>
+                <input type="text" matInput placeholder="Nacionalidad del autor" [(ngModel)]="nationality" name="nationality" required>
                 <mat-error>La nacionalidad no puede estar vacía</mat-error>
             </mat-form-field>
         </form>
@@ -409,7 +409,7 @@ El último paso es definir la pantalla de diálogo que realizará el alta y modi
     ```
 === "author-edit.component.ts"
     ``` TypeScript
-    import { Component, Inject, OnInit } from '@angular/core';
+    import { Component, inject, OnInit, signal } from '@angular/core';
     import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
     import { AuthorService } from '../author.service';
     import { Author } from '../model/Author';
@@ -426,26 +426,32 @@ El último paso es definir la pantalla de diálogo que realizará el alta y modi
         styleUrl: './author-edit.component.scss',
     })
     export class AuthorEditComponent implements OnInit {
-        author: Author;
+        protected readonly authorService = inject(AuthorService);
+        protected readonly dialogRef = inject(MatDialogRef<AuthorEditComponent>);
+        protected readonly data = inject(MAT_DIALOG_DATA);
 
-        constructor(
-            public dialogRef: MatDialogRef<AuthorEditComponent>,
-            @Inject(MAT_DIALOG_DATA) public data: any,
-            private authorService: AuthorService
-        ) {}
+        protected readonly id = signal<number | null>(null);
+        protected readonly name = signal<string | null>(null);
+        protected readonly nationality = signal<string | null>(null);
+
+        loadFormData(initialData: Author | null) {
+            this.id.set(initialData.id ?? null);
+            this.name.set(initialData.name ?? null);
+            this.nationality.set(initialData.nationality ?? null);
+        }
 
         ngOnInit(): void {
-            this.author = this.data.author ? Object.assign({}, this.data.author) : new Author();
+            this.loadFormData(this.data.author ?? null);
         }
 
         onSave() {
             this.authorService.saveAuthor(this.author).subscribe(() => {
-                this.dialogRef.close();
+                this.dialogRef.close(true);
             });
         }
 
         onClose() {
-            this.dialogRef.close();
+            this.dialogRef.close(false);
         }
     }
     ```
@@ -466,11 +472,11 @@ Una vez implementado front y back, lo que nos queda es modificar el servicio del
 
 === "author.service.ts"
     ``` TypeScript hl_lines="13 15 18 22-25 28"
-    import { Injectable } from '@angular/core';
+    import { Injectable, inject } from '@angular/core';
     import { Observable, of } from 'rxjs';
     import { Pageable } from '../core/model/page/Pageable';
     import { Author } from './model/Author';
-    import { AuthorPage } from './model/AuthorPage';
+    import { PaginatedData } from 'src/app/core/model/page/PaginatedData';
     import { AUTHOR_DATA } from './model/mock-authors';
     import { HttpClient } from '@angular/common/http';
 
@@ -478,12 +484,12 @@ Una vez implementado front y back, lo que nos queda es modificar el servicio del
         providedIn: 'root',
     })
     export class AuthorService {
-        constructor(private http: HttpClient) {}
+        protected readonly http = inject(HttpClient);
 
         private baseUrl = 'http://localhost:8080/author';
 
-        getAuthors(pageable: Pageable): Observable<AuthorPage> {
-            return this.http.post<AuthorPage>(this.baseUrl, { pageable: pageable });
+        getAuthors(pageable: Pageable): Observable<PaginatedData<Author>> {
+            return this.http.post<PaginatedData<Author>>(this.baseUrl, { pageable: pageable });
         }
 
         saveAuthor(author: Author): Observable<Author> {

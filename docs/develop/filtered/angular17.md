@@ -11,7 +11,7 @@ Vamos a desarrollar el listado de `Juegos`. Este listado es un tanto peculiar, p
 Manos a la obra:
 
 ```
-ng generate component game/game-list
+ng generate component game/game-list --type=page
 ng generate component game/game-list/game-item
 ng generate component game/game-edit
 
@@ -48,9 +48,9 @@ Añadimos la ruta al menú para que podamos navegar a esta pantalla:
 
     export const routes: Routes = [
         { path: '', redirectTo: '/games', pathMatch: 'full'},
-        { path: 'categories', loadComponent: () => import('../category/category-list/category-list.component').then(m => m.CategoryListComponent)},
-        { path: 'authors', loadComponent: () => import('../author/author-list/author-list.component').then(m => m.AuthorListComponent)},
-        { path: 'games', loadComponent: () => import('../game/game-list/game-list.component').then(m => m.GameListComponent)}
+        { path: 'categories', loadComponent: () => import('../category/category-list/category-list.page').then(m => m.CategoryListPage)},
+        { path: 'authors', loadComponent: () => import('../author/author-list/author-list.page').then(m => m.AuthorListPage)},
+        { path: 'games', loadComponent: () => import('../game/game-list/game-list.page').then(m => m.GameListPage)}
     ];
     ```
 
@@ -127,7 +127,7 @@ Ya tenemos las operaciones del servicio con datos, así que ahora vamos a por el
                 <mat-form-field>
                     <mat-label>Categoría del juego</mat-label>
                     <mat-select disableRipple [(ngModel)]="filterCategory" name="category">
-                        @for (category of categories; track category.id) {
+                        @for (category of categories(); track category.id) {
                             <mat-option [value]="category">{{ category.name }}</mat-option>
                         }
                     </mat-select>
@@ -141,7 +141,7 @@ Ya tenemos las operaciones del servicio con datos, así que ahora vamos a por el
         </div>
 
         <div class="game-list">
-            @for (game of games; track game.id) {
+            @for (game of games(); track game.id) {
                 <app-game-item (click)="editGame(game)" />
             }
         </div>
@@ -196,7 +196,7 @@ Ya tenemos las operaciones del servicio con datos, así que ahora vamos a por el
     ```
 === "game-list.component.ts"
     ``` TypeScript
-    import { Component, OnInit } from '@angular/core';
+    import { Component, OnInit, inject, signal } from '@angular/core';
     import { MatDialog } from '@angular/material/dialog';
     import { GameEditComponent } from '../game-edit/game-edit.component';
     import { GameService } from '../game.service';
@@ -231,39 +231,37 @@ Ya tenemos las operaciones del servicio con datos, así que ahora vamos a por el
         styleUrl: './game-list.component.scss',
     })
     export class GameListComponent implements OnInit {
-        categories: Category[];
-        games: Game[];
-        filterCategory: Category;
-        filterTitle: string;
+        protected readonly categories = signal<Category[]>([]);
+        protected readonly games = signal<Game[]>([]);
+        protected readonly filterCategory = signal<Category | null>(null);
+        protected readonly filterTitle = signal<string>('');
 
-        constructor(
-            private gameService: GameService,
-            private categoryService: CategoryService,
-            public dialog: MatDialog
-        ) {}
+        protected readonly gameService = inject(GameService);
+        protected readonly categoryService = inject(CategoryService);
+        protected readonly dialog = inject(MatDialog);
 
         ngOnInit(): void {
-            this.gameService.getGames().subscribe((games) => (this.games = games));
+            this.gameService.getGames().subscribe((games) => this.games.set(games));
 
             this.categoryService
                 .getCategories()
-                .subscribe((categories) => (this.categories = categories));
+                .subscribe((categories) => this.categories.set(categories));
         }
 
         onCleanFilter(): void {
-            this.filterTitle = null;
-            this.filterCategory = null;
+            this.filterTitle.set('');
+            this.filterCategory.set(null);
             this.onSearch();
         }
 
         onSearch(): void {
-            const title = this.filterTitle;
+            const title = this.filterTitle();
             const categoryId =
-                this.filterCategory != null ? this.filterCategory.id : null;
+                this.filterCategory() != null ? this.filterCategory().id : null;
 
             this.gameService
                 .getGames(title, categoryId)
-                .subscribe((games) => (this.games = games));
+                .subscribe((games) => this.games.set(games));
         }
 
         createGame() {
@@ -272,7 +270,8 @@ Ya tenemos las operaciones del servicio con datos, así que ahora vamos a por el
             });
 
             dialogRef.afterClosed().subscribe((result) => {
-                this.ngOnInit();
+                if(!result) return;
+                this.onSearch();
             });
         }
 
@@ -282,6 +281,7 @@ Ya tenemos las operaciones del servicio con datos, así que ahora vamos a por el
             });
 
             dialogRef.afterClosed().subscribe((result) => {
+                if(!result) return;
                 this.onSearch();
             });
         }
@@ -322,7 +322,7 @@ Ahora vamos a implementar el detalle de cada uno de los items que forman el list
                 <mat-form-field>
                     <mat-label>Categoría del juego</mat-label>
                     <mat-select disableRipple [(ngModel)]="filterCategory" name="category">
-                        @for (category of categories; track category.id) {
+                        @for (category of categories(); track category.id) {
                             <mat-option [value]="category">{{ category.name }}</mat-option>
                         }
                     </mat-select>
@@ -336,7 +336,7 @@ Ahora vamos a implementar el detalle de cada uno de los items que forman el list
         </div>
 
         <div class="game-list">
-            @for (game of games; track game.id) {
+            @for (game of games(); track game.id) {
                 <app-game-item (click)="editGame(game)" [game]="game" />
             }
         </div>
@@ -364,12 +364,12 @@ Descárgala y déjala dentro del proyecto en `public/img/foto.png`. Y ya para te
                 <img src="img/foto.png">
             </div>
             <div class="detail">
-                <div class="title">{{game.title}}</div>
+                <div class="title">{{game().title}}</div>
                 <div class="properties">
-                    <div><i>Edad recomendada: </i>+{{game.age}}</div>
-                    <div><i>Categoría: </i>{{game.category.name}}</div>
-                    <div><i>Autor: </i>{{game.author.name}}</div>
-                    <div><i>Nacionalidad: </i>{{game.author.nationality}}</div>
+                    <div><i>Edad recomendada: </i>+{{game().age}}</div>
+                    <div><i>Categoría: </i>{{game().category.name}}</div>
+                    <div><i>Autor: </i>{{game().author.name}}</div>
+                    <div><i>Nacionalidad: </i>{{game().author.nationality}}</div>
                 </div>
             </div>
         </mat-card>
@@ -415,7 +415,7 @@ Descárgala y déjala dentro del proyecto en `public/img/foto.png`. Y ya para te
     ```
 === "game-item.component.ts"
     ``` TypeScript hl_lines="13"
-    import { Component, OnInit, Input } from '@angular/core';
+    import { Component, input } from '@angular/core';
     import { Game } from '../../model/Game';
     import {MatCardModule} from '@angular/material/card';
 
@@ -427,7 +427,7 @@ Descárgala y déjala dentro del proyecto en `public/img/foto.png`. Y ya para te
         styleUrl: './game-item.component.scss'
     })
     export class GameItemComponent {
-        @Input() game: Game;
+        protected readonly game = input.required<Game>();
     }
 
     ```
@@ -459,11 +459,11 @@ Así que lo primero que haremos será implementar una operación `getAllAuthors`
     ```
 === "author.service.ts"
     ``` TypeScript hl_lines="7 31-33"
-    import { Injectable } from '@angular/core';
+    import { Injectable, inject } from '@angular/core';
     import { Observable, of } from 'rxjs';
     import { Pageable } from '../core/model/page/Pageable';
     import { Author } from './model/Author';
-    import { AuthorPage } from './model/AuthorPage';
+    import { PaginatedData } from 'src/app/core/model/page/PaginatedData';
     import { HttpClient } from '@angular/common/http';
     import { AUTHOR_DATA_LIST } from './model/mock-authors-list';
 
@@ -471,12 +471,12 @@ Así que lo primero que haremos será implementar una operación `getAllAuthors`
         providedIn: 'root',
     })
     export class AuthorService {
-    constructor(private http: HttpClient) {}
+        protected readonly http = inject(HttpClient);
 
         private baseUrl = 'http://localhost:8080/author';
 
-        getAuthors(pageable: Pageable): Observable<AuthorPage> {
-            return this.http.post<AuthorPage>(this.baseUrl, { pageable: pageable });
+        getAuthors(pageable: Pageable): Observable<PaginatedData<Author>> {
+            return this.http.post<PaginatedData<Author>>(this.baseUrl, { pageable: pageable });
         }
 
         saveAuthor(author: Author): Observable<Author> {
@@ -500,7 +500,7 @@ Ahora sí que tenemos todo listo para implementar el cuadro de diálogo para dar
 === "game-edit.component.html"
     ``` HTML
     <div class="container">
-        @if (game.id) {
+        @if (id()) {
             <h1>Modificar juego</h1>
         } @else {
             <h1>Crear juego</h1>
@@ -509,26 +509,26 @@ Ahora sí que tenemos todo listo para implementar el cuadro de diálogo para dar
         <form>
             <mat-form-field>
                 <mat-label>Identificador</mat-label>
-                <input type="text" matInput placeholder="Identificador" [(ngModel)]="game.id" name="id" disabled>
+                <input type="text" matInput placeholder="Identificador" [(ngModel)]="id" name="id" disabled>
             </mat-form-field>
 
             <mat-form-field>
                 <mat-label>Título</mat-label>
-                <input type="text" matInput placeholder="Título del juego" [(ngModel)]="game.title" name="title" required>
+                <input type="text" matInput placeholder="Título del juego" [(ngModel)]="title" name="title" required>
                 <mat-error>El título no puede estar vacío</mat-error>
             </mat-form-field>
 
             <mat-form-field>
                 <mat-label>Edad recomendada</mat-label>
-                <input type="number" matInput placeholder="Edad recomendada" [(ngModel)]="game.age" name="age" required>
+                <input type="number" matInput placeholder="Edad recomendada" [(ngModel)]="age" name="age" required>
                 <mat-error>La edad no puede estar vacía</mat-error>
             </mat-form-field>
 
             <mat-form-field>
                 <mat-label>Categoría</mat-label>
-                <mat-select disableRipple [(ngModel)]="game.category" name="category" required>
-                    @for (category of categories; track category.id) {
-                        <mat-option [value]="category">{{category.name}}</mat-option>
+                <mat-select disableRipple [(ngModel)]="categoryId" name="category" required>
+                    @for (cat of categories(); track cat.id) {
+                        <mat-option [value]="cat.id">{{cat.name}}</mat-option>
                     }
                 </mat-select>
                 <mat-error>La categoría no puede estar vacía</mat-error>
@@ -536,9 +536,9 @@ Ahora sí que tenemos todo listo para implementar el cuadro de diálogo para dar
 
             <mat-form-field>
                 <mat-label>Autor</mat-label>
-                <mat-select disableRipple [(ngModel)]="game.author" name="author" required>
-                    @for (author of authors; track author.id) {
-                        <mat-option [value]="author">{{author.name}}</mat-option>
+                <mat-select disableRipple [(ngModel)]="authorId" name="author" required>
+                    @for (aut of authors(); track aut.id) {
+                        <mat-option [value]="aut.id">{{aut.name}}</mat-option>
                     }
                 </mat-select>
                 <mat-error>El autor no puede estar vacío</mat-error>
@@ -575,7 +575,7 @@ Ahora sí que tenemos todo listo para implementar el cuadro de diálogo para dar
     ```
 === "game-edit.component.ts"
     ``` TypeScript
-    import { Component, Inject, OnInit } from '@angular/core';
+    import { Component, inject, OnInit, signal } from '@angular/core';
     import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
     import { GameService } from '../game.service';
     import { Game } from '../model/Game';
@@ -597,51 +597,50 @@ Ahora sí que tenemos todo listo para implementar el cuadro de diálogo para dar
         styleUrl: './game-edit.component.scss',
     })
     export class GameEditComponent implements OnInit {
-        game: Game;
-        authors: Author[];
-        categories: Category[];
+        protected readonly id = signal<number | null>(null);
+        protected readonly title = signal<string | null>(null);
+        protected readonly age = signal<number | null>(null);
+        protected readonly categoryId = signal<number | null>(null);
+        protected readonly authorId = signal<number | null>(null);
+        protected readonly categories = signal<Category[]>([]);
+        protected readonly authors = signal<Author[]>([]);
 
-        constructor(
-            public dialogRef: MatDialogRef<GameEditComponent>,
-            @Inject(MAT_DIALOG_DATA) public data: any,
-            private gameService: GameService,
-            private categoryService: CategoryService,
-            private authorService: AuthorService
-        ) {}
+        protected readonly dialogRef = inject(MatDialogRef<GameEditComponent>);
+        protected readonly data = inject(MAT_DIALOG_DATA);
+        protected readonly gameService = inject(GameService);
+        protected readonly categoryService = inject(CategoryService);
+        protected readonly authorService = inject(AuthorService);
 
         ngOnInit(): void {
-            this.game = this.data.game ? Object.assign({}, this.data.game) : new Game();
+            this.loadFormData(this.data.game ?? null);
+        }
 
-            this.categoryService.getCategories().subscribe((categories) => {
-                this.categories = categories;
+        loadFormData(initialData: Game | null): void {
+            this.id.set(initialData?.id ?? null);
+            this.title.set(initialData?.title ?? null);
+            this.age.set(initialData?.age ?? null);
 
-                if (this.game.category != null) {
-                    const categoryFilter: Category[] = categories.filter(
-                        (category) => category.id == this.data.game.category.id
-                    );
-                    if (categoryFilter != null) {
-                        this.game.category = categoryFilter[0];
-                    }
-                }
+            this.categoryService.getCategories().subscribe((cats) => {
+                this.categories.set(cats);
+                this.categoryId.set(initialData?.category?.id ?? null);
             });
 
-            this.authorService.getAllAuthors().subscribe((authors) => {
-                this.authors = authors;
-
-                if (this.game.author != null) {
-                    const authorFilter: Author[] = authors.filter(
-                        (author) => author.id == this.data.game.author.id
-                    );
-                    if (authorFilter != null) {
-                        this.game.author = authorFilter[0];
-                    }
-                }
+            this.authorService.getAllAuthors().subscribe((auts) => {
+                this.authors.set(auts);
+                this.authorId.set(initialData?.author?.id ?? null);
             });
         }
 
         onSave() {
-            this.gameService.saveGame(this.game).subscribe((result) => {
-                this.dialogRef.close();
+            const game: Game = {
+                id: this.id(),
+                title: this.title(),
+                age: this.age(),
+                category: this.categories().find(c => c.id === this.categoryId()) ?? null,
+                author: this.authors().find(a => a.id === this.authorId()) ?? null,
+            };
+            this.gameService.saveGame(game).subscribe(() => {
+                this.dialogRef.close(true);
             });
         }
 
@@ -666,23 +665,23 @@ Una vez implementado front y back, lo que nos queda es modificar el servicio del
 
 === "author-service.ts"
     ``` Typescript hl_lines="30-32"
-    import { Injectable } from '@angular/core';
+    import { Injectable, inject } from '@angular/core';
     import { Observable, of } from 'rxjs';
     import { Pageable } from '../core/model/page/Pageable';
     import { Author } from './model/Author';
-    import { AuthorPage } from './model/AuthorPage';
+    import { PaginatedData } from 'src/app/core/model/page/PaginatedData';
     import { HttpClient } from '@angular/common/http';
 
     @Injectable({
         providedIn: 'root',
     })
     export class AuthorService {
-        constructor(private http: HttpClient) {}
+        protected readonly http = inject(HttpClient);
 
         private baseUrl = 'http://localhost:8080/author';
 
-        getAuthors(pageable: Pageable): Observable<AuthorPage> {
-            return this.http.post<AuthorPage>(this.baseUrl, { pageable: pageable });
+        getAuthors(pageable: Pageable): Observable<PaginatedData<Author>> {
+            return this.http.post<PaginatedData<Author>>(this.baseUrl, { pageable: pageable });
         }
 
         saveAuthor(author: Author): Observable<Author> {
@@ -702,7 +701,7 @@ Una vez implementado front y back, lo que nos queda es modificar el servicio del
     ```
 === "game-service.ts"
     ``` Typescript hl_lines="11 17 20-25 27-37"
-    import { Injectable } from '@angular/core';
+    import { Injectable, inject } from '@angular/core';
     import { Observable, of } from 'rxjs';
     import { Game } from './model/Game';
     import { HttpClient } from '@angular/common/http';
@@ -711,9 +710,7 @@ Una vez implementado front y back, lo que nos queda es modificar el servicio del
     providedIn: 'root',
     })
     export class GameService {
-        constructor(
-            private http: HttpClient
-        ) {}
+        protected readonly http = inject(HttpClient);
 
         private baseUrl = 'http://localhost:8080/game';
 
