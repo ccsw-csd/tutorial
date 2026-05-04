@@ -72,6 +72,17 @@ Por defecto, el esquema de datos de Spring para la paginación es como el siguie
 
 Así que necesitamos poder enviar y recuperar esa información desde Angular, nos hace falta crear esos objetos. Los objetos de paginación, al ser comunes a toda la aplicación, vamos a crearlos en `core/model/page`.
 
+!!! info "¿Por qué en `core/model/page` y no dentro del componente `author`?"
+    `SortPage`, `Pageable` y `PaginatedData` **no pertenecen al dominio de negocio de `Author`**; son contratos técnicos que describen cómo se comunica el frontend con el backend cuando los datos vienen paginados.
+
+    Cualquier otro listado de la aplicación —categorías, préstamos, juegos…— necesitará exactamente estos mismos objetos. Si los metiéramos dentro de `author/`, el día que quisiéramos paginar otro listado tendríamos dos opciones igual de malas: duplicar el código o importar clases de un módulo que no tiene nada que ver con tu entidad.
+
+    Colocarlos en `core/` sigue el principio de **reutilización y responsabilidad única**:
+
+    - Un único lugar donde mantener el contrato de paginación.
+    - Si el backend cambia el esquema (p. ej. renombra `pageNumber` a `page`), sólo hay que tocar un fichero.
+    - Cualquier desarrollador que llegue al proyecto sabrá dónde buscarlos sin tener que adivinar en qué módulo de negocio están escondidos.
+
 === "SortPage.ts"
     ``` TypeScript
     export class SortPage {
@@ -99,6 +110,19 @@ Así que necesitamos poder enviar y recuperar esa información desde Angular, no
         totalElements: number;
     }
     ```
+
+!!! info "¿Qué es `<TData>`?"
+    `<TData>` es un **genérico de TypeScript** (el equivalente a los *generics* de Java `<T>` o de C# `<T>`).
+
+    Permite que `PaginatedData` sea una clase **reutilizable con cualquier tipo de contenido**, sin necesidad de crear una clase distinta para cada entidad:
+
+    ```typescript
+    PaginatedData<Author>    // content será Author[]
+    PaginatedData<Category>  // content será Category[]
+    PaginatedData<Loan>      // content será Loan[]
+    ```
+
+    TypeScript verifica el tipo en tiempo de compilación, por lo que si intentas acceder a una propiedad que no existe en `Author` dentro de un `PaginatedData<Author>`, el compilador te avisará de inmediato. Obtienes reutilización **y** seguridad de tipos al mismo tiempo.
 
 Con estos objetos creados ya podemos implementar el servicio y sus datos mockeados.
 
