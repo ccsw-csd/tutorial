@@ -10,16 +10,16 @@ Ahora que ya tenemos listo el proyecto frontend de Angular (en el puerto 4200), 
 
 Si abrimos el proyecto con el IDE que tengamos (Visual Studio Code en el caso del tutorial) podemos ver que en la carpeta `src/app` existen unos ficheros ya creados por defecto. Estos ficheros son:
 
-* `app.component.ts` → contiene el código inicial del proyecto escrito en TypeScript.
-* `app.component.html` → contiene la plantilla inicial del proyecto escrita en HTML.
-* `app.component.scss` → contiene los estilos CSS privados de la plantilla inicial.
+* `app.ts` → contiene el código inicial del proyecto escrito en TypeScript.
+* `app.html` → contiene la plantilla inicial del proyecto escrita en HTML.
+* `app.scss` → contiene los estilos CSS privados de la plantilla inicial.
 
 Vamos a modificar este código inicial para ver como funciona. Abrimos el fichero `app.component.ts` y modificamos la línea donde se asigna un valor a la variable `title`.
 
 === "app.component.ts"
     ``` TypeScript
     ...
-    title = 'Tutorial de Angular';
+       protected readonly title = signal('Tutorial de Angular');
     ...
     ```
 
@@ -27,7 +27,7 @@ Ahora abrimos el fichero `app.component.html`, borramos todo el código de la pl
 
 === "app.component.html"
     ``` HTML
-    <h1>{{title}}</h1>
+    <h1>{{ title() }}</h1>
     ```
 
 Las llaves dobles permiten hacen un binding entre el código del componente y la plantilla. Es decir, en este caso irá al código TypeScript y buscará el valor de la variable `title`.
@@ -60,8 +60,10 @@ Para agrupar los componentes comunes de nuestra aplicación vamos a crear una ca
 ng generate component core/header
 ```
 
-!!! info "Angular 19+"
-    A partir de Angular 19, los elementos se generan sin topología, es decir `*.component.html` -> `*.html`, `*.service.ts` -> `*.ts`, etc.
+!!! info "Angular 17+"
+    A partir de Angular 17, el CLI apuesta por una arquitectura **standalone** y una estructura inicial más simple al crear un proyecto con `ng new`.
+
+    Sin embargo, Angular **no impone una topología concreta** para componentes o servicios. La generación de archivos como `*.component.ts`, `*.service.ts` y sus carpetas asociadas sigue siendo el comportamiento por defecto del CLI y solo cambia si se utilizan flags como `--flat`, opciones de inline o schematics personalizadas.
 
 ### Código de la pantalla
 
@@ -160,8 +162,8 @@ Esto nos creará una carpeta con los ficheros del componente, donde tendremos qu
 
 Al utilizar etiquetas de material como `mat-toolbar` o `mat-icon` y `routerLink` necesitaremos importar las dependencias. Al tratarse de un standalone component lo tendremos que hacer directamente en el atributo "imports" de nuestro component en el fichero `header.component.ts`.
 
-!!! info "Angular 19+"
-    A partir de Angular 19, los componentes se crean por defecto como `standalone`, para que este no sea el caso debemos indicárselo con `--standalone false`.
+!!! info "Angular 17+"
+    A partir de Angular 17, los componentes se crean por defecto como `standalone`, para que este no sea el caso debemos indicárselo con `--standalone false`.
 
 === "header.component.ts"
     ``` Typescript hl_lines="3 4 5 12 13 14"
@@ -192,7 +194,7 @@ Ahora, para poder usar nuestro componente en las páginas del componente `AppCom
 
 === "app.component.html"
     ``` Typescript hl_lines="3 6 8"
-        import { Component } from '@angular/core';
+        import { Component, signal } from '@angular/core';
         import { RouterOutlet } from '@angular/router';
         import { HeaderComponent } from '../core/header/header.component';
 
@@ -204,7 +206,7 @@ Ahora, para poder usar nuestro componente en las páginas del componente `AppCom
             styleUrl: './app.component.scss'
         })
         export class AppComponent {
-            title = 'Tutorial de Angular';
+            protected readonly title = signal('Tutorial de Angular');
         }
     ```
 
@@ -239,8 +241,10 @@ Como categorías es un dominio funcional de la aplicación, vamos a crear una ca
 Vamos a crear un primer componente que será un listado de categorías. Para ello vamos a ejecutar el siguiente comando desde src:
 
 ```
-ng generate component category/category-list
+ng generate component category/category-list --type=page
 ```
+
+Como en este caso crearemos una página, hemos añadido el parámetro `--type=page` al comando. Esto hace que los ficheros generados tengan la extensión `.page.ts` y `.page.html`.
 
 Para terminar de configurar la aplicación, vamos a añadir la ruta del componente dentro del componente routing de Angular, para poder acceder a él, para ello modificamos el fichero `app.routes.ts`
 
@@ -249,7 +253,7 @@ Para terminar de configurar la aplicación, vamos a añadir la ruta del componen
     import { Routes } from '@angular/router';
 
     export const routes: Routes = [
-        { path: 'categories', loadComponent: () => import('../category/category-list/category-list.component').then(m => m.CategoryListComponent)},
+        { path: 'categories', loadComponent: () => import('../category/category-list/category-list.page').then(m => m.CategoryListPage)},
     ];
     ```
 
@@ -560,10 +564,8 @@ Ahora vamos a hacer que se abra al pulsar el botón `Nueva categoría`. Para eso
         CommonModule,
     ],
     ...
-      constructor(
-        private categoryService: CategoryService,
-        public dialog: MatDialog,
-      ) { }
+      protected readonly categoryService = inject(CategoryService);
+      protected readonly dialog = inject(MatDialog);
     ...
       createCategory() {    
         const dialogRef = this.dialog.open(CategoryEditComponent, {
@@ -571,15 +573,16 @@ Ahora vamos a hacer que se abra al pulsar el botón `Nueva categoría`. Para eso
         });
 
         dialogRef.afterClosed().subscribe(result => {
-          this.ngOnInit();
+          if(!result) return;
+          this.loadData();
         });    
       }  
     ...
     ``` 
 
-Para poder abrir un componente dentro de un diálogo necesitamos obtener en el constructor un MatDialog. De ahí que hayamos tenido que añadirlo como import y en el constructor.
+Para poder abrir un componente dentro de un diálogo necesitamos inyectar un MatDialog. De ahí que hayamos tenido que añadirlo como import y usarlo con un `inject`.
 
-Dentro del método `createCategory` lo que hacemos es crear un diálogo con el componente `CategoryEditComponent` en su interior, pasarle unos datos de creación, donde podemos poner estilos del dialog y un objeto `data` donde pondremos los datos que queremos pasar entre los componentes. Por último, nos suscribimos al evento `afterClosed` para ejecutar las acciones que creamos oportunas, en nuestro caso volveremos a cargar el listado inicial.
+Dentro del método `createCategory` lo que hacemos es crear un diálogo con el componente `CategoryEditComponent` en su interior, pasarle unos datos de creación, donde podemos poner estilos del dialog y un objeto `data` donde pondremos los datos que queremos pasar entre los componentes. Por último, nos suscribimos al evento `afterClosed` para ejecutar las acciones que creamos oportunas, solo en el caso de que `result` sea true, en nuestro caso volveremos a cargar el listado inicial.
 
 Y ya por último enlazamos el click en el botón con el método que acabamos de crear para abrir el diálogo. Modificamos el fichero `category-list.component.html` y añadimos el evento click:
 
@@ -609,12 +612,12 @@ Ahora vamos a darle forma al formulario de editar y crear. Para ello vamos al ht
         <form>
             <mat-form-field>
                 <mat-label>Identificador</mat-label>
-                <input type="text" matInput placeholder="Identificador" [(ngModel)]="category.id" name="id" disabled>
+                <input type="text" matInput placeholder="Identificador" [(ngModel)]="id" name="id" disabled>
             </mat-form-field>
 
             <mat-form-field>
                 <mat-label>Nombre</mat-label>
-                <input type="text" matInput placeholder="Nombre de categoría" [(ngModel)]="category.name" name="name" required>
+                <input type="text" matInput placeholder="Nombre de categoría" [(ngModel)]="name" name="name" required>
                 <mat-error>El nombre no puede estar vacío</mat-error>
             </mat-form-field>
         </form>
@@ -649,7 +652,7 @@ Ahora vamos a darle forma al formulario de editar y crear. Para ello vamos al ht
     ```
 === "category-edit.component.ts"
     ``` TypeScript
-    import { Component, OnInit, Inject } from '@angular/core';
+    import { Component, OnInit, inject, signal } from '@angular/core';
     import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
     import { CategoryService } from '../category.service';
     import { Category } from '../model/category';
@@ -666,20 +669,25 @@ Ahora vamos a darle forma al formulario de editar y crear. Para ello vamos al ht
         styleUrl: './category-edit.component.scss'
     })
     export class CategoryEditComponent implements OnInit {
-        category: Category;
+        protected readonly dialogRef = inject(MatDialogRef<CategoryEditComponent>);
+        protected readonly categoryService = inject(CategoryService);
 
-        constructor(
-            public dialogRef: MatDialogRef<CategoryEditComponent>,
-            private categoryService: CategoryService
-        ) {}
+        protected readonly id = signal<number | null>(null);
+        protected readonly name = signal<string | null>(null);
 
         ngOnInit(): void {
-            this.category = new Category();
+            this.loadFormData();
+        }
+
+        loadFormData(): void {
+            this.id.set(null);
+            this.name.set(null);
         }
 
         onSave() {
-            this.categoryService.saveCategory(this.category).subscribe(() => {
-                this.dialogRef.close();
+            const category: Category = { id: this.id(), name: this.name() };
+            this.categoryService.saveCategory(category).subscribe(() => {
+                this.dialogRef.close(true);
             });
         }
 
@@ -743,24 +751,27 @@ Vamos a implementar funcionalidad sobre el icono `editar`, tendremos que modific
       dataSource = new MatTableDataSource<Category>();
       displayedColumns: string[] = ['id', 'name', 'action'];
 
-      constructor(
-        private categoryService: CategoryService,
-        public dialog: MatDialog,
-      ) { }
+      protected readonly categoryService = inject(CategoryService);
+      protected readonly dialog = inject(MatDialog);
 
-      ngOnInit(): void {
+      loadData(): void {
         this.categoryService.getCategories().subscribe(
           categories => this.dataSource.data = categories
         );
       }
     
+      ngOnInit(): void {
+        this.loadData();
+      }
+
       createCategory() {    
         const dialogRef = this.dialog.open(CategoryEditComponent, {
           data: {}
         });
 
         dialogRef.afterClosed().subscribe(result => {
-          this.ngOnInit();
+          if(!result) return;
+          this.loadData();
         });    
       }  
 
@@ -770,7 +781,8 @@ Vamos a implementar funcionalidad sobre el icono `editar`, tendremos que modific
         });
 
         dialogRef.afterClosed().subscribe(result => {
-          this.ngOnInit();
+          if(!result) return;
+          this.loadData();
         });
       }
     }
@@ -781,7 +793,7 @@ Y los Dialog:
 === "category-edit.component.html"
     ``` TypeScript hl_lines="2 3 4 5 6"
     <div class="container">
-        @if (category.id) {
+        @if (id()) {
             <h1>Modificar categoría</h1>
         } @else {
             <h1>Crear categoría</h1>
@@ -793,7 +805,7 @@ Y los Dialog:
     ```
 === "category-edit.component.ts"
     ``` TypeScript hl_lines="1 2 22 27"
-    import { Component, OnInit, Inject } from '@angular/core';
+    import { Component, OnInit, inject, signal } from '@angular/core';
     import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
     import { CategoryService } from '../category.service';
     import { Category } from '../model/category';
@@ -810,21 +822,26 @@ Y los Dialog:
         styleUrl: './category-edit.component.scss'
     })
     export class CategoryEditComponent implements OnInit {
-        category: Category;
+        protected readonly dialogRef = inject(MatDialogRef<CategoryEditComponent>);
+        protected readonly data = inject(MAT_DIALOG_DATA) as { category: Category };
+        protected readonly categoryService = inject(CategoryService);
 
-        constructor(
-            public dialogRef: MatDialogRef<CategoryEditComponent>,
-            @Inject(MAT_DIALOG_DATA) public data: {category : Category},
-            private categoryService: CategoryService
-        ) {}
+        protected readonly id = signal<number | null>(null);
+        protected readonly name = signal<string | null>(null);
 
         ngOnInit(): void {
-            this.category = this.data.category != null ? this.data.category : new Category();
+            this.loadFormData(this.data.category ?? null);
+        }
+
+        loadFormData(initialData: Category | null): void {
+            this.id.set(initialData?.id ?? null);
+            this.name.set(initialData?.name ?? null);
         }
 
         onSave() {
-            this.categoryService.saveCategory(this.category).subscribe(() => {
-                this.dialogRef.close();
+            const category: Category = { id: this.id(), name: this.name() };
+            this.categoryService.saveCategory(category).subscribe(() => {
+                this.dialogRef.close(true);
             });
         }
 
@@ -838,21 +855,18 @@ Navegando ahora por la página y pulsando en el icono de editar, se debería abr
 
 ![step1-angular3](../../assets/images/step1-angular3.png)
 
-Si te fijas, al modificar los datos dentro de la ventana de diálogo se modifica también en el listado. Esto es porque estamos pasando el mismo objeto desde el listado a la ventana diálogo y al ser el listado y el formulario reactivos los dos, cualquier cambio sobre los datos se refresca directamente en la pantalla. 
+En el tutorial de [Angular antiguo](/site/develop/basic/angular/#__tabbed_18_3) se aprovechaba que, al modificar los datos dentro de la ventana de diálogo, el listado se actualizaba automáticamente. Esto sucedía porque se pasaba la misma referencia del objeto desde el listado al formulario y, al trabajar con objetos mutables, cualquier cambio se reflejaba en ambos.
 
-Hay veces en la que este comportamiento nos interesa, pero en este caso no queremos que se modifique el listado. Para solucionarlo debemos hacer una copia del objeto, para que ambos modelos (formulario y listado) utilicen objetos diferentes. Es tan sencillo como modificar `category-edit.component.ts` y añadirle una copia del dato
+Con la llegada de **Signals**, este enfoque deja de ser recomendable. Los signals están diseñados para modelar el estado de forma explícita, predecible y controlada, evitando efectos colaterales derivados de compartir y mutar referencias entre distintas partes de la aplicación.
 
-=== "category-edit.component.ts"
-    ``` TypeScript hl_lines="3"
-        ...
-        ngOnInit(): void {
-            this.category = this.data.category ? Object.assign({}, this.data.category) : new Category();
-        }
-        ...
-    ```
+En lugar de modificar directamente un objeto que también utiliza el listado, trabajamos con estados independientes (por ejemplo, inicializando un signal con una copia del valor original) y aplicamos los cambios solo cuando el usuario los confirma. De esta forma, el listado no se ve afectado durante la edición.
 
-!!! tip "Cuidado"
-    Hay que tener mucho cuidado con el binding de los objetos. Hay veces que al modificar un objeto NO queremos que se modifique en todas sus instancias y tenemos que poner especial cuidado en esos aspectos.
+Esta filosofía —estado local, sin mutaciones implícitas y flujos de datos claros— hace que la interfaz sea más fácil de razonar, mantener y depurar, y encaja con el modelo reactivo que propone Angular moderno.
+
+!!! tip "Recomendación"
+    En Angular moderno se recomienda evitar el binding directo de objetos mutables. Compartir referencias puede provocar cambios no deseados en distintas partes de la aplicación.
+
+    Con el nuevo enfoque basado en **Signals**, es preferible modelar el estado de forma explícita, trabajando con copias o estados independientes y aplicando los cambios de manera controlada. Esto reduce efectos colaterales y hace el flujo de datos más claro y predecible.
 
 
 ### Acción de borrado
@@ -901,7 +915,7 @@ E implementamos el código que queremos que tenga el componente. Al ser un compo
     ```
 === "dialog-confirmation.component.ts"
     ``` Typescript
-    import { Component, Inject } from '@angular/core';
+    import { Component, inject, signal } from '@angular/core';
     import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
     import { MatButtonModule } from '@angular/material/button';
 
@@ -913,17 +927,15 @@ E implementamos el código que queremos que tenga el componente. Al ser un compo
         styleUrl: './dialog-confirmation.component.scss',
     })
     export class DialogConfirmationComponent {
-        title: string;
-        description: string;
+        protected readonly title = signal<string | null>(null);
+        protected readonly description = signal<string | null>(null);
 
-        constructor(
-            public dialogRef: MatDialogRef<DialogConfirmationComponent>,
-            @Inject(MAT_DIALOG_DATA) public data: any
-        ) {}
+        protected readonly dialogRef = inject(MatDialogRef<DialogConfirmationComponent>);
+        protected readonly data = inject(MAT_DIALOG_DATA);
 
         ngOnInit(): void {
-            this.title = this.data.title;
-            this.description = this.data.description;
+            this.title.set(this.data.title);
+            this.description.set(this.data.description);
         }
 
         onClose(value = false) {
@@ -963,7 +975,7 @@ Ya por último, una vez tenemos el componente genérico de diálogo, vamos a uti
         dialogRef.afterClosed().subscribe(result => {
           if (result) {
             this.categoryService.deleteCategory(category.id).subscribe(result => {
-              this.ngOnInit();
+              this.loadData();
             }); 
           }
         });
@@ -994,8 +1006,8 @@ Abrimos el fichero y sustituimos la línea que antes devolvía los datos estáti
 
 === "category.service.ts"
     ``` Typescript hl_lines="1 12 15 18"
+    import { Injectable, inject } from '@angular/core';
     import { HttpClient } from '@angular/common/http';
-    import { Injectable } from '@angular/core';
     import { Observable, of } from 'rxjs';
     import { Category } from './model/category';
 
@@ -1004,9 +1016,7 @@ Abrimos el fichero y sustituimos la línea que antes devolvía los datos estáti
     })
     export class CategoryService { 
 
-        constructor(
-            private http: HttpClient
-        ) { }
+        protected readonly http = inject(HttpClient);
 
         private baseUrl = 'http://localhost:8080/category';
 
@@ -1056,8 +1066,8 @@ Para la llamada de guardado haríamos lo mismo, pero invocando la operación de 
 
 === "category.service.ts"
     ``` Typescript hl_lines="20-22"
+    import { Injectable, inject } from '@angular/core';
     import { HttpClient } from '@angular/common/http';
-    import { Injectable } from '@angular/core';
     import { Observable, of } from 'rxjs';
     import { Category } from './model/category';
 
@@ -1066,7 +1076,7 @@ Para la llamada de guardado haríamos lo mismo, pero invocando la operación de 
     })
     export class CategoryService { 
 
-        constructor(private http: HttpClient) {}
+        protected readonly http = inject(HttpClient);
   
         private baseUrl = 'http://localhost:8080/category';
 
@@ -1096,8 +1106,8 @@ Y ya por último, la llamada de borrado, deberíamos cambiarla e invocar a la op
 
 === "category.service.ts"
     ``` Typescript hl_lines="25"
+    import { Injectable, inject } from '@angular/core';
     import { HttpClient } from '@angular/common/http';
-    import { Injectable } from '@angular/core';
     import { Observable, of } from 'rxjs';
     import { Category } from './model/category';
 
@@ -1105,7 +1115,7 @@ Y ya por último, la llamada de borrado, deberíamos cambiarla e invocar a la op
     providedIn: 'root'
     })
     export class CategoryService {
-        constructor(private http: HttpClient) {}
+        protected readonly http = inject(HttpClient);
 
         private baseUrl = 'http://localhost:8080/category';
 

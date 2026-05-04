@@ -2574,16 +2574,16 @@
 </div>
 <p>Si abrimos el proyecto con el IDE que tengamos (Visual Studio Code en el caso del tutorial) podemos ver que en la carpeta <code>src/app</code> existen unos ficheros ya creados por defecto. Estos ficheros son:</p>
 <ul>
-<li><code>app.component.ts</code> → contiene el código inicial del proyecto escrito en TypeScript.</li>
-<li><code>app.component.html</code> → contiene la plantilla inicial del proyecto escrita en HTML.</li>
-<li><code>app.component.scss</code> → contiene los estilos CSS privados de la plantilla inicial.</li>
+<li><code>app.ts</code> → contiene el código inicial del proyecto escrito en TypeScript.</li>
+<li><code>app.html</code> → contiene la plantilla inicial del proyecto escrita en HTML.</li>
+<li><code>app.scss</code> → contiene los estilos CSS privados de la plantilla inicial.</li>
 </ul>
 <p>Vamos a modificar este código inicial para ver como funciona. Abrimos el fichero <code>app.component.ts</code> y modificamos la línea donde se asigna un valor a la variable <code>title</code>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">app.component.ts</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="p">...</span>
-<span class="nx">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Tutorial de Angular&#39;</span><span class="p">;</span>
+<span class="w">   </span><span class="k">protected</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="nx">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">signal</span><span class="p">(</span><span class="s1">&#39;Tutorial de Angular&#39;</span><span class="p">);</span>
 <span class="p">...</span>
 </code></pre></div>
 </div>
@@ -2593,7 +2593,7 @@
 <div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">app.component.html</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>{{title}}<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>{{ title() }}<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
 </code></pre></div>
 </div>
 </div>
@@ -2618,8 +2618,9 @@
 <div class="highlight"><pre><span></span><code>ng generate component core/header
 </code></pre></div>
 <div class="admonition info">
-<p class="admonition-title">Angular 19+</p>
-<p>A partir de Angular 19, los elementos se generan sin topología, es decir <code>*.component.html</code> -&gt; <code>*.html</code>, <code>*.service.ts</code> -&gt; <code>*.ts</code>, etc.</p>
+<p class="admonition-title">Angular 17+</p>
+<p>A partir de Angular 17, el CLI apuesta por una arquitectura <strong>standalone</strong> y una estructura inicial más simple al crear un proyecto con <code>ng new</code>.</p>
+<p>Sin embargo, Angular <strong>no impone una topología concreta</strong> para componentes o servicios. La generación de archivos como <code>*.component.ts</code>, <code>*.service.ts</code> y sus carpetas asociadas sigue siendo el comportamiento por defecto del CLI y solo cambia si se utilizan flags como <code>--flat</code>, opciones de inline o schematics personalizadas.</p>
 </div>
 <h3 id="codigo-de-la-pantalla">Código de la pantalla</h3>
 <p>Esto nos creará una carpeta con los ficheros del componente, donde tendremos que copiar el siguiente contenido:</p>
@@ -2719,8 +2720,8 @@
 </div>
 <p>Al utilizar etiquetas de material como <code>mat-toolbar</code> o <code>mat-icon</code> y <code>routerLink</code> necesitaremos importar las dependencias. Al tratarse de un standalone component lo tendremos que hacer directamente en el atributo "imports" de nuestro component en el fichero <code>header.component.ts</code>.</p>
 <div class="admonition info">
-<p class="admonition-title">Angular 19+</p>
-<p>A partir de Angular 19, los componentes se crean por defecto como <code>standalone</code>, para que este no sea el caso debemos indicárselo con <code>--standalone false</code>.</p>
+<p class="admonition-title">Angular 17+</p>
+<p>A partir de Angular 17, los componentes se crean por defecto como <code>standalone</code>, para que este no sea el caso debemos indicárselo con <code>--standalone false</code>.</p>
 </div>
 <div class="tabbed-set tabbed-alternate" data-tabs="4:1"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">header.component.ts</label></div>
 <div class="tabbed-content">
@@ -2754,7 +2755,7 @@
 <div class="tabbed-set tabbed-alternate" data-tabs="5:1"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">app.component.html</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Component</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Component</span><span class="p">,</span><span class="w"> </span><span class="nx">signal</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
 <span class="w">    </span><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">RouterOutlet</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@angular/router&#39;</span><span class="p">;</span>
 <span class="hll"><span class="w">    </span><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">HeaderComponent</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;../core/header/header.component&#39;</span><span class="p">;</span>
 </span>
@@ -2766,7 +2767,7 @@
 <span class="w">        </span><span class="nx">styleUrl</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;./app.component.scss&#39;</span>
 <span class="w">    </span><span class="p">})</span>
 <span class="w">    </span><span class="k">export</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">AppComponent</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Tutorial de Angular&#39;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">protected</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="nx">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">signal</span><span class="p">(</span><span class="s1">&#39;Tutorial de Angular&#39;</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
 </code></pre></div>
 </div>
@@ -2798,8 +2799,9 @@ Además, recuerda que para poder utilizar componentes, los debes importar en el 
 <p>Ya tenemos la estructura principal, ahora vamos a crear nuestra primera pantalla. Vamos a empezar por la de <code>Categorías</code> que es la más sencilla, ya que se trata de un listado, que muestra datos sin filtrar ni paginar.</p>
 <p>Como categorías es un dominio funcional de la aplicación, vamos a crear una carpeta que contenga toda la funcionalidad de ese dominio y todas las pantallas, componentes y servicios que creemos referidos a este dominio funcional, deberán ir dentro de esta nueva carpeta.</p>
 <p>Vamos a crear un primer componente que será un listado de categorías. Para ello vamos a ejecutar el siguiente comando desde src:</p>
-<div class="highlight"><pre><span></span><code>ng generate component category/category-list
+<div class="highlight"><pre><span></span><code>ng generate component category/category-list --type=page
 </code></pre></div>
+<p>Como en este caso crearemos una página, hemos añadido el parámetro <code>--type=page</code> al comando. Esto hace que los ficheros generados tengan la extensión <code>.page.ts</code> y <code>.page.html</code>.</p>
 <p>Para terminar de configurar la aplicación, vamos a añadir la ruta del componente dentro del componente routing de Angular, para poder acceder a él, para ello modificamos el fichero <code>app.routes.ts</code></p>
 <div class="tabbed-set tabbed-alternate" data-tabs="7:1"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">app.routes.ts</label></div>
 <div class="tabbed-content">
@@ -2807,7 +2809,7 @@ Además, recuerda que para poder utilizar componentes, los debes importar en el 
 <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Routes</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@angular/router&#39;</span><span class="p">;</span>
 
 <span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">routes</span><span class="o">:</span><span class="w"> </span><span class="kt">Routes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
-<span class="hll"><span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;categories&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">loadComponent</span><span class="o">:</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">import</span><span class="p">(</span><span class="s1">&#39;../category/category-list/category-list.component&#39;</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">m</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">m</span><span class="p">.</span><span class="nx">CategoryListComponent</span><span class="p">)},</span>
+<span class="hll"><span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;categories&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">loadComponent</span><span class="o">:</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">import</span><span class="p">(</span><span class="s1">&#39;../category/category-list/category-list.page&#39;</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">m</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">m</span><span class="p">.</span><span class="nx">CategoryListPage</span><span class="p">)},</span>
 </span><span class="p">];</span>
 </code></pre></div>
 </div>
@@ -3108,27 +3110,26 @@ Como siempre, para crear un componente usamos el asistente de Angular, esta vez 
 <span class="w">    </span><span class="nx">CommonModule</span><span class="p">,</span>
 <span class="p">],</span>
 <span class="p">...</span>
-<span class="w">  </span><span class="kr">constructor</span><span class="p">(</span>
-<span class="hll"><span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="nx">categoryService</span><span class="o">:</span><span class="w"> </span><span class="kt">CategoryService</span><span class="p">,</span>
-</span><span class="hll"><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nx">dialog</span><span class="o">:</span><span class="w"> </span><span class="kt">MatDialog</span><span class="p">,</span>
-</span><span class="w">  </span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
-<span class="p">...</span>
-<span class="hll"><span class="w">  </span><span class="nx">createCategory</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">    </span>
-</span><span class="hll"><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">dialogRef</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">dialog</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="nx">CategoryEditComponent</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
-</span><span class="hll"><span class="w">      </span><span class="nx">data</span><span class="o">:</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">  </span><span class="k">protected</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="nx">categoryService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">inject</span><span class="p">(</span><span class="nx">CategoryService</span><span class="p">);</span>
+<span class="hll"><span class="w">  </span><span class="k">protected</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="nx">dialog</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">inject</span><span class="p">(</span><span class="nx">MatDialog</span><span class="p">);</span>
+</span><span class="hll"><span class="p">...</span>
+</span><span class="w">  </span><span class="nx">createCategory</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">    </span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">dialogRef</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">dialog</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="nx">CategoryEditComponent</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="hll"><span class="w">      </span><span class="nx">data</span><span class="o">:</span><span class="w"> </span><span class="p">{}</span>
 </span><span class="hll"><span class="w">    </span><span class="p">});</span>
 </span><span class="hll">
 </span><span class="hll"><span class="w">    </span><span class="nx">dialogRef</span><span class="p">.</span><span class="nx">afterClosed</span><span class="p">().</span><span class="nx">subscribe</span><span class="p">(</span><span class="nx">result</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
-</span><span class="hll"><span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="nx">ngOnInit</span><span class="p">();</span>
+</span><span class="hll"><span class="w">      </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">result</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+</span><span class="hll"><span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="nx">loadData</span><span class="p">();</span>
 </span><span class="hll"><span class="w">    </span><span class="p">});</span><span class="w">    </span>
 </span><span class="hll"><span class="w">  </span><span class="p">}</span><span class="w">  </span>
-</span><span class="p">...</span>
-</code></pre></div>
+</span><span class="hll"><span class="p">...</span>
+</span></code></pre></div>
 </div>
 </div>
 </div>
-<p>Para poder abrir un componente dentro de un diálogo necesitamos obtener en el constructor un MatDialog. De ahí que hayamos tenido que añadirlo como import y en el constructor.</p>
-<p>Dentro del método <code>createCategory</code> lo que hacemos es crear un diálogo con el componente <code>CategoryEditComponent</code> en su interior, pasarle unos datos de creación, donde podemos poner estilos del dialog y un objeto <code>data</code> donde pondremos los datos que queremos pasar entre los componentes. Por último, nos suscribimos al evento <code>afterClosed</code> para ejecutar las acciones que creamos oportunas, en nuestro caso volveremos a cargar el listado inicial.</p>
+<p>Para poder abrir un componente dentro de un diálogo necesitamos inyectar un MatDialog. De ahí que hayamos tenido que añadirlo como import y usarlo con un <code>inject</code>.</p>
+<p>Dentro del método <code>createCategory</code> lo que hacemos es crear un diálogo con el componente <code>CategoryEditComponent</code> en su interior, pasarle unos datos de creación, donde podemos poner estilos del dialog y un objeto <code>data</code> donde pondremos los datos que queremos pasar entre los componentes. Por último, nos suscribimos al evento <code>afterClosed</code> para ejecutar las acciones que creamos oportunas, solo en el caso de que <code>result</code> sea true, en nuestro caso volveremos a cargar el listado inicial.</p>
 <p>Y ya por último enlazamos el click en el botón con el método que acabamos de crear para abrir el diálogo. Modificamos el fichero <code>category-list.component.html</code> y añadimos el evento click:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="14:1"><input checked="checked" id="__tabbed_14_1" name="__tabbed_14" type="radio" /><div class="tabbed-labels"><label for="__tabbed_14_1">category-list.component.html</label></div>
 <div class="tabbed-content">
@@ -3158,12 +3159,12 @@ Como siempre, para crear un componente usamos el asistente de Angular, esta vez 
     <span class="p">&lt;</span><span class="nt">form</span><span class="p">&gt;</span>
         <span class="p">&lt;</span><span class="nt">mat-form-field</span><span class="p">&gt;</span>
             <span class="p">&lt;</span><span class="nt">mat-label</span><span class="p">&gt;</span>Identificador<span class="p">&lt;/</span><span class="nt">mat-label</span><span class="p">&gt;</span>
-            <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">matInput</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&quot;Identificador&quot;</span> <span class="err">[(</span><span class="na">ngModel</span><span class="err">)]=&quot;</span><span class="na">category</span><span class="err">.</span><span class="na">id</span><span class="err">&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;id&quot;</span> <span class="na">disabled</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">matInput</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&quot;Identificador&quot;</span> <span class="err">[(</span><span class="na">ngModel</span><span class="err">)]=&quot;</span><span class="na">id</span><span class="err">&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;id&quot;</span> <span class="na">disabled</span><span class="p">&gt;</span>
         <span class="p">&lt;/</span><span class="nt">mat-form-field</span><span class="p">&gt;</span>
 
         <span class="p">&lt;</span><span class="nt">mat-form-field</span><span class="p">&gt;</span>
             <span class="p">&lt;</span><span class="nt">mat-label</span><span class="p">&gt;</span>Nombre<span class="p">&lt;/</span><span class="nt">mat-label</span><span class="p">&gt;</span>
-            <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">matInput</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&quot;Nombre de categoría&quot;</span> <span class="err">[(</span><span class="na">ngModel</span><span class="err">)]=&quot;</span><span class="na">category</span><span class="err">.</span><span class="na">name</span><span class="err">&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;name&quot;</span> <span class="na">required</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">matInput</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&quot;Nombre de categoría&quot;</span> <span class="err">[(</span><span class="na">ngModel</span><span class="err">)]=&quot;</span><span class="na">name</span><span class="err">&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;name&quot;</span> <span class="na">required</span><span class="p">&gt;</span>
             <span class="p">&lt;</span><span class="nt">mat-error</span><span class="p">&gt;</span>El nombre no puede estar vacío<span class="p">&lt;/</span><span class="nt">mat-error</span><span class="p">&gt;</span>
         <span class="p">&lt;/</span><span class="nt">mat-form-field</span><span class="p">&gt;</span>
     <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
@@ -3198,7 +3199,7 @@ Como siempre, para crear un componente usamos el asistente de Angular, esta vez 
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Component</span><span class="p">,</span><span class="w"> </span><span class="nx">OnInit</span><span class="p">,</span><span class="w"> </span><span class="nx">Inject</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Component</span><span class="p">,</span><span class="w"> </span><span class="nx">OnInit</span><span class="p">,</span><span class="w"> </span><span class="nx">inject</span><span class="p">,</span><span class="w"> </span><span class="nx">signal</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
 <span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">MAT_DIALOG_DATA</span><span class="p">,</span><span class="w"> </span><span class="nx">MatDialogRef</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@angular/material/dialog&#39;</span><span class="p">;</span>
 <span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">CategoryService</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;../category.service&#39;</span><span class="p">;</span>
 <span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Category</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;../model/category&#39;</span><span class="p">;</span>
@@ -3215,20 +3216,25 @@ Como siempre, para crear un componente usamos el asistente de Angular, esta vez 
 <span class="w">    </span><span class="nx">styleUrl</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;./category-edit.component.scss&#39;</span>
 <span class="p">})</span>
 <span class="k">export</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">CategoryEditComponent</span><span class="w"> </span><span class="k">implements</span><span class="w"> </span><span class="nx">OnInit</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">category</span><span class="o">:</span><span class="w"> </span><span class="kt">Category</span><span class="p">;</span>
+<span class="w">    </span><span class="k">protected</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="nx">dialogRef</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">inject</span><span class="p">(</span><span class="nx">MatDialogRef</span><span class="o">&lt;</span><span class="nx">CategoryEditComponent</span><span class="o">&gt;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">protected</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="nx">categoryService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">inject</span><span class="p">(</span><span class="nx">CategoryService</span><span class="p">);</span>
 
-<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span>
-<span class="w">        </span><span class="k">public</span><span class="w"> </span><span class="nx">dialogRef</span><span class="o">:</span><span class="w"> </span><span class="kt">MatDialogRef</span><span class="o">&lt;</span><span class="nx">CategoryEditComponent</span><span class="o">&gt;</span><span class="p">,</span>
-<span class="w">        </span><span class="k">private</span><span class="w"> </span><span class="nx">categoryService</span><span class="o">:</span><span class="w"> </span><span class="kt">CategoryService</span>
-<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">    </span><span class="k">protected</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="nx">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">signal</span><span class="o">&lt;</span><span class="kt">number</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kc">null</span><span class="o">&gt;</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+<span class="w">    </span><span class="k">protected</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="nx">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">signal</span><span class="o">&lt;</span><span class="kt">string</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kc">null</span><span class="o">&gt;</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
 
 <span class="w">    </span><span class="nx">ngOnInit</span><span class="p">()</span><span class="o">:</span><span class="w"> </span><span class="ow">void</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">category</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Category</span><span class="p">();</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">loadFormData</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">loadFormData</span><span class="p">()</span><span class="o">:</span><span class="w"> </span><span class="ow">void</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">id</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="nx">onSave</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">categoryService</span><span class="p">.</span><span class="nx">saveCategory</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">category</span><span class="p">).</span><span class="nx">subscribe</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="nx">dialogRef</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">category</span><span class="o">:</span><span class="w"> </span><span class="kt">Category</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">this.id</span><span class="p">(),</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">this.name</span><span class="p">()</span><span class="w"> </span><span class="p">};</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">categoryService</span><span class="p">.</span><span class="nx">saveCategory</span><span class="p">(</span><span class="nx">category</span><span class="p">).</span><span class="nx">subscribe</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="nx">dialogRef</span><span class="p">.</span><span class="nx">close</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
 <span class="w">        </span><span class="p">});</span>
 <span class="w">    </span><span class="p">}</span>
 
@@ -3289,15 +3295,17 @@ Vamos a implementar funcionalidad sobre el icono <code>editar</code>, tendremos 
 <span class="w">  </span><span class="nx">dataSource</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">MatTableDataSource</span><span class="o">&lt;</span><span class="nx">Category</span><span class="o">&gt;</span><span class="p">();</span>
 <span class="w">  </span><span class="nx">displayedColumns</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;name&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;action&#39;</span><span class="p">];</span>
 
-<span class="w">  </span><span class="kr">constructor</span><span class="p">(</span>
-<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="nx">categoryService</span><span class="o">:</span><span class="w"> </span><span class="kt">CategoryService</span><span class="p">,</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nx">dialog</span><span class="o">:</span><span class="w"> </span><span class="kt">MatDialog</span><span class="p">,</span>
-<span class="w">  </span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<span class="w">  </span><span class="k">protected</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="nx">categoryService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">inject</span><span class="p">(</span><span class="nx">CategoryService</span><span class="p">);</span>
+<span class="w">  </span><span class="k">protected</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="nx">dialog</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">inject</span><span class="p">(</span><span class="nx">MatDialog</span><span class="p">);</span>
 
-<span class="w">  </span><span class="nx">ngOnInit</span><span class="p">()</span><span class="o">:</span><span class="w"> </span><span class="ow">void</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">loadData</span><span class="p">()</span><span class="o">:</span><span class="w"> </span><span class="ow">void</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">categoryService</span><span class="p">.</span><span class="nx">getCategories</span><span class="p">().</span><span class="nx">subscribe</span><span class="p">(</span>
 <span class="w">      </span><span class="nx">categories</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">dataSource</span><span class="p">.</span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">categories</span>
 <span class="w">    </span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="nx">ngOnInit</span><span class="p">()</span><span class="o">:</span><span class="w"> </span><span class="ow">void</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">loadData</span><span class="p">();</span>
 <span class="w">  </span><span class="p">}</span>
 
 <span class="w">  </span><span class="nx">createCategory</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">    </span>
@@ -3306,20 +3314,22 @@ Vamos a implementar funcionalidad sobre el icono <code>editar</code>, tendremos 
 <span class="w">    </span><span class="p">});</span>
 
 <span class="w">    </span><span class="nx">dialogRef</span><span class="p">.</span><span class="nx">afterClosed</span><span class="p">().</span><span class="nx">subscribe</span><span class="p">(</span><span class="nx">result</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="nx">ngOnInit</span><span class="p">();</span>
-<span class="w">    </span><span class="p">});</span><span class="w">    </span>
-<span class="w">  </span><span class="p">}</span><span class="w">  </span>
-
-<span class="hll"><span class="w">  </span><span class="nx">editCategory</span><span class="p">(</span><span class="nx">category</span><span class="o">:</span><span class="w"> </span><span class="kt">Category</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">result</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="nx">loadData</span><span class="p">();</span>
+<span class="hll"><span class="w">    </span><span class="p">});</span><span class="w">    </span>
+</span><span class="hll"><span class="w">  </span><span class="p">}</span><span class="w">  </span>
+</span><span class="hll">
+</span><span class="hll"><span class="w">  </span><span class="nx">editCategory</span><span class="p">(</span><span class="nx">category</span><span class="o">:</span><span class="w"> </span><span class="kt">Category</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 </span><span class="hll"><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">dialogRef</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">dialog</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="nx">CategoryEditComponent</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
 </span><span class="hll"><span class="w">      </span><span class="nx">data</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">category</span><span class="w"> </span><span class="p">}</span>
 </span><span class="hll"><span class="w">    </span><span class="p">});</span>
 </span><span class="hll">
 </span><span class="hll"><span class="w">    </span><span class="nx">dialogRef</span><span class="p">.</span><span class="nx">afterClosed</span><span class="p">().</span><span class="nx">subscribe</span><span class="p">(</span><span class="nx">result</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
-</span><span class="hll"><span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="nx">ngOnInit</span><span class="p">();</span>
-</span><span class="hll"><span class="w">    </span><span class="p">});</span>
-</span><span class="hll"><span class="w">  </span><span class="p">}</span>
-</span><span class="p">}</span>
+</span><span class="w">      </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">result</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="nx">loadData</span><span class="p">();</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
 </div>
 </div>
@@ -3329,7 +3339,7 @@ Vamos a implementar funcionalidad sobre el icono <code>editar</code>, tendremos 
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="kd">class</span><span class="o">=</span><span class="s2">&quot;container&quot;</span><span class="o">&gt;</span>
-<span class="hll"><span class="w">    </span><span class="kd">@if</span><span class="w"> </span><span class="p">(</span><span class="nx">category</span><span class="p">.</span><span class="nx">id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="hll"><span class="w">    </span><span class="kd">@if</span><span class="w"> </span><span class="p">(</span><span class="nx">id</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
 </span><span class="hll"><span class="w">        </span><span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="nx">Modificar</span><span class="w"> </span><span class="nx">categoría</span><span class="o">&lt;</span><span class="err">/h1&gt;</span>
 </span><span class="hll"><span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="kd">@else</span><span class="w"> </span><span class="p">{</span>
 </span><span class="hll"><span class="w">        </span><span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="nx">Crear</span><span class="w"> </span><span class="nx">categoría</span><span class="o">&lt;</span><span class="err">/h1&gt;</span>
@@ -3341,7 +3351,7 @@ Vamos a implementar funcionalidad sobre el icono <code>editar</code>, tendremos 
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><span class="hll"><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Component</span><span class="p">,</span><span class="w"> </span><span class="nx">OnInit</span><span class="p">,</span><span class="w"> </span><span class="nx">Inject</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="hll"><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Component</span><span class="p">,</span><span class="w"> </span><span class="nx">OnInit</span><span class="p">,</span><span class="w"> </span><span class="nx">inject</span><span class="p">,</span><span class="w"> </span><span class="nx">signal</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
 </span><span class="hll"><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">MAT_DIALOG_DATA</span><span class="p">,</span><span class="w"> </span><span class="nx">MatDialogRef</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@angular/material/dialog&#39;</span><span class="p">;</span>
 </span><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">CategoryService</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;../category.service&#39;</span><span class="p">;</span>
 <span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Category</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;../model/category&#39;</span><span class="p">;</span>
@@ -3358,21 +3368,26 @@ Vamos a implementar funcionalidad sobre el icono <code>editar</code>, tendremos 
 <span class="w">    </span><span class="nx">styleUrl</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;./category-edit.component.scss&#39;</span>
 <span class="p">})</span>
 <span class="k">export</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">CategoryEditComponent</span><span class="w"> </span><span class="k">implements</span><span class="w"> </span><span class="nx">OnInit</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">category</span><span class="o">:</span><span class="w"> </span><span class="kt">Category</span><span class="p">;</span>
+<span class="w">    </span><span class="k">protected</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="nx">dialogRef</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">inject</span><span class="p">(</span><span class="nx">MatDialogRef</span><span class="o">&lt;</span><span class="nx">CategoryEditComponent</span><span class="o">&gt;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">protected</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">inject</span><span class="p">(</span><span class="nx">MAT_DIALOG_DATA</span><span class="p">)</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">category</span><span class="o">:</span><span class="w"> </span><span class="kt">Category</span><span class="w"> </span><span class="p">};</span>
+<span class="w">    </span><span class="k">protected</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="nx">categoryService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">inject</span><span class="p">(</span><span class="nx">CategoryService</span><span class="p">);</span>
 
-<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span>
-<span class="w">        </span><span class="k">public</span><span class="w"> </span><span class="nx">dialogRef</span><span class="o">:</span><span class="w"> </span><span class="kt">MatDialogRef</span><span class="o">&lt;</span><span class="nx">CategoryEditComponent</span><span class="o">&gt;</span><span class="p">,</span>
-<span class="hll"><span class="w">        </span><span class="kd">@Inject</span><span class="p">(</span><span class="nx">MAT_DIALOG_DATA</span><span class="p">)</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="nx">data</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">category</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Category</span><span class="p">},</span>
-</span><span class="w">        </span><span class="k">private</span><span class="w"> </span><span class="nx">categoryService</span><span class="o">:</span><span class="w"> </span><span class="kt">CategoryService</span>
-<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+<span class="hll"><span class="w">    </span><span class="k">protected</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="nx">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">signal</span><span class="o">&lt;</span><span class="kt">number</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kc">null</span><span class="o">&gt;</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+</span><span class="w">    </span><span class="k">protected</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="nx">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">signal</span><span class="o">&lt;</span><span class="kt">string</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kc">null</span><span class="o">&gt;</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
 
 <span class="w">    </span><span class="nx">ngOnInit</span><span class="p">()</span><span class="o">:</span><span class="w"> </span><span class="ow">void</span><span class="w"> </span><span class="p">{</span>
-<span class="hll"><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">category</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">category</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">this.data.category</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">new</span><span class="w"> </span><span class="nx">Category</span><span class="p">();</span>
-</span><span class="w">    </span><span class="p">}</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">loadFormData</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">category</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="kc">null</span><span class="p">);</span>
+<span class="hll"><span class="w">    </span><span class="p">}</span>
+</span>
+<span class="w">    </span><span class="nx">loadFormData</span><span class="p">(</span><span class="nx">initialData</span><span class="o">:</span><span class="w"> </span><span class="kt">Category</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="ow">void</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">id</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">initialData</span><span class="o">?</span><span class="p">.</span><span class="nx">id</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="kc">null</span><span class="p">);</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">initialData</span><span class="o">?</span><span class="p">.</span><span class="nx">name</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="kc">null</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="nx">onSave</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">categoryService</span><span class="p">.</span><span class="nx">saveCategory</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">category</span><span class="p">).</span><span class="nx">subscribe</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="nx">dialogRef</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">category</span><span class="o">:</span><span class="w"> </span><span class="kt">Category</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">this.id</span><span class="p">(),</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">this.name</span><span class="p">()</span><span class="w"> </span><span class="p">};</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">categoryService</span><span class="p">.</span><span class="nx">saveCategory</span><span class="p">(</span><span class="nx">category</span><span class="p">).</span><span class="nx">subscribe</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="nx">dialogRef</span><span class="p">.</span><span class="nx">close</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
 <span class="w">        </span><span class="p">});</span>
 <span class="w">    </span><span class="p">}</span>
 
@@ -3386,23 +3401,14 @@ Vamos a implementar funcionalidad sobre el icono <code>editar</code>, tendremos 
 </div>
 <p>Navegando ahora por la página y pulsando en el icono de editar, se debería abrir una ventana con los datos que hemos seleccionado, similar a esta imagen:</p>
 <p><img alt="step1-angular3" src="../../../assets/images/step1-angular3.png" /></p>
-<p>Si te fijas, al modificar los datos dentro de la ventana de diálogo se modifica también en el listado. Esto es porque estamos pasando el mismo objeto desde el listado a la ventana diálogo y al ser el listado y el formulario reactivos los dos, cualquier cambio sobre los datos se refresca directamente en la pantalla. </p>
-<p>Hay veces en la que este comportamiento nos interesa, pero en este caso no queremos que se modifique el listado. Para solucionarlo debemos hacer una copia del objeto, para que ambos modelos (formulario y listado) utilicen objetos diferentes. Es tan sencillo como modificar <code>category-edit.component.ts</code> y añadirle una copia del dato</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="18:1"><input checked="checked" id="__tabbed_18_1" name="__tabbed_18" type="radio" /><div class="tabbed-labels"><label for="__tabbed_18_1">category-edit.component.ts</label></div>
-<div class="tabbed-content">
-<div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="p">...</span>
-<span class="w">    </span><span class="nx">ngOnInit</span><span class="p">()</span><span class="o">:</span><span class="w"> </span><span class="ow">void</span><span class="w"> </span><span class="p">{</span>
-<span class="hll"><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">category</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">category</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nb">Object</span><span class="p">.</span><span class="nx">assign</span><span class="p">({},</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">category</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Category</span><span class="p">();</span>
-</span><span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="p">...</span>
-</code></pre></div>
-</div>
-</div>
-</div>
+<p>En el tutorial de <a href="/site/develop/basic/angular/#__tabbed_18_3">Angular antiguo</a> se aprovechaba que, al modificar los datos dentro de la ventana de diálogo, el listado se actualizaba automáticamente. Esto sucedía porque se pasaba la misma referencia del objeto desde el listado al formulario y, al trabajar con objetos mutables, cualquier cambio se reflejaba en ambos.</p>
+<p>Con la llegada de <strong>Signals</strong>, este enfoque deja de ser recomendable. Los signals están diseñados para modelar el estado de forma explícita, predecible y controlada, evitando efectos colaterales derivados de compartir y mutar referencias entre distintas partes de la aplicación.</p>
+<p>En lugar de modificar directamente un objeto que también utiliza el listado, trabajamos con estados independientes (por ejemplo, inicializando un signal con una copia del valor original) y aplicamos los cambios solo cuando el usuario los confirma. De esta forma, el listado no se ve afectado durante la edición.</p>
+<p>Esta filosofía —estado local, sin mutaciones implícitas y flujos de datos claros— hace que la interfaz sea más fácil de razonar, mantener y depurar, y encaja con el modelo reactivo que propone Angular moderno.</p>
 <div class="admonition tip">
-<p class="admonition-title">Cuidado</p>
-<p>Hay que tener mucho cuidado con el binding de los objetos. Hay veces que al modificar un objeto NO queremos que se modifique en todas sus instancias y tenemos que poner especial cuidado en esos aspectos.</p>
+<p class="admonition-title">Recomendación</p>
+<p>En Angular moderno se recomienda evitar el binding directo de objetos mutables. Compartir referencias puede provocar cambios no deseados en distintas partes de la aplicación.</p>
+<p>Con el nuevo enfoque basado en <strong>Signals</strong>, es preferible modelar el estado de forma explícita, trabajando con copias o estados independientes y aplicando los cambios de manera controlada. Esto reduce efectos colaterales y hace el flujo de datos más claro y predecible.</p>
 </div>
 <h3 id="accion-de-borrado">Acción de borrado</h3>
 <p>Por norma general, toda acción de borrado de un dato de pantalla requiere una confirmación previa por parte del usuario. Es decir, para evitar que el dato se borre accidentalmente, el usuario tendrá que confirmar su acción. Por tanto, vamos a crear un componente que nos permita pedir una confirmación al usuario.</p>
@@ -3410,7 +3416,7 @@ Vamos a implementar funcionalidad sobre el icono <code>editar</code>, tendremos 
 <div class="highlight"><pre><span></span><code>ng generate component core/dialog-confirmation
 </code></pre></div>
 <p>E implementamos el código que queremos que tenga el componente. Al ser un componente genérico vamos a aprovechar y leeremos las variables que le pasemos en <code>data</code>.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="19:3"><input checked="checked" id="__tabbed_19_1" name="__tabbed_19" type="radio" /><input id="__tabbed_19_2" name="__tabbed_19" type="radio" /><input id="__tabbed_19_3" name="__tabbed_19" type="radio" /><div class="tabbed-labels"><label for="__tabbed_19_1">dialog-confirmation.component.html</label><label for="__tabbed_19_2">dialog-confirmation.component.scss</label><label for="__tabbed_19_3">dialog-confirmation.component.ts</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="18:3"><input checked="checked" id="__tabbed_18_1" name="__tabbed_18" type="radio" /><input id="__tabbed_18_2" name="__tabbed_18" type="radio" /><input id="__tabbed_18_3" name="__tabbed_18" type="radio" /><div class="tabbed-labels"><label for="__tabbed_18_1">dialog-confirmation.component.html</label><label for="__tabbed_18_2">dialog-confirmation.component.scss</label><label for="__tabbed_18_3">dialog-confirmation.component.ts</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;container&quot;</span><span class="p">&gt;</span>
@@ -3445,7 +3451,7 @@ Vamos a implementar funcionalidad sobre el icono <code>editar</code>, tendremos 
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Component</span><span class="p">,</span><span class="w"> </span><span class="nx">Inject</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Component</span><span class="p">,</span><span class="w"> </span><span class="nx">inject</span><span class="p">,</span><span class="w"> </span><span class="nx">signal</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
 <span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">MAT_DIALOG_DATA</span><span class="p">,</span><span class="w"> </span><span class="nx">MatDialogRef</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@angular/material/dialog&#39;</span><span class="p">;</span>
 <span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">MatButtonModule</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@angular/material/button&#39;</span><span class="p">;</span>
 
@@ -3457,17 +3463,15 @@ Vamos a implementar funcionalidad sobre el icono <code>editar</code>, tendremos 
 <span class="w">    </span><span class="nx">styleUrl</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;./dialog-confirmation.component.scss&#39;</span><span class="p">,</span>
 <span class="p">})</span>
 <span class="k">export</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">DialogConfirmationComponent</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
-<span class="w">    </span><span class="nx">description</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">    </span><span class="k">protected</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="nx">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">signal</span><span class="o">&lt;</span><span class="kt">string</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kc">null</span><span class="o">&gt;</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+<span class="w">    </span><span class="k">protected</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="nx">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">signal</span><span class="o">&lt;</span><span class="kt">string</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kc">null</span><span class="o">&gt;</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
 
-<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span>
-<span class="w">        </span><span class="k">public</span><span class="w"> </span><span class="nx">dialogRef</span><span class="o">:</span><span class="w"> </span><span class="kt">MatDialogRef</span><span class="o">&lt;</span><span class="nx">DialogConfirmationComponent</span><span class="o">&gt;</span><span class="p">,</span>
-<span class="w">        </span><span class="kd">@Inject</span><span class="p">(</span><span class="nx">MAT_DIALOG_DATA</span><span class="p">)</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="nx">data</span><span class="o">:</span><span class="w"> </span><span class="kt">any</span>
-<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">    </span><span class="k">protected</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="nx">dialogRef</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">inject</span><span class="p">(</span><span class="nx">MatDialogRef</span><span class="o">&lt;</span><span class="nx">DialogConfirmationComponent</span><span class="o">&gt;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">protected</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">inject</span><span class="p">(</span><span class="nx">MAT_DIALOG_DATA</span><span class="p">);</span>
 
 <span class="w">    </span><span class="nx">ngOnInit</span><span class="p">()</span><span class="o">:</span><span class="w"> </span><span class="ow">void</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">title</span><span class="p">;</span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">description</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">title</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">title</span><span class="p">);</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">description</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">description</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="nx">onClose</span><span class="p">(</span><span class="nx">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -3479,7 +3483,7 @@ Vamos a implementar funcionalidad sobre el icono <code>editar</code>, tendremos 
 </div>
 </div>
 <p>Ya por último, una vez tenemos el componente genérico de diálogo, vamos a utilizarlo en nuestro listado al pulsar el botón eliminar:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="20:2"><input checked="checked" id="__tabbed_20_1" name="__tabbed_20" type="radio" /><input id="__tabbed_20_2" name="__tabbed_20" type="radio" /><div class="tabbed-labels"><label for="__tabbed_20_1">category-list.component.html</label><label for="__tabbed_20_2">category-list.component.ts</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="19:2"><input checked="checked" id="__tabbed_19_1" name="__tabbed_19" type="radio" /><input id="__tabbed_19_2" name="__tabbed_19" type="radio" /><div class="tabbed-labels"><label for="__tabbed_19_1">category-list.component.html</label><label for="__tabbed_19_2">category-list.component.ts</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code>    ...
@@ -3509,7 +3513,7 @@ Vamos a implementar funcionalidad sobre el icono <code>editar</code>, tendremos 
 </span><span class="hll"><span class="w">    </span><span class="nx">dialogRef</span><span class="p">.</span><span class="nx">afterClosed</span><span class="p">().</span><span class="nx">subscribe</span><span class="p">(</span><span class="nx">result</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 </span><span class="hll"><span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">result</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 </span><span class="hll"><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">categoryService</span><span class="p">.</span><span class="nx">deleteCategory</span><span class="p">(</span><span class="nx">category</span><span class="p">.</span><span class="nx">id</span><span class="p">).</span><span class="nx">subscribe</span><span class="p">(</span><span class="nx">result</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
-</span><span class="hll"><span class="w">          </span><span class="k">this</span><span class="p">.</span><span class="nx">ngOnInit</span><span class="p">();</span>
+</span><span class="hll"><span class="w">          </span><span class="k">this</span><span class="p">.</span><span class="nx">loadData</span><span class="p">();</span>
 </span><span class="hll"><span class="w">        </span><span class="p">});</span><span class="w"> </span>
 </span><span class="hll"><span class="w">      </span><span class="p">}</span>
 </span><span class="hll"><span class="w">    </span><span class="p">});</span>
@@ -3531,11 +3535,11 @@ Vamos a implementar funcionalidad sobre el icono <code>editar</code>, tendremos 
 <h3 id="llamada-del-listado">Llamada del listado</h3>
 <p>La idea es que el método <code>getCategories()</code> de <code>category.service.ts</code> en lugar de devolver datos estáticos, realice una llamada al servidor a la ruta <code>http://localhost:8080/category</code>.</p>
 <p>Abrimos el fichero y sustituimos la línea que antes devolvía los datos estáticos, por esto:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="21:1"><input checked="checked" id="__tabbed_21_1" name="__tabbed_21" type="radio" /><div class="tabbed-labels"><label for="__tabbed_21_1">category.service.ts</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="20:1"><input checked="checked" id="__tabbed_20_1" name="__tabbed_20" type="radio" /><div class="tabbed-labels"><label for="__tabbed_20_1">category.service.ts</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><span class="hll"><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">HttpClient</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@angular/common/http&#39;</span><span class="p">;</span>
-</span><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Injectable</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="hll"><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Injectable</span><span class="p">,</span><span class="w"> </span><span class="nx">inject</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+</span><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">HttpClient</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@angular/common/http&#39;</span><span class="p">;</span>
 <span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Observable</span><span class="p">,</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;rxjs&#39;</span><span class="p">;</span>
 <span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Category</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;./model/category&#39;</span><span class="p">;</span>
 
@@ -3544,17 +3548,15 @@ Vamos a implementar funcionalidad sobre el icono <code>editar</code>, tendremos 
 <span class="p">})</span>
 <span class="k">export</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">CategoryService</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
 
-<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span>
-<span class="hll"><span class="w">        </span><span class="k">private</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="w"> </span><span class="kt">HttpClient</span>
-</span><span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">protected</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="nx">http</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">inject</span><span class="p">(</span><span class="nx">HttpClient</span><span class="p">);</span>
+<span class="hll">
+</span><span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="nx">baseUrl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;http://localhost:8080/category&#39;</span><span class="p">;</span>
 
-<span class="hll"><span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="nx">baseUrl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;http://localhost:8080/category&#39;</span><span class="p">;</span>
-</span>
-<span class="w">    </span><span class="nx">getCategories</span><span class="p">()</span><span class="o">:</span><span class="w"> </span><span class="nx">Observable</span><span class="o">&lt;</span><span class="nx">Category</span><span class="p">[]</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
-<span class="hll"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="o">&lt;</span><span class="nx">Category</span><span class="p">[]</span><span class="o">&gt;</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">baseUrl</span><span class="p">);</span>
-</span><span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="nx">saveCategory</span><span class="p">(</span><span class="nx">category</span><span class="o">:</span><span class="w"> </span><span class="kt">Category</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nx">Observable</span><span class="o">&lt;</span><span class="nx">Category</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="hll"><span class="w">    </span><span class="nx">getCategories</span><span class="p">()</span><span class="o">:</span><span class="w"> </span><span class="nx">Observable</span><span class="o">&lt;</span><span class="nx">Category</span><span class="p">[]</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="o">&lt;</span><span class="nx">Category</span><span class="p">[]</span><span class="o">&gt;</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">baseUrl</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="hll">
+</span><span class="w">    </span><span class="nx">saveCategory</span><span class="p">(</span><span class="nx">category</span><span class="o">:</span><span class="w"> </span><span class="kt">Category</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nx">Observable</span><span class="o">&lt;</span><span class="nx">Category</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">of</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
 
@@ -3567,7 +3569,7 @@ Vamos a implementar funcionalidad sobre el icono <code>editar</code>, tendremos 
 </div>
 </div>
 <p>Como hemos añadido un componente nuevo <code>HttpClient</code> tenemos que configurar nuestro proyecto para poder realizar llamadas, para eso modificamos el fichero <code>app.config.ts</code>.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="22:1"><input checked="checked" id="__tabbed_22_1" name="__tabbed_22" type="radio" /><div class="tabbed-labels"><label for="__tabbed_22_1">app.config.ts</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="21:1"><input checked="checked" id="__tabbed_21_1" name="__tabbed_21" type="radio" /><div class="tabbed-labels"><label for="__tabbed_21_1">app.config.ts</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block"></div>
 </div>
@@ -3592,11 +3594,11 @@ Vamos a implementar funcionalidad sobre el icono <code>editar</code>, tendremos 
 <p><img alt="step3-angular1" src="../../../assets/images/step3-angular1.png" /></p>
 <h3 id="llamada-de-guardado-edicion">Llamada de guardado / edición</h3>
 <p>Para la llamada de guardado haríamos lo mismo, pero invocando la operación de negocio <code>put</code>.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="23:1"><input checked="checked" id="__tabbed_23_1" name="__tabbed_23" type="radio" /><div class="tabbed-labels"><label for="__tabbed_23_1">category.service.ts</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="22:1"><input checked="checked" id="__tabbed_22_1" name="__tabbed_22" type="radio" /><div class="tabbed-labels"><label for="__tabbed_22_1">category.service.ts</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">HttpClient</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@angular/common/http&#39;</span><span class="p">;</span>
-<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Injectable</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Injectable</span><span class="p">,</span><span class="w"> </span><span class="nx">inject</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">HttpClient</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@angular/common/http&#39;</span><span class="p">;</span>
 <span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Observable</span><span class="p">,</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;rxjs&#39;</span><span class="p">;</span>
 <span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Category</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;./model/category&#39;</span><span class="p">;</span>
 
@@ -3605,7 +3607,7 @@ Vamos a implementar funcionalidad sobre el icono <code>editar</code>, tendremos 
 <span class="p">})</span>
 <span class="k">export</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">CategoryService</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
 
-<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="k">private</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="w"> </span><span class="kt">HttpClient</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">    </span><span class="k">protected</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="nx">http</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">inject</span><span class="p">(</span><span class="nx">HttpClient</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="nx">baseUrl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;http://localhost:8080/category&#39;</span><span class="p">;</span>
 
@@ -3631,11 +3633,11 @@ Vamos a implementar funcionalidad sobre el icono <code>editar</code>, tendremos 
 <p>Ahora podemos probar a modificar o añadir una nueva categoría desde la pantalla y debería aparecer los nuevos datos en el listado.</p>
 <h3 id="llamada-de-borrado">Llamada de borrado</h3>
 <p>Y ya por último, la llamada de borrado, deberíamos cambiarla e invocar a la operación de negocio <code>delete</code>.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="24:1"><input checked="checked" id="__tabbed_24_1" name="__tabbed_24" type="radio" /><div class="tabbed-labels"><label for="__tabbed_24_1">category.service.ts</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="23:1"><input checked="checked" id="__tabbed_23_1" name="__tabbed_23" type="radio" /><div class="tabbed-labels"><label for="__tabbed_23_1">category.service.ts</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">HttpClient</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@angular/common/http&#39;</span><span class="p">;</span>
-<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Injectable</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Injectable</span><span class="p">,</span><span class="w"> </span><span class="nx">inject</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">HttpClient</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@angular/common/http&#39;</span><span class="p">;</span>
 <span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Observable</span><span class="p">,</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;rxjs&#39;</span><span class="p">;</span>
 <span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Category</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;./model/category&#39;</span><span class="p">;</span>
 
@@ -3643,7 +3645,7 @@ Vamos a implementar funcionalidad sobre el icono <code>editar</code>, tendremos 
 <span class="nx">providedIn</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;root&#39;</span>
 <span class="p">})</span>
 <span class="k">export</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">CategoryService</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="k">private</span><span class="w"> </span><span class="nx">http</span><span class="o">:</span><span class="w"> </span><span class="kt">HttpClient</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">    </span><span class="k">protected</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="nx">http</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">inject</span><span class="p">(</span><span class="nx">HttpClient</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="nx">baseUrl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;http://localhost:8080/category&#39;</span><span class="p">;</span>
 
