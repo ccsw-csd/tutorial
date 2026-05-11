@@ -66,7 +66,9 @@ nav:
       - ¿Qué es docker?: appendix/docker/docudocker.md
       - Practiquemos: appendix/docker/traindocker.md
       - Resumen: appendix/docker/summary.md
-    - AWS CLI: appendix/aws.md
+    - AWS: 
+      - Instalacion AWS CLI: appendix/aws/cli.md
+      - Despligue en AWS: appendix/aws/deploy.md
     - "GIT: Tutorial básico": appendix/git.md
     - API Rest: appendix/rest.md
     - TDD: appendix/tdd.md
