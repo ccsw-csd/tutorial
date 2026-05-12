@@ -25,7 +25,7 @@ Creamos el modelo en `author/model/Author.ts` con las propiedades necesarias par
 
 === "Author.ts"
     ``` TypeScript
-    export class Author {
+    export interface Author {
         id: number;
         name: string;
         nationality: string;
@@ -85,7 +85,7 @@ Así que necesitamos poder enviar y recuperar esa información desde Angular, no
 
 === "SortPage.ts"
     ``` TypeScript
-    export class SortPage {
+    export interface SortPage {
         property: string;
         direction: string;
     }
@@ -94,7 +94,7 @@ Así que necesitamos poder enviar y recuperar esa información desde Angular, no
     ``` TypeScript
     import { SortPage } from './SortPage';
 
-    export class Pageable {
+    export interface Pageable {
         pageNumber: number;
         pageSize: number;
         sort: SortPage[];
@@ -104,7 +104,7 @@ Así que necesitamos poder enviar y recuperar esa información desde Angular, no
     ``` TypeScript
     import { Pageable } from "src/app/core/model/page/Pageable";
 
-    export class PaginatedData <TData>{
+    export interface PaginatedData <TData>{
         content: TData[];
         pageable: Pageable;
         totalElements: number;
@@ -469,7 +469,20 @@ El último paso es definir la pantalla de diálogo que realizará el alta y modi
         }
 
         onSave() {
-            this.authorService.saveAuthor(this.author).subscribe(() => {
+            const id = this.id();
+            const name = this.name();
+            const nationality = this.nationality();
+
+            if(!name || !nationality ) {
+                return;
+            }
+
+            const author = {
+                id,
+                name,
+                nationality,
+            } as Author;
+            this.authorService.saveAuthor(author).subscribe(() => {
                 this.dialogRef.close(true);
             });
         }

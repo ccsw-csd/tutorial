@@ -265,7 +265,7 @@ Ahora vamos a construir la pantalla. Para manejar la información del listado, n
 
 === "category.ts"
     ``` Typescript
-    export class Category {
+    export interface Category {
         id: number;
         name: string;
     }
@@ -685,7 +685,14 @@ Ahora vamos a darle forma al formulario de editar y crear. Para ello vamos al ht
         }
 
         onSave() {
-            const category: Category = { id: this.id(), name: this.name() };
+            const id = this.id();
+            const name = this.name();
+
+            if(!name) {
+                return;
+            }
+
+            const category = { id, name } as Category;
             this.categoryService.saveCategory(category).subscribe(() => {
                 this.dialogRef.close(true);
             });
@@ -699,6 +706,13 @@ Ahora vamos a darle forma al formulario de editar y crear. Para ello vamos al ht
     ```
 
 Si te fijas en el código TypeScript, hemos añadido en el método `onSave` una llamada al servicio de `CategoryService` que aunque no realice ninguna operación de momento, por lo menos lo dejamos preparado para conectar con el servidor.
+
+!!! Cast de tipo para resolver incompatibilidad de tipos
+    Se utiliza "as Category" porque el tipo obtenido del servidor siempre llegará con id, 
+    sin embargo al crear una nueva categoría no dispondremos de valor hasta que lo genere el backend
+    
+    ⚠️ Nota: Usar con cuidado, ya que bypasea la validación de tipos.
+    Considera validar los datos en tiempo de ejecución si es crítico (cómo se hace con la propiedad `name`)
 
 Además, como siempre, al utilizar componentes `matInput`, `matForm`, `matError` hay que añadir los módulos correspondientes como dependencias en el atributo imports.
 
@@ -839,7 +853,14 @@ Y los Dialog:
         }
 
         onSave() {
-            const category: Category = { id: this.id(), name: this.name() };
+            const id = this.id();
+            const name = this.name();
+
+            if(!name) {
+                return;
+            }
+
+            const category = { id, name } as Category;
             this.categoryService.saveCategory(category).subscribe(() => {
                 this.dialogRef.close(true);
             });
