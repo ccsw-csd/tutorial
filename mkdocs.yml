@@ -68,7 +68,8 @@ nav:
       - Resumen: appendix/docker/summary.md
     - AWS: 
       - Instalacion AWS CLI: appendix/aws/cli.md
-      - Despligue en AWS: appendix/aws/deploy.md
+      - Despliegue en AWS ECS: appendix/aws/deploy_ecs.md
+      - Despligue en AWS EB: appendix/aws/deploy_eb.md
     - "GIT: Tutorial básico": appendix/git.md
     - API Rest: appendix/rest.md
     - TDD: appendix/tdd.md
