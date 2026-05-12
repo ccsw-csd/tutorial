@@ -2821,7 +2821,7 @@ Además, recuerda que para poder utilizar componentes, los debes importar en el 
 <div class="tabbed-set tabbed-alternate" data-tabs="8:1"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">category.ts</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><span class="k">export</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">Category</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="k">export</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="nx">Category</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
 <span class="w">    </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
 <span class="p">}</span>
@@ -3232,7 +3232,14 @@ Como siempre, para crear un componente usamos el asistente de Angular, esta vez 
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="nx">onSave</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">category</span><span class="o">:</span><span class="w"> </span><span class="kt">Category</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">this.id</span><span class="p">(),</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">this.name</span><span class="p">()</span><span class="w"> </span><span class="p">};</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">id</span><span class="p">();</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">();</span>
+
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">name</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">category</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">id</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="nx">Category</span><span class="p">;</span>
 <span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">categoryService</span><span class="p">.</span><span class="nx">saveCategory</span><span class="p">(</span><span class="nx">category</span><span class="p">).</span><span class="nx">subscribe</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="nx">dialogRef</span><span class="p">.</span><span class="nx">close</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
 <span class="w">        </span><span class="p">});</span>
@@ -3247,6 +3254,13 @@ Como siempre, para crear un componente usamos el asistente de Angular, esta vez 
 </div>
 </div>
 <p>Si te fijas en el código TypeScript, hemos añadido en el método <code>onSave</code> una llamada al servicio de <code>CategoryService</code> que aunque no realice ninguna operación de momento, por lo menos lo dejamos preparado para conectar con el servidor.</p>
+<div class="admonition cast de tipo para resolver incompatibilidad de tipos">
+<p class="admonition-title">Cast</p>
+<p>Se utiliza "as Category" porque el tipo obtenido del servidor siempre llegará con id, 
+sin embargo al crear una nueva categoría no dispondremos de valor hasta que lo genere el backend</p>
+<p>⚠️ Nota: Usar con cuidado, ya que bypasea la validación de tipos.
+Considera validar los datos en tiempo de ejecución si es crítico (cómo se hace con la propiedad <code>name</code>)</p>
+</div>
 <p>Además, como siempre, al utilizar componentes <code>matInput</code>, <code>matForm</code>, <code>matError</code> hay que añadir los módulos correspondientes como dependencias en el atributo imports.</p>
 <p>Ahora podemos navegar y abrir el cuadro de diálogo mediante el botón <code>Nueva categoría</code> para ver como queda nuestro formulario.</p>
 <h3 id="utilizar-el-dialogo-para-editar">Utilizar el diálogo para editar</h3>
@@ -3385,7 +3399,14 @@ Vamos a implementar funcionalidad sobre el icono <code>editar</code>, tendremos 
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="nx">onSave</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">category</span><span class="o">:</span><span class="w"> </span><span class="kt">Category</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">this.id</span><span class="p">(),</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">this.name</span><span class="p">()</span><span class="w"> </span><span class="p">};</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">id</span><span class="p">();</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">();</span>
+
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">name</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">category</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">id</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="nx">Category</span><span class="p">;</span>
 <span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">categoryService</span><span class="p">.</span><span class="nx">saveCategory</span><span class="p">(</span><span class="nx">category</span><span class="p">).</span><span class="nx">subscribe</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="nx">dialogRef</span><span class="p">.</span><span class="nx">close</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
 <span class="w">        </span><span class="p">});</span>
