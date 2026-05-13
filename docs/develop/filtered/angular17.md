@@ -662,6 +662,7 @@ Ahora sí que tenemos todo listo para implementar el cuadro de diálogo para dar
             this.dialogRef.close();
         }
     }
+    ```
 
 Como puedes ver, para rellenar los componentes seleccionables de dropdown, hemos realizado una consulta al servicio para recuperar todos los autores y categorías, y en la respuesta de cada uno de ellos, hemos buscado en los resultados cuál es el que coincide con el ID enviado desde el listado, y ese es el que hemos fijado en el objeto `Game`.
 
