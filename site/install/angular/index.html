@@ -2384,11 +2384,16 @@ Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
 </code></pre></div>
 <p>Con esto, scoop ya nos instalará todo lo necesario.</p>
 <h3 id="angular-cli">Angular CLI</h3>
-<p>El siguiente pasó será instalar una capa de gestión por encima de Nodejs que nos ayudará en concreto con la funcionalidad de Angular. Si no indicamos nada se instalará la última versión del CLI, pero si queremos podemos elegir una versión en concreto añadiendo '@' y el número de la versión correspondiente. Para poder instalarlo, tan solo hay que abrir una consola de msdos y ejecutar el comando y Nodejs ya hará el resto:</p>
+<p>El siguiente pasó será instalar una capa de gestión por encima de Nodejs que nos ayudará en concreto con la funcionalidad de Angular.  Para poder instalarlo, tan solo hay que abrir una consola de msdos y ejecutar el comando y Nodejs ya hará el resto:</p>
 <div class="highlight"><pre><span></span><code>npm install -g @angular/cli
-
-npm install -g @angular/cli@16
 </code></pre></div>
+<p>Si en el comando no indicamos la versión se instalará la última del CLI, pero si queremos podemos elegir una versión en concreto añadiendo '@' y el número de la versión correspondiente.
+<div class="highlight"><pre><span></span><code>npm install -g @angular/cli@16
+</code></pre></div></p>
+<div class="admonition muy importante">
+<p class="admonition-title">Muy</p>
+<p>Si vas a realizar el tutorial de <code>Angular 17+</code> deberás instalar la última versión, en el caso de que por alguna razón optes por el tutorial <code>Angular</code> deberás instalar la versión 16.</p>
+</div>
 <p>Y con esto ya tendremos todo instalado, listo para empezar a crear los proyectos.</p>
 <div class="admonition note">
 <p class="admonition-title">Aviso para navegantes corporativos</p>
