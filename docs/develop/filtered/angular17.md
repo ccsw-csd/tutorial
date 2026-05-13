@@ -27,7 +27,7 @@ Lo primero que vamos a hacer es crear el modelo en `game/model/Game.ts` con toda
     import { Author } from "../../author/model/Author";
     import { Category } from "../../category/model/Category";
 
-    export class Game {
+    export interface Game {
         id: number;
         title: string;
         age: number;
@@ -588,6 +588,7 @@ Ahora sí que tenemos todo listo para implementar el cuadro de diálogo para dar
     import { MatFormFieldModule } from '@angular/material/form-field';
     import { MatInputModule } from '@angular/material/input';
     import { MatSelectModule } from '@angular/material/select';
+    import { validateFields } from '../../core/helpers/validation.helper';
 
     @Component({
         selector: 'app-game-edit',
@@ -632,13 +633,26 @@ Ahora sí que tenemos todo listo para implementar el cuadro de diálogo para dar
         }
 
         onSave() {
-            const game: Game = {
-                id: this.id(),
-                title: this.title(),
-                age: this.age(),
-                category: this.categories().find(c => c.id === this.categoryId()) ?? null,
-                author: this.authors().find(a => a.id === this.authorId()) ?? null,
-            };
+            const id = this.id();
+            const title = this.title(); 
+            const age = this.age(); 
+            const categoryId = this.categoryId(); 
+            const authorId = this.authorId(); 
+
+            const requiredFields = ["title", "age", "categoryId", "authorId"] as const
+            const data = { title, age, categoryId, authorId }
+            
+            if (!validateFields(data, requiredFields)) {
+                return;
+            }
+
+            const game = {
+                id,
+                title,
+                age,
+                category: this.categories().find(c => c.id === categoryId) ?? null,
+                author: this.authors().find(a => a.id === authorId) ?? null,
+            } as Game;
             this.gameService.saveGame(game).subscribe(() => {
                 this.dialogRef.close(true);
             });
@@ -648,7 +662,6 @@ Ahora sí que tenemos todo listo para implementar el cuadro de diálogo para dar
             this.dialogRef.close();
         }
     }
-    ```
 
 Como puedes ver, para rellenar los componentes seleccionables de dropdown, hemos realizado una consulta al servicio para recuperar todos los autores y categorías, y en la respuesta de cada uno de ellos, hemos buscado en los resultados cuál es el que coincide con el ID enviado desde el listado, y ese es el que hemos fijado en el objeto `Game`.
 

@@ -14,7 +14,22 @@ Si abrimos el proyecto con el IDE que tengamos (Visual Studio Code en el caso de
 * `app.html` → contiene la plantilla inicial del proyecto escrita en HTML.
 * `app.scss` → contiene los estilos CSS privados de la plantilla inicial.
 
-Vamos a modificar este código inicial para ver como funciona. Abrimos el fichero `app.component.ts` y modificamos la línea donde se asigna un valor a la variable `title`.
+!!! info 
+    Comprueba el fichero `tsconfig.json` del proyecto, puede que estés usando el modo `strict` o tengas `strictNullChecks` a true. 
+    Con estas propiedades activadas se obliga al compilador a tratar los tipos `null` y `undefined` de manera más estricta.
+
+    **Comportamiento sin strictNullChecks (false):**
+    - `null` y `undefined` se consideran valores válidos para cualquier tipo
+    - Puedes asignar `null` o `undefined` a variables de cualquier tipo sin errores
+    - Mayor flexibilidad pero menos seguridad de tipos
+ 
+    **Comportamiento con strictNullChecks (true):**
+    - Solo los tipos `null` y `undefined` pueden contener esos valores explícitamente
+    - Debes usar tipos union para permitir nulidad: `string | null`, `number | undefined`
+    - El compilador previene acceso a propiedades/métodos en valores potencialmente nulos
+    - Mayor seguridad de tipos y detección de errores en tiempo de compilación
+
+Vamos a modificar el código inicial para ver como funciona. Abrimos el fichero `app.component.ts` y modificamos la línea donde se asigna un valor a la variable `title`.
 
 === "app.component.ts"
     ``` TypeScript
@@ -265,7 +280,7 @@ Ahora vamos a construir la pantalla. Para manejar la información del listado, n
 
 === "category.ts"
     ``` Typescript
-    export class Category {
+    export interface Category {
         id: number;
         name: string;
     }
@@ -685,7 +700,14 @@ Ahora vamos a darle forma al formulario de editar y crear. Para ello vamos al ht
         }
 
         onSave() {
-            const category: Category = { id: this.id(), name: this.name() };
+            const id = this.id();
+            const name = this.name();
+
+            if(!name) {
+                return;
+            }
+
+            const category = { id, name } as Category;
             this.categoryService.saveCategory(category).subscribe(() => {
                 this.dialogRef.close(true);
             });
@@ -699,6 +721,13 @@ Ahora vamos a darle forma al formulario de editar y crear. Para ello vamos al ht
     ```
 
 Si te fijas en el código TypeScript, hemos añadido en el método `onSave` una llamada al servicio de `CategoryService` que aunque no realice ninguna operación de momento, por lo menos lo dejamos preparado para conectar con el servidor.
+
+!!! Cast de tipo para resolver incompatibilidad de tipos
+    Se utiliza "as Category" porque el tipo obtenido del servidor siempre llegará con id, 
+    sin embargo al crear una nueva categoría no dispondremos de valor hasta que lo genere el backend
+    
+    ⚠️ Nota: Usar con cuidado, ya que bypasea la validación de tipos.
+    Considera validar los datos en tiempo de ejecución si es crítico (cómo se hace con la propiedad `name`)
 
 Además, como siempre, al utilizar componentes `matInput`, `matForm`, `matError` hay que añadir los módulos correspondientes como dependencias en el atributo imports.
 
@@ -839,7 +868,14 @@ Y los Dialog:
         }
 
         onSave() {
-            const category: Category = { id: this.id(), name: this.name() };
+            const id = this.id();
+            const name = this.name();
+
+            if(!name) {
+                return;
+            }
+
+            const category = { id, name } as Category;
             this.categoryService.saveCategory(category).subscribe(() => {
                 this.dialogRef.close(true);
             });
