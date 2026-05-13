@@ -441,6 +441,7 @@ El último paso es definir la pantalla de diálogo que realizará el alta y modi
     import { MatButtonModule } from '@angular/material/button';
     import { MatFormFieldModule } from '@angular/material/form-field';
     import { MatInputModule } from '@angular/material/input';
+    import { validateFields } from '../../core/helpers/validation.helper';
 
     @Component({
         selector: 'app-author-edit',
@@ -473,7 +474,10 @@ El último paso es definir la pantalla de diálogo que realizará el alta y modi
             const name = this.name();
             const nationality = this.nationality();
 
-            if(!name || !nationality ) {
+            const requiredFields = ["name", "nationality"] as const
+            const data = { name, nationality }
+
+            if (!validateFields(data, requiredFields)) {
                 return;
             }
 
@@ -492,6 +496,9 @@ El último paso es definir la pantalla de diálogo que realizará el alta y modi
         }
     }
     ```
+
+!!! info
+    Podemos usar el helper `validateFields` cuando haya varios campos para validar que sean requeridos
 
 Que debería quedar algo así:
 

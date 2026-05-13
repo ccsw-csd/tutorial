@@ -14,7 +14,22 @@ Si abrimos el proyecto con el IDE que tengamos (Visual Studio Code en el caso de
 * `app.html` → contiene la plantilla inicial del proyecto escrita en HTML.
 * `app.scss` → contiene los estilos CSS privados de la plantilla inicial.
 
-Vamos a modificar este código inicial para ver como funciona. Abrimos el fichero `app.component.ts` y modificamos la línea donde se asigna un valor a la variable `title`.
+!!! info 
+    Comprueba el fichero `tsconfig.json` del proyecto, puede que estés usando el modo `strict` o tengas `strictNullChecks` a true. 
+    Con estas propiedades activadas se obliga al compilador a tratar los tipos `null` y `undefined` de manera más estricta.
+
+    **Comportamiento sin strictNullChecks (false):**
+    - `null` y `undefined` se consideran valores válidos para cualquier tipo
+    - Puedes asignar `null` o `undefined` a variables de cualquier tipo sin errores
+    - Mayor flexibilidad pero menos seguridad de tipos
+ 
+    **Comportamiento con strictNullChecks (true):**
+    - Solo los tipos `null` y `undefined` pueden contener esos valores explícitamente
+    - Debes usar tipos union para permitir nulidad: `string | null`, `number | undefined`
+    - El compilador previene acceso a propiedades/métodos en valores potencialmente nulos
+    - Mayor seguridad de tipos y detección de errores en tiempo de compilación
+
+Vamos a modificar el código inicial para ver como funciona. Abrimos el fichero `app.component.ts` y modificamos la línea donde se asigna un valor a la variable `title`.
 
 === "app.component.ts"
     ``` TypeScript

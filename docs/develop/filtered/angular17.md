@@ -588,6 +588,7 @@ Ahora sí que tenemos todo listo para implementar el cuadro de diálogo para dar
     import { MatFormFieldModule } from '@angular/material/form-field';
     import { MatInputModule } from '@angular/material/input';
     import { MatSelectModule } from '@angular/material/select';
+    import { validateFields } from '../../core/helpers/validation.helper';
 
     @Component({
         selector: 'app-game-edit',
@@ -638,7 +639,10 @@ Ahora sí que tenemos todo listo para implementar el cuadro de diálogo para dar
             const categoryId = this.categoryId(); 
             const authorId = this.authorId(); 
 
-            if(!title || !age || !categoryId || !authorId) {    
+            const requiredFields = ["title", "age", "categoryId", "authorId"] as const
+            const data = { title, age, categoryId, authorId }
+            
+            if (!validateFields(data, requiredFields)) {
                 return;
             }
 
@@ -658,7 +662,6 @@ Ahora sí que tenemos todo listo para implementar el cuadro de diálogo para dar
             this.dialogRef.close();
         }
     }
-    ```
 
 Como puedes ver, para rellenar los componentes seleccionables de dropdown, hemos realizado una consulta al servicio para recuperar todos los autores y categorías, y en la respuesta de cada uno de ellos, hemos buscado en los resultados cuál es el que coincide con el ID enviado desde el listado, y ese es el que hemos fijado en el objeto `Game`.
 
