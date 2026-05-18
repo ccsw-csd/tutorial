@@ -65,13 +65,20 @@ Con esto, scoop ya nos instalará todo lo necesario.
 
 ### Angular CLI
 
-El siguiente pasó será instalar una capa de gestión por encima de Nodejs que nos ayudará en concreto con la funcionalidad de Angular. Si no indicamos nada se instalará la última versión del CLI, pero si queremos podemos elegir una versión en concreto añadiendo '@' y el número de la versión correspondiente. Para poder instalarlo, tan solo hay que abrir una consola de msdos y ejecutar el comando y Nodejs ya hará el resto:
+El siguiente pasó será instalar una capa de gestión por encima de Nodejs que nos ayudará en concreto con la funcionalidad de Angular.  Para poder instalarlo, tan solo hay que abrir una consola de msdos y ejecutar el comando y Nodejs ya hará el resto:
 
 ```
 npm install -g @angular/cli
+```
 
+Si en el comando no indicamos la versión se instalará la última del CLI, pero si queremos podemos elegir una versión en concreto añadiendo '@' y el número de la versión correspondiente.
+```
 npm install -g @angular/cli@16
 ```
+
+!!! MUY IMPORTANTE
+    Si vas a realizar el tutorial de `Angular 17+` deberás instalar la última versión, en el caso de que por alguna razón optes por el tutorial `Angular` deberás instalar la versión 16.
+
 
 Y con esto ya tendremos todo instalado, listo para empezar a crear los proyectos.
 
