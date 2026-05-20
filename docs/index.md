@@ -5,6 +5,10 @@ En cualquier caso, te agradecemos el esfuerzo que estás haciendo y te deseamos 
 
 Por favor, si detectas que hay algo incorrecto en el tutorial, que no funciona o que está mal escrito, contacta con nosotros para que podamos solventarlo para futuras lecturas. Escríbenos un issue [aquí](https://github.com/ccsw-csd/tutorial/issues).
 
+!!! warning "Nota importante"
+    - Queda terminantemente prohibido utilizar herramientas de inteligencia artificial para resolver los ejercicios de este tutorial. El uso de IA será detectado y comunicado al tutor.
+    - Este tutorial tiene como objetivo que te familiarices con las tecnologías que empleamos y que produzcas código propio siguiendo buenas prácticas. Si el trabajo lo realiza una IA, no cumplirás ese objetivo y perderás la oportunidad de aprender.
+
 
 ## ¿Que vamos a hacer?
 
@@ -53,7 +57,6 @@ No te preocupes, no es un examen :laughing:
 Te recomiendo que leas todo el tutorial, que no te saltes ningún punto y si se hace referencia a los anexos, que los visites y los leas también. Si tan solo copias y pegas, no serás capaz de hacer el último ejercicio por ti mismo. Debes leer y comprender lo que se está haciendo.
 
 Además, los anexos están ahí por algo, sirven para completar información y para que conozcas los motivos por los que estamos programando así el tutorial. Por favor, échales un ojo también cuando te lo indique.
-
 
 ## Por último, ¡no te olvides!
 
