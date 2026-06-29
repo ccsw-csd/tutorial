@@ -550,7 +550,7 @@ Finalmente, debemos crear el script de inicialización de base de datos con solo
 
 ### Pruebas
 
-Ahora si arrancamos la aplicación server y abrimos el [Postman](https://www.postman.com/) podemos realizar las mismas pruebas del apartado de [Listado filtrado](../../develop/filtered/springboot.md) pero esta vez apuntado al puerto `8093`.
+Ahora si arrancamos la aplicación server y abrimos el [HTTPie](https://httpie.io/download) podemos realizar las mismas pruebas del apartado de [Listado filtrado](../../develop/filtered/springboot.md) pero esta vez apuntado al puerto `8093`.
 
 Fíjate que cuando probemos el listado de juegos, devolverá identificadores en `idAuthor` y `idCategory`, y no objetos como funcionaba hasta ahora en la aplicación monolítica. Así que las pruebas que realices para insertar también deben utilizar esas propiedades y NO objetos.
 

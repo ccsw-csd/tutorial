@@ -581,7 +581,7 @@ Finalmente, debemos crear el script de inicialización de base de datos con solo
 
 ### Pruebas
 
-Ahora si arrancamos la aplicación server y abrimos el [Postman](https://www.postman.com/) podemos realizar las mismas pruebas del apartado de [Listado paginado](../../develop/paginated/springboot.md) pero esta vez apuntado al puerto `8092`.
+Ahora si arrancamos la aplicación server y abrimos el [HTTPie](https://httpie.io/download) podemos realizar las mismas pruebas del apartado de [Listado paginado](../../develop/paginated/springboot.md) pero esta vez apuntado al puerto `8092`.
 
 
 ## Siguientes pasos

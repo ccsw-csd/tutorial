@@ -373,7 +373,7 @@ Finalmente, debemos crear el mismo fichero de inicialización de base de datos c
 
 ### Pruebas
 
-Ahora si arrancamos la aplicación server y abrimos el [Postman](https://www.postman.com/) podemos realizar las mismas pruebas del apartado de [Listado simple](../../develop/basic/springboot.md) pero esta vez apuntado al puerto `8091`.
+Ahora si arrancamos la aplicación server y abrimos el [HTTPie](https://httpie.io/download) podemos realizar las mismas pruebas del apartado de [Listado simple](../../develop/basic/springboot.md) pero esta vez apuntado al puerto `8091`.
 
 
 ## Siguientes pasos

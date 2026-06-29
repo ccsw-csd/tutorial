@@ -72,7 +72,7 @@ Vamos a crear una clase `CategoryController.java` dentro del package `com.ccsw.t
     }
     ```
 
-Ahora si arrancamos la aplicación server, abrimos el [Postman](https://www.postman.com/) y creamos una petición GET a la url http://localhost:8080/category nos responderá con el mensaje que hemos programado.
+Ahora si arrancamos la aplicación server, abrimos el [HTTPie](https://httpie.io/download) y creamos una petición GET a la url http://localhost:8080/category nos responderá con el mensaje que hemos programado.
 
 
 ### Implementar operaciones
@@ -217,7 +217,7 @@ A continuación utilizaremos esta clase en nuestro Controller para implementar l
     }
     ```
 
-Como todavía no tenemos acceso a BD, hemos creado una variable tipo HashMap y una variable Long, que simularán una BD y una secuencia. También hemos implementado tres operaciones GET, PUT y DELETE que realizan las acciones necesarias por nuestra pantalla. Ahora podríamos probarlo desde el Postman con cuatro ejemplo sencillos.
+Como todavía no tenemos acceso a BD, hemos creado una variable tipo HashMap y una variable Long, que simularán una BD y una secuencia. También hemos implementado tres operaciones GET, PUT y DELETE que realizan las acciones necesarias por nuestra pantalla. Ahora podríamos probarlo desde el HTTPie con cuatro ejemplos sencillos.
 
 Fíjate que el método `save` tiene dos rutas. La ruta normal `category/` y la ruta informada `category/1`. Esto es porque hemos juntado la acción create y update en un mismo método para facilitar el desarrollo. Es totalmente válido y funcional.
 
@@ -229,15 +229,18 @@ Como no tenemos ningún dato dado de alta, podemos probar en primer lugar a real
 
 **PUT /category** nos sirve para insertar `Categorías` nuevas (si no tienen el id informado) o para actualizar `Categorías` (si tienen el id informado). Fíjate que los datos que se envían están en el body como formato JSON (parte izquierda de la imagen). Si no envías datos, te dará un error.
 
-<kbd>![step2-java2](../../assets/images/step2-java2.png)</kbd>
+<kbd>![step2-java1-create](../../assets/images/step2-java1-create.png)</kbd>
 
 
-<kbd>![step2-java3](../../assets/images/step2-java3.png)</kbd>
+<kbd>![step2-java1-update](../../assets/images/step2-java1-update.png)</kbd>
 
 
 **GET /category** nos devuelve un listado de `Categorías`, siempre que hayamos insertado algo antes.
 
-<kbd>![step2-java1](../../assets/images/step2-java1.png)</kbd>
+<kbd>![step2-java2-create](../../assets/images/step2-java2-create.png)</kbd>
+
+
+<kbd>![step2-java2-update](../../assets/images/step2-java2-update.png)</kbd>
 
 
 **DELETE /category** nos sirve eliminar `Categorías`. Fíjate que el dato del ID que se envía está en el path.
@@ -1235,9 +1238,9 @@ Colocamos el breakpoint en la primera línea del método `save` (click al lado d
 
 ![back1-debug1](../../assets/images/back1-intellij-debug3.png) 
 
- y desde la interfaz/postman creamos una nueva categoría para lanzar la petición y que se detenga la ejecución en debug.
+ y desde la interfaz/HTTPie creamos una nueva categoría para lanzar la petición y que se detenga la ejecución en debug.
 
-Hecho esto, podemos observar que a nivel de interfaz/postman, la petición se queda esperando y el IDE pasa modo `Debug`. En la parte inferior del IDE podemos ver la pila de llamadas y las variables actuales en memoria:
+Hecho esto, podemos observar que a nivel de interfaz/HTTPie, la petición se queda esperando y el IDE pasa modo `Debug`. En la parte inferior del IDE podemos ver la pila de llamadas y las variables actuales en memoria:
 
 ![back1-debug1](../../assets/images/back1-intellij-debug4.png) 
 
@@ -1245,7 +1248,7 @@ El IDE nos lleva al punto exacto donde hemos añadido el breakpoint y se para en
 
 ![back1-debug1](../../assets/images/back1-intellij-debug5.png) 
 
-Aquí podemos comprobar que efectivamente el atributo `name` de la variable `dto` tiene el valor que hemos introducido por pantalla/postman.
+Aquí podemos comprobar que efectivamente el atributo `name` de la variable `dto` tiene el valor que hemos introducido por pantalla/HTTPie.
 
 Para continuar con la ejecución basta con darle al botón de `play` de la barra de herramientas inferior-izquierda, o incluso navegar por las siguientes líneas de código.
 
@@ -1264,9 +1267,9 @@ Para ello vamos a abrir nuestro fichero donde tenemos la implementación del ser
 
 Dentro del fichero ya podemos añadir puntos de ruptura (breakpoint), en nuestro caso queremos comprobar que el nombre introducido se recibe correctamente.
 
-Colocamos el breakpoint en la primera línea del método (click sobre el número de la línea) y desde la interfaz/postman creamos una nueva categoría.
+Colocamos el breakpoint en la primera línea del método (click sobre el número de la línea) y desde la interfaz/HTTPie creamos una nueva categoría.
 
-Hecho esto, podemos observar que a nivel de interfaz/postman, la petición se queda esperando y el IDE pasa modo `Debug` (la primera vez nos preguntará si queremos hacerlo, le decimos que si):
+Hecho esto, podemos observar que a nivel de interfaz/HTTPie, la petición se queda esperando y el IDE pasa modo `Debug` (la primera vez nos preguntará si queremos hacerlo, le decimos que si):
 
 ![back1-debug1](../../assets/images/back1-debug2.png)
 
@@ -1274,7 +1277,7 @@ El IDE nos lleva al punto exacto donde hemos añadido el breakpoint y se para en
 
 ![back1-debug1](../../assets/images/back1-debug3.png)
 
-Aquí podemos comprobar que efectivamente el atributo `name` de la variable `dto` tiene el valor que hemos introducido por pantalla/postman.
+Aquí podemos comprobar que efectivamente el atributo `name` de la variable `dto` tiene el valor que hemos introducido por pantalla/HTTPie.
 
 Para continuar con la ejecución basta con darle al botón de `play` de la barra de herramientas superior.
 

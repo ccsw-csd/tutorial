@@ -867,7 +867,7 @@ Si ahora ejecutamos los test jUnit, veremos que todos funcionan y están en verd
 
 ![step4-java0](../../assets/images/step4-java0.png)
 
-Aun así, debemos realizar pruebas con el postman para ver los resultados que nos ofrece el back. Para ello, tienes que levantar la aplición y ejecutar las siguientes operaciones:
+Aun así, debemos realizar pruebas con el HTTPie para ver los resultados que nos ofrece el back. Para ello, tienes que levantar la aplicación y ejecutar las siguientes operaciones:
 
 ** POST /author ** 
 ```

@@ -1514,7 +1514,7 @@ Si ahora ejecutamos de nuevo los jUnits, vemos que todos los que hemos desarroll
     Cada vez que desarrollemos un caso de uso nuevo, debemos relanzar todas las pruebas automáticas que tenga la aplicación. Es muy común que al implementar algún desarrollo nuevo, interfiramos de alguna forma en el funcionamiento de otra funcionalidad. Si lanzamos toda la batería de pruebas, nos daremos cuenta si algo ha dejado de funcionar y podremos solucionarlo antes de llevar ese error a Producción. Las pruebas jUnit son nuestra red de seguridad.
 
 
-Además de las pruebas automáticas, podemos ver como se comporta la aplicación y que respuesta nos ofrece, lanzando peticiones Rest con Postman, como hemos hecho en los casos anteriores. Así que podemos levantar la aplicación y lanzar las operaciones:
+Además de las pruebas automáticas, podemos ver como se comporta la aplicación y que respuesta nos ofrece, lanzando peticiones Rest con HTTPie, como hemos hecho en los casos anteriores. Así que podemos levantar la aplicación y lanzar las operaciones:
 
 ** GET http://localhost:8080/game ** 
 
@@ -1526,7 +1526,8 @@ Nos devuelve un listado filtrado de `Game`. Fíjate bien en la petición donde e
 
 ![step5-java1](../../assets/images/step5-java1.png)
 
-** PUT http://localhost:8080/game ** 
+** PUT http://localhost:8080/game **
+
 ** PUT http://localhost:8080/game/{id} ** 
 
 ```

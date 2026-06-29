@@ -5,12 +5,12 @@ Las herramientas básicas que vamos a utilizar para esta tecnología son:
 
 * [IntelliJ](https://www.jetbrains.com/es-es/idea/) o [Eclipse IDE](https://www.eclipse.org/downloads/) (el que más te guste)
 * [Java 17](https://www.oracle.com/java/technologies/downloads/#java17) o superior
-* [Postman](https://www.postman.com/)
+* [HTTPie](https://httpie.io/download)
 
 
 ### Instalación de IntelliJ IDEA
 
-Nuestra preferencia es utilizar IntelliJ ya que es un IDE más moderno que Eclise IDE, pero cualquiera de los dos es válido para hacer el tutorial. Debido a las restricciones que tenemos en nuestros portátiles no será posible descargarnos una versión de la web e instalarlo, aunque existe otra forma de hacerlo.
+Nuestra preferencia es utilizar IntelliJ, ya que es un IDE más moderno que Eclipse IDE, pero cualquiera de los dos es válido para hacer el tutorial. Debido a las restricciones que tenemos en nuestros portátiles no será posible descargarnos una versión de la web e instalarlo, aunque existe otra forma de hacerlo.
 
 Deberemos acceder al "Portal de Empresa" que tenemos instalado en nuestro portátil. Teclear en el buscador de Windows (o en el menú de inicio) el texto "Portal de empresa". Debería aparecerte una app instalada en tu ordenador y hacer click en ella:
 
@@ -38,7 +38,7 @@ Para ello de nuevo abrimos el menú `Customize -> All Settings` o el menú `Sett
 
 ![Formatting](../assets/images/install-intellij4.png)
 
-En el botón de `opciones`, nos permitirá "Importar esquema" desde Intellij IDEA:
+En el botón de `opciones`, nos permitirá "Importar esquema" desde IntelliJ IDEA:
 
 ![Formatting](../assets/images/install-intellij5.png)
 
@@ -60,7 +60,7 @@ Si no te gusta IntelliJ, puedes utilizar Eclipse IDE y la máquina virtual de ja
 
 Para instalar el IDE deberás acceder a la web de [Eclipse IDE](https://www.eclipse.org/downloads/) y descargarte la última versión del instalador. Una vez lo ejecutes te pedirá el tipo de instalación que deseas instalar. Por lo general con la de "Eclipse IDE for Java Developers" es suficiente. Con esta versión ya tiene integrado los plugins de Maven y Git.
 
-Pero recuerda que tendrás que instalar una versión acorde de Java ya que Eclipse viene con una versión vieja.
+Pero recuerda que tendrás que instalar una versión acorde de Java, ya que Eclipse viene con una versión vieja.
 
 
 
@@ -113,14 +113,14 @@ Aquí aplicamos la configuración deseada.
 
 ### Herramientas para pruebas
 
-Para poder probar las operaciones de negocio que vamos a crear, lo mejor es utilizar una herramienta que permita realizar llamadas a API Rest. Para ello te propongo utilizar [Postman](https://www.postman.com/), en su versión web o en su versión desktop, cualquiera de las dos sirve.
+Para poder probar las operaciones de negocio que vamos a crear, lo mejor es utilizar una herramienta que permita realizar llamadas a API Rest. Para ello te propongo utilizar [HTTPie](https://httpie.io/download), en su versión web o en su versión desktop, cualquiera de las dos sirve.
 
 Con esta herramienta se puede generar peticiones GET, POST, PUT, DELETE contra el servidor y pasarle parámetros de forma muy sencilla y visual. Lo usaremos durante el tutorial.
 
 
 ## Creación de proyecto
 
-La mayoría de los proyectos Spring Boot en los que trabajamos normalmente, suelen ser proyectos web sencillos con pocas dependencias de terceros o incluso proyectos basados en micro-servicios que ejecutan pocas acciones. Ahora tienes que preparar el proyecto SpringBoot,
+La mayoría de los proyectos Spring Boot en los que trabajamos normalmente, suelen ser proyectos web sencillos con pocas dependencias de terceros o incluso proyectos basados en microservicios que ejecutan pocas acciones. Ahora tienes que preparar el proyecto SpringBoot,
 
 ### Crear con Initilizr
 
@@ -134,7 +134,7 @@ Esta página está disponible desde [Spring Initializr](https://start.spring.io/
 
 * Tipo de proyecto: Maven
 * Lenguage: Java
-* Versión Spring boot: 3.2.4 (o alguna similar que no sea SNAPSHOPT y que sea 3.x)
+* Versión Spring Boot: 3.2.4 (o alguna similar que no sea SNAPSHOT y que sea 3.x)
 * Group: com.ccsw
 * ArtifactId: tutorial
 * Versión Java: 17 (o superior)
@@ -153,7 +153,7 @@ Una vez importado, recuerda darle al menú File → Settings y configurar las ac
 
 #### Importar en Eclipse
 
-El siguiente paso, es descomprimir el proyecto generado e importarlo como proyecto Maven. Abrimos el eclipse, pulsamos en File → Import y seleccionamos `Existing Maven Projects`. Buscamos el proyecto y le damos a importar.
+El siguiente paso es descomprimir el proyecto generado e importarlo como proyecto Maven. Abrimos el eclipse, pulsamos en File → Import y seleccionamos `Existing Maven Projects`. Buscamos el proyecto y le damos a importar.
 
 #### Configurar las dependencias
 
