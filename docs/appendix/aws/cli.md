@@ -5,7 +5,7 @@ AWS CLI (Command Line Interface) es una herramienta oficial proporcionada por Am
 
 ## Pre-requisitos
 
-Vamos a instalar AWS CLI desde un sistema Linux, así que lo primero que deberás tener instalado en tu máquina es un Linux o un WSL. Si no lo tienes, puedes revisar el tutorial de [Subsistema de Linux para Windows](./docker/installdocker.md).
+Vamos a instalar AWS CLI desde un sistema Linux, así que lo primero que deberás tener instalado en tu máquina es un Linux o un WSL. Si no lo tienes, puedes revisar el tutorial de [Subsistema de Linux para Windows](../docker/installdocker.md).
 
 
 ## Instalación de AWS CLI
